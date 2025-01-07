@@ -1,0 +1,31 @@
+["CT report"."Insecurity models".0x08049814.public]
+ebp = ["0x29f7b444"]
+ebx = ["0x1e1f5018"]
+n = ["0x00000009"]
+s2 = ["0x0000000000000000000000003ee7ed5f"]
+["CT report"."Insecurity models".0x08049814.secret1]
+s1 = ["0x000000000000000000000000210c23b1"]
+["CT report"."Insecurity models".0x08049814.secret2]
+s1 = ["0x0000000000000000000000002e015971"]
+["CT report"."Insecurity models".0x0804983c.public]
+ebp = ["0x29f7b444"]
+ebx = ["0x1e1f5018"]
+n = ["0x00000009"]
+s2 = ["0x000000000000000000000000000000ff"]
+["CT report"."Insecurity models".0x0804983c.secret1]
+s1 = ["0x000000000000000000000000000000ff"]
+["CT report"."Insecurity models".0x0804983c.secret2]
+s1 = ["0x0000000000000000000000002e015971"]
+["CT report"."Instructions status"]
+insecure = ["0x08049814", "0x0804983c"]
+unknown = []
+[Exploration]
+branches = 55
+completed_paths = 27
+failed_asserts = 0
+instructions = 1248
+max_depth = 294
+paths = 27
+total_asserts = 0
+unique_insts = 95
+unknown_paths = 0
