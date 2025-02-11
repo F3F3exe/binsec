@@ -1,6 +1,8 @@
 #include "inc/bearssl.h"
 #include <stdint.h>
 #include <stdlib.h>
+#include "../../__libsym__/sym.h"
+
 
 #define KEY_LEN 240 /* uint32_t skey[30]; => 30 * 8 */
 #define N_ROUND 2
@@ -10,18 +12,15 @@
 uint8_t data[DATA_LEN];
 uint64_t skey[30];
 uint8_t iv[IV_LEN];
-size_t len;
 
 int main(){  
   br_aes_ct64_cbcdec_keys ctx;
   ctx.vtable = &br_aes_ct_cbcdec_vtable;
   ctx.num_rounds = N_ROUND;
-  len = (size_t) DATA_LEN;
 
-  //HIGH_INPUT(KEY_LEN)(ctx.skey);
-  //HIGH_INPUT(DATA_LEN)(data);
+  HIGH_INPUT(KEY_LEN)(ctx.skey);
+  HIGH_INPUT(DATA_LEN)(data);
 
-  br_aes_ct64_cbcdec_run(&ctx, iv, data, len);
-  exit(iv[0]);
+  br_aes_ct64_cbcdec_run(&ctx, iv, data, (size_t) DATA_LEN);
   return 0;
 }

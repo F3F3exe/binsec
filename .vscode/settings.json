@@ -5,6 +5,9 @@
         "array": "c",
         "string": "c",
         "string_view": "c",
-        "span": "c"
+        "span": "c",
+        "bearssl.h": "c",
+        "sym.h": "c",
+        "stdint.h": "c"
     }
 }

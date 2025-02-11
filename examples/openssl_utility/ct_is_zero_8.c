@@ -1,13 +1,11 @@
-#include <stdlib.h>
+#include "../../__libsym__/sym.h"
 #include "lib.h"
 
-unsigned int x;  // private
 int main() {
-  
+  unsigned int x;  // private
 
-  //high_input_4(&x);
+  high_input_4(&x);
   
   int res = constant_time_is_zero_8(x);
-  exit(res);
   return res;
 }

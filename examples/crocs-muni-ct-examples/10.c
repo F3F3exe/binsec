@@ -1,21 +1,32 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "issue.h"
+#include "../../__libsym__/sym.h"
 
 typedef uint32_t (* issue_t)(const uint32_t);
 
+uint32_t issue(const uint32_t a) {
+  uint32_t b = 0;
+  srand(a);
+  while(1) {
+    b = rand();
+    if(b > 255) break;
+  }
 
-uint32_t a = 0;
+  return b;
+}
+
 int main(int argc, char * argv[]) {
-  
+  uint32_t a = 0;
+
 
   // a is our secret value, we read its content from the environment so the
   // compiler cannot play tricks on us by inlining
-  
-  // declarations and markup here
-  volatile issue_t func = issue_10;
-  func(a);
+    HIGH_INPUT(4)(&a);
 
-  return 0;
+  // declarations and markup here
+  volatile issue_t func = issue;
+  
+
+  return func(a);
 }

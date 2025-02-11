@@ -1,8 +1,10 @@
-#include <stdlib.h>
+#include "../../__libsym__/sym.h"
 #include "tls1_cbc_remove_padding_patch.c"
 
 #define LEN 63
- unsigned long options;              // public
+ 
+int main(){
+unsigned long options;              // public
   long s3_flags;                      // public
   unsigned long flags;                // public
   int slicing_cheat;                  // public                  
@@ -10,20 +12,18 @@
   unsigned int length = LEN;          // public
   unsigned int block_size;            // public
   unsigned int mac_size;              // public
-int main(){
-
  
 
    // Data is private
-  // HIGH_INPUT(LEN)(data);
+  HIGH_INPUT(LEN)(data);
 
   // // these lengths are all public
-  // LOW_INPUT(4)(&options);
-  // LOW_INPUT(4)(&s3_flags);
-  // LOW_INPUT(4)(&flags);
-  // LOW_INPUT(4)(&slicing_cheat); // stay away from struct hell
-  // LOW_INPUT(4)(&block_size);
-  // LOW_INPUT(4)(&mac_size);
+  LOW_INPUT(4)(&options);
+  LOW_INPUT(4)(&s3_flags);
+  LOW_INPUT(4)(&flags);
+  LOW_INPUT(4)(&slicing_cheat); // stay away from struct hell
+  LOW_INPUT(4)(&block_size);
+  LOW_INPUT(4)(&mac_size);
 
   SSL3_STATE s3_obj = { s3_flags };
   EVP_CIPHER cipher = { flags };
@@ -37,7 +37,6 @@ int main(){
   SSL3_RECORD *rec = &rec_obj;
 
   int res = tls1_cbc_remove_padding(s,rec,block_size,mac_size);
-  exit(res);
   return res;
 }
 

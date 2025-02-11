@@ -1,34 +1,49 @@
-CFLAGS=-m32 -g -static
-LIB=
-LOG="./log"
+# Compiler flags and libraries
+CFLAGS=-m32  -static
+LIB=-L../../__libsym__/ -lsym
+LIBBEARSSL= -I./inc -L./. -lbearssl
+DEPS=Hacl_Policies.c
 
-.PHONY: all clean
+CLANG ?= clang #/usr/bin/llvm-3.9.0/clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-16.04/bin/clang-3.9
 
-# List of targets to build
-TARGETS=ct_eq_8 ct_eq_int ct_is_zero_8 ct_lt ct_select ct_eq ct_ge_8 ct_is_zero ct_msb ct_eq_int_8 ct_ge ct_lt_8 ct_select_8
+# Optimization levels to build
+OPT_LEVELS := O0 O1 O2 O3 Os Oz Ofast flto# Add optimization levels here
 
-all: $(TARGETS)
+# List of targets
+TARGETS = ct_eq_8 ct_eq_int ct_is_zero_8 ct_lt ct_select ct_eq ct_ge_8 ct_is_zero ct_msb ct_eq_int_8 ct_ge ct_lt_8 ct_select_8
 
-# Pattern rule to compile each target using clang
-%: %.c
-	@echo "-------------------"
-	@echo " Compiling $@"
-	@echo "-------------------"
-	clang-19 $(CFLAGS) -O3 $< -o $@ $(LIB)
+# Build all versions of the targets with different optimizations
+.PHONY: $(foreach target, $(TARGETS), $(foreach opt, $(OPT_LEVELS), $(target)_$(opt)))
+all: $(foreach target, $(TARGETS), $(foreach opt, $(OPT_LEVELS), $(target)_$(opt)))
 
-# Force recompilation
-.PHONY: force_rebuild
-force_rebuild: clean all
+# Generic rule for compiling each target with different optimization levels
+$(TARGETS:%=%_O0): %_O0: %.c
+	$(CLANG) $(CFLAGS) -O0 $< -o $@ $(LIB)
+
+$(TARGETS:%=%_O1): %_O1: %.c
+	$(CLANG) $(CFLAGS) -O1 $< -o $@ $(LIB)
+
+$(TARGETS:%=%_O2): %_O2: %.c
+	$(CLANG) $(CFLAGS) -O2 $< -o $@ $(LIB)
+
+$(TARGETS:%=%_O3): %_O3: %.c
+	$(CLANG) $(CFLAGS) -O3 $< -o $@ $(LIB)
+
+$(TARGETS:%=%_Os): %_Os: %.c
+	$(CLANG) $(CFLAGS) -Os $< -o $@ $(LIB)
+
+$(TARGETS:%=%_Oz): %_Oz: %.c
+	$(CLANG) $(CFLAGS) -Oz $< -o $@ $(LIB)
+
+$(TARGETS:%=%_Ofast): %_Ofast: %.c
+	$(CLANG) $(CFLAGS) -Ofast $< -o $@ $(LIB)
+
+$(TARGETS:%=%_flto): %_flto: %.c
+	$(CLANG) $(CFLAGS) -flto $< -o $@ $(LIB)
 
 clean:
-	rm -f $(TARGETS)
+	rm -rf *.o *.csv *.out smtdir/*/*.smt2
 
-#	$(eval PARAMS := -relse -relse-dedup 1 -relse-fp instr \
-	-fml-solver-timeout 0 -relse-timeout 3600 -sse-depth 10000 \
-	-relse-paths 50 -sse-memory memory.txt -sse-load-ro-sections \
-	-sse-load-sections .got.plt,.data,.plt -fml-solver boolector \
-	-relse-store-type sha -relse-memory-type row-map 	\
-	-sse-address-trace-file /tmp/SMTDIR/trace/ -sse-smt-dir \
-	/tmp/SMTDIR/ -sse-comment  -relse-print-model \
-	
+mrproper: clean
+	find . -type f -executable | xargs rm
 

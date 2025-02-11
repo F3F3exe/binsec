@@ -1,13 +1,26 @@
 CFLAGS= -m32 -g -fno-stack-protector -static 
 export WD          ?= ${PWD}
 export CPATH       += ${PWD}/libsodium/src/libsodium/include:${PWD}/libsodium/src/libsodium/include/sodium
-LIBSYM=
+LIBSYM=-L../../__libsym__/ -lsym
 
 LIBDIR             = libsodium/src/libsodium
 
-.PHONY: all clean chacha20 salsa20 sha256 sha512
+.PHONY: all clean chacha20 chacha20_O0 chacha20_O1 chacha20_O2 chacha20_O3 chacha20_Os salsa20 salsa20_O0 salsa20_O1 salsa20_O2 salsa20_O3 salsa20_Os \
+sha256 sha256_O0 sha256_O1 sha256_O2 sha256_O3 sha256_Os sha512 sha512_O0 sha512_O1 sha512_O2 sha512_O3 sha512_Os \
+sodium_add sodium_add_O0 sodium_add_O1 sodium_add_O2 sodium_add_O3 sodium_add_Os sodium_sub sodium_sub_O0 sodium_sub_O1 sodium_sub_O2 sodium_sub_O3 sodium_sub_Os \
+sodium_is_zero sodium_is_zero_O0 sodium_is_zero_O1 sodium_is_zero_O2 sodium_is_zero_O3 sodium_is_zero_Os sodium_compare sodium_compare_O0 sodium_compare_O1 sodium_compare_O2 sodium_compare_O3 sodium_compare_Os \
+sodium_increment sodium_increment_O0 sodium_increment_O1 sodium_increment_O2 sodium_increment_O3 sodium_increment_Os \
+sodium_memcmp sodium_memcmp_O0 sodium_memcmp_O1 sodium_memcmp_O2 sodium_memcmp_O3 sodium_memcmp_Os
 
-all: chacha20 salsa20 sha256 sha512
+
+all: cchacha20 chacha20_O0 chacha20_O1 chacha20_O2 chacha20_O3 chacha20_Os salsa20 salsa20_O0 salsa20_O1 salsa20_O2 salsa20_O3 salsa20_Os \
+sha256 sha256_O0 sha256_O1 sha256_O2 sha256_O3 sha256_Os sha512 sha512_O0 sha512_O1 sha512_O2 sha512_O3 sha512_Os \
+sodium_add sodium_add_O0 sodium_add_O1 sodium_add_O2 sodium_add_O3 sodium_add_Os sodium_sub sodium_sub_O0 sodium_sub_O1 sodium_sub_O2 sodium_sub_O3 sodium_sub_Os \
+sodium_is_zero sodium_is_zero_O0 sodium_is_zero_O1 sodium_is_zero_O2 sodium_is_zero_O3 sodium_is_zero_Os sodium_compare sodium_compare_O0 sodium_compare_O1 sodium_compare_O2 sodium_compare_O3 sodium_compare_Os \
+sodium_increment sodium_increment_O0 sodium_increment_O1 sodium_increment_O2 sodium_increment_O3 sodium_increment_Os \
+sodium_memcmp sodium_memcmp_O0 sodium_memcmp_O1 sodium_memcmp_O2 sodium_memcmp_O3 sodium_memcmp_Os
+
+CLANG=clang-19 #/usr/bin/llvm-3.9.0/clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-16.04/bin/clang-3.9
 
 # CHACHA20
 CHACHA20_LIBS = sodium/utils.c																				\
@@ -17,8 +30,22 @@ CHACHA20_LIBS = sodium/utils.c																				\
                      crypto_stream/chacha20/stream_chacha20_api.c
 
 chacha20:
-	 clang-19 $(CFLAGS) $(patsubst %,$(LIBDIR)/%,$(CHACHA20_LIBS)) $@_wrapper.c -o $@ $(LIBSYM)
+	 $(CLANG) $(CFLAGS) $(patsubst %,$(LIBDIR)/%,$(CHACHA20_LIBS)) $@_wrapper.c -o $@ $(LIBSYM)
 
+chacha20_O0:
+	 $(CLANG) $(CFLAGS) -O0 $(patsubst %,$(LIBDIR)/%,$(CHACHA20_LIBS)) chacha20_wrapper.c -o $@ $(LIBSYM)
+
+chacha20_O1:
+	 $(CLANG) $(CFLAGS) -O1 $(patsubst %,$(LIBDIR)/%,$(CHACHA20_LIBS)) chacha20_wrapper.c -o $@ $(LIBSYM)
+
+chacha20_O2:
+	 $(CLANG) $(CFLAGS) -O2 $(patsubst %,$(LIBDIR)/%,$(CHACHA20_LIBS)) chacha20_wrapper.c -o $@ $(LIBSYM)
+
+chacha20_O3:
+	 $(CLANG) $(CFLAGS) -O3 $(patsubst %,$(LIBDIR)/%,$(CHACHA20_LIBS)) chacha20_wrapper.c -o $@ $(LIBSYM)
+
+chacha20_Os:
+	 $(CLANG) $(CFLAGS) -Os $(patsubst %,$(LIBDIR)/%,$(CHACHA20_LIBS)) chacha20_wrapper.c -o $@ $(LIBSYM)
 
 # SALSA20
 SALSA20_LIBS = sodium/utils.c																			 \
@@ -29,8 +56,22 @@ SALSA20_LIBS = sodium/utils.c																			 \
 										crypto_stream/salsa20/ref/xor_salsa20_ref.c
 
 salsa20:
-	 clang-19  $(CFLAGS) $(patsubst %,$(LIBDIR)/%,$(SALSA20_LIBS)) $@_wrapper.c -o $@ $(LIBSYM)
+	 $(CLANG)  $(CFLAGS) $(patsubst %,$(LIBDIR)/%,$(SALSA20_LIBS)) salsa20_wrapper.c -o $@ $(LIBSYM)
 
+salsa20_O0:
+	 $(CLANG)  $(CFLAGS) -O0 $(patsubst %,$(LIBDIR)/%,$(SALSA20_LIBS)) salsa20_wrapper.c -o $@ $(LIBSYM)
+
+salsa20_O1:
+	 $(CLANG)  $(CFLAGS) -O1 $(patsubst %,$(LIBDIR)/%,$(SALSA20_LIBS)) salsa20_wrapper.c -o $@ $(LIBSYM)
+
+salsa20_O2:
+	 $(CLANG)  $(CFLAGS) -O2 $(patsubst %,$(LIBDIR)/%,$(SALSA20_LIBS)) salsa20_wrapper.c -o $@ $(LIBSYM)
+
+salsa20_O3:
+	 $(CLANG)  $(CFLAGS) -O3 $(patsubst %,$(LIBDIR)/%,$(SALSA20_LIBS)) salsa20_wrapper.c -o $@ $(LIBSYM)
+
+salsa20_Os:
+	 $(CLANG)  $(CFLAGS) -Os $(patsubst %,$(LIBDIR)/%,$(SALSA20_LIBS)) salsa20_wrapper.c -o $@ $(LIBSYM)
 
 # SHA256
 SHA256_LIBS = sodium/utils.c																			\
@@ -39,7 +80,22 @@ SHA256_LIBS = sodium/utils.c																			\
                    crypto_hash/sha256/cp/hash_sha256.c
 
 sha256:
-	 clang $(CFLAGS) $(patsubst %,$(LIBDIR)/%,$(SHA256_LIBS)) $@_wrapper.c -o $@ $(LIBSYM)
+	 $(CLANG) $(CFLAGS) $(patsubst %,$(LIBDIR)/%,$(SHA256_LIBS)) sha256_wrapper.c -o $@ $(LIBSYM)
+
+sha256_O0:
+	 $(CLANG) $(CFLAGS) -O0 $(patsubst %,$(LIBDIR)/%,$(SHA256_LIBS)) sha256_wrapper.c -o $@ $(LIBSYM)
+
+sha256_O1:
+	 $(CLANG) $(CFLAGS) -O1 $(patsubst %,$(LIBDIR)/%,$(SHA256_LIBS)) sha256_wrapper.c -o $@ $(LIBSYM)
+
+sha256_O2:
+	 $(CLANG) $(CFLAGS) -O2 $(patsubst %,$(LIBDIR)/%,$(SHA256_LIBS)) sha256_wrapper.c -o $@ $(LIBSYM)
+
+sha256_O3:
+	 $(CLANG) $(CFLAGS) -O3 $(patsubst %,$(LIBDIR)/%,$(SHA256_LIBS)) sha256_wrapper.c -o $@ $(LIBSYM)
+
+sha256_Os:
+	 $(CLANG) $(CFLAGS) -Os $(patsubst %,$(LIBDIR)/%,$(SHA256_LIBS)) sha256_wrapper.c -o $@ $(LIBSYM)
 
 
 # SHA512
@@ -49,56 +105,132 @@ SHA512_LIBS = sodium/utils.c																			\
                    crypto_hash/sha512/cp/hash_sha512.c
 
 sha512:
-	 clang $(CFLAGS) $(patsubst %,$(LIBDIR)/%,$(SHA512_LIBS)) $@_wrapper.c -o $@ $(LIBSYM)
+	 $(CLANG) $(CFLAGS) $(patsubst %,$(LIBDIR)/%,$(SHA512_LIBS)) sha512_wrapper.c -o $@ $(LIBSYM)
 
-# # AUTH
-# AUTH_LIBS      = sodium/utils.c \
-#                  randombytes/randombytes.c randombytes/sysrandom/randombytes_sysrandom.c \
-#                  crypto_hash/sha256/cp/hash_sha256.c crypto_auth/hmacsha256/cp/hmac_hmacsha256.c
+sha512_O0:
+	 $(CLANG) $(CFLAGS) -O0 $(patsubst %,$(LIBDIR)/%,$(SHA512_LIBS)) sha512_wrapper.c -o $@ $(LIBSYM)
 
-# auth_pub:
-# 	@make auth_pub-verify
+sha512_O1:
+	 $(CLANG) $(CFLAGS) -O1 $(patsubst %,$(LIBDIR)/%,$(SHA512_LIBS)) sha512_wrapper.c -o $@ $(LIBSYM)
 
-# auth_pub-%:
-# 	 clang $(CFLAGS)  $(patsubst %,$(LIBDIR)/%,$(_LIBS))  .c -o 
+sha512_O2:
+	 $(CLANG) $(CFLAGS) -O2 $(patsubst %,$(LIBDIR)/%,$(SHA512_LIBS)) sha512_wrapper.c -o $@ $(LIBSYM)
 
-# auth_prv:
-# 	@make auth_prv-verify
+sha512_O3:
+	 $(CLANG) $(CFLAGS) -O3 $(patsubst %,$(LIBDIR)/%,$(SHA512_LIBS)) sha512_wrapper.c -o $@ $(LIBSYM)
 
-# auth_prv-%:
-# 	 clang $(CFLAGS)  $(patsubst %,$(LIBDIR)/%,$(_LIBS))  .c -o 
+sha512_Os:
+	 $(CLANG) $(CFLAGS) -Os $(patsubst %,$(LIBDIR)/%,$(SHA512_LIBS)) sha512_wrapper.c -o $@ $(LIBSYM)
 
+sodium_add:
+	 $(CLANG) $(CFLAGS) $@.c -o $@ $(LIBSYM)
 
-# # POLY1305
-# POLY1305_LIBS      = sodium/utils.c \
-#                      randombytes/sysrandom/randombytes_sysrandom.c randombytes/randombytes.c \
-#                      crypto_verify/16/ref/verify_16.c \
-#                      crypto_onetimeauth/poly1305/donna/auth_poly1305_donna.c \
-#                      crypto_onetimeauth/poly1305/donna/verify_poly1305_donna.c
+sodium_add_O0:
+	 $(CLANG) $(CFLAGS) -O0 sodium_add.c -o $@ $(LIBSYM)
 
-# poly1305:
-# 	@make poly1305-verify
+sodium_add_O1:
+	 $(CLANG) $(CFLAGS) -O1 sodium_add.c -o $@ $(LIBSYM)
 
-# poly1305-%:
-# 	 clang $(CFLAGS)  $(patsubst %,$(LIBDIR)/%,$(_LIBS))  .c -o 
+sodium_add_O2:
+	 $(CLANG) $(CFLAGS) -O2 sodium_add.c -o $@ $(LIBSYM)
 
+sodium_add_O3:
+	 $(CLANG) $(CFLAGS) -O3 sodium_add.c -o $@ $(LIBSYM)
 
-# # AEAD (CHACHA20 + POLY1305)
-# AEAD_LIBS = sodium/utils.c \
-#             randombytes/randombytes.c randombytes/sysrandom/randombytes_sysrandom.c \
-#             crypto_stream/chacha20/ref/stream_chacha20_ref.c crypto_stream/chacha20/stream_chacha20_api.c \
-#             crypto_onetimeauth/crypto_onetimeauth.c crypto_onetimeauth/poly1305/onetimeauth_poly1305.c \
-#             crypto_onetimeauth/poly1305/donna/auth_poly1305_donna.c crypto_onetimeauth/poly1305/donna/verify_poly1305_donna.c \
-#             crypto_verify/16/ref/verify_16.c \
-#             crypto_aead/chacha20poly1305/sodium/aead_chacha20poly1305.c
+sodium_add_Os:
+	 $(CLANG) $(CFLAGS) -Os sodium_add.c -o $@ $(LIBSYM)
 
-# aead:
-# 	@make aead-verify
+sodium_sub:
+	 $(CLANG) $(CFLAGS) sodium_sub.c -o $@ $(LIBSYM)
 
-# aead-%:
-# 	 clang $(CFLAGS)  $(patsubst %,$(LIBDIR)/%,$(_LIBS))  .c -o 
+sodium_sub_O0:
+	 $(CLANG) $(CFLAGS) sodium_sub.c -o $@ $(LIBSYM)
 
+sodium_sub_O1:
+	 $(CLANG) $(CFLAGS) -O1 sodium_sub.c -o $@ $(LIBSYM)
+
+sodium_sub_O2:
+	 $(CLANG) $(CFLAGS) -O2 sodium_sub.c -o $@ $(LIBSYM)
+
+sodium_sub_O3:
+	 $(CLANG) $(CFLAGS) -O3 sodium_sub.c -o $@ $(LIBSYM)
+
+sodium_sub_Os:
+	 $(CLANG) $(CFLAGS) -Os sodium_sub.c -o $@ $(LIBSYM)
+
+sodium_is_zero:
+	 $(CLANG) $(CFLAGS) sodium_is_zero.c -o $@ $(LIBSYM)
+
+sodium_is_zero_O0:
+	 $(CLANG) $(CFLAGS) -O0 sodium_is_zero.c -o $@ $(LIBSYM)
+
+sodium_is_zero_O1:
+	 $(CLANG) $(CFLAGS) -O1 sodium_is_zero.c -o $@ $(LIBSYM)
+
+sodium_is_zero_O2:
+	 $(CLANG) $(CFLAGS) -O2 sodium_is_zero.c -o $@ $(LIBSYM)
+
+sodium_is_zero_O3:
+	 $(CLANG) $(CFLAGS) -O3 sodium_is_zero.c -o $@ $(LIBSYM)
+
+sodium_is_zero_Os:
+	 $(CLANG) $(CFLAGS) -Os sodium_is_zero.c -o $@ $(LIBSYM)
+
+sodium_compare:
+	 $(CLANG) $(CFLAGS) $@.c -o $@ $(LIBSYM)
+
+sodium_compare_O0:
+	 $(CLANG) $(CFLAGS) -O0 sodium_compare.c -o $@ $(LIBSYM)
+
+sodium_compare_O1:
+	 $(CLANG) $(CFLAGS) -O1 sodium_compare.c -o $@ $(LIBSYM)
+
+sodium_compare_O2:
+	 $(CLANG) $(CFLAGS) -O2 sodium_compare.c -o $@ $(LIBSYM)
+
+sodium_compare_O3:
+	 $(CLANG) $(CFLAGS) -O3 sodium_compare.c -o $@ $(LIBSYM)
+
+sodium_compare_Os:
+	 $(CLANG) $(CFLAGS) -Os sodium_compare.c -o $@ $(LIBSYM)
+
+sodium_increment:
+	 $(CLANG) $(CFLAGS) $@.c -o $@ $(LIBSYM)
+
+sodium_increment_O0:
+	 $(CLANG) $(CFLAGS) -O0 sodium_increment.c -o $@ $(LIBSYM)
+
+sodium_increment_O1:
+	 $(CLANG) $(CFLAGS) -O1 sodium_increment.c -o $@ $(LIBSYM)
+
+sodium_increment_O2:
+	 $(CLANG) $(CFLAGS) -O2 sodium_increment.c -o $@ $(LIBSYM)
+
+sodium_increment_O3:
+	 $(CLANG) $(CFLAGS) -O3 sodium_increment.c -o $@ $(LIBSYM)
+
+sodium_increment_Os:
+	 $(CLANG) $(CFLAGS) -Os sodium_increment.c -o $@ $(LIBSYM)
+   
+sodium_memcmp:
+	 $(CLANG) $(CFLAGS) $@.c -o $@ $(LIBSYM)
+
+sodium_memcmp_O0:
+	 $(CLANG) $(CFLAGS) -O0 sodium_memcmp.c -o $@ $(LIBSYM)
+
+sodium_memcmp_O1:
+	 $(CLANG) $(CFLAGS) -O1 sodium_memcmp.c -o $@ $(LIBSYM)
+
+sodium_memcmp_O2:
+	 $(CLANG) $(CFLAGS) -O2 sodium_memcmp.c -o $@ $(LIBSYM)
+
+sodium_memcmp_O3:
+	 $(CLANG) $(CFLAGS) -O3 sodium_memcmp.c -o $@ $(LIBSYM)
+
+sodium_memcmp_Os:
+	 $(CLANG) $(CFLAGS) -Os sodium_memcmp.c -o $@ $(LIBSYM)
 
 clean:
 	rm -rf *.o *.csv *.out smtdir/*/*.smt2
 	rmdir smtdir/binsec_relse smtdir/binsec_sse
+	

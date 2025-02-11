@@ -1,4 +1,4 @@
-#include <stdlib.h>
+#include "../../__libsym__/sym.h"
 #include "hacl-c/hacl-c/Hacl_SHA2_256.h"
 #include <stdint.h>
 
@@ -11,10 +11,10 @@ uint8_t input[MESSAGE_LEN];             // private
 int main() {
   
 
-  // HIGH_INPUT(MESSAGE_LEN)(input);
-  // HIGH_INPUT(Hacl_SHA2_256_size_hash)(input);
+  HIGH_INPUT(MESSAGE_LEN)(input);
+  HIGH_INPUT(Hacl_SHA2_256_size_hash)(input);
  
   Hacl_SHA2_256_hash(hash1, input, len);
-  exit(1);
+
   return 0;
 }

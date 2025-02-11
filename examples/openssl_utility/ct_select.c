@@ -1,13 +1,14 @@
 #include "lib.h"
-#include <stdlib.h>
+#include "../../__libsym__/sym.h"
 
-unsigned int mask, x, y;  // private
 
 int main() {
+  unsigned int mask, x, y;  // private
 
+  high_input_4(&mask);
+  high_input_4(&x);
+  high_input_4(&y);
   
   int res = constant_time_select(mask, x, y);
-  exit(res);
   return res;
-
 }

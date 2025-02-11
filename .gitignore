@@ -346,3 +346,8 @@ tags
 # nix-build
 /result
 /result-*
+
+*.csv
+*.snapshot
+
+/examples/*

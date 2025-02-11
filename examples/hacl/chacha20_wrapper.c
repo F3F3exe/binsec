@@ -1,4 +1,4 @@
-#include <stdlib.h>
+#include "../../__libsym__/sym.h"
 #include "hacl-c/hacl-c/Hacl_Chacha20.h"
 #include <stdint.h>
 
@@ -15,11 +15,10 @@ uint8_t output[MESSAGE_LEN]; // private
 int main() {
   
 
-  // HIGH_INPUT(MESSAGE_LEN)(output);
-  // HIGH_INPUT(MESSAGE_LEN)(plain);
-  // HIGH_INPUT(KEY_LEN)(k);
+  HIGH_INPUT(MESSAGE_LEN)(output);
+  HIGH_INPUT(MESSAGE_LEN)(plain);
+  HIGH_INPUT(KEY_LEN)(k);
   
   Hacl_Chacha20_chacha20(output, plain, len, k, nonce, ctr);
-  exit(1);
   return 0;
 }

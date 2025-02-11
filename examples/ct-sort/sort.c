@@ -4,6 +4,8 @@
 */
 #include <stdlib.h>
 #include "lib.h"
+#include "../../__libsym__/sym.h"
+
 
 int conds[3];
   int out[3];
@@ -11,11 +13,10 @@ int conds[3];
 int main() {
   
 
-  // high_input_12(&conds);
-  // high_input_12(&out);
-  // high_input_12(&in);
+  high_input_12(&conds);
+  high_input_12(&out);
+  high_input_12(&in);
 
   sort3(conds,out,in);
-  exit(1);
   return 0;
 }

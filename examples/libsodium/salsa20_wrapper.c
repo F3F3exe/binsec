@@ -1,23 +1,22 @@
 #include <sodium.h>
-#include <stdlib.h>
+#include "../../__libsym__/sym.h"
 
 #define MSG_LEN 256
 #define KEYBYTES 32 /* crypto_core_salsa20_KEYBYTES */
 #define NONCEBYTES 16 /* crypto_stream_salsa20_NONCEBYTES */
 
 
- unsigned char out[MSG_LEN];                            // private
+ 
+int main() {
+  unsigned char out[MSG_LEN];                            // private
   unsigned char msg[MSG_LEN];                            // private
   unsigned char key[crypto_stream_salsa20_KEYBYTES];         // private
   unsigned char nonce[crypto_stream_salsa20_NONCEBYTES];
-int main() {
- 
 
-  // HIGH_INPUT(MSG_LEN)(out);
-  // HIGH_INPUT(MSG_LEN)(msg);
-  // HIGH_INPUT(KEYBYTES)(key);
+  HIGH_INPUT(MSG_LEN)(out);
+  HIGH_INPUT(MSG_LEN)(msg);
+  HIGH_INPUT(KEYBYTES)(key);
 
   int res = crypto_stream_salsa20_xor(out, msg, MSG_LEN, nonce, key);
-  exit(res);
   return res;
 }

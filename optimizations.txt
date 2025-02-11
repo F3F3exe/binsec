@@ -1,0 +1,106 @@
+diff -wy --suppress-common-lines  \
+  <(echo 'int;' | clang -xc -O0    - -o /dev/null -\#\#\# 2>&1 | tr " " "\n" | grep -v /tmp) \
+  <(echo 'int;' | clang -xc -O1 - -o /dev/null -\#\#\# 2>&1 | tr " " "\n" | grep -v /tmp)
+
+
+clang  -mllvm -debug-pass=Structure -xc -o /dev/null - <<< 'int main() { return 0; }'
+
+clang -O3 -mllvm -debug-pass=Structure -xc -o /dev/null - <<< 'int main() { return 0; }'
+
+clang -O0 -S -emit-llvm test.c -o test.ll
+opt -O3 -debug-pass=Structure -S test.ll -o /dev/null
+
+
+#for cmp_bytes:
+clang -O2 -fno-inline-functions -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm cmp_bytes.c -o cmp_bytes.ll 
+clang -O2 -fno-inline-functions -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm Hacl_Policies.c -o Hacl_Policies.ll 
+
+opt  -S cmp_bytes.ll -o cmp_bytes.ll 
+opt  -S Hacl_Policies.ll -o Hacl_Policies.ll 
+
+
+clang -m32 -march=i386 -DKRML_NOUINT128 -static cmp_bytes.ll -o cmp_bytes -L../../__libsym__/ -lsym Hacl_Policies.ll
+binsec -sse -sse-script checkct_cmp_bytes.cfg -sse-depth 100000000 -checkct cmp_bytes
+
+#this will not work, also need to compile the Hacl_Policies.c
+clang -O2  -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm cmp_bytes.c -o cmp_bytes.ll 
+opt  -S cmp_bytes.ll -o cmp_bytes.ll 
+clang -m32 -march=i386 -DKRML_NOUINT128 -static cmp_bytes.ll -o cmp_bytes -L../../__libsym__/ -lsym Hacl_Policies.c
+binsec -sse -sse-script checkct_cmp_bytes.cfg -sse-depth 100000000 -checkct cmp_bytes
+
+
+# uint8_gte_mask.c
+clang  -fno-inline-functions -m32 -march=i386 -DKRML_NOUINT128 -static -O3 uint8_gte_mask.c -o uint8_gte_mask_O1 -L../../__libsym__/ -lsym Hacl_Policies.c
+binsec -sse -checkct-stats-file ./uint8_gte_mask_O1.csv -sse-script checkct_uint8_gte_mask.cfg -sse-depth 100000000 -checkct uint8_gte_mask_O1
+
+#uint16_gte_mask.c
+clang  -fno-inline-functions -m32 -march=i386 -DKRML_NOUINT128 -static -O3 uint16_gte_mask.c -o uint16_gte_mask_O1 -L../../__libsym__/ -lsym Hacl_Policies.c
+binsec -sse -checkct-stats-file ./uint16_gte_mask_O1.csv -sse-script checkct_uint16_gte_mask.cfg -sse-depth 100000000 -checkct uint16_gte_mask_O1
+
+#sort_multiplex
+clang -fno-inline-functions -m32 -march=i386 -static -O3 sort_multiplex.c -o sort_multiplex_O1 -L../../__libsym__/ -lsym lib.c
+binsec -sse -checkct-stats-file ./sort_multiplex_O1.csv -sse-script checkct_sort_multiplex.cfg -sse-depth 100000000 -checkct sort_multiplex_O1
+
+#to get opt flags
+clang -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm sort_multiplex.c -o sort_multiplex.ll 
+
+opt -O1 -debug-pass-manager < sort_multiplex.ll > /dev/null
+
+
+#02
+#no opt
+clang -fno-inline-functions -m32 -g -static 02.c -o 02 -L../../__libsym__/ -lsym
+binsec -sse -checkct-stats-file ./02.csv -sse-script checkct_02.cfg -sse-depth 100000000 -checkct 02
+
+#-O0
+clang -fno-inline-functions -m32 -g -static -O0 02.c -o 02_O0 -L../../__libsym__/ -lsym
+binsec -sse -checkct-stats-file ./02_O0.csv -sse-script checkct_02.cfg -sse-depth 100000000 -checkct 02_O0
+
+#-O1
+clang -fno-inline-functions -m32 -g -static -O1 02.c -o 02_O1 -L../../__libsym__/ -lsym
+binsec -sse -checkct-stats-file ./02_O1.csv -sse-script checkct_02.cfg -sse-depth 100000000 -checkct 02_O1
+
+
+#O0 and mem2reg
+clang -O0 -m32 -march=i386 -static -S -emit-llvm 02.c -o 02_O0.ll 
+
+opt  -S -scalar-evolution -scev-aa -adce -always-inline -argpromotion -break-crit-edges -codegenprepare -constmerge -dce -deadargelim -dse -function-attrs -globaldce -globalopt -gvn -indvars -inline -instcombine -aggressive-instcombine -ipsccp  -jump-threading -lcssa -licm -loop-deletion -loop-extract -loop-reduce -loop-rotate -loop-simplify -loop-unroll -loweratomic -lowerinvoke -memcpyopt -mergefunc -mergereturn -partial-inliner -reassociate -tailcallelim -strip-dead-prototypes -strip -simple-loop-unswitch -sink -simplifycfg -mem2reg -memcpyopt -sccp -sroa -reg2mem 02_O0.ll -o 02_O0.ll 
+#opt -O1 -S  02_O0.ll -o 02_O0.ll 
+
+
+clang -O0 -m32 -march=i386 -DKRML_NOUINT128 -static 02_O0.ll -o 02_O0_opt -L../../__libsym__/ -lsym 
+binsec -sse -checkct-stats-file ./02_O0.csv -sse-script checkct_02.cfg -sse-depth 100000000 -checkct 02_O0_opt
+
+
+-fno-sroa
+clang -O1 -fsanitize=address -fno-omit-frame-pointer 02.c -o 02_O1
+clang -disable-lifetime-markers -m32 -g -static -O1 02.c -o 02_O1 -L../../__libsym__/ -lsym
+binsec -sse -checkct-stats-file ./02_O1.csv -sse-script checkct_02.cfg -sse-depth 100000000 -checkct 02_O1
+
+clang -O1 -m32 -march=i386 -static -S -emit-llvm 02.c -o 02_O0.ll 
+opt -O1 -debug-pass-manager < 02_O0.ll > /dev/null
+
+
+#from core
+clang -fno-lto -m32 -g -static -O1 02.c -o 02_O1 -L../../__libsym__/ -lsym
+make_coredump.sh core_02_O1.snapshot 02_O1
+binsec -sse -checkct-stats-file ./02_O1.csv -sse-script checkct_02.cfg -sse-depth 100000000 -checkct core_02_O1.snapshot
+
+#prints only llvm optimization passes -> doesnt print clang frontend optimizations
+clang -O3  -Rpass=.* 02.c -o 02_O1 
+clang -O1 -m32 -g -static -mllvm -debug-pass=Structure 02.c -o 02_O1
+
+
+#check if preprocessed code has any changes:
+clang -O0 -S -emit-llvm 02.c -o 02_O0.ll 
+clang -O1 -S -emit-llvm 02.c -o 02_O1.ll 
+diff -u 02_O0.ll 02_O1.ll
+
+clang -O0 -S -emit-llvm -Xclang -disable-llvm-passes 02.c -o 02_O0.ll
+clang -O1 -S -emit-llvm -Xclang -disable-llvm-passes 02.c -o 02_O1.ll
+diff -u 02_O0.ll 02_O1.ll
+
+
+clang -O1 -S -emit-llvm  02.c -o 02_opt.ll
+clang -O1 -S -emit-llvm -Xclang -disable-llvm-passes 02.c -o 02_not_opt.ll
+diff -u 02_opt.ll 02_not_opt.ll

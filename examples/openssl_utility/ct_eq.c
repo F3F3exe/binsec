@@ -1,15 +1,12 @@
-#include <stdlib.h>
+#include "../../__libsym__/sym.h"
 #include "lib.h"
-#include <stdio.h>
 
-unsigned int x, y;  // private
 int main() {
-  
+  int x, y;  // private
 
-  // high_input_4(&x);
-  // high_input_4(&y);
+  high_input_4(&x);
+  high_input_4(&y);
   
   int res = constant_time_eq(x, y);
-  exit(res);
   return res;
 }

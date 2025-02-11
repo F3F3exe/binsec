@@ -1,14 +1,12 @@
 #include "lib.h"
-#include <stdlib.h>
-
-  unsigned int x;  // private
-
+#include "../../__libsym__/sym.h"
 
 int main() {
 
-  //high_input_4(&x);
+  unsigned int x;  // private
+
+  high_input_4(&x);
   
   int res = constant_time_msb(x);
-  exit(res);
   return res;
 }

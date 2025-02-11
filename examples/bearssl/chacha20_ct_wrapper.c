@@ -1,26 +1,22 @@
 #include "inc/bearssl.h"
 #include <stdint.h>
-#include <stdlib.h>
+#include "../../__libsym__/sym.h"
 
-#define KEY_LEN 240 /* uint32_t skey[30]; => 30 * 8 */
-#define N_ROUND 2
-#define IV_LEN br_aes_big_BLOCK_SIZE /* 16 bytes */
-#define DATA_LEN 64   /* Must be a multiple of block size */
-
-uint8_t data[DATA_LEN];
-uint64_t key[30];
-uint8_t iv[IV_LEN];
-size_t len;
-uint32_t cc = 1; 
+#define DATA_LEN 256   /* Must be a multiple of block size */
+#define KEY_LEN 32
+#define IV_LEN 12
 
 int main(){  
-  
-  len = (size_t) DATA_LEN;
+  uint8_t data[DATA_LEN];
+  uint8_t key[32];
+  uint8_t iv[IV_LEN];
+  uint32_t len = DATA_LEN;
+  uint32_t cc; 
 
-  //HIGH_INPUT(KEY_LEN)(ctx.skey);
-  //HIGH_INPUT(DATA_LEN)(data);
+  HIGH_INPUT(KEY_LEN)(key);
+  HIGH_INPUT(DATA_LEN)(data);
 
-  br_chacha20_ct_run(key, iv, cc, data, len);
-  exit(iv[0]);
+
+  br_chacha20_ct_run(key, iv, cc, data, (size_t) DATA_LEN);
   return 0;
 }

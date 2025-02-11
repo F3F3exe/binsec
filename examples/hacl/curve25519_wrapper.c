@@ -1,4 +1,4 @@
-#include <stdlib.h>
+#include "../../__libsym__/sym.h"
 #include "hacl-c/hacl-c/Hacl_Curve25519.h"
 #include <stdint.h>
 
@@ -10,11 +10,10 @@ uint8_t mypublic[SIZE];   // private (but declassified in output)
 int main() {
   
   
-  // HIGH_INPUT(SIZE)(mypublic);
-  // HIGH_INPUT(SIZE)(secret);
-  // HIGH_INPUT(SIZE)(basepoint);
+  HIGH_INPUT(SIZE)(mypublic);
+  HIGH_INPUT(SIZE)(secret);
+  HIGH_INPUT(SIZE)(basepoint);
 
   Hacl_Curve25519_crypto_scalarmult(mypublic, secret, basepoint);
-  exit(1);
   return 0;
 }

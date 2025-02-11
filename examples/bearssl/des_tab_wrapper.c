@@ -1,7 +1,6 @@
 #include "inc/bearssl.h"
 #include <stdint.h>
-#include <stdlib.h> 
-#include <stdio.h>
+#include "../../__libsym__/sym.h"
 
 #define KEY_LEN 384     /* uint32_t skey[96]; => 96 * 4 */
 #define N_ROUND 2
@@ -19,11 +18,9 @@ int main(){
   uint8_t iv[IV_LEN];
   uint8_t data[DATA_LEN];
 
-  //HIGH_INPUT(KEY_LEN)(ctx.skey);
-  //HIGH_INPUT(DATA_LEN)(data);
+  HIGH_INPUT(KEY_LEN)(ctx.skey);
+  HIGH_INPUT(DATA_LEN)(data);
 
   br_des_tab_cbcenc_run(&ctx, iv, data, (size_t) DATA_LEN);
-  printf("data %d\n", ctx.skey[0]);
-  exit(iv[0]);
   return 0;
 }
