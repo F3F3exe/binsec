@@ -90,6 +90,9 @@ binsec -sse -checkct-stats-file ./02_O1.csv -sse-script checkct_02.cfg -sse-dept
 clang -O3  -Rpass=.* 02.c -o 02_O1 
 clang -O1 -m32 -g -static -mllvm -debug-pass=Structure 02.c -o 02_O1
 
+#get llvm passes for automized passes
+clang -O0 -S -emit-llvm 02.c -o 02.ll
+opt  -debug-pass-manager -S 02.ll -o /dev/null
 
 #check if preprocessed code has any changes:
 clang -O0 -S -emit-llvm 02.c -o 02_O0.ll 
@@ -104,3 +107,33 @@ diff -u 02_O0.ll 02_O1.ll
 clang -O1 -S -emit-llvm  02.c -o 02_opt.ll
 clang -O1 -S -emit-llvm -Xclang -disable-llvm-passes 02.c -o 02_not_opt.ll
 diff -u 02_opt.ll 02_not_opt.ll
+
+
+#O1 and no llvm optimization passes -> secure
+clang -O1 -Xclang -disable-llvm-passes -m32  -g -static 02.c -o 02_O1 -L../../__libsym__/ -lsym
+binsec -sse -checkct-stats-file ./02_O1.csv -sse-script checkct_02.cfg -sse-depth 100000000 -checkct 02_O1
+
+#O1 and llvm optimization passes -> insecure, so an llvm opt pass causes the mem access leak
+clang -O1  -m32  -g -static 02.c -o 02_O1 -L../../__libsym__/ -lsym
+binsec -sse -checkct-stats-file ./02_O1.csv -sse-script checkct_02.cfg -sse-depth 100000000 -checkct 02_O1
+
+
+#donna -> secure
+clang-14 -m32 -g  -static donna_wrapper.c -O1 -o donna_O1  -L../../__libsym__/ -lsym
+make_coredump.sh core_donna_O1.snapshot donna_O1
+binsec -sse -sse-script checkct_donna.cfg -sse-depth 100000000 -checkct core_donna_O1.snapshot
+
+#test opt passes
+#1st option -> secure
+clang-14 -m32 -g -march=i386 -static  -S -emit-llvm donna_wrapper.c -o donna_wrapper.ll
+opt -S  -dce donna_wrapper.ll -o donna_wrapper.ll
+clang-14 -O1 -m32 -g -march=i386 -static donna_wrapper.ll -o donna_wrapper -L../../__libsym__/ -lsym
+make_coredump.sh core_donna.snapshot donna_wrapper
+binsec -sse -sse-script checkct_donna.cfg -sse-depth 100000000 -checkct core_donna.snapshot -sse-timeout 100
+
+#2nd option -> has control flow leak
+clang-14 -O1 -m32 -g -march=i386 -static  -S -emit-llvm donna_wrapper.c -o donna_wrapper.ll
+opt -S  donna_wrapper.ll -o donna_wrapper.ll
+clang-14  -m32 -g -march=i386 -static donna_wrapper.ll -o donna_wrapper -L../../__libsym__/ -lsym
+make_coredump.sh core_donna.snapshot donna_wrapper
+binsec -sse -sse-script checkct_donna.cfg -sse-depth 100000000 -checkct core_donna.snapshot -sse-timeout 100
