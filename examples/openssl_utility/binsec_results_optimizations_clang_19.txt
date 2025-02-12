@@ -1,0 +1,14 @@
+Target			O0		O1		O2		O3		Os
+ct_eq_8	secure	secure	secure	secure	secure	secure	secure	secure
+ct_eq_int	secure	secure	secure	secure	secure	secure	secure	secure
+ct_is_zero_8	secure	secure	secure	secure	secure	secure	secure	secure
+ct_lt	secure	secure	secure	secure	secure	secure	secure	secure
+ct_select	secure	secure	secure	secure	secure	secure	secure	secure
+ct_eq	secure	secure	secure	secure	secure	secure	secure	secure
+ct_ge_8	secure	secure	secure	secure	secure	secure	secure	secure
+ct_is_zero	secure	secure	secure	secure	secure	secure	secure	secure
+ct_msb	secure	secure	secure	secure	secure	secure	secure	secure
+ct_eq_int_8	secure	secure	secure	secure	secure	secure	secure	secure
+ct_ge	secure	secure	secure	secure	secure	secure	secure	secure
+ct_lt_8	secure	secure	secure	secure	secure	secure	secure	secure
+ct_select_8	secure	secure	secure	secure	secure	secure	secure	secure

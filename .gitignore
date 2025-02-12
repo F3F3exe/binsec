@@ -350,4 +350,5 @@ tags
 *.csv
 *.snapshot
 
-/examples/*
+/examples/**/.* 
+/examples/**/!*.*

@@ -1,0 +1,53 @@
+CFLAGS=-m32 -g -static -O0
+LIB=-L../../__libsym__/ -lsym
+LIBBEARSSL= -I./inc -L./. -lbearssl
+WRAPPER=${NAME}_wrapper
+
+
+.PHONY: aes_big  des_tab des_ct_cbcenc des_ct_cbcdec aes_ct_cbcdec aes_ct_cbcenc chacha20_ct aes_ct_ctr aes_ct64_cbcdec aes_ct64_cbcenc aes_ct64_ctr ghash_ctmul
+all: aes_big  des_tab des_ct_cbcenc des_ct_cbcdec aes_ct_cbcdec aes_ct_cbcenc chacha20_ct aes_ct_ctr aes_ct64_cbcdec aes_ct64_cbcenc aes_ct64_ctr ghash_ctmul
+
+aes_big:
+	clang  $(CFLAGS) $@_wrapper.c -o $@  $(LIB) $(LIBBEARSSL)
+
+aes_ct:
+	clang  $(CFLAGS) $@_wrapper.c -o $@  $(LIB) $(LIBBEARSSL)
+
+aes_ct_cbcenc:
+	clang  $(CFLAGS) $@_wrapper.c -o $@  $(LIB) $(LIBBEARSSL)
+
+aes_ct_cbcdec:
+	clang  $(CFLAGS) $@_wrapper.c -o $@  $(LIB) $(LIBBEARSSL)
+
+aes_ct64_cbcdec:
+	clang  $(CFLAGS) $@_wrapper.c -o $@  $(LIB) $(LIBBEARSSL)
+
+aes_ct64_cbcenc:
+	clang  $(CFLAGS) $@_wrapper.c -o $@  $(LIB) $(LIBBEARSSL)
+
+aes_ct_ctr:
+	clang  $(CFLAGS) $@_wrapper.c -o $@  $(LIB) $(LIBBEARSSL)
+
+aes_ct64_ctr:
+	clang  $(CFLAGS) $@_wrapper.c -o $@  $(LIB) $(LIBBEARSSL)
+
+des_tab:
+	clang  $(CFLAGS) $@_wrapper.c -o $@  $(LIB) $(LIBBEARSSL)
+
+des_ct_cbcenc:
+	clang $(CFLAGS) $@_wrapper.c -o $@  $(LIB) $(LIBBEARSSL)
+
+des_ct_cbcdec:
+	clang $(CFLAGS) $@_wrapper.c -o $@  $(LIB) $(LIBBEARSSL)
+
+chacha20_ct: 
+	clang $(CFLAGS) $@_wrapper.c -o $@  $(LIB) $(LIBBEARSSL)
+
+ghash_ctmul:
+	clang $(CFLAGS) $@_wrapper.c -o $@  $(LIB) $(LIBBEARSSL)
+
+clean:
+	rm -rf *.o *.csv *.out smtdir/*/*.smt2
+
+mrproper: clean
+	find . -type f -executable | xargs rm

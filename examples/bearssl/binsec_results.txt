@@ -1,0 +1,10 @@
+Target	O0 	O1 	O2 	O3
+aes_ct	binsec failed	binsec failed	binsec failed	binsec failed
+des_tab	binsec failed	binsec failed	binsec failed	binsec failed
+aes_ct_cbcenc	binsec failed	binsec failed	binsec failed	binsec failed
+aes_ct_cbcdec	binsec failed	binsec failed	binsec failed	binsec failed
+aes_ct64_cbcenc	binsec failed	binsec failed	binsec failed	binsec failed
+aes_ct64_cbcdec	binsec failed	binsec failed	binsec failed	binsec failed
+chacha20_ct	binsec failed	binsec failed	binsec failed	binsec failed
+ghash_ctmul	binsec failed	binsec failed	binsec failed	binsec failed
+curve25519	binsec failed	binsec failed	binsec failed	binsec failed

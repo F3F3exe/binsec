@@ -1,0 +1,3 @@
+Target			O0		O1		O2		O3		Os		Oz		Of
+test_harness_vuln	insecure	insecure	insecure	insecure	insecure	insecure	insecure
+test_harness_ct	secure	secure	secure	secure	secure	secure	secure

@@ -1,0 +1,10 @@
+Target			O0		O1		O2		O3		Os		Oz		Ofast
+01	insecure	insecure	insecure	insecure	insecure	insecure	insecure
+02	secure	insecure	insecure	insecure	insecure	insecure	insecure
+03	insecure	insecure	insecure	insecure	insecure	insecure	insecure
+04	secure	secure	secure	secure	secure	secure	secure
+05	secure	unknown	unknown	unknown	unknown	unknown	unknown
+07	secure	unknown	unknown	unknown	unknown	unknown	unknown
+08	insecure	secure	secure	secure	secure	secure	secure
+09	secure	secure	secure	secure	secure	secure	secure
+10	insecure

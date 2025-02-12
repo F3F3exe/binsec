@@ -1,0 +1,11 @@
+Target			O0		O1		O2		O3		Os
+chacha20	secure	secure	secure	secure	secure
+salsa20	secure	secure	secure	secure	secure
+sha256	secure	secure	secure	secure	secure
+sha512	secure	secure	secure	secure	secure
+sodium_add	secure	secure	secure	secure	secure
+sodium_sub	secure	secure	secure	secure	secure
+sodium_is_zero	secure	secure	secure	secure	secure
+sodium_compare	secure	secure	secure	secure	secure
+sodium_increment	secure	secure	secure	secure	secure
+sodium_memcmp	secure	secure	secure	secure	secure

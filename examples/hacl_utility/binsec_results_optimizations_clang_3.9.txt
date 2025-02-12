@@ -1,0 +1,2 @@
+Target			O0			O1			O2			O3			Os			Oz			Ofast
+cmp_bytes	secure	secure	secure	secure	secure	secure	secure

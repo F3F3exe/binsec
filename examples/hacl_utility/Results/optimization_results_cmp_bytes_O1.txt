@@ -1,0 +1,20 @@
+Optimization,Result
+-scev-aa, insecure
+-adce, insecure
+-scev-aa -adce, insecure
+-always-inline, insecure
+-scev-aa -always-inline, insecure
+-adce -always-inline, insecure
+-scev-aa -adce -always-inline, insecure
+-argpromotion, insecure
+-scev-aa -argpromotion, insecure
+-adce -argpromotion, insecure
+-scev-aa -adce -argpromotion, insecure
+-always-inline -argpromotion, insecure
+-scev-aa -always-inline -argpromotion, insecure
+-adce -always-inline -argpromotion, insecure
+-scev-aa -adce -always-inline -argpromotion, insecure
+-break-crit-edges, insecure
+-scev-aa -break-crit-edges, insecure
+-adce -break-crit-edges, insecure
+-scev-aa -adce -break-crit-edges, insecure

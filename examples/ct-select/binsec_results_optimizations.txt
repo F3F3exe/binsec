@@ -1,0 +1,6 @@
+Target			O0		O1		O2		O3		Os		Oz		Ofast		flto
+ct_select_v1	secure	insecure	insecure	insecure	insecure	insecure	insecure	secure
+ct_select_v2	secure	insecure	insecure	insecure	insecure	insecure	insecure	secure
+ct_select_v3	secure	insecure	insecure	insecure	insecure	insecure	insecure	secure
+ct_select_v4	secure	insecure	insecure	insecure	insecure	insecure	insecure	secure
+naive_select	insecure	insecure	insecure	insecure	insecure	insecure	insecure	insecure

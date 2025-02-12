@@ -1,0 +1,506 @@
+
+;; Function main (main, funcdef_no=6, decl_uid=2962, cgraph_uid=7, symbol_order=6)
+
+int main ()
+{
+  uint8_t b2[200];
+  uint8_t b1[200];
+  int D.2967;
+  unsigned char _1;
+  int _6;
+
+;;   basic block 2, loop depth 0
+;;    pred:       ENTRY
+  high_input_200 (&b1);
+  high_input_200 (&b2);
+  _1 = Hacl_Policies_cmp_bytes (&b1, &b2, 200);
+  _6 = (int) _1;
+  b1 ={v} {CLOBBER};
+  b2 ={v} {CLOBBER};
+;;    succ:       3
+
+;;   basic block 3, loop depth 0
+;;    pred:       2
+<L1>:
+  return _6;
+;;    succ:       EXIT
+
+}
+
+
+
+Partition map 
+
+Partition 1 (_1 - 1 )
+Partition 6 (_6 - 6 )
+Partition 9 (_9(D) - 9 )
+
+
+Coalescible Partition map 
+
+Partition 0, base 0 (_9(D) - 9 )
+
+
+Partition map 
+
+Partition 0 (_9(D) - 9 )
+
+
+Conflict graph:
+
+After sorting:
+Coalesce List:
+
+Partition map 
+
+Partition 0 (_9(D) - 9 )
+
+After Coalescing:
+
+Partition map 
+
+Partition 0 (_1 - 1 )
+Partition 1 (_6 - 6 )
+Partition 2 (_9(D) - 9 )
+
+int main ()
+{
+  uint8_t b2[200];
+  uint8_t b1[200];
+  int D.2967;
+  unsigned char _1;
+  int _6;
+  int _9(D);
+
+;;   basic block 2, loop depth 0
+;;    pred:       ENTRY
+  high_input_200 (&b1);
+  high_input_200 (&b2);
+  _1 = Hacl_Policies_cmp_bytes (&b1, &b2, 200);
+  _6 = (int) _1;
+  b1 ={v} {CLOBBER};
+  b2 ={v} {CLOBBER};
+;;    succ:       3
+
+;;   basic block 3, loop depth 0
+;;    pred:       2
+<L1>:
+  return _6;
+;;    succ:       EXIT
+
+}
+
+
+Partition 1: size 200 align 1
+	b2
+Partition 0: size 200 align 1
+	b1
+
+;; Generating RTL for gimple basic block 2
+
+;; high_input_200 (&b1);
+
+(insn 6 5 7 (parallel [
+            (set (reg/f:SI 7 sp)
+                (plus:SI (reg/f:SI 7 sp)
+                    (const_int -12 [0xfffffffffffffff4])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":11:3 -1
+     (expr_list:REG_ARGS_SIZE (const_int 12 [0xc])
+        (nil)))
+
+(insn 7 6 8 (parallel [
+            (set (reg:SI 86)
+                (plus:SI (reg/f:SI 77 virtual-stack-vars)
+                    (const_int -404 [0xfffffffffffffe6c])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":11:3 -1
+     (nil))
+
+(insn 8 7 9 (set (mem/f:SI (pre_dec:SI (reg/f:SI 7 sp)) [2  S4 A32])
+        (reg:SI 86)) "cmp_bytes.c":11:3 -1
+     (expr_list:REG_ARGS_SIZE (const_int 16 [0x10])
+        (nil)))
+
+(insn 9 8 10 (set (reg:SI 3 bx)
+        (reg:SI 82)) "cmp_bytes.c":11:3 -1
+     (nil))
+
+(call_insn 10 9 11 (call (mem:QI (symbol_ref:SI ("high_input_200") [flags 0x41]  <function_decl 0x7f3cc921b200 high_input_200>) [0 high_input_200 S1 A8])
+        (const_int 16 [0x10])) "cmp_bytes.c":11:3 -1
+     (nil)
+    (expr_list (use (reg:SI 3 bx))
+        (nil)))
+
+(insn 11 10 0 (parallel [
+            (set (reg/f:SI 7 sp)
+                (plus:SI (reg/f:SI 7 sp)
+                    (const_int 16 [0x10])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":11:3 -1
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (nil)))
+
+;; high_input_200 (&b2);
+
+(insn 12 11 13 (parallel [
+            (set (reg/f:SI 7 sp)
+                (plus:SI (reg/f:SI 7 sp)
+                    (const_int -12 [0xfffffffffffffff4])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":12:3 -1
+     (expr_list:REG_ARGS_SIZE (const_int 12 [0xc])
+        (nil)))
+
+(insn 13 12 14 (parallel [
+            (set (reg:SI 87)
+                (plus:SI (reg/f:SI 77 virtual-stack-vars)
+                    (const_int -204 [0xffffffffffffff34])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":12:3 -1
+     (nil))
+
+(insn 14 13 15 (set (mem/f:SI (pre_dec:SI (reg/f:SI 7 sp)) [2  S4 A32])
+        (reg:SI 87)) "cmp_bytes.c":12:3 -1
+     (expr_list:REG_ARGS_SIZE (const_int 16 [0x10])
+        (nil)))
+
+(insn 15 14 16 (set (reg:SI 3 bx)
+        (reg:SI 82)) "cmp_bytes.c":12:3 -1
+     (nil))
+
+(call_insn 16 15 17 (call (mem:QI (symbol_ref:SI ("high_input_200") [flags 0x41]  <function_decl 0x7f3cc921b200 high_input_200>) [0 high_input_200 S1 A8])
+        (const_int 16 [0x10])) "cmp_bytes.c":12:3 -1
+     (nil)
+    (expr_list (use (reg:SI 3 bx))
+        (nil)))
+
+(insn 17 16 0 (parallel [
+            (set (reg/f:SI 7 sp)
+                (plus:SI (reg/f:SI 7 sp)
+                    (const_int 16 [0x10])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":12:3 -1
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (nil)))
+
+;; _1 = Hacl_Policies_cmp_bytes (&b1, &b2, 200);
+
+(insn 18 17 19 (parallel [
+            (set (reg/f:SI 7 sp)
+                (plus:SI (reg/f:SI 7 sp)
+                    (const_int -4 [0xfffffffffffffffc])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":14:10 -1
+     (expr_list:REG_ARGS_SIZE (const_int 4 [0x4])
+        (nil)))
+
+(insn 19 18 20 (set (mem:SI (pre_dec:SI (reg/f:SI 7 sp)) [3  S4 A32])
+        (const_int 200 [0xc8])) "cmp_bytes.c":14:10 -1
+     (expr_list:REG_ARGS_SIZE (const_int 8 [0x8])
+        (nil)))
+
+(insn 20 19 21 (parallel [
+            (set (reg:SI 88)
+                (plus:SI (reg/f:SI 77 virtual-stack-vars)
+                    (const_int -204 [0xffffffffffffff34])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":14:10 -1
+     (nil))
+
+(insn 21 20 22 (set (mem/f:SI (pre_dec:SI (reg/f:SI 7 sp)) [2  S4 A32])
+        (reg:SI 88)) "cmp_bytes.c":14:10 -1
+     (expr_list:REG_ARGS_SIZE (const_int 12 [0xc])
+        (nil)))
+
+(insn 22 21 23 (parallel [
+            (set (reg:SI 89)
+                (plus:SI (reg/f:SI 77 virtual-stack-vars)
+                    (const_int -404 [0xfffffffffffffe6c])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":14:10 -1
+     (nil))
+
+(insn 23 22 24 (set (mem/f:SI (pre_dec:SI (reg/f:SI 7 sp)) [2  S4 A32])
+        (reg:SI 89)) "cmp_bytes.c":14:10 -1
+     (expr_list:REG_ARGS_SIZE (const_int 16 [0x10])
+        (nil)))
+
+(insn 24 23 25 (set (reg:SI 3 bx)
+        (reg:SI 82)) "cmp_bytes.c":14:10 -1
+     (nil))
+
+(call_insn 25 24 26 (set (reg:QI 0 ax)
+        (call (mem:QI (symbol_ref:SI ("Hacl_Policies_cmp_bytes") [flags 0x41]  <function_decl 0x7f3cc92eca00 Hacl_Policies_cmp_bytes>) [0 Hacl_Policies_cmp_bytes S1 A8])
+            (const_int 16 [0x10]))) "cmp_bytes.c":14:10 -1
+     (nil)
+    (expr_list (use (reg:SI 3 bx))
+        (nil)))
+
+(insn 26 25 27 (parallel [
+            (set (reg/f:SI 7 sp)
+                (plus:SI (reg/f:SI 7 sp)
+                    (const_int 16 [0x10])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":14:10 -1
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (nil)))
+
+(insn 27 26 0 (set (reg:QI 83 [ _1 ])
+        (reg:QI 0 ax)) "cmp_bytes.c":14:10 -1
+     (nil))
+
+;; _6 = (int) _1;
+
+(insn 28 27 0 (set (reg:SI 84 [ _6 ])
+        (zero_extend:SI (reg:QI 83 [ _1 ]))) "cmp_bytes.c":14:10 -1
+     (nil))
+
+;; b1 ={v} {CLOBBER};
+
+(nil)
+
+;; b2 ={v} {CLOBBER};
+
+(nil)
+
+;; Generating RTL for gimple basic block 3
+
+;; <L1>:
+
+(code_label 29 28 30 2 (nil) [0 uses])
+
+(note 30 29 0 NOTE_INSN_BASIC_BLOCK)
+
+;; return _6;
+
+(insn 31 30 32 (set (reg:SI 85 [ <retval> ])
+        (reg:SI 84 [ _6 ])) "cmp_bytes.c":15:1 -1
+     (nil))
+
+(jump_insn 32 31 33 (set (pc)
+        (label_ref 0)) "cmp_bytes.c":15:1 -1
+     (nil))
+
+(barrier 33 32 0)
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Merging block 4 into block 2...
+Merged blocks 2 and 4.
+Merged 2 and 4 without moving.
+Removing jump 32.
+Merging block 5 into block 2...
+Merged blocks 2 and 5.
+Merged 2 and 5 without moving.
+
+
+try_optimize_cfg iteration 2
+
+fix_loop_structure: fixing up loops for function
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 4 NOTE_INSN_DELETED)
+;; basic block 2, loop depth 0, maybe hot
+;;  prev block 0, next block 6, flags: (NEW, REACHABLE, RTL, MODIFIED)
+;;  pred:       ENTRY (FALLTHRU)
+(note 4 1 45 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn/f 45 4 2 2 (set (reg:SI 91)
+        (reg:SI 2 cx)) -1
+     (expr_list:REG_CFA_SET_VDRAP (reg:SI 91)
+        (nil)))
+(note 2 45 3 2 NOTE_INSN_FUNCTION_BEG)
+(insn 3 2 6 2 (parallel [
+            (set (mem/v/f/c:SI (plus:SI (reg/f:SI 77 virtual-stack-vars)
+                        (const_int -4 [0xfffffffffffffffc])) [1 D.2971+0 S4 A32])
+                (unspec:SI [
+                        (mem/v/f:SI (const_int 20 [0x14]) [0 MEM[(<address-space-2> unsigned int *)20B]+0 S4 A32 AS2])
+                    ] UNSPEC_SP_SET))
+            (set (scratch:SI)
+                (const_int 0 [0]))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":7:12 -1
+     (nil))
+(insn 6 3 7 2 (parallel [
+            (set (reg/f:SI 7 sp)
+                (plus:SI (reg/f:SI 7 sp)
+                    (const_int -12 [0xfffffffffffffff4])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":11:3 -1
+     (expr_list:REG_ARGS_SIZE (const_int 12 [0xc])
+        (nil)))
+(insn 7 6 8 2 (parallel [
+            (set (reg:SI 86)
+                (plus:SI (reg/f:SI 77 virtual-stack-vars)
+                    (const_int -404 [0xfffffffffffffe6c])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":11:3 -1
+     (nil))
+(insn 8 7 9 2 (set (mem/f:SI (pre_dec:SI (reg/f:SI 7 sp)) [2  S4 A32])
+        (reg:SI 86)) "cmp_bytes.c":11:3 -1
+     (expr_list:REG_ARGS_SIZE (const_int 16 [0x10])
+        (nil)))
+(insn 9 8 10 2 (set (reg:SI 3 bx)
+        (reg:SI 82)) "cmp_bytes.c":11:3 -1
+     (nil))
+(call_insn 10 9 11 2 (call (mem:QI (symbol_ref:SI ("high_input_200") [flags 0x41]  <function_decl 0x7f3cc921b200 high_input_200>) [0 high_input_200 S1 A8])
+        (const_int 16 [0x10])) "cmp_bytes.c":11:3 -1
+     (nil)
+    (expr_list (use (reg:SI 3 bx))
+        (nil)))
+(insn 11 10 12 2 (parallel [
+            (set (reg/f:SI 7 sp)
+                (plus:SI (reg/f:SI 7 sp)
+                    (const_int 16 [0x10])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":11:3 -1
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (nil)))
+(insn 12 11 13 2 (parallel [
+            (set (reg/f:SI 7 sp)
+                (plus:SI (reg/f:SI 7 sp)
+                    (const_int -12 [0xfffffffffffffff4])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":12:3 -1
+     (expr_list:REG_ARGS_SIZE (const_int 12 [0xc])
+        (nil)))
+(insn 13 12 14 2 (parallel [
+            (set (reg:SI 87)
+                (plus:SI (reg/f:SI 77 virtual-stack-vars)
+                    (const_int -204 [0xffffffffffffff34])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":12:3 -1
+     (nil))
+(insn 14 13 15 2 (set (mem/f:SI (pre_dec:SI (reg/f:SI 7 sp)) [2  S4 A32])
+        (reg:SI 87)) "cmp_bytes.c":12:3 -1
+     (expr_list:REG_ARGS_SIZE (const_int 16 [0x10])
+        (nil)))
+(insn 15 14 16 2 (set (reg:SI 3 bx)
+        (reg:SI 82)) "cmp_bytes.c":12:3 -1
+     (nil))
+(call_insn 16 15 17 2 (call (mem:QI (symbol_ref:SI ("high_input_200") [flags 0x41]  <function_decl 0x7f3cc921b200 high_input_200>) [0 high_input_200 S1 A8])
+        (const_int 16 [0x10])) "cmp_bytes.c":12:3 -1
+     (nil)
+    (expr_list (use (reg:SI 3 bx))
+        (nil)))
+(insn 17 16 18 2 (parallel [
+            (set (reg/f:SI 7 sp)
+                (plus:SI (reg/f:SI 7 sp)
+                    (const_int 16 [0x10])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":12:3 -1
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (nil)))
+(insn 18 17 19 2 (parallel [
+            (set (reg/f:SI 7 sp)
+                (plus:SI (reg/f:SI 7 sp)
+                    (const_int -4 [0xfffffffffffffffc])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":14:10 -1
+     (expr_list:REG_ARGS_SIZE (const_int 4 [0x4])
+        (nil)))
+(insn 19 18 20 2 (set (mem:SI (pre_dec:SI (reg/f:SI 7 sp)) [3  S4 A32])
+        (const_int 200 [0xc8])) "cmp_bytes.c":14:10 -1
+     (expr_list:REG_ARGS_SIZE (const_int 8 [0x8])
+        (nil)))
+(insn 20 19 21 2 (parallel [
+            (set (reg:SI 88)
+                (plus:SI (reg/f:SI 77 virtual-stack-vars)
+                    (const_int -204 [0xffffffffffffff34])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":14:10 -1
+     (nil))
+(insn 21 20 22 2 (set (mem/f:SI (pre_dec:SI (reg/f:SI 7 sp)) [2  S4 A32])
+        (reg:SI 88)) "cmp_bytes.c":14:10 -1
+     (expr_list:REG_ARGS_SIZE (const_int 12 [0xc])
+        (nil)))
+(insn 22 21 23 2 (parallel [
+            (set (reg:SI 89)
+                (plus:SI (reg/f:SI 77 virtual-stack-vars)
+                    (const_int -404 [0xfffffffffffffe6c])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":14:10 -1
+     (nil))
+(insn 23 22 24 2 (set (mem/f:SI (pre_dec:SI (reg/f:SI 7 sp)) [2  S4 A32])
+        (reg:SI 89)) "cmp_bytes.c":14:10 -1
+     (expr_list:REG_ARGS_SIZE (const_int 16 [0x10])
+        (nil)))
+(insn 24 23 25 2 (set (reg:SI 3 bx)
+        (reg:SI 82)) "cmp_bytes.c":14:10 -1
+     (nil))
+(call_insn 25 24 26 2 (set (reg:QI 0 ax)
+        (call (mem:QI (symbol_ref:SI ("Hacl_Policies_cmp_bytes") [flags 0x41]  <function_decl 0x7f3cc92eca00 Hacl_Policies_cmp_bytes>) [0 Hacl_Policies_cmp_bytes S1 A8])
+            (const_int 16 [0x10]))) "cmp_bytes.c":14:10 -1
+     (nil)
+    (expr_list (use (reg:SI 3 bx))
+        (nil)))
+(insn 26 25 27 2 (parallel [
+            (set (reg/f:SI 7 sp)
+                (plus:SI (reg/f:SI 7 sp)
+                    (const_int 16 [0x10])))
+            (clobber (reg:CC 17 flags))
+        ]) "cmp_bytes.c":14:10 -1
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (nil)))
+(insn 27 26 28 2 (set (reg:QI 83 [ _1 ])
+        (reg:QI 0 ax)) "cmp_bytes.c":14:10 -1
+     (nil))
+(insn 28 27 31 2 (set (reg:SI 84 [ _6 ])
+        (zero_extend:SI (reg:QI 83 [ _1 ]))) "cmp_bytes.c":14:10 -1
+     (nil))
+(insn 31 28 35 2 (set (reg:SI 85 [ <retval> ])
+        (reg:SI 84 [ _6 ])) "cmp_bytes.c":15:1 -1
+     (nil))
+(insn 35 31 36 2 (parallel [
+            (set (reg:CCZ 17 flags)
+                (unspec:CCZ [
+                        (mem/v/f/c:SI (plus:SI (reg/f:SI 77 virtual-stack-vars)
+                                (const_int -4 [0xfffffffffffffffc])) [1 D.2971+0 S4 A32])
+                        (mem/v/f:SI (const_int 20 [0x14]) [0 MEM[(<address-space-2> unsigned int *)20B]+0 S4 A32 AS2])
+                    ] UNSPEC_SP_TEST))
+            (clobber (scratch:SI))
+        ]) "cmp_bytes.c":15:1 -1
+     (nil))
+(jump_insn 36 35 43 2 (set (pc)
+        (if_then_else (eq (reg:CCZ 17 flags)
+                (const_int 0 [0]))
+            (label_ref 39)
+            (pc))) "cmp_bytes.c":15:1 -1
+     (nil)
+ -> 39)
+;;  succ:       7
+;;              6 (FALLTHRU)
+
+;; basic block 6, loop depth 0, maybe hot
+;;  prev block 2, next block 7, flags: (NEW, REACHABLE, RTL, MODIFIED)
+;;  pred:       2 (FALLTHRU)
+(note 43 36 37 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(call_insn 37 43 38 6 (call (mem:QI (symbol_ref:SI ("__stack_chk_fail_local") [flags 0x43]  <function_decl 0x7f3cc8ebd600 __stack_chk_fail_local>) [0 __stack_chk_fail_local S1 A8])
+        (const_int 0 [0])) "cmp_bytes.c":15:1 -1
+     (expr_list:REG_ARGS_SIZE (const_int 0 [0])
+        (expr_list:REG_NORETURN (const_int 0 [0])
+            (expr_list:REG_EH_REGION (const_int 0 [0])
+                (nil))))
+    (nil))
+;;  succ:      
+
+(barrier 38 37 39)
+;; basic block 7, loop depth 0, maybe hot
+;;  prev block 6, next block 1, flags: (NEW, REACHABLE, RTL)
+;;  pred:       2
+(code_label 39 38 44 7 3 (nil) [1 uses])
+(note 44 39 40 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(insn 40 44 41 7 (set (reg/i:SI 0 ax)
+        (reg:SI 85 [ <retval> ])) "cmp_bytes.c":15:1 -1
+     (nil))
+(insn 41 40 0 7 (use (reg/i:SI 0 ax)) "cmp_bytes.c":15:1 -1
+     (nil))
+;;  succ:       EXIT [always]  (FALLTHRU)
+

@@ -1,0 +1,84 @@
+Optimization,Result
+-scev-aa, secure
+-adce, secure
+-scev-aa -adce, secure
+-always-inline, secure
+-scev-aa -always-inline, secure
+-adce -always-inline, secure
+-scev-aa -adce -always-inline, secure
+-argpromotion, secure
+-scev-aa -argpromotion, secure
+-adce -argpromotion, secure
+-scev-aa -adce -argpromotion, secure
+-always-inline -argpromotion, secure
+-scev-aa -always-inline -argpromotion, secure
+-adce -always-inline -argpromotion, secure
+-scev-aa -adce -always-inline -argpromotion, secure
+-break-crit-edges, secure
+-scev-aa -break-crit-edges, secure
+-adce -break-crit-edges, secure
+-scev-aa -adce -break-crit-edges, secure
+-always-inline -break-crit-edges, secure
+-scev-aa -always-inline -break-crit-edges, secure
+-adce -always-inline -break-crit-edges, secure
+-scev-aa -adce -always-inline -break-crit-edges, secure
+-argpromotion -break-crit-edges, secure
+-scev-aa -argpromotion -break-crit-edges, secure
+-adce -argpromotion -break-crit-edges, secure
+-scev-aa -adce -argpromotion -break-crit-edges, secure
+-always-inline -argpromotion -break-crit-edges, secure
+-scev-aa -always-inline -argpromotion -break-crit-edges, secure
+-adce -always-inline -argpromotion -break-crit-edges, secure
+-scev-aa -adce -always-inline -argpromotion -break-crit-edges, secure
+-codegenprepare, secure
+-scev-aa -codegenprepare, secure
+-adce -codegenprepare, secure
+-scev-aa -adce -codegenprepare, secure
+-always-inline -codegenprepare, secure
+-scev-aa -always-inline -codegenprepare, secure
+-adce -always-inline -codegenprepare, secure
+-scev-aa -adce -always-inline -codegenprepare, secure
+-argpromotion -codegenprepare, secure
+-scev-aa -argpromotion -codegenprepare, secure
+-adce -argpromotion -codegenprepare, secure
+-scev-aa -adce -argpromotion -codegenprepare, secure
+-always-inline -argpromotion -codegenprepare, secure
+-scev-aa -always-inline -argpromotion -codegenprepare, secure
+-adce -always-inline -argpromotion -codegenprepare, secure
+-scev-aa -adce -always-inline -argpromotion -codegenprepare, secure
+-break-crit-edges -codegenprepare, secure
+-scev-aa -break-crit-edges -codegenprepare, secure
+-adce -break-crit-edges -codegenprepare, secure
+-scev-aa -adce -break-crit-edges -codegenprepare, secure
+-always-inline -break-crit-edges -codegenprepare, secure
+-scev-aa -always-inline -break-crit-edges -codegenprepare, secure
+-adce -always-inline -break-crit-edges -codegenprepare, secure
+-scev-aa -adce -always-inline -break-crit-edges -codegenprepare, secure
+-argpromotion -break-crit-edges -codegenprepare, secure
+-scev-aa -argpromotion -break-crit-edges -codegenprepare, secure
+-adce -argpromotion -break-crit-edges -codegenprepare, secure
+-scev-aa -adce -argpromotion -break-crit-edges -codegenprepare, secure
+-always-inline -argpromotion -break-crit-edges -codegenprepare, secure
+-scev-aa -always-inline -argpromotion -break-crit-edges -codegenprepare, secure
+-adce -always-inline -argpromotion -break-crit-edges -codegenprepare, secure
+-scev-aa -adce -always-inline -argpromotion -break-crit-edges -codegenprepare, secure
+-constmerge, secure
+-scev-aa -constmerge, secure
+-adce -constmerge, secure
+-scev-aa -adce -constmerge, secure
+-always-inline -constmerge, secure
+-scev-aa -always-inline -constmerge, secure
+-adce -always-inline -constmerge, secure
+-scev-aa -adce -always-inline -constmerge, secure
+-argpromotion -constmerge, secure
+-scev-aa -argpromotion -constmerge, secure
+-adce -argpromotion -constmerge, secure
+-scev-aa -adce -argpromotion -constmerge, secure
+-always-inline -argpromotion -constmerge, secure
+-scev-aa -always-inline -argpromotion -constmerge, secure
+-adce -always-inline -argpromotion -constmerge, secure
+-scev-aa -adce -always-inline -argpromotion -constmerge, secure
+-break-crit-edges -constmerge, secure
+-scev-aa -break-crit-edges -constmerge, secure
+-adce -break-crit-edges -constmerge, secure
+-scev-aa -adce -break-crit-edges -constmerge, secure

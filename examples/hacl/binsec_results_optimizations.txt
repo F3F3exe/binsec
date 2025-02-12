@@ -1,0 +1,6 @@
+Target			O0		O1		O2		O3		Os		Oz		Ofast		flto
+chacha20	secure	secure	secure	secure	secure	secure	secure	binsec failed
+curve25519	secure	secure	secure	secure	secure	secure	secure	binsec failed
+sha256	secure	secure	secure	secure	secure	secure	secure	binsec failed
+sha512	unknown	unknown	unknown	unknown	unknown	unknown	unknown	binsec failed
+cmp_bytes	secure	secure	secure	secure	secure	secure	secure	binsec failed

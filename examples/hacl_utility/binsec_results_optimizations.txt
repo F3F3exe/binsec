@@ -1,0 +1,12 @@
+Target			O0		O1		O2		O3		Os		Oz		Ofast		flto
+cmp_bytes	secure	insecure	insecure	insecure	insecure	insecure	insecure	secure
+rotate32_left	secure	secure	secure	secure	secure	secure	secure	secure
+rotate32_right	secure	secure	secure	secure	secure	secure	secure	secure
+uint8_eq_mask	secure	secure	secure	secure	secure	secure	secure	secure
+uint8_gte_mask	secure	insecure	insecure	insecure	insecure	insecure	insecure	secure
+uint16_eq_mask	secure	secure	secure	secure	secure	secure	secure	secure
+uint16_gte_mask	secure	insecure	insecure	insecure	insecure	insecure	insecure	secure
+uint32_eq_mask	secure	secure	secure	secure	secure	secure	secure	secure
+uint32_gte_mask	secure	secure	secure	secure	secure	secure	secure	secure
+uint64_eq_mask	secure	secure	secure	secure	secure	secure	secure	secure
+uint64_gte_mask	secure	secure	secure	secure	secure	secure	secure	secure

@@ -1,0 +1,14 @@
+Target			O0		O1		O2		O3		Os
+ct_eq_8	secure	secure	secure	secure	secure	secure	secure	binsec failed
+ct_eq_int	secure	secure	secure	secure	secure	secure	secure	binsec failed
+ct_is_zero_8	secure	secure	secure	secure	secure	secure	secure	binsec failed
+ct_lt	secure	secure	secure	secure	secure	secure	secure	binsec failed
+ct_select	secure	secure	secure	secure	secure	secure	secure	binsec failed
+ct_eq	secure	secure	secure	secure	secure	secure	secure	binsec failed
+ct_ge_8	secure	secure	secure	secure	secure	secure	secure	binsec failed
+ct_is_zero	secure	secure	secure	secure	secure	secure	secure	binsec failed
+ct_msb	secure	secure	secure	secure	secure	secure	secure	binsec failed
+ct_eq_int_8	secure	secure	secure	secure	secure	secure	secure	binsec failed
+ct_ge	secure	unknown	secure	secure	secure	secure	secure	binsec failed
+ct_lt_8	secure	secure	secure	secure	secure	secure	secure	binsec failed
+ct_select_8	secure	secure	secure	secure	secure	secure	secure	binsec failed
