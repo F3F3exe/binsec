@@ -41,8 +41,7 @@ CFLAGS="-m32 -march=i386 -static"
 LIBS="-L../../__libsym__/ -lsym"
 LIBSORT="lib"
 
-NAME=donna
-WRAPPER=${NAME}_wrapper.c
+
 
 # List of LLVM optimization passes
 OPTIMIZATIONS=(
@@ -57,14 +56,14 @@ OPTIMIZATIONS=(
 )
 
 # Ensure source file exists
-if [[ ! -f "$WRAPPER" ]]; then
-    echo "Error: Source file $WRAPPER not found!"
+if [[ ! -f "$SOURCE_FILE" ]]; then
+    echo "Error: Source file $SOURCE_FILE not found!"
     exit 1
 fi
 
 # Compile to LLVM IR (-O0 to disable optimizations)
-echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $WRAPPER -o $BASE_NAME.ll
-$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $WRAPPER -o $BASE_NAME.ll
+echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $BASE_NAME.c -o $BASE_NAME.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $BASE_NAME.c -o $BASE_NAME.ll
 
 
 # Create a results file to track the status
@@ -96,6 +95,8 @@ while read -r OPT_COMBO; do
     
     # Apply optimization using opt
     echo opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
+    echo opt -S $OPT_COMBO $LIBSORT.ll -o ${LIBSORT}.ll
+
     opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
     opt -S $OPT_COMBO $LIBSORT.ll -o ${LIBSORT}.ll
 
@@ -157,7 +158,3 @@ rm -f $BASE_NAME.ll
 rm -f *.snapshot
 rm -f ${BASE_NAME}
 
-
-# clang-14 -O1 -m32 -g -march=i386 -static  -S -emit-llvm donna_wrapper.c -o donna_wrapper.ll
-# make_coredump.sh core_donna.snapshot donna_wrapper
-# binsec -sse -sse-script checkct_donna.cfg -sse-depth 100000000 -checkct core_donna.snapshot
