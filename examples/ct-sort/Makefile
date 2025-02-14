@@ -5,7 +5,7 @@ LIBBEARSSL= -I./inc -L./. -lbearssl
 WRAPPER=${NAME}
 LIBSORT= lib.c
 
-CLANG ?= clang #/usr/bin/llvm-3.9.0/clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-16.04/bin/clang-3.9
+CLANG=/usr/bin/llvm-3.9.0/clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-16.04/bin/clang-3.9
 
 # Optimization levels to build
 OPT_LEVELS := O0 O1 O2 O3 Os Oz Ofast flto# Add optimization levels here

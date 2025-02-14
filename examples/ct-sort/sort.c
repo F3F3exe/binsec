@@ -7,11 +7,11 @@
 #include "../../__libsym__/sym.h"
 
 
-int conds[3];
+
+int main() {
+  int conds[3];
   int out[3];
   int in[3];
-int main() {
-  
 
   high_input_12(&conds);
   high_input_12(&out);

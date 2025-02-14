@@ -18,7 +18,7 @@ if [[ ! "$CLANG" =~ ^(clang-14|clang-12|clang-19)$ ]]; then
 fi
 
 targets=(
-  sort sort_multiplex sort_negative
+  aes_big  des_tab des_ct_cbcenc des_ct_cbcdec aes_ct_cbcdec aes_ct_cbcenc chacha20_ct aes_ct_ctr aes_ct64_cbcdec aes_ct64_cbcenc aes_ct64_ctr ghash_ctmul
 )
 
 if [[ $# -eq 3 ]]; then
@@ -39,9 +39,10 @@ SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 100"
 CFLAGS="-m32 -march=i386 -static"
 LIBS="-L../../__libsym__/ -lsym"
-LIBSORT="lib"
+LIBBEARSSL="-I./inc -L./. -lbearssl"
 
-
+NAME=$BASE_NAME
+WRAPPER=${NAME}_wrapper.c
 
 # List of LLVM optimization passes
 OPTIMIZATIONS=(
@@ -56,14 +57,14 @@ OPTIMIZATIONS=(
 )
 
 # Ensure source file exists
-if [[ ! -f "$SOURCE_FILE" ]]; then
-    echo "Error: Source file $SOURCE_FILE not found!"
+if [[ ! -f "$WRAPPER" ]]; then
+    echo "Error: Source file $WRAPPER not found!"
     exit 1
 fi
 
 # Compile to LLVM IR (-O0 to disable optimizations)
-echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $BASE_NAME.c -o $BASE_NAME.ll
-$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $BASE_NAME.c -o $BASE_NAME.ll
+echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $WRAPPER -o $BASE_NAME.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $WRAPPER -o $BASE_NAME.ll
 
 
 # Create a results file to track the status
@@ -95,17 +96,15 @@ while read -r OPT_COMBO; do
     
     # Apply optimization using opt
     echo opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
-    echo opt -S $OPT_COMBO $LIBSORT.ll -o ${LIBSORT}.ll
 
     opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
-    opt -S $OPT_COMBO $LIBSORT.ll -o ${LIBSORT}.ll
 
     
     # Recompile the optimized IR
     #echo $CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
-    echo $CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS $LIBSORT.c
+    echo $CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS $LIBBEARSSL
     #$CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
-    $CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS $LIBSORT.c
+    $CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS $LIBBEARSSL
 
 
     # Construct the config file path
@@ -157,4 +156,7 @@ echo "Results saved in $RESULTS_FILE"
 rm -f $BASE_NAME.ll
 rm -f *.snapshot
 rm -f ${BASE_NAME}
+
+
+
 

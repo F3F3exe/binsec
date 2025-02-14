@@ -3,10 +3,10 @@
 #include "lib.h"
 #include "../../__libsym__/sym.h"
 
- int out[3];
-  int in[3];
 int main() {
  
+ int out[3];
+  int in[3];
 
   high_input_12(&out);
   high_input_12(&in);

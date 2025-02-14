@@ -1,3 +1,2 @@
 Optimization,Result
 -scev-aa, insecure
--adce, insecure

@@ -36,7 +36,7 @@ for target in "${targets[@]}"; do
     target_with_opt="${target}_${opt}"  # e.g., aes_ct_O0, aes_ct_O1, etc.
 
     echo "Building target: $target_with_opt"
-    make CLANG="$CLANG_VERSION" "$target_with_opt"  # Build the target with the specific optimization level
+    make  "$target_with_opt"  # Build the target with the specific optimization level
 
     if [[ $? -ne 0 ]]; then
       echo -e -n "\tbinsec failed" >> "$output_file"
