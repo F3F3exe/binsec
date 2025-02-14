@@ -1,8 +1,9 @@
 OPT_LEVEL=$1
 FILE=$2
+CLANG=$3
 
-if [[ -z "$OPT_LEVEL" || -z "$FILE" ]]; then
-    echo "Usage: $0 <OPT_LEVEL> <FILE>"
+if [[ -z "$OPT_LEVEL" || -z "$FILE" || -z "$CLANG" ]]; then
+    echo "Usage: $0 <OPT_LEVEL> <FILE> <CLANG>"
     exit 1
 fi
 
@@ -11,11 +12,16 @@ if [[ ! "$OPT_LEVEL" =~ ^O[0-3]$ ]]; then
     exit 1
 fi
 
-targets=(
-cmp_bytes rotate32_left rotate32_right uint8_eq_mask uint8_gte_mask uint16_eq_mask uint16_gte_mask uint32_eq_mask uint32_gte_mask uint64_eq_mask uint64_gte_mask
-  )
+if [[ ! "$CLANG" =~ ^(clang-14|clang-12|clang-19)$ ]]; then
+    echo "Error: CLANG must be one of clang-14, clang-12, or clang-19."
+    exit 1
+fi
 
-if [[ $# -eq 2 ]]; then
+targets=(
+chacha20 curve25519 sha256 sha512 cmp_bytes
+)
+
+if [[ $# -eq 3 ]]; then
   specific_target=$2
   if [[ ! " ${targets[@]} " =~ " ${specific_target} " ]]; then
     echo "Error: Target '$specific_target' is not in the predefined list."
@@ -24,14 +30,19 @@ if [[ $# -eq 2 ]]; then
   targets=($specific_target)
 fi
 
+echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): ${targets[@]}"
+
 # Configuration
 SOURCE_FILE="$specific_target.c"  # Change this if needed
 BASE_NAME=$specific_target
 SNAPSHOT_SCRIPT="make_coredump.sh"
-BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
-CFLAGS="-m32 -march=i386 -DKRML_NOUINT128 -static"
-LIBS="-L../../__libsym__/ -lsym Hacl_Policies.ll"
--I./hacl-c/hacl-c/ -L./hacl-c/hacl-c/ -lhacl32
+BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 100"
+CFLAGS="-m32 -g -fno-stack-protector -static -DKRML_NOUINT128 -Wall"
+LIBS="-L../../__libsym__/ -lsym"
+LIBHACL="-I./hacl-c/hacl-c/ -L./hacl-c/hacl-c/ -lhacl32"
+
+NAME=$BASE_NAME
+WRAPPER=${NAME}_wrapper.c
 
 # List of LLVM optimization passes
 OPTIMIZATIONS=(
@@ -46,21 +57,42 @@ OPTIMIZATIONS=(
 )
 
 # Ensure source file exists
-if [[ ! -f "$SOURCE_FILE" ]]; then
-    echo "Error: Source file $SOURCE_FILE not found!"
+if [[ ! -f "$WRAPPER" ]]; then
+    echo "Error: Source file $WRAPPER not found!"
     exit 1
 fi
 
 # Compile to LLVM IR (-O0 to disable optimizations)
-echo clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
-clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
-clang $CFLAGS -$OPT_LEVEL -S -emit-llvm Hacl_Policies.c -o Hacl_Policies.ll 
+echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $WRAPPER -o $BASE_NAME.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $WRAPPER -o $BASE_NAME.ll
 
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/AEAD_Poly1305_64.c -o hacl-c/hacl-c/AEAD_Poly1305_64.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/FStar.c -o hacl-c/hacl-c/FStar.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/Hacl_Chacha20.c -o hacl-c/hacl-c/Hacl_Chacha20.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/Hacl_Chacha20Poly1305.c -o hacl-c/hacl-c/Hacl_Chacha20Poly1305.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/Hacl_Chacha20_Vec128.c -o hacl-c/hacl-c/Hacl_Chacha20_Vec128.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/Hacl_Curve25519.c -o hacl-c/hacl-c/Hacl_Curve25519.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/Hacl_Ed25519.c -o hacl-c/hacl-c/Hacl_Ed25519.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/Hacl_HMAC_SHA2_256.c -o hacl-c/hacl-c/Hacl_HMAC_SHA2_256.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/Hacl_Policies.c -o hacl-c/hacl-c/Hacl_Policies.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/Hacl_Poly1305_32.c -o hacl-c/hacl-c/Hacl_Poly1305_32.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/Hacl_Poly1305_64.c -o hacl-c/hacl-c/Hacl_Poly1305_64.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/Hacl_SHA2_256.c -o hacl-c/hacl-c/Hacl_SHA2_256.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/Hacl_SHA2_384.c -o hacl-c/hacl-c/Hacl_SHA2_384.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/Hacl_SHA2_512.c -o hacl-c/hacl-c/Hacl_SHA2_512.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/Hacl_Salsa20.c -o hacl-c/hacl-c/Hacl_Salsa20.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/Hacl_Unverified_Random.c -o hacl-c/hacl-c/Hacl_Unverified_Random.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/NaCl.c -o hacl-c/hacl-c/NaCl.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/haclnacl.c -o hacl-c/hacl-c/haclnacl.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/kremlib.c -o hacl-c/hacl-c/kremlib.ll
+
+llvm-link -S hacl-c/hacl-c/*.ll -o hacl_c.ll
+echo 2
 
 # Create a results file to track the status
 # Ensure the Results directory exists
 mkdir -p Results
-RESULTS_FILE="Results/optimization_results_$(basename $FILE .c)_$OPT_LEVEL.txt"
+RESULTS_FILE="Results/optimization_results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG}.txt"
 echo "Optimization,Result" > $RESULTS_FILE
 
 # Function to generate power set of optimizations
@@ -85,12 +117,16 @@ while read -r OPT_COMBO; do
     echo "Testing optimizations: $OPT_COMBO"
     
     # Apply optimization using opt
-    opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
-    opt  -S $OPT_COMBO Hacl_Policies.ll -o Hacl_Policies.ll 
+    echo opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
 
+    opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
+    opt -S $OPT_COMBO hacl_c.ll -o hacl_c.ll
     
     # Recompile the optimized IR
-    clang $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
+    #echo $CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
+    echo $CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS $LIBHACL
+    #$CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
+    $CLANG $CFLAGS ${BASE_NAME}.ll hacl_c.ll -o ${BASE_NAME} $LIBS $LIBHACL
 
 
     # Construct the config file path
@@ -99,15 +135,17 @@ while read -r OPT_COMBO; do
     # Check if the cfg file contains "starting from core" at the start
     if grep -q "^starting from core" "$config_file"; then
       # If the file starts with "starting from core", run the core-based binsec command
-      echo "Running core-based binsec for $BASE_NAME..."
+      #echo "Running core-based binsec for $BASE_NAME..."
       core_dump="core_${BASE_NAME}.snapshot"
+      #echo make_coredump.sh "$core_dump" "$BASE_NAME"
       make_coredump.sh "$core_dump" "$BASE_NAME"
-      binsec_output=$(binsec -sse -sse-script "$config_file" -sse-depth 1000000 -checkct "$core_dump" -sse-timeout 10)
+      #echo binsec -sse -sse-script "$config_file" -sse-depth 100000000 -checkct "$core_dump" -sse-timeout 100
+      binsec_output=$(binsec -sse -sse-script "$config_file" -sse-depth 100000000 -checkct "$core_dump" -sse-timeout 100)
     else
       # Otherwise, run the normal binsec command
       stats_file="./${target_with_opt}.csv"
-      echo "Running standard binsec for $target_with_opt..."
-      $BINSEC_SCRIPT ${BASE_NAME}
+      #echo "Running standard binsec for $target_with_opt..."
+      #echo $BINSEC_SCRIPT ${BASE_NAME}
       binsec_output=$($BINSEC_SCRIPT ${BASE_NAME})
     fi
     
@@ -130,9 +168,17 @@ while read -r OPT_COMBO; do
     # Append the result to the output file
     echo "$OPT_COMBO, $status" >> "$RESULTS_FILE"
     
-    echo "Finished testing $OPT_COMBO."
-    echo "-------------------------------------"
+    #echo "Finished testing $OPT_COMBO."
+    #echo "-------------------------------------"
 done < <(generate_combinations "${OPTIMIZATIONS[@]}")
 
 echo "All optimization combinations tested!"
 echo "Results saved in $RESULTS_FILE"
+
+rm -f $BASE_NAME.ll
+rm -f *.snapshot
+rm -f ${BASE_NAME}
+
+
+
+
