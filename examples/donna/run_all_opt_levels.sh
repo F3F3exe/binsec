@@ -1,7 +1,7 @@
 #!/bin/bash
 CLANG_VERSIONS=(clang-14)
 # List of optimization levels
-OPT_LEVELS=(O1 O2 O2 O3)
+OPT_LEVELS=(O0 O1 O2 O3)
 
 # List of targets
 targets=(
