@@ -3,9 +3,9 @@ source_filename = "02.c"
 target datalayout = "e-m:e-p:32:32-p270:32:32-p271:32:32-p272:64:64-f64:32:64-f80:32-n8:16:32-S128"
 target triple = "i386-pc-linux-gnu"
 
-@a = dso_local global i32 0, align 4
-@b = dso_local global i32 0, align 4
-@c = dso_local global i32 0, align 4
+@a = dso_local local_unnamed_addr global i32 0, align 4
+@b = dso_local local_unnamed_addr global i32 0, align 4
+@c = dso_local local_unnamed_addr global i32 0, align 4
 
 ; Function Attrs: noinline nounwind optnone uwtable
 define dso_local zeroext i8 @issue(i32 noundef %0, i8 noundef zeroext %1, i8 noundef zeroext %2) #0 {
@@ -37,7 +37,7 @@ define dso_local zeroext i8 @issue(i32 noundef %0, i8 noundef zeroext %1, i8 nou
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32 @main(i32 noundef %0, i8** noundef %1) #0 {
+define dso_local i32 @main(i32 noundef %0, i8** noundef %1) local_unnamed_addr #0 {
   %3 = alloca i32, align 4
   %4 = alloca i32, align 4
   %5 = alloca i8**, align 4
@@ -69,9 +69,9 @@ define dso_local i32 @main(i32 noundef %0, i8** noundef %1) #0 {
   ret i32 %20
 }
 
-declare void @high_input_4(i8* noundef) #1
+declare void @high_input_4(i8* noundef) local_unnamed_addr #1
 
-declare void @low_input_4(i8* noundef) #1
+declare void @low_input_4(i8* noundef) local_unnamed_addr #1
 
 attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i386" "target-features"="+x87" }
 attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i386" "target-features"="+x87" }

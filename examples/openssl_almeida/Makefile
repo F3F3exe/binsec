@@ -1,5 +1,5 @@
 # Compiler flags and libraries
-CLFLAGS=-m32 -g -static -Wall -O3
+CLFLAGS=-m32 -g -static -Wall
 CFLAGS=$(CLFLAGS) -fno-stack-protector
 LIB=-L../../__libsym__/ -lsym
 WRAPPER=${NAME}_wrapper

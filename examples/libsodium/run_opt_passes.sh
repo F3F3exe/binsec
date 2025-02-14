@@ -68,11 +68,13 @@ OPTIMIZATIONS=(
   "scalar-evolution"
 )
 
-# Ensure source file exists
-if [[ ! -f "$WRAPPER" ]]; then
-    echo "Error: Source file $WRAPPER not found!"
+
+if [[ ! -f "$WRAPPER" && ! -f "$SOURCE_FILE" ]]; then
+    echo "Error: Source file $WRAPPER or $SOURCE_FILE not found!"
     exit 1
 fi
+
+
 
 # Compile to LLVM IR (-O0 to disable optimizations)
 
@@ -98,6 +100,14 @@ if [ "$BASE_NAME" = "sha256" ]; then
     echo  $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm -Ilibsodium/src/libsodium/include $WRAPPER -o $BASE_NAME.ll
     $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm -Ilibsodium/src/libsodium/include $WRAPPER -o $BASE_NAME.ll
     echo 2
+elif [ "$BASE_NAME" = "SHA512" ]; then
+    echo "Processing MD5..."
+elif [ "$BASE_NAME" = "SALSA20" ]; then
+    echo "Processing SALSA20..."
+else
+    echo "Unknown BASE_NAME: $BASE_NAME"
+    $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $BASE_NAME.c -o $BASE_NAME.ll
+
 fi
 
 
@@ -132,7 +142,7 @@ while read -r OPT_COMBO; do
     echo opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
 
     opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
-    opt -S $OPT_COMBO $LL_LIB -o $LL_LIB
+    #opt -S $OPT_COMBO $LL_LIB -o $LL_LIB
     
     echo 3
     # Recompile the optimized IR

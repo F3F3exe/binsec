@@ -18,7 +18,7 @@ if [[ ! "$CLANG" =~ ^(clang-14|clang-12|clang-19)$ ]]; then
 fi
 
 targets=(
-  01 02 03 04 05 07 08 09 10 
+tls1_cbc_remove_padding_patch tls1_cbc_remove_padding_lucky13 ssl3_cbc_copy_mac ssl3_cbc_digest_record ssl3_cbc_remove_padding_patch
 )
 
 if [[ $# -eq 3 ]]; then
@@ -36,14 +36,19 @@ echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): $
 SOURCE_FILE="$specific_target.c"  # Change this if needed
 BASE_NAME=$specific_target
 SNAPSHOT_SCRIPT="make_coredump.sh"
-BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
+BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 100"
 CFLAGS="-m32 -march=i386 -static"
 LIBS="-L../../__libsym__/ -lsym"
 
-# List of LLVM optimization passe
+
+NAME=$BASE_NAME
+WRAPPER=${NAME}_wrapper.c
+
+#removed  "function-attrs" maybe its  "functionattrs" for clang-12
+# List of LLVM optimization passes
 OPTIMIZATIONS=(
   "scev-aa" "adce" "always-inline" "argpromotion" "break-crit-edges"  
-  "codegenprepare" "constmerge" "dce" "deadargelim" "dse" "function-attrs" "globaldce"  
+  "codegenprepare" "constmerge" "dce" "deadargelim" "dse" "globaldce"  
   "globalopt" "gvn" "indvars" "inline" "instcombine" "aggressive-instcombine" "ipsccp"  
   "jump-threading" "lcssa" "licm" "loop-deletion" "loop-extract" "loop-reduce" "loop-rotate"  
   "loop-simplify" "loop-unroll" "loweratomic" "lowerinvoke" "memcpyopt" "mergefunc"  
@@ -53,22 +58,14 @@ OPTIMIZATIONS=(
 )
 
 # Ensure source file exists
-if [[ ! -f "$SOURCE_FILE" ]]; then
-    echo "Error: Source file $SOURCE_FILE not found!"
+if [[ ! -f "$WRAPPER" ]]; then
+    echo "Error: Source file $WRAPPER not found!"
     exit 1
 fi
 
 # Compile to LLVM IR (-O0 to disable optimizations)
-#echo clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
-clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
-
-for OPT in "${OPTIMIZATIONS[@]}"; do
-  echo "Checking optimizations: $OPT"
-  echo opt -S -$OPT $BASE_NAME.ll -o ${BASE_NAME}.ll
-  opt -S -$OPT $BASE_NAME.ll -o ${BASE_NAME}.ll
-done
-
-clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $WRAPPER -o $BASE_NAME.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $WRAPPER -o $BASE_NAME.ll
 
 
 # Create a results file to track the status
@@ -76,6 +73,11 @@ clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
 mkdir -p Results
 RESULTS_FILE="Results/optimization_results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG}.txt"
 echo "Optimization,Result" > $RESULTS_FILE
+
+for OPT in "${OPTIMIZATIONS[@]}"; do
+  echo "Checking optimizations: $OPT_COMBO"
+  opt -S $OPT $BASE_NAME.ll -o ${BASE_NAME}.ll
+done
 
 # Function to generate power set of optimizations
 generate_combinations() {
@@ -99,11 +101,16 @@ while read -r OPT_COMBO; do
     echo "Testing optimizations: $OPT_COMBO"
     
     # Apply optimization using opt
+    echo opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
+
     opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
 
     
     # Recompile the optimized IR
-    clang -$OPT_LEVEL $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
+    #echo $CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
+    echo $CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS 
+    #$CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
+    $CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS 
 
 
     # Construct the config file path
@@ -114,18 +121,20 @@ while read -r OPT_COMBO; do
       # If the file starts with "starting from core", run the core-based binsec command
       #echo "Running core-based binsec for $BASE_NAME..."
       core_dump="core_${BASE_NAME}.snapshot"
+      #echo make_coredump.sh "$core_dump" "$BASE_NAME"
       make_coredump.sh "$core_dump" "$BASE_NAME"
-      binsec_output=$(binsec -sse -sse-script "$config_file" -sse-depth 1000000 -checkct "$core_dump" -sse-timeout 10)
+      #echo binsec -sse -sse-script "$config_file" -sse-depth 100000000 -checkct "$core_dump" -sse-timeout 100
+      binsec_output=$(binsec -sse -sse-script "$config_file" -sse-depth 100000000 -checkct "$core_dump" -sse-timeout 100)
     else
       # Otherwise, run the normal binsec command
       stats_file="./${target_with_opt}.csv"
       #echo "Running standard binsec for $target_with_opt..."
-      #$BINSEC_SCRIPT ${BASE_NAME}
+      #echo $BINSEC_SCRIPT ${BASE_NAME}
       binsec_output=$($BINSEC_SCRIPT ${BASE_NAME})
     fi
     
     # Run binsec
-    #echo "$binsec_output"
+    echo "$binsec_output"
     
     if [[ $? -ne 0 ]]; then
         echo -e "$OPT_COMBO, binsec failed" >> "$RESULTS_FILE"
@@ -149,3 +158,11 @@ done < <(generate_combinations "${OPTIMIZATIONS[@]}")
 
 echo "All optimization combinations tested!"
 echo "Results saved in $RESULTS_FILE"
+
+rm -f $BASE_NAME.ll
+rm -f *.snapshot
+rm -f ${BASE_NAME}
+
+
+
+

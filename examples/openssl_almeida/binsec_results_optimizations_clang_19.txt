@@ -1,2 +1,2 @@
 Target			O0		O1		O2		O3		Os		Oz		Ofast		flto
-tls1_cbc_remove_padding_patch	secure	secure	secure	secure	secure	secure	secure	secure
+tls1_cbc_remove_padding_lucky13	insecure	insecure

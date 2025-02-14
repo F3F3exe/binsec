@@ -2,3 +2,7 @@ Optimization,Result
 -scev-aa, secure
 -adce, secure
 -scev-aa -adce, secure
+-always-inline, secure
+-scev-aa -always-inline, secure
+-adce -always-inline, secure
+-scev-aa -adce -always-inline, secure
