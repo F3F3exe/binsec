@@ -1,8 +1,9 @@
 OPT_LEVEL=$1
 FILE=$2
+CLANG=$3
 
-if [[ -z "$OPT_LEVEL" || -z "$FILE" ]]; then
-    echo "Usage: $0 <OPT_LEVEL> <FILE>"
+if [[ -z "$OPT_LEVEL" || -z "$FILE" || -z "$CLANG" ]]; then
+    echo "Usage: $0 <OPT_LEVEL> <FILE> <CLANG>"
     exit 1
 fi
 
@@ -11,11 +12,16 @@ if [[ ! "$OPT_LEVEL" =~ ^O[0-3]$ ]]; then
     exit 1
 fi
 
+if [[ ! "$CLANG" =~ ^(clang-14|clang-12|clang-19)$ ]]; then
+    echo "Error: CLANG must be one of clang-14, clang-12, or clang-19."
+    exit 1
+fi
+
 targets=(
 cmp_bytes rotate32_left rotate32_right uint8_eq_mask uint8_gte_mask uint16_eq_mask uint16_gte_mask uint32_eq_mask uint32_gte_mask uint64_eq_mask uint64_gte_mask
-  )
+)
 
-if [[ $# -eq 2 ]]; then
+if [[ $# -eq 3 ]]; then
   specific_target=$2
   if [[ ! " ${targets[@]} " =~ " ${specific_target} " ]]; then
     echo "Error: Target '$specific_target' is not in the predefined list."
@@ -23,6 +29,9 @@ if [[ $# -eq 2 ]]; then
   fi
   targets=($specific_target)
 fi
+
+echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): ${targets[@]}"
+
 
 # Configuration
 SOURCE_FILE="$specific_target.c"  # Change this if needed
@@ -59,7 +68,7 @@ clang $CFLAGS -$OPT_LEVEL -S -emit-llvm Hacl_Policies.c -o Hacl_Policies.ll
 # Create a results file to track the status
 # Ensure the Results directory exists
 mkdir -p Results
-RESULTS_FILE="Results/optimization_results_$(basename $FILE .c)_$OPT_LEVEL.txt"
+RESULTS_FILE="Results/optimization_results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG}.txt"
 echo "Optimization,Result" > $RESULTS_FILE
 
 # Function to generate power set of optimizations

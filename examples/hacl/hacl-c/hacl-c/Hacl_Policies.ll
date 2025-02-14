@@ -5,26 +5,29 @@ target triple = "i386-pc-linux-gnu"
 
 %struct.FStar_UInt128_uint128 = type { i64, i64 }
 
-; Function Attrs: mustprogress nofree norecurse nosync nounwind readnone uwtable willreturn
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind readnone uwtable willreturn
 define dso_local zeroext i8 @Hacl_Policies_declassify_u8(i8 noundef returned zeroext %0) local_unnamed_addr #0 !dbg !23 {
   call void @llvm.dbg.value(metadata i8 %0, metadata !27, metadata !DIExpression()), !dbg !28
   ret i8 %0, !dbg !29
 }
 
-; Function Attrs: mustprogress nofree norecurse nosync nounwind readnone uwtable willreturn
+; Function Attrs: mustprogress nofree nosync nounwind readnone speculatable willreturn
+declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind readnone uwtable willreturn
 define dso_local i32 @Hacl_Policies_declassify_u32(i32 noundef returned %0) local_unnamed_addr #0 !dbg !30 {
   call void @llvm.dbg.value(metadata i32 %0, metadata !34, metadata !DIExpression()), !dbg !35
   ret i32 %0, !dbg !36
 }
 
-; Function Attrs: mustprogress nofree norecurse nosync nounwind readnone uwtable willreturn
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind readnone uwtable willreturn
 define dso_local i64 @Hacl_Policies_declassify_u64(i64 noundef returned %0) local_unnamed_addr #0 !dbg !37 {
   call void @llvm.dbg.value(metadata i64 %0, metadata !44, metadata !DIExpression()), !dbg !45
   ret i64 %0, !dbg !46
 }
 
-; Function Attrs: mustprogress nofree norecurse nosync nounwind uwtable willreturn writeonly
-define dso_local void @Hacl_Policies_declassify_u128(%struct.FStar_UInt128_uint128* noalias nocapture writeonly sret(%struct.FStar_UInt128_uint128) align 4 %0, i64 %1, i64 %2) local_unnamed_addr #1 !dbg !47 {
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind uwtable willreturn writeonly
+define dso_local void @Hacl_Policies_declassify_u128(%struct.FStar_UInt128_uint128* noalias nocapture writeonly sret(%struct.FStar_UInt128_uint128) align 4 %0, i64 %1, i64 %2) local_unnamed_addr #2 !dbg !47 {
   call void @llvm.dbg.value(metadata i64 %1, metadata !58, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 64)), !dbg !59
   call void @llvm.dbg.value(metadata i64 %2, metadata !58, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 64)), !dbg !59
   %4 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %0, i32 0, i32 0, !dbg !60
@@ -34,8 +37,8 @@ define dso_local void @Hacl_Policies_declassify_u128(%struct.FStar_UInt128_uint1
   ret void, !dbg !67
 }
 
-; Function Attrs: nofree norecurse nosync nounwind uwtable
-define dso_local zeroext i8 @Hacl_Policies_cmp_bytes_(i8* nocapture noundef readonly %0, i8* nocapture noundef readonly %1, i32 noundef %2, i8* nocapture noundef %3) local_unnamed_addr #2 !dbg !68 {
+; Function Attrs: nofree noinline norecurse nosync nounwind uwtable
+define dso_local zeroext i8 @Hacl_Policies_cmp_bytes_(i8* nocapture noundef readonly %0, i8* nocapture noundef readonly %1, i32 noundef %2, i8* nocapture noundef %3) local_unnamed_addr #3 !dbg !68 {
   call void @llvm.dbg.value(metadata i8* %0, metadata !73, metadata !DIExpression()), !dbg !84
   call void @llvm.dbg.value(metadata i8* %1, metadata !74, metadata !DIExpression()), !dbg !84
   call void @llvm.dbg.value(metadata i32 %2, metadata !75, metadata !DIExpression()), !dbg !84
@@ -49,7 +52,7 @@ define dso_local zeroext i8 @Hacl_Policies_cmp_bytes_(i8* nocapture noundef read
   ret i8 %7, !dbg !90
 
 8:                                                ; preds = %4, %8
-  %9 = phi i32 [ %25, %8 ], [ 0, %4 ]
+  %9 = phi i32 [ %17, %8 ], [ 0, %4 ]
   call void @llvm.dbg.value(metadata i32 %9, metadata !77, metadata !DIExpression()), !dbg !85
   %10 = getelementptr inbounds i8, i8* %0, i32 %9, !dbg !91
   %11 = load i8, i8* %10, align 1, !dbg !91, !tbaa !89
@@ -59,96 +62,69 @@ define dso_local zeroext i8 @Hacl_Policies_cmp_bytes_(i8* nocapture noundef read
   call void @llvm.dbg.value(metadata i8 %13, metadata !82, metadata !DIExpression()), !dbg !92
   %14 = load i8, i8* %3, align 1, !dbg !94, !tbaa !89
   call void @llvm.dbg.value(metadata i8 %14, metadata !83, metadata !DIExpression()), !dbg !92
-  call void @llvm.dbg.value(metadata i8 %11, metadata !95, metadata !DIExpression()), !dbg !102
-  call void @llvm.dbg.value(metadata i8 %13, metadata !101, metadata !DIExpression()), !dbg !102
-  %15 = xor i8 %11, %13, !dbg !104
-  %16 = xor i8 %15, -1, !dbg !104
-  call void @llvm.dbg.value(metadata i8 %16, metadata !95, metadata !DIExpression()), !dbg !102
-  %17 = shl i8 %16, 4, !dbg !105
-  %18 = and i8 %17, %16, !dbg !105
-  call void @llvm.dbg.value(metadata i8 %18, metadata !95, metadata !DIExpression()), !dbg !102
-  %19 = shl i8 %18, 2, !dbg !106
-  %20 = and i8 %19, %18, !dbg !106
-  call void @llvm.dbg.value(metadata i8 %20, metadata !95, metadata !DIExpression()), !dbg !102
-  %21 = shl i8 %20, 1, !dbg !107
-  %22 = and i8 %21, %20, !dbg !107
-  call void @llvm.dbg.value(metadata i8 %22, metadata !95, metadata !DIExpression()), !dbg !102
-  %23 = icmp eq i8 %22, 0, !dbg !108
-  %24 = select i1 %23, i8 0, i8 %14, !dbg !108
-  store i8 %24, i8* %3, align 1, !dbg !109, !tbaa !89
-  %25 = add nuw i32 %9, 1, !dbg !110
-  call void @llvm.dbg.value(metadata i32 %25, metadata !77, metadata !DIExpression()), !dbg !85
-  %26 = icmp eq i32 %25, %2, !dbg !86
-  br i1 %26, label %6, label %8, !dbg !87, !llvm.loop !111
+  %15 = call fastcc zeroext i8 @FStar_UInt8_eq_mask(i8 noundef zeroext %11, i8 noundef zeroext %13), !dbg !95
+  %16 = and i8 %15, %14, !dbg !96
+  store i8 %16, i8* %3, align 1, !dbg !97, !tbaa !89
+  %17 = add nuw i32 %9, 1, !dbg !98
+  call void @llvm.dbg.value(metadata i32 %17, metadata !77, metadata !DIExpression()), !dbg !85
+  %18 = icmp eq i32 %17, %2, !dbg !86
+  br i1 %18, label %6, label %8, !dbg !87, !llvm.loop !99
 }
 
-; Function Attrs: nofree nosync nounwind readonly uwtable
-define dso_local zeroext i8 @Hacl_Policies_cmp_bytes(i8* nocapture noundef readonly %0, i8* nocapture noundef readonly %1, i32 noundef %2) local_unnamed_addr #3 !dbg !115 {
-  call void @llvm.dbg.value(metadata i8* %0, metadata !119, metadata !DIExpression()), !dbg !127
-  call void @llvm.dbg.value(metadata i8* %1, metadata !120, metadata !DIExpression()), !dbg !127
-  call void @llvm.dbg.value(metadata i32 %2, metadata !121, metadata !DIExpression()), !dbg !127
-  call void @llvm.dbg.value(metadata i8 -1, metadata !122, metadata !DIExpression()), !dbg !127
-  call void @llvm.dbg.value(metadata i8* %0, metadata !73, metadata !DIExpression()), !dbg !128
-  call void @llvm.dbg.value(metadata i8* %1, metadata !74, metadata !DIExpression()), !dbg !128
-  call void @llvm.dbg.value(metadata i32 %2, metadata !75, metadata !DIExpression()), !dbg !128
-  call void @llvm.dbg.value(metadata i8* undef, metadata !76, metadata !DIExpression()), !dbg !128
-  call void @llvm.dbg.value(metadata i32 0, metadata !77, metadata !DIExpression()), !dbg !130
-  %4 = icmp eq i32 %2, 0, !dbg !131
-  br i1 %4, label %26, label %5, !dbg !132
+; Function Attrs: argmemonly mustprogress nofree nosync nounwind willreturn
+declare void @llvm.lifetime.start.p0i8(i64 immarg, i8* nocapture) #4
 
-5:                                                ; preds = %3, %5
-  %6 = phi i8 [ %21, %5 ], [ -1, %3 ], !dbg !127
-  %7 = phi i32 [ %22, %5 ], [ 0, %3 ]
-  call void @llvm.dbg.value(metadata i8 %6, metadata !122, metadata !DIExpression()), !dbg !127
-  call void @llvm.dbg.value(metadata i32 %7, metadata !77, metadata !DIExpression()), !dbg !130
-  %8 = getelementptr inbounds i8, i8* %0, i32 %7, !dbg !133
-  %9 = load i8, i8* %8, align 1, !dbg !133, !tbaa !89
-  call void @llvm.dbg.value(metadata i8 %9, metadata !79, metadata !DIExpression()), !dbg !134
-  %10 = getelementptr inbounds i8, i8* %1, i32 %7, !dbg !135
-  %11 = load i8, i8* %10, align 1, !dbg !135, !tbaa !89
-  call void @llvm.dbg.value(metadata i8 %11, metadata !82, metadata !DIExpression()), !dbg !134
-  call void @llvm.dbg.value(metadata i8 %6, metadata !83, metadata !DIExpression()), !dbg !134
-  call void @llvm.dbg.value(metadata i8 %9, metadata !95, metadata !DIExpression()), !dbg !136
-  call void @llvm.dbg.value(metadata i8 %11, metadata !101, metadata !DIExpression()), !dbg !136
-  %12 = xor i8 %9, %11, !dbg !138
-  %13 = xor i8 %12, -1, !dbg !138
-  call void @llvm.dbg.value(metadata i8 %13, metadata !95, metadata !DIExpression()), !dbg !136
-  %14 = shl i8 %13, 4, !dbg !139
-  %15 = and i8 %14, %13, !dbg !139
-  call void @llvm.dbg.value(metadata i8 %15, metadata !95, metadata !DIExpression()), !dbg !136
-  %16 = shl i8 %15, 2, !dbg !140
-  %17 = and i8 %16, %15, !dbg !140
-  call void @llvm.dbg.value(metadata i8 %17, metadata !95, metadata !DIExpression()), !dbg !136
-  %18 = shl i8 %17, 1, !dbg !141
-  %19 = and i8 %18, %17, !dbg !141
-  call void @llvm.dbg.value(metadata i8 %19, metadata !95, metadata !DIExpression()), !dbg !136
-  %20 = icmp eq i8 %19, 0, !dbg !142
-  %21 = select i1 %20, i8 0, i8 %6, !dbg !142
-  call void @llvm.dbg.value(metadata i8 %21, metadata !122, metadata !DIExpression()), !dbg !127
-  %22 = add nuw i32 %7, 1, !dbg !143
-  call void @llvm.dbg.value(metadata i32 %22, metadata !77, metadata !DIExpression()), !dbg !130
-  %23 = icmp eq i32 %22, %2, !dbg !131
-  br i1 %23, label %24, label %5, !dbg !132, !llvm.loop !144
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind readnone uwtable willreturn
+define internal fastcc zeroext i8 @FStar_UInt8_eq_mask(i8 noundef zeroext %0, i8 noundef zeroext %1) unnamed_addr #0 !dbg !103 {
+  call void @llvm.dbg.value(metadata i8 %0, metadata !108, metadata !DIExpression()), !dbg !110
+  call void @llvm.dbg.value(metadata i8 %1, metadata !109, metadata !DIExpression()), !dbg !110
+  %3 = xor i8 %0, %1, !dbg !111
+  %4 = xor i8 %3, -1, !dbg !111
+  call void @llvm.dbg.value(metadata i8 %4, metadata !108, metadata !DIExpression()), !dbg !110
+  %5 = shl i8 %4, 4, !dbg !112
+  %6 = and i8 %5, %4, !dbg !112
+  call void @llvm.dbg.value(metadata i8 %6, metadata !108, metadata !DIExpression()), !dbg !110
+  %7 = shl i8 %6, 2, !dbg !113
+  %8 = and i8 %7, %6, !dbg !113
+  call void @llvm.dbg.value(metadata i8 %8, metadata !108, metadata !DIExpression()), !dbg !110
+  %9 = shl i8 %8, 1, !dbg !114
+  %10 = and i8 %9, %8, !dbg !114
+  call void @llvm.dbg.value(metadata i8 %10, metadata !108, metadata !DIExpression()), !dbg !110
+  %11 = ashr exact i8 %10, 7, !dbg !115
+  ret i8 %11, !dbg !116
+}
 
-24:                                               ; preds = %5
-  %25 = xor i8 %21, -1, !dbg !146
-  br label %26, !dbg !146
+; Function Attrs: argmemonly mustprogress nofree nosync nounwind willreturn
+declare void @llvm.lifetime.end.p0i8(i64 immarg, i8* nocapture) #4
 
-26:                                               ; preds = %24, %3
-  %27 = phi i8 [ 0, %3 ], [ %25, %24 ]
-  call void @llvm.dbg.value(metadata i8 undef, metadata !122, metadata !DIExpression()), !dbg !127
-  call void @llvm.dbg.value(metadata i8 undef, metadata !126, metadata !DIExpression()), !dbg !127
-  ret i8 %27, !dbg !147
+; Function Attrs: nofree noinline nosync nounwind uwtable
+define dso_local zeroext i8 @Hacl_Policies_cmp_bytes(i8* nocapture noundef readonly %0, i8* nocapture noundef readonly %1, i32 noundef %2) local_unnamed_addr #5 !dbg !117 {
+  %4 = alloca [1 x i8], align 1
+  call void @llvm.dbg.value(metadata i8* %0, metadata !121, metadata !DIExpression()), !dbg !129
+  call void @llvm.dbg.value(metadata i8* %1, metadata !122, metadata !DIExpression()), !dbg !129
+  call void @llvm.dbg.value(metadata i32 %2, metadata !123, metadata !DIExpression()), !dbg !129
+  %5 = getelementptr inbounds [1 x i8], [1 x i8]* %4, i32 0, i32 0, !dbg !130
+  call void @llvm.lifetime.start.p0i8(i64 1, i8* nonnull %5) #7, !dbg !130
+  call void @llvm.dbg.declare(metadata [1 x i8]* %4, metadata !124, metadata !DIExpression()), !dbg !131
+  store i8 -1, i8* %5, align 1, !dbg !132, !tbaa !89
+  %6 = call zeroext i8 @Hacl_Policies_cmp_bytes_(i8* noundef %0, i8* noundef %1, i32 noundef %2, i8* noundef nonnull %5), !dbg !133
+  call void @llvm.dbg.value(metadata i8 %6, metadata !128, metadata !DIExpression()), !dbg !129
+  %7 = xor i8 %6, -1, !dbg !134
+  call void @llvm.lifetime.end.p0i8(i64 1, i8* nonnull %5) #7, !dbg !135
+  ret i8 %7, !dbg !136
 }
 
 ; Function Attrs: nofree nosync nounwind readnone speculatable willreturn
-declare void @llvm.dbg.value(metadata, metadata, metadata) #4
+declare void @llvm.dbg.value(metadata, metadata, metadata) #6
 
-attributes #0 = { mustprogress nofree norecurse nosync nounwind readnone uwtable willreturn "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
-attributes #1 = { mustprogress nofree norecurse nosync nounwind uwtable willreturn writeonly "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
-attributes #2 = { nofree norecurse nosync nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
-attributes #3 = { nofree nosync nounwind readonly uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
-attributes #4 = { nofree nosync nounwind readnone speculatable willreturn }
+attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind readnone uwtable willreturn "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #1 = { mustprogress nofree nosync nounwind readnone speculatable willreturn }
+attributes #2 = { mustprogress nofree noinline norecurse nosync nounwind uwtable willreturn writeonly "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #3 = { nofree noinline norecurse nosync nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #4 = { argmemonly mustprogress nofree nosync nounwind willreturn }
+attributes #5 = { nofree noinline nosync nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #6 = { nofree nosync nounwind readnone speculatable willreturn }
+attributes #7 = { nounwind }
 
 !llvm.dbg.cu = !{!0}
 !llvm.module.flags = !{!15, !16, !17, !18, !19, !20, !21}
@@ -249,56 +225,45 @@ attributes #4 = { nofree nosync nounwind readnone speculatable willreturn }
 !92 = !DILocation(line: 0, scope: !80)
 !93 = !DILocation(line: 52, column: 19, scope: !80)
 !94 = !DILocation(line: 53, column: 18, scope: !80)
-!95 = !DILocalVariable(name: "x", arg: 1, scope: !96, file: !97, line: 118, type: !8)
-!96 = distinct !DISubprogram(name: "FStar_UInt8_eq_mask", scope: !97, file: !97, line: 118, type: !98, scopeLine: 118, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !100)
-!97 = !DIFile(filename: "hacl-c/hacl-c/kremlib_base.h", directory: "/mnt/c/Users/fwill/Documents/HS24/semester_project/tools/binsec/binsec/examples/hacl", checksumkind: CSK_MD5, checksum: "d6560fd4701aab11aac1f04efb4ba74f")
-!98 = !DISubroutineType(types: !99)
-!99 = !{!8, !8, !8}
-!100 = !{!95, !101}
-!101 = !DILocalVariable(name: "y", arg: 2, scope: !96, file: !97, line: 118, type: !8)
-!102 = !DILocation(line: 0, scope: !96, inlinedAt: !103)
-!103 = distinct !DILocation(line: 54, column: 15, scope: !80)
-!104 = !DILocation(line: 119, column: 7, scope: !96, inlinedAt: !103)
-!105 = !DILocation(line: 120, column: 5, scope: !96, inlinedAt: !103)
-!106 = !DILocation(line: 121, column: 5, scope: !96, inlinedAt: !103)
-!107 = !DILocation(line: 122, column: 5, scope: !96, inlinedAt: !103)
-!108 = !DILocation(line: 54, column: 45, scope: !80)
-!109 = !DILocation(line: 54, column: 13, scope: !80)
-!110 = !DILocation(line: 49, column: 50, scope: !81)
-!111 = distinct !{!111, !87, !112, !113, !114}
-!112 = !DILocation(line: 55, column: 3, scope: !78)
-!113 = !{!"llvm.loop.mustprogress"}
-!114 = !{!"llvm.loop.unroll.disable"}
-!115 = distinct !DISubprogram(name: "Hacl_Policies_cmp_bytes", scope: !1, file: !1, line: 59, type: !116, scopeLine: 60, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !118)
-!116 = !DISubroutineType(types: !117)
-!117 = !{!8, !71, !71, !3}
-!118 = !{!119, !120, !121, !122, !126}
-!119 = !DILocalVariable(name: "b1", arg: 1, scope: !115, file: !1, line: 59, type: !71)
-!120 = !DILocalVariable(name: "b2", arg: 2, scope: !115, file: !1, line: 59, type: !71)
-!121 = !DILocalVariable(name: "len", arg: 3, scope: !115, file: !1, line: 59, type: !3)
-!122 = !DILocalVariable(name: "tmp", scope: !115, file: !1, line: 61, type: !123)
-!123 = !DICompositeType(tag: DW_TAG_array_type, baseType: !8, size: 8, elements: !124)
-!124 = !{!125}
-!125 = !DISubrange(count: 1)
-!126 = !DILocalVariable(name: "z", scope: !115, file: !1, line: 63, type: !8)
-!127 = !DILocation(line: 0, scope: !115)
-!128 = !DILocation(line: 0, scope: !68, inlinedAt: !129)
-!129 = distinct !DILocation(line: 63, column: 15, scope: !115)
-!130 = !DILocation(line: 0, scope: !78, inlinedAt: !129)
-!131 = !DILocation(line: 49, column: 37, scope: !81, inlinedAt: !129)
-!132 = !DILocation(line: 49, column: 3, scope: !78, inlinedAt: !129)
-!133 = !DILocation(line: 51, column: 19, scope: !80, inlinedAt: !129)
-!134 = !DILocation(line: 0, scope: !80, inlinedAt: !129)
-!135 = !DILocation(line: 52, column: 19, scope: !80, inlinedAt: !129)
-!136 = !DILocation(line: 0, scope: !96, inlinedAt: !137)
-!137 = distinct !DILocation(line: 54, column: 15, scope: !80, inlinedAt: !129)
-!138 = !DILocation(line: 119, column: 7, scope: !96, inlinedAt: !137)
-!139 = !DILocation(line: 120, column: 5, scope: !96, inlinedAt: !137)
-!140 = !DILocation(line: 121, column: 5, scope: !96, inlinedAt: !137)
-!141 = !DILocation(line: 122, column: 5, scope: !96, inlinedAt: !137)
-!142 = !DILocation(line: 54, column: 45, scope: !80, inlinedAt: !129)
-!143 = !DILocation(line: 49, column: 50, scope: !81, inlinedAt: !129)
-!144 = distinct !{!144, !132, !145, !113, !114}
-!145 = !DILocation(line: 55, column: 3, scope: !78, inlinedAt: !129)
-!146 = !DILocation(line: 64, column: 10, scope: !115)
-!147 = !DILocation(line: 64, column: 3, scope: !115)
+!95 = !DILocation(line: 54, column: 15, scope: !80)
+!96 = !DILocation(line: 54, column: 45, scope: !80)
+!97 = !DILocation(line: 54, column: 13, scope: !80)
+!98 = !DILocation(line: 49, column: 50, scope: !81)
+!99 = distinct !{!99, !87, !100, !101, !102}
+!100 = !DILocation(line: 55, column: 3, scope: !78)
+!101 = !{!"llvm.loop.mustprogress"}
+!102 = !{!"llvm.loop.unroll.disable"}
+!103 = distinct !DISubprogram(name: "FStar_UInt8_eq_mask", scope: !104, file: !104, line: 118, type: !105, scopeLine: 118, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !107)
+!104 = !DIFile(filename: "hacl-c/hacl-c/kremlib_base.h", directory: "/mnt/c/Users/fwill/Documents/HS24/semester_project/tools/binsec/binsec/examples/hacl", checksumkind: CSK_MD5, checksum: "d6560fd4701aab11aac1f04efb4ba74f")
+!105 = !DISubroutineType(types: !106)
+!106 = !{!8, !8, !8}
+!107 = !{!108, !109}
+!108 = !DILocalVariable(name: "x", arg: 1, scope: !103, file: !104, line: 118, type: !8)
+!109 = !DILocalVariable(name: "y", arg: 2, scope: !103, file: !104, line: 118, type: !8)
+!110 = !DILocation(line: 0, scope: !103)
+!111 = !DILocation(line: 119, column: 7, scope: !103)
+!112 = !DILocation(line: 120, column: 5, scope: !103)
+!113 = !DILocation(line: 121, column: 5, scope: !103)
+!114 = !DILocation(line: 122, column: 5, scope: !103)
+!115 = !DILocation(line: 123, column: 20, scope: !103)
+!116 = !DILocation(line: 123, column: 3, scope: !103)
+!117 = distinct !DISubprogram(name: "Hacl_Policies_cmp_bytes", scope: !1, file: !1, line: 59, type: !118, scopeLine: 60, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !120)
+!118 = !DISubroutineType(types: !119)
+!119 = !{!8, !71, !71, !3}
+!120 = !{!121, !122, !123, !124, !128}
+!121 = !DILocalVariable(name: "b1", arg: 1, scope: !117, file: !1, line: 59, type: !71)
+!122 = !DILocalVariable(name: "b2", arg: 2, scope: !117, file: !1, line: 59, type: !71)
+!123 = !DILocalVariable(name: "len", arg: 3, scope: !117, file: !1, line: 59, type: !3)
+!124 = !DILocalVariable(name: "tmp", scope: !117, file: !1, line: 61, type: !125)
+!125 = !DICompositeType(tag: DW_TAG_array_type, baseType: !8, size: 8, elements: !126)
+!126 = !{!127}
+!127 = !DISubrange(count: 1)
+!128 = !DILocalVariable(name: "z", scope: !117, file: !1, line: 63, type: !8)
+!129 = !DILocation(line: 0, scope: !117)
+!130 = !DILocation(line: 61, column: 3, scope: !117)
+!131 = !DILocation(line: 61, column: 11, scope: !117)
+!132 = !DILocation(line: 62, column: 11, scope: !117)
+!133 = !DILocation(line: 63, column: 15, scope: !117)
+!134 = !DILocation(line: 64, column: 10, scope: !117)
+!135 = !DILocation(line: 65, column: 1, scope: !117)
+!136 = !DILocation(line: 64, column: 3, scope: !117)

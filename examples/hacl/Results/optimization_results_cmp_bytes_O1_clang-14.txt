@@ -1,2 +1,2 @@
 Optimization,Result
--scev-aa, insecure
+-scev-aa, secure

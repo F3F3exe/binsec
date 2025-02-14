@@ -8,7 +8,7 @@ target triple = "i386-pc-linux-gnu"
 @.str.3 = private unnamed_addr constant [44 x i8] c"Cannot allocate %llu bytes aligned to %llu\0A\00", align 1
 @str = private unnamed_addr constant [25 x i8] c"Cannot open /dev/urandom\00", align 1
 
-; Function Attrs: nounwind uwtable
+; Function Attrs: noinline nounwind uwtable
 define dso_local zeroext i1 @read_random_bytes(i64 noundef %0, i8* nocapture noundef %1) local_unnamed_addr #0 !dbg !17 {
   call void @llvm.dbg.value(metadata i64 %0, metadata !26, metadata !DIExpression()), !dbg !32
   call void @llvm.dbg.value(metadata i8* %1, metadata !27, metadata !DIExpression()), !dbg !32
@@ -62,7 +62,7 @@ declare !dbg !68 i32 @close(i32 noundef) local_unnamed_addr #4
 ; Function Attrs: argmemonly mustprogress nofree nosync nounwind willreturn
 declare void @llvm.lifetime.end.p0i8(i64 immarg, i8* nocapture) #1
 
-; Function Attrs: nofree nounwind uwtable
+; Function Attrs: nofree noinline nounwind uwtable
 define dso_local i8* @hacl_aligned_malloc(i32 noundef %0, i32 noundef %1) local_unnamed_addr #5 !dbg !71 {
   %3 = alloca i8*, align 4
   call void @llvm.dbg.value(metadata i32 %0, metadata !75, metadata !DIExpression()), !dbg !78
@@ -96,7 +96,7 @@ define dso_local i8* @hacl_aligned_malloc(i32 noundef %0, i32 noundef %1) local_
 ; Function Attrs: nofree nounwind
 declare !dbg !96 i32 @posix_memalign(i8** noundef, i32 noundef, i32 noundef) local_unnamed_addr #3
 
-; Function Attrs: mustprogress nounwind uwtable willreturn
+; Function Attrs: mustprogress noinline nounwind uwtable willreturn
 define dso_local void @hacl_aligned_free(i8* nocapture noundef %0) local_unnamed_addr #6 !dbg !101 {
   call void @llvm.dbg.value(metadata i8* %0, metadata !105, metadata !DIExpression()), !dbg !106
   call void @free(i8* noundef %0) #11, !dbg !107
@@ -106,45 +106,19 @@ define dso_local void @hacl_aligned_free(i8* nocapture noundef %0) local_unnamed
 ; Function Attrs: inaccessiblemem_or_argmemonly mustprogress nounwind willreturn
 declare void @free(i8* nocapture noundef) local_unnamed_addr #7
 
-; Function Attrs: nounwind uwtable
+; Function Attrs: noinline nounwind uwtable
 define dso_local void @randombytes(i8* nocapture noundef %0, i64 noundef %1) local_unnamed_addr #0 !dbg !109 {
   call void @llvm.dbg.value(metadata i8* %0, metadata !113, metadata !DIExpression()), !dbg !115
   call void @llvm.dbg.value(metadata i64 %1, metadata !114, metadata !DIExpression()), !dbg !115
-  call void @llvm.dbg.value(metadata i64 %1, metadata !26, metadata !DIExpression()) #11, !dbg !116
-  call void @llvm.dbg.value(metadata i8* %0, metadata !27, metadata !DIExpression()) #11, !dbg !116
-  %3 = call i32 (i8*, i32, ...) @open(i8* noundef getelementptr inbounds ([13 x i8], [13 x i8]* @.str, i32 0, i32 0), i32 noundef 0) #11, !dbg !119
-  call void @llvm.dbg.value(metadata i32 %3, metadata !28, metadata !DIExpression()) #11, !dbg !116
-  %4 = icmp eq i32 %3, -1, !dbg !120
-  br i1 %4, label %5, label %7, !dbg !121
+  %3 = call zeroext i1 @read_random_bytes(i64 noundef %1, i8* noundef %0), !dbg !116
+  br i1 %3, label %5, label %4, !dbg !118
+
+4:                                                ; preds = %2
+  call void @exit(i32 noundef 1) #12, !dbg !119
+  unreachable, !dbg !119
 
 5:                                                ; preds = %2
-  %6 = call i32 @puts(i8* nonnull dereferenceable(1) getelementptr inbounds ([25 x i8], [25 x i8]* @str, i32 0, i32 0)) #11, !dbg !122
-  br label %15, !dbg !123
-
-7:                                                ; preds = %2
-  call void @llvm.dbg.value(metadata i8 1, metadata !30, metadata !DIExpression()) #11, !dbg !116
-  %8 = trunc i64 %1 to i32, !dbg !124
-  %9 = call i32 @read(i32 noundef %3, i8* noundef %0, i32 noundef %8) #11, !dbg !125
-  %10 = sext i32 %9 to i64, !dbg !125
-  call void @llvm.dbg.value(metadata i64 %10, metadata !31, metadata !DIExpression()) #11, !dbg !116
-  %11 = icmp eq i64 %10, %1, !dbg !126
-  br i1 %11, label %16, label %12, !dbg !127
-
-12:                                               ; preds = %7
-  %13 = call i32 (i8*, ...) @printf(i8* noundef nonnull dereferenceable(1) getelementptr inbounds ([55 x i8], [55 x i8]* @.str.2, i32 0, i32 0), i64 noundef %1, i64 noundef %10) #11, !dbg !128
-  call void @llvm.dbg.value(metadata i8 0, metadata !30, metadata !DIExpression()) #11, !dbg !116
-  call void @llvm.dbg.value(metadata i8 undef, metadata !30, metadata !DIExpression()) #11, !dbg !116
-  %14 = call i32 @close(i32 noundef %3) #11, !dbg !129
-  br label %15, !dbg !123
-
-15:                                               ; preds = %12, %5
-  call void @exit(i32 noundef 1) #12, !dbg !130
-  unreachable, !dbg !130
-
-16:                                               ; preds = %7
-  call void @llvm.dbg.value(metadata i8 undef, metadata !30, metadata !DIExpression()) #11, !dbg !116
-  %17 = call i32 @close(i32 noundef %3) #11, !dbg !129
-  ret void, !dbg !131
+  ret void, !dbg !120
 }
 
 ; Function Attrs: noreturn nounwind
@@ -156,13 +130,13 @@ declare void @llvm.dbg.value(metadata, metadata, metadata) #9
 ; Function Attrs: nofree nounwind
 declare noundef i32 @puts(i8* nocapture noundef readonly) local_unnamed_addr #10
 
-attributes #0 = { nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #0 = { noinline nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
 attributes #1 = { argmemonly mustprogress nofree nosync nounwind willreturn }
 attributes #2 = { nofree "frame-pointer"="none" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
 attributes #3 = { nofree nounwind "frame-pointer"="none" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
 attributes #4 = { "frame-pointer"="none" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
-attributes #5 = { nofree nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
-attributes #6 = { mustprogress nounwind uwtable willreturn "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #5 = { nofree noinline nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #6 = { mustprogress noinline nounwind uwtable willreturn "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
 attributes #7 = { inaccessiblemem_or_argmemonly mustprogress nounwind willreturn "frame-pointer"="none" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
 attributes #8 = { noreturn nounwind "frame-pointer"="none" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
 attributes #9 = { nofree nosync nounwind readnone speculatable willreturn }
@@ -290,19 +264,8 @@ attributes #12 = { noreturn nounwind }
 !113 = !DILocalVariable(name: "x", arg: 1, scope: !109, file: !1, line: 101, type: !21)
 !114 = !DILocalVariable(name: "len", arg: 2, scope: !109, file: !1, line: 101, type: !4)
 !115 = !DILocation(line: 0, scope: !109)
-!116 = !DILocation(line: 0, scope: !17, inlinedAt: !117)
-!117 = distinct !DILocation(line: 102, column: 10, scope: !118)
-!118 = distinct !DILexicalBlock(scope: !109, file: !1, line: 102, column: 7)
-!119 = !DILocation(line: 71, column: 12, scope: !17, inlinedAt: !117)
-!120 = !DILocation(line: 72, column: 10, scope: !35, inlinedAt: !117)
-!121 = !DILocation(line: 72, column: 7, scope: !17, inlinedAt: !117)
-!122 = !DILocation(line: 73, column: 5, scope: !38, inlinedAt: !117)
-!123 = !DILocation(line: 102, column: 7, scope: !109)
-!124 = !DILocation(line: 77, column: 32, scope: !17, inlinedAt: !117)
-!125 = !DILocation(line: 77, column: 18, scope: !17, inlinedAt: !117)
-!126 = !DILocation(line: 78, column: 11, scope: !43, inlinedAt: !117)
-!127 = !DILocation(line: 78, column: 7, scope: !17, inlinedAt: !117)
-!128 = !DILocation(line: 79, column: 5, scope: !46, inlinedAt: !117)
-!129 = !DILocation(line: 82, column: 3, scope: !17, inlinedAt: !117)
-!130 = !DILocation(line: 103, column: 5, scope: !118)
-!131 = !DILocation(line: 104, column: 1, scope: !109)
+!116 = !DILocation(line: 102, column: 10, scope: !117)
+!117 = distinct !DILexicalBlock(scope: !109, file: !1, line: 102, column: 7)
+!118 = !DILocation(line: 102, column: 7, scope: !109)
+!119 = !DILocation(line: 103, column: 5, scope: !117)
+!120 = !DILocation(line: 104, column: 1, scope: !109)

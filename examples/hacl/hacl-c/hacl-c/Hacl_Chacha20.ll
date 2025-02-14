@@ -3,78 +3,23 @@ source_filename = "hacl-c/hacl-c/Hacl_Chacha20.c"
 target datalayout = "e-m:e-p:32:32-p270:32:32-p271:32:32-p272:64:64-f64:32:64-f80:32-n8:16:32-S128"
 target triple = "i386-pc-linux-gnu"
 
-; Function Attrs: nofree nosync nounwind uwtable
+; Function Attrs: nofree noinline nosync nounwind uwtable
 define dso_local void @Hacl_Chacha20_chacha20_key_block(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i8* nocapture noundef readonly %2, i32 noundef %3) local_unnamed_addr #0 !dbg !16 {
   %5 = alloca [16 x i32], align 4
-  %6 = alloca [16 x i32], align 4
   call void @llvm.dbg.value(metadata i8* %0, metadata !24, metadata !DIExpression()), !dbg !34
   call void @llvm.dbg.value(metadata i8* %1, metadata !25, metadata !DIExpression()), !dbg !34
   call void @llvm.dbg.value(metadata i8* %2, metadata !26, metadata !DIExpression()), !dbg !34
   call void @llvm.dbg.value(metadata i32 %3, metadata !27, metadata !DIExpression()), !dbg !34
-  %7 = bitcast [16 x i32]* %6 to i8*, !dbg !35
-  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %7) #7, !dbg !35
-  call void @llvm.dbg.declare(metadata [16 x i32]* %6, metadata !28, metadata !DIExpression()), !dbg !36
-  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(64) %7, i8 0, i32 64, i1 false), !dbg !36
-  %8 = getelementptr inbounds [16 x i32], [16 x i32]* %6, i32 0, i32 0, !dbg !37
-  call void @llvm.dbg.value(metadata i32* %8, metadata !32, metadata !DIExpression()), !dbg !34
-  call void @llvm.dbg.value(metadata i32* %8, metadata !38, metadata !DIExpression()), !dbg !49
-  call void @llvm.dbg.value(metadata i8* %1, metadata !43, metadata !DIExpression()), !dbg !49
-  call void @llvm.dbg.value(metadata i8* %2, metadata !44, metadata !DIExpression()), !dbg !49
-  call void @llvm.dbg.value(metadata i32* %8, metadata !45, metadata !DIExpression()), !dbg !49
-  call void @llvm.dbg.value(metadata [16 x i32]* %6, metadata !46, metadata !DIExpression(DW_OP_plus_uconst, 16, DW_OP_stack_value)), !dbg !49
-  call void @llvm.dbg.value(metadata i32* %14, metadata !47, metadata !DIExpression()), !dbg !49
-  store i32 1634760805, i32* %8, align 4, !dbg !51, !tbaa !52
-  %9 = getelementptr inbounds [16 x i32], [16 x i32]* %6, i32 0, i32 1, !dbg !56
-  store i32 857760878, i32* %9, align 4, !dbg !57, !tbaa !52
-  %10 = getelementptr inbounds [16 x i32], [16 x i32]* %6, i32 0, i32 2, !dbg !58
-  store i32 2036477234, i32* %10, align 4, !dbg !59, !tbaa !52
-  %11 = getelementptr inbounds [16 x i32], [16 x i32]* %6, i32 0, i32 3, !dbg !60
-  store i32 1797285236, i32* %11, align 4, !dbg !61, !tbaa !52
-  call void @llvm.dbg.value(metadata [16 x i32]* %6, metadata !62, metadata !DIExpression(DW_OP_plus_uconst, 16, DW_OP_stack_value)), !dbg !75
-  call void @llvm.dbg.value(metadata i8* %1, metadata !67, metadata !DIExpression()), !dbg !75
-  call void @llvm.dbg.value(metadata i32 8, metadata !68, metadata !DIExpression()), !dbg !75
-  call void @llvm.dbg.value(metadata i32 0, metadata !69, metadata !DIExpression()), !dbg !77
-  %12 = getelementptr inbounds [16 x i32], [16 x i32]* %6, i32 0, i32 4
-  %13 = bitcast i32* %12 to i8*
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(32) %13, i8* noundef nonnull align 1 dereferenceable(32) %1, i32 32, i1 false), !dbg !78
-  call void @llvm.dbg.value(metadata i32 undef, metadata !69, metadata !DIExpression()), !dbg !77
-  call void @llvm.dbg.value(metadata i32 undef, metadata !71, metadata !DIExpression()), !dbg !79
-  call void @llvm.dbg.value(metadata i32 undef, metadata !74, metadata !DIExpression()), !dbg !79
-  %14 = getelementptr inbounds [16 x i32], [16 x i32]* %6, i32 0, i32 12, !dbg !80
-  store i32 0, i32* %14, align 4, !dbg !81, !tbaa !52
-  call void @llvm.dbg.value(metadata [16 x i32]* %6, metadata !62, metadata !DIExpression(DW_OP_plus_uconst, 52, DW_OP_stack_value)), !dbg !82
-  call void @llvm.dbg.value(metadata i8* %2, metadata !67, metadata !DIExpression()), !dbg !82
-  call void @llvm.dbg.value(metadata i32 3, metadata !68, metadata !DIExpression()), !dbg !82
-  call void @llvm.dbg.value(metadata i32 0, metadata !69, metadata !DIExpression()), !dbg !84
-  %15 = getelementptr inbounds [16 x i32], [16 x i32]* %6, i32 0, i32 13
-  %16 = bitcast i32* %15 to i8*
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(12) %16, i8* noundef nonnull align 1 dereferenceable(12) %2, i32 12, i1 false), !dbg !85
-  call void @llvm.dbg.value(metadata i32 undef, metadata !69, metadata !DIExpression()), !dbg !84
-  call void @llvm.dbg.value(metadata i32 undef, metadata !71, metadata !DIExpression()), !dbg !86
-  call void @llvm.dbg.value(metadata i32 undef, metadata !74, metadata !DIExpression()), !dbg !86
-  %17 = bitcast [16 x i32]* %5 to i8*, !dbg !87
-  call void @llvm.dbg.value(metadata i8* %0, metadata !92, metadata !DIExpression()) #7, !dbg !87
-  call void @llvm.dbg.value(metadata i32* %8, metadata !93, metadata !DIExpression()) #7, !dbg !87
-  call void @llvm.dbg.value(metadata i32 %3, metadata !94, metadata !DIExpression()) #7, !dbg !87
-  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %17) #7, !dbg !97
-  call void @llvm.dbg.declare(metadata [16 x i32]* %5, metadata !95, metadata !DIExpression()) #7, !dbg !98
-  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(64) %17, i8 0, i32 64, i1 false) #7, !dbg !98
-  %18 = getelementptr inbounds [16 x i32], [16 x i32]* %5, i32 0, i32 0, !dbg !99
-  call fastcc void @Hacl_Impl_Chacha20_chacha20_core(i32* noundef nonnull %18, i32* noundef nonnull %8, i32 noundef %3) #7, !dbg !100
-  call void @llvm.dbg.value(metadata i8* %0, metadata !101, metadata !DIExpression()) #7, !dbg !112
-  call void @llvm.dbg.value(metadata i32* %18, metadata !104, metadata !DIExpression()) #7, !dbg !112
-  call void @llvm.dbg.value(metadata i32 16, metadata !105, metadata !DIExpression()) #7, !dbg !112
-  call void @llvm.dbg.value(metadata i32 0, metadata !106, metadata !DIExpression()) #7, !dbg !114
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 1 dereferenceable(64) %0, i8* noundef nonnull align 4 dereferenceable(64) %17, i32 64, i1 false) #7, !dbg !115
-  call void @llvm.dbg.value(metadata i32 undef, metadata !106, metadata !DIExpression()) #7, !dbg !114
-  call void @llvm.dbg.value(metadata i32 undef, metadata !108, metadata !DIExpression()) #7, !dbg !124
-  call void @llvm.dbg.value(metadata i32 undef, metadata !111, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 2, DW_OP_shl, DW_OP_constu, 1, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)) #7, !dbg !124
-  call void @llvm.dbg.value(metadata i32 undef, metadata !121, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 2, DW_OP_shl, DW_OP_constu, 1, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)) #7, !dbg !125
-  call void @llvm.dbg.value(metadata i32 undef, metadata !122, metadata !DIExpression()) #7, !dbg !125
-  call void @llvm.dbg.value(metadata i32 undef, metadata !106, metadata !DIExpression(DW_OP_plus_uconst, 1, DW_OP_stack_value)) #7, !dbg !114
-  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %17) #7, !dbg !126
-  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %7) #7, !dbg !127
-  ret void, !dbg !127
+  %6 = bitcast [16 x i32]* %5 to i8*, !dbg !35
+  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %6) #12, !dbg !35
+  call void @llvm.dbg.declare(metadata [16 x i32]* %5, metadata !28, metadata !DIExpression()), !dbg !36
+  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(64) %6, i8 0, i32 64, i1 false), !dbg !36
+  %7 = getelementptr inbounds [16 x i32], [16 x i32]* %5, i32 0, i32 0, !dbg !37
+  call void @llvm.dbg.value(metadata i32* %7, metadata !32, metadata !DIExpression()), !dbg !34
+  call fastcc void @Hacl_Impl_Chacha20_init(i32* noundef nonnull %7, i8* noundef %1, i8* noundef %2), !dbg !38
+  call fastcc void @Hacl_Impl_Chacha20_chacha20_block(i8* noundef %0, i32* noundef nonnull %7, i32 noundef %3), !dbg !39
+  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %6) #12, !dbg !40
+  ret void, !dbg !40
 }
 
 ; Function Attrs: mustprogress nofree nosync nounwind readnone speculatable willreturn
@@ -86,717 +31,481 @@ declare void @llvm.lifetime.start.p0i8(i64 immarg, i8* nocapture) #2
 ; Function Attrs: argmemonly mustprogress nofree nounwind willreturn writeonly
 declare void @llvm.memset.p0i8.i32(i8* nocapture writeonly, i8, i32, i1 immarg) #3
 
+; Function Attrs: nofree noinline norecurse nosync nounwind uwtable
+define internal fastcc void @Hacl_Impl_Chacha20_init(i32* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i8* nocapture noundef readonly %2) unnamed_addr #4 !dbg !41 {
+  call void @llvm.dbg.value(metadata i32* %0, metadata !45, metadata !DIExpression()), !dbg !52
+  call void @llvm.dbg.value(metadata i8* %1, metadata !46, metadata !DIExpression()), !dbg !52
+  call void @llvm.dbg.value(metadata i8* %2, metadata !47, metadata !DIExpression()), !dbg !52
+  call void @llvm.dbg.value(metadata i32* %0, metadata !48, metadata !DIExpression()), !dbg !52
+  %4 = getelementptr inbounds i32, i32* %0, i32 4, !dbg !53
+  call void @llvm.dbg.value(metadata i32* %4, metadata !49, metadata !DIExpression()), !dbg !52
+  %5 = getelementptr inbounds i32, i32* %0, i32 12, !dbg !54
+  call void @llvm.dbg.value(metadata i32* %5, metadata !50, metadata !DIExpression()), !dbg !52
+  %6 = getelementptr inbounds i32, i32* %0, i32 13, !dbg !55
+  call void @llvm.dbg.value(metadata i32* %6, metadata !51, metadata !DIExpression()), !dbg !52
+  store i32 1634760805, i32* %0, align 4, !dbg !56, !tbaa !57
+  %7 = getelementptr inbounds i32, i32* %0, i32 1, !dbg !61
+  store i32 857760878, i32* %7, align 4, !dbg !62, !tbaa !57
+  %8 = getelementptr inbounds i32, i32* %0, i32 2, !dbg !63
+  store i32 2036477234, i32* %8, align 4, !dbg !64, !tbaa !57
+  %9 = getelementptr inbounds i32, i32* %0, i32 3, !dbg !65
+  store i32 1797285236, i32* %9, align 4, !dbg !66, !tbaa !57
+  call fastcc void @Hacl_Lib_LoadStore32_uint32s_from_le_bytes(i32* noundef nonnull %4, i8* noundef %1, i32 noundef 8), !dbg !67
+  store i32 0, i32* %5, align 4, !dbg !68, !tbaa !57
+  call fastcc void @Hacl_Lib_LoadStore32_uint32s_from_le_bytes(i32* noundef nonnull %6, i8* noundef %2, i32 noundef 3), !dbg !69
+  ret void, !dbg !70
+}
+
+; Function Attrs: nofree noinline nosync nounwind uwtable
+define internal fastcc void @Hacl_Impl_Chacha20_chacha20_block(i8* nocapture noundef writeonly %0, i32* nocapture noundef %1, i32 noundef %2) unnamed_addr #0 !dbg !71 {
+  %4 = alloca [16 x i32], align 4
+  call void @llvm.dbg.value(metadata i8* %0, metadata !75, metadata !DIExpression()), !dbg !79
+  call void @llvm.dbg.value(metadata i32* %1, metadata !76, metadata !DIExpression()), !dbg !79
+  call void @llvm.dbg.value(metadata i32 %2, metadata !77, metadata !DIExpression()), !dbg !79
+  %5 = bitcast [16 x i32]* %4 to i8*, !dbg !80
+  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %5) #12, !dbg !80
+  call void @llvm.dbg.declare(metadata [16 x i32]* %4, metadata !78, metadata !DIExpression()), !dbg !81
+  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(64) %5, i8 0, i32 64, i1 false), !dbg !81
+  %6 = getelementptr inbounds [16 x i32], [16 x i32]* %4, i32 0, i32 0, !dbg !82
+  call fastcc void @Hacl_Impl_Chacha20_chacha20_core(i32* noundef nonnull %6, i32* noundef %1, i32 noundef %2), !dbg !83
+  call fastcc void @Hacl_Lib_LoadStore32_uint32s_to_le_bytes(i8* noundef %0, i32* noundef nonnull %6), !dbg !84
+  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %5) #12, !dbg !85
+  ret void, !dbg !85
+}
+
 ; Function Attrs: argmemonly mustprogress nofree nosync nounwind willreturn
 declare void @llvm.lifetime.end.p0i8(i64 immarg, i8* nocapture) #2
 
-; Function Attrs: nofree nosync nounwind uwtable
-define dso_local void @Hacl_Chacha20_chacha20(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32 noundef %2, i8* nocapture noundef readonly %3, i8* nocapture noundef readonly %4, i32 noundef %5) local_unnamed_addr #0 !dbg !128 {
+; Function Attrs: nofree noinline nosync nounwind uwtable
+define dso_local void @Hacl_Chacha20_chacha20(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32 noundef %2, i8* nocapture noundef readonly %3, i8* nocapture noundef readonly %4, i32 noundef %5) local_unnamed_addr #0 !dbg !86 {
+  call void @llvm.dbg.value(metadata i8* %0, metadata !90, metadata !DIExpression()), !dbg !96
+  call void @llvm.dbg.value(metadata i8* %1, metadata !91, metadata !DIExpression()), !dbg !96
+  call void @llvm.dbg.value(metadata i32 %2, metadata !92, metadata !DIExpression()), !dbg !96
+  call void @llvm.dbg.value(metadata i8* %3, metadata !93, metadata !DIExpression()), !dbg !96
+  call void @llvm.dbg.value(metadata i8* %4, metadata !94, metadata !DIExpression()), !dbg !96
+  call void @llvm.dbg.value(metadata i32 %5, metadata !95, metadata !DIExpression()), !dbg !96
+  call fastcc void @Hacl_Impl_Chacha20_chacha20(i8* noundef %0, i8* noundef %1, i32 noundef %2, i8* noundef %3, i8* noundef %4, i32 noundef %5), !dbg !97
+  ret void, !dbg !98
+}
+
+; Function Attrs: nofree noinline nosync nounwind uwtable
+define internal fastcc void @Hacl_Impl_Chacha20_chacha20(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32 noundef %2, i8* nocapture noundef readonly %3, i8* nocapture noundef readonly %4, i32 noundef %5) unnamed_addr #0 !dbg !99 {
   %7 = alloca [16 x i32], align 4
-  %8 = alloca [64 x i8], align 1
-  %9 = alloca [48 x i32], align 4
-  %10 = alloca [16 x i32], align 4
-  call void @llvm.dbg.value(metadata i8* %0, metadata !132, metadata !DIExpression()), !dbg !138
-  call void @llvm.dbg.value(metadata i8* %1, metadata !133, metadata !DIExpression()), !dbg !138
-  call void @llvm.dbg.value(metadata i32 %2, metadata !134, metadata !DIExpression()), !dbg !138
-  call void @llvm.dbg.value(metadata i8* %3, metadata !135, metadata !DIExpression()), !dbg !138
-  call void @llvm.dbg.value(metadata i8* %4, metadata !136, metadata !DIExpression()), !dbg !138
-  call void @llvm.dbg.value(metadata i32 %5, metadata !137, metadata !DIExpression()), !dbg !138
-  call void @llvm.dbg.value(metadata i8* %0, metadata !139, metadata !DIExpression()) #7, !dbg !149
-  call void @llvm.dbg.value(metadata i8* %1, metadata !142, metadata !DIExpression()) #7, !dbg !149
-  call void @llvm.dbg.value(metadata i32 %2, metadata !143, metadata !DIExpression()) #7, !dbg !149
-  call void @llvm.dbg.value(metadata i8* %3, metadata !144, metadata !DIExpression()) #7, !dbg !149
-  call void @llvm.dbg.value(metadata i8* %4, metadata !145, metadata !DIExpression()) #7, !dbg !149
-  call void @llvm.dbg.value(metadata i32 %5, metadata !146, metadata !DIExpression()) #7, !dbg !149
-  %11 = bitcast [16 x i32]* %10 to i8*, !dbg !151
-  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %11) #7, !dbg !151
-  call void @llvm.dbg.declare(metadata [16 x i32]* %10, metadata !147, metadata !DIExpression()) #7, !dbg !152
-  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(64) %11, i8 0, i32 64, i1 false) #7, !dbg !152
-  %12 = getelementptr inbounds [16 x i32], [16 x i32]* %10, i32 0, i32 0, !dbg !153
-  call void @llvm.dbg.value(metadata i32* %12, metadata !148, metadata !DIExpression()) #7, !dbg !149
-  call void @llvm.dbg.value(metadata i32* %12, metadata !38, metadata !DIExpression()) #7, !dbg !154
-  call void @llvm.dbg.value(metadata i8* %3, metadata !43, metadata !DIExpression()) #7, !dbg !154
-  call void @llvm.dbg.value(metadata i8* %4, metadata !44, metadata !DIExpression()) #7, !dbg !154
-  call void @llvm.dbg.value(metadata i32* %12, metadata !45, metadata !DIExpression()) #7, !dbg !154
-  call void @llvm.dbg.value(metadata [16 x i32]* %10, metadata !46, metadata !DIExpression(DW_OP_plus_uconst, 16, DW_OP_stack_value)) #7, !dbg !154
-  store i32 1634760805, i32* %12, align 4, !dbg !156, !tbaa !52
-  %13 = getelementptr inbounds [16 x i32], [16 x i32]* %10, i32 0, i32 1, !dbg !157
-  store i32 857760878, i32* %13, align 4, !dbg !158, !tbaa !52
-  %14 = getelementptr inbounds [16 x i32], [16 x i32]* %10, i32 0, i32 2, !dbg !159
-  store i32 2036477234, i32* %14, align 4, !dbg !160, !tbaa !52
-  %15 = getelementptr inbounds [16 x i32], [16 x i32]* %10, i32 0, i32 3, !dbg !161
-  store i32 1797285236, i32* %15, align 4, !dbg !162, !tbaa !52
-  call void @llvm.dbg.value(metadata [16 x i32]* %10, metadata !62, metadata !DIExpression(DW_OP_plus_uconst, 16, DW_OP_stack_value)) #7, !dbg !163
-  call void @llvm.dbg.value(metadata i8* %3, metadata !67, metadata !DIExpression()) #7, !dbg !163
-  call void @llvm.dbg.value(metadata i32 8, metadata !68, metadata !DIExpression()) #7, !dbg !163
-  call void @llvm.dbg.value(metadata i32 0, metadata !69, metadata !DIExpression()) #7, !dbg !165
-  %16 = getelementptr inbounds [16 x i32], [16 x i32]* %10, i32 0, i32 4
-  %17 = bitcast i32* %16 to i8*
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(32) %17, i8* noundef nonnull align 1 dereferenceable(32) %3, i32 32, i1 false) #7, !dbg !166
-  call void @llvm.dbg.value(metadata i32 undef, metadata !69, metadata !DIExpression()) #7, !dbg !165
-  call void @llvm.dbg.value(metadata i32 undef, metadata !71, metadata !DIExpression()) #7, !dbg !167
-  call void @llvm.dbg.value(metadata i32 undef, metadata !74, metadata !DIExpression()) #7, !dbg !167
-  %18 = getelementptr inbounds [16 x i32], [16 x i32]* %10, i32 0, i32 12, !dbg !168
-  store i32 0, i32* %18, align 4, !dbg !169, !tbaa !52
-  call void @llvm.dbg.value(metadata [16 x i32]* %10, metadata !62, metadata !DIExpression(DW_OP_plus_uconst, 52, DW_OP_stack_value)) #7, !dbg !170
-  call void @llvm.dbg.value(metadata i8* %4, metadata !67, metadata !DIExpression()) #7, !dbg !170
-  call void @llvm.dbg.value(metadata i32 3, metadata !68, metadata !DIExpression()) #7, !dbg !170
-  call void @llvm.dbg.value(metadata i32 0, metadata !69, metadata !DIExpression()) #7, !dbg !172
-  %19 = getelementptr inbounds [16 x i32], [16 x i32]* %10, i32 0, i32 13
-  %20 = bitcast i32* %19 to i8*
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(12) %20, i8* noundef nonnull align 1 dereferenceable(12) %4, i32 12, i1 false) #7, !dbg !173
-  call void @llvm.dbg.value(metadata i32 undef, metadata !69, metadata !DIExpression()) #7, !dbg !172
-  call void @llvm.dbg.value(metadata i32 undef, metadata !71, metadata !DIExpression()) #7, !dbg !174
-  call void @llvm.dbg.value(metadata i32 undef, metadata !74, metadata !DIExpression()) #7, !dbg !174
-  call void @llvm.dbg.value(metadata i8* %0, metadata !175, metadata !DIExpression()) #7, !dbg !190
-  call void @llvm.dbg.value(metadata i8* %1, metadata !180, metadata !DIExpression()) #7, !dbg !190
-  call void @llvm.dbg.value(metadata i32 %2, metadata !181, metadata !DIExpression()) #7, !dbg !190
-  call void @llvm.dbg.value(metadata i32* %12, metadata !182, metadata !DIExpression()) #7, !dbg !190
-  call void @llvm.dbg.value(metadata i32 %5, metadata !183, metadata !DIExpression()) #7, !dbg !190
-  %21 = lshr i32 %2, 6, !dbg !192
-  call void @llvm.dbg.value(metadata i32 %21, metadata !184, metadata !DIExpression()) #7, !dbg !190
-  %22 = and i32 %2, 63, !dbg !193
-  call void @llvm.dbg.value(metadata i32 %22, metadata !185, metadata !DIExpression()) #7, !dbg !190
-  call void @llvm.dbg.value(metadata i8* %0, metadata !186, metadata !DIExpression()) #7, !dbg !190
-  call void @llvm.dbg.value(metadata i8* %1, metadata !187, metadata !DIExpression()) #7, !dbg !190
-  %23 = and i32 %2, -64, !dbg !194
-  call void @llvm.dbg.value(metadata !DIArgList(i8* %0, i32 %23), metadata !188, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)) #7, !dbg !190
-  call void @llvm.dbg.value(metadata !DIArgList(i8* %1, i32 %23), metadata !189, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)) #7, !dbg !190
-  call void @llvm.dbg.value(metadata i8* %0, metadata !195, metadata !DIExpression()) #7, !dbg !208
-  call void @llvm.dbg.value(metadata i8* %1, metadata !198, metadata !DIExpression()) #7, !dbg !208
-  call void @llvm.dbg.value(metadata i32 %21, metadata !199, metadata !DIExpression()) #7, !dbg !208
-  call void @llvm.dbg.value(metadata i32* %12, metadata !200, metadata !DIExpression()) #7, !dbg !208
-  call void @llvm.dbg.value(metadata i32 %5, metadata !201, metadata !DIExpression()) #7, !dbg !208
-  call void @llvm.dbg.value(metadata i32 0, metadata !202, metadata !DIExpression()) #7, !dbg !210
-  %24 = icmp ult i32 %2, 64, !dbg !211
-  br i1 %24, label %51, label %25, !dbg !212
+  call void @llvm.dbg.value(metadata i8* %0, metadata !101, metadata !DIExpression()), !dbg !109
+  call void @llvm.dbg.value(metadata i8* %1, metadata !102, metadata !DIExpression()), !dbg !109
+  call void @llvm.dbg.value(metadata i32 %2, metadata !103, metadata !DIExpression()), !dbg !109
+  call void @llvm.dbg.value(metadata i8* %3, metadata !104, metadata !DIExpression()), !dbg !109
+  call void @llvm.dbg.value(metadata i8* %4, metadata !105, metadata !DIExpression()), !dbg !109
+  call void @llvm.dbg.value(metadata i32 %5, metadata !106, metadata !DIExpression()), !dbg !109
+  %8 = bitcast [16 x i32]* %7 to i8*, !dbg !110
+  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %8) #12, !dbg !110
+  call void @llvm.dbg.declare(metadata [16 x i32]* %7, metadata !107, metadata !DIExpression()), !dbg !111
+  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(64) %8, i8 0, i32 64, i1 false), !dbg !111
+  %9 = getelementptr inbounds [16 x i32], [16 x i32]* %7, i32 0, i32 0, !dbg !112
+  call void @llvm.dbg.value(metadata i32* %9, metadata !108, metadata !DIExpression()), !dbg !109
+  call fastcc void @Hacl_Impl_Chacha20_init(i32* noundef nonnull %9, i8* noundef %3, i8* noundef %4), !dbg !113
+  call fastcc void @Hacl_Impl_Chacha20_chacha20_counter_mode(i8* noundef %0, i8* noundef %1, i32 noundef %2, i32* noundef nonnull %9, i32 noundef %5), !dbg !114
+  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %8) #12, !dbg !115
+  ret void, !dbg !115
+}
 
-25:                                               ; preds = %6
-  %26 = bitcast [48 x i32]* %9 to i8*
-  %27 = getelementptr inbounds [48 x i32], [48 x i32]* %9, i32 0, i32 0
-  %28 = getelementptr inbounds [48 x i32], [48 x i32]* %9, i32 0, i32 16
-  %29 = bitcast i32* %28 to i8*
-  %30 = getelementptr inbounds [48 x i32], [48 x i32]* %9, i32 0, i32 32
-  %31 = bitcast i32* %30 to i8*
-  br label %32, !dbg !212
+; Function Attrs: nofree noinline norecurse nosync nounwind uwtable
+define internal fastcc void @Hacl_Lib_LoadStore32_uint32s_from_le_bytes(i32* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32 noundef %2) unnamed_addr #4 !dbg !116 {
+  call void @llvm.dbg.value(metadata i32* %0, metadata !120, metadata !DIExpression()), !dbg !129
+  call void @llvm.dbg.value(metadata i8* %1, metadata !121, metadata !DIExpression()), !dbg !129
+  call void @llvm.dbg.value(metadata i32 %2, metadata !122, metadata !DIExpression()), !dbg !129
+  call void @llvm.dbg.value(metadata i32 0, metadata !123, metadata !DIExpression()), !dbg !130
+  %4 = icmp eq i32 %2, 0, !dbg !131
+  br i1 %4, label %5, label %6, !dbg !132
 
-32:                                               ; preds = %47, %25
-  %33 = phi i32 [ 0, %25 ], [ %49, %47 ]
-  call void @llvm.dbg.value(metadata i32 %33, metadata !202, metadata !DIExpression()) #7, !dbg !210
-  %34 = shl i32 %33, 6, !dbg !213
-  %35 = getelementptr inbounds i8, i8* %1, i32 %34, !dbg !214
-  call void @llvm.dbg.value(metadata i8* %35, metadata !204, metadata !DIExpression()) #7, !dbg !215
-  %36 = add i32 %33, %5, !dbg !216
-  call void @llvm.dbg.value(metadata i8* %35, metadata !217, metadata !DIExpression()) #7, !dbg !238
-  call void @llvm.dbg.value(metadata i32* %12, metadata !223, metadata !DIExpression()) #7, !dbg !238
-  call void @llvm.dbg.value(metadata i32 %36, metadata !224, metadata !DIExpression()) #7, !dbg !238
-  call void @llvm.lifetime.start.p0i8(i64 192, i8* nonnull %26) #7, !dbg !240
-  call void @llvm.dbg.declare(metadata [48 x i32]* %9, metadata !225, metadata !DIExpression()) #7, !dbg !241
-  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(192) %26, i8 0, i32 192, i1 false) #7, !dbg !241
-  call void @llvm.dbg.value(metadata i32* %27, metadata !229, metadata !DIExpression()) #7, !dbg !238
-  call void @llvm.dbg.value(metadata i32* %28, metadata !230, metadata !DIExpression()) #7, !dbg !238
-  call fastcc void @Hacl_Impl_Chacha20_chacha20_core(i32* noundef nonnull %27, i32* noundef nonnull %12, i32 noundef %36) #7, !dbg !242
-  call void @llvm.dbg.value(metadata i32* %28, metadata !62, metadata !DIExpression()) #7, !dbg !243
-  call void @llvm.dbg.value(metadata i8* %35, metadata !67, metadata !DIExpression()) #7, !dbg !243
-  call void @llvm.dbg.value(metadata i32 16, metadata !68, metadata !DIExpression()) #7, !dbg !243
-  call void @llvm.dbg.value(metadata i32 0, metadata !69, metadata !DIExpression()) #7, !dbg !245
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(64) %29, i8* noundef nonnull align 1 dereferenceable(64) %35, i32 64, i1 false) #7, !dbg !246
-  call void @llvm.dbg.value(metadata i32 undef, metadata !69, metadata !DIExpression()) #7, !dbg !245
-  call void @llvm.dbg.value(metadata i32 undef, metadata !71, metadata !DIExpression()) #7, !dbg !247
-  call void @llvm.dbg.value(metadata i32 undef, metadata !74, metadata !DIExpression()) #7, !dbg !247
-  br label %37, !dbg !248
+5:                                                ; preds = %6, %3
+  ret void, !dbg !133
 
-37:                                               ; preds = %37, %32
-  %38 = phi i32 [ %45, %37 ], [ 0, %32 ]
-  call void @llvm.dbg.value(metadata i32 %38, metadata !232, metadata !DIExpression()) #7, !dbg !249
-  %39 = getelementptr inbounds i32, i32* %28, i32 %38, !dbg !250
-  %40 = load i32, i32* %39, align 4, !dbg !250, !tbaa !52
-  call void @llvm.dbg.value(metadata i32 %40, metadata !234, metadata !DIExpression()) #7, !dbg !251
-  %41 = getelementptr inbounds [48 x i32], [48 x i32]* %9, i32 0, i32 %38, !dbg !252
-  %42 = load i32, i32* %41, align 4, !dbg !252, !tbaa !52
-  call void @llvm.dbg.value(metadata i32 %42, metadata !237, metadata !DIExpression()) #7, !dbg !251
-  %43 = xor i32 %42, %40, !dbg !253
-  %44 = getelementptr inbounds i32, i32* %30, i32 %38, !dbg !254
-  store i32 %43, i32* %44, align 4, !dbg !255, !tbaa !52
-  %45 = add nuw nsw i32 %38, 1, !dbg !256
-  call void @llvm.dbg.value(metadata i32 %45, metadata !232, metadata !DIExpression()) #7, !dbg !249
-  %46 = icmp eq i32 %45, 16, !dbg !257
-  br i1 %46, label %47, label %37, !dbg !248, !llvm.loop !258
+6:                                                ; preds = %3, %6
+  %7 = phi i32 [ %12, %6 ], [ 0, %3 ]
+  call void @llvm.dbg.value(metadata i32 %7, metadata !123, metadata !DIExpression()), !dbg !130
+  %8 = shl i32 %7, 2, !dbg !134
+  %9 = getelementptr inbounds i8, i8* %1, i32 %8, !dbg !135
+  call void @llvm.dbg.value(metadata i8* %9, metadata !125, metadata !DIExpression()), !dbg !136
+  %10 = call fastcc i32 @load32(i8* noundef %9), !dbg !137
+  call void @llvm.dbg.value(metadata i32 %10, metadata !128, metadata !DIExpression()), !dbg !136
+  %11 = getelementptr inbounds i32, i32* %0, i32 %7, !dbg !138
+  store i32 %10, i32* %11, align 4, !dbg !139, !tbaa !57
+  %12 = add nuw i32 %7, 1, !dbg !140
+  call void @llvm.dbg.value(metadata i32 %12, metadata !123, metadata !DIExpression()), !dbg !130
+  %13 = icmp eq i32 %12, %2, !dbg !131
+  br i1 %13, label %5, label %6, !dbg !132, !llvm.loop !141
+}
 
-47:                                               ; preds = %37
-  %48 = getelementptr inbounds i8, i8* %0, i32 %34, !dbg !262
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 1 dereferenceable(64) %48, i8* noundef nonnull align 4 dereferenceable(64) %31, i32 64, i1 false) #7, !dbg !263
-  call void @llvm.dbg.value(metadata i32 undef, metadata !108, metadata !DIExpression()) #7, !dbg !266
-  call void @llvm.dbg.value(metadata i32 undef, metadata !111, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 2, DW_OP_shl, DW_OP_constu, 1, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)) #7, !dbg !266
-  call void @llvm.dbg.value(metadata i32 undef, metadata !121, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 2, DW_OP_shl, DW_OP_constu, 1, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)) #7, !dbg !267
-  call void @llvm.dbg.value(metadata i32 undef, metadata !122, metadata !DIExpression()) #7, !dbg !267
-  call void @llvm.dbg.value(metadata i32 undef, metadata !106, metadata !DIExpression(DW_OP_plus_uconst, 1, DW_OP_stack_value)) #7, !dbg !268
-  call void @llvm.lifetime.end.p0i8(i64 192, i8* nonnull %26) #7, !dbg !269
-  %49 = add nuw nsw i32 %33, 1, !dbg !270
-  call void @llvm.dbg.value(metadata i32 %49, metadata !202, metadata !DIExpression()) #7, !dbg !210
-  %50 = icmp eq i32 %49, %21, !dbg !211
-  br i1 %50, label %51, label %32, !dbg !212, !llvm.loop !271
-
-51:                                               ; preds = %47, %6
-  %52 = icmp eq i32 %22, 0, !dbg !273
-  br i1 %52, label %71, label %53, !dbg !275
-
-53:                                               ; preds = %51
-  %54 = getelementptr inbounds i8, i8* %1, i32 %23, !dbg !276
-  call void @llvm.dbg.value(metadata i8* %54, metadata !189, metadata !DIExpression()) #7, !dbg !190
-  %55 = getelementptr inbounds i8, i8* %0, i32 %23, !dbg !277
-  call void @llvm.dbg.value(metadata i8* %55, metadata !188, metadata !DIExpression()) #7, !dbg !190
-  %56 = add i32 %21, %5, !dbg !278
-  call void @llvm.dbg.value(metadata i8* %55, metadata !279, metadata !DIExpression()) #7, !dbg !297
-  call void @llvm.dbg.value(metadata i8* %54, metadata !282, metadata !DIExpression()) #7, !dbg !297
-  call void @llvm.dbg.value(metadata i32 %22, metadata !283, metadata !DIExpression()) #7, !dbg !297
-  call void @llvm.dbg.value(metadata i32* %12, metadata !284, metadata !DIExpression()) #7, !dbg !297
-  call void @llvm.dbg.value(metadata i32 %56, metadata !285, metadata !DIExpression()) #7, !dbg !297
-  %57 = getelementptr inbounds [64 x i8], [64 x i8]* %8, i32 0, i32 0, !dbg !299
-  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %57) #7, !dbg !299
-  call void @llvm.dbg.declare(metadata [64 x i8]* %8, metadata !286, metadata !DIExpression()) #7, !dbg !300
-  %58 = bitcast [16 x i32]* %7 to i8*, !dbg !301
-  call void @llvm.dbg.value(metadata i8* %57, metadata !92, metadata !DIExpression()) #7, !dbg !301
-  call void @llvm.dbg.value(metadata i32* %12, metadata !93, metadata !DIExpression()) #7, !dbg !301
-  call void @llvm.dbg.value(metadata i32 %56, metadata !94, metadata !DIExpression()) #7, !dbg !301
-  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %58) #7, !dbg !303
-  call void @llvm.dbg.declare(metadata [16 x i32]* %7, metadata !95, metadata !DIExpression()) #7, !dbg !304
-  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(64) %58, i8 0, i32 64, i1 false) #7, !dbg !304
-  %59 = getelementptr inbounds [16 x i32], [16 x i32]* %7, i32 0, i32 0, !dbg !305
-  call fastcc void @Hacl_Impl_Chacha20_chacha20_core(i32* noundef nonnull %59, i32* noundef nonnull %12, i32 noundef %56) #7, !dbg !306
-  call void @llvm.dbg.value(metadata i8* %57, metadata !101, metadata !DIExpression()) #7, !dbg !307
-  call void @llvm.dbg.value(metadata i32* %59, metadata !104, metadata !DIExpression()) #7, !dbg !307
-  call void @llvm.dbg.value(metadata i32 16, metadata !105, metadata !DIExpression()) #7, !dbg !307
-  call void @llvm.dbg.value(metadata i32 0, metadata !106, metadata !DIExpression()) #7, !dbg !309
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 1 dereferenceable(64) %57, i8* noundef nonnull align 4 dereferenceable(64) %58, i32 64, i1 false) #7, !dbg !310
-  call void @llvm.dbg.value(metadata i32 undef, metadata !106, metadata !DIExpression()) #7, !dbg !309
-  call void @llvm.dbg.value(metadata i32 undef, metadata !108, metadata !DIExpression()) #7, !dbg !312
-  call void @llvm.dbg.value(metadata i32 undef, metadata !111, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 2, DW_OP_shl, DW_OP_constu, 1, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)) #7, !dbg !312
-  call void @llvm.dbg.value(metadata i32 undef, metadata !121, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 2, DW_OP_shl, DW_OP_constu, 1, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)) #7, !dbg !313
-  call void @llvm.dbg.value(metadata i32 undef, metadata !122, metadata !DIExpression()) #7, !dbg !313
-  call void @llvm.dbg.value(metadata i32 undef, metadata !106, metadata !DIExpression(DW_OP_plus_uconst, 1, DW_OP_stack_value)) #7, !dbg !309
-  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %58) #7, !dbg !314
-  call void @llvm.dbg.value(metadata i8* %57, metadata !290, metadata !DIExpression()) #7, !dbg !297
-  call void @llvm.dbg.value(metadata i32 0, metadata !291, metadata !DIExpression()) #7, !dbg !315
-  br label %60, !dbg !316
-
-60:                                               ; preds = %60, %53
-  %61 = phi i32 [ %68, %60 ], [ 0, %53 ]
-  call void @llvm.dbg.value(metadata i32 %61, metadata !291, metadata !DIExpression()) #7, !dbg !315
-  %62 = getelementptr inbounds i8, i8* %54, i32 %61, !dbg !317
-  %63 = load i8, i8* %62, align 1, !dbg !317, !tbaa !318
-  call void @llvm.dbg.value(metadata i8 %63, metadata !293, metadata !DIExpression()) #7, !dbg !319
-  %64 = getelementptr inbounds [64 x i8], [64 x i8]* %8, i32 0, i32 %61, !dbg !320
-  %65 = load i8, i8* %64, align 1, !dbg !320, !tbaa !318
-  call void @llvm.dbg.value(metadata i8 %65, metadata !296, metadata !DIExpression()) #7, !dbg !319
-  %66 = xor i8 %65, %63, !dbg !321
-  %67 = getelementptr inbounds i8, i8* %55, i32 %61, !dbg !322
-  store i8 %66, i8* %67, align 1, !dbg !323, !tbaa !318
-  %68 = add nuw nsw i32 %61, 1, !dbg !324
-  call void @llvm.dbg.value(metadata i32 %68, metadata !291, metadata !DIExpression()) #7, !dbg !315
-  %69 = icmp eq i32 %68, %22, !dbg !325
-  br i1 %69, label %70, label %60, !dbg !316, !llvm.loop !326
-
-70:                                               ; preds = %60
-  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %57) #7, !dbg !328
-  br label %71, !dbg !329
-
-71:                                               ; preds = %51, %70
-  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %11) #7, !dbg !330
-  ret void, !dbg !331
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind readonly uwtable willreturn
+define internal fastcc i32 @load32(i8* nocapture noundef readonly %0) unnamed_addr #5 !dbg !145 {
+  call void @llvm.dbg.value(metadata i8* %0, metadata !150, metadata !DIExpression()), !dbg !152
+  %2 = bitcast i8* %0 to i32*, !dbg !153
+  %3 = load i32, i32* %2, align 1, !dbg !153
+  call void @llvm.dbg.value(metadata i32 %3, metadata !151, metadata !DIExpression()), !dbg !152
+  ret i32 %3, !dbg !154
 }
 
 ; Function Attrs: argmemonly mustprogress nofree nounwind willreturn
-declare void @llvm.memcpy.p0i8.p0i8.i32(i8* noalias nocapture writeonly, i8* noalias nocapture readonly, i32, i1 immarg) #4
+declare void @llvm.memcpy.p0i8.p0i8.i32(i8* noalias nocapture writeonly, i8* noalias nocapture readonly, i32, i1 immarg) #6
 
-; Function Attrs: inlinehint nofree nosync nounwind uwtable
-define internal fastcc void @Hacl_Impl_Chacha20_chacha20_core(i32* nocapture noundef %0, i32* nocapture noundef %1, i32 noundef %2) unnamed_addr #5 !dbg !332 {
-  call void @llvm.dbg.value(metadata i32* %0, metadata !336, metadata !DIExpression()), !dbg !339
-  call void @llvm.dbg.value(metadata i32* %1, metadata !337, metadata !DIExpression()), !dbg !339
-  call void @llvm.dbg.value(metadata i32 %2, metadata !338, metadata !DIExpression()), !dbg !339
-  %4 = getelementptr inbounds i32, i32* %1, i32 12, !dbg !340
-  store i32 %2, i32* %4, align 4, !dbg !341, !tbaa !52
-  call void @llvm.dbg.value(metadata i32* %0, metadata !342, metadata !DIExpression()) #7, !dbg !348
-  call void @llvm.dbg.value(metadata i32* %1, metadata !347, metadata !DIExpression()) #7, !dbg !348
-  %5 = bitcast i32* %0 to i8*, !dbg !350
-  %6 = bitcast i32* %1 to i8*, !dbg !350
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(64) %5, i8* noundef nonnull align 4 dereferenceable(64) %6, i32 64, i1 false) #7, !dbg !350
-  call void @llvm.dbg.value(metadata i32* %0, metadata !351, metadata !DIExpression()) #7, !dbg !358
-  call void @llvm.dbg.value(metadata i32 0, metadata !356, metadata !DIExpression()) #7, !dbg !360
-  %7 = getelementptr inbounds i32, i32* %0, i32 4
-  %8 = getelementptr inbounds i32, i32* %0, i32 12
-  %9 = getelementptr inbounds i32, i32* %0, i32 8
-  %10 = getelementptr inbounds i32, i32* %0, i32 1
-  %11 = getelementptr inbounds i32, i32* %0, i32 5
-  %12 = getelementptr inbounds i32, i32* %0, i32 13
-  %13 = getelementptr inbounds i32, i32* %0, i32 9
-  %14 = getelementptr inbounds i32, i32* %0, i32 2
-  %15 = getelementptr inbounds i32, i32* %0, i32 6
-  %16 = getelementptr inbounds i32, i32* %0, i32 14
-  %17 = getelementptr inbounds i32, i32* %0, i32 10
-  %18 = getelementptr inbounds i32, i32* %0, i32 3
-  %19 = getelementptr inbounds i32, i32* %0, i32 7
-  %20 = getelementptr inbounds i32, i32* %0, i32 15
-  %21 = getelementptr inbounds i32, i32* %0, i32 11
-  %22 = load i32, i32* %0, align 4, !tbaa !52
-  %23 = load i32, i32* %7, align 4, !tbaa !52
-  %24 = load i32, i32* %8, align 4, !tbaa !52
-  %25 = load i32, i32* %9, align 4, !tbaa !52
-  %26 = load i32, i32* %10, align 4, !tbaa !52
-  %27 = load i32, i32* %11, align 4, !tbaa !52
-  %28 = load i32, i32* %12, align 4, !tbaa !52
-  %29 = load i32, i32* %13, align 4, !tbaa !52
-  %30 = load i32, i32* %14, align 4, !tbaa !52
-  %31 = load i32, i32* %15, align 4, !tbaa !52
-  %32 = load i32, i32* %16, align 4, !tbaa !52
-  %33 = load i32, i32* %17, align 4, !tbaa !52
-  %34 = load i32, i32* %18, align 4, !tbaa !52
-  %35 = load i32, i32* %19, align 4, !tbaa !52
-  %36 = load i32, i32* %20, align 4, !tbaa !52
-  %37 = load i32, i32* %21, align 4, !tbaa !52
-  call void @llvm.dbg.value(metadata i32 0, metadata !356, metadata !DIExpression()) #7, !dbg !360
-  br label %38, !dbg !361
+; Function Attrs: nofree noinline nosync nounwind uwtable
+define internal fastcc void @Hacl_Impl_Chacha20_chacha20_core(i32* nocapture noundef %0, i32* nocapture noundef %1, i32 noundef %2) unnamed_addr #0 !dbg !155 {
+  call void @llvm.dbg.value(metadata i32* %0, metadata !159, metadata !DIExpression()), !dbg !162
+  call void @llvm.dbg.value(metadata i32* %1, metadata !160, metadata !DIExpression()), !dbg !162
+  call void @llvm.dbg.value(metadata i32 %2, metadata !161, metadata !DIExpression()), !dbg !162
+  %4 = getelementptr inbounds i32, i32* %1, i32 12, !dbg !163
+  store i32 %2, i32* %4, align 4, !dbg !164, !tbaa !57
+  call fastcc void @Hacl_Impl_Chacha20_copy_state(i32* noundef %0, i32* noundef %1), !dbg !165
+  call fastcc void @Hacl_Impl_Chacha20_rounds(i32* noundef %0), !dbg !166
+  call fastcc void @Hacl_Impl_Chacha20_sum_states(i32* noundef %0, i32* noundef %1), !dbg !167
+  ret void, !dbg !168
+}
 
-38:                                               ; preds = %38, %3
-  %39 = phi i32 [ 0, %3 ], [ %152, %38 ]
-  %40 = phi i32 [ %22, %3 ], [ %110, %38 ]
-  %41 = phi i32 [ %23, %3 ], [ %151, %38 ]
-  %42 = phi i32 [ %24, %3 ], [ %124, %38 ]
-  %43 = phi i32 [ %25, %3 ], [ %137, %38 ]
-  %44 = phi i32 [ %26, %3 ], [ %122, %38 ]
-  %45 = phi i32 [ %27, %3 ], [ %115, %38 ]
-  %46 = phi i32 [ %28, %3 ], [ %136, %38 ]
-  %47 = phi i32 [ %29, %3 ], [ %149, %38 ]
-  %48 = phi i32 [ %30, %3 ], [ %134, %38 ]
-  %49 = phi i32 [ %31, %3 ], [ %127, %38 ]
-  %50 = phi i32 [ %32, %3 ], [ %148, %38 ]
-  %51 = phi i32 [ %33, %3 ], [ %113, %38 ]
-  %52 = phi i32 [ %34, %3 ], [ %146, %38 ]
-  %53 = phi i32 [ %35, %3 ], [ %139, %38 ]
-  %54 = phi i32 [ %36, %3 ], [ %112, %38 ]
-  %55 = phi i32 [ %37, %3 ], [ %125, %38 ]
-  call void @llvm.dbg.value(metadata i32 %39, metadata !356, metadata !DIExpression()) #7, !dbg !360
-  call void @llvm.dbg.value(metadata i32* %0, metadata !362, metadata !DIExpression()) #7, !dbg !365
-  call void @llvm.dbg.value(metadata i32* %0, metadata !368, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 0, metadata !373, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 4, metadata !374, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 8, metadata !375, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 12, metadata !376, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 %40, metadata !377, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 %41, metadata !378, metadata !DIExpression()) #7, !dbg !397
-  %56 = add i32 %41, %40, !dbg !399
-  call void @llvm.dbg.value(metadata i32 %42, metadata !379, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 %56, metadata !380, metadata !DIExpression()) #7, !dbg !397
-  %57 = xor i32 %42, %56, !dbg !400
-  call void @llvm.dbg.value(metadata i32 %57, metadata !381, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 %57, metadata !401, metadata !DIExpression()) #7, !dbg !407
-  call void @llvm.dbg.value(metadata i32 16, metadata !406, metadata !DIExpression()) #7, !dbg !407
-  %58 = call i32 @llvm.fshl.i32(i32 %57, i32 %57, i32 16) #7, !dbg !409
-  call void @llvm.dbg.value(metadata i32 %43, metadata !382, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 %58, metadata !383, metadata !DIExpression()) #7, !dbg !397
-  %59 = add i32 %58, %43, !dbg !410
-  call void @llvm.dbg.value(metadata i32 %41, metadata !384, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 %59, metadata !385, metadata !DIExpression()) #7, !dbg !397
-  %60 = xor i32 %59, %41, !dbg !411
-  call void @llvm.dbg.value(metadata i32 %60, metadata !386, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 %60, metadata !401, metadata !DIExpression()) #7, !dbg !412
-  call void @llvm.dbg.value(metadata i32 12, metadata !406, metadata !DIExpression()) #7, !dbg !412
-  %61 = call i32 @llvm.fshl.i32(i32 %60, i32 %60, i32 12) #7, !dbg !414
-  call void @llvm.dbg.value(metadata i32 %56, metadata !387, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 %61, metadata !388, metadata !DIExpression()) #7, !dbg !397
-  %62 = add i32 %61, %56, !dbg !415
-  call void @llvm.dbg.value(metadata i32 %58, metadata !389, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 %62, metadata !390, metadata !DIExpression()) #7, !dbg !397
-  %63 = xor i32 %62, %58, !dbg !416
-  call void @llvm.dbg.value(metadata i32 %63, metadata !391, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 %63, metadata !401, metadata !DIExpression()) #7, !dbg !417
-  call void @llvm.dbg.value(metadata i32 8, metadata !406, metadata !DIExpression()) #7, !dbg !417
-  %64 = call i32 @llvm.fshl.i32(i32 %63, i32 %63, i32 8) #7, !dbg !419
-  call void @llvm.dbg.value(metadata i32 %59, metadata !392, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 %64, metadata !393, metadata !DIExpression()) #7, !dbg !397
-  %65 = add i32 %64, %59, !dbg !420
-  call void @llvm.dbg.value(metadata i32 %61, metadata !394, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 %65, metadata !395, metadata !DIExpression()) #7, !dbg !397
-  %66 = xor i32 %65, %61, !dbg !421
-  call void @llvm.dbg.value(metadata i32 %66, metadata !396, metadata !DIExpression()) #7, !dbg !397
-  call void @llvm.dbg.value(metadata i32 %66, metadata !401, metadata !DIExpression()) #7, !dbg !422
-  call void @llvm.dbg.value(metadata i32 7, metadata !406, metadata !DIExpression()) #7, !dbg !422
-  %67 = call i32 @llvm.fshl.i32(i32 %66, i32 %66, i32 7) #7, !dbg !424
-  call void @llvm.dbg.value(metadata i32* %0, metadata !368, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 1, metadata !373, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 5, metadata !374, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 9, metadata !375, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 13, metadata !376, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 %44, metadata !377, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 %45, metadata !378, metadata !DIExpression()) #7, !dbg !425
-  %68 = add i32 %45, %44, !dbg !427
-  call void @llvm.dbg.value(metadata i32 %46, metadata !379, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 %68, metadata !380, metadata !DIExpression()) #7, !dbg !425
-  %69 = xor i32 %46, %68, !dbg !428
-  call void @llvm.dbg.value(metadata i32 %69, metadata !381, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 %69, metadata !401, metadata !DIExpression()) #7, !dbg !429
-  call void @llvm.dbg.value(metadata i32 16, metadata !406, metadata !DIExpression()) #7, !dbg !429
-  %70 = call i32 @llvm.fshl.i32(i32 %69, i32 %69, i32 16) #7, !dbg !431
-  call void @llvm.dbg.value(metadata i32 %47, metadata !382, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 %70, metadata !383, metadata !DIExpression()) #7, !dbg !425
-  %71 = add i32 %70, %47, !dbg !432
-  call void @llvm.dbg.value(metadata i32 %45, metadata !384, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 %71, metadata !385, metadata !DIExpression()) #7, !dbg !425
-  %72 = xor i32 %71, %45, !dbg !433
-  call void @llvm.dbg.value(metadata i32 %72, metadata !386, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 %72, metadata !401, metadata !DIExpression()) #7, !dbg !434
-  call void @llvm.dbg.value(metadata i32 12, metadata !406, metadata !DIExpression()) #7, !dbg !434
-  %73 = call i32 @llvm.fshl.i32(i32 %72, i32 %72, i32 12) #7, !dbg !436
-  call void @llvm.dbg.value(metadata i32 %68, metadata !387, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 %73, metadata !388, metadata !DIExpression()) #7, !dbg !425
-  %74 = add i32 %73, %68, !dbg !437
-  call void @llvm.dbg.value(metadata i32 %70, metadata !389, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 %74, metadata !390, metadata !DIExpression()) #7, !dbg !425
-  %75 = xor i32 %74, %70, !dbg !438
-  call void @llvm.dbg.value(metadata i32 %75, metadata !391, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 %75, metadata !401, metadata !DIExpression()) #7, !dbg !439
-  call void @llvm.dbg.value(metadata i32 8, metadata !406, metadata !DIExpression()) #7, !dbg !439
-  %76 = call i32 @llvm.fshl.i32(i32 %75, i32 %75, i32 8) #7, !dbg !441
-  call void @llvm.dbg.value(metadata i32 %71, metadata !392, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 %76, metadata !393, metadata !DIExpression()) #7, !dbg !425
-  %77 = add i32 %76, %71, !dbg !442
-  call void @llvm.dbg.value(metadata i32 %73, metadata !394, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 %77, metadata !395, metadata !DIExpression()) #7, !dbg !425
-  %78 = xor i32 %77, %73, !dbg !443
-  call void @llvm.dbg.value(metadata i32 %78, metadata !396, metadata !DIExpression()) #7, !dbg !425
-  call void @llvm.dbg.value(metadata i32 %78, metadata !401, metadata !DIExpression()) #7, !dbg !444
-  call void @llvm.dbg.value(metadata i32 7, metadata !406, metadata !DIExpression()) #7, !dbg !444
-  %79 = call i32 @llvm.fshl.i32(i32 %78, i32 %78, i32 7) #7, !dbg !446
-  call void @llvm.dbg.value(metadata i32* %0, metadata !368, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 2, metadata !373, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 6, metadata !374, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 10, metadata !375, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 14, metadata !376, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 %48, metadata !377, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 %49, metadata !378, metadata !DIExpression()) #7, !dbg !447
-  %80 = add i32 %49, %48, !dbg !449
-  call void @llvm.dbg.value(metadata i32 %50, metadata !379, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 %80, metadata !380, metadata !DIExpression()) #7, !dbg !447
-  %81 = xor i32 %50, %80, !dbg !450
-  call void @llvm.dbg.value(metadata i32 %81, metadata !381, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 %81, metadata !401, metadata !DIExpression()) #7, !dbg !451
-  call void @llvm.dbg.value(metadata i32 16, metadata !406, metadata !DIExpression()) #7, !dbg !451
-  %82 = call i32 @llvm.fshl.i32(i32 %81, i32 %81, i32 16) #7, !dbg !453
-  call void @llvm.dbg.value(metadata i32 %51, metadata !382, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 %82, metadata !383, metadata !DIExpression()) #7, !dbg !447
-  %83 = add i32 %82, %51, !dbg !454
-  call void @llvm.dbg.value(metadata i32 %49, metadata !384, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 %83, metadata !385, metadata !DIExpression()) #7, !dbg !447
-  %84 = xor i32 %83, %49, !dbg !455
-  call void @llvm.dbg.value(metadata i32 %84, metadata !386, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 %84, metadata !401, metadata !DIExpression()) #7, !dbg !456
-  call void @llvm.dbg.value(metadata i32 12, metadata !406, metadata !DIExpression()) #7, !dbg !456
-  %85 = call i32 @llvm.fshl.i32(i32 %84, i32 %84, i32 12) #7, !dbg !458
-  call void @llvm.dbg.value(metadata i32 %80, metadata !387, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 %85, metadata !388, metadata !DIExpression()) #7, !dbg !447
-  %86 = add i32 %85, %80, !dbg !459
-  call void @llvm.dbg.value(metadata i32 %82, metadata !389, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 %86, metadata !390, metadata !DIExpression()) #7, !dbg !447
-  %87 = xor i32 %86, %82, !dbg !460
-  call void @llvm.dbg.value(metadata i32 %87, metadata !391, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 %87, metadata !401, metadata !DIExpression()) #7, !dbg !461
-  call void @llvm.dbg.value(metadata i32 8, metadata !406, metadata !DIExpression()) #7, !dbg !461
-  %88 = call i32 @llvm.fshl.i32(i32 %87, i32 %87, i32 8) #7, !dbg !463
-  call void @llvm.dbg.value(metadata i32 %83, metadata !392, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 %88, metadata !393, metadata !DIExpression()) #7, !dbg !447
-  %89 = add i32 %88, %83, !dbg !464
-  call void @llvm.dbg.value(metadata i32 %85, metadata !394, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 %89, metadata !395, metadata !DIExpression()) #7, !dbg !447
-  %90 = xor i32 %89, %85, !dbg !465
-  call void @llvm.dbg.value(metadata i32 %90, metadata !396, metadata !DIExpression()) #7, !dbg !447
-  call void @llvm.dbg.value(metadata i32 %90, metadata !401, metadata !DIExpression()) #7, !dbg !466
-  call void @llvm.dbg.value(metadata i32 7, metadata !406, metadata !DIExpression()) #7, !dbg !466
-  %91 = call i32 @llvm.fshl.i32(i32 %90, i32 %90, i32 7) #7, !dbg !468
-  call void @llvm.dbg.value(metadata i32* %0, metadata !368, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 3, metadata !373, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 7, metadata !374, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 11, metadata !375, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 15, metadata !376, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 %52, metadata !377, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 %53, metadata !378, metadata !DIExpression()) #7, !dbg !469
-  %92 = add i32 %53, %52, !dbg !471
-  call void @llvm.dbg.value(metadata i32 %54, metadata !379, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 %92, metadata !380, metadata !DIExpression()) #7, !dbg !469
-  %93 = xor i32 %54, %92, !dbg !472
-  call void @llvm.dbg.value(metadata i32 %93, metadata !381, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 %93, metadata !401, metadata !DIExpression()) #7, !dbg !473
-  call void @llvm.dbg.value(metadata i32 16, metadata !406, metadata !DIExpression()) #7, !dbg !473
-  %94 = call i32 @llvm.fshl.i32(i32 %93, i32 %93, i32 16) #7, !dbg !475
-  call void @llvm.dbg.value(metadata i32 %55, metadata !382, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 %94, metadata !383, metadata !DIExpression()) #7, !dbg !469
-  %95 = add i32 %94, %55, !dbg !476
-  call void @llvm.dbg.value(metadata i32 %53, metadata !384, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 %95, metadata !385, metadata !DIExpression()) #7, !dbg !469
-  %96 = xor i32 %95, %53, !dbg !477
-  call void @llvm.dbg.value(metadata i32 %96, metadata !386, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 %96, metadata !401, metadata !DIExpression()) #7, !dbg !478
-  call void @llvm.dbg.value(metadata i32 12, metadata !406, metadata !DIExpression()) #7, !dbg !478
-  %97 = call i32 @llvm.fshl.i32(i32 %96, i32 %96, i32 12) #7, !dbg !480
-  call void @llvm.dbg.value(metadata i32 %92, metadata !387, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 %97, metadata !388, metadata !DIExpression()) #7, !dbg !469
-  %98 = add i32 %97, %92, !dbg !481
-  call void @llvm.dbg.value(metadata i32 %94, metadata !389, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 %98, metadata !390, metadata !DIExpression()) #7, !dbg !469
-  %99 = xor i32 %98, %94, !dbg !482
-  call void @llvm.dbg.value(metadata i32 %99, metadata !391, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 %99, metadata !401, metadata !DIExpression()) #7, !dbg !483
-  call void @llvm.dbg.value(metadata i32 8, metadata !406, metadata !DIExpression()) #7, !dbg !483
-  %100 = call i32 @llvm.fshl.i32(i32 %99, i32 %99, i32 8) #7, !dbg !485
-  call void @llvm.dbg.value(metadata i32 %95, metadata !392, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 %100, metadata !393, metadata !DIExpression()) #7, !dbg !469
-  %101 = add i32 %100, %95, !dbg !486
-  call void @llvm.dbg.value(metadata i32 %97, metadata !394, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 %101, metadata !395, metadata !DIExpression()) #7, !dbg !469
-  %102 = xor i32 %101, %97, !dbg !487
-  call void @llvm.dbg.value(metadata i32 %102, metadata !396, metadata !DIExpression()) #7, !dbg !469
-  call void @llvm.dbg.value(metadata i32 %102, metadata !401, metadata !DIExpression()) #7, !dbg !488
-  call void @llvm.dbg.value(metadata i32 7, metadata !406, metadata !DIExpression()) #7, !dbg !488
-  %103 = call i32 @llvm.fshl.i32(i32 %102, i32 %102, i32 7) #7, !dbg !490
-  call void @llvm.dbg.value(metadata i32* %0, metadata !368, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 0, metadata !373, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 5, metadata !374, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 10, metadata !375, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 15, metadata !376, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 %62, metadata !377, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 %79, metadata !378, metadata !DIExpression()) #7, !dbg !491
-  %104 = add i32 %79, %62, !dbg !493
-  call void @llvm.dbg.value(metadata i32 %100, metadata !379, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 %104, metadata !380, metadata !DIExpression()) #7, !dbg !491
-  %105 = xor i32 %100, %104, !dbg !494
-  call void @llvm.dbg.value(metadata i32 %105, metadata !381, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 %105, metadata !401, metadata !DIExpression()) #7, !dbg !495
-  call void @llvm.dbg.value(metadata i32 16, metadata !406, metadata !DIExpression()) #7, !dbg !495
-  %106 = call i32 @llvm.fshl.i32(i32 %105, i32 %105, i32 16) #7, !dbg !497
-  call void @llvm.dbg.value(metadata i32 %89, metadata !382, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 %106, metadata !383, metadata !DIExpression()) #7, !dbg !491
-  %107 = add i32 %106, %89, !dbg !498
-  call void @llvm.dbg.value(metadata i32 %79, metadata !384, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 %107, metadata !385, metadata !DIExpression()) #7, !dbg !491
-  %108 = xor i32 %107, %79, !dbg !499
-  call void @llvm.dbg.value(metadata i32 %108, metadata !386, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 %108, metadata !401, metadata !DIExpression()) #7, !dbg !500
-  call void @llvm.dbg.value(metadata i32 12, metadata !406, metadata !DIExpression()) #7, !dbg !500
-  %109 = call i32 @llvm.fshl.i32(i32 %108, i32 %108, i32 12) #7, !dbg !502
-  call void @llvm.dbg.value(metadata i32 %104, metadata !387, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 %109, metadata !388, metadata !DIExpression()) #7, !dbg !491
-  %110 = add i32 %109, %104, !dbg !503
-  call void @llvm.dbg.value(metadata i32 %106, metadata !389, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 %110, metadata !390, metadata !DIExpression()) #7, !dbg !491
-  %111 = xor i32 %110, %106, !dbg !504
-  call void @llvm.dbg.value(metadata i32 %111, metadata !391, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 %111, metadata !401, metadata !DIExpression()) #7, !dbg !505
-  call void @llvm.dbg.value(metadata i32 8, metadata !406, metadata !DIExpression()) #7, !dbg !505
-  %112 = call i32 @llvm.fshl.i32(i32 %111, i32 %111, i32 8) #7, !dbg !507
-  call void @llvm.dbg.value(metadata i32 %107, metadata !392, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 %112, metadata !393, metadata !DIExpression()) #7, !dbg !491
-  %113 = add i32 %112, %107, !dbg !508
-  call void @llvm.dbg.value(metadata i32 %109, metadata !394, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 %113, metadata !395, metadata !DIExpression()) #7, !dbg !491
-  %114 = xor i32 %113, %109, !dbg !509
-  call void @llvm.dbg.value(metadata i32 %114, metadata !396, metadata !DIExpression()) #7, !dbg !491
-  call void @llvm.dbg.value(metadata i32 %114, metadata !401, metadata !DIExpression()) #7, !dbg !510
-  call void @llvm.dbg.value(metadata i32 7, metadata !406, metadata !DIExpression()) #7, !dbg !510
-  %115 = call i32 @llvm.fshl.i32(i32 %114, i32 %114, i32 7) #7, !dbg !512
-  call void @llvm.dbg.value(metadata i32* %0, metadata !368, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 1, metadata !373, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 6, metadata !374, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 11, metadata !375, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 12, metadata !376, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 %74, metadata !377, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 %91, metadata !378, metadata !DIExpression()) #7, !dbg !513
-  %116 = add i32 %91, %74, !dbg !515
-  call void @llvm.dbg.value(metadata i32 %64, metadata !379, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 %116, metadata !380, metadata !DIExpression()) #7, !dbg !513
-  %117 = xor i32 %116, %64, !dbg !516
-  call void @llvm.dbg.value(metadata i32 %117, metadata !381, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 %117, metadata !401, metadata !DIExpression()) #7, !dbg !517
-  call void @llvm.dbg.value(metadata i32 16, metadata !406, metadata !DIExpression()) #7, !dbg !517
-  %118 = call i32 @llvm.fshl.i32(i32 %117, i32 %117, i32 16) #7, !dbg !519
-  call void @llvm.dbg.value(metadata i32 %101, metadata !382, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 %118, metadata !383, metadata !DIExpression()) #7, !dbg !513
-  %119 = add i32 %118, %101, !dbg !520
-  call void @llvm.dbg.value(metadata i32 %91, metadata !384, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 %119, metadata !385, metadata !DIExpression()) #7, !dbg !513
-  %120 = xor i32 %119, %91, !dbg !521
-  call void @llvm.dbg.value(metadata i32 %120, metadata !386, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 %120, metadata !401, metadata !DIExpression()) #7, !dbg !522
-  call void @llvm.dbg.value(metadata i32 12, metadata !406, metadata !DIExpression()) #7, !dbg !522
-  %121 = call i32 @llvm.fshl.i32(i32 %120, i32 %120, i32 12) #7, !dbg !524
-  call void @llvm.dbg.value(metadata i32 %116, metadata !387, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 %121, metadata !388, metadata !DIExpression()) #7, !dbg !513
-  %122 = add i32 %121, %116, !dbg !525
-  call void @llvm.dbg.value(metadata i32 %118, metadata !389, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 %122, metadata !390, metadata !DIExpression()) #7, !dbg !513
-  %123 = xor i32 %122, %118, !dbg !526
-  call void @llvm.dbg.value(metadata i32 %123, metadata !391, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 %123, metadata !401, metadata !DIExpression()) #7, !dbg !527
-  call void @llvm.dbg.value(metadata i32 8, metadata !406, metadata !DIExpression()) #7, !dbg !527
-  %124 = call i32 @llvm.fshl.i32(i32 %123, i32 %123, i32 8) #7, !dbg !529
-  call void @llvm.dbg.value(metadata i32 %119, metadata !392, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 %124, metadata !393, metadata !DIExpression()) #7, !dbg !513
-  %125 = add i32 %124, %119, !dbg !530
-  call void @llvm.dbg.value(metadata i32 %121, metadata !394, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 %125, metadata !395, metadata !DIExpression()) #7, !dbg !513
-  %126 = xor i32 %125, %121, !dbg !531
-  call void @llvm.dbg.value(metadata i32 %126, metadata !396, metadata !DIExpression()) #7, !dbg !513
-  call void @llvm.dbg.value(metadata i32 %126, metadata !401, metadata !DIExpression()) #7, !dbg !532
-  call void @llvm.dbg.value(metadata i32 7, metadata !406, metadata !DIExpression()) #7, !dbg !532
-  %127 = call i32 @llvm.fshl.i32(i32 %126, i32 %126, i32 7) #7, !dbg !534
-  call void @llvm.dbg.value(metadata i32* %0, metadata !368, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 2, metadata !373, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 7, metadata !374, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 8, metadata !375, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 13, metadata !376, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 %86, metadata !377, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 %103, metadata !378, metadata !DIExpression()) #7, !dbg !535
-  %128 = add i32 %103, %86, !dbg !537
-  call void @llvm.dbg.value(metadata i32 %76, metadata !379, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 %128, metadata !380, metadata !DIExpression()) #7, !dbg !535
-  %129 = xor i32 %128, %76, !dbg !538
-  call void @llvm.dbg.value(metadata i32 %129, metadata !381, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 %129, metadata !401, metadata !DIExpression()) #7, !dbg !539
-  call void @llvm.dbg.value(metadata i32 16, metadata !406, metadata !DIExpression()) #7, !dbg !539
-  %130 = call i32 @llvm.fshl.i32(i32 %129, i32 %129, i32 16) #7, !dbg !541
-  call void @llvm.dbg.value(metadata i32 %65, metadata !382, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 %130, metadata !383, metadata !DIExpression()) #7, !dbg !535
-  %131 = add i32 %130, %65, !dbg !542
-  call void @llvm.dbg.value(metadata i32 %103, metadata !384, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 %131, metadata !385, metadata !DIExpression()) #7, !dbg !535
-  %132 = xor i32 %131, %103, !dbg !543
-  call void @llvm.dbg.value(metadata i32 %132, metadata !386, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 %132, metadata !401, metadata !DIExpression()) #7, !dbg !544
-  call void @llvm.dbg.value(metadata i32 12, metadata !406, metadata !DIExpression()) #7, !dbg !544
-  %133 = call i32 @llvm.fshl.i32(i32 %132, i32 %132, i32 12) #7, !dbg !546
-  call void @llvm.dbg.value(metadata i32 %128, metadata !387, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 %133, metadata !388, metadata !DIExpression()) #7, !dbg !535
-  %134 = add i32 %133, %128, !dbg !547
-  call void @llvm.dbg.value(metadata i32 %130, metadata !389, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 %134, metadata !390, metadata !DIExpression()) #7, !dbg !535
-  %135 = xor i32 %134, %130, !dbg !548
-  call void @llvm.dbg.value(metadata i32 %135, metadata !391, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 %135, metadata !401, metadata !DIExpression()) #7, !dbg !549
-  call void @llvm.dbg.value(metadata i32 8, metadata !406, metadata !DIExpression()) #7, !dbg !549
-  %136 = call i32 @llvm.fshl.i32(i32 %135, i32 %135, i32 8) #7, !dbg !551
-  call void @llvm.dbg.value(metadata i32 %131, metadata !392, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 %136, metadata !393, metadata !DIExpression()) #7, !dbg !535
-  %137 = add i32 %136, %131, !dbg !552
-  call void @llvm.dbg.value(metadata i32 %133, metadata !394, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 %137, metadata !395, metadata !DIExpression()) #7, !dbg !535
-  %138 = xor i32 %137, %133, !dbg !553
-  call void @llvm.dbg.value(metadata i32 %138, metadata !396, metadata !DIExpression()) #7, !dbg !535
-  call void @llvm.dbg.value(metadata i32 %138, metadata !401, metadata !DIExpression()) #7, !dbg !554
-  call void @llvm.dbg.value(metadata i32 7, metadata !406, metadata !DIExpression()) #7, !dbg !554
-  %139 = call i32 @llvm.fshl.i32(i32 %138, i32 %138, i32 7) #7, !dbg !556
-  call void @llvm.dbg.value(metadata i32* %0, metadata !368, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 3, metadata !373, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 4, metadata !374, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 9, metadata !375, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 14, metadata !376, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 %98, metadata !377, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 %67, metadata !378, metadata !DIExpression()) #7, !dbg !557
-  %140 = add i32 %98, %67, !dbg !559
-  call void @llvm.dbg.value(metadata i32 %88, metadata !379, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 %140, metadata !380, metadata !DIExpression()) #7, !dbg !557
-  %141 = xor i32 %140, %88, !dbg !560
-  call void @llvm.dbg.value(metadata i32 %141, metadata !381, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 %141, metadata !401, metadata !DIExpression()) #7, !dbg !561
-  call void @llvm.dbg.value(metadata i32 16, metadata !406, metadata !DIExpression()) #7, !dbg !561
-  %142 = call i32 @llvm.fshl.i32(i32 %141, i32 %141, i32 16) #7, !dbg !563
-  call void @llvm.dbg.value(metadata i32 %77, metadata !382, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 %142, metadata !383, metadata !DIExpression()) #7, !dbg !557
-  %143 = add i32 %142, %77, !dbg !564
-  call void @llvm.dbg.value(metadata i32 %67, metadata !384, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 %143, metadata !385, metadata !DIExpression()) #7, !dbg !557
-  %144 = xor i32 %143, %67, !dbg !565
-  call void @llvm.dbg.value(metadata i32 %144, metadata !386, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 %144, metadata !401, metadata !DIExpression()) #7, !dbg !566
-  call void @llvm.dbg.value(metadata i32 12, metadata !406, metadata !DIExpression()) #7, !dbg !566
-  %145 = call i32 @llvm.fshl.i32(i32 %144, i32 %144, i32 12) #7, !dbg !568
-  call void @llvm.dbg.value(metadata i32 %140, metadata !387, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 %145, metadata !388, metadata !DIExpression()) #7, !dbg !557
-  %146 = add i32 %145, %140, !dbg !569
-  call void @llvm.dbg.value(metadata i32 %142, metadata !389, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 %146, metadata !390, metadata !DIExpression()) #7, !dbg !557
-  %147 = xor i32 %146, %142, !dbg !570
-  call void @llvm.dbg.value(metadata i32 %147, metadata !391, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 %147, metadata !401, metadata !DIExpression()) #7, !dbg !571
-  call void @llvm.dbg.value(metadata i32 8, metadata !406, metadata !DIExpression()) #7, !dbg !571
-  %148 = call i32 @llvm.fshl.i32(i32 %147, i32 %147, i32 8) #7, !dbg !573
-  call void @llvm.dbg.value(metadata i32 %143, metadata !392, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 %148, metadata !393, metadata !DIExpression()) #7, !dbg !557
-  %149 = add i32 %148, %143, !dbg !574
-  call void @llvm.dbg.value(metadata i32 %145, metadata !394, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 %149, metadata !395, metadata !DIExpression()) #7, !dbg !557
-  %150 = xor i32 %149, %145, !dbg !575
-  call void @llvm.dbg.value(metadata i32 %150, metadata !396, metadata !DIExpression()) #7, !dbg !557
-  call void @llvm.dbg.value(metadata i32 %150, metadata !401, metadata !DIExpression()) #7, !dbg !576
-  call void @llvm.dbg.value(metadata i32 7, metadata !406, metadata !DIExpression()) #7, !dbg !576
-  %151 = call i32 @llvm.fshl.i32(i32 %150, i32 %150, i32 7) #7, !dbg !578
-  %152 = add nuw nsw i32 %39, 1, !dbg !579
-  call void @llvm.dbg.value(metadata i32 %152, metadata !356, metadata !DIExpression()) #7, !dbg !360
-  %153 = icmp eq i32 %152, 10, !dbg !580
-  br i1 %153, label %154, label %38, !dbg !361, !llvm.loop !581
+; Function Attrs: nofree noinline norecurse nosync nounwind uwtable
+define internal fastcc void @Hacl_Lib_LoadStore32_uint32s_to_le_bytes(i8* nocapture noundef writeonly %0, i32* nocapture noundef readonly %1) unnamed_addr #4 !dbg !169 {
+  call void @llvm.dbg.value(metadata i8* %0, metadata !171, metadata !DIExpression()), !dbg !180
+  call void @llvm.dbg.value(metadata i32* %1, metadata !172, metadata !DIExpression()), !dbg !180
+  call void @llvm.dbg.value(metadata i32 16, metadata !173, metadata !DIExpression()), !dbg !180
+  call void @llvm.dbg.value(metadata i32 0, metadata !174, metadata !DIExpression()), !dbg !181
+  br label %4, !dbg !182
 
-154:                                              ; preds = %38
-  store i32 %110, i32* %0, align 4, !dbg !365, !tbaa !52
-  store i32 %151, i32* %7, align 4, !dbg !365, !tbaa !52
-  store i32 %124, i32* %8, align 4, !dbg !365, !tbaa !52
-  store i32 %137, i32* %9, align 4, !dbg !365, !tbaa !52
-  store i32 %122, i32* %10, align 4, !dbg !365, !tbaa !52
-  store i32 %115, i32* %11, align 4, !dbg !365, !tbaa !52
-  store i32 %136, i32* %12, align 4, !dbg !365, !tbaa !52
-  store i32 %149, i32* %13, align 4, !dbg !365, !tbaa !52
-  store i32 %134, i32* %14, align 4, !dbg !365, !tbaa !52
-  store i32 %127, i32* %15, align 4, !dbg !365, !tbaa !52
-  store i32 %148, i32* %16, align 4, !dbg !365, !tbaa !52
-  store i32 %113, i32* %17, align 4, !dbg !365, !tbaa !52
-  store i32 %146, i32* %18, align 4, !dbg !365, !tbaa !52
-  store i32 %139, i32* %19, align 4, !dbg !365, !tbaa !52
-  store i32 %112, i32* %20, align 4, !dbg !365, !tbaa !52
-  store i32 %125, i32* %21, align 4, !dbg !365, !tbaa !52
-  call void @llvm.dbg.value(metadata i32* %0, metadata !583, metadata !DIExpression()), !dbg !593
-  call void @llvm.dbg.value(metadata i32* %1, metadata !586, metadata !DIExpression()), !dbg !593
-  call void @llvm.dbg.value(metadata i32 0, metadata !587, metadata !DIExpression()), !dbg !595
-  br label %155, !dbg !596
+3:                                                ; preds = %4
+  ret void, !dbg !183
 
-155:                                              ; preds = %155, %154
-  %156 = phi i32 [ 0, %154 ], [ %162, %155 ]
-  call void @llvm.dbg.value(metadata i32 %156, metadata !587, metadata !DIExpression()), !dbg !595
-  %157 = getelementptr inbounds i32, i32* %0, i32 %156, !dbg !597
-  %158 = load i32, i32* %157, align 4, !dbg !597, !tbaa !52
-  call void @llvm.dbg.value(metadata i32 %158, metadata !589, metadata !DIExpression()), !dbg !598
-  %159 = getelementptr inbounds i32, i32* %1, i32 %156, !dbg !599
-  %160 = load i32, i32* %159, align 4, !dbg !599, !tbaa !52
-  call void @llvm.dbg.value(metadata i32 %160, metadata !592, metadata !DIExpression()), !dbg !598
-  %161 = add i32 %160, %158, !dbg !600
-  store i32 %161, i32* %157, align 4, !dbg !601, !tbaa !52
-  %162 = add nuw nsw i32 %156, 1, !dbg !602
-  call void @llvm.dbg.value(metadata i32 %162, metadata !587, metadata !DIExpression()), !dbg !595
-  %163 = icmp eq i32 %162, 16, !dbg !603
-  br i1 %163, label %164, label %155, !dbg !596, !llvm.loop !604
+4:                                                ; preds = %2, %4
+  %5 = phi i32 [ 0, %2 ], [ %10, %4 ]
+  call void @llvm.dbg.value(metadata i32 %5, metadata !174, metadata !DIExpression()), !dbg !181
+  %6 = getelementptr inbounds i32, i32* %1, i32 %5, !dbg !184
+  %7 = load i32, i32* %6, align 4, !dbg !184, !tbaa !57
+  call void @llvm.dbg.value(metadata i32 %7, metadata !176, metadata !DIExpression()), !dbg !185
+  %8 = shl i32 %5, 2, !dbg !186
+  %9 = getelementptr inbounds i8, i8* %0, i32 %8, !dbg !187
+  call void @llvm.dbg.value(metadata i8* %9, metadata !179, metadata !DIExpression()), !dbg !185
+  call fastcc void @store32(i8* noundef %9, i32 noundef %7), !dbg !188
+  %10 = add nuw nsw i32 %5, 1, !dbg !189
+  call void @llvm.dbg.value(metadata i32 %10, metadata !174, metadata !DIExpression()), !dbg !181
+  %11 = icmp eq i32 %10, 16, !dbg !190
+  br i1 %11, label %3, label %4, !dbg !182, !llvm.loop !191
+}
 
-164:                                              ; preds = %155
-  ret void, !dbg !606
+; Function Attrs: mustprogress nofree noinline nosync nounwind uwtable willreturn
+define internal fastcc void @Hacl_Impl_Chacha20_copy_state(i32* nocapture noundef writeonly %0, i32* nocapture noundef readonly %1) unnamed_addr #7 !dbg !193 {
+  call void @llvm.dbg.value(metadata i32* %0, metadata !197, metadata !DIExpression()), !dbg !199
+  call void @llvm.dbg.value(metadata i32* %1, metadata !198, metadata !DIExpression()), !dbg !199
+  %3 = bitcast i32* %0 to i8*, !dbg !200
+  %4 = bitcast i32* %1 to i8*, !dbg !200
+  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(64) %3, i8* noundef nonnull align 4 dereferenceable(64) %4, i32 64, i1 false), !dbg !200
+  ret void, !dbg !201
+}
+
+; Function Attrs: nofree noinline norecurse nosync nounwind uwtable
+define internal fastcc void @Hacl_Impl_Chacha20_rounds(i32* nocapture noundef %0) unnamed_addr #4 !dbg !202 {
+  call void @llvm.dbg.value(metadata i32* %0, metadata !206, metadata !DIExpression()), !dbg !209
+  call void @llvm.dbg.value(metadata i32 0, metadata !207, metadata !DIExpression()), !dbg !210
+  br label %3, !dbg !211
+
+2:                                                ; preds = %3
+  ret void, !dbg !212
+
+3:                                                ; preds = %1, %3
+  %4 = phi i32 [ 0, %1 ], [ %5, %3 ]
+  call void @llvm.dbg.value(metadata i32 %4, metadata !207, metadata !DIExpression()), !dbg !210
+  call fastcc void @Hacl_Impl_Chacha20_double_round(i32* noundef %0), !dbg !213
+  %5 = add nuw nsw i32 %4, 1, !dbg !215
+  call void @llvm.dbg.value(metadata i32 %5, metadata !207, metadata !DIExpression()), !dbg !210
+  %6 = icmp eq i32 %5, 10, !dbg !216
+  br i1 %6, label %2, label %3, !dbg !211, !llvm.loop !217
+}
+
+; Function Attrs: nofree noinline norecurse nosync nounwind uwtable
+define internal fastcc void @Hacl_Impl_Chacha20_sum_states(i32* nocapture noundef %0, i32* nocapture noundef readonly %1) unnamed_addr #4 !dbg !219 {
+  call void @llvm.dbg.value(metadata i32* %0, metadata !221, metadata !DIExpression()), !dbg !229
+  call void @llvm.dbg.value(metadata i32* %1, metadata !222, metadata !DIExpression()), !dbg !229
+  call void @llvm.dbg.value(metadata i32 0, metadata !223, metadata !DIExpression()), !dbg !230
+  br label %4, !dbg !231
+
+3:                                                ; preds = %4
+  ret void, !dbg !232
+
+4:                                                ; preds = %2, %4
+  %5 = phi i32 [ 0, %2 ], [ %11, %4 ]
+  call void @llvm.dbg.value(metadata i32 %5, metadata !223, metadata !DIExpression()), !dbg !230
+  %6 = getelementptr inbounds i32, i32* %0, i32 %5, !dbg !233
+  %7 = load i32, i32* %6, align 4, !dbg !233, !tbaa !57
+  call void @llvm.dbg.value(metadata i32 %7, metadata !225, metadata !DIExpression()), !dbg !234
+  %8 = getelementptr inbounds i32, i32* %1, i32 %5, !dbg !235
+  %9 = load i32, i32* %8, align 4, !dbg !235, !tbaa !57
+  call void @llvm.dbg.value(metadata i32 %9, metadata !228, metadata !DIExpression()), !dbg !234
+  %10 = add i32 %9, %7, !dbg !236
+  store i32 %10, i32* %6, align 4, !dbg !237, !tbaa !57
+  %11 = add nuw nsw i32 %5, 1, !dbg !238
+  call void @llvm.dbg.value(metadata i32 %11, metadata !223, metadata !DIExpression()), !dbg !230
+  %12 = icmp eq i32 %11, 16, !dbg !239
+  br i1 %12, label %3, label %4, !dbg !231, !llvm.loop !240
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind uwtable willreturn
+define internal fastcc void @Hacl_Impl_Chacha20_double_round(i32* nocapture noundef %0) unnamed_addr #8 !dbg !242 {
+  call void @llvm.dbg.value(metadata i32* %0, metadata !244, metadata !DIExpression()), !dbg !245
+  call fastcc void @Hacl_Impl_Chacha20_quarter_round(i32* noundef %0, i32 noundef 0, i32 noundef 4, i32 noundef 8, i32 noundef 12), !dbg !246
+  call fastcc void @Hacl_Impl_Chacha20_quarter_round(i32* noundef %0, i32 noundef 1, i32 noundef 5, i32 noundef 9, i32 noundef 13), !dbg !247
+  call fastcc void @Hacl_Impl_Chacha20_quarter_round(i32* noundef %0, i32 noundef 2, i32 noundef 6, i32 noundef 10, i32 noundef 14), !dbg !248
+  call fastcc void @Hacl_Impl_Chacha20_quarter_round(i32* noundef %0, i32 noundef 3, i32 noundef 7, i32 noundef 11, i32 noundef 15), !dbg !249
+  call fastcc void @Hacl_Impl_Chacha20_quarter_round(i32* noundef %0, i32 noundef 0, i32 noundef 5, i32 noundef 10, i32 noundef 15), !dbg !250
+  call fastcc void @Hacl_Impl_Chacha20_quarter_round(i32* noundef %0, i32 noundef 1, i32 noundef 6, i32 noundef 11, i32 noundef 12), !dbg !251
+  call fastcc void @Hacl_Impl_Chacha20_quarter_round(i32* noundef %0, i32 noundef 2, i32 noundef 7, i32 noundef 8, i32 noundef 13), !dbg !252
+  call fastcc void @Hacl_Impl_Chacha20_quarter_round(i32* noundef %0, i32 noundef 3, i32 noundef 4, i32 noundef 9, i32 noundef 14), !dbg !253
+  ret void, !dbg !254
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind uwtable willreturn
+define internal fastcc void @Hacl_Impl_Chacha20_quarter_round(i32* nocapture noundef %0, i32 noundef %1, i32 noundef %2, i32 noundef %3, i32 noundef %4) unnamed_addr #8 !dbg !255 {
+  call void @llvm.dbg.value(metadata i32* %0, metadata !259, metadata !DIExpression()), !dbg !284
+  call void @llvm.dbg.value(metadata i32 %1, metadata !260, metadata !DIExpression()), !dbg !284
+  call void @llvm.dbg.value(metadata i32 %2, metadata !261, metadata !DIExpression()), !dbg !284
+  call void @llvm.dbg.value(metadata i32 %3, metadata !262, metadata !DIExpression()), !dbg !284
+  call void @llvm.dbg.value(metadata i32 %4, metadata !263, metadata !DIExpression()), !dbg !284
+  %6 = getelementptr inbounds i32, i32* %0, i32 %1, !dbg !285
+  %7 = load i32, i32* %6, align 4, !dbg !285, !tbaa !57
+  call void @llvm.dbg.value(metadata i32 %7, metadata !264, metadata !DIExpression()), !dbg !284
+  %8 = getelementptr inbounds i32, i32* %0, i32 %2, !dbg !286
+  %9 = load i32, i32* %8, align 4, !dbg !286, !tbaa !57
+  call void @llvm.dbg.value(metadata i32 %9, metadata !265, metadata !DIExpression()), !dbg !284
+  %10 = add i32 %9, %7, !dbg !287
+  store i32 %10, i32* %6, align 4, !dbg !288, !tbaa !57
+  %11 = getelementptr inbounds i32, i32* %0, i32 %4, !dbg !289
+  %12 = load i32, i32* %11, align 4, !dbg !289, !tbaa !57
+  call void @llvm.dbg.value(metadata i32 %12, metadata !266, metadata !DIExpression()), !dbg !284
+  call void @llvm.dbg.value(metadata i32 %10, metadata !267, metadata !DIExpression()), !dbg !284
+  %13 = xor i32 %12, %10, !dbg !290
+  call void @llvm.dbg.value(metadata i32 %13, metadata !268, metadata !DIExpression()), !dbg !284
+  %14 = call fastcc i32 @Hacl_Impl_Chacha20_rotate_left(i32 noundef %13, i32 noundef 16), !dbg !291
+  store i32 %14, i32* %11, align 4, !dbg !292, !tbaa !57
+  %15 = getelementptr inbounds i32, i32* %0, i32 %3, !dbg !293
+  %16 = load i32, i32* %15, align 4, !dbg !293, !tbaa !57
+  call void @llvm.dbg.value(metadata i32 %16, metadata !269, metadata !DIExpression()), !dbg !284
+  call void @llvm.dbg.value(metadata i32 %14, metadata !270, metadata !DIExpression()), !dbg !284
+  %17 = add i32 %16, %14, !dbg !294
+  store i32 %17, i32* %15, align 4, !dbg !295, !tbaa !57
+  %18 = load i32, i32* %8, align 4, !dbg !296, !tbaa !57
+  call void @llvm.dbg.value(metadata i32 %18, metadata !271, metadata !DIExpression()), !dbg !284
+  call void @llvm.dbg.value(metadata i32 %17, metadata !272, metadata !DIExpression()), !dbg !284
+  %19 = xor i32 %18, %17, !dbg !297
+  call void @llvm.dbg.value(metadata i32 %19, metadata !273, metadata !DIExpression()), !dbg !284
+  %20 = call fastcc i32 @Hacl_Impl_Chacha20_rotate_left(i32 noundef %19, i32 noundef 12), !dbg !298
+  store i32 %20, i32* %8, align 4, !dbg !299, !tbaa !57
+  %21 = load i32, i32* %6, align 4, !dbg !300, !tbaa !57
+  call void @llvm.dbg.value(metadata i32 %21, metadata !274, metadata !DIExpression()), !dbg !284
+  call void @llvm.dbg.value(metadata i32 %20, metadata !275, metadata !DIExpression()), !dbg !284
+  %22 = add i32 %21, %20, !dbg !301
+  store i32 %22, i32* %6, align 4, !dbg !302, !tbaa !57
+  %23 = load i32, i32* %11, align 4, !dbg !303, !tbaa !57
+  call void @llvm.dbg.value(metadata i32 %23, metadata !276, metadata !DIExpression()), !dbg !284
+  call void @llvm.dbg.value(metadata i32 %22, metadata !277, metadata !DIExpression()), !dbg !284
+  %24 = xor i32 %23, %22, !dbg !304
+  call void @llvm.dbg.value(metadata i32 %24, metadata !278, metadata !DIExpression()), !dbg !284
+  %25 = call fastcc i32 @Hacl_Impl_Chacha20_rotate_left(i32 noundef %24, i32 noundef 8), !dbg !305
+  store i32 %25, i32* %11, align 4, !dbg !306, !tbaa !57
+  %26 = load i32, i32* %15, align 4, !dbg !307, !tbaa !57
+  call void @llvm.dbg.value(metadata i32 %26, metadata !279, metadata !DIExpression()), !dbg !284
+  call void @llvm.dbg.value(metadata i32 %25, metadata !280, metadata !DIExpression()), !dbg !284
+  %27 = add i32 %26, %25, !dbg !308
+  store i32 %27, i32* %15, align 4, !dbg !309, !tbaa !57
+  %28 = load i32, i32* %8, align 4, !dbg !310, !tbaa !57
+  call void @llvm.dbg.value(metadata i32 %28, metadata !281, metadata !DIExpression()), !dbg !284
+  call void @llvm.dbg.value(metadata i32 %27, metadata !282, metadata !DIExpression()), !dbg !284
+  %29 = xor i32 %28, %27, !dbg !311
+  call void @llvm.dbg.value(metadata i32 %29, metadata !283, metadata !DIExpression()), !dbg !284
+  %30 = call fastcc i32 @Hacl_Impl_Chacha20_rotate_left(i32 noundef %29, i32 noundef 7), !dbg !312
+  store i32 %30, i32* %8, align 4, !dbg !313, !tbaa !57
+  ret void, !dbg !314
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind readnone uwtable willreturn
+define internal fastcc i32 @Hacl_Impl_Chacha20_rotate_left(i32 noundef %0, i32 noundef %1) unnamed_addr #9 !dbg !315 {
+  call void @llvm.dbg.value(metadata i32 %0, metadata !319, metadata !DIExpression()), !dbg !321
+  call void @llvm.dbg.value(metadata i32 %1, metadata !320, metadata !DIExpression()), !dbg !321
+  %3 = shl i32 %0, %1, !dbg !322
+  %4 = sub i32 32, %1, !dbg !323
+  %5 = lshr i32 %0, %4, !dbg !324
+  %6 = or i32 %5, %3, !dbg !325
+  ret i32 %6, !dbg !326
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind uwtable willreturn writeonly
+define internal fastcc void @store32(i8* nocapture noundef writeonly %0, i32 noundef %1) unnamed_addr #10 !dbg !327 {
+  call void @llvm.dbg.value(metadata i8* %0, metadata !331, metadata !DIExpression()), !dbg !333
+  call void @llvm.dbg.value(metadata i32 %1, metadata !332, metadata !DIExpression()), !dbg !333
+  %3 = bitcast i8* %0 to i32*, !dbg !334
+  store i32 %1, i32* %3, align 1, !dbg !334
+  ret void, !dbg !335
+}
+
+; Function Attrs: nofree noinline nosync nounwind uwtable
+define internal fastcc void @Hacl_Impl_Chacha20_chacha20_counter_mode(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32 noundef %2, i32* nocapture noundef %3, i32 noundef %4) unnamed_addr #0 !dbg !336 {
+  call void @llvm.dbg.value(metadata i8* %0, metadata !340, metadata !DIExpression()), !dbg !351
+  call void @llvm.dbg.value(metadata i8* %1, metadata !341, metadata !DIExpression()), !dbg !351
+  call void @llvm.dbg.value(metadata i32 %2, metadata !342, metadata !DIExpression()), !dbg !351
+  call void @llvm.dbg.value(metadata i32* %3, metadata !343, metadata !DIExpression()), !dbg !351
+  call void @llvm.dbg.value(metadata i32 %4, metadata !344, metadata !DIExpression()), !dbg !351
+  %6 = lshr i32 %2, 6, !dbg !352
+  call void @llvm.dbg.value(metadata i32 %6, metadata !345, metadata !DIExpression()), !dbg !351
+  %7 = and i32 %2, 63, !dbg !353
+  call void @llvm.dbg.value(metadata i32 %7, metadata !346, metadata !DIExpression()), !dbg !351
+  call void @llvm.dbg.value(metadata i8* %0, metadata !347, metadata !DIExpression()), !dbg !351
+  call void @llvm.dbg.value(metadata i8* %1, metadata !348, metadata !DIExpression()), !dbg !351
+  %8 = and i32 %2, -64, !dbg !354
+  call void @llvm.dbg.value(metadata !DIArgList(i8* %0, i32 %8), metadata !349, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)), !dbg !351
+  call void @llvm.dbg.value(metadata !DIArgList(i8* %1, i32 %8), metadata !350, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)), !dbg !351
+  call fastcc void @Hacl_Impl_Chacha20_chacha20_counter_mode_blocks(i8* noundef %0, i8* noundef %1, i32 noundef %6, i32* noundef %3, i32 noundef %4), !dbg !355
+  %9 = icmp eq i32 %7, 0, !dbg !356
+  br i1 %9, label %14, label %10, !dbg !358
+
+10:                                               ; preds = %5
+  %11 = getelementptr inbounds i8, i8* %1, i32 %8, !dbg !359
+  call void @llvm.dbg.value(metadata i8* %11, metadata !350, metadata !DIExpression()), !dbg !351
+  %12 = getelementptr inbounds i8, i8* %0, i32 %8, !dbg !360
+  call void @llvm.dbg.value(metadata i8* %12, metadata !349, metadata !DIExpression()), !dbg !351
+  %13 = add i32 %6, %4, !dbg !361
+  call fastcc void @Hacl_Impl_Chacha20_update_last(i8* noundef %12, i8* noundef %11, i32 noundef %7, i32* noundef %3, i32 noundef %13), !dbg !362
+  br label %14, !dbg !362
+
+14:                                               ; preds = %10, %5
+  ret void, !dbg !363
+}
+
+; Function Attrs: nofree noinline nosync nounwind uwtable
+define internal fastcc void @Hacl_Impl_Chacha20_chacha20_counter_mode_blocks(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32 noundef %2, i32* nocapture noundef %3, i32 noundef %4) unnamed_addr #0 !dbg !364 {
+  call void @llvm.dbg.value(metadata i8* %0, metadata !366, metadata !DIExpression()), !dbg !377
+  call void @llvm.dbg.value(metadata i8* %1, metadata !367, metadata !DIExpression()), !dbg !377
+  call void @llvm.dbg.value(metadata i32 %2, metadata !368, metadata !DIExpression()), !dbg !377
+  call void @llvm.dbg.value(metadata i32* %3, metadata !369, metadata !DIExpression()), !dbg !377
+  call void @llvm.dbg.value(metadata i32 %4, metadata !370, metadata !DIExpression()), !dbg !377
+  call void @llvm.dbg.value(metadata i32 0, metadata !371, metadata !DIExpression()), !dbg !378
+  %6 = icmp eq i32 %2, 0, !dbg !379
+  br i1 %6, label %7, label %8, !dbg !380
+
+7:                                                ; preds = %8, %5
+  ret void, !dbg !381
+
+8:                                                ; preds = %5, %8
+  %9 = phi i32 [ %14, %8 ], [ 0, %5 ]
+  call void @llvm.dbg.value(metadata i32 %9, metadata !371, metadata !DIExpression()), !dbg !378
+  %10 = shl i32 %9, 6, !dbg !382
+  %11 = getelementptr inbounds i8, i8* %1, i32 %10, !dbg !383
+  call void @llvm.dbg.value(metadata i8* %11, metadata !373, metadata !DIExpression()), !dbg !384
+  %12 = getelementptr inbounds i8, i8* %0, i32 %10, !dbg !385
+  call void @llvm.dbg.value(metadata i8* %12, metadata !376, metadata !DIExpression()), !dbg !384
+  %13 = add i32 %9, %4, !dbg !386
+  call fastcc void @Hacl_Impl_Chacha20_update(i8* noundef %12, i8* noundef %11, i32* noundef %3, i32 noundef %13), !dbg !387
+  %14 = add nuw i32 %9, 1, !dbg !388
+  call void @llvm.dbg.value(metadata i32 %14, metadata !371, metadata !DIExpression()), !dbg !378
+  %15 = icmp eq i32 %14, %2, !dbg !379
+  br i1 %15, label %7, label %8, !dbg !380, !llvm.loop !389
+}
+
+; Function Attrs: nofree noinline nosync nounwind uwtable
+define internal fastcc void @Hacl_Impl_Chacha20_update_last(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32 noundef %2, i32* nocapture noundef %3, i32 noundef %4) unnamed_addr #0 !dbg !391 {
+  %6 = alloca [64 x i8], align 1
+  call void @llvm.dbg.value(metadata i8* %0, metadata !393, metadata !DIExpression()), !dbg !409
+  call void @llvm.dbg.value(metadata i8* %1, metadata !394, metadata !DIExpression()), !dbg !409
+  call void @llvm.dbg.value(metadata i32 %2, metadata !395, metadata !DIExpression()), !dbg !409
+  call void @llvm.dbg.value(metadata i32* %3, metadata !396, metadata !DIExpression()), !dbg !409
+  call void @llvm.dbg.value(metadata i32 %4, metadata !397, metadata !DIExpression()), !dbg !409
+  %7 = getelementptr inbounds [64 x i8], [64 x i8]* %6, i32 0, i32 0, !dbg !410
+  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %7) #12, !dbg !410
+  call void @llvm.dbg.declare(metadata [64 x i8]* %6, metadata !398, metadata !DIExpression()), !dbg !411
+  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 1 dereferenceable(64) %7, i8 0, i32 64, i1 false), !dbg !411
+  call fastcc void @Hacl_Impl_Chacha20_chacha20_block(i8* noundef nonnull %7, i32* noundef %3, i32 noundef %4), !dbg !412
+  call void @llvm.dbg.value(metadata i8* %7, metadata !402, metadata !DIExpression()), !dbg !409
+  call void @llvm.dbg.value(metadata i32 0, metadata !403, metadata !DIExpression()), !dbg !413
+  %8 = icmp eq i32 %2, 0, !dbg !414
+  br i1 %8, label %9, label %10, !dbg !415
+
+9:                                                ; preds = %10, %5
+  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %7) #12, !dbg !416
+  ret void, !dbg !416
+
+10:                                               ; preds = %5, %10
+  %11 = phi i32 [ %18, %10 ], [ 0, %5 ]
+  call void @llvm.dbg.value(metadata i32 %11, metadata !403, metadata !DIExpression()), !dbg !413
+  %12 = getelementptr inbounds i8, i8* %1, i32 %11, !dbg !417
+  %13 = load i8, i8* %12, align 1, !dbg !417, !tbaa !418
+  call void @llvm.dbg.value(metadata i8 %13, metadata !405, metadata !DIExpression()), !dbg !419
+  %14 = getelementptr inbounds [64 x i8], [64 x i8]* %6, i32 0, i32 %11, !dbg !420
+  %15 = load i8, i8* %14, align 1, !dbg !420, !tbaa !418
+  call void @llvm.dbg.value(metadata i8 %15, metadata !408, metadata !DIExpression()), !dbg !419
+  %16 = xor i8 %15, %13, !dbg !421
+  %17 = getelementptr inbounds i8, i8* %0, i32 %11, !dbg !422
+  store i8 %16, i8* %17, align 1, !dbg !423, !tbaa !418
+  %18 = add nuw i32 %11, 1, !dbg !424
+  call void @llvm.dbg.value(metadata i32 %18, metadata !403, metadata !DIExpression()), !dbg !413
+  %19 = icmp eq i32 %18, %2, !dbg !414
+  br i1 %19, label %9, label %10, !dbg !415, !llvm.loop !425
+}
+
+; Function Attrs: nofree noinline nosync nounwind uwtable
+define internal fastcc void @Hacl_Impl_Chacha20_update(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32* nocapture noundef %2, i32 noundef %3) unnamed_addr #0 !dbg !427 {
+  %5 = alloca [48 x i32], align 4
+  call void @llvm.dbg.value(metadata i8* %0, metadata !431, metadata !DIExpression()), !dbg !448
+  call void @llvm.dbg.value(metadata i8* %1, metadata !432, metadata !DIExpression()), !dbg !448
+  call void @llvm.dbg.value(metadata i32* %2, metadata !433, metadata !DIExpression()), !dbg !448
+  call void @llvm.dbg.value(metadata i32 %3, metadata !434, metadata !DIExpression()), !dbg !448
+  %6 = bitcast [48 x i32]* %5 to i8*, !dbg !449
+  call void @llvm.lifetime.start.p0i8(i64 192, i8* nonnull %6) #12, !dbg !449
+  call void @llvm.dbg.declare(metadata [48 x i32]* %5, metadata !435, metadata !DIExpression()), !dbg !450
+  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(192) %6, i8 0, i32 192, i1 false), !dbg !450
+  %7 = getelementptr inbounds [48 x i32], [48 x i32]* %5, i32 0, i32 0, !dbg !451
+  call void @llvm.dbg.value(metadata i32* %7, metadata !439, metadata !DIExpression()), !dbg !448
+  %8 = getelementptr inbounds [48 x i32], [48 x i32]* %5, i32 0, i32 16, !dbg !452
+  call void @llvm.dbg.value(metadata i32* %8, metadata !440, metadata !DIExpression()), !dbg !448
+  %9 = getelementptr inbounds [48 x i32], [48 x i32]* %5, i32 0, i32 32, !dbg !453
+  call void @llvm.dbg.value(metadata i32* %9, metadata !441, metadata !DIExpression()), !dbg !448
+  call fastcc void @Hacl_Impl_Chacha20_chacha20_core(i32* noundef nonnull %7, i32* noundef %2, i32 noundef %3), !dbg !454
+  call fastcc void @Hacl_Lib_LoadStore32_uint32s_from_le_bytes(i32* noundef nonnull %8, i8* noundef %1, i32 noundef 16), !dbg !455
+  call void @llvm.dbg.value(metadata i32 0, metadata !442, metadata !DIExpression()), !dbg !456
+  br label %11, !dbg !457
+
+10:                                               ; preds = %11
+  call fastcc void @Hacl_Lib_LoadStore32_uint32s_to_le_bytes(i8* noundef %0, i32* noundef nonnull %9), !dbg !458
+  call void @llvm.lifetime.end.p0i8(i64 192, i8* nonnull %6) #12, !dbg !459
+  ret void, !dbg !459
+
+11:                                               ; preds = %4, %11
+  %12 = phi i32 [ 0, %4 ], [ %19, %11 ]
+  call void @llvm.dbg.value(metadata i32 %12, metadata !442, metadata !DIExpression()), !dbg !456
+  %13 = getelementptr inbounds i32, i32* %8, i32 %12, !dbg !460
+  %14 = load i32, i32* %13, align 4, !dbg !460, !tbaa !57
+  call void @llvm.dbg.value(metadata i32 %14, metadata !444, metadata !DIExpression()), !dbg !461
+  %15 = getelementptr inbounds [48 x i32], [48 x i32]* %5, i32 0, i32 %12, !dbg !462
+  %16 = load i32, i32* %15, align 4, !dbg !462, !tbaa !57
+  call void @llvm.dbg.value(metadata i32 %16, metadata !447, metadata !DIExpression()), !dbg !461
+  %17 = xor i32 %16, %14, !dbg !463
+  %18 = getelementptr inbounds i32, i32* %9, i32 %12, !dbg !464
+  store i32 %17, i32* %18, align 4, !dbg !465, !tbaa !57
+  %19 = add nuw nsw i32 %12, 1, !dbg !466
+  call void @llvm.dbg.value(metadata i32 %19, metadata !442, metadata !DIExpression()), !dbg !456
+  %20 = icmp eq i32 %19, 16, !dbg !467
+  br i1 %20, label %10, label %11, !dbg !457, !llvm.loop !468
 }
 
 ; Function Attrs: nofree nosync nounwind readnone speculatable willreturn
-declare void @llvm.dbg.value(metadata, metadata, metadata) #6
+declare void @llvm.dbg.value(metadata, metadata, metadata) #11
 
-; Function Attrs: nofree nosync nounwind readnone speculatable willreturn
-declare i32 @llvm.fshl.i32(i32, i32, i32) #6
-
-attributes #0 = { nofree nosync nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #0 = { nofree noinline nosync nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
 attributes #1 = { mustprogress nofree nosync nounwind readnone speculatable willreturn }
 attributes #2 = { argmemonly mustprogress nofree nosync nounwind willreturn }
 attributes #3 = { argmemonly mustprogress nofree nounwind willreturn writeonly }
-attributes #4 = { argmemonly mustprogress nofree nounwind willreturn }
-attributes #5 = { inlinehint nofree nosync nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
-attributes #6 = { nofree nosync nounwind readnone speculatable willreturn }
-attributes #7 = { nounwind }
+attributes #4 = { nofree noinline norecurse nosync nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #5 = { mustprogress nofree noinline norecurse nosync nounwind readonly uwtable willreturn "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #6 = { argmemonly mustprogress nofree nounwind willreturn }
+attributes #7 = { mustprogress nofree noinline nosync nounwind uwtable willreturn "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #8 = { mustprogress nofree noinline norecurse nosync nounwind uwtable willreturn "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #9 = { mustprogress nofree noinline norecurse nosync nounwind readnone uwtable willreturn "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #10 = { mustprogress nofree noinline norecurse nosync nounwind uwtable willreturn writeonly "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #11 = { nofree nosync nounwind readnone speculatable willreturn }
+attributes #12 = { nounwind }
 
 !llvm.dbg.cu = !{!0}
 !llvm.module.flags = !{!8, !9, !10, !11, !12, !13, !14}
@@ -840,572 +549,435 @@ attributes #7 = { nounwind }
 !35 = !DILocation(line: 244, column: 3, scope: !16)
 !36 = !DILocation(line: 244, column: 12, scope: !16)
 !37 = !DILocation(line: 245, column: 18, scope: !16)
-!38 = !DILocalVariable(name: "st", arg: 1, scope: !39, file: !1, line: 136, type: !33)
-!39 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_init", scope: !1, file: !1, line: 136, type: !40, scopeLine: 137, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !42)
-!40 = !DISubroutineType(types: !41)
-!41 = !{null, !33, !19, !19}
-!42 = !{!38, !43, !44, !45, !46, !47, !48}
-!43 = !DILocalVariable(name: "k", arg: 2, scope: !39, file: !1, line: 136, type: !19)
-!44 = !DILocalVariable(name: "n1", arg: 3, scope: !39, file: !1, line: 136, type: !19)
-!45 = !DILocalVariable(name: "stcst", scope: !39, file: !1, line: 138, type: !33)
-!46 = !DILocalVariable(name: "stk", scope: !39, file: !1, line: 139, type: !33)
-!47 = !DILocalVariable(name: "stc", scope: !39, file: !1, line: 140, type: !33)
-!48 = !DILocalVariable(name: "stn", scope: !39, file: !1, line: 141, type: !33)
-!49 = !DILocation(line: 0, scope: !39, inlinedAt: !50)
-!50 = distinct !DILocation(line: 246, column: 3, scope: !16)
-!51 = !DILocation(line: 142, column: 13, scope: !39, inlinedAt: !50)
-!52 = !{!53, !53, i64 0}
-!53 = !{!"int", !54, i64 0}
-!54 = !{!"omnipotent char", !55, i64 0}
-!55 = !{!"Simple C/C++ TBAA"}
-!56 = !DILocation(line: 143, column: 3, scope: !39, inlinedAt: !50)
-!57 = !DILocation(line: 143, column: 13, scope: !39, inlinedAt: !50)
-!58 = !DILocation(line: 144, column: 3, scope: !39, inlinedAt: !50)
-!59 = !DILocation(line: 144, column: 13, scope: !39, inlinedAt: !50)
-!60 = !DILocation(line: 145, column: 3, scope: !39, inlinedAt: !50)
-!61 = !DILocation(line: 145, column: 13, scope: !39, inlinedAt: !50)
-!62 = !DILocalVariable(name: "output", arg: 1, scope: !63, file: !1, line: 28, type: !33)
-!63 = distinct !DISubprogram(name: "Hacl_Lib_LoadStore32_uint32s_from_le_bytes", scope: !1, file: !1, line: 28, type: !64, scopeLine: 29, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !66)
-!64 = !DISubroutineType(types: !65)
-!65 = !{null, !33, !19, !3}
-!66 = !{!62, !67, !68, !69, !71, !74}
-!67 = !DILocalVariable(name: "input", arg: 2, scope: !63, file: !1, line: 28, type: !19)
-!68 = !DILocalVariable(name: "len", arg: 3, scope: !63, file: !1, line: 28, type: !3)
-!69 = !DILocalVariable(name: "i", scope: !70, file: !1, line: 30, type: !3)
-!70 = distinct !DILexicalBlock(scope: !63, file: !1, line: 30, column: 3)
-!71 = !DILocalVariable(name: "x0", scope: !72, file: !1, line: 32, type: !19)
-!72 = distinct !DILexicalBlock(scope: !73, file: !1, line: 31, column: 3)
-!73 = distinct !DILexicalBlock(scope: !70, file: !1, line: 30, column: 3)
-!74 = !DILocalVariable(name: "inputi", scope: !72, file: !1, line: 33, type: !3)
-!75 = !DILocation(line: 0, scope: !63, inlinedAt: !76)
-!76 = distinct !DILocation(line: 146, column: 3, scope: !39, inlinedAt: !50)
-!77 = !DILocation(line: 0, scope: !70, inlinedAt: !76)
-!78 = !DILocation(line: 34, column: 15, scope: !72, inlinedAt: !76)
-!79 = !DILocation(line: 0, scope: !72, inlinedAt: !76)
-!80 = !DILocation(line: 140, column: 22, scope: !39, inlinedAt: !50)
-!81 = !DILocation(line: 147, column: 11, scope: !39, inlinedAt: !50)
-!82 = !DILocation(line: 0, scope: !63, inlinedAt: !83)
-!83 = distinct !DILocation(line: 148, column: 3, scope: !39, inlinedAt: !50)
-!84 = !DILocation(line: 0, scope: !70, inlinedAt: !83)
-!85 = !DILocation(line: 34, column: 15, scope: !72, inlinedAt: !83)
-!86 = !DILocation(line: 0, scope: !72, inlinedAt: !83)
-!87 = !DILocation(line: 0, scope: !88, inlinedAt: !96)
-!88 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_chacha20_block", scope: !1, file: !1, line: 129, type: !89, scopeLine: 130, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !91)
-!89 = !DISubroutineType(types: !90)
-!90 = !{null, !19, !33, !3}
-!91 = !{!92, !93, !94, !95}
-!92 = !DILocalVariable(name: "stream_block", arg: 1, scope: !88, file: !1, line: 129, type: !19)
-!93 = !DILocalVariable(name: "st", arg: 2, scope: !88, file: !1, line: 129, type: !33)
-!94 = !DILocalVariable(name: "ctr", arg: 3, scope: !88, file: !1, line: 129, type: !3)
-!95 = !DILocalVariable(name: "st_", scope: !88, file: !1, line: 131, type: !29)
-!96 = distinct !DILocation(line: 247, column: 3, scope: !16)
-!97 = !DILocation(line: 131, column: 3, scope: !88, inlinedAt: !96)
-!98 = !DILocation(line: 131, column: 12, scope: !88, inlinedAt: !96)
-!99 = !DILocation(line: 132, column: 36, scope: !88, inlinedAt: !96)
-!100 = !DILocation(line: 132, column: 3, scope: !88, inlinedAt: !96)
-!101 = !DILocalVariable(name: "output", arg: 1, scope: !102, file: !1, line: 39, type: !19)
-!102 = distinct !DISubprogram(name: "Hacl_Lib_LoadStore32_uint32s_to_le_bytes", scope: !1, file: !1, line: 39, type: !89, scopeLine: 40, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !103)
-!103 = !{!101, !104, !105, !106, !108, !111}
-!104 = !DILocalVariable(name: "input", arg: 2, scope: !102, file: !1, line: 39, type: !33)
-!105 = !DILocalVariable(name: "len", arg: 3, scope: !102, file: !1, line: 39, type: !3)
-!106 = !DILocalVariable(name: "i", scope: !107, file: !1, line: 41, type: !3)
-!107 = distinct !DILexicalBlock(scope: !102, file: !1, line: 41, column: 3)
-!108 = !DILocalVariable(name: "hd1", scope: !109, file: !1, line: 43, type: !3)
-!109 = distinct !DILexicalBlock(scope: !110, file: !1, line: 42, column: 3)
-!110 = distinct !DILexicalBlock(scope: !107, file: !1, line: 41, column: 3)
-!111 = !DILocalVariable(name: "x0", scope: !109, file: !1, line: 44, type: !19)
-!112 = !DILocation(line: 0, scope: !102, inlinedAt: !113)
-!113 = distinct !DILocation(line: 133, column: 3, scope: !88, inlinedAt: !96)
-!114 = !DILocation(line: 0, scope: !107, inlinedAt: !113)
-!115 = !DILocation(line: 355, column: 54, scope: !116, inlinedAt: !123)
-!116 = distinct !DISubprogram(name: "store32", scope: !117, file: !117, line: 355, type: !118, scopeLine: 355, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !120)
-!117 = !DIFile(filename: "hacl-c/hacl-c/kremlib.h", directory: "/mnt/c/Users/fwill/Documents/HS24/semester_project/tools/binsec/binsec/examples/hacl", checksumkind: CSK_MD5, checksum: "cde125f1f98cb7b9ee1f380d4178ebe4")
-!118 = !DISubroutineType(types: !119)
-!119 = !{null, !19, !3}
-!120 = !{!121, !122}
-!121 = !DILocalVariable(name: "b", arg: 1, scope: !116, file: !117, line: 355, type: !19)
-!122 = !DILocalVariable(name: "i", arg: 2, scope: !116, file: !117, line: 355, type: !3)
-!123 = distinct !DILocation(line: 45, column: 5, scope: !109, inlinedAt: !113)
-!124 = !DILocation(line: 0, scope: !109, inlinedAt: !113)
-!125 = !DILocation(line: 0, scope: !116, inlinedAt: !123)
-!126 = !DILocation(line: 134, column: 1, scope: !88, inlinedAt: !96)
-!127 = !DILocation(line: 248, column: 1, scope: !16)
-!128 = distinct !DISubprogram(name: "Hacl_Chacha20_chacha20", scope: !1, file: !1, line: 272, type: !129, scopeLine: 280, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !131)
-!129 = !DISubroutineType(types: !130)
-!130 = !{null, !19, !19, !3, !19, !19, !3}
-!131 = !{!132, !133, !134, !135, !136, !137}
-!132 = !DILocalVariable(name: "output", arg: 1, scope: !128, file: !1, line: 273, type: !19)
-!133 = !DILocalVariable(name: "plain", arg: 2, scope: !128, file: !1, line: 274, type: !19)
-!134 = !DILocalVariable(name: "len", arg: 3, scope: !128, file: !1, line: 275, type: !3)
-!135 = !DILocalVariable(name: "k", arg: 4, scope: !128, file: !1, line: 276, type: !19)
-!136 = !DILocalVariable(name: "n1", arg: 5, scope: !128, file: !1, line: 277, type: !19)
-!137 = !DILocalVariable(name: "ctr", arg: 6, scope: !128, file: !1, line: 278, type: !3)
-!138 = !DILocation(line: 0, scope: !128)
-!139 = !DILocalVariable(name: "output", arg: 1, scope: !140, file: !1, line: 228, type: !19)
-!140 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_chacha20", scope: !1, file: !1, line: 227, type: !129, scopeLine: 235, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !141)
-!141 = !{!139, !142, !143, !144, !145, !146, !147, !148}
-!142 = !DILocalVariable(name: "plain", arg: 2, scope: !140, file: !1, line: 229, type: !19)
-!143 = !DILocalVariable(name: "len", arg: 3, scope: !140, file: !1, line: 230, type: !3)
-!144 = !DILocalVariable(name: "k", arg: 4, scope: !140, file: !1, line: 231, type: !19)
-!145 = !DILocalVariable(name: "n1", arg: 5, scope: !140, file: !1, line: 232, type: !19)
-!146 = !DILocalVariable(name: "ctr", arg: 6, scope: !140, file: !1, line: 233, type: !3)
-!147 = !DILocalVariable(name: "buf", scope: !140, file: !1, line: 236, type: !29)
-!148 = !DILocalVariable(name: "st", scope: !140, file: !1, line: 237, type: !33)
-!149 = !DILocation(line: 0, scope: !140, inlinedAt: !150)
-!150 = distinct !DILocation(line: 281, column: 3, scope: !128)
-!151 = !DILocation(line: 236, column: 3, scope: !140, inlinedAt: !150)
-!152 = !DILocation(line: 236, column: 12, scope: !140, inlinedAt: !150)
-!153 = !DILocation(line: 237, column: 18, scope: !140, inlinedAt: !150)
-!154 = !DILocation(line: 0, scope: !39, inlinedAt: !155)
-!155 = distinct !DILocation(line: 238, column: 3, scope: !140, inlinedAt: !150)
-!156 = !DILocation(line: 142, column: 13, scope: !39, inlinedAt: !155)
-!157 = !DILocation(line: 143, column: 3, scope: !39, inlinedAt: !155)
-!158 = !DILocation(line: 143, column: 13, scope: !39, inlinedAt: !155)
-!159 = !DILocation(line: 144, column: 3, scope: !39, inlinedAt: !155)
-!160 = !DILocation(line: 144, column: 13, scope: !39, inlinedAt: !155)
-!161 = !DILocation(line: 145, column: 3, scope: !39, inlinedAt: !155)
-!162 = !DILocation(line: 145, column: 13, scope: !39, inlinedAt: !155)
-!163 = !DILocation(line: 0, scope: !63, inlinedAt: !164)
-!164 = distinct !DILocation(line: 146, column: 3, scope: !39, inlinedAt: !155)
-!165 = !DILocation(line: 0, scope: !70, inlinedAt: !164)
-!166 = !DILocation(line: 34, column: 15, scope: !72, inlinedAt: !164)
-!167 = !DILocation(line: 0, scope: !72, inlinedAt: !164)
-!168 = !DILocation(line: 140, column: 22, scope: !39, inlinedAt: !155)
-!169 = !DILocation(line: 147, column: 11, scope: !39, inlinedAt: !155)
-!170 = !DILocation(line: 0, scope: !63, inlinedAt: !171)
-!171 = distinct !DILocation(line: 148, column: 3, scope: !39, inlinedAt: !155)
-!172 = !DILocation(line: 0, scope: !70, inlinedAt: !171)
-!173 = !DILocation(line: 34, column: 15, scope: !72, inlinedAt: !171)
-!174 = !DILocation(line: 0, scope: !72, inlinedAt: !171)
-!175 = !DILocalVariable(name: "output", arg: 1, scope: !176, file: !1, line: 208, type: !19)
-!176 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_chacha20_counter_mode", scope: !1, file: !1, line: 207, type: !177, scopeLine: 214, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !179)
-!177 = !DISubroutineType(types: !178)
-!178 = !{null, !19, !19, !3, !33, !3}
-!179 = !{!175, !180, !181, !182, !183, !184, !185, !186, !187, !188, !189}
-!180 = !DILocalVariable(name: "plain", arg: 2, scope: !176, file: !1, line: 209, type: !19)
-!181 = !DILocalVariable(name: "len", arg: 3, scope: !176, file: !1, line: 210, type: !3)
-!182 = !DILocalVariable(name: "st", arg: 4, scope: !176, file: !1, line: 211, type: !33)
-!183 = !DILocalVariable(name: "ctr", arg: 5, scope: !176, file: !1, line: 212, type: !3)
-!184 = !DILocalVariable(name: "blocks_len", scope: !176, file: !1, line: 215, type: !3)
-!185 = !DILocalVariable(name: "part_len", scope: !176, file: !1, line: 216, type: !3)
-!186 = !DILocalVariable(name: "output_", scope: !176, file: !1, line: 217, type: !19)
-!187 = !DILocalVariable(name: "plain_", scope: !176, file: !1, line: 218, type: !19)
-!188 = !DILocalVariable(name: "output__", scope: !176, file: !1, line: 219, type: !19)
-!189 = !DILocalVariable(name: "plain__", scope: !176, file: !1, line: 220, type: !19)
-!190 = !DILocation(line: 0, scope: !176, inlinedAt: !191)
-!191 = distinct !DILocation(line: 239, column: 3, scope: !140, inlinedAt: !150)
-!192 = !DILocation(line: 215, column: 29, scope: !176, inlinedAt: !191)
-!193 = !DILocation(line: 216, column: 27, scope: !176, inlinedAt: !191)
-!194 = !DILocation(line: 219, column: 46, scope: !176, inlinedAt: !191)
-!195 = !DILocalVariable(name: "output", arg: 1, scope: !196, file: !1, line: 191, type: !19)
-!196 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_chacha20_counter_mode_blocks", scope: !1, file: !1, line: 190, type: !177, scopeLine: 197, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !197)
-!197 = !{!195, !198, !199, !200, !201, !202, !204, !207}
-!198 = !DILocalVariable(name: "plain", arg: 2, scope: !196, file: !1, line: 192, type: !19)
-!199 = !DILocalVariable(name: "num_blocks", arg: 3, scope: !196, file: !1, line: 193, type: !3)
-!200 = !DILocalVariable(name: "st", arg: 4, scope: !196, file: !1, line: 194, type: !33)
-!201 = !DILocalVariable(name: "ctr", arg: 5, scope: !196, file: !1, line: 195, type: !3)
-!202 = !DILocalVariable(name: "i", scope: !203, file: !1, line: 198, type: !3)
-!203 = distinct !DILexicalBlock(scope: !196, file: !1, line: 198, column: 3)
-!204 = !DILocalVariable(name: "b", scope: !205, file: !1, line: 200, type: !19)
-!205 = distinct !DILexicalBlock(scope: !206, file: !1, line: 199, column: 3)
-!206 = distinct !DILexicalBlock(scope: !203, file: !1, line: 198, column: 3)
-!207 = !DILocalVariable(name: "o", scope: !205, file: !1, line: 201, type: !19)
-!208 = !DILocation(line: 0, scope: !196, inlinedAt: !209)
-!209 = distinct !DILocation(line: 221, column: 3, scope: !176, inlinedAt: !191)
-!210 = !DILocation(line: 0, scope: !203, inlinedAt: !209)
-!211 = !DILocation(line: 198, column: 37, scope: !206, inlinedAt: !209)
-!212 = !DILocation(line: 198, column: 3, scope: !203, inlinedAt: !209)
-!213 = !DILocation(line: 200, column: 40, scope: !205, inlinedAt: !209)
-!214 = !DILocation(line: 200, column: 24, scope: !205, inlinedAt: !209)
-!215 = !DILocation(line: 0, scope: !205, inlinedAt: !209)
-!216 = !DILocation(line: 202, column: 45, scope: !205, inlinedAt: !209)
-!217 = !DILocalVariable(name: "plain", arg: 2, scope: !218, file: !1, line: 152, type: !19)
-!218 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_update", scope: !1, file: !1, line: 152, type: !219, scopeLine: 153, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !221)
-!219 = !DISubroutineType(types: !220)
-!220 = !{null, !19, !19, !33, !3}
-!221 = !{!222, !217, !223, !224, !225, !229, !230, !231, !232, !234, !237}
-!222 = !DILocalVariable(name: "output", arg: 1, scope: !218, file: !1, line: 152, type: !19)
-!223 = !DILocalVariable(name: "st", arg: 3, scope: !218, file: !1, line: 152, type: !33)
-!224 = !DILocalVariable(name: "ctr", arg: 4, scope: !218, file: !1, line: 152, type: !3)
-!225 = !DILocalVariable(name: "b", scope: !218, file: !1, line: 154, type: !226)
-!226 = !DICompositeType(tag: DW_TAG_array_type, baseType: !3, size: 1536, elements: !227)
-!227 = !{!228}
-!228 = !DISubrange(count: 48)
-!229 = !DILocalVariable(name: "k", scope: !218, file: !1, line: 155, type: !33)
-!230 = !DILocalVariable(name: "ib", scope: !218, file: !1, line: 156, type: !33)
-!231 = !DILocalVariable(name: "ob", scope: !218, file: !1, line: 157, type: !33)
-!232 = !DILocalVariable(name: "i", scope: !233, file: !1, line: 160, type: !3)
-!233 = distinct !DILexicalBlock(scope: !218, file: !1, line: 160, column: 3)
-!234 = !DILocalVariable(name: "xi", scope: !235, file: !1, line: 162, type: !3)
-!235 = distinct !DILexicalBlock(scope: !236, file: !1, line: 161, column: 3)
-!236 = distinct !DILexicalBlock(scope: !233, file: !1, line: 160, column: 3)
-!237 = !DILocalVariable(name: "yi", scope: !235, file: !1, line: 163, type: !3)
-!238 = !DILocation(line: 0, scope: !218, inlinedAt: !239)
-!239 = distinct !DILocation(line: 202, column: 5, scope: !205, inlinedAt: !209)
-!240 = !DILocation(line: 154, column: 3, scope: !218, inlinedAt: !239)
-!241 = !DILocation(line: 154, column: 12, scope: !218, inlinedAt: !239)
-!242 = !DILocation(line: 158, column: 3, scope: !218, inlinedAt: !239)
-!243 = !DILocation(line: 0, scope: !63, inlinedAt: !244)
-!244 = distinct !DILocation(line: 159, column: 3, scope: !218, inlinedAt: !239)
-!245 = !DILocation(line: 0, scope: !70, inlinedAt: !244)
-!246 = !DILocation(line: 34, column: 15, scope: !72, inlinedAt: !244)
-!247 = !DILocation(line: 0, scope: !72, inlinedAt: !244)
-!248 = !DILocation(line: 160, column: 3, scope: !233, inlinedAt: !239)
-!249 = !DILocation(line: 0, scope: !233, inlinedAt: !239)
-!250 = !DILocation(line: 162, column: 19, scope: !235, inlinedAt: !239)
-!251 = !DILocation(line: 0, scope: !235, inlinedAt: !239)
-!252 = !DILocation(line: 163, column: 19, scope: !235, inlinedAt: !239)
-!253 = !DILocation(line: 164, column: 16, scope: !235, inlinedAt: !239)
-!254 = !DILocation(line: 164, column: 5, scope: !235, inlinedAt: !239)
-!255 = !DILocation(line: 164, column: 11, scope: !235, inlinedAt: !239)
-!256 = !DILocation(line: 160, column: 60, scope: !236, inlinedAt: !239)
-!257 = !DILocation(line: 160, column: 37, scope: !236, inlinedAt: !239)
-!258 = distinct !{!258, !248, !259, !260, !261}
-!259 = !DILocation(line: 165, column: 3, scope: !233, inlinedAt: !239)
-!260 = !{!"llvm.loop.mustprogress"}
-!261 = !{!"llvm.loop.unroll.disable"}
-!262 = !DILocation(line: 201, column: 25, scope: !205, inlinedAt: !209)
-!263 = !DILocation(line: 355, column: 54, scope: !116, inlinedAt: !264)
-!264 = distinct !DILocation(line: 45, column: 5, scope: !109, inlinedAt: !265)
-!265 = distinct !DILocation(line: 166, column: 3, scope: !218, inlinedAt: !239)
-!266 = !DILocation(line: 0, scope: !109, inlinedAt: !265)
-!267 = !DILocation(line: 0, scope: !116, inlinedAt: !264)
-!268 = !DILocation(line: 0, scope: !107, inlinedAt: !265)
-!269 = !DILocation(line: 167, column: 1, scope: !218, inlinedAt: !239)
-!270 = !DILocation(line: 198, column: 57, scope: !206, inlinedAt: !209)
-!271 = distinct !{!271, !212, !272, !260, !261}
-!272 = !DILocation(line: 203, column: 3, scope: !203, inlinedAt: !209)
-!273 = !DILocation(line: 222, column: 16, scope: !274, inlinedAt: !191)
-!274 = distinct !DILexicalBlock(scope: !176, file: !1, line: 222, column: 7)
-!275 = !DILocation(line: 222, column: 7, scope: !176, inlinedAt: !191)
-!276 = !DILocation(line: 220, column: 28, scope: !176, inlinedAt: !191)
-!277 = !DILocation(line: 219, column: 30, scope: !176, inlinedAt: !191)
-!278 = !DILocation(line: 223, column: 73, scope: !274, inlinedAt: !191)
-!279 = !DILocalVariable(name: "output", arg: 1, scope: !280, file: !1, line: 171, type: !19)
-!280 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_update_last", scope: !1, file: !1, line: 170, type: !177, scopeLine: 177, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !281)
-!281 = !{!279, !282, !283, !284, !285, !286, !290, !291, !293, !296}
-!282 = !DILocalVariable(name: "plain", arg: 2, scope: !280, file: !1, line: 172, type: !19)
-!283 = !DILocalVariable(name: "len", arg: 3, scope: !280, file: !1, line: 173, type: !3)
-!284 = !DILocalVariable(name: "st", arg: 4, scope: !280, file: !1, line: 174, type: !33)
-!285 = !DILocalVariable(name: "ctr", arg: 5, scope: !280, file: !1, line: 175, type: !3)
-!286 = !DILocalVariable(name: "block", scope: !280, file: !1, line: 178, type: !287)
-!287 = !DICompositeType(tag: DW_TAG_array_type, baseType: !20, size: 512, elements: !288)
-!288 = !{!289}
-!289 = !DISubrange(count: 64)
-!290 = !DILocalVariable(name: "mask", scope: !280, file: !1, line: 180, type: !19)
-!291 = !DILocalVariable(name: "i", scope: !292, file: !1, line: 181, type: !3)
-!292 = distinct !DILexicalBlock(scope: !280, file: !1, line: 181, column: 3)
-!293 = !DILocalVariable(name: "xi", scope: !294, file: !1, line: 183, type: !20)
-!294 = distinct !DILexicalBlock(scope: !295, file: !1, line: 182, column: 3)
-!295 = distinct !DILexicalBlock(scope: !292, file: !1, line: 181, column: 3)
-!296 = !DILocalVariable(name: "yi", scope: !294, file: !1, line: 184, type: !20)
-!297 = !DILocation(line: 0, scope: !280, inlinedAt: !298)
-!298 = distinct !DILocation(line: 223, column: 5, scope: !274, inlinedAt: !191)
-!299 = !DILocation(line: 178, column: 3, scope: !280, inlinedAt: !298)
-!300 = !DILocation(line: 178, column: 11, scope: !280, inlinedAt: !298)
-!301 = !DILocation(line: 0, scope: !88, inlinedAt: !302)
-!302 = distinct !DILocation(line: 179, column: 3, scope: !280, inlinedAt: !298)
-!303 = !DILocation(line: 131, column: 3, scope: !88, inlinedAt: !302)
-!304 = !DILocation(line: 131, column: 12, scope: !88, inlinedAt: !302)
-!305 = !DILocation(line: 132, column: 36, scope: !88, inlinedAt: !302)
-!306 = !DILocation(line: 132, column: 3, scope: !88, inlinedAt: !302)
-!307 = !DILocation(line: 0, scope: !102, inlinedAt: !308)
-!308 = distinct !DILocation(line: 133, column: 3, scope: !88, inlinedAt: !302)
-!309 = !DILocation(line: 0, scope: !107, inlinedAt: !308)
-!310 = !DILocation(line: 355, column: 54, scope: !116, inlinedAt: !311)
-!311 = distinct !DILocation(line: 45, column: 5, scope: !109, inlinedAt: !308)
-!312 = !DILocation(line: 0, scope: !109, inlinedAt: !308)
-!313 = !DILocation(line: 0, scope: !116, inlinedAt: !311)
-!314 = !DILocation(line: 134, column: 1, scope: !88, inlinedAt: !302)
-!315 = !DILocation(line: 0, scope: !292, inlinedAt: !298)
-!316 = !DILocation(line: 181, column: 3, scope: !292, inlinedAt: !298)
-!317 = !DILocation(line: 183, column: 18, scope: !294, inlinedAt: !298)
-!318 = !{!54, !54, i64 0}
-!319 = !DILocation(line: 0, scope: !294, inlinedAt: !298)
-!320 = !DILocation(line: 184, column: 18, scope: !294, inlinedAt: !298)
-!321 = !DILocation(line: 185, column: 20, scope: !294, inlinedAt: !298)
-!322 = !DILocation(line: 185, column: 5, scope: !294, inlinedAt: !298)
-!323 = !DILocation(line: 185, column: 15, scope: !294, inlinedAt: !298)
-!324 = !DILocation(line: 181, column: 50, scope: !295, inlinedAt: !298)
-!325 = !DILocation(line: 181, column: 37, scope: !295, inlinedAt: !298)
-!326 = distinct !{!326, !316, !327, !260, !261}
-!327 = !DILocation(line: 186, column: 3, scope: !292, inlinedAt: !298)
-!328 = !DILocation(line: 187, column: 1, scope: !280, inlinedAt: !298)
-!329 = !DILocation(line: 223, column: 5, scope: !274, inlinedAt: !191)
-!330 = !DILocation(line: 240, column: 1, scope: !140, inlinedAt: !150)
-!331 = !DILocation(line: 282, column: 1, scope: !128)
-!332 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_chacha20_core", scope: !1, file: !1, line: 120, type: !333, scopeLine: 121, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !335)
-!333 = !DISubroutineType(types: !334)
-!334 = !{null, !33, !33, !3}
-!335 = !{!336, !337, !338}
-!336 = !DILocalVariable(name: "k", arg: 1, scope: !332, file: !1, line: 120, type: !33)
-!337 = !DILocalVariable(name: "st", arg: 2, scope: !332, file: !1, line: 120, type: !33)
-!338 = !DILocalVariable(name: "ctr", arg: 3, scope: !332, file: !1, line: 120, type: !3)
-!339 = !DILocation(line: 0, scope: !332)
-!340 = !DILocation(line: 122, column: 3, scope: !332)
-!341 = !DILocation(line: 122, column: 11, scope: !332)
-!342 = !DILocalVariable(name: "st", arg: 1, scope: !343, file: !1, line: 115, type: !33)
-!343 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_copy_state", scope: !1, file: !1, line: 115, type: !344, scopeLine: 116, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !346)
-!344 = !DISubroutineType(types: !345)
-!345 = !{null, !33, !33}
-!346 = !{!342, !347}
-!347 = !DILocalVariable(name: "st_", arg: 2, scope: !343, file: !1, line: 115, type: !33)
-!348 = !DILocation(line: 0, scope: !343, inlinedAt: !349)
-!349 = distinct !DILocation(line: 123, column: 3, scope: !332)
-!350 = !DILocation(line: 117, column: 3, scope: !343, inlinedAt: !349)
-!351 = !DILocalVariable(name: "st", arg: 1, scope: !352, file: !1, line: 99, type: !33)
-!352 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_rounds", scope: !1, file: !1, line: 99, type: !353, scopeLine: 100, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !355)
-!353 = !DISubroutineType(types: !354)
-!354 = !{null, !33}
-!355 = !{!351, !356}
-!356 = !DILocalVariable(name: "i", scope: !357, file: !1, line: 101, type: !3)
-!357 = distinct !DILexicalBlock(scope: !352, file: !1, line: 101, column: 3)
-!358 = !DILocation(line: 0, scope: !352, inlinedAt: !359)
-!359 = distinct !DILocation(line: 124, column: 3, scope: !332)
-!360 = !DILocation(line: 0, scope: !357, inlinedAt: !359)
-!361 = !DILocation(line: 101, column: 3, scope: !357, inlinedAt: !359)
-!362 = !DILocalVariable(name: "st", arg: 1, scope: !363, file: !1, line: 87, type: !33)
-!363 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_double_round", scope: !1, file: !1, line: 87, type: !353, scopeLine: 88, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !364)
-!364 = !{!362}
-!365 = !DILocation(line: 0, scope: !363, inlinedAt: !366)
-!366 = distinct !DILocation(line: 102, column: 5, scope: !367, inlinedAt: !359)
-!367 = distinct !DILexicalBlock(scope: !357, file: !1, line: 101, column: 3)
-!368 = !DILocalVariable(name: "st", arg: 1, scope: !369, file: !1, line: 55, type: !33)
-!369 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_quarter_round", scope: !1, file: !1, line: 55, type: !370, scopeLine: 56, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !372)
-!370 = !DISubroutineType(types: !371)
-!371 = !{null, !33, !3, !3, !3, !3}
-!372 = !{!368, !373, !374, !375, !376, !377, !378, !379, !380, !381, !382, !383, !384, !385, !386, !387, !388, !389, !390, !391, !392, !393, !394, !395, !396}
-!373 = !DILocalVariable(name: "a", arg: 2, scope: !369, file: !1, line: 55, type: !3)
-!374 = !DILocalVariable(name: "b", arg: 3, scope: !369, file: !1, line: 55, type: !3)
-!375 = !DILocalVariable(name: "c", arg: 4, scope: !369, file: !1, line: 55, type: !3)
-!376 = !DILocalVariable(name: "d", arg: 5, scope: !369, file: !1, line: 55, type: !3)
-!377 = !DILocalVariable(name: "sa", scope: !369, file: !1, line: 57, type: !3)
-!378 = !DILocalVariable(name: "sb0", scope: !369, file: !1, line: 58, type: !3)
-!379 = !DILocalVariable(name: "sd", scope: !369, file: !1, line: 60, type: !3)
-!380 = !DILocalVariable(name: "sa10", scope: !369, file: !1, line: 61, type: !3)
-!381 = !DILocalVariable(name: "sda", scope: !369, file: !1, line: 62, type: !3)
-!382 = !DILocalVariable(name: "sa0", scope: !369, file: !1, line: 64, type: !3)
-!383 = !DILocalVariable(name: "sb1", scope: !369, file: !1, line: 65, type: !3)
-!384 = !DILocalVariable(name: "sd0", scope: !369, file: !1, line: 67, type: !3)
-!385 = !DILocalVariable(name: "sa11", scope: !369, file: !1, line: 68, type: !3)
-!386 = !DILocalVariable(name: "sda0", scope: !369, file: !1, line: 69, type: !3)
-!387 = !DILocalVariable(name: "sa2", scope: !369, file: !1, line: 71, type: !3)
-!388 = !DILocalVariable(name: "sb2", scope: !369, file: !1, line: 72, type: !3)
-!389 = !DILocalVariable(name: "sd1", scope: !369, file: !1, line: 74, type: !3)
-!390 = !DILocalVariable(name: "sa12", scope: !369, file: !1, line: 75, type: !3)
-!391 = !DILocalVariable(name: "sda1", scope: !369, file: !1, line: 76, type: !3)
-!392 = !DILocalVariable(name: "sa3", scope: !369, file: !1, line: 78, type: !3)
-!393 = !DILocalVariable(name: "sb", scope: !369, file: !1, line: 79, type: !3)
-!394 = !DILocalVariable(name: "sd2", scope: !369, file: !1, line: 81, type: !3)
-!395 = !DILocalVariable(name: "sa1", scope: !369, file: !1, line: 82, type: !3)
-!396 = !DILocalVariable(name: "sda2", scope: !369, file: !1, line: 83, type: !3)
-!397 = !DILocation(line: 0, scope: !369, inlinedAt: !398)
-!398 = distinct !DILocation(line: 89, column: 3, scope: !363, inlinedAt: !366)
-!399 = !DILocation(line: 59, column: 14, scope: !369, inlinedAt: !398)
-!400 = !DILocation(line: 62, column: 21, scope: !369, inlinedAt: !398)
-!401 = !DILocalVariable(name: "a", arg: 1, scope: !402, file: !1, line: 49, type: !3)
-!402 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_rotate_left", scope: !1, file: !1, line: 49, type: !403, scopeLine: 50, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !405)
-!403 = !DISubroutineType(types: !404)
-!404 = !{!3, !3, !3}
-!405 = !{!401, !406}
-!406 = !DILocalVariable(name: "s", arg: 2, scope: !402, file: !1, line: 49, type: !3)
-!407 = !DILocation(line: 0, scope: !402, inlinedAt: !408)
-!408 = distinct !DILocation(line: 63, column: 11, scope: !369, inlinedAt: !398)
-!409 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !408)
-!410 = !DILocation(line: 66, column: 15, scope: !369, inlinedAt: !398)
-!411 = !DILocation(line: 69, column: 23, scope: !369, inlinedAt: !398)
-!412 = !DILocation(line: 0, scope: !402, inlinedAt: !413)
-!413 = distinct !DILocation(line: 70, column: 11, scope: !369, inlinedAt: !398)
-!414 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !413)
-!415 = !DILocation(line: 73, column: 15, scope: !369, inlinedAt: !398)
-!416 = !DILocation(line: 76, column: 23, scope: !369, inlinedAt: !398)
-!417 = !DILocation(line: 0, scope: !402, inlinedAt: !418)
-!418 = distinct !DILocation(line: 77, column: 11, scope: !369, inlinedAt: !398)
-!419 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !418)
-!420 = !DILocation(line: 80, column: 15, scope: !369, inlinedAt: !398)
-!421 = !DILocation(line: 83, column: 23, scope: !369, inlinedAt: !398)
-!422 = !DILocation(line: 0, scope: !402, inlinedAt: !423)
-!423 = distinct !DILocation(line: 84, column: 11, scope: !369, inlinedAt: !398)
-!424 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !423)
-!425 = !DILocation(line: 0, scope: !369, inlinedAt: !426)
-!426 = distinct !DILocation(line: 90, column: 3, scope: !363, inlinedAt: !366)
-!427 = !DILocation(line: 59, column: 14, scope: !369, inlinedAt: !426)
-!428 = !DILocation(line: 62, column: 21, scope: !369, inlinedAt: !426)
-!429 = !DILocation(line: 0, scope: !402, inlinedAt: !430)
-!430 = distinct !DILocation(line: 63, column: 11, scope: !369, inlinedAt: !426)
-!431 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !430)
-!432 = !DILocation(line: 66, column: 15, scope: !369, inlinedAt: !426)
-!433 = !DILocation(line: 69, column: 23, scope: !369, inlinedAt: !426)
-!434 = !DILocation(line: 0, scope: !402, inlinedAt: !435)
-!435 = distinct !DILocation(line: 70, column: 11, scope: !369, inlinedAt: !426)
-!436 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !435)
-!437 = !DILocation(line: 73, column: 15, scope: !369, inlinedAt: !426)
-!438 = !DILocation(line: 76, column: 23, scope: !369, inlinedAt: !426)
-!439 = !DILocation(line: 0, scope: !402, inlinedAt: !440)
-!440 = distinct !DILocation(line: 77, column: 11, scope: !369, inlinedAt: !426)
-!441 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !440)
-!442 = !DILocation(line: 80, column: 15, scope: !369, inlinedAt: !426)
-!443 = !DILocation(line: 83, column: 23, scope: !369, inlinedAt: !426)
-!444 = !DILocation(line: 0, scope: !402, inlinedAt: !445)
-!445 = distinct !DILocation(line: 84, column: 11, scope: !369, inlinedAt: !426)
-!446 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !445)
-!447 = !DILocation(line: 0, scope: !369, inlinedAt: !448)
-!448 = distinct !DILocation(line: 91, column: 3, scope: !363, inlinedAt: !366)
-!449 = !DILocation(line: 59, column: 14, scope: !369, inlinedAt: !448)
-!450 = !DILocation(line: 62, column: 21, scope: !369, inlinedAt: !448)
-!451 = !DILocation(line: 0, scope: !402, inlinedAt: !452)
-!452 = distinct !DILocation(line: 63, column: 11, scope: !369, inlinedAt: !448)
-!453 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !452)
-!454 = !DILocation(line: 66, column: 15, scope: !369, inlinedAt: !448)
-!455 = !DILocation(line: 69, column: 23, scope: !369, inlinedAt: !448)
-!456 = !DILocation(line: 0, scope: !402, inlinedAt: !457)
-!457 = distinct !DILocation(line: 70, column: 11, scope: !369, inlinedAt: !448)
-!458 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !457)
-!459 = !DILocation(line: 73, column: 15, scope: !369, inlinedAt: !448)
-!460 = !DILocation(line: 76, column: 23, scope: !369, inlinedAt: !448)
-!461 = !DILocation(line: 0, scope: !402, inlinedAt: !462)
-!462 = distinct !DILocation(line: 77, column: 11, scope: !369, inlinedAt: !448)
-!463 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !462)
-!464 = !DILocation(line: 80, column: 15, scope: !369, inlinedAt: !448)
-!465 = !DILocation(line: 83, column: 23, scope: !369, inlinedAt: !448)
-!466 = !DILocation(line: 0, scope: !402, inlinedAt: !467)
-!467 = distinct !DILocation(line: 84, column: 11, scope: !369, inlinedAt: !448)
-!468 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !467)
-!469 = !DILocation(line: 0, scope: !369, inlinedAt: !470)
-!470 = distinct !DILocation(line: 92, column: 3, scope: !363, inlinedAt: !366)
-!471 = !DILocation(line: 59, column: 14, scope: !369, inlinedAt: !470)
-!472 = !DILocation(line: 62, column: 21, scope: !369, inlinedAt: !470)
-!473 = !DILocation(line: 0, scope: !402, inlinedAt: !474)
-!474 = distinct !DILocation(line: 63, column: 11, scope: !369, inlinedAt: !470)
-!475 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !474)
-!476 = !DILocation(line: 66, column: 15, scope: !369, inlinedAt: !470)
-!477 = !DILocation(line: 69, column: 23, scope: !369, inlinedAt: !470)
-!478 = !DILocation(line: 0, scope: !402, inlinedAt: !479)
-!479 = distinct !DILocation(line: 70, column: 11, scope: !369, inlinedAt: !470)
-!480 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !479)
-!481 = !DILocation(line: 73, column: 15, scope: !369, inlinedAt: !470)
-!482 = !DILocation(line: 76, column: 23, scope: !369, inlinedAt: !470)
-!483 = !DILocation(line: 0, scope: !402, inlinedAt: !484)
-!484 = distinct !DILocation(line: 77, column: 11, scope: !369, inlinedAt: !470)
-!485 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !484)
-!486 = !DILocation(line: 80, column: 15, scope: !369, inlinedAt: !470)
-!487 = !DILocation(line: 83, column: 23, scope: !369, inlinedAt: !470)
-!488 = !DILocation(line: 0, scope: !402, inlinedAt: !489)
-!489 = distinct !DILocation(line: 84, column: 11, scope: !369, inlinedAt: !470)
-!490 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !489)
-!491 = !DILocation(line: 0, scope: !369, inlinedAt: !492)
-!492 = distinct !DILocation(line: 93, column: 3, scope: !363, inlinedAt: !366)
-!493 = !DILocation(line: 59, column: 14, scope: !369, inlinedAt: !492)
-!494 = !DILocation(line: 62, column: 21, scope: !369, inlinedAt: !492)
-!495 = !DILocation(line: 0, scope: !402, inlinedAt: !496)
-!496 = distinct !DILocation(line: 63, column: 11, scope: !369, inlinedAt: !492)
-!497 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !496)
-!498 = !DILocation(line: 66, column: 15, scope: !369, inlinedAt: !492)
-!499 = !DILocation(line: 69, column: 23, scope: !369, inlinedAt: !492)
-!500 = !DILocation(line: 0, scope: !402, inlinedAt: !501)
-!501 = distinct !DILocation(line: 70, column: 11, scope: !369, inlinedAt: !492)
-!502 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !501)
-!503 = !DILocation(line: 73, column: 15, scope: !369, inlinedAt: !492)
-!504 = !DILocation(line: 76, column: 23, scope: !369, inlinedAt: !492)
-!505 = !DILocation(line: 0, scope: !402, inlinedAt: !506)
-!506 = distinct !DILocation(line: 77, column: 11, scope: !369, inlinedAt: !492)
-!507 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !506)
-!508 = !DILocation(line: 80, column: 15, scope: !369, inlinedAt: !492)
-!509 = !DILocation(line: 83, column: 23, scope: !369, inlinedAt: !492)
-!510 = !DILocation(line: 0, scope: !402, inlinedAt: !511)
-!511 = distinct !DILocation(line: 84, column: 11, scope: !369, inlinedAt: !492)
-!512 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !511)
-!513 = !DILocation(line: 0, scope: !369, inlinedAt: !514)
-!514 = distinct !DILocation(line: 94, column: 3, scope: !363, inlinedAt: !366)
-!515 = !DILocation(line: 59, column: 14, scope: !369, inlinedAt: !514)
-!516 = !DILocation(line: 62, column: 21, scope: !369, inlinedAt: !514)
-!517 = !DILocation(line: 0, scope: !402, inlinedAt: !518)
-!518 = distinct !DILocation(line: 63, column: 11, scope: !369, inlinedAt: !514)
-!519 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !518)
-!520 = !DILocation(line: 66, column: 15, scope: !369, inlinedAt: !514)
-!521 = !DILocation(line: 69, column: 23, scope: !369, inlinedAt: !514)
-!522 = !DILocation(line: 0, scope: !402, inlinedAt: !523)
-!523 = distinct !DILocation(line: 70, column: 11, scope: !369, inlinedAt: !514)
-!524 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !523)
-!525 = !DILocation(line: 73, column: 15, scope: !369, inlinedAt: !514)
-!526 = !DILocation(line: 76, column: 23, scope: !369, inlinedAt: !514)
-!527 = !DILocation(line: 0, scope: !402, inlinedAt: !528)
-!528 = distinct !DILocation(line: 77, column: 11, scope: !369, inlinedAt: !514)
-!529 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !528)
-!530 = !DILocation(line: 80, column: 15, scope: !369, inlinedAt: !514)
-!531 = !DILocation(line: 83, column: 23, scope: !369, inlinedAt: !514)
-!532 = !DILocation(line: 0, scope: !402, inlinedAt: !533)
-!533 = distinct !DILocation(line: 84, column: 11, scope: !369, inlinedAt: !514)
-!534 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !533)
-!535 = !DILocation(line: 0, scope: !369, inlinedAt: !536)
-!536 = distinct !DILocation(line: 95, column: 3, scope: !363, inlinedAt: !366)
-!537 = !DILocation(line: 59, column: 14, scope: !369, inlinedAt: !536)
-!538 = !DILocation(line: 62, column: 21, scope: !369, inlinedAt: !536)
-!539 = !DILocation(line: 0, scope: !402, inlinedAt: !540)
-!540 = distinct !DILocation(line: 63, column: 11, scope: !369, inlinedAt: !536)
-!541 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !540)
-!542 = !DILocation(line: 66, column: 15, scope: !369, inlinedAt: !536)
-!543 = !DILocation(line: 69, column: 23, scope: !369, inlinedAt: !536)
-!544 = !DILocation(line: 0, scope: !402, inlinedAt: !545)
-!545 = distinct !DILocation(line: 70, column: 11, scope: !369, inlinedAt: !536)
-!546 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !545)
-!547 = !DILocation(line: 73, column: 15, scope: !369, inlinedAt: !536)
-!548 = !DILocation(line: 76, column: 23, scope: !369, inlinedAt: !536)
-!549 = !DILocation(line: 0, scope: !402, inlinedAt: !550)
-!550 = distinct !DILocation(line: 77, column: 11, scope: !369, inlinedAt: !536)
-!551 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !550)
-!552 = !DILocation(line: 80, column: 15, scope: !369, inlinedAt: !536)
-!553 = !DILocation(line: 83, column: 23, scope: !369, inlinedAt: !536)
-!554 = !DILocation(line: 0, scope: !402, inlinedAt: !555)
-!555 = distinct !DILocation(line: 84, column: 11, scope: !369, inlinedAt: !536)
-!556 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !555)
-!557 = !DILocation(line: 0, scope: !369, inlinedAt: !558)
-!558 = distinct !DILocation(line: 96, column: 3, scope: !363, inlinedAt: !366)
-!559 = !DILocation(line: 59, column: 14, scope: !369, inlinedAt: !558)
-!560 = !DILocation(line: 62, column: 21, scope: !369, inlinedAt: !558)
-!561 = !DILocation(line: 0, scope: !402, inlinedAt: !562)
-!562 = distinct !DILocation(line: 63, column: 11, scope: !369, inlinedAt: !558)
-!563 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !562)
-!564 = !DILocation(line: 66, column: 15, scope: !369, inlinedAt: !558)
-!565 = !DILocation(line: 69, column: 23, scope: !369, inlinedAt: !558)
-!566 = !DILocation(line: 0, scope: !402, inlinedAt: !567)
-!567 = distinct !DILocation(line: 70, column: 11, scope: !369, inlinedAt: !558)
-!568 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !567)
-!569 = !DILocation(line: 73, column: 15, scope: !369, inlinedAt: !558)
-!570 = !DILocation(line: 76, column: 23, scope: !369, inlinedAt: !558)
-!571 = !DILocation(line: 0, scope: !402, inlinedAt: !572)
-!572 = distinct !DILocation(line: 77, column: 11, scope: !369, inlinedAt: !558)
-!573 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !572)
-!574 = !DILocation(line: 80, column: 15, scope: !369, inlinedAt: !558)
-!575 = !DILocation(line: 83, column: 23, scope: !369, inlinedAt: !558)
-!576 = !DILocation(line: 0, scope: !402, inlinedAt: !577)
-!577 = distinct !DILocation(line: 84, column: 11, scope: !369, inlinedAt: !558)
-!578 = !DILocation(line: 51, column: 17, scope: !402, inlinedAt: !577)
-!579 = !DILocation(line: 101, column: 60, scope: !367, inlinedAt: !359)
-!580 = !DILocation(line: 101, column: 37, scope: !367, inlinedAt: !359)
-!581 = distinct !{!581, !361, !582, !260, !261}
-!582 = !DILocation(line: 102, column: 39, scope: !357, inlinedAt: !359)
-!583 = !DILocalVariable(name: "st", arg: 1, scope: !584, file: !1, line: 105, type: !33)
-!584 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_sum_states", scope: !1, file: !1, line: 105, type: !344, scopeLine: 106, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !585)
-!585 = !{!583, !586, !587, !589, !592}
-!586 = !DILocalVariable(name: "st_", arg: 2, scope: !584, file: !1, line: 105, type: !33)
-!587 = !DILocalVariable(name: "i", scope: !588, file: !1, line: 107, type: !3)
-!588 = distinct !DILexicalBlock(scope: !584, file: !1, line: 107, column: 3)
-!589 = !DILocalVariable(name: "xi", scope: !590, file: !1, line: 109, type: !3)
-!590 = distinct !DILexicalBlock(scope: !591, file: !1, line: 108, column: 3)
-!591 = distinct !DILexicalBlock(scope: !588, file: !1, line: 107, column: 3)
-!592 = !DILocalVariable(name: "yi", scope: !590, file: !1, line: 110, type: !3)
-!593 = !DILocation(line: 0, scope: !584, inlinedAt: !594)
-!594 = distinct !DILocation(line: 125, column: 3, scope: !332)
-!595 = !DILocation(line: 0, scope: !588, inlinedAt: !594)
-!596 = !DILocation(line: 107, column: 3, scope: !588, inlinedAt: !594)
-!597 = !DILocation(line: 109, column: 19, scope: !590, inlinedAt: !594)
-!598 = !DILocation(line: 0, scope: !590, inlinedAt: !594)
-!599 = !DILocation(line: 110, column: 19, scope: !590, inlinedAt: !594)
-!600 = !DILocation(line: 111, column: 16, scope: !590, inlinedAt: !594)
-!601 = !DILocation(line: 111, column: 11, scope: !590, inlinedAt: !594)
-!602 = !DILocation(line: 107, column: 60, scope: !591, inlinedAt: !594)
-!603 = !DILocation(line: 107, column: 37, scope: !591, inlinedAt: !594)
-!604 = distinct !{!604, !596, !605, !260, !261}
-!605 = !DILocation(line: 112, column: 3, scope: !588, inlinedAt: !594)
-!606 = !DILocation(line: 126, column: 1, scope: !332)
+!38 = !DILocation(line: 246, column: 3, scope: !16)
+!39 = !DILocation(line: 247, column: 3, scope: !16)
+!40 = !DILocation(line: 248, column: 1, scope: !16)
+!41 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_init", scope: !1, file: !1, line: 136, type: !42, scopeLine: 137, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !44)
+!42 = !DISubroutineType(types: !43)
+!43 = !{null, !33, !19, !19}
+!44 = !{!45, !46, !47, !48, !49, !50, !51}
+!45 = !DILocalVariable(name: "st", arg: 1, scope: !41, file: !1, line: 136, type: !33)
+!46 = !DILocalVariable(name: "k", arg: 2, scope: !41, file: !1, line: 136, type: !19)
+!47 = !DILocalVariable(name: "n1", arg: 3, scope: !41, file: !1, line: 136, type: !19)
+!48 = !DILocalVariable(name: "stcst", scope: !41, file: !1, line: 138, type: !33)
+!49 = !DILocalVariable(name: "stk", scope: !41, file: !1, line: 139, type: !33)
+!50 = !DILocalVariable(name: "stc", scope: !41, file: !1, line: 140, type: !33)
+!51 = !DILocalVariable(name: "stn", scope: !41, file: !1, line: 141, type: !33)
+!52 = !DILocation(line: 0, scope: !41)
+!53 = !DILocation(line: 139, column: 22, scope: !41)
+!54 = !DILocation(line: 140, column: 22, scope: !41)
+!55 = !DILocation(line: 141, column: 22, scope: !41)
+!56 = !DILocation(line: 142, column: 13, scope: !41)
+!57 = !{!58, !58, i64 0}
+!58 = !{!"int", !59, i64 0}
+!59 = !{!"omnipotent char", !60, i64 0}
+!60 = !{!"Simple C/C++ TBAA"}
+!61 = !DILocation(line: 143, column: 3, scope: !41)
+!62 = !DILocation(line: 143, column: 13, scope: !41)
+!63 = !DILocation(line: 144, column: 3, scope: !41)
+!64 = !DILocation(line: 144, column: 13, scope: !41)
+!65 = !DILocation(line: 145, column: 3, scope: !41)
+!66 = !DILocation(line: 145, column: 13, scope: !41)
+!67 = !DILocation(line: 146, column: 3, scope: !41)
+!68 = !DILocation(line: 147, column: 11, scope: !41)
+!69 = !DILocation(line: 148, column: 3, scope: !41)
+!70 = !DILocation(line: 149, column: 1, scope: !41)
+!71 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_chacha20_block", scope: !1, file: !1, line: 129, type: !72, scopeLine: 130, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !74)
+!72 = !DISubroutineType(types: !73)
+!73 = !{null, !19, !33, !3}
+!74 = !{!75, !76, !77, !78}
+!75 = !DILocalVariable(name: "stream_block", arg: 1, scope: !71, file: !1, line: 129, type: !19)
+!76 = !DILocalVariable(name: "st", arg: 2, scope: !71, file: !1, line: 129, type: !33)
+!77 = !DILocalVariable(name: "ctr", arg: 3, scope: !71, file: !1, line: 129, type: !3)
+!78 = !DILocalVariable(name: "st_", scope: !71, file: !1, line: 131, type: !29)
+!79 = !DILocation(line: 0, scope: !71)
+!80 = !DILocation(line: 131, column: 3, scope: !71)
+!81 = !DILocation(line: 131, column: 12, scope: !71)
+!82 = !DILocation(line: 132, column: 36, scope: !71)
+!83 = !DILocation(line: 132, column: 3, scope: !71)
+!84 = !DILocation(line: 133, column: 3, scope: !71)
+!85 = !DILocation(line: 134, column: 1, scope: !71)
+!86 = distinct !DISubprogram(name: "Hacl_Chacha20_chacha20", scope: !1, file: !1, line: 272, type: !87, scopeLine: 280, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !89)
+!87 = !DISubroutineType(types: !88)
+!88 = !{null, !19, !19, !3, !19, !19, !3}
+!89 = !{!90, !91, !92, !93, !94, !95}
+!90 = !DILocalVariable(name: "output", arg: 1, scope: !86, file: !1, line: 273, type: !19)
+!91 = !DILocalVariable(name: "plain", arg: 2, scope: !86, file: !1, line: 274, type: !19)
+!92 = !DILocalVariable(name: "len", arg: 3, scope: !86, file: !1, line: 275, type: !3)
+!93 = !DILocalVariable(name: "k", arg: 4, scope: !86, file: !1, line: 276, type: !19)
+!94 = !DILocalVariable(name: "n1", arg: 5, scope: !86, file: !1, line: 277, type: !19)
+!95 = !DILocalVariable(name: "ctr", arg: 6, scope: !86, file: !1, line: 278, type: !3)
+!96 = !DILocation(line: 0, scope: !86)
+!97 = !DILocation(line: 281, column: 3, scope: !86)
+!98 = !DILocation(line: 282, column: 1, scope: !86)
+!99 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_chacha20", scope: !1, file: !1, line: 227, type: !87, scopeLine: 235, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !100)
+!100 = !{!101, !102, !103, !104, !105, !106, !107, !108}
+!101 = !DILocalVariable(name: "output", arg: 1, scope: !99, file: !1, line: 228, type: !19)
+!102 = !DILocalVariable(name: "plain", arg: 2, scope: !99, file: !1, line: 229, type: !19)
+!103 = !DILocalVariable(name: "len", arg: 3, scope: !99, file: !1, line: 230, type: !3)
+!104 = !DILocalVariable(name: "k", arg: 4, scope: !99, file: !1, line: 231, type: !19)
+!105 = !DILocalVariable(name: "n1", arg: 5, scope: !99, file: !1, line: 232, type: !19)
+!106 = !DILocalVariable(name: "ctr", arg: 6, scope: !99, file: !1, line: 233, type: !3)
+!107 = !DILocalVariable(name: "buf", scope: !99, file: !1, line: 236, type: !29)
+!108 = !DILocalVariable(name: "st", scope: !99, file: !1, line: 237, type: !33)
+!109 = !DILocation(line: 0, scope: !99)
+!110 = !DILocation(line: 236, column: 3, scope: !99)
+!111 = !DILocation(line: 236, column: 12, scope: !99)
+!112 = !DILocation(line: 237, column: 18, scope: !99)
+!113 = !DILocation(line: 238, column: 3, scope: !99)
+!114 = !DILocation(line: 239, column: 3, scope: !99)
+!115 = !DILocation(line: 240, column: 1, scope: !99)
+!116 = distinct !DISubprogram(name: "Hacl_Lib_LoadStore32_uint32s_from_le_bytes", scope: !1, file: !1, line: 28, type: !117, scopeLine: 29, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !119)
+!117 = !DISubroutineType(types: !118)
+!118 = !{null, !33, !19, !3}
+!119 = !{!120, !121, !122, !123, !125, !128}
+!120 = !DILocalVariable(name: "output", arg: 1, scope: !116, file: !1, line: 28, type: !33)
+!121 = !DILocalVariable(name: "input", arg: 2, scope: !116, file: !1, line: 28, type: !19)
+!122 = !DILocalVariable(name: "len", arg: 3, scope: !116, file: !1, line: 28, type: !3)
+!123 = !DILocalVariable(name: "i", scope: !124, file: !1, line: 30, type: !3)
+!124 = distinct !DILexicalBlock(scope: !116, file: !1, line: 30, column: 3)
+!125 = !DILocalVariable(name: "x0", scope: !126, file: !1, line: 32, type: !19)
+!126 = distinct !DILexicalBlock(scope: !127, file: !1, line: 31, column: 3)
+!127 = distinct !DILexicalBlock(scope: !124, file: !1, line: 30, column: 3)
+!128 = !DILocalVariable(name: "inputi", scope: !126, file: !1, line: 33, type: !3)
+!129 = !DILocation(line: 0, scope: !116)
+!130 = !DILocation(line: 0, scope: !124)
+!131 = !DILocation(line: 30, column: 37, scope: !127)
+!132 = !DILocation(line: 30, column: 3, scope: !124)
+!133 = !DILocation(line: 36, column: 1, scope: !116)
+!134 = !DILocation(line: 32, column: 40, scope: !126)
+!135 = !DILocation(line: 32, column: 25, scope: !126)
+!136 = !DILocation(line: 0, scope: !126)
+!137 = !DILocation(line: 33, column: 23, scope: !126)
+!138 = !DILocation(line: 34, column: 5, scope: !126)
+!139 = !DILocation(line: 34, column: 15, scope: !126)
+!140 = !DILocation(line: 30, column: 50, scope: !127)
+!141 = distinct !{!141, !132, !142, !143, !144}
+!142 = !DILocation(line: 35, column: 3, scope: !124)
+!143 = !{!"llvm.loop.mustprogress"}
+!144 = !{!"llvm.loop.unroll.disable"}
+!145 = distinct !DISubprogram(name: "load32", scope: !146, file: !146, line: 341, type: !147, scopeLine: 341, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !149)
+!146 = !DIFile(filename: "hacl-c/hacl-c/kremlib.h", directory: "/mnt/c/Users/fwill/Documents/HS24/semester_project/tools/binsec/binsec/examples/hacl", checksumkind: CSK_MD5, checksum: "cde125f1f98cb7b9ee1f380d4178ebe4")
+!147 = !DISubroutineType(types: !148)
+!148 = !{!3, !19}
+!149 = !{!150, !151}
+!150 = !DILocalVariable(name: "b", arg: 1, scope: !145, file: !146, line: 341, type: !19)
+!151 = !DILocalVariable(name: "x", scope: !145, file: !146, line: 342, type: !3)
+!152 = !DILocation(line: 0, scope: !145)
+!153 = !DILocation(line: 343, column: 3, scope: !145)
+!154 = !DILocation(line: 344, column: 3, scope: !145)
+!155 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_chacha20_core", scope: !1, file: !1, line: 120, type: !156, scopeLine: 121, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !158)
+!156 = !DISubroutineType(types: !157)
+!157 = !{null, !33, !33, !3}
+!158 = !{!159, !160, !161}
+!159 = !DILocalVariable(name: "k", arg: 1, scope: !155, file: !1, line: 120, type: !33)
+!160 = !DILocalVariable(name: "st", arg: 2, scope: !155, file: !1, line: 120, type: !33)
+!161 = !DILocalVariable(name: "ctr", arg: 3, scope: !155, file: !1, line: 120, type: !3)
+!162 = !DILocation(line: 0, scope: !155)
+!163 = !DILocation(line: 122, column: 3, scope: !155)
+!164 = !DILocation(line: 122, column: 11, scope: !155)
+!165 = !DILocation(line: 123, column: 3, scope: !155)
+!166 = !DILocation(line: 124, column: 3, scope: !155)
+!167 = !DILocation(line: 125, column: 3, scope: !155)
+!168 = !DILocation(line: 126, column: 1, scope: !155)
+!169 = distinct !DISubprogram(name: "Hacl_Lib_LoadStore32_uint32s_to_le_bytes", scope: !1, file: !1, line: 39, type: !72, scopeLine: 40, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !170)
+!170 = !{!171, !172, !173, !174, !176, !179}
+!171 = !DILocalVariable(name: "output", arg: 1, scope: !169, file: !1, line: 39, type: !19)
+!172 = !DILocalVariable(name: "input", arg: 2, scope: !169, file: !1, line: 39, type: !33)
+!173 = !DILocalVariable(name: "len", arg: 3, scope: !169, file: !1, line: 39, type: !3)
+!174 = !DILocalVariable(name: "i", scope: !175, file: !1, line: 41, type: !3)
+!175 = distinct !DILexicalBlock(scope: !169, file: !1, line: 41, column: 3)
+!176 = !DILocalVariable(name: "hd1", scope: !177, file: !1, line: 43, type: !3)
+!177 = distinct !DILexicalBlock(scope: !178, file: !1, line: 42, column: 3)
+!178 = distinct !DILexicalBlock(scope: !175, file: !1, line: 41, column: 3)
+!179 = !DILocalVariable(name: "x0", scope: !177, file: !1, line: 44, type: !19)
+!180 = !DILocation(line: 0, scope: !169)
+!181 = !DILocation(line: 0, scope: !175)
+!182 = !DILocation(line: 41, column: 3, scope: !175)
+!183 = !DILocation(line: 47, column: 1, scope: !169)
+!184 = !DILocation(line: 43, column: 20, scope: !177)
+!185 = !DILocation(line: 0, scope: !177)
+!186 = !DILocation(line: 44, column: 41, scope: !177)
+!187 = !DILocation(line: 44, column: 26, scope: !177)
+!188 = !DILocation(line: 45, column: 5, scope: !177)
+!189 = !DILocation(line: 41, column: 50, scope: !178)
+!190 = !DILocation(line: 41, column: 37, scope: !178)
+!191 = distinct !{!191, !182, !192, !143, !144}
+!192 = !DILocation(line: 46, column: 3, scope: !175)
+!193 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_copy_state", scope: !1, file: !1, line: 115, type: !194, scopeLine: 116, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !196)
+!194 = !DISubroutineType(types: !195)
+!195 = !{null, !33, !33}
+!196 = !{!197, !198}
+!197 = !DILocalVariable(name: "st", arg: 1, scope: !193, file: !1, line: 115, type: !33)
+!198 = !DILocalVariable(name: "st_", arg: 2, scope: !193, file: !1, line: 115, type: !33)
+!199 = !DILocation(line: 0, scope: !193)
+!200 = !DILocation(line: 117, column: 3, scope: !193)
+!201 = !DILocation(line: 118, column: 1, scope: !193)
+!202 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_rounds", scope: !1, file: !1, line: 99, type: !203, scopeLine: 100, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !205)
+!203 = !DISubroutineType(types: !204)
+!204 = !{null, !33}
+!205 = !{!206, !207}
+!206 = !DILocalVariable(name: "st", arg: 1, scope: !202, file: !1, line: 99, type: !33)
+!207 = !DILocalVariable(name: "i", scope: !208, file: !1, line: 101, type: !3)
+!208 = distinct !DILexicalBlock(scope: !202, file: !1, line: 101, column: 3)
+!209 = !DILocation(line: 0, scope: !202)
+!210 = !DILocation(line: 0, scope: !208)
+!211 = !DILocation(line: 101, column: 3, scope: !208)
+!212 = !DILocation(line: 103, column: 1, scope: !202)
+!213 = !DILocation(line: 102, column: 5, scope: !214)
+!214 = distinct !DILexicalBlock(scope: !208, file: !1, line: 101, column: 3)
+!215 = !DILocation(line: 101, column: 60, scope: !214)
+!216 = !DILocation(line: 101, column: 37, scope: !214)
+!217 = distinct !{!217, !211, !218, !143, !144}
+!218 = !DILocation(line: 102, column: 39, scope: !208)
+!219 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_sum_states", scope: !1, file: !1, line: 105, type: !194, scopeLine: 106, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !220)
+!220 = !{!221, !222, !223, !225, !228}
+!221 = !DILocalVariable(name: "st", arg: 1, scope: !219, file: !1, line: 105, type: !33)
+!222 = !DILocalVariable(name: "st_", arg: 2, scope: !219, file: !1, line: 105, type: !33)
+!223 = !DILocalVariable(name: "i", scope: !224, file: !1, line: 107, type: !3)
+!224 = distinct !DILexicalBlock(scope: !219, file: !1, line: 107, column: 3)
+!225 = !DILocalVariable(name: "xi", scope: !226, file: !1, line: 109, type: !3)
+!226 = distinct !DILexicalBlock(scope: !227, file: !1, line: 108, column: 3)
+!227 = distinct !DILexicalBlock(scope: !224, file: !1, line: 107, column: 3)
+!228 = !DILocalVariable(name: "yi", scope: !226, file: !1, line: 110, type: !3)
+!229 = !DILocation(line: 0, scope: !219)
+!230 = !DILocation(line: 0, scope: !224)
+!231 = !DILocation(line: 107, column: 3, scope: !224)
+!232 = !DILocation(line: 113, column: 1, scope: !219)
+!233 = !DILocation(line: 109, column: 19, scope: !226)
+!234 = !DILocation(line: 0, scope: !226)
+!235 = !DILocation(line: 110, column: 19, scope: !226)
+!236 = !DILocation(line: 111, column: 16, scope: !226)
+!237 = !DILocation(line: 111, column: 11, scope: !226)
+!238 = !DILocation(line: 107, column: 60, scope: !227)
+!239 = !DILocation(line: 107, column: 37, scope: !227)
+!240 = distinct !{!240, !231, !241, !143, !144}
+!241 = !DILocation(line: 112, column: 3, scope: !224)
+!242 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_double_round", scope: !1, file: !1, line: 87, type: !203, scopeLine: 88, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !243)
+!243 = !{!244}
+!244 = !DILocalVariable(name: "st", arg: 1, scope: !242, file: !1, line: 87, type: !33)
+!245 = !DILocation(line: 0, scope: !242)
+!246 = !DILocation(line: 89, column: 3, scope: !242)
+!247 = !DILocation(line: 90, column: 3, scope: !242)
+!248 = !DILocation(line: 91, column: 3, scope: !242)
+!249 = !DILocation(line: 92, column: 3, scope: !242)
+!250 = !DILocation(line: 93, column: 3, scope: !242)
+!251 = !DILocation(line: 94, column: 3, scope: !242)
+!252 = !DILocation(line: 95, column: 3, scope: !242)
+!253 = !DILocation(line: 96, column: 3, scope: !242)
+!254 = !DILocation(line: 97, column: 1, scope: !242)
+!255 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_quarter_round", scope: !1, file: !1, line: 55, type: !256, scopeLine: 56, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !258)
+!256 = !DISubroutineType(types: !257)
+!257 = !{null, !33, !3, !3, !3, !3}
+!258 = !{!259, !260, !261, !262, !263, !264, !265, !266, !267, !268, !269, !270, !271, !272, !273, !274, !275, !276, !277, !278, !279, !280, !281, !282, !283}
+!259 = !DILocalVariable(name: "st", arg: 1, scope: !255, file: !1, line: 55, type: !33)
+!260 = !DILocalVariable(name: "a", arg: 2, scope: !255, file: !1, line: 55, type: !3)
+!261 = !DILocalVariable(name: "b", arg: 3, scope: !255, file: !1, line: 55, type: !3)
+!262 = !DILocalVariable(name: "c", arg: 4, scope: !255, file: !1, line: 55, type: !3)
+!263 = !DILocalVariable(name: "d", arg: 5, scope: !255, file: !1, line: 55, type: !3)
+!264 = !DILocalVariable(name: "sa", scope: !255, file: !1, line: 57, type: !3)
+!265 = !DILocalVariable(name: "sb0", scope: !255, file: !1, line: 58, type: !3)
+!266 = !DILocalVariable(name: "sd", scope: !255, file: !1, line: 60, type: !3)
+!267 = !DILocalVariable(name: "sa10", scope: !255, file: !1, line: 61, type: !3)
+!268 = !DILocalVariable(name: "sda", scope: !255, file: !1, line: 62, type: !3)
+!269 = !DILocalVariable(name: "sa0", scope: !255, file: !1, line: 64, type: !3)
+!270 = !DILocalVariable(name: "sb1", scope: !255, file: !1, line: 65, type: !3)
+!271 = !DILocalVariable(name: "sd0", scope: !255, file: !1, line: 67, type: !3)
+!272 = !DILocalVariable(name: "sa11", scope: !255, file: !1, line: 68, type: !3)
+!273 = !DILocalVariable(name: "sda0", scope: !255, file: !1, line: 69, type: !3)
+!274 = !DILocalVariable(name: "sa2", scope: !255, file: !1, line: 71, type: !3)
+!275 = !DILocalVariable(name: "sb2", scope: !255, file: !1, line: 72, type: !3)
+!276 = !DILocalVariable(name: "sd1", scope: !255, file: !1, line: 74, type: !3)
+!277 = !DILocalVariable(name: "sa12", scope: !255, file: !1, line: 75, type: !3)
+!278 = !DILocalVariable(name: "sda1", scope: !255, file: !1, line: 76, type: !3)
+!279 = !DILocalVariable(name: "sa3", scope: !255, file: !1, line: 78, type: !3)
+!280 = !DILocalVariable(name: "sb", scope: !255, file: !1, line: 79, type: !3)
+!281 = !DILocalVariable(name: "sd2", scope: !255, file: !1, line: 81, type: !3)
+!282 = !DILocalVariable(name: "sa1", scope: !255, file: !1, line: 82, type: !3)
+!283 = !DILocalVariable(name: "sda2", scope: !255, file: !1, line: 83, type: !3)
+!284 = !DILocation(line: 0, scope: !255)
+!285 = !DILocation(line: 57, column: 17, scope: !255)
+!286 = !DILocation(line: 58, column: 18, scope: !255)
+!287 = !DILocation(line: 59, column: 14, scope: !255)
+!288 = !DILocation(line: 59, column: 9, scope: !255)
+!289 = !DILocation(line: 60, column: 17, scope: !255)
+!290 = !DILocation(line: 62, column: 21, scope: !255)
+!291 = !DILocation(line: 63, column: 11, scope: !255)
+!292 = !DILocation(line: 63, column: 9, scope: !255)
+!293 = !DILocation(line: 64, column: 18, scope: !255)
+!294 = !DILocation(line: 66, column: 15, scope: !255)
+!295 = !DILocation(line: 66, column: 9, scope: !255)
+!296 = !DILocation(line: 67, column: 18, scope: !255)
+!297 = !DILocation(line: 69, column: 23, scope: !255)
+!298 = !DILocation(line: 70, column: 11, scope: !255)
+!299 = !DILocation(line: 70, column: 9, scope: !255)
+!300 = !DILocation(line: 71, column: 18, scope: !255)
+!301 = !DILocation(line: 73, column: 15, scope: !255)
+!302 = !DILocation(line: 73, column: 9, scope: !255)
+!303 = !DILocation(line: 74, column: 18, scope: !255)
+!304 = !DILocation(line: 76, column: 23, scope: !255)
+!305 = !DILocation(line: 77, column: 11, scope: !255)
+!306 = !DILocation(line: 77, column: 9, scope: !255)
+!307 = !DILocation(line: 78, column: 18, scope: !255)
+!308 = !DILocation(line: 80, column: 15, scope: !255)
+!309 = !DILocation(line: 80, column: 9, scope: !255)
+!310 = !DILocation(line: 81, column: 18, scope: !255)
+!311 = !DILocation(line: 83, column: 23, scope: !255)
+!312 = !DILocation(line: 84, column: 11, scope: !255)
+!313 = !DILocation(line: 84, column: 9, scope: !255)
+!314 = !DILocation(line: 85, column: 1, scope: !255)
+!315 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_rotate_left", scope: !1, file: !1, line: 49, type: !316, scopeLine: 50, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !318)
+!316 = !DISubroutineType(types: !317)
+!317 = !{!3, !3, !3}
+!318 = !{!319, !320}
+!319 = !DILocalVariable(name: "a", arg: 1, scope: !315, file: !1, line: 49, type: !3)
+!320 = !DILocalVariable(name: "s", arg: 2, scope: !315, file: !1, line: 49, type: !3)
+!321 = !DILocation(line: 0, scope: !315)
+!322 = !DILocation(line: 51, column: 12, scope: !315)
+!323 = !DILocation(line: 51, column: 39, scope: !315)
+!324 = !DILocation(line: 51, column: 21, scope: !315)
+!325 = !DILocation(line: 51, column: 17, scope: !315)
+!326 = !DILocation(line: 51, column: 3, scope: !315)
+!327 = distinct !DISubprogram(name: "store32", scope: !146, file: !146, line: 355, type: !328, scopeLine: 355, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !330)
+!328 = !DISubroutineType(types: !329)
+!329 = !{null, !19, !3}
+!330 = !{!331, !332}
+!331 = !DILocalVariable(name: "b", arg: 1, scope: !327, file: !146, line: 355, type: !19)
+!332 = !DILocalVariable(name: "i", arg: 2, scope: !327, file: !146, line: 355, type: !3)
+!333 = !DILocation(line: 0, scope: !327)
+!334 = !DILocation(line: 355, column: 54, scope: !327)
+!335 = !DILocation(line: 355, column: 72, scope: !327)
+!336 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_chacha20_counter_mode", scope: !1, file: !1, line: 207, type: !337, scopeLine: 214, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !339)
+!337 = !DISubroutineType(types: !338)
+!338 = !{null, !19, !19, !3, !33, !3}
+!339 = !{!340, !341, !342, !343, !344, !345, !346, !347, !348, !349, !350}
+!340 = !DILocalVariable(name: "output", arg: 1, scope: !336, file: !1, line: 208, type: !19)
+!341 = !DILocalVariable(name: "plain", arg: 2, scope: !336, file: !1, line: 209, type: !19)
+!342 = !DILocalVariable(name: "len", arg: 3, scope: !336, file: !1, line: 210, type: !3)
+!343 = !DILocalVariable(name: "st", arg: 4, scope: !336, file: !1, line: 211, type: !33)
+!344 = !DILocalVariable(name: "ctr", arg: 5, scope: !336, file: !1, line: 212, type: !3)
+!345 = !DILocalVariable(name: "blocks_len", scope: !336, file: !1, line: 215, type: !3)
+!346 = !DILocalVariable(name: "part_len", scope: !336, file: !1, line: 216, type: !3)
+!347 = !DILocalVariable(name: "output_", scope: !336, file: !1, line: 217, type: !19)
+!348 = !DILocalVariable(name: "plain_", scope: !336, file: !1, line: 218, type: !19)
+!349 = !DILocalVariable(name: "output__", scope: !336, file: !1, line: 219, type: !19)
+!350 = !DILocalVariable(name: "plain__", scope: !336, file: !1, line: 220, type: !19)
+!351 = !DILocation(line: 0, scope: !336)
+!352 = !DILocation(line: 215, column: 29, scope: !336)
+!353 = !DILocation(line: 216, column: 27, scope: !336)
+!354 = !DILocation(line: 219, column: 46, scope: !336)
+!355 = !DILocation(line: 221, column: 3, scope: !336)
+!356 = !DILocation(line: 222, column: 16, scope: !357)
+!357 = distinct !DILexicalBlock(scope: !336, file: !1, line: 222, column: 7)
+!358 = !DILocation(line: 222, column: 7, scope: !336)
+!359 = !DILocation(line: 220, column: 28, scope: !336)
+!360 = !DILocation(line: 219, column: 30, scope: !336)
+!361 = !DILocation(line: 223, column: 73, scope: !357)
+!362 = !DILocation(line: 223, column: 5, scope: !357)
+!363 = !DILocation(line: 224, column: 1, scope: !336)
+!364 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_chacha20_counter_mode_blocks", scope: !1, file: !1, line: 190, type: !337, scopeLine: 197, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !365)
+!365 = !{!366, !367, !368, !369, !370, !371, !373, !376}
+!366 = !DILocalVariable(name: "output", arg: 1, scope: !364, file: !1, line: 191, type: !19)
+!367 = !DILocalVariable(name: "plain", arg: 2, scope: !364, file: !1, line: 192, type: !19)
+!368 = !DILocalVariable(name: "num_blocks", arg: 3, scope: !364, file: !1, line: 193, type: !3)
+!369 = !DILocalVariable(name: "st", arg: 4, scope: !364, file: !1, line: 194, type: !33)
+!370 = !DILocalVariable(name: "ctr", arg: 5, scope: !364, file: !1, line: 195, type: !3)
+!371 = !DILocalVariable(name: "i", scope: !372, file: !1, line: 198, type: !3)
+!372 = distinct !DILexicalBlock(scope: !364, file: !1, line: 198, column: 3)
+!373 = !DILocalVariable(name: "b", scope: !374, file: !1, line: 200, type: !19)
+!374 = distinct !DILexicalBlock(scope: !375, file: !1, line: 199, column: 3)
+!375 = distinct !DILexicalBlock(scope: !372, file: !1, line: 198, column: 3)
+!376 = !DILocalVariable(name: "o", scope: !374, file: !1, line: 201, type: !19)
+!377 = !DILocation(line: 0, scope: !364)
+!378 = !DILocation(line: 0, scope: !372)
+!379 = !DILocation(line: 198, column: 37, scope: !375)
+!380 = !DILocation(line: 198, column: 3, scope: !372)
+!381 = !DILocation(line: 204, column: 1, scope: !364)
+!382 = !DILocation(line: 200, column: 40, scope: !374)
+!383 = !DILocation(line: 200, column: 24, scope: !374)
+!384 = !DILocation(line: 0, scope: !374)
+!385 = !DILocation(line: 201, column: 25, scope: !374)
+!386 = !DILocation(line: 202, column: 45, scope: !374)
+!387 = !DILocation(line: 202, column: 5, scope: !374)
+!388 = !DILocation(line: 198, column: 57, scope: !375)
+!389 = distinct !{!389, !380, !390, !143, !144}
+!390 = !DILocation(line: 203, column: 3, scope: !372)
+!391 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_update_last", scope: !1, file: !1, line: 170, type: !337, scopeLine: 177, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !392)
+!392 = !{!393, !394, !395, !396, !397, !398, !402, !403, !405, !408}
+!393 = !DILocalVariable(name: "output", arg: 1, scope: !391, file: !1, line: 171, type: !19)
+!394 = !DILocalVariable(name: "plain", arg: 2, scope: !391, file: !1, line: 172, type: !19)
+!395 = !DILocalVariable(name: "len", arg: 3, scope: !391, file: !1, line: 173, type: !3)
+!396 = !DILocalVariable(name: "st", arg: 4, scope: !391, file: !1, line: 174, type: !33)
+!397 = !DILocalVariable(name: "ctr", arg: 5, scope: !391, file: !1, line: 175, type: !3)
+!398 = !DILocalVariable(name: "block", scope: !391, file: !1, line: 178, type: !399)
+!399 = !DICompositeType(tag: DW_TAG_array_type, baseType: !20, size: 512, elements: !400)
+!400 = !{!401}
+!401 = !DISubrange(count: 64)
+!402 = !DILocalVariable(name: "mask", scope: !391, file: !1, line: 180, type: !19)
+!403 = !DILocalVariable(name: "i", scope: !404, file: !1, line: 181, type: !3)
+!404 = distinct !DILexicalBlock(scope: !391, file: !1, line: 181, column: 3)
+!405 = !DILocalVariable(name: "xi", scope: !406, file: !1, line: 183, type: !20)
+!406 = distinct !DILexicalBlock(scope: !407, file: !1, line: 182, column: 3)
+!407 = distinct !DILexicalBlock(scope: !404, file: !1, line: 181, column: 3)
+!408 = !DILocalVariable(name: "yi", scope: !406, file: !1, line: 184, type: !20)
+!409 = !DILocation(line: 0, scope: !391)
+!410 = !DILocation(line: 178, column: 3, scope: !391)
+!411 = !DILocation(line: 178, column: 11, scope: !391)
+!412 = !DILocation(line: 179, column: 3, scope: !391)
+!413 = !DILocation(line: 0, scope: !404)
+!414 = !DILocation(line: 181, column: 37, scope: !407)
+!415 = !DILocation(line: 181, column: 3, scope: !404)
+!416 = !DILocation(line: 187, column: 1, scope: !391)
+!417 = !DILocation(line: 183, column: 18, scope: !406)
+!418 = !{!59, !59, i64 0}
+!419 = !DILocation(line: 0, scope: !406)
+!420 = !DILocation(line: 184, column: 18, scope: !406)
+!421 = !DILocation(line: 185, column: 20, scope: !406)
+!422 = !DILocation(line: 185, column: 5, scope: !406)
+!423 = !DILocation(line: 185, column: 15, scope: !406)
+!424 = !DILocation(line: 181, column: 50, scope: !407)
+!425 = distinct !{!425, !415, !426, !143, !144}
+!426 = !DILocation(line: 186, column: 3, scope: !404)
+!427 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_update", scope: !1, file: !1, line: 152, type: !428, scopeLine: 153, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !430)
+!428 = !DISubroutineType(types: !429)
+!429 = !{null, !19, !19, !33, !3}
+!430 = !{!431, !432, !433, !434, !435, !439, !440, !441, !442, !444, !447}
+!431 = !DILocalVariable(name: "output", arg: 1, scope: !427, file: !1, line: 152, type: !19)
+!432 = !DILocalVariable(name: "plain", arg: 2, scope: !427, file: !1, line: 152, type: !19)
+!433 = !DILocalVariable(name: "st", arg: 3, scope: !427, file: !1, line: 152, type: !33)
+!434 = !DILocalVariable(name: "ctr", arg: 4, scope: !427, file: !1, line: 152, type: !3)
+!435 = !DILocalVariable(name: "b", scope: !427, file: !1, line: 154, type: !436)
+!436 = !DICompositeType(tag: DW_TAG_array_type, baseType: !3, size: 1536, elements: !437)
+!437 = !{!438}
+!438 = !DISubrange(count: 48)
+!439 = !DILocalVariable(name: "k", scope: !427, file: !1, line: 155, type: !33)
+!440 = !DILocalVariable(name: "ib", scope: !427, file: !1, line: 156, type: !33)
+!441 = !DILocalVariable(name: "ob", scope: !427, file: !1, line: 157, type: !33)
+!442 = !DILocalVariable(name: "i", scope: !443, file: !1, line: 160, type: !3)
+!443 = distinct !DILexicalBlock(scope: !427, file: !1, line: 160, column: 3)
+!444 = !DILocalVariable(name: "xi", scope: !445, file: !1, line: 162, type: !3)
+!445 = distinct !DILexicalBlock(scope: !446, file: !1, line: 161, column: 3)
+!446 = distinct !DILexicalBlock(scope: !443, file: !1, line: 160, column: 3)
+!447 = !DILocalVariable(name: "yi", scope: !445, file: !1, line: 163, type: !3)
+!448 = !DILocation(line: 0, scope: !427)
+!449 = !DILocation(line: 154, column: 3, scope: !427)
+!450 = !DILocation(line: 154, column: 12, scope: !427)
+!451 = !DILocation(line: 155, column: 17, scope: !427)
+!452 = !DILocation(line: 156, column: 20, scope: !427)
+!453 = !DILocation(line: 157, column: 20, scope: !427)
+!454 = !DILocation(line: 158, column: 3, scope: !427)
+!455 = !DILocation(line: 159, column: 3, scope: !427)
+!456 = !DILocation(line: 0, scope: !443)
+!457 = !DILocation(line: 160, column: 3, scope: !443)
+!458 = !DILocation(line: 166, column: 3, scope: !427)
+!459 = !DILocation(line: 167, column: 1, scope: !427)
+!460 = !DILocation(line: 162, column: 19, scope: !445)
+!461 = !DILocation(line: 0, scope: !445)
+!462 = !DILocation(line: 163, column: 19, scope: !445)
+!463 = !DILocation(line: 164, column: 16, scope: !445)
+!464 = !DILocation(line: 164, column: 5, scope: !445)
+!465 = !DILocation(line: 164, column: 11, scope: !445)
+!466 = !DILocation(line: 160, column: 60, scope: !446)
+!467 = !DILocation(line: 160, column: 37, scope: !446)
+!468 = distinct !{!468, !457, !469, !143, !144}
+!469 = !DILocation(line: 165, column: 3, scope: !443)

@@ -87,7 +87,7 @@ $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/haclnacl.c -o hacl-c/hacl
 $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm hacl-c/hacl-c/kremlib.c -o hacl-c/hacl-c/kremlib.ll
 
 llvm-link -S hacl-c/hacl-c/*.ll -o hacl_c.ll
-echo 2
+
 
 # Create a results file to track the status
 # Ensure the Results directory exists

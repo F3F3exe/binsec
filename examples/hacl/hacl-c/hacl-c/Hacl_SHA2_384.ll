@@ -9,7 +9,7 @@ target triple = "i386-pc-linux-gnu"
 @Hacl_SHA2_384_size_block = dso_local local_unnamed_addr global i32 128, align 4, !dbg !17
 @Hacl_SHA2_384_size_state = dso_local local_unnamed_addr global i32 169, align 4, !dbg !19
 
-; Function Attrs: mustprogress nofree norecurse nosync nounwind uwtable willreturn writeonly
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind uwtable willreturn writeonly
 define dso_local void @Hacl_SHA2_384_init(i64* noundef %0) local_unnamed_addr #0 !dbg !29 {
   call void @llvm.dbg.value(metadata i64* %0, metadata !34, metadata !DIExpression()), !dbg !35
   call fastcc void @Hacl_Impl_SHA2_384_init(i64* noundef %0), !dbg !36
@@ -19,7 +19,7 @@ define dso_local void @Hacl_SHA2_384_init(i64* noundef %0) local_unnamed_addr #0
 ; Function Attrs: mustprogress nofree nosync nounwind readnone speculatable willreturn
 declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
 
-; Function Attrs: mustprogress nofree norecurse nosync nounwind uwtable willreturn writeonly
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind uwtable willreturn writeonly
 define internal fastcc void @Hacl_Impl_SHA2_384_init(i64* noundef writeonly %0) unnamed_addr #0 !dbg !38 {
   call void @llvm.dbg.value(metadata i64* %0, metadata !40, metadata !DIExpression()), !dbg !81
   %2 = getelementptr inbounds i64, i64* %0, i32 168, !dbg !82
@@ -242,7 +242,7 @@ define internal fastcc void @Hacl_Impl_SHA2_384_init(i64* noundef writeonly %0) 
   ret void, !dbg !263
 }
 
-; Function Attrs: nofree nosync nounwind uwtable
+; Function Attrs: nofree noinline nosync nounwind uwtable
 define dso_local void @Hacl_SHA2_384_update(i64* nocapture noundef %0, i8* nocapture noundef readonly %1) local_unnamed_addr #2 !dbg !264 {
   call void @llvm.dbg.value(metadata i64* %0, metadata !269, metadata !DIExpression()), !dbg !271
   call void @llvm.dbg.value(metadata i8* %1, metadata !270, metadata !DIExpression()), !dbg !271
@@ -250,7 +250,7 @@ define dso_local void @Hacl_SHA2_384_update(i64* nocapture noundef %0, i8* nocap
   ret void, !dbg !273
 }
 
-; Function Attrs: nofree nosync nounwind uwtable
+; Function Attrs: nofree noinline nosync nounwind uwtable
 define internal fastcc void @Hacl_Impl_SHA2_384_update(i64* nocapture noundef %0, i8* nocapture noundef readonly %1) unnamed_addr #2 !dbg !274 {
   %3 = alloca [16 x i64], align 8
   %4 = bitcast [16 x i64]* %3 to i8*
@@ -258,687 +258,359 @@ define internal fastcc void @Hacl_Impl_SHA2_384_update(i64* nocapture noundef %0
   call void @llvm.dbg.value(metadata i64* %0, metadata !276, metadata !DIExpression()), !dbg !333
   call void @llvm.dbg.value(metadata i8* %1, metadata !277, metadata !DIExpression()), !dbg !333
   %6 = bitcast [16 x i64]* %3 to i8*, !dbg !334
-  call void @llvm.lifetime.start.p0i8(i64 128, i8* nonnull %6) #9, !dbg !334
+  call void @llvm.lifetime.start.p0i8(i64 128, i8* nonnull %6) #12, !dbg !334
   call void @llvm.dbg.declare(metadata [16 x i64]* %3, metadata !278, metadata !DIExpression()), !dbg !335
   call void @llvm.dbg.value(metadata i32 0, metadata !282, metadata !DIExpression()), !dbg !336
   call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 8 dereferenceable(128) %4, i8 0, i32 128, i1 false), !dbg !337, !tbaa !91
   call void @llvm.dbg.value(metadata i32 undef, metadata !282, metadata !DIExpression()), !dbg !336
   call void @llvm.dbg.value(metadata i32 undef, metadata !282, metadata !DIExpression(DW_OP_plus_uconst, 1, DW_OP_stack_value)), !dbg !336
-  br label %7, !dbg !339
-
-7:                                                ; preds = %2, %7
-  %8 = phi i32 [ %15, %7 ], [ 0, %2 ]
-  call void @llvm.dbg.value(metadata i32 %8, metadata !348, metadata !DIExpression()) #9, !dbg !354
-  %9 = shl i32 %8, 3, !dbg !355
-  %10 = getelementptr inbounds i8, i8* %1, i32 %9, !dbg !356
-  call void @llvm.dbg.value(metadata i8* %10, metadata !349, metadata !DIExpression()) #9, !dbg !357
-  call void @llvm.dbg.value(metadata i8* %10, metadata !358, metadata !DIExpression()) #9, !dbg !365
-  %11 = bitcast i8* %10 to i64*, !dbg !367
-  %12 = load i64, i64* %11, align 1, !dbg !367
-  call void @llvm.dbg.value(metadata i64 %12, metadata !364, metadata !DIExpression()) #9, !dbg !365
-  call void @llvm.dbg.value(metadata i64 %12, metadata !368, metadata !DIExpression()) #9, !dbg !374
-  %13 = call i64 @llvm.bswap.i64(i64 %12) #9, !dbg !376
-  call void @llvm.dbg.value(metadata i64 %13, metadata !352, metadata !DIExpression()) #9, !dbg !357
-  %14 = getelementptr inbounds [16 x i64], [16 x i64]* %3, i32 0, i32 %8, !dbg !377
-  store i64 %13, i64* %14, align 8, !dbg !378, !tbaa !91
-  %15 = add nuw nsw i32 %8, 1, !dbg !379
-  call void @llvm.dbg.value(metadata i32 %15, metadata !348, metadata !DIExpression()) #9, !dbg !354
-  %16 = icmp eq i32 %15, 16, !dbg !380
-  br i1 %16, label %17, label %7, !dbg !339, !llvm.loop !381
-
-17:                                               ; preds = %7
-  call void @llvm.dbg.value(metadata i64* %20, metadata !284, metadata !DIExpression()), !dbg !333
-  %18 = getelementptr inbounds i64, i64* %0, i32 80, !dbg !385
-  %19 = bitcast i64* %18 to i8*, !dbg !333
-  call void @llvm.dbg.value(metadata i64* %18, metadata !285, metadata !DIExpression()), !dbg !333
+  %7 = getelementptr inbounds [16 x i64], [16 x i64]* %3, i32 0, i32 0, !dbg !339
+  call fastcc void @Hacl_Hash_Lib_LoadStore_uint64s_from_be_bytes(i64* noundef nonnull %7, i8* noundef %1), !dbg !340
+  call void @llvm.dbg.value(metadata i64* %10, metadata !284, metadata !DIExpression()), !dbg !333
+  %8 = getelementptr inbounds i64, i64* %0, i32 80, !dbg !341
+  %9 = bitcast i64* %8 to i8*, !dbg !333
+  call void @llvm.dbg.value(metadata i64* %8, metadata !285, metadata !DIExpression()), !dbg !333
   call void @llvm.dbg.value(metadata i64* %0, metadata !286, metadata !DIExpression()), !dbg !333
-  call void @llvm.dbg.value(metadata i64* %113, metadata !287, metadata !DIExpression()), !dbg !333
-  call void @llvm.dbg.value(metadata i32 0, metadata !288, metadata !DIExpression()), !dbg !386
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(128) %19, i8* noundef nonnull align 8 dereferenceable(128) %4, i32 128, i1 false), !dbg !387, !tbaa !91
-  call void @llvm.dbg.value(metadata i32 undef, metadata !288, metadata !DIExpression()), !dbg !386
-  call void @llvm.dbg.value(metadata i32 undef, metadata !290, metadata !DIExpression()), !dbg !388
-  call void @llvm.dbg.value(metadata i32 undef, metadata !288, metadata !DIExpression(DW_OP_plus_uconst, 1, DW_OP_stack_value)), !dbg !386
-  %20 = getelementptr inbounds i64, i64* %0, i32 160, !dbg !389
-  br label %40, !dbg !390
+  call void @llvm.dbg.value(metadata i64* %103, metadata !287, metadata !DIExpression()), !dbg !333
+  call void @llvm.dbg.value(metadata i32 0, metadata !288, metadata !DIExpression()), !dbg !342
+  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(128) %9, i8* noundef nonnull align 8 dereferenceable(128) %4, i32 128, i1 false), !dbg !343, !tbaa !91
+  call void @llvm.dbg.value(metadata i32 undef, metadata !288, metadata !DIExpression()), !dbg !342
+  call void @llvm.dbg.value(metadata i32 undef, metadata !290, metadata !DIExpression()), !dbg !344
+  call void @llvm.dbg.value(metadata i32 undef, metadata !288, metadata !DIExpression(DW_OP_plus_uconst, 1, DW_OP_stack_value)), !dbg !342
+  %10 = getelementptr inbounds i64, i64* %0, i32 160, !dbg !345
+  br label %30, !dbg !346
 
-21:                                               ; preds = %40
-  %22 = bitcast [8 x i64]* %5 to i8*, !dbg !391
-  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %22) #9, !dbg !391
-  call void @llvm.dbg.declare(metadata [8 x i64]* %5, metadata !301, metadata !DIExpression()), !dbg !392
-  %23 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 0, !dbg !393
-  %24 = bitcast i64* %20 to i8*, !dbg !393
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 8 dereferenceable(64) %22, i8* noundef nonnull align 4 dereferenceable(64) %24, i32 64, i1 false), !dbg !393
-  call void @llvm.dbg.value(metadata i32 0, metadata !305, metadata !DIExpression()), !dbg !394
-  %25 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 1
-  %26 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 2
-  %27 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 3
-  %28 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 4
-  %29 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 5
-  %30 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 6
-  %31 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 7
-  %32 = load i64, i64* %23, align 8, !tbaa !91
-  %33 = load i64, i64* %25, align 8, !tbaa !91
-  %34 = load i64, i64* %26, align 8, !tbaa !91
-  %35 = load i64, i64* %27, align 8, !tbaa !91
-  %36 = load i64, i64* %28, align 8, !tbaa !91
-  %37 = load i64, i64* %29, align 8, !tbaa !91
-  %38 = load i64, i64* %30, align 8, !tbaa !91
-  %39 = load i64, i64* %31, align 8, !tbaa !91
-  call void @llvm.dbg.value(metadata i32 0, metadata !305, metadata !DIExpression()), !dbg !394
-  br label %71, !dbg !395
+11:                                               ; preds = %30
+  %12 = bitcast [8 x i64]* %5 to i8*, !dbg !347
+  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %12) #12, !dbg !347
+  call void @llvm.dbg.declare(metadata [8 x i64]* %5, metadata !301, metadata !DIExpression()), !dbg !348
+  %13 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 0, !dbg !349
+  %14 = bitcast i64* %10 to i8*, !dbg !349
+  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 8 dereferenceable(64) %12, i8* noundef nonnull align 4 dereferenceable(64) %14, i32 64, i1 false), !dbg !349
+  call void @llvm.dbg.value(metadata i32 0, metadata !305, metadata !DIExpression()), !dbg !350
+  %15 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 1
+  %16 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 2
+  %17 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 3
+  %18 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 4
+  %19 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 5
+  %20 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 6
+  %21 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 7
+  %22 = load i64, i64* %13, align 8, !tbaa !91
+  %23 = load i64, i64* %15, align 8, !tbaa !91
+  %24 = load i64, i64* %16, align 8, !tbaa !91
+  %25 = load i64, i64* %17, align 8, !tbaa !91
+  %26 = load i64, i64* %18, align 8, !tbaa !91
+  %27 = load i64, i64* %19, align 8, !tbaa !91
+  %28 = load i64, i64* %20, align 8, !tbaa !91
+  %29 = load i64, i64* %21, align 8, !tbaa !91
+  call void @llvm.dbg.value(metadata i32 0, metadata !305, metadata !DIExpression()), !dbg !350
+  br label %61, !dbg !351
 
-40:                                               ; preds = %17, %40
-  %41 = phi i32 [ %68, %40 ], [ 16, %17 ]
-  call void @llvm.dbg.value(metadata i32 %41, metadata !293, metadata !DIExpression()), !dbg !396
-  %42 = add nsw i32 %41, -16, !dbg !397
-  %43 = getelementptr inbounds i64, i64* %18, i32 %42, !dbg !398
-  %44 = load i64, i64* %43, align 4, !dbg !398, !tbaa !91
-  call void @llvm.dbg.value(metadata i64 %44, metadata !295, metadata !DIExpression()), !dbg !399
-  %45 = add nsw i32 %41, -15, !dbg !400
-  %46 = getelementptr inbounds i64, i64* %18, i32 %45, !dbg !401
-  %47 = load i64, i64* %46, align 4, !dbg !401, !tbaa !91
-  call void @llvm.dbg.value(metadata i64 %47, metadata !298, metadata !DIExpression()), !dbg !399
-  %48 = add nsw i32 %41, -7, !dbg !402
-  %49 = getelementptr inbounds i64, i64* %18, i32 %48, !dbg !403
-  %50 = load i64, i64* %49, align 4, !dbg !403, !tbaa !91
-  call void @llvm.dbg.value(metadata i64 %50, metadata !299, metadata !DIExpression()), !dbg !399
-  %51 = add nsw i32 %41, -2, !dbg !404
-  %52 = getelementptr inbounds i64, i64* %18, i32 %51, !dbg !405
-  %53 = load i64, i64* %52, align 4, !dbg !405, !tbaa !91
-  call void @llvm.dbg.value(metadata i64 %53, metadata !300, metadata !DIExpression()), !dbg !399
-  %54 = call i64 @llvm.fshl.i64(i64 %53, i64 %53, i64 45), !dbg !406
-  %55 = call i64 @llvm.fshl.i64(i64 %53, i64 %53, i64 3), !dbg !407
-  %56 = lshr i64 %53, 6, !dbg !408
-  %57 = xor i64 %55, %56, !dbg !409
-  %58 = xor i64 %57, %54, !dbg !410
-  %59 = call i64 @llvm.fshl.i64(i64 %47, i64 %47, i64 63), !dbg !411
-  %60 = call i64 @llvm.fshl.i64(i64 %47, i64 %47, i64 56), !dbg !412
-  %61 = lshr i64 %47, 7, !dbg !413
-  %62 = xor i64 %60, %61, !dbg !414
-  %63 = xor i64 %62, %59, !dbg !415
-  %64 = add i64 %50, %44, !dbg !416
-  %65 = add i64 %64, %63, !dbg !417
-  %66 = add i64 %65, %58, !dbg !418
-  %67 = getelementptr inbounds i64, i64* %18, i32 %41, !dbg !419
-  store i64 %66, i64* %67, align 4, !dbg !420, !tbaa !91
-  %68 = add nuw nsw i32 %41, 1, !dbg !421
-  call void @llvm.dbg.value(metadata i32 %68, metadata !293, metadata !DIExpression()), !dbg !396
-  %69 = icmp eq i32 %68, 80, !dbg !422
-  br i1 %69, label %21, label %40, !dbg !390, !llvm.loop !423
+30:                                               ; preds = %2, %30
+  %31 = phi i32 [ %58, %30 ], [ 16, %2 ]
+  call void @llvm.dbg.value(metadata i32 %31, metadata !293, metadata !DIExpression()), !dbg !352
+  %32 = add nsw i32 %31, -16, !dbg !353
+  %33 = getelementptr inbounds i64, i64* %8, i32 %32, !dbg !354
+  %34 = load i64, i64* %33, align 4, !dbg !354, !tbaa !91
+  call void @llvm.dbg.value(metadata i64 %34, metadata !295, metadata !DIExpression()), !dbg !355
+  %35 = add nsw i32 %31, -15, !dbg !356
+  %36 = getelementptr inbounds i64, i64* %8, i32 %35, !dbg !357
+  %37 = load i64, i64* %36, align 4, !dbg !357, !tbaa !91
+  call void @llvm.dbg.value(metadata i64 %37, metadata !298, metadata !DIExpression()), !dbg !355
+  %38 = add nsw i32 %31, -7, !dbg !358
+  %39 = getelementptr inbounds i64, i64* %8, i32 %38, !dbg !359
+  %40 = load i64, i64* %39, align 4, !dbg !359, !tbaa !91
+  call void @llvm.dbg.value(metadata i64 %40, metadata !299, metadata !DIExpression()), !dbg !355
+  %41 = add nsw i32 %31, -2, !dbg !360
+  %42 = getelementptr inbounds i64, i64* %8, i32 %41, !dbg !361
+  %43 = load i64, i64* %42, align 4, !dbg !361, !tbaa !91
+  call void @llvm.dbg.value(metadata i64 %43, metadata !300, metadata !DIExpression()), !dbg !355
+  %44 = call i64 @llvm.fshl.i64(i64 %43, i64 %43, i64 45), !dbg !362
+  %45 = call i64 @llvm.fshl.i64(i64 %43, i64 %43, i64 3), !dbg !363
+  %46 = lshr i64 %43, 6, !dbg !364
+  %47 = xor i64 %45, %46, !dbg !365
+  %48 = xor i64 %47, %44, !dbg !366
+  %49 = call i64 @llvm.fshl.i64(i64 %37, i64 %37, i64 63), !dbg !367
+  %50 = call i64 @llvm.fshl.i64(i64 %37, i64 %37, i64 56), !dbg !368
+  %51 = lshr i64 %37, 7, !dbg !369
+  %52 = xor i64 %50, %51, !dbg !370
+  %53 = xor i64 %52, %49, !dbg !371
+  %54 = add i64 %40, %34, !dbg !372
+  %55 = add i64 %54, %53, !dbg !373
+  %56 = add i64 %55, %48, !dbg !374
+  %57 = getelementptr inbounds i64, i64* %8, i32 %31, !dbg !375
+  store i64 %56, i64* %57, align 4, !dbg !376, !tbaa !91
+  %58 = add nuw nsw i32 %31, 1, !dbg !377
+  call void @llvm.dbg.value(metadata i32 %58, metadata !293, metadata !DIExpression()), !dbg !352
+  %59 = icmp eq i32 %58, 80, !dbg !378
+  br i1 %59, label %11, label %30, !dbg !346, !llvm.loop !379
 
-70:                                               ; preds = %71
-  store i64 %108, i64* %23, align 8, !dbg !425, !tbaa !91
-  store i64 %73, i64* %25, align 8, !dbg !425, !tbaa !91
-  store i64 %74, i64* %26, align 8, !dbg !425, !tbaa !91
-  store i64 %75, i64* %27, align 8, !dbg !425, !tbaa !91
-  store i64 %109, i64* %28, align 8, !dbg !425, !tbaa !91
-  store i64 %77, i64* %29, align 8, !dbg !425, !tbaa !91
-  store i64 %78, i64* %30, align 8, !dbg !425, !tbaa !91
-  store i64 %79, i64* %31, align 8, !dbg !425, !tbaa !91
-  call void @llvm.dbg.value(metadata i32 0, metadata !325, metadata !DIExpression()), !dbg !426
-  br label %116, !dbg !427
+60:                                               ; preds = %61
+  store i64 %98, i64* %13, align 8, !dbg !383, !tbaa !91
+  store i64 %63, i64* %15, align 8, !dbg !383, !tbaa !91
+  store i64 %64, i64* %16, align 8, !dbg !383, !tbaa !91
+  store i64 %65, i64* %17, align 8, !dbg !383, !tbaa !91
+  store i64 %99, i64* %18, align 8, !dbg !383, !tbaa !91
+  store i64 %67, i64* %19, align 8, !dbg !383, !tbaa !91
+  store i64 %68, i64* %20, align 8, !dbg !383, !tbaa !91
+  store i64 %69, i64* %21, align 8, !dbg !383, !tbaa !91
+  call void @llvm.dbg.value(metadata i32 0, metadata !325, metadata !DIExpression()), !dbg !384
+  br label %106, !dbg !385
 
-71:                                               ; preds = %21, %71
-  %72 = phi i32 [ 0, %21 ], [ %110, %71 ]
-  %73 = phi i64 [ %32, %21 ], [ %108, %71 ]
-  %74 = phi i64 [ %33, %21 ], [ %73, %71 ]
-  %75 = phi i64 [ %34, %21 ], [ %74, %71 ]
-  %76 = phi i64 [ %35, %21 ], [ %75, %71 ]
-  %77 = phi i64 [ %36, %21 ], [ %109, %71 ]
-  %78 = phi i64 [ %37, %21 ], [ %77, %71 ]
-  %79 = phi i64 [ %38, %21 ], [ %78, %71 ]
-  %80 = phi i64 [ %39, %21 ], [ %79, %71 ]
-  call void @llvm.dbg.value(metadata i32 %72, metadata !305, metadata !DIExpression()), !dbg !394
-  call void @llvm.dbg.value(metadata i64 %73, metadata !307, metadata !DIExpression()), !dbg !425
-  call void @llvm.dbg.value(metadata i64 %74, metadata !310, metadata !DIExpression()), !dbg !425
-  call void @llvm.dbg.value(metadata i64 %75, metadata !311, metadata !DIExpression()), !dbg !425
-  call void @llvm.dbg.value(metadata i64 %76, metadata !312, metadata !DIExpression()), !dbg !425
-  call void @llvm.dbg.value(metadata i64 %77, metadata !313, metadata !DIExpression()), !dbg !425
-  call void @llvm.dbg.value(metadata i64 %78, metadata !314, metadata !DIExpression()), !dbg !425
-  call void @llvm.dbg.value(metadata i64 %79, metadata !315, metadata !DIExpression()), !dbg !425
-  call void @llvm.dbg.value(metadata i64 %80, metadata !316, metadata !DIExpression()), !dbg !425
-  %81 = getelementptr inbounds i64, i64* %0, i32 %72, !dbg !428
-  %82 = load i64, i64* %81, align 4, !dbg !428, !tbaa !91
-  call void @llvm.dbg.value(metadata i64 %82, metadata !317, metadata !DIExpression()), !dbg !425
-  %83 = getelementptr inbounds i64, i64* %18, i32 %72, !dbg !429
-  %84 = load i64, i64* %83, align 4, !dbg !429, !tbaa !91
-  call void @llvm.dbg.value(metadata i64 %84, metadata !318, metadata !DIExpression()), !dbg !425
-  %85 = call i64 @llvm.fshl.i64(i64 %77, i64 %77, i64 50), !dbg !430
-  %86 = call i64 @llvm.fshl.i64(i64 %77, i64 %77, i64 46), !dbg !431
-  %87 = call i64 @llvm.fshl.i64(i64 %77, i64 %77, i64 23), !dbg !432
-  %88 = xor i64 %86, %87, !dbg !433
-  %89 = xor i64 %88, %85, !dbg !434
-  %90 = and i64 %78, %77, !dbg !435
-  %91 = xor i64 %77, -1, !dbg !436
-  %92 = and i64 %79, %91, !dbg !437
-  %93 = add i64 %89, %90, !dbg !438
-  %94 = add i64 %93, %80, !dbg !439
-  %95 = add i64 %94, %92, !dbg !440
-  %96 = add i64 %95, %82, !dbg !441
-  %97 = add i64 %96, %84, !dbg !442
-  call void @llvm.dbg.value(metadata i64 %97, metadata !319, metadata !DIExpression()), !dbg !425
-  %98 = call i64 @llvm.fshl.i64(i64 %73, i64 %73, i64 36), !dbg !443
-  %99 = call i64 @llvm.fshl.i64(i64 %73, i64 %73, i64 30), !dbg !444
-  %100 = call i64 @llvm.fshl.i64(i64 %73, i64 %73, i64 25), !dbg !445
-  %101 = xor i64 %99, %100, !dbg !446
-  %102 = xor i64 %101, %98, !dbg !447
-  %103 = and i64 %74, %73, !dbg !448
-  %104 = xor i64 %74, %73, !dbg !449
-  %105 = and i64 %104, %75, !dbg !449
-  %106 = xor i64 %105, %103, !dbg !450
-  %107 = add i64 %106, %102, !dbg !451
-  call void @llvm.dbg.value(metadata i64 %107, metadata !320, metadata !DIExpression()), !dbg !425
-  %108 = add i64 %107, %97, !dbg !452
-  call void @llvm.dbg.value(metadata i64 %108, metadata !321, metadata !DIExpression()), !dbg !425
-  %109 = add i64 %97, %76, !dbg !453
-  call void @llvm.dbg.value(metadata i64 %109, metadata !322, metadata !DIExpression()), !dbg !425
-  call void @llvm.dbg.value(metadata i64* %23, metadata !323, metadata !DIExpression()), !dbg !425
-  call void @llvm.dbg.value(metadata i64* %28, metadata !324, metadata !DIExpression()), !dbg !425
-  %110 = add nuw nsw i32 %72, 1, !dbg !454
-  call void @llvm.dbg.value(metadata i32 %110, metadata !305, metadata !DIExpression()), !dbg !394
-  %111 = icmp eq i32 %110, 80, !dbg !455
-  br i1 %111, label %70, label %71, !dbg !395, !llvm.loop !456
+61:                                               ; preds = %11, %61
+  %62 = phi i32 [ 0, %11 ], [ %100, %61 ]
+  %63 = phi i64 [ %22, %11 ], [ %98, %61 ]
+  %64 = phi i64 [ %23, %11 ], [ %63, %61 ]
+  %65 = phi i64 [ %24, %11 ], [ %64, %61 ]
+  %66 = phi i64 [ %25, %11 ], [ %65, %61 ]
+  %67 = phi i64 [ %26, %11 ], [ %99, %61 ]
+  %68 = phi i64 [ %27, %11 ], [ %67, %61 ]
+  %69 = phi i64 [ %28, %11 ], [ %68, %61 ]
+  %70 = phi i64 [ %29, %11 ], [ %69, %61 ]
+  call void @llvm.dbg.value(metadata i32 %62, metadata !305, metadata !DIExpression()), !dbg !350
+  call void @llvm.dbg.value(metadata i64 %63, metadata !307, metadata !DIExpression()), !dbg !383
+  call void @llvm.dbg.value(metadata i64 %64, metadata !310, metadata !DIExpression()), !dbg !383
+  call void @llvm.dbg.value(metadata i64 %65, metadata !311, metadata !DIExpression()), !dbg !383
+  call void @llvm.dbg.value(metadata i64 %66, metadata !312, metadata !DIExpression()), !dbg !383
+  call void @llvm.dbg.value(metadata i64 %67, metadata !313, metadata !DIExpression()), !dbg !383
+  call void @llvm.dbg.value(metadata i64 %68, metadata !314, metadata !DIExpression()), !dbg !383
+  call void @llvm.dbg.value(metadata i64 %69, metadata !315, metadata !DIExpression()), !dbg !383
+  call void @llvm.dbg.value(metadata i64 %70, metadata !316, metadata !DIExpression()), !dbg !383
+  %71 = getelementptr inbounds i64, i64* %0, i32 %62, !dbg !386
+  %72 = load i64, i64* %71, align 4, !dbg !386, !tbaa !91
+  call void @llvm.dbg.value(metadata i64 %72, metadata !317, metadata !DIExpression()), !dbg !383
+  %73 = getelementptr inbounds i64, i64* %8, i32 %62, !dbg !387
+  %74 = load i64, i64* %73, align 4, !dbg !387, !tbaa !91
+  call void @llvm.dbg.value(metadata i64 %74, metadata !318, metadata !DIExpression()), !dbg !383
+  %75 = call i64 @llvm.fshl.i64(i64 %67, i64 %67, i64 50), !dbg !388
+  %76 = call i64 @llvm.fshl.i64(i64 %67, i64 %67, i64 46), !dbg !389
+  %77 = call i64 @llvm.fshl.i64(i64 %67, i64 %67, i64 23), !dbg !390
+  %78 = xor i64 %76, %77, !dbg !391
+  %79 = xor i64 %78, %75, !dbg !392
+  %80 = and i64 %68, %67, !dbg !393
+  %81 = xor i64 %67, -1, !dbg !394
+  %82 = and i64 %69, %81, !dbg !395
+  %83 = add i64 %79, %80, !dbg !396
+  %84 = add i64 %83, %70, !dbg !397
+  %85 = add i64 %84, %82, !dbg !398
+  %86 = add i64 %85, %72, !dbg !399
+  %87 = add i64 %86, %74, !dbg !400
+  call void @llvm.dbg.value(metadata i64 %87, metadata !319, metadata !DIExpression()), !dbg !383
+  %88 = call i64 @llvm.fshl.i64(i64 %63, i64 %63, i64 36), !dbg !401
+  %89 = call i64 @llvm.fshl.i64(i64 %63, i64 %63, i64 30), !dbg !402
+  %90 = call i64 @llvm.fshl.i64(i64 %63, i64 %63, i64 25), !dbg !403
+  %91 = xor i64 %89, %90, !dbg !404
+  %92 = xor i64 %91, %88, !dbg !405
+  %93 = and i64 %64, %63, !dbg !406
+  %94 = xor i64 %64, %63, !dbg !407
+  %95 = and i64 %94, %65, !dbg !407
+  %96 = xor i64 %95, %93, !dbg !408
+  %97 = add i64 %96, %92, !dbg !409
+  call void @llvm.dbg.value(metadata i64 %97, metadata !320, metadata !DIExpression()), !dbg !383
+  %98 = add i64 %97, %87, !dbg !410
+  call void @llvm.dbg.value(metadata i64 %98, metadata !321, metadata !DIExpression()), !dbg !383
+  %99 = add i64 %87, %66, !dbg !411
+  call void @llvm.dbg.value(metadata i64 %99, metadata !322, metadata !DIExpression()), !dbg !383
+  call void @llvm.dbg.value(metadata i64* %13, metadata !323, metadata !DIExpression()), !dbg !383
+  call void @llvm.dbg.value(metadata i64* %18, metadata !324, metadata !DIExpression()), !dbg !383
+  %100 = add nuw nsw i32 %62, 1, !dbg !412
+  call void @llvm.dbg.value(metadata i32 %100, metadata !305, metadata !DIExpression()), !dbg !350
+  %101 = icmp eq i32 %100, 80, !dbg !413
+  br i1 %101, label %60, label %61, !dbg !351, !llvm.loop !414
 
-112:                                              ; preds = %116
-  %113 = getelementptr inbounds i64, i64* %0, i32 168, !dbg !458
-  %114 = load i64, i64* %113, align 4, !dbg !459, !tbaa !91
-  call void @llvm.dbg.value(metadata i64 %114, metadata !331, metadata !DIExpression()), !dbg !333
+102:                                              ; preds = %106
+  %103 = getelementptr inbounds i64, i64* %0, i32 168, !dbg !416
+  %104 = load i64, i64* %103, align 4, !dbg !417, !tbaa !91
+  call void @llvm.dbg.value(metadata i64 %104, metadata !331, metadata !DIExpression()), !dbg !333
   call void @llvm.dbg.value(metadata i64 1, metadata !332, metadata !DIExpression()), !dbg !333
-  %115 = add i64 %114, 1, !dbg !460
-  store i64 %115, i64* %113, align 4, !dbg !461, !tbaa !91
-  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %22) #9, !dbg !462
-  call void @llvm.lifetime.end.p0i8(i64 128, i8* nonnull %6) #9, !dbg !462
-  ret void, !dbg !462
+  %105 = add i64 %104, 1, !dbg !418
+  store i64 %105, i64* %103, align 4, !dbg !419, !tbaa !91
+  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %12) #12, !dbg !420
+  call void @llvm.lifetime.end.p0i8(i64 128, i8* nonnull %6) #12, !dbg !420
+  ret void, !dbg !420
 
-116:                                              ; preds = %70, %116
-  %117 = phi i32 [ 0, %70 ], [ %123, %116 ]
-  call void @llvm.dbg.value(metadata i32 %117, metadata !325, metadata !DIExpression()), !dbg !426
-  %118 = getelementptr inbounds i64, i64* %20, i32 %117, !dbg !463
-  %119 = load i64, i64* %118, align 4, !dbg !463, !tbaa !91
-  call void @llvm.dbg.value(metadata i64 %119, metadata !327, metadata !DIExpression()), !dbg !464
-  %120 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 %117, !dbg !465
-  %121 = load i64, i64* %120, align 8, !dbg !465, !tbaa !91
-  call void @llvm.dbg.value(metadata i64 %121, metadata !330, metadata !DIExpression()), !dbg !464
-  %122 = add i64 %121, %119, !dbg !466
-  store i64 %122, i64* %118, align 4, !dbg !467, !tbaa !91
-  %123 = add nuw nsw i32 %117, 1, !dbg !468
-  call void @llvm.dbg.value(metadata i32 %123, metadata !325, metadata !DIExpression()), !dbg !426
-  %124 = icmp eq i32 %123, 8, !dbg !469
-  br i1 %124, label %112, label %116, !dbg !427, !llvm.loop !470
+106:                                              ; preds = %60, %106
+  %107 = phi i32 [ 0, %60 ], [ %113, %106 ]
+  call void @llvm.dbg.value(metadata i32 %107, metadata !325, metadata !DIExpression()), !dbg !384
+  %108 = getelementptr inbounds i64, i64* %10, i32 %107, !dbg !421
+  %109 = load i64, i64* %108, align 4, !dbg !421, !tbaa !91
+  call void @llvm.dbg.value(metadata i64 %109, metadata !327, metadata !DIExpression()), !dbg !422
+  %110 = getelementptr inbounds [8 x i64], [8 x i64]* %5, i32 0, i32 %107, !dbg !423
+  %111 = load i64, i64* %110, align 8, !dbg !423, !tbaa !91
+  call void @llvm.dbg.value(metadata i64 %111, metadata !330, metadata !DIExpression()), !dbg !422
+  %112 = add i64 %111, %109, !dbg !424
+  store i64 %112, i64* %108, align 4, !dbg !425, !tbaa !91
+  %113 = add nuw nsw i32 %107, 1, !dbg !426
+  call void @llvm.dbg.value(metadata i32 %113, metadata !325, metadata !DIExpression()), !dbg !384
+  %114 = icmp eq i32 %113, 8, !dbg !427
+  br i1 %114, label %102, label %106, !dbg !385, !llvm.loop !428
 }
 
-; Function Attrs: nofree nosync nounwind uwtable
-define dso_local void @Hacl_SHA2_384_update_multi(i64* nocapture noundef %0, i8* nocapture noundef readonly %1, i32 noundef %2) local_unnamed_addr #2 !dbg !472 {
-  call void @llvm.dbg.value(metadata i64* %0, metadata !474, metadata !DIExpression()), !dbg !477
-  call void @llvm.dbg.value(metadata i8* %1, metadata !475, metadata !DIExpression()), !dbg !477
-  call void @llvm.dbg.value(metadata i32 %2, metadata !476, metadata !DIExpression()), !dbg !477
-  call void @llvm.dbg.value(metadata i64* %0, metadata !478, metadata !DIExpression()) #9, !dbg !488
-  call void @llvm.dbg.value(metadata i8* %1, metadata !481, metadata !DIExpression()) #9, !dbg !488
-  call void @llvm.dbg.value(metadata i32 %2, metadata !482, metadata !DIExpression()) #9, !dbg !488
-  call void @llvm.dbg.value(metadata i32 0, metadata !483, metadata !DIExpression()) #9, !dbg !490
-  %4 = icmp eq i32 %2, 0, !dbg !491
-  br i1 %4, label %11, label %5, !dbg !492
-
-5:                                                ; preds = %3, %5
-  %6 = phi i32 [ %9, %5 ], [ 0, %3 ]
-  call void @llvm.dbg.value(metadata i32 %6, metadata !483, metadata !DIExpression()) #9, !dbg !490
-  %7 = shl i32 %6, 7, !dbg !493
-  %8 = getelementptr inbounds i8, i8* %1, i32 %7, !dbg !494
-  call void @llvm.dbg.value(metadata i8* %8, metadata !485, metadata !DIExpression()) #9, !dbg !495
-  call fastcc void @Hacl_Impl_SHA2_384_update(i64* noundef %0, i8* noundef %8) #9, !dbg !496
-  %9 = add nuw i32 %6, 1, !dbg !497
-  call void @llvm.dbg.value(metadata i32 %9, metadata !483, metadata !DIExpression()) #9, !dbg !490
-  %10 = icmp eq i32 %9, %2, !dbg !491
-  br i1 %10, label %11, label %5, !dbg !492, !llvm.loop !498
-
-11:                                               ; preds = %5, %3
-  ret void, !dbg !500
+; Function Attrs: nofree noinline nosync nounwind uwtable
+define dso_local void @Hacl_SHA2_384_update_multi(i64* nocapture noundef %0, i8* nocapture noundef readonly %1, i32 noundef %2) local_unnamed_addr #2 !dbg !430 {
+  call void @llvm.dbg.value(metadata i64* %0, metadata !434, metadata !DIExpression()), !dbg !437
+  call void @llvm.dbg.value(metadata i8* %1, metadata !435, metadata !DIExpression()), !dbg !437
+  call void @llvm.dbg.value(metadata i32 %2, metadata !436, metadata !DIExpression()), !dbg !437
+  call fastcc void @Hacl_Impl_SHA2_384_update_multi(i64* noundef %0, i8* noundef %1, i32 noundef %2), !dbg !438
+  ret void, !dbg !439
 }
 
-; Function Attrs: nounwind uwtable
-define dso_local void @Hacl_SHA2_384_update_last(i64* nocapture noundef %0, i8* nocapture noundef readonly %1, i64 noundef %2) local_unnamed_addr #3 !dbg !501 {
-  call void @llvm.dbg.value(metadata i64* %0, metadata !505, metadata !DIExpression()), !dbg !508
-  call void @llvm.dbg.value(metadata i8* %1, metadata !506, metadata !DIExpression()), !dbg !508
-  call void @llvm.dbg.value(metadata i64 %2, metadata !507, metadata !DIExpression()), !dbg !508
-  call fastcc void @Hacl_Impl_SHA2_384_update_last(i64* noundef %0, i8* noundef %1, i64 noundef %2), !dbg !509
-  ret void, !dbg !510
+; Function Attrs: nofree noinline nosync nounwind uwtable
+define internal fastcc void @Hacl_Impl_SHA2_384_update_multi(i64* nocapture noundef %0, i8* nocapture noundef readonly %1, i32 noundef %2) unnamed_addr #2 !dbg !440 {
+  call void @llvm.dbg.value(metadata i64* %0, metadata !442, metadata !DIExpression()), !dbg !450
+  call void @llvm.dbg.value(metadata i8* %1, metadata !443, metadata !DIExpression()), !dbg !450
+  call void @llvm.dbg.value(metadata i32 %2, metadata !444, metadata !DIExpression()), !dbg !450
+  call void @llvm.dbg.value(metadata i32 0, metadata !445, metadata !DIExpression()), !dbg !451
+  %4 = icmp eq i32 %2, 0, !dbg !452
+  br i1 %4, label %5, label %6, !dbg !453
+
+5:                                                ; preds = %6, %3
+  ret void, !dbg !454
+
+6:                                                ; preds = %3, %6
+  %7 = phi i32 [ %10, %6 ], [ 0, %3 ]
+  call void @llvm.dbg.value(metadata i32 %7, metadata !445, metadata !DIExpression()), !dbg !451
+  %8 = shl i32 %7, 7, !dbg !455
+  %9 = getelementptr inbounds i8, i8* %1, i32 %8, !dbg !456
+  call void @llvm.dbg.value(metadata i8* %9, metadata !447, metadata !DIExpression()), !dbg !457
+  call fastcc void @Hacl_Impl_SHA2_384_update(i64* noundef %0, i8* noundef %9), !dbg !458
+  %10 = add nuw i32 %7, 1, !dbg !459
+  call void @llvm.dbg.value(metadata i32 %10, metadata !445, metadata !DIExpression()), !dbg !451
+  %11 = icmp eq i32 %10, %2, !dbg !452
+  br i1 %11, label %5, label %6, !dbg !453, !llvm.loop !460
 }
 
-; Function Attrs: nounwind uwtable
-define internal fastcc void @Hacl_Impl_SHA2_384_update_last(i64* nocapture noundef %0, i8* nocapture noundef readonly %1, i64 noundef %2) unnamed_addr #3 !dbg !511 {
+; Function Attrs: noinline nounwind uwtable
+define dso_local void @Hacl_SHA2_384_update_last(i64* nocapture noundef %0, i8* nocapture noundef readonly %1, i64 noundef %2) local_unnamed_addr #3 !dbg !462 {
+  call void @llvm.dbg.value(metadata i64* %0, metadata !466, metadata !DIExpression()), !dbg !469
+  call void @llvm.dbg.value(metadata i8* %1, metadata !467, metadata !DIExpression()), !dbg !469
+  call void @llvm.dbg.value(metadata i64 %2, metadata !468, metadata !DIExpression()), !dbg !469
+  call fastcc void @Hacl_Impl_SHA2_384_update_last(i64* noundef %0, i8* noundef %1, i64 noundef %2), !dbg !470
+  ret void, !dbg !471
+}
+
+; Function Attrs: noinline nounwind uwtable
+define internal fastcc void @Hacl_Impl_SHA2_384_update_last(i64* nocapture noundef %0, i8* nocapture noundef readonly %1, i64 noundef %2) unnamed_addr #3 !dbg !472 {
   %4 = alloca [256 x i8], align 1
   %5 = alloca %struct.FStar_UInt128_uint128, align 8
   %6 = alloca %struct.FStar_UInt128_uint128, align 8
   %7 = alloca %struct.FStar_UInt128_uint128, align 8
   %8 = alloca %struct.FStar_UInt128_uint128, align 8
-  call void @llvm.dbg.value(metadata i64* %0, metadata !513, metadata !DIExpression()), !dbg !535
-  call void @llvm.dbg.value(metadata i8* %1, metadata !514, metadata !DIExpression()), !dbg !535
-  call void @llvm.dbg.value(metadata i64 %2, metadata !515, metadata !DIExpression()), !dbg !535
-  %9 = getelementptr inbounds [256 x i8], [256 x i8]* %4, i32 0, i32 0, !dbg !536
-  call void @llvm.lifetime.start.p0i8(i64 256, i8* nonnull %9) #9, !dbg !536
-  call void @llvm.dbg.declare(metadata [256 x i8]* %4, metadata !516, metadata !DIExpression()), !dbg !537
-  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 1 dereferenceable(256) %9, i8 0, i32 256, i1 false), !dbg !537
-  %10 = icmp ult i64 %2, 112, !dbg !538
+  call void @llvm.dbg.value(metadata i64* %0, metadata !474, metadata !DIExpression()), !dbg !496
+  call void @llvm.dbg.value(metadata i8* %1, metadata !475, metadata !DIExpression()), !dbg !496
+  call void @llvm.dbg.value(metadata i64 %2, metadata !476, metadata !DIExpression()), !dbg !496
+  %9 = getelementptr inbounds [256 x i8], [256 x i8]* %4, i32 0, i32 0, !dbg !497
+  call void @llvm.lifetime.start.p0i8(i64 256, i8* nonnull %9) #12, !dbg !497
+  call void @llvm.dbg.declare(metadata [256 x i8]* %4, metadata !477, metadata !DIExpression()), !dbg !498
+  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 1 dereferenceable(256) %9, i8 0, i32 256, i1 false), !dbg !498
+  %10 = icmp ult i64 %2, 112, !dbg !499
   %11 = select i1 %10, i32 1, i32 2
-  call void @llvm.dbg.value(metadata i32 %11, metadata !520, metadata !DIExpression()), !dbg !535
-  %12 = getelementptr inbounds [256 x i8], [256 x i8]* %4, i32 0, i32 128, !dbg !540
-  %13 = select i1 %10, i8* %12, i8* %9, !dbg !540
-  call void @llvm.dbg.value(metadata i8* %13, metadata !521, metadata !DIExpression()), !dbg !535
-  %14 = trunc i64 %2 to i32, !dbg !541
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* nonnull align 1 %13, i8* align 1 %1, i32 %14, i1 false), !dbg !542
-  %15 = getelementptr inbounds i64, i64* %0, i32 168, !dbg !543
-  %16 = load i64, i64* %15, align 4, !dbg !543, !tbaa !91
-  call void @llvm.dbg.value(metadata i64 %16, metadata !522, metadata !DIExpression()), !dbg !535
-  %17 = getelementptr inbounds i8, i8* %13, i32 %14, !dbg !544
-  call void @llvm.dbg.value(metadata i8* %17, metadata !523, metadata !DIExpression()), !dbg !535
-  %18 = bitcast %struct.FStar_UInt128_uint128* %5 to i8*, !dbg !545
-  call void @llvm.lifetime.start.p0i8(i64 16, i8* nonnull %18) #9, !dbg !545
-  call void @llvm.dbg.declare(metadata %struct.FStar_UInt128_uint128* %5, metadata !524, metadata !DIExpression()), !dbg !546
-  call void @FStar_UInt128_mul_wide(%struct.FStar_UInt128_uint128* nonnull sret(%struct.FStar_UInt128_uint128) align 4 %7, i64 noundef %16, i64 noundef 128) #9, !dbg !547
-  call void @FStar_UInt128_uint64_to_uint128(%struct.FStar_UInt128_uint128* nonnull sret(%struct.FStar_UInt128_uint128) align 4 %8, i64 noundef %2) #9, !dbg !548
-  %19 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %7, i32 0, i32 0, !dbg !549
-  %20 = load i64, i64* %19, align 8, !dbg !549, !tbaa !550
-  %21 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %7, i32 0, i32 1, !dbg !549
-  %22 = load i64, i64* %21, align 8, !dbg !549, !tbaa !552
-  %23 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %8, i32 0, i32 0, !dbg !549
-  %24 = load i64, i64* %23, align 8, !dbg !549, !tbaa !550
-  %25 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %8, i32 0, i32 1, !dbg !549
-  %26 = load i64, i64* %25, align 8, !dbg !549, !tbaa !552
-  call void @FStar_UInt128_add(%struct.FStar_UInt128_uint128* nonnull sret(%struct.FStar_UInt128_uint128) align 4 %6, i64 %20, i64 %22, i64 %24, i64 %26) #9, !dbg !549
-  %27 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %6, i32 0, i32 0, !dbg !553
-  %28 = load i64, i64* %27, align 8, !dbg !553, !tbaa !550
-  %29 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %6, i32 0, i32 1, !dbg !553
-  %30 = load i64, i64* %29, align 8, !dbg !553, !tbaa !552
-  call void @FStar_UInt128_shift_left(%struct.FStar_UInt128_uint128* nonnull sret(%struct.FStar_UInt128_uint128) align 4 %5, i64 %28, i64 %30, i32 noundef 3) #9, !dbg !553
-  %31 = sub i32 111, %14, !dbg !554
-  %32 = and i32 %31, 127, !dbg !555
-  call void @llvm.dbg.value(metadata i32 %32, metadata !532, metadata !DIExpression()), !dbg !535
-  call void @llvm.dbg.value(metadata i8* %17, metadata !533, metadata !DIExpression()), !dbg !535
-  %33 = getelementptr inbounds i8, i8* %17, i32 1, !dbg !556
-  %34 = getelementptr inbounds i8, i8* %33, i32 %32, !dbg !557
-  call void @llvm.dbg.value(metadata i8* %34, metadata !534, metadata !DIExpression()), !dbg !535
-  store i8 -128, i8* %17, align 1, !dbg !558, !tbaa !559
-  %35 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %5, i32 0, i32 0, !dbg !560
-  %36 = load i64, i64* %35, align 8, !dbg !560, !tbaa !550
-  %37 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %5, i32 0, i32 1, !dbg !560
-  %38 = load i64, i64* %37, align 8, !dbg !560, !tbaa !552
-  call void @llvm.dbg.value(metadata i64 %36, metadata !561, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 64)) #9, !dbg !568
-  call void @llvm.dbg.value(metadata i64 %38, metadata !561, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 64)) #9, !dbg !568
-  call void @llvm.dbg.value(metadata i8* %34, metadata !567, metadata !DIExpression()) #9, !dbg !568
-  call void @llvm.dbg.value(metadata i8* %34, metadata !570, metadata !DIExpression()) #9, !dbg !577
-  call void @llvm.dbg.value(metadata %struct.FStar_UInt128_uint128* undef, metadata !576, metadata !DIExpression()) #9, !dbg !577
-  call void @llvm.dbg.value(metadata i64 %38, metadata !368, metadata !DIExpression()) #9, !dbg !579
-  %39 = call i64 @llvm.bswap.i64(i64 %38) #9, !dbg !581
-  call void @llvm.dbg.value(metadata i8* %34, metadata !582, metadata !DIExpression()) #9, !dbg !588
-  call void @llvm.dbg.value(metadata i64 %39, metadata !587, metadata !DIExpression()) #9, !dbg !588
-  %40 = bitcast i8* %34 to i64*, !dbg !590
-  store i64 %39, i64* %40, align 1, !dbg !590
-  %41 = getelementptr inbounds i8, i8* %34, i32 8, !dbg !591
-  call void @llvm.dbg.value(metadata i64 %36, metadata !368, metadata !DIExpression()) #9, !dbg !592
-  %42 = call i64 @llvm.bswap.i64(i64 %36) #9, !dbg !594
-  call void @llvm.dbg.value(metadata i8* %41, metadata !582, metadata !DIExpression()) #9, !dbg !595
-  call void @llvm.dbg.value(metadata i64 %42, metadata !587, metadata !DIExpression()) #9, !dbg !595
-  %43 = bitcast i8* %41 to i64*, !dbg !597
-  store i64 %42, i64* %43, align 1, !dbg !597
-  call void @llvm.dbg.value(metadata i64* %0, metadata !478, metadata !DIExpression()) #9, !dbg !598
-  call void @llvm.dbg.value(metadata i8* %13, metadata !481, metadata !DIExpression()) #9, !dbg !598
-  call void @llvm.dbg.value(metadata i32 %11, metadata !482, metadata !DIExpression()) #9, !dbg !598
-  call void @llvm.dbg.value(metadata i32 0, metadata !483, metadata !DIExpression()) #9, !dbg !600
-  br label %44
-
-44:                                               ; preds = %44, %3
-  %45 = phi i32 [ %48, %44 ], [ 0, %3 ]
-  call void @llvm.dbg.value(metadata i32 %45, metadata !483, metadata !DIExpression()) #9, !dbg !600
-  %46 = shl i32 %45, 7, !dbg !601
-  %47 = getelementptr inbounds i8, i8* %13, i32 %46, !dbg !602
-  call void @llvm.dbg.value(metadata i8* %47, metadata !485, metadata !DIExpression()) #9, !dbg !603
-  call fastcc void @Hacl_Impl_SHA2_384_update(i64* noundef %0, i8* noundef nonnull %47) #9, !dbg !604
-  %48 = add nuw i32 %45, 1, !dbg !605
-  call void @llvm.dbg.value(metadata i32 %48, metadata !483, metadata !DIExpression()) #9, !dbg !600
-  %49 = icmp eq i32 %48, %11, !dbg !606
-  br i1 %49, label %50, label %44, !dbg !607, !llvm.loop !608
-
-50:                                               ; preds = %44
-  call void @llvm.lifetime.end.p0i8(i64 16, i8* nonnull %18) #9, !dbg !610
-  call void @llvm.lifetime.end.p0i8(i64 256, i8* nonnull %9) #9, !dbg !610
-  ret void, !dbg !610
+  call void @llvm.dbg.value(metadata i32 %11, metadata !481, metadata !DIExpression()), !dbg !496
+  %12 = getelementptr inbounds [256 x i8], [256 x i8]* %4, i32 0, i32 128, !dbg !501
+  %13 = select i1 %10, i8* %12, i8* %9, !dbg !501
+  call void @llvm.dbg.value(metadata i8* %13, metadata !482, metadata !DIExpression()), !dbg !496
+  %14 = trunc i64 %2 to i32, !dbg !502
+  call void @llvm.memcpy.p0i8.p0i8.i32(i8* nonnull align 1 %13, i8* align 1 %1, i32 %14, i1 false), !dbg !503
+  %15 = getelementptr inbounds i64, i64* %0, i32 168, !dbg !504
+  %16 = load i64, i64* %15, align 4, !dbg !504, !tbaa !91
+  call void @llvm.dbg.value(metadata i64 %16, metadata !483, metadata !DIExpression()), !dbg !496
+  %17 = getelementptr inbounds i8, i8* %13, i32 %14, !dbg !505
+  call void @llvm.dbg.value(metadata i8* %17, metadata !484, metadata !DIExpression()), !dbg !496
+  %18 = bitcast %struct.FStar_UInt128_uint128* %5 to i8*, !dbg !506
+  call void @llvm.lifetime.start.p0i8(i64 16, i8* nonnull %18) #12, !dbg !506
+  call void @llvm.dbg.declare(metadata %struct.FStar_UInt128_uint128* %5, metadata !485, metadata !DIExpression()), !dbg !507
+  call void @FStar_UInt128_mul_wide(%struct.FStar_UInt128_uint128* nonnull sret(%struct.FStar_UInt128_uint128) align 4 %7, i64 noundef %16, i64 noundef 128) #12, !dbg !508
+  call void @FStar_UInt128_uint64_to_uint128(%struct.FStar_UInt128_uint128* nonnull sret(%struct.FStar_UInt128_uint128) align 4 %8, i64 noundef %2) #12, !dbg !509
+  %19 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %7, i32 0, i32 0, !dbg !510
+  %20 = load i64, i64* %19, align 8, !dbg !510, !tbaa !511
+  %21 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %7, i32 0, i32 1, !dbg !510
+  %22 = load i64, i64* %21, align 8, !dbg !510, !tbaa !513
+  %23 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %8, i32 0, i32 0, !dbg !510
+  %24 = load i64, i64* %23, align 8, !dbg !510, !tbaa !511
+  %25 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %8, i32 0, i32 1, !dbg !510
+  %26 = load i64, i64* %25, align 8, !dbg !510, !tbaa !513
+  call void @FStar_UInt128_add(%struct.FStar_UInt128_uint128* nonnull sret(%struct.FStar_UInt128_uint128) align 4 %6, i64 %20, i64 %22, i64 %24, i64 %26) #12, !dbg !510
+  %27 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %6, i32 0, i32 0, !dbg !514
+  %28 = load i64, i64* %27, align 8, !dbg !514, !tbaa !511
+  %29 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %6, i32 0, i32 1, !dbg !514
+  %30 = load i64, i64* %29, align 8, !dbg !514, !tbaa !513
+  call void @FStar_UInt128_shift_left(%struct.FStar_UInt128_uint128* nonnull sret(%struct.FStar_UInt128_uint128) align 4 %5, i64 %28, i64 %30, i32 noundef 3) #12, !dbg !514
+  %31 = sub i32 111, %14, !dbg !515
+  %32 = and i32 %31, 127, !dbg !516
+  call void @llvm.dbg.value(metadata i32 %32, metadata !493, metadata !DIExpression()), !dbg !496
+  call void @llvm.dbg.value(metadata i8* %17, metadata !494, metadata !DIExpression()), !dbg !496
+  %33 = getelementptr inbounds i8, i8* %17, i32 1, !dbg !517
+  %34 = getelementptr inbounds i8, i8* %33, i32 %32, !dbg !518
+  call void @llvm.dbg.value(metadata i8* %34, metadata !495, metadata !DIExpression()), !dbg !496
+  store i8 -128, i8* %17, align 1, !dbg !519, !tbaa !520
+  %35 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %5, i32 0, i32 0, !dbg !521
+  %36 = load i64, i64* %35, align 8, !dbg !521, !tbaa !511
+  %37 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %5, i32 0, i32 1, !dbg !521
+  %38 = load i64, i64* %37, align 8, !dbg !521, !tbaa !513
+  call fastcc void @store128_be(i8* noundef nonnull %34, i64 %36, i64 %38), !dbg !521
+  call fastcc void @Hacl_Impl_SHA2_384_update_multi(i64* noundef %0, i8* noundef nonnull %13, i32 noundef %11), !dbg !522
+  call void @llvm.lifetime.end.p0i8(i64 16, i8* nonnull %18) #12, !dbg !523
+  call void @llvm.lifetime.end.p0i8(i64 256, i8* nonnull %9) #12, !dbg !523
+  ret void, !dbg !523
 }
 
-; Function Attrs: nofree nosync nounwind uwtable
-define dso_local void @Hacl_SHA2_384_finish(i64* nocapture noundef readonly %0, i8* nocapture noundef writeonly %1) local_unnamed_addr #2 !dbg !611 {
-  call void @llvm.dbg.value(metadata i64* %0, metadata !613, metadata !DIExpression()), !dbg !615
-  call void @llvm.dbg.value(metadata i8* %1, metadata !614, metadata !DIExpression()), !dbg !615
-  call void @llvm.dbg.value(metadata i64* %0, metadata !616, metadata !DIExpression()) #9, !dbg !621
-  call void @llvm.dbg.value(metadata i8* %1, metadata !619, metadata !DIExpression()) #9, !dbg !621
-  %3 = getelementptr inbounds i64, i64* %0, i32 160, !dbg !623
-  call void @llvm.dbg.value(metadata i64* %3, metadata !620, metadata !DIExpression()) #9, !dbg !621
-  call void @llvm.dbg.value(metadata i8* %1, metadata !624, metadata !DIExpression()) #9, !dbg !637
-  call void @llvm.dbg.value(metadata i64* %3, metadata !629, metadata !DIExpression()) #9, !dbg !637
-  call void @llvm.dbg.value(metadata i32 6, metadata !630, metadata !DIExpression()) #9, !dbg !637
-  call void @llvm.dbg.value(metadata i32 0, metadata !631, metadata !DIExpression()) #9, !dbg !639
-  br label %4, !dbg !640
-
-4:                                                ; preds = %4, %2
-  %5 = phi i32 [ 0, %2 ], [ %12, %4 ]
-  call void @llvm.dbg.value(metadata i32 %5, metadata !631, metadata !DIExpression()) #9, !dbg !639
-  %6 = getelementptr inbounds i64, i64* %3, i32 %5, !dbg !641
-  %7 = load i64, i64* %6, align 4, !dbg !641, !tbaa !91
-  call void @llvm.dbg.value(metadata i64 %7, metadata !633, metadata !DIExpression()) #9, !dbg !642
-  %8 = shl i32 %5, 3, !dbg !643
-  %9 = getelementptr inbounds i8, i8* %1, i32 %8, !dbg !644
-  call void @llvm.dbg.value(metadata i8* %9, metadata !636, metadata !DIExpression()) #9, !dbg !642
-  call void @llvm.dbg.value(metadata i64 %7, metadata !368, metadata !DIExpression()) #9, !dbg !645
-  %10 = call i64 @llvm.bswap.i64(i64 %7) #9, !dbg !647
-  call void @llvm.dbg.value(metadata i8* %9, metadata !582, metadata !DIExpression()) #9, !dbg !648
-  call void @llvm.dbg.value(metadata i64 %10, metadata !587, metadata !DIExpression()) #9, !dbg !648
-  %11 = bitcast i8* %9 to i64*, !dbg !650
-  store i64 %10, i64* %11, align 1, !dbg !650
-  %12 = add nuw nsw i32 %5, 1, !dbg !651
-  call void @llvm.dbg.value(metadata i32 %12, metadata !631, metadata !DIExpression()) #9, !dbg !639
-  %13 = icmp eq i32 %12, 6, !dbg !652
-  br i1 %13, label %14, label %4, !dbg !640, !llvm.loop !653
-
-14:                                               ; preds = %4
-  ret void, !dbg !655
+; Function Attrs: nofree noinline nosync nounwind uwtable
+define dso_local void @Hacl_SHA2_384_finish(i64* nocapture noundef readonly %0, i8* nocapture noundef writeonly %1) local_unnamed_addr #2 !dbg !524 {
+  call void @llvm.dbg.value(metadata i64* %0, metadata !526, metadata !DIExpression()), !dbg !528
+  call void @llvm.dbg.value(metadata i8* %1, metadata !527, metadata !DIExpression()), !dbg !528
+  call fastcc void @Hacl_Impl_SHA2_384_finish(i64* noundef %0, i8* noundef %1), !dbg !529
+  ret void, !dbg !530
 }
 
-; Function Attrs: nounwind uwtable
-define dso_local void @Hacl_SHA2_384_hash(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32 noundef %2) local_unnamed_addr #3 !dbg !656 {
+; Function Attrs: nofree noinline nosync nounwind uwtable
+define internal fastcc void @Hacl_Impl_SHA2_384_finish(i64* nocapture noundef readonly %0, i8* nocapture noundef writeonly %1) unnamed_addr #2 !dbg !531 {
+  call void @llvm.dbg.value(metadata i64* %0, metadata !533, metadata !DIExpression()), !dbg !536
+  call void @llvm.dbg.value(metadata i8* %1, metadata !534, metadata !DIExpression()), !dbg !536
+  %3 = getelementptr inbounds i64, i64* %0, i32 160, !dbg !537
+  call void @llvm.dbg.value(metadata i64* %3, metadata !535, metadata !DIExpression()), !dbg !536
+  call fastcc void @Hacl_Hash_Lib_LoadStore_uint64s_to_be_bytes(i8* noundef %1, i64* noundef nonnull %3), !dbg !538
+  ret void, !dbg !539
+}
+
+; Function Attrs: noinline nounwind uwtable
+define dso_local void @Hacl_SHA2_384_hash(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32 noundef %2) local_unnamed_addr #3 !dbg !540 {
+  call void @llvm.dbg.value(metadata i8* %0, metadata !544, metadata !DIExpression()), !dbg !547
+  call void @llvm.dbg.value(metadata i8* %1, metadata !545, metadata !DIExpression()), !dbg !547
+  call void @llvm.dbg.value(metadata i32 %2, metadata !546, metadata !DIExpression()), !dbg !547
+  call fastcc void @Hacl_Impl_SHA2_384_hash(i8* noundef %0, i8* noundef %1, i32 noundef %2), !dbg !548
+  ret void, !dbg !549
+}
+
+; Function Attrs: noinline nounwind uwtable
+define internal fastcc void @Hacl_Impl_SHA2_384_hash(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32 noundef %2) unnamed_addr #3 !dbg !550 {
   %4 = alloca [169 x i64], align 8
-  call void @llvm.dbg.value(metadata i8* %0, metadata !660, metadata !DIExpression()), !dbg !663
-  call void @llvm.dbg.value(metadata i8* %1, metadata !661, metadata !DIExpression()), !dbg !663
-  call void @llvm.dbg.value(metadata i32 %2, metadata !662, metadata !DIExpression()), !dbg !663
-  %5 = bitcast [169 x i64]* %4 to i8*, !dbg !664
-  call void @llvm.dbg.value(metadata i8* %0, metadata !667, metadata !DIExpression()) #9, !dbg !664
-  call void @llvm.dbg.value(metadata i8* %1, metadata !668, metadata !DIExpression()) #9, !dbg !664
-  call void @llvm.dbg.value(metadata i32 %2, metadata !669, metadata !DIExpression()) #9, !dbg !664
-  call void @llvm.lifetime.start.p0i8(i64 1352, i8* nonnull %5) #9, !dbg !681
-  call void @llvm.dbg.declare(metadata [169 x i64]* %4, metadata !670, metadata !DIExpression()) #9, !dbg !682
-  call void @llvm.dbg.value(metadata i32 0, metadata !674, metadata !DIExpression()) #9, !dbg !683
-  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 8 dereferenceable(1352) %5, i8 0, i32 1352, i1 false) #9, !dbg !684, !tbaa !91
-  call void @llvm.dbg.value(metadata i32 undef, metadata !674, metadata !DIExpression()) #9, !dbg !683
-  call void @llvm.dbg.value(metadata i32 undef, metadata !674, metadata !DIExpression(DW_OP_plus_uconst, 1, DW_OP_stack_value)) #9, !dbg !683
-  %6 = lshr i32 %2, 7, !dbg !686
-  call void @llvm.dbg.value(metadata i32 %6, metadata !676, metadata !DIExpression()) #9, !dbg !664
-  %7 = and i32 %2, 127, !dbg !687
-  call void @llvm.dbg.value(metadata i32 %7, metadata !677, metadata !DIExpression()) #9, !dbg !664
-  call void @llvm.dbg.value(metadata i8* %1, metadata !678, metadata !DIExpression()) #9, !dbg !664
-  %8 = and i32 %2, -128, !dbg !688
-  %9 = getelementptr inbounds i8, i8* %1, i32 %8, !dbg !689
-  call void @llvm.dbg.value(metadata i8* %9, metadata !679, metadata !DIExpression()) #9, !dbg !664
-  %10 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 0, !dbg !690
-  call void @llvm.dbg.value(metadata i64* %10, metadata !40, metadata !DIExpression()) #9, !dbg !691
-  %11 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 168, !dbg !693
-  call void @llvm.dbg.value(metadata i64* %11, metadata !41, metadata !DIExpression()) #9, !dbg !691
-  call void @llvm.dbg.value(metadata i64* %10, metadata !42, metadata !DIExpression()) #9, !dbg !691
-  %12 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 160, !dbg !694
-  call void @llvm.dbg.value(metadata i64* %12, metadata !43, metadata !DIExpression()) #9, !dbg !691
-  call void @llvm.dbg.value(metadata i64* %10, metadata !44, metadata !DIExpression()) #9, !dbg !691
-  %13 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 16, !dbg !695
-  call void @llvm.dbg.value(metadata i64* %13, metadata !45, metadata !DIExpression()) #9, !dbg !691
-  %14 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 32, !dbg !696
-  call void @llvm.dbg.value(metadata i64* %14, metadata !46, metadata !DIExpression()) #9, !dbg !691
-  %15 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 48, !dbg !697
-  call void @llvm.dbg.value(metadata i64* %15, metadata !47, metadata !DIExpression()) #9, !dbg !691
-  %16 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 64, !dbg !698
-  call void @llvm.dbg.value(metadata i64* %16, metadata !48, metadata !DIExpression()) #9, !dbg !691
-  call void @llvm.dbg.value(metadata i64* %10, metadata !49, metadata !DIExpression()) #9, !dbg !691
-  %17 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 8, !dbg !699
-  call void @llvm.dbg.value(metadata i64* %17, metadata !50, metadata !DIExpression()) #9, !dbg !691
-  call void @llvm.dbg.value(metadata i64* %10, metadata !51, metadata !DIExpression()) #9, !dbg !691
-  %18 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 4, !dbg !700
-  call void @llvm.dbg.value(metadata i64* %18, metadata !52, metadata !DIExpression()) #9, !dbg !691
-  store i64 4794697086780616226, i64* %10, align 8, !dbg !701, !tbaa !91
-  %19 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 1, !dbg !702
-  store i64 8158064640168781261, i64* %19, align 8, !dbg !703, !tbaa !91
-  %20 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 2, !dbg !704
-  store i64 -5349999486874862801, i64* %20, align 8, !dbg !705, !tbaa !91
-  %21 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 3, !dbg !706
-  store i64 -1606136188198331460, i64* %21, align 8, !dbg !707, !tbaa !91
-  store i64 4131703408338449720, i64* %18, align 8, !dbg !708, !tbaa !91
-  %22 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 5, !dbg !709
-  store i64 6480981068601479193, i64* %22, align 8, !dbg !710, !tbaa !91
-  %23 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 6, !dbg !711
-  store i64 -7908458776815382629, i64* %23, align 8, !dbg !712, !tbaa !91
-  %24 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 7, !dbg !713
-  store i64 -6116909921290321640, i64* %24, align 8, !dbg !714, !tbaa !91
-  call void @llvm.dbg.value(metadata i64* %17, metadata !53, metadata !DIExpression()) #9, !dbg !691
-  %25 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 12, !dbg !715
-  call void @llvm.dbg.value(metadata i64* %25, metadata !54, metadata !DIExpression()) #9, !dbg !691
-  store i64 -2880145864133508542, i64* %17, align 8, !dbg !716, !tbaa !91
-  %26 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 9, !dbg !717
-  store i64 1334009975649890238, i64* %26, align 8, !dbg !718, !tbaa !91
-  %27 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 10, !dbg !719
-  store i64 2608012711638119052, i64* %27, align 8, !dbg !720, !tbaa !91
-  %28 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 11, !dbg !721
-  store i64 6128411473006802146, i64* %28, align 8, !dbg !722, !tbaa !91
-  store i64 8268148722764581231, i64* %25, align 8, !dbg !723, !tbaa !91
-  %29 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 13, !dbg !724
-  store i64 -9160688886553864527, i64* %29, align 8, !dbg !725, !tbaa !91
-  %30 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 14, !dbg !726
-  store i64 -7215885187991268811, i64* %30, align 8, !dbg !727, !tbaa !91
-  %31 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 15, !dbg !728
-  store i64 -4495734319001033068, i64* %31, align 8, !dbg !729, !tbaa !91
-  call void @llvm.dbg.value(metadata i64* %13, metadata !55, metadata !DIExpression()) #9, !dbg !691
-  %32 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 24, !dbg !730
-  call void @llvm.dbg.value(metadata i64* %32, metadata !56, metadata !DIExpression()) #9, !dbg !691
-  call void @llvm.dbg.value(metadata i64* %13, metadata !57, metadata !DIExpression()) #9, !dbg !691
-  %33 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 20, !dbg !731
-  call void @llvm.dbg.value(metadata i64* %33, metadata !58, metadata !DIExpression()) #9, !dbg !691
-  store i64 -1973867731355612462, i64* %13, align 8, !dbg !732, !tbaa !91
-  %34 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 17, !dbg !733
-  store i64 -1171420211273849373, i64* %34, align 8, !dbg !734, !tbaa !91
-  %35 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 18, !dbg !735
-  store i64 1135362057144423861, i64* %35, align 8, !dbg !736, !tbaa !91
-  %36 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 19, !dbg !737
-  store i64 2597628984639134821, i64* %36, align 8, !dbg !738, !tbaa !91
-  store i64 3308224258029322869, i64* %33, align 8, !dbg !739, !tbaa !91
-  %37 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 21, !dbg !740
-  store i64 5365058923640841347, i64* %37, align 8, !dbg !741, !tbaa !91
-  %38 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 22, !dbg !742
-  store i64 6679025012923562964, i64* %38, align 8, !dbg !743, !tbaa !91
-  %39 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 23, !dbg !744
-  store i64 8573033837759648693, i64* %39, align 8, !dbg !745, !tbaa !91
-  call void @llvm.dbg.value(metadata i64* %32, metadata !59, metadata !DIExpression()) #9, !dbg !691
-  %40 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 28, !dbg !746
-  call void @llvm.dbg.value(metadata i64* %40, metadata !60, metadata !DIExpression()) #9, !dbg !691
-  store i64 -7476448914759557205, i64* %32, align 8, !dbg !747, !tbaa !91
-  %41 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 25, !dbg !748
-  store i64 -6327057829258317296, i64* %41, align 8, !dbg !749, !tbaa !91
-  %42 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 26, !dbg !750
-  store i64 -5763719355590565569, i64* %42, align 8, !dbg !751, !tbaa !91
-  %43 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 27, !dbg !752
-  store i64 -4658551843659510044, i64* %43, align 8, !dbg !753, !tbaa !91
-  store i64 -4116276920077217854, i64* %40, align 8, !dbg !754, !tbaa !91
-  %44 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 29, !dbg !755
-  store i64 -3051310485924567259, i64* %44, align 8, !dbg !756, !tbaa !91
-  %45 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 30, !dbg !757
-  store i64 489312712824947311, i64* %45, align 8, !dbg !758, !tbaa !91
-  %46 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 31, !dbg !759
-  store i64 1452737877330783856, i64* %46, align 8, !dbg !760, !tbaa !91
-  call void @llvm.dbg.value(metadata i64* %14, metadata !61, metadata !DIExpression()) #9, !dbg !691
-  %47 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 40, !dbg !761
-  call void @llvm.dbg.value(metadata i64* %47, metadata !62, metadata !DIExpression()) #9, !dbg !691
-  call void @llvm.dbg.value(metadata i64* %14, metadata !63, metadata !DIExpression()) #9, !dbg !691
-  %48 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 36, !dbg !762
-  call void @llvm.dbg.value(metadata i64* %48, metadata !64, metadata !DIExpression()) #9, !dbg !691
-  store i64 2861767655752347644, i64* %14, align 8, !dbg !763, !tbaa !91
-  %49 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 33, !dbg !764
-  store i64 3322285676063803686, i64* %49, align 8, !dbg !765, !tbaa !91
-  %50 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 34, !dbg !766
-  store i64 5560940570517711597, i64* %50, align 8, !dbg !767, !tbaa !91
-  %51 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 35, !dbg !768
-  store i64 5996557281743188959, i64* %51, align 8, !dbg !769, !tbaa !91
-  store i64 7280758554555802590, i64* %48, align 8, !dbg !770, !tbaa !91
-  %52 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 37, !dbg !771
-  store i64 8532644243296465576, i64* %52, align 8, !dbg !772, !tbaa !91
-  %53 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 38, !dbg !773
-  store i64 -9096487096722542874, i64* %53, align 8, !dbg !774, !tbaa !91
-  %54 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 39, !dbg !775
-  store i64 -7894198246740708037, i64* %54, align 8, !dbg !776, !tbaa !91
-  call void @llvm.dbg.value(metadata i64* %47, metadata !65, metadata !DIExpression()) #9, !dbg !691
-  %55 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 44, !dbg !777
-  call void @llvm.dbg.value(metadata i64* %55, metadata !66, metadata !DIExpression()) #9, !dbg !691
-  store i64 -6719396339535248540, i64* %47, align 8, !dbg !778, !tbaa !91
-  %56 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 41, !dbg !779
-  store i64 -6333637450476146687, i64* %56, align 8, !dbg !780, !tbaa !91
-  %57 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 42, !dbg !781
-  store i64 -4446306890439682159, i64* %57, align 8, !dbg !782, !tbaa !91
-  %58 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 43, !dbg !783
-  store i64 -4076793802049405392, i64* %58, align 8, !dbg !784, !tbaa !91
-  store i64 -3345356375505022440, i64* %55, align 8, !dbg !785, !tbaa !91
-  %59 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 45, !dbg !786
-  store i64 -2983346525034927856, i64* %59, align 8, !dbg !787, !tbaa !91
-  %60 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 46, !dbg !788
-  store i64 -860691631967231958, i64* %60, align 8, !dbg !789, !tbaa !91
-  %61 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 47, !dbg !790
-  store i64 1182934255886127544, i64* %61, align 8, !dbg !791, !tbaa !91
-  call void @llvm.dbg.value(metadata i64* %15, metadata !67, metadata !DIExpression()) #9, !dbg !691
-  %62 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 56, !dbg !792
-  call void @llvm.dbg.value(metadata i64* %62, metadata !68, metadata !DIExpression()) #9, !dbg !691
-  call void @llvm.dbg.value(metadata i64* %15, metadata !69, metadata !DIExpression()) #9, !dbg !691
-  %63 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 52, !dbg !793
-  call void @llvm.dbg.value(metadata i64* %63, metadata !70, metadata !DIExpression()) #9, !dbg !691
-  store i64 1847814050463011016, i64* %15, align 8, !dbg !794, !tbaa !91
-  %64 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 49, !dbg !795
-  store i64 2177327727835720531, i64* %64, align 8, !dbg !796, !tbaa !91
-  %65 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 50, !dbg !797
-  store i64 2830643537854262169, i64* %65, align 8, !dbg !798, !tbaa !91
-  %66 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 51, !dbg !799
-  store i64 3796741975233480872, i64* %66, align 8, !dbg !800, !tbaa !91
-  store i64 4115178125766777443, i64* %63, align 8, !dbg !801, !tbaa !91
-  %67 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 53, !dbg !802
-  store i64 5681478168544905931, i64* %67, align 8, !dbg !803, !tbaa !91
-  %68 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 54, !dbg !804
-  store i64 6601373596472566643, i64* %68, align 8, !dbg !805, !tbaa !91
-  %69 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 55, !dbg !806
-  store i64 7507060721942968483, i64* %69, align 8, !dbg !807, !tbaa !91
-  call void @llvm.dbg.value(metadata i64* %62, metadata !71, metadata !DIExpression()) #9, !dbg !691
-  %70 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 60, !dbg !808
-  call void @llvm.dbg.value(metadata i64* %70, metadata !72, metadata !DIExpression()) #9, !dbg !691
-  store i64 8399075790359081724, i64* %62, align 8, !dbg !809, !tbaa !91
-  %71 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 57, !dbg !810
-  store i64 8693463985226723168, i64* %71, align 8, !dbg !811, !tbaa !91
-  %72 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 58, !dbg !812
-  store i64 -8878714635349349518, i64* %72, align 8, !dbg !813, !tbaa !91
-  %73 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 59, !dbg !814
-  store i64 -8302665154208450068, i64* %73, align 8, !dbg !815, !tbaa !91
-  store i64 -8016688836872298968, i64* %70, align 8, !dbg !816, !tbaa !91
-  %74 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 61, !dbg !817
-  store i64 -6606660893046293015, i64* %74, align 8, !dbg !818, !tbaa !91
-  %75 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 62, !dbg !819
-  store i64 -4685533653050689259, i64* %75, align 8, !dbg !820, !tbaa !91
-  %76 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 63, !dbg !821
-  store i64 -4147400797238176981, i64* %76, align 8, !dbg !822, !tbaa !91
-  call void @llvm.dbg.value(metadata i64* %16, metadata !73, metadata !DIExpression()) #9, !dbg !691
-  %77 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 72, !dbg !823
-  call void @llvm.dbg.value(metadata i64* %77, metadata !74, metadata !DIExpression()) #9, !dbg !691
-  call void @llvm.dbg.value(metadata i64* %16, metadata !75, metadata !DIExpression()) #9, !dbg !691
-  %78 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 68, !dbg !824
-  call void @llvm.dbg.value(metadata i64* %78, metadata !76, metadata !DIExpression()) #9, !dbg !691
-  store i64 -3880063495543823972, i64* %16, align 8, !dbg !825, !tbaa !91
-  %79 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 65, !dbg !826
-  store i64 -3348786107499101689, i64* %79, align 8, !dbg !827, !tbaa !91
-  %80 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 66, !dbg !828
-  store i64 -1523767162380948706, i64* %80, align 8, !dbg !829, !tbaa !91
-  %81 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 67, !dbg !830
-  store i64 -757361751448694408, i64* %81, align 8, !dbg !831, !tbaa !91
-  store i64 500013540394364858, i64* %78, align 8, !dbg !832, !tbaa !91
-  %82 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 69, !dbg !833
-  store i64 748580250866718886, i64* %82, align 8, !dbg !834, !tbaa !91
-  %83 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 70, !dbg !835
-  store i64 1242879168328830382, i64* %83, align 8, !dbg !836, !tbaa !91
-  %84 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 71, !dbg !837
-  store i64 1977374033974150939, i64* %84, align 8, !dbg !838, !tbaa !91
-  call void @llvm.dbg.value(metadata i64* %77, metadata !77, metadata !DIExpression()) #9, !dbg !691
-  %85 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 76, !dbg !839
-  call void @llvm.dbg.value(metadata i64* %85, metadata !78, metadata !DIExpression()) #9, !dbg !691
-  store i64 2944078676154940804, i64* %77, align 8, !dbg !840, !tbaa !91
-  %86 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 73, !dbg !841
-  store i64 3659926193048069267, i64* %86, align 8, !dbg !842, !tbaa !91
-  %87 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 74, !dbg !843
-  store i64 4368137639120453308, i64* %87, align 8, !dbg !844, !tbaa !91
-  %88 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 75, !dbg !845
-  store i64 4836135668995329356, i64* %88, align 8, !dbg !846, !tbaa !91
-  store i64 5532061633213252278, i64* %85, align 8, !dbg !847, !tbaa !91
-  %89 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 77, !dbg !848
-  store i64 6448918945643986474, i64* %89, align 8, !dbg !849, !tbaa !91
-  %90 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 78, !dbg !850
-  store i64 6902733635092675308, i64* %90, align 8, !dbg !851, !tbaa !91
-  %91 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 79, !dbg !852
-  store i64 7801388544844847127, i64* %91, align 8, !dbg !853, !tbaa !91
-  call void @llvm.dbg.value(metadata i64* %12, metadata !79, metadata !DIExpression()) #9, !dbg !691
-  %92 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 164, !dbg !854
-  call void @llvm.dbg.value(metadata i64* %92, metadata !80, metadata !DIExpression()) #9, !dbg !691
-  store i64 -3766243637369397544, i64* %12, align 8, !dbg !855, !tbaa !91
-  %93 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 161, !dbg !856
-  store i64 7105036623409894663, i64* %93, align 8, !dbg !857, !tbaa !91
-  %94 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 162, !dbg !858
-  store i64 -7973340178411365097, i64* %94, align 8, !dbg !859, !tbaa !91
-  %95 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 163, !dbg !860
-  store i64 1526699215303891257, i64* %95, align 8, !dbg !861, !tbaa !91
-  store i64 7436329637833083697, i64* %92, align 8, !dbg !862, !tbaa !91
-  %96 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 165, !dbg !863
-  store i64 -8163818279084223215, i64* %96, align 8, !dbg !864, !tbaa !91
-  %97 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 166, !dbg !865
-  store i64 -2662702644619276377, i64* %97, align 8, !dbg !866, !tbaa !91
-  %98 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 167, !dbg !867
-  store i64 5167115440072839076, i64* %98, align 8, !dbg !868, !tbaa !91
-  store i64 0, i64* %11, align 8, !dbg !869, !tbaa !91
-  call void @llvm.dbg.value(metadata i64* %10, metadata !478, metadata !DIExpression()) #9, !dbg !870
-  call void @llvm.dbg.value(metadata i8* %1, metadata !481, metadata !DIExpression()) #9, !dbg !870
-  call void @llvm.dbg.value(metadata i32 %6, metadata !482, metadata !DIExpression()) #9, !dbg !870
-  call void @llvm.dbg.value(metadata i32 0, metadata !483, metadata !DIExpression()) #9, !dbg !872
-  %99 = icmp ult i32 %2, 128, !dbg !873
-  br i1 %99, label %106, label %100, !dbg !874
-
-100:                                              ; preds = %3, %100
-  %101 = phi i32 [ %104, %100 ], [ 0, %3 ]
-  call void @llvm.dbg.value(metadata i32 %101, metadata !483, metadata !DIExpression()) #9, !dbg !872
-  %102 = shl i32 %101, 7, !dbg !875
-  %103 = getelementptr inbounds i8, i8* %1, i32 %102, !dbg !876
-  call void @llvm.dbg.value(metadata i8* %103, metadata !485, metadata !DIExpression()) #9, !dbg !877
-  call fastcc void @Hacl_Impl_SHA2_384_update(i64* noundef nonnull %10, i8* noundef %103) #9, !dbg !878
-  %104 = add nuw nsw i32 %101, 1, !dbg !879
-  call void @llvm.dbg.value(metadata i32 %104, metadata !483, metadata !DIExpression()) #9, !dbg !872
-  %105 = icmp eq i32 %104, %6, !dbg !873
-  br i1 %105, label %106, label %100, !dbg !874, !llvm.loop !880
-
-106:                                              ; preds = %100, %3
-  %107 = zext i32 %7 to i64, !dbg !882
-  call fastcc void @Hacl_Impl_SHA2_384_update_last(i64* noundef nonnull %10, i8* noundef %9, i64 noundef %107) #9, !dbg !883
-  call void @llvm.dbg.value(metadata i64* %10, metadata !616, metadata !DIExpression()) #9, !dbg !884
-  call void @llvm.dbg.value(metadata i8* %0, metadata !619, metadata !DIExpression()) #9, !dbg !884
-  call void @llvm.dbg.value(metadata i64* %12, metadata !620, metadata !DIExpression()) #9, !dbg !884
-  call void @llvm.dbg.value(metadata i8* %0, metadata !624, metadata !DIExpression()) #9, !dbg !886
-  call void @llvm.dbg.value(metadata i64* %12, metadata !629, metadata !DIExpression()) #9, !dbg !886
-  call void @llvm.dbg.value(metadata i32 6, metadata !630, metadata !DIExpression()) #9, !dbg !886
-  call void @llvm.dbg.value(metadata i32 0, metadata !631, metadata !DIExpression()) #9, !dbg !888
-  br label %108, !dbg !889
-
-108:                                              ; preds = %108, %106
-  %109 = phi i32 [ 0, %106 ], [ %116, %108 ]
-  call void @llvm.dbg.value(metadata i32 %109, metadata !631, metadata !DIExpression()) #9, !dbg !888
-  %110 = getelementptr inbounds i64, i64* %12, i32 %109, !dbg !890
-  %111 = load i64, i64* %110, align 8, !dbg !890, !tbaa !91
-  call void @llvm.dbg.value(metadata i64 %111, metadata !633, metadata !DIExpression()) #9, !dbg !891
-  %112 = shl i32 %109, 3, !dbg !892
-  %113 = getelementptr inbounds i8, i8* %0, i32 %112, !dbg !893
-  call void @llvm.dbg.value(metadata i8* %113, metadata !636, metadata !DIExpression()) #9, !dbg !891
-  call void @llvm.dbg.value(metadata i64 %111, metadata !368, metadata !DIExpression()) #9, !dbg !894
-  %114 = call i64 @llvm.bswap.i64(i64 %111) #9, !dbg !896
-  call void @llvm.dbg.value(metadata i8* %113, metadata !582, metadata !DIExpression()) #9, !dbg !897
-  call void @llvm.dbg.value(metadata i64 %114, metadata !587, metadata !DIExpression()) #9, !dbg !897
-  %115 = bitcast i8* %113 to i64*, !dbg !899
-  store i64 %114, i64* %115, align 1, !dbg !899
-  %116 = add nuw nsw i32 %109, 1, !dbg !900
-  call void @llvm.dbg.value(metadata i32 %116, metadata !631, metadata !DIExpression()) #9, !dbg !888
-  %117 = icmp eq i32 %116, 6, !dbg !901
-  br i1 %117, label %118, label %108, !dbg !889, !llvm.loop !902
-
-118:                                              ; preds = %108
-  call void @llvm.lifetime.end.p0i8(i64 1352, i8* nonnull %5) #9, !dbg !904
-  ret void, !dbg !905
+  %5 = bitcast [169 x i64]* %4 to i8*, !dbg !565
+  call void @llvm.dbg.value(metadata i8* %0, metadata !552, metadata !DIExpression()), !dbg !565
+  call void @llvm.dbg.value(metadata i8* %1, metadata !553, metadata !DIExpression()), !dbg !565
+  call void @llvm.dbg.value(metadata i32 %2, metadata !554, metadata !DIExpression()), !dbg !565
+  %6 = bitcast [169 x i64]* %4 to i8*, !dbg !566
+  call void @llvm.lifetime.start.p0i8(i64 1352, i8* nonnull %6) #12, !dbg !566
+  call void @llvm.dbg.declare(metadata [169 x i64]* %4, metadata !555, metadata !DIExpression()), !dbg !567
+  call void @llvm.dbg.value(metadata i32 0, metadata !559, metadata !DIExpression()), !dbg !568
+  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 8 dereferenceable(1352) %5, i8 0, i32 1352, i1 false), !dbg !569, !tbaa !91
+  call void @llvm.dbg.value(metadata i32 undef, metadata !559, metadata !DIExpression()), !dbg !568
+  call void @llvm.dbg.value(metadata i32 undef, metadata !559, metadata !DIExpression(DW_OP_plus_uconst, 1, DW_OP_stack_value)), !dbg !568
+  %7 = lshr i32 %2, 7, !dbg !571
+  call void @llvm.dbg.value(metadata i32 %7, metadata !561, metadata !DIExpression()), !dbg !565
+  %8 = and i32 %2, 127, !dbg !572
+  call void @llvm.dbg.value(metadata i32 %8, metadata !562, metadata !DIExpression()), !dbg !565
+  call void @llvm.dbg.value(metadata i8* %1, metadata !563, metadata !DIExpression()), !dbg !565
+  %9 = and i32 %2, -128, !dbg !573
+  %10 = getelementptr inbounds i8, i8* %1, i32 %9, !dbg !574
+  call void @llvm.dbg.value(metadata i8* %10, metadata !564, metadata !DIExpression()), !dbg !565
+  %11 = getelementptr inbounds [169 x i64], [169 x i64]* %4, i32 0, i32 0, !dbg !575
+  call fastcc void @Hacl_Impl_SHA2_384_init(i64* noundef nonnull %11), !dbg !576
+  call fastcc void @Hacl_Impl_SHA2_384_update_multi(i64* noundef nonnull %11, i8* noundef %1, i32 noundef %7), !dbg !577
+  %12 = zext i32 %8 to i64, !dbg !578
+  call fastcc void @Hacl_Impl_SHA2_384_update_last(i64* noundef nonnull %11, i8* noundef %10, i64 noundef %12), !dbg !579
+  call fastcc void @Hacl_Impl_SHA2_384_finish(i64* noundef nonnull %11, i8* noundef %0), !dbg !580
+  call void @llvm.lifetime.end.p0i8(i64 1352, i8* nonnull %6) #12, !dbg !581
+  ret void, !dbg !581
 }
 
 ; Function Attrs: argmemonly mustprogress nofree nosync nounwind willreturn
@@ -947,39 +619,152 @@ declare void @llvm.lifetime.start.p0i8(i64 immarg, i8* nocapture) #4
 ; Function Attrs: argmemonly mustprogress nofree nosync nounwind willreturn
 declare void @llvm.lifetime.end.p0i8(i64 immarg, i8* nocapture) #4
 
+; Function Attrs: nofree noinline nosync nounwind uwtable
+define internal fastcc void @Hacl_Hash_Lib_LoadStore_uint64s_from_be_bytes(i64* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1) unnamed_addr #2 !dbg !582 {
+  call void @llvm.dbg.value(metadata i64* %0, metadata !584, metadata !DIExpression()), !dbg !593
+  call void @llvm.dbg.value(metadata i8* %1, metadata !585, metadata !DIExpression()), !dbg !593
+  call void @llvm.dbg.value(metadata i32 16, metadata !586, metadata !DIExpression()), !dbg !593
+  call void @llvm.dbg.value(metadata i32 0, metadata !587, metadata !DIExpression()), !dbg !594
+  br label %4, !dbg !595
+
+3:                                                ; preds = %4
+  ret void, !dbg !596
+
+4:                                                ; preds = %2, %4
+  %5 = phi i32 [ 0, %2 ], [ %11, %4 ]
+  call void @llvm.dbg.value(metadata i32 %5, metadata !587, metadata !DIExpression()), !dbg !594
+  %6 = shl i32 %5, 3, !dbg !597
+  %7 = getelementptr inbounds i8, i8* %1, i32 %6, !dbg !598
+  call void @llvm.dbg.value(metadata i8* %7, metadata !589, metadata !DIExpression()), !dbg !599
+  %8 = call fastcc i64 @load64(i8* noundef %7), !dbg !600
+  %9 = call fastcc i64 @__bswap_64(i64 noundef %8), !dbg !600
+  call void @llvm.dbg.value(metadata i64 %9, metadata !592, metadata !DIExpression()), !dbg !599
+  %10 = getelementptr inbounds i64, i64* %0, i32 %5, !dbg !601
+  store i64 %9, i64* %10, align 4, !dbg !602, !tbaa !91
+  %11 = add nuw nsw i32 %5, 1, !dbg !603
+  call void @llvm.dbg.value(metadata i32 %11, metadata !587, metadata !DIExpression()), !dbg !594
+  %12 = icmp eq i32 %11, 16, !dbg !604
+  br i1 %12, label %3, label %4, !dbg !595, !llvm.loop !605
+}
+
 ; Function Attrs: argmemonly mustprogress nofree nounwind willreturn writeonly
 declare void @llvm.memset.p0i8.i32(i8* nocapture writeonly, i8, i32, i1 immarg) #5
 
 ; Function Attrs: argmemonly mustprogress nofree nounwind willreturn
 declare void @llvm.memcpy.p0i8.p0i8.i32(i8* noalias nocapture writeonly, i8* noalias nocapture readonly, i32, i1 immarg) #6
 
-declare !dbg !906 void @FStar_UInt128_shift_left(%struct.FStar_UInt128_uint128* sret(%struct.FStar_UInt128_uint128) align 4, i64, i64, i32 noundef) local_unnamed_addr #7
+; Function Attrs: mustprogress nofree noinline nosync nounwind readnone uwtable willreturn
+define internal fastcc i64 @__bswap_64(i64 noundef %0) unnamed_addr #7 !dbg !607 {
+  call void @llvm.dbg.value(metadata i64 %0, metadata !612, metadata !DIExpression()), !dbg !613
+  %2 = call i64 @llvm.bswap.i64(i64 %0), !dbg !614
+  ret i64 %2, !dbg !615
+}
 
-declare !dbg !910 void @FStar_UInt128_add(%struct.FStar_UInt128_uint128* sret(%struct.FStar_UInt128_uint128) align 4, i64, i64, i64, i64) local_unnamed_addr #7
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind readonly uwtable willreturn
+define internal fastcc i64 @load64(i8* nocapture noundef readonly %0) unnamed_addr #8 !dbg !616 {
+  call void @llvm.dbg.value(metadata i8* %0, metadata !621, metadata !DIExpression()), !dbg !623
+  %2 = bitcast i8* %0 to i64*, !dbg !624
+  %3 = load i64, i64* %2, align 1, !dbg !624
+  call void @llvm.dbg.value(metadata i64 %3, metadata !622, metadata !DIExpression()), !dbg !623
+  ret i64 %3, !dbg !625
+}
 
-declare !dbg !913 void @FStar_UInt128_mul_wide(%struct.FStar_UInt128_uint128* sret(%struct.FStar_UInt128_uint128) align 4, i64 noundef, i64 noundef) local_unnamed_addr #7
+declare !dbg !626 void @FStar_UInt128_shift_left(%struct.FStar_UInt128_uint128* sret(%struct.FStar_UInt128_uint128) align 4, i64, i64, i32 noundef) local_unnamed_addr #9
 
-declare !dbg !916 void @FStar_UInt128_uint64_to_uint128(%struct.FStar_UInt128_uint128* sret(%struct.FStar_UInt128_uint128) align 4, i64 noundef) local_unnamed_addr #7
+declare !dbg !630 void @FStar_UInt128_add(%struct.FStar_UInt128_uint128* sret(%struct.FStar_UInt128_uint128) align 4, i64, i64, i64, i64) local_unnamed_addr #9
+
+declare !dbg !633 void @FStar_UInt128_mul_wide(%struct.FStar_UInt128_uint128* sret(%struct.FStar_UInt128_uint128) align 4, i64 noundef, i64 noundef) local_unnamed_addr #9
+
+declare !dbg !636 void @FStar_UInt128_uint64_to_uint128(%struct.FStar_UInt128_uint128* sret(%struct.FStar_UInt128_uint128) align 4, i64 noundef) local_unnamed_addr #9
+
+; Function Attrs: mustprogress nofree noinline nosync nounwind uwtable willreturn
+define internal fastcc void @store128_be(i8* nocapture noundef writeonly %0, i64 %1, i64 %2) unnamed_addr #10 !dbg !639 {
+  %4 = alloca %struct.FStar_UInt128_uint128, align 8
+  %5 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %4, i32 0, i32 0
+  store i64 %1, i64* %5, align 8, !tbaa !511
+  %6 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %4, i32 0, i32 1
+  store i64 %2, i64* %6, align 8, !tbaa !513
+  call void @llvm.dbg.value(metadata i8* %0, metadata !644, metadata !DIExpression()), !dbg !646
+  call void @llvm.dbg.declare(metadata %struct.FStar_UInt128_uint128* %4, metadata !645, metadata !DIExpression()), !dbg !647
+  call fastcc void @store128_be_(i8* noundef %0, %struct.FStar_UInt128_uint128* noundef nonnull %4), !dbg !648
+  ret void, !dbg !649
+}
+
+; Function Attrs: mustprogress nofree noinline nosync nounwind uwtable willreturn
+define internal fastcc void @store128_be_(i8* nocapture noundef writeonly %0, %struct.FStar_UInt128_uint128* nocapture noundef readonly %1) unnamed_addr #10 !dbg !650 {
+  call void @llvm.dbg.value(metadata i8* %0, metadata !655, metadata !DIExpression()), !dbg !657
+  call void @llvm.dbg.value(metadata %struct.FStar_UInt128_uint128* %1, metadata !656, metadata !DIExpression()), !dbg !657
+  %3 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %1, i32 0, i32 1, !dbg !658
+  %4 = load i64, i64* %3, align 4, !dbg !658, !tbaa !513
+  %5 = call fastcc i64 @__bswap_64(i64 noundef %4), !dbg !658
+  call fastcc void @store64(i8* noundef %0, i64 noundef %5), !dbg !658
+  %6 = getelementptr inbounds i8, i8* %0, i32 8, !dbg !659
+  %7 = getelementptr inbounds %struct.FStar_UInt128_uint128, %struct.FStar_UInt128_uint128* %1, i32 0, i32 0, !dbg !659
+  %8 = load i64, i64* %7, align 4, !dbg !659, !tbaa !511
+  %9 = call fastcc i64 @__bswap_64(i64 noundef %8), !dbg !659
+  call fastcc void @store64(i8* noundef nonnull %6, i64 noundef %9), !dbg !659
+  ret void, !dbg !660
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind uwtable willreturn writeonly
+define internal fastcc void @store64(i8* nocapture noundef writeonly %0, i64 noundef %1) unnamed_addr #0 !dbg !661 {
+  call void @llvm.dbg.value(metadata i8* %0, metadata !665, metadata !DIExpression()), !dbg !667
+  call void @llvm.dbg.value(metadata i64 %1, metadata !666, metadata !DIExpression()), !dbg !667
+  %3 = bitcast i8* %0 to i64*, !dbg !668
+  store i64 %1, i64* %3, align 1, !dbg !668
+  ret void, !dbg !669
+}
+
+; Function Attrs: nofree noinline nosync nounwind uwtable
+define internal fastcc void @Hacl_Hash_Lib_LoadStore_uint64s_to_be_bytes(i8* nocapture noundef writeonly %0, i64* nocapture noundef readonly %1) unnamed_addr #2 !dbg !670 {
+  call void @llvm.dbg.value(metadata i8* %0, metadata !674, metadata !DIExpression()), !dbg !683
+  call void @llvm.dbg.value(metadata i64* %1, metadata !675, metadata !DIExpression()), !dbg !683
+  call void @llvm.dbg.value(metadata i32 6, metadata !676, metadata !DIExpression()), !dbg !683
+  call void @llvm.dbg.value(metadata i32 0, metadata !677, metadata !DIExpression()), !dbg !684
+  br label %4, !dbg !685
+
+3:                                                ; preds = %4
+  ret void, !dbg !686
+
+4:                                                ; preds = %2, %4
+  %5 = phi i32 [ 0, %2 ], [ %11, %4 ]
+  call void @llvm.dbg.value(metadata i32 %5, metadata !677, metadata !DIExpression()), !dbg !684
+  %6 = getelementptr inbounds i64, i64* %1, i32 %5, !dbg !687
+  %7 = load i64, i64* %6, align 4, !dbg !687, !tbaa !91
+  call void @llvm.dbg.value(metadata i64 %7, metadata !679, metadata !DIExpression()), !dbg !688
+  %8 = shl i32 %5, 3, !dbg !689
+  %9 = getelementptr inbounds i8, i8* %0, i32 %8, !dbg !690
+  call void @llvm.dbg.value(metadata i8* %9, metadata !682, metadata !DIExpression()), !dbg !688
+  %10 = call fastcc i64 @__bswap_64(i64 noundef %7), !dbg !691
+  call fastcc void @store64(i8* noundef %9, i64 noundef %10), !dbg !691
+  %11 = add nuw nsw i32 %5, 1, !dbg !692
+  call void @llvm.dbg.value(metadata i32 %11, metadata !677, metadata !DIExpression()), !dbg !684
+  %12 = icmp eq i32 %11, 6, !dbg !693
+  br i1 %12, label %3, label %4, !dbg !685, !llvm.loop !694
+}
 
 ; Function Attrs: nofree nosync nounwind readnone speculatable willreturn
-declare void @llvm.dbg.value(metadata, metadata, metadata) #8
+declare void @llvm.dbg.value(metadata, metadata, metadata) #11
 
 ; Function Attrs: nofree nosync nounwind readnone speculatable willreturn
-declare i64 @llvm.fshl.i64(i64, i64, i64) #8
+declare i64 @llvm.fshl.i64(i64, i64, i64) #11
 
 ; Function Attrs: nofree nosync nounwind readnone speculatable willreturn
-declare i64 @llvm.bswap.i64(i64) #8
+declare i64 @llvm.bswap.i64(i64) #11
 
-attributes #0 = { mustprogress nofree norecurse nosync nounwind uwtable willreturn writeonly "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind uwtable willreturn writeonly "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
 attributes #1 = { mustprogress nofree nosync nounwind readnone speculatable willreturn }
-attributes #2 = { nofree nosync nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
-attributes #3 = { nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #2 = { nofree noinline nosync nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #3 = { noinline nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
 attributes #4 = { argmemonly mustprogress nofree nosync nounwind willreturn }
 attributes #5 = { argmemonly mustprogress nofree nounwind willreturn writeonly }
 attributes #6 = { argmemonly mustprogress nofree nounwind willreturn }
-attributes #7 = { "frame-pointer"="none" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
-attributes #8 = { nofree nosync nounwind readnone speculatable willreturn }
-attributes #9 = { nounwind }
+attributes #7 = { mustprogress nofree noinline nosync nounwind readnone uwtable willreturn "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #8 = { mustprogress nofree noinline norecurse nosync nounwind readonly uwtable willreturn "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #9 = { "frame-pointer"="none" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #10 = { mustprogress nofree noinline nosync nounwind uwtable willreturn "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #11 = { nofree nosync nounwind readnone speculatable willreturn }
+attributes #12 = { nounwind }
 
 !llvm.dbg.cu = !{!2}
 !llvm.module.flags = !{!21, !22, !23, !24, !25, !26, !27}
@@ -1324,583 +1109,360 @@ attributes #9 = { nounwind }
 !336 = !DILocation(line: 0, scope: !283)
 !337 = !DILocation(line: 187, column: 16, scope: !338)
 !338 = distinct !DILexicalBlock(scope: !283, file: !3, line: 186, column: 3)
-!339 = !DILocation(line: 30, column: 3, scope: !340, inlinedAt: !353)
-!340 = distinct !DILexicalBlock(scope: !341, file: !3, line: 30, column: 3)
-!341 = distinct !DISubprogram(name: "Hacl_Hash_Lib_LoadStore_uint64s_from_be_bytes", scope: !3, file: !3, line: 28, type: !342, scopeLine: 29, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !344)
-!342 = !DISubroutineType(types: !343)
-!343 = !{null, !32, !267, !5}
-!344 = !{!345, !346, !347, !348, !349, !352}
-!345 = !DILocalVariable(name: "output", arg: 1, scope: !341, file: !3, line: 28, type: !32)
-!346 = !DILocalVariable(name: "input", arg: 2, scope: !341, file: !3, line: 28, type: !267)
-!347 = !DILocalVariable(name: "len", arg: 3, scope: !341, file: !3, line: 28, type: !5)
-!348 = !DILocalVariable(name: "i", scope: !340, file: !3, line: 30, type: !5)
-!349 = !DILocalVariable(name: "x0", scope: !350, file: !3, line: 32, type: !267)
-!350 = distinct !DILexicalBlock(scope: !351, file: !3, line: 31, column: 3)
-!351 = distinct !DILexicalBlock(scope: !340, file: !3, line: 30, column: 3)
-!352 = !DILocalVariable(name: "inputi", scope: !350, file: !3, line: 33, type: !10)
-!353 = distinct !DILocation(line: 188, column: 3, scope: !274)
-!354 = !DILocation(line: 0, scope: !340, inlinedAt: !353)
-!355 = !DILocation(line: 32, column: 40, scope: !350, inlinedAt: !353)
-!356 = !DILocation(line: 32, column: 25, scope: !350, inlinedAt: !353)
-!357 = !DILocation(line: 0, scope: !350, inlinedAt: !353)
-!358 = !DILocalVariable(name: "b", arg: 1, scope: !359, file: !360, line: 347, type: !267)
-!359 = distinct !DISubprogram(name: "load64", scope: !360, file: !360, line: 347, type: !361, scopeLine: 347, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !363)
-!360 = !DIFile(filename: "hacl-c/hacl-c/kremlib.h", directory: "/mnt/c/Users/fwill/Documents/HS24/semester_project/tools/binsec/binsec/examples/hacl", checksumkind: CSK_MD5, checksum: "cde125f1f98cb7b9ee1f380d4178ebe4")
-!361 = !DISubroutineType(types: !362)
-!362 = !{!10, !267}
-!363 = !{!358, !364}
-!364 = !DILocalVariable(name: "x", scope: !359, file: !360, line: 348, type: !10)
-!365 = !DILocation(line: 0, scope: !359, inlinedAt: !366)
-!366 = distinct !DILocation(line: 33, column: 23, scope: !350, inlinedAt: !353)
-!367 = !DILocation(line: 349, column: 3, scope: !359, inlinedAt: !366)
-!368 = !DILocalVariable(name: "__bsx", arg: 1, scope: !369, file: !370, line: 70, type: !11)
-!369 = distinct !DISubprogram(name: "__bswap_64", scope: !370, file: !370, line: 70, type: !371, scopeLine: 71, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !373)
-!370 = !DIFile(filename: "/usr/include/bits/byteswap.h", directory: "", checksumkind: CSK_MD5, checksum: "98f83253ffd9c64e7486789204e9fa05")
-!371 = !DISubroutineType(types: !372)
-!372 = !{!11, !11}
-!373 = !{!368}
-!374 = !DILocation(line: 0, scope: !369, inlinedAt: !375)
-!375 = distinct !DILocation(line: 33, column: 23, scope: !350, inlinedAt: !353)
-!376 = !DILocation(line: 75, column: 10, scope: !369, inlinedAt: !375)
-!377 = !DILocation(line: 34, column: 5, scope: !350, inlinedAt: !353)
-!378 = !DILocation(line: 34, column: 15, scope: !350, inlinedAt: !353)
-!379 = !DILocation(line: 30, column: 50, scope: !351, inlinedAt: !353)
-!380 = !DILocation(line: 30, column: 37, scope: !351, inlinedAt: !353)
-!381 = distinct !{!381, !339, !382, !383, !384}
-!382 = !DILocation(line: 35, column: 3, scope: !340, inlinedAt: !353)
-!383 = !{!"llvm.loop.mustprogress"}
-!384 = !{!"llvm.loop.unroll.disable"}
-!385 = !DILocation(line: 190, column: 26, scope: !274)
-!386 = !DILocation(line: 0, scope: !289)
-!387 = !DILocation(line: 196, column: 13, scope: !291)
-!388 = !DILocation(line: 0, scope: !291)
-!389 = !DILocation(line: 189, column: 28, scope: !274)
-!390 = !DILocation(line: 198, column: 3, scope: !294)
-!391 = !DILocation(line: 214, column: 3, scope: !274)
-!392 = !DILocation(line: 214, column: 12, scope: !274)
-!393 = !DILocation(line: 215, column: 3, scope: !274)
-!394 = !DILocation(line: 0, scope: !306)
-!395 = !DILocation(line: 216, column: 3, scope: !306)
-!396 = !DILocation(line: 0, scope: !294)
-!397 = !DILocation(line: 200, column: 27, scope: !296)
-!398 = !DILocation(line: 200, column: 20, scope: !296)
-!399 = !DILocation(line: 0, scope: !296)
-!400 = !DILocation(line: 201, column: 27, scope: !296)
-!401 = !DILocation(line: 201, column: 20, scope: !296)
-!402 = !DILocation(line: 202, column: 26, scope: !296)
-!403 = !DILocation(line: 202, column: 19, scope: !296)
-!404 = !DILocation(line: 203, column: 26, scope: !296)
-!405 = !DILocation(line: 203, column: 19, scope: !296)
-!406 = !DILocation(line: 205, column: 29, scope: !296)
-!407 = !DILocation(line: 206, column: 31, scope: !296)
-!408 = !DILocation(line: 206, column: 77, scope: !296)
-!409 = !DILocation(line: 206, column: 72, scope: !296)
-!410 = !DILocation(line: 206, column: 7, scope: !296)
-!411 = !DILocation(line: 210, column: 33, scope: !296)
-!412 = !DILocation(line: 211, column: 35, scope: !296)
-!413 = !DILocation(line: 211, column: 82, scope: !296)
-!414 = !DILocation(line: 211, column: 76, scope: !296)
-!415 = !DILocation(line: 211, column: 11, scope: !296)
-!416 = !DILocation(line: 207, column: 7, scope: !296)
-!417 = !DILocation(line: 209, column: 9, scope: !296)
-!418 = !DILocation(line: 212, column: 11, scope: !296)
-!419 = !DILocation(line: 204, column: 5, scope: !296)
-!420 = !DILocation(line: 204, column: 13, scope: !296)
-!421 = !DILocation(line: 198, column: 61, scope: !297)
-!422 = !DILocation(line: 198, column: 38, scope: !297)
-!423 = distinct !{!423, !390, !424, !383, !384}
-!424 = !DILocation(line: 213, column: 3, scope: !294)
-!425 = !DILocation(line: 0, scope: !308)
-!426 = !DILocation(line: 0, scope: !326)
-!427 = !DILocation(line: 259, column: 3, scope: !326)
-!428 = !DILocation(line: 226, column: 20, scope: !308)
-!429 = !DILocation(line: 227, column: 21, scope: !308)
-!430 = !DILocation(line: 232, column: 30, scope: !308)
-!431 = !DILocation(line: 234, column: 32, scope: !308)
-!432 = !DILocation(line: 235, column: 33, scope: !308)
-!433 = !DILocation(line: 235, column: 11, scope: !308)
-!434 = !DILocation(line: 233, column: 9, scope: !308)
-!435 = !DILocation(line: 236, column: 13, scope: !308)
-!436 = !DILocation(line: 236, column: 22, scope: !308)
-!437 = !DILocation(line: 236, column: 25, scope: !308)
-!438 = !DILocation(line: 236, column: 19, scope: !308)
-!439 = !DILocation(line: 231, column: 7, scope: !308)
-!440 = !DILocation(line: 236, column: 7, scope: !308)
-!441 = !DILocation(line: 237, column: 7, scope: !308)
-!442 = !DILocation(line: 238, column: 7, scope: !308)
-!443 = !DILocation(line: 241, column: 28, scope: !308)
-!444 = !DILocation(line: 243, column: 30, scope: !308)
-!445 = !DILocation(line: 244, column: 31, scope: !308)
-!446 = !DILocation(line: 244, column: 9, scope: !308)
-!447 = !DILocation(line: 242, column: 7, scope: !308)
-!448 = !DILocation(line: 245, column: 13, scope: !308)
-!449 = !DILocation(line: 245, column: 29, scope: !308)
-!450 = !DILocation(line: 245, column: 18, scope: !308)
-!451 = !DILocation(line: 245, column: 7, scope: !308)
-!452 = !DILocation(line: 246, column: 22, scope: !308)
-!453 = !DILocation(line: 247, column: 21, scope: !308)
-!454 = !DILocation(line: 216, column: 60, scope: !309)
-!455 = !DILocation(line: 216, column: 37, scope: !309)
-!456 = distinct !{!456, !395, !457, !383, !384}
-!457 = !DILocation(line: 258, column: 3, scope: !306)
-!458 = !DILocation(line: 192, column: 31, scope: !274)
-!459 = !DILocation(line: 265, column: 17, scope: !274)
-!460 = !DILocation(line: 267, column: 22, scope: !274)
-!461 = !DILocation(line: 267, column: 17, scope: !274)
-!462 = !DILocation(line: 268, column: 1, scope: !274)
-!463 = !DILocation(line: 261, column: 19, scope: !328)
-!464 = !DILocation(line: 0, scope: !328)
-!465 = !DILocation(line: 262, column: 19, scope: !328)
-!466 = !DILocation(line: 263, column: 20, scope: !328)
-!467 = !DILocation(line: 263, column: 15, scope: !328)
-!468 = !DILocation(line: 259, column: 59, scope: !329)
-!469 = !DILocation(line: 259, column: 37, scope: !329)
-!470 = distinct !{!470, !427, !471, !383, !384}
-!471 = !DILocation(line: 264, column: 3, scope: !326)
-!472 = distinct !DISubprogram(name: "Hacl_SHA2_384_update_multi", scope: !3, file: !3, line: 349, type: !342, scopeLine: 350, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !473)
-!473 = !{!474, !475, !476}
-!474 = !DILocalVariable(name: "state", arg: 1, scope: !472, file: !3, line: 349, type: !32)
-!475 = !DILocalVariable(name: "data", arg: 2, scope: !472, file: !3, line: 349, type: !267)
-!476 = !DILocalVariable(name: "n1", arg: 3, scope: !472, file: !3, line: 349, type: !5)
-!477 = !DILocation(line: 0, scope: !472)
-!478 = !DILocalVariable(name: "state", arg: 1, scope: !479, file: !3, line: 270, type: !32)
-!479 = distinct !DISubprogram(name: "Hacl_Impl_SHA2_384_update_multi", scope: !3, file: !3, line: 270, type: !342, scopeLine: 271, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !480)
-!480 = !{!478, !481, !482, !483, !485}
-!481 = !DILocalVariable(name: "data", arg: 2, scope: !479, file: !3, line: 270, type: !267)
-!482 = !DILocalVariable(name: "n1", arg: 3, scope: !479, file: !3, line: 270, type: !5)
-!483 = !DILocalVariable(name: "i", scope: !484, file: !3, line: 272, type: !5)
-!484 = distinct !DILexicalBlock(scope: !479, file: !3, line: 272, column: 3)
-!485 = !DILocalVariable(name: "b", scope: !486, file: !3, line: 274, type: !267)
-!486 = distinct !DILexicalBlock(scope: !487, file: !3, line: 273, column: 3)
-!487 = distinct !DILexicalBlock(scope: !484, file: !3, line: 272, column: 3)
-!488 = !DILocation(line: 0, scope: !479, inlinedAt: !489)
-!489 = distinct !DILocation(line: 351, column: 3, scope: !472)
-!490 = !DILocation(line: 0, scope: !484, inlinedAt: !489)
-!491 = !DILocation(line: 272, column: 37, scope: !487, inlinedAt: !489)
-!492 = !DILocation(line: 272, column: 3, scope: !484, inlinedAt: !489)
-!493 = !DILocation(line: 274, column: 27, scope: !486, inlinedAt: !489)
-!494 = !DILocation(line: 274, column: 23, scope: !486, inlinedAt: !489)
-!495 = !DILocation(line: 0, scope: !486, inlinedAt: !489)
-!496 = !DILocation(line: 275, column: 5, scope: !486, inlinedAt: !489)
-!497 = !DILocation(line: 272, column: 49, scope: !487, inlinedAt: !489)
-!498 = distinct !{!498, !492, !499, !383, !384}
-!499 = !DILocation(line: 276, column: 3, scope: !484, inlinedAt: !489)
-!500 = !DILocation(line: 352, column: 1, scope: !472)
-!501 = distinct !DISubprogram(name: "Hacl_SHA2_384_update_last", scope: !3, file: !3, line: 354, type: !502, scopeLine: 355, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !504)
-!502 = !DISubroutineType(types: !503)
-!503 = !{null, !32, !267, !10}
-!504 = !{!505, !506, !507}
-!505 = !DILocalVariable(name: "state", arg: 1, scope: !501, file: !3, line: 354, type: !32)
-!506 = !DILocalVariable(name: "data", arg: 2, scope: !501, file: !3, line: 354, type: !267)
-!507 = !DILocalVariable(name: "len", arg: 3, scope: !501, file: !3, line: 354, type: !10)
-!508 = !DILocation(line: 0, scope: !501)
-!509 = !DILocation(line: 356, column: 3, scope: !501)
-!510 = !DILocation(line: 357, column: 1, scope: !501)
-!511 = distinct !DISubprogram(name: "Hacl_Impl_SHA2_384_update_last", scope: !3, file: !3, line: 279, type: !502, scopeLine: 280, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !512)
-!512 = !{!513, !514, !515, !516, !520, !521, !522, !523, !524, !532, !533, !534}
-!513 = !DILocalVariable(name: "state", arg: 1, scope: !511, file: !3, line: 279, type: !32)
-!514 = !DILocalVariable(name: "data", arg: 2, scope: !511, file: !3, line: 279, type: !267)
-!515 = !DILocalVariable(name: "len", arg: 3, scope: !511, file: !3, line: 279, type: !10)
-!516 = !DILocalVariable(name: "blocks", scope: !511, file: !3, line: 281, type: !517)
-!517 = !DICompositeType(tag: DW_TAG_array_type, baseType: !13, size: 2048, elements: !518)
-!518 = !{!519}
-!519 = !DISubrange(count: 256)
-!520 = !DILocalVariable(name: "nb", scope: !511, file: !3, line: 282, type: !5)
-!521 = !DILocalVariable(name: "final_blocks", scope: !511, file: !3, line: 287, type: !267)
-!522 = !DILocalVariable(name: "n1", scope: !511, file: !3, line: 293, type: !10)
-!523 = !DILocalVariable(name: "padding", scope: !511, file: !3, line: 294, type: !267)
-!524 = !DILocalVariable(name: "encodedlen", scope: !511, file: !3, line: 296, type: !525)
-!525 = !DIDerivedType(tag: DW_TAG_typedef, name: "FStar_UInt128_t", file: !526, line: 37, baseType: !527)
-!526 = !DIFile(filename: "hacl-c/hacl-c/FStar.h", directory: "/mnt/c/Users/fwill/Documents/HS24/semester_project/tools/binsec/binsec/examples/hacl", checksumkind: CSK_MD5, checksum: "f30034e5606e554271b07b1e7e8a42fa")
-!527 = !DIDerivedType(tag: DW_TAG_typedef, name: "FStar_UInt128_uint128", file: !526, line: 35, baseType: !528)
-!528 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !526, line: 30, size: 128, elements: !529)
-!529 = !{!530, !531}
-!530 = !DIDerivedType(tag: DW_TAG_member, name: "low", scope: !528, file: !526, line: 32, baseType: !10, size: 64)
-!531 = !DIDerivedType(tag: DW_TAG_member, name: "high", scope: !528, file: !526, line: 33, baseType: !10, size: 64, offset: 64)
-!532 = !DILocalVariable(name: "pad0len", scope: !511, file: !3, line: 301, type: !5)
-!533 = !DILocalVariable(name: "buf1", scope: !511, file: !3, line: 304, type: !267)
-!534 = !DILocalVariable(name: "buf2", scope: !511, file: !3, line: 305, type: !267)
-!535 = !DILocation(line: 0, scope: !511)
-!536 = !DILocation(line: 281, column: 3, scope: !511)
-!537 = !DILocation(line: 281, column: 11, scope: !511)
-!538 = !DILocation(line: 283, column: 11, scope: !539)
-!539 = distinct !DILexicalBlock(scope: !511, file: !3, line: 283, column: 7)
-!540 = !DILocation(line: 288, column: 7, scope: !511)
-!541 = !DILocation(line: 292, column: 30, scope: !511)
-!542 = !DILocation(line: 292, column: 3, scope: !511)
-!543 = !DILocation(line: 293, column: 17, scope: !511)
-!544 = !DILocation(line: 294, column: 35, scope: !511)
-!545 = !DILocation(line: 295, column: 3, scope: !511)
-!546 = !DILocation(line: 296, column: 3, scope: !511)
-!547 = !DILocation(line: 297, column: 48, scope: !511)
-!548 = !DILocation(line: 298, column: 9, scope: !511)
-!549 = !DILocation(line: 297, column: 30, scope: !511)
-!550 = !{!551, !92, i64 0}
-!551 = !{!"", !92, i64 0, !92, i64 8}
-!552 = !{!551, !92, i64 8}
-!553 = !DILocation(line: 297, column: 5, scope: !511)
-!554 = !DILocation(line: 302, column: 21, scope: !511)
-!555 = !DILocation(line: 303, column: 5, scope: !511)
-!556 = !DILocation(line: 305, column: 27, scope: !511)
-!557 = !DILocation(line: 305, column: 42, scope: !511)
-!558 = !DILocation(line: 306, column: 12, scope: !511)
-!559 = !{!93, !93, i64 0}
-!560 = !DILocation(line: 307, column: 3, scope: !511)
-!561 = !DILocalVariable(name: "n", arg: 2, scope: !562, file: !360, line: 557, type: !565)
-!562 = distinct !DISubprogram(name: "store128_be", scope: !360, file: !360, line: 557, type: !563, scopeLine: 557, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !566)
-!563 = !DISubroutineType(types: !564)
-!564 = !{null, !267, !565}
-!565 = !DIDerivedType(tag: DW_TAG_typedef, name: "uint128_t", file: !360, line: 510, baseType: !527)
-!566 = !{!567, !561}
-!567 = !DILocalVariable(name: "b", arg: 1, scope: !562, file: !360, line: 557, type: !267)
-!568 = !DILocation(line: 0, scope: !562, inlinedAt: !569)
-!569 = distinct !DILocation(line: 307, column: 3, scope: !511)
-!570 = !DILocalVariable(name: "b", arg: 1, scope: !571, file: !360, line: 532, type: !267)
-!571 = distinct !DISubprogram(name: "store128_be_", scope: !360, file: !360, line: 532, type: !572, scopeLine: 532, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !575)
-!572 = !DISubroutineType(types: !573)
-!573 = !{null, !267, !574}
-!574 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !565, size: 32)
-!575 = !{!570, !576}
-!576 = !DILocalVariable(name: "n", arg: 2, scope: !571, file: !360, line: 532, type: !574)
-!577 = !DILocation(line: 0, scope: !571, inlinedAt: !578)
-!578 = distinct !DILocation(line: 557, column: 59, scope: !562, inlinedAt: !569)
-!579 = !DILocation(line: 0, scope: !369, inlinedAt: !580)
-!580 = distinct !DILocation(line: 533, column: 3, scope: !571, inlinedAt: !578)
-!581 = !DILocation(line: 75, column: 10, scope: !369, inlinedAt: !580)
-!582 = !DILocalVariable(name: "b", arg: 1, scope: !583, file: !360, line: 357, type: !267)
-!583 = distinct !DISubprogram(name: "store64", scope: !360, file: !360, line: 357, type: !584, scopeLine: 357, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !586)
-!584 = !DISubroutineType(types: !585)
-!585 = !{null, !267, !10}
-!586 = !{!582, !587}
-!587 = !DILocalVariable(name: "i", arg: 2, scope: !583, file: !360, line: 357, type: !10)
-!588 = !DILocation(line: 0, scope: !583, inlinedAt: !589)
-!589 = distinct !DILocation(line: 533, column: 3, scope: !571, inlinedAt: !578)
-!590 = !DILocation(line: 357, column: 54, scope: !583, inlinedAt: !589)
-!591 = !DILocation(line: 534, column: 3, scope: !571, inlinedAt: !578)
-!592 = !DILocation(line: 0, scope: !369, inlinedAt: !593)
-!593 = distinct !DILocation(line: 534, column: 3, scope: !571, inlinedAt: !578)
-!594 = !DILocation(line: 75, column: 10, scope: !369, inlinedAt: !593)
-!595 = !DILocation(line: 0, scope: !583, inlinedAt: !596)
-!596 = distinct !DILocation(line: 534, column: 3, scope: !571, inlinedAt: !578)
-!597 = !DILocation(line: 357, column: 54, scope: !583, inlinedAt: !596)
-!598 = !DILocation(line: 0, scope: !479, inlinedAt: !599)
-!599 = distinct !DILocation(line: 308, column: 3, scope: !511)
-!600 = !DILocation(line: 0, scope: !484, inlinedAt: !599)
-!601 = !DILocation(line: 274, column: 27, scope: !486, inlinedAt: !599)
-!602 = !DILocation(line: 274, column: 23, scope: !486, inlinedAt: !599)
-!603 = !DILocation(line: 0, scope: !486, inlinedAt: !599)
-!604 = !DILocation(line: 275, column: 5, scope: !486, inlinedAt: !599)
-!605 = !DILocation(line: 272, column: 49, scope: !487, inlinedAt: !599)
-!606 = !DILocation(line: 272, column: 37, scope: !487, inlinedAt: !599)
-!607 = !DILocation(line: 272, column: 3, scope: !484, inlinedAt: !599)
-!608 = distinct !{!608, !607, !609, !383, !384}
-!609 = !DILocation(line: 276, column: 3, scope: !484, inlinedAt: !599)
-!610 = !DILocation(line: 309, column: 1, scope: !511)
-!611 = distinct !DISubprogram(name: "Hacl_SHA2_384_finish", scope: !3, file: !3, line: 359, type: !265, scopeLine: 360, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !612)
-!612 = !{!613, !614}
-!613 = !DILocalVariable(name: "state", arg: 1, scope: !611, file: !3, line: 359, type: !32)
-!614 = !DILocalVariable(name: "hash1", arg: 2, scope: !611, file: !3, line: 359, type: !267)
-!615 = !DILocation(line: 0, scope: !611)
-!616 = !DILocalVariable(name: "state", arg: 1, scope: !617, file: !3, line: 311, type: !32)
-!617 = distinct !DISubprogram(name: "Hacl_Impl_SHA2_384_finish", scope: !3, file: !3, line: 311, type: !265, scopeLine: 312, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !618)
-!618 = !{!616, !619, !620}
-!619 = !DILocalVariable(name: "hash1", arg: 2, scope: !617, file: !3, line: 311, type: !267)
-!620 = !DILocalVariable(name: "hash_w", scope: !617, file: !3, line: 313, type: !32)
-!621 = !DILocation(line: 0, scope: !617, inlinedAt: !622)
-!622 = distinct !DILocation(line: 361, column: 3, scope: !611)
-!623 = !DILocation(line: 313, column: 28, scope: !617, inlinedAt: !622)
-!624 = !DILocalVariable(name: "output", arg: 1, scope: !625, file: !3, line: 39, type: !267)
-!625 = distinct !DISubprogram(name: "Hacl_Hash_Lib_LoadStore_uint64s_to_be_bytes", scope: !3, file: !3, line: 39, type: !626, scopeLine: 40, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !628)
-!626 = !DISubroutineType(types: !627)
-!627 = !{null, !267, !32, !5}
-!628 = !{!624, !629, !630, !631, !633, !636}
-!629 = !DILocalVariable(name: "input", arg: 2, scope: !625, file: !3, line: 39, type: !32)
-!630 = !DILocalVariable(name: "len", arg: 3, scope: !625, file: !3, line: 39, type: !5)
-!631 = !DILocalVariable(name: "i", scope: !632, file: !3, line: 41, type: !5)
-!632 = distinct !DILexicalBlock(scope: !625, file: !3, line: 41, column: 3)
-!633 = !DILocalVariable(name: "hd1", scope: !634, file: !3, line: 43, type: !10)
-!634 = distinct !DILexicalBlock(scope: !635, file: !3, line: 42, column: 3)
-!635 = distinct !DILexicalBlock(scope: !632, file: !3, line: 41, column: 3)
-!636 = !DILocalVariable(name: "x0", scope: !634, file: !3, line: 44, type: !267)
-!637 = !DILocation(line: 0, scope: !625, inlinedAt: !638)
-!638 = distinct !DILocation(line: 314, column: 3, scope: !617, inlinedAt: !622)
-!639 = !DILocation(line: 0, scope: !632, inlinedAt: !638)
-!640 = !DILocation(line: 41, column: 3, scope: !632, inlinedAt: !638)
-!641 = !DILocation(line: 43, column: 20, scope: !634, inlinedAt: !638)
-!642 = !DILocation(line: 0, scope: !634, inlinedAt: !638)
-!643 = !DILocation(line: 44, column: 41, scope: !634, inlinedAt: !638)
-!644 = !DILocation(line: 44, column: 26, scope: !634, inlinedAt: !638)
-!645 = !DILocation(line: 0, scope: !369, inlinedAt: !646)
-!646 = distinct !DILocation(line: 45, column: 5, scope: !634, inlinedAt: !638)
-!647 = !DILocation(line: 75, column: 10, scope: !369, inlinedAt: !646)
-!648 = !DILocation(line: 0, scope: !583, inlinedAt: !649)
-!649 = distinct !DILocation(line: 45, column: 5, scope: !634, inlinedAt: !638)
-!650 = !DILocation(line: 357, column: 54, scope: !583, inlinedAt: !649)
-!651 = !DILocation(line: 41, column: 50, scope: !635, inlinedAt: !638)
-!652 = !DILocation(line: 41, column: 37, scope: !635, inlinedAt: !638)
-!653 = distinct !{!653, !640, !654, !383, !384}
-!654 = !DILocation(line: 46, column: 3, scope: !632, inlinedAt: !638)
-!655 = !DILocation(line: 362, column: 1, scope: !611)
-!656 = distinct !DISubprogram(name: "Hacl_SHA2_384_hash", scope: !3, file: !3, line: 364, type: !657, scopeLine: 365, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !659)
-!657 = !DISubroutineType(types: !658)
-!658 = !{null, !267, !267, !5}
-!659 = !{!660, !661, !662}
-!660 = !DILocalVariable(name: "hash1", arg: 1, scope: !656, file: !3, line: 364, type: !267)
-!661 = !DILocalVariable(name: "input", arg: 2, scope: !656, file: !3, line: 364, type: !267)
-!662 = !DILocalVariable(name: "len", arg: 3, scope: !656, file: !3, line: 364, type: !5)
-!663 = !DILocation(line: 0, scope: !656)
-!664 = !DILocation(line: 0, scope: !665, inlinedAt: !680)
-!665 = distinct !DISubprogram(name: "Hacl_Impl_SHA2_384_hash", scope: !3, file: !3, line: 317, type: !657, scopeLine: 318, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !666)
-!666 = !{!667, !668, !669, !670, !674, !676, !677, !678, !679}
-!667 = !DILocalVariable(name: "hash1", arg: 1, scope: !665, file: !3, line: 317, type: !267)
-!668 = !DILocalVariable(name: "input", arg: 2, scope: !665, file: !3, line: 317, type: !267)
-!669 = !DILocalVariable(name: "len", arg: 3, scope: !665, file: !3, line: 317, type: !5)
-!670 = !DILocalVariable(name: "state", scope: !665, file: !3, line: 320, type: !671)
-!671 = !DICompositeType(tag: DW_TAG_array_type, baseType: !10, size: 10816, elements: !672)
-!672 = !{!673}
-!673 = !DISubrange(count: 169)
-!674 = !DILocalVariable(name: "_i", scope: !675, file: !3, line: 321, type: !5)
-!675 = distinct !DILexicalBlock(scope: !665, file: !3, line: 321, column: 3)
-!676 = !DILocalVariable(name: "n1", scope: !665, file: !3, line: 323, type: !5)
-!677 = !DILocalVariable(name: "r", scope: !665, file: !3, line: 324, type: !5)
-!678 = !DILocalVariable(name: "input_blocks", scope: !665, file: !3, line: 325, type: !267)
-!679 = !DILocalVariable(name: "input_last", scope: !665, file: !3, line: 326, type: !267)
-!680 = distinct !DILocation(line: 366, column: 3, scope: !656)
-!681 = !DILocation(line: 320, column: 3, scope: !665, inlinedAt: !680)
-!682 = !DILocation(line: 320, column: 12, scope: !665, inlinedAt: !680)
-!683 = !DILocation(line: 0, scope: !675, inlinedAt: !680)
-!684 = !DILocation(line: 322, column: 15, scope: !685, inlinedAt: !680)
-!685 = distinct !DILexicalBlock(scope: !675, file: !3, line: 321, column: 3)
-!686 = !DILocation(line: 323, column: 21, scope: !665, inlinedAt: !680)
-!687 = !DILocation(line: 324, column: 20, scope: !665, inlinedAt: !680)
-!688 = !DILocation(line: 326, column: 36, scope: !665, inlinedAt: !680)
-!689 = !DILocation(line: 326, column: 31, scope: !665, inlinedAt: !680)
-!690 = !DILocation(line: 327, column: 27, scope: !665, inlinedAt: !680)
-!691 = !DILocation(line: 0, scope: !38, inlinedAt: !692)
-!692 = distinct !DILocation(line: 327, column: 3, scope: !665, inlinedAt: !680)
-!693 = !DILocation(line: 51, column: 24, scope: !38, inlinedAt: !692)
-!694 = !DILocation(line: 53, column: 26, scope: !38, inlinedAt: !692)
-!695 = !DILocation(line: 55, column: 22, scope: !38, inlinedAt: !692)
-!696 = !DILocation(line: 56, column: 21, scope: !38, inlinedAt: !692)
-!697 = !DILocation(line: 57, column: 21, scope: !38, inlinedAt: !692)
-!698 = !DILocation(line: 58, column: 21, scope: !38, inlinedAt: !692)
-!699 = !DILocation(line: 60, column: 23, scope: !38, inlinedAt: !692)
-!700 = !DILocation(line: 62, column: 23, scope: !38, inlinedAt: !692)
-!701 = !DILocation(line: 63, column: 11, scope: !38, inlinedAt: !692)
-!702 = !DILocation(line: 64, column: 3, scope: !38, inlinedAt: !692)
-!703 = !DILocation(line: 64, column: 11, scope: !38, inlinedAt: !692)
-!704 = !DILocation(line: 65, column: 3, scope: !38, inlinedAt: !692)
-!705 = !DILocation(line: 65, column: 11, scope: !38, inlinedAt: !692)
-!706 = !DILocation(line: 66, column: 3, scope: !38, inlinedAt: !692)
-!707 = !DILocation(line: 66, column: 11, scope: !38, inlinedAt: !692)
-!708 = !DILocation(line: 67, column: 11, scope: !38, inlinedAt: !692)
-!709 = !DILocation(line: 68, column: 3, scope: !38, inlinedAt: !692)
-!710 = !DILocation(line: 68, column: 11, scope: !38, inlinedAt: !692)
-!711 = !DILocation(line: 69, column: 3, scope: !38, inlinedAt: !692)
-!712 = !DILocation(line: 69, column: 11, scope: !38, inlinedAt: !692)
-!713 = !DILocation(line: 70, column: 3, scope: !38, inlinedAt: !692)
-!714 = !DILocation(line: 70, column: 11, scope: !38, inlinedAt: !692)
-!715 = !DILocation(line: 72, column: 23, scope: !38, inlinedAt: !692)
-!716 = !DILocation(line: 73, column: 11, scope: !38, inlinedAt: !692)
-!717 = !DILocation(line: 74, column: 3, scope: !38, inlinedAt: !692)
-!718 = !DILocation(line: 74, column: 11, scope: !38, inlinedAt: !692)
-!719 = !DILocation(line: 75, column: 3, scope: !38, inlinedAt: !692)
-!720 = !DILocation(line: 75, column: 11, scope: !38, inlinedAt: !692)
-!721 = !DILocation(line: 76, column: 3, scope: !38, inlinedAt: !692)
-!722 = !DILocation(line: 76, column: 11, scope: !38, inlinedAt: !692)
-!723 = !DILocation(line: 77, column: 11, scope: !38, inlinedAt: !692)
-!724 = !DILocation(line: 78, column: 3, scope: !38, inlinedAt: !692)
-!725 = !DILocation(line: 78, column: 11, scope: !38, inlinedAt: !692)
-!726 = !DILocation(line: 79, column: 3, scope: !38, inlinedAt: !692)
-!727 = !DILocation(line: 79, column: 11, scope: !38, inlinedAt: !692)
-!728 = !DILocation(line: 80, column: 3, scope: !38, inlinedAt: !692)
-!729 = !DILocation(line: 80, column: 11, scope: !38, inlinedAt: !692)
-!730 = !DILocation(line: 82, column: 23, scope: !38, inlinedAt: !692)
-!731 = !DILocation(line: 84, column: 23, scope: !38, inlinedAt: !692)
-!732 = !DILocation(line: 85, column: 11, scope: !38, inlinedAt: !692)
-!733 = !DILocation(line: 86, column: 3, scope: !38, inlinedAt: !692)
-!734 = !DILocation(line: 86, column: 11, scope: !38, inlinedAt: !692)
-!735 = !DILocation(line: 87, column: 3, scope: !38, inlinedAt: !692)
-!736 = !DILocation(line: 87, column: 11, scope: !38, inlinedAt: !692)
-!737 = !DILocation(line: 88, column: 3, scope: !38, inlinedAt: !692)
-!738 = !DILocation(line: 88, column: 11, scope: !38, inlinedAt: !692)
-!739 = !DILocation(line: 89, column: 11, scope: !38, inlinedAt: !692)
-!740 = !DILocation(line: 90, column: 3, scope: !38, inlinedAt: !692)
-!741 = !DILocation(line: 90, column: 11, scope: !38, inlinedAt: !692)
-!742 = !DILocation(line: 91, column: 3, scope: !38, inlinedAt: !692)
-!743 = !DILocation(line: 91, column: 11, scope: !38, inlinedAt: !692)
-!744 = !DILocation(line: 92, column: 3, scope: !38, inlinedAt: !692)
-!745 = !DILocation(line: 92, column: 11, scope: !38, inlinedAt: !692)
-!746 = !DILocation(line: 94, column: 23, scope: !38, inlinedAt: !692)
-!747 = !DILocation(line: 95, column: 11, scope: !38, inlinedAt: !692)
-!748 = !DILocation(line: 96, column: 3, scope: !38, inlinedAt: !692)
-!749 = !DILocation(line: 96, column: 11, scope: !38, inlinedAt: !692)
-!750 = !DILocation(line: 97, column: 3, scope: !38, inlinedAt: !692)
-!751 = !DILocation(line: 97, column: 11, scope: !38, inlinedAt: !692)
-!752 = !DILocation(line: 98, column: 3, scope: !38, inlinedAt: !692)
-!753 = !DILocation(line: 98, column: 11, scope: !38, inlinedAt: !692)
-!754 = !DILocation(line: 99, column: 11, scope: !38, inlinedAt: !692)
-!755 = !DILocation(line: 100, column: 3, scope: !38, inlinedAt: !692)
-!756 = !DILocation(line: 100, column: 11, scope: !38, inlinedAt: !692)
-!757 = !DILocation(line: 101, column: 3, scope: !38, inlinedAt: !692)
-!758 = !DILocation(line: 101, column: 11, scope: !38, inlinedAt: !692)
-!759 = !DILocation(line: 102, column: 3, scope: !38, inlinedAt: !692)
-!760 = !DILocation(line: 102, column: 11, scope: !38, inlinedAt: !692)
-!761 = !DILocation(line: 104, column: 22, scope: !38, inlinedAt: !692)
-!762 = !DILocation(line: 106, column: 23, scope: !38, inlinedAt: !692)
-!763 = !DILocation(line: 107, column: 11, scope: !38, inlinedAt: !692)
-!764 = !DILocation(line: 108, column: 3, scope: !38, inlinedAt: !692)
-!765 = !DILocation(line: 108, column: 11, scope: !38, inlinedAt: !692)
-!766 = !DILocation(line: 109, column: 3, scope: !38, inlinedAt: !692)
-!767 = !DILocation(line: 109, column: 11, scope: !38, inlinedAt: !692)
-!768 = !DILocation(line: 110, column: 3, scope: !38, inlinedAt: !692)
-!769 = !DILocation(line: 110, column: 11, scope: !38, inlinedAt: !692)
-!770 = !DILocation(line: 111, column: 11, scope: !38, inlinedAt: !692)
-!771 = !DILocation(line: 112, column: 3, scope: !38, inlinedAt: !692)
-!772 = !DILocation(line: 112, column: 11, scope: !38, inlinedAt: !692)
-!773 = !DILocation(line: 113, column: 3, scope: !38, inlinedAt: !692)
-!774 = !DILocation(line: 113, column: 11, scope: !38, inlinedAt: !692)
-!775 = !DILocation(line: 114, column: 3, scope: !38, inlinedAt: !692)
-!776 = !DILocation(line: 114, column: 11, scope: !38, inlinedAt: !692)
-!777 = !DILocation(line: 116, column: 23, scope: !38, inlinedAt: !692)
-!778 = !DILocation(line: 117, column: 11, scope: !38, inlinedAt: !692)
-!779 = !DILocation(line: 118, column: 3, scope: !38, inlinedAt: !692)
-!780 = !DILocation(line: 118, column: 11, scope: !38, inlinedAt: !692)
-!781 = !DILocation(line: 119, column: 3, scope: !38, inlinedAt: !692)
-!782 = !DILocation(line: 119, column: 11, scope: !38, inlinedAt: !692)
-!783 = !DILocation(line: 120, column: 3, scope: !38, inlinedAt: !692)
-!784 = !DILocation(line: 120, column: 11, scope: !38, inlinedAt: !692)
-!785 = !DILocation(line: 121, column: 11, scope: !38, inlinedAt: !692)
-!786 = !DILocation(line: 122, column: 3, scope: !38, inlinedAt: !692)
-!787 = !DILocation(line: 122, column: 11, scope: !38, inlinedAt: !692)
-!788 = !DILocation(line: 123, column: 3, scope: !38, inlinedAt: !692)
-!789 = !DILocation(line: 123, column: 11, scope: !38, inlinedAt: !692)
-!790 = !DILocation(line: 124, column: 3, scope: !38, inlinedAt: !692)
-!791 = !DILocation(line: 124, column: 11, scope: !38, inlinedAt: !692)
-!792 = !DILocation(line: 126, column: 23, scope: !38, inlinedAt: !692)
-!793 = !DILocation(line: 128, column: 25, scope: !38, inlinedAt: !692)
-!794 = !DILocation(line: 129, column: 12, scope: !38, inlinedAt: !692)
-!795 = !DILocation(line: 130, column: 3, scope: !38, inlinedAt: !692)
-!796 = !DILocation(line: 130, column: 12, scope: !38, inlinedAt: !692)
-!797 = !DILocation(line: 131, column: 3, scope: !38, inlinedAt: !692)
-!798 = !DILocation(line: 131, column: 12, scope: !38, inlinedAt: !692)
-!799 = !DILocation(line: 132, column: 3, scope: !38, inlinedAt: !692)
-!800 = !DILocation(line: 132, column: 12, scope: !38, inlinedAt: !692)
-!801 = !DILocation(line: 133, column: 12, scope: !38, inlinedAt: !692)
-!802 = !DILocation(line: 134, column: 3, scope: !38, inlinedAt: !692)
-!803 = !DILocation(line: 134, column: 12, scope: !38, inlinedAt: !692)
-!804 = !DILocation(line: 135, column: 3, scope: !38, inlinedAt: !692)
-!805 = !DILocation(line: 135, column: 12, scope: !38, inlinedAt: !692)
-!806 = !DILocation(line: 136, column: 3, scope: !38, inlinedAt: !692)
-!807 = !DILocation(line: 136, column: 12, scope: !38, inlinedAt: !692)
-!808 = !DILocation(line: 138, column: 25, scope: !38, inlinedAt: !692)
-!809 = !DILocation(line: 139, column: 12, scope: !38, inlinedAt: !692)
-!810 = !DILocation(line: 140, column: 3, scope: !38, inlinedAt: !692)
-!811 = !DILocation(line: 140, column: 12, scope: !38, inlinedAt: !692)
-!812 = !DILocation(line: 141, column: 3, scope: !38, inlinedAt: !692)
-!813 = !DILocation(line: 141, column: 12, scope: !38, inlinedAt: !692)
-!814 = !DILocation(line: 142, column: 3, scope: !38, inlinedAt: !692)
-!815 = !DILocation(line: 142, column: 12, scope: !38, inlinedAt: !692)
-!816 = !DILocation(line: 143, column: 12, scope: !38, inlinedAt: !692)
-!817 = !DILocation(line: 144, column: 3, scope: !38, inlinedAt: !692)
-!818 = !DILocation(line: 144, column: 12, scope: !38, inlinedAt: !692)
-!819 = !DILocation(line: 145, column: 3, scope: !38, inlinedAt: !692)
-!820 = !DILocation(line: 145, column: 12, scope: !38, inlinedAt: !692)
-!821 = !DILocation(line: 146, column: 3, scope: !38, inlinedAt: !692)
-!822 = !DILocation(line: 146, column: 12, scope: !38, inlinedAt: !692)
-!823 = !DILocation(line: 148, column: 23, scope: !38, inlinedAt: !692)
-!824 = !DILocation(line: 150, column: 25, scope: !38, inlinedAt: !692)
-!825 = !DILocation(line: 151, column: 10, scope: !38, inlinedAt: !692)
-!826 = !DILocation(line: 152, column: 3, scope: !38, inlinedAt: !692)
-!827 = !DILocation(line: 152, column: 10, scope: !38, inlinedAt: !692)
-!828 = !DILocation(line: 153, column: 3, scope: !38, inlinedAt: !692)
-!829 = !DILocation(line: 153, column: 10, scope: !38, inlinedAt: !692)
-!830 = !DILocation(line: 154, column: 3, scope: !38, inlinedAt: !692)
-!831 = !DILocation(line: 154, column: 10, scope: !38, inlinedAt: !692)
-!832 = !DILocation(line: 155, column: 12, scope: !38, inlinedAt: !692)
-!833 = !DILocation(line: 156, column: 3, scope: !38, inlinedAt: !692)
-!834 = !DILocation(line: 156, column: 12, scope: !38, inlinedAt: !692)
-!835 = !DILocation(line: 157, column: 3, scope: !38, inlinedAt: !692)
-!836 = !DILocation(line: 157, column: 12, scope: !38, inlinedAt: !692)
-!837 = !DILocation(line: 158, column: 3, scope: !38, inlinedAt: !692)
-!838 = !DILocation(line: 158, column: 12, scope: !38, inlinedAt: !692)
-!839 = !DILocation(line: 160, column: 25, scope: !38, inlinedAt: !692)
-!840 = !DILocation(line: 161, column: 12, scope: !38, inlinedAt: !692)
-!841 = !DILocation(line: 162, column: 3, scope: !38, inlinedAt: !692)
-!842 = !DILocation(line: 162, column: 12, scope: !38, inlinedAt: !692)
-!843 = !DILocation(line: 163, column: 3, scope: !38, inlinedAt: !692)
-!844 = !DILocation(line: 163, column: 12, scope: !38, inlinedAt: !692)
-!845 = !DILocation(line: 164, column: 3, scope: !38, inlinedAt: !692)
-!846 = !DILocation(line: 164, column: 12, scope: !38, inlinedAt: !692)
-!847 = !DILocation(line: 165, column: 12, scope: !38, inlinedAt: !692)
-!848 = !DILocation(line: 166, column: 3, scope: !38, inlinedAt: !692)
-!849 = !DILocation(line: 166, column: 12, scope: !38, inlinedAt: !692)
-!850 = !DILocation(line: 167, column: 3, scope: !38, inlinedAt: !692)
-!851 = !DILocation(line: 167, column: 12, scope: !38, inlinedAt: !692)
-!852 = !DILocation(line: 168, column: 3, scope: !38, inlinedAt: !692)
-!853 = !DILocation(line: 168, column: 12, scope: !38, inlinedAt: !692)
-!854 = !DILocation(line: 170, column: 23, scope: !38, inlinedAt: !692)
-!855 = !DILocation(line: 171, column: 12, scope: !38, inlinedAt: !692)
-!856 = !DILocation(line: 172, column: 3, scope: !38, inlinedAt: !692)
-!857 = !DILocation(line: 172, column: 12, scope: !38, inlinedAt: !692)
-!858 = !DILocation(line: 173, column: 3, scope: !38, inlinedAt: !692)
-!859 = !DILocation(line: 173, column: 12, scope: !38, inlinedAt: !692)
-!860 = !DILocation(line: 174, column: 3, scope: !38, inlinedAt: !692)
-!861 = !DILocation(line: 174, column: 12, scope: !38, inlinedAt: !692)
-!862 = !DILocation(line: 175, column: 10, scope: !38, inlinedAt: !692)
-!863 = !DILocation(line: 176, column: 3, scope: !38, inlinedAt: !692)
-!864 = !DILocation(line: 176, column: 10, scope: !38, inlinedAt: !692)
-!865 = !DILocation(line: 177, column: 3, scope: !38, inlinedAt: !692)
-!866 = !DILocation(line: 177, column: 10, scope: !38, inlinedAt: !692)
-!867 = !DILocation(line: 178, column: 3, scope: !38, inlinedAt: !692)
-!868 = !DILocation(line: 178, column: 10, scope: !38, inlinedAt: !692)
-!869 = !DILocation(line: 179, column: 10, scope: !38, inlinedAt: !692)
-!870 = !DILocation(line: 0, scope: !479, inlinedAt: !871)
-!871 = distinct !DILocation(line: 328, column: 3, scope: !665, inlinedAt: !680)
-!872 = !DILocation(line: 0, scope: !484, inlinedAt: !871)
-!873 = !DILocation(line: 272, column: 37, scope: !487, inlinedAt: !871)
-!874 = !DILocation(line: 272, column: 3, scope: !484, inlinedAt: !871)
-!875 = !DILocation(line: 274, column: 27, scope: !486, inlinedAt: !871)
-!876 = !DILocation(line: 274, column: 23, scope: !486, inlinedAt: !871)
-!877 = !DILocation(line: 0, scope: !486, inlinedAt: !871)
-!878 = !DILocation(line: 275, column: 5, scope: !486, inlinedAt: !871)
-!879 = !DILocation(line: 272, column: 49, scope: !487, inlinedAt: !871)
-!880 = distinct !{!880, !874, !881, !383, !384}
-!881 = !DILocation(line: 276, column: 3, scope: !484, inlinedAt: !871)
-!882 = !DILocation(line: 329, column: 53, scope: !665, inlinedAt: !680)
-!883 = !DILocation(line: 329, column: 3, scope: !665, inlinedAt: !680)
-!884 = !DILocation(line: 0, scope: !617, inlinedAt: !885)
-!885 = distinct !DILocation(line: 330, column: 3, scope: !665, inlinedAt: !680)
-!886 = !DILocation(line: 0, scope: !625, inlinedAt: !887)
-!887 = distinct !DILocation(line: 314, column: 3, scope: !617, inlinedAt: !885)
-!888 = !DILocation(line: 0, scope: !632, inlinedAt: !887)
-!889 = !DILocation(line: 41, column: 3, scope: !632, inlinedAt: !887)
-!890 = !DILocation(line: 43, column: 20, scope: !634, inlinedAt: !887)
-!891 = !DILocation(line: 0, scope: !634, inlinedAt: !887)
-!892 = !DILocation(line: 44, column: 41, scope: !634, inlinedAt: !887)
-!893 = !DILocation(line: 44, column: 26, scope: !634, inlinedAt: !887)
-!894 = !DILocation(line: 0, scope: !369, inlinedAt: !895)
-!895 = distinct !DILocation(line: 45, column: 5, scope: !634, inlinedAt: !887)
-!896 = !DILocation(line: 75, column: 10, scope: !369, inlinedAt: !895)
-!897 = !DILocation(line: 0, scope: !583, inlinedAt: !898)
-!898 = distinct !DILocation(line: 45, column: 5, scope: !634, inlinedAt: !887)
-!899 = !DILocation(line: 357, column: 54, scope: !583, inlinedAt: !898)
-!900 = !DILocation(line: 41, column: 50, scope: !635, inlinedAt: !887)
-!901 = !DILocation(line: 41, column: 37, scope: !635, inlinedAt: !887)
-!902 = distinct !{!902, !889, !903, !383, !384}
-!903 = !DILocation(line: 46, column: 3, scope: !632, inlinedAt: !887)
-!904 = !DILocation(line: 331, column: 1, scope: !665, inlinedAt: !680)
-!905 = !DILocation(line: 367, column: 1, scope: !656)
-!906 = !DISubprogram(name: "FStar_UInt128_shift_left", scope: !526, file: !526, line: 57, type: !907, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !909)
-!907 = !DISubroutineType(types: !908)
-!908 = !{!527, !527, !5}
-!909 = !{}
-!910 = !DISubprogram(name: "FStar_UInt128_add", scope: !526, file: !526, line: 41, type: !911, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !909)
-!911 = !DISubroutineType(types: !912)
-!912 = !{!527, !527, !527}
-!913 = !DISubprogram(name: "FStar_UInt128_mul_wide", scope: !526, file: !526, line: 78, type: !914, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !909)
-!914 = !DISubroutineType(types: !915)
-!915 = !{!527, !10, !10}
-!916 = !DISubprogram(name: "FStar_UInt128_uint64_to_uint128", scope: !526, file: !526, line: 65, type: !917, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !909)
-!917 = !DISubroutineType(types: !918)
-!918 = !{!527, !10}
+!339 = !DILocation(line: 188, column: 49, scope: !274)
+!340 = !DILocation(line: 188, column: 3, scope: !274)
+!341 = !DILocation(line: 190, column: 26, scope: !274)
+!342 = !DILocation(line: 0, scope: !289)
+!343 = !DILocation(line: 196, column: 13, scope: !291)
+!344 = !DILocation(line: 0, scope: !291)
+!345 = !DILocation(line: 189, column: 28, scope: !274)
+!346 = !DILocation(line: 198, column: 3, scope: !294)
+!347 = !DILocation(line: 214, column: 3, scope: !274)
+!348 = !DILocation(line: 214, column: 12, scope: !274)
+!349 = !DILocation(line: 215, column: 3, scope: !274)
+!350 = !DILocation(line: 0, scope: !306)
+!351 = !DILocation(line: 216, column: 3, scope: !306)
+!352 = !DILocation(line: 0, scope: !294)
+!353 = !DILocation(line: 200, column: 27, scope: !296)
+!354 = !DILocation(line: 200, column: 20, scope: !296)
+!355 = !DILocation(line: 0, scope: !296)
+!356 = !DILocation(line: 201, column: 27, scope: !296)
+!357 = !DILocation(line: 201, column: 20, scope: !296)
+!358 = !DILocation(line: 202, column: 26, scope: !296)
+!359 = !DILocation(line: 202, column: 19, scope: !296)
+!360 = !DILocation(line: 203, column: 26, scope: !296)
+!361 = !DILocation(line: 203, column: 19, scope: !296)
+!362 = !DILocation(line: 205, column: 29, scope: !296)
+!363 = !DILocation(line: 206, column: 31, scope: !296)
+!364 = !DILocation(line: 206, column: 77, scope: !296)
+!365 = !DILocation(line: 206, column: 72, scope: !296)
+!366 = !DILocation(line: 206, column: 7, scope: !296)
+!367 = !DILocation(line: 210, column: 33, scope: !296)
+!368 = !DILocation(line: 211, column: 35, scope: !296)
+!369 = !DILocation(line: 211, column: 82, scope: !296)
+!370 = !DILocation(line: 211, column: 76, scope: !296)
+!371 = !DILocation(line: 211, column: 11, scope: !296)
+!372 = !DILocation(line: 207, column: 7, scope: !296)
+!373 = !DILocation(line: 209, column: 9, scope: !296)
+!374 = !DILocation(line: 212, column: 11, scope: !296)
+!375 = !DILocation(line: 204, column: 5, scope: !296)
+!376 = !DILocation(line: 204, column: 13, scope: !296)
+!377 = !DILocation(line: 198, column: 61, scope: !297)
+!378 = !DILocation(line: 198, column: 38, scope: !297)
+!379 = distinct !{!379, !346, !380, !381, !382}
+!380 = !DILocation(line: 213, column: 3, scope: !294)
+!381 = !{!"llvm.loop.mustprogress"}
+!382 = !{!"llvm.loop.unroll.disable"}
+!383 = !DILocation(line: 0, scope: !308)
+!384 = !DILocation(line: 0, scope: !326)
+!385 = !DILocation(line: 259, column: 3, scope: !326)
+!386 = !DILocation(line: 226, column: 20, scope: !308)
+!387 = !DILocation(line: 227, column: 21, scope: !308)
+!388 = !DILocation(line: 232, column: 30, scope: !308)
+!389 = !DILocation(line: 234, column: 32, scope: !308)
+!390 = !DILocation(line: 235, column: 33, scope: !308)
+!391 = !DILocation(line: 235, column: 11, scope: !308)
+!392 = !DILocation(line: 233, column: 9, scope: !308)
+!393 = !DILocation(line: 236, column: 13, scope: !308)
+!394 = !DILocation(line: 236, column: 22, scope: !308)
+!395 = !DILocation(line: 236, column: 25, scope: !308)
+!396 = !DILocation(line: 236, column: 19, scope: !308)
+!397 = !DILocation(line: 231, column: 7, scope: !308)
+!398 = !DILocation(line: 236, column: 7, scope: !308)
+!399 = !DILocation(line: 237, column: 7, scope: !308)
+!400 = !DILocation(line: 238, column: 7, scope: !308)
+!401 = !DILocation(line: 241, column: 28, scope: !308)
+!402 = !DILocation(line: 243, column: 30, scope: !308)
+!403 = !DILocation(line: 244, column: 31, scope: !308)
+!404 = !DILocation(line: 244, column: 9, scope: !308)
+!405 = !DILocation(line: 242, column: 7, scope: !308)
+!406 = !DILocation(line: 245, column: 13, scope: !308)
+!407 = !DILocation(line: 245, column: 29, scope: !308)
+!408 = !DILocation(line: 245, column: 18, scope: !308)
+!409 = !DILocation(line: 245, column: 7, scope: !308)
+!410 = !DILocation(line: 246, column: 22, scope: !308)
+!411 = !DILocation(line: 247, column: 21, scope: !308)
+!412 = !DILocation(line: 216, column: 60, scope: !309)
+!413 = !DILocation(line: 216, column: 37, scope: !309)
+!414 = distinct !{!414, !351, !415, !381, !382}
+!415 = !DILocation(line: 258, column: 3, scope: !306)
+!416 = !DILocation(line: 192, column: 31, scope: !274)
+!417 = !DILocation(line: 265, column: 17, scope: !274)
+!418 = !DILocation(line: 267, column: 22, scope: !274)
+!419 = !DILocation(line: 267, column: 17, scope: !274)
+!420 = !DILocation(line: 268, column: 1, scope: !274)
+!421 = !DILocation(line: 261, column: 19, scope: !328)
+!422 = !DILocation(line: 0, scope: !328)
+!423 = !DILocation(line: 262, column: 19, scope: !328)
+!424 = !DILocation(line: 263, column: 20, scope: !328)
+!425 = !DILocation(line: 263, column: 15, scope: !328)
+!426 = !DILocation(line: 259, column: 59, scope: !329)
+!427 = !DILocation(line: 259, column: 37, scope: !329)
+!428 = distinct !{!428, !385, !429, !381, !382}
+!429 = !DILocation(line: 264, column: 3, scope: !326)
+!430 = distinct !DISubprogram(name: "Hacl_SHA2_384_update_multi", scope: !3, file: !3, line: 349, type: !431, scopeLine: 350, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !433)
+!431 = !DISubroutineType(types: !432)
+!432 = !{null, !32, !267, !5}
+!433 = !{!434, !435, !436}
+!434 = !DILocalVariable(name: "state", arg: 1, scope: !430, file: !3, line: 349, type: !32)
+!435 = !DILocalVariable(name: "data", arg: 2, scope: !430, file: !3, line: 349, type: !267)
+!436 = !DILocalVariable(name: "n1", arg: 3, scope: !430, file: !3, line: 349, type: !5)
+!437 = !DILocation(line: 0, scope: !430)
+!438 = !DILocation(line: 351, column: 3, scope: !430)
+!439 = !DILocation(line: 352, column: 1, scope: !430)
+!440 = distinct !DISubprogram(name: "Hacl_Impl_SHA2_384_update_multi", scope: !3, file: !3, line: 270, type: !431, scopeLine: 271, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !441)
+!441 = !{!442, !443, !444, !445, !447}
+!442 = !DILocalVariable(name: "state", arg: 1, scope: !440, file: !3, line: 270, type: !32)
+!443 = !DILocalVariable(name: "data", arg: 2, scope: !440, file: !3, line: 270, type: !267)
+!444 = !DILocalVariable(name: "n1", arg: 3, scope: !440, file: !3, line: 270, type: !5)
+!445 = !DILocalVariable(name: "i", scope: !446, file: !3, line: 272, type: !5)
+!446 = distinct !DILexicalBlock(scope: !440, file: !3, line: 272, column: 3)
+!447 = !DILocalVariable(name: "b", scope: !448, file: !3, line: 274, type: !267)
+!448 = distinct !DILexicalBlock(scope: !449, file: !3, line: 273, column: 3)
+!449 = distinct !DILexicalBlock(scope: !446, file: !3, line: 272, column: 3)
+!450 = !DILocation(line: 0, scope: !440)
+!451 = !DILocation(line: 0, scope: !446)
+!452 = !DILocation(line: 272, column: 37, scope: !449)
+!453 = !DILocation(line: 272, column: 3, scope: !446)
+!454 = !DILocation(line: 277, column: 1, scope: !440)
+!455 = !DILocation(line: 274, column: 27, scope: !448)
+!456 = !DILocation(line: 274, column: 23, scope: !448)
+!457 = !DILocation(line: 0, scope: !448)
+!458 = !DILocation(line: 275, column: 5, scope: !448)
+!459 = !DILocation(line: 272, column: 49, scope: !449)
+!460 = distinct !{!460, !453, !461, !381, !382}
+!461 = !DILocation(line: 276, column: 3, scope: !446)
+!462 = distinct !DISubprogram(name: "Hacl_SHA2_384_update_last", scope: !3, file: !3, line: 354, type: !463, scopeLine: 355, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !465)
+!463 = !DISubroutineType(types: !464)
+!464 = !{null, !32, !267, !10}
+!465 = !{!466, !467, !468}
+!466 = !DILocalVariable(name: "state", arg: 1, scope: !462, file: !3, line: 354, type: !32)
+!467 = !DILocalVariable(name: "data", arg: 2, scope: !462, file: !3, line: 354, type: !267)
+!468 = !DILocalVariable(name: "len", arg: 3, scope: !462, file: !3, line: 354, type: !10)
+!469 = !DILocation(line: 0, scope: !462)
+!470 = !DILocation(line: 356, column: 3, scope: !462)
+!471 = !DILocation(line: 357, column: 1, scope: !462)
+!472 = distinct !DISubprogram(name: "Hacl_Impl_SHA2_384_update_last", scope: !3, file: !3, line: 279, type: !463, scopeLine: 280, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !473)
+!473 = !{!474, !475, !476, !477, !481, !482, !483, !484, !485, !493, !494, !495}
+!474 = !DILocalVariable(name: "state", arg: 1, scope: !472, file: !3, line: 279, type: !32)
+!475 = !DILocalVariable(name: "data", arg: 2, scope: !472, file: !3, line: 279, type: !267)
+!476 = !DILocalVariable(name: "len", arg: 3, scope: !472, file: !3, line: 279, type: !10)
+!477 = !DILocalVariable(name: "blocks", scope: !472, file: !3, line: 281, type: !478)
+!478 = !DICompositeType(tag: DW_TAG_array_type, baseType: !13, size: 2048, elements: !479)
+!479 = !{!480}
+!480 = !DISubrange(count: 256)
+!481 = !DILocalVariable(name: "nb", scope: !472, file: !3, line: 282, type: !5)
+!482 = !DILocalVariable(name: "final_blocks", scope: !472, file: !3, line: 287, type: !267)
+!483 = !DILocalVariable(name: "n1", scope: !472, file: !3, line: 293, type: !10)
+!484 = !DILocalVariable(name: "padding", scope: !472, file: !3, line: 294, type: !267)
+!485 = !DILocalVariable(name: "encodedlen", scope: !472, file: !3, line: 296, type: !486)
+!486 = !DIDerivedType(tag: DW_TAG_typedef, name: "FStar_UInt128_t", file: !487, line: 37, baseType: !488)
+!487 = !DIFile(filename: "hacl-c/hacl-c/FStar.h", directory: "/mnt/c/Users/fwill/Documents/HS24/semester_project/tools/binsec/binsec/examples/hacl", checksumkind: CSK_MD5, checksum: "f30034e5606e554271b07b1e7e8a42fa")
+!488 = !DIDerivedType(tag: DW_TAG_typedef, name: "FStar_UInt128_uint128", file: !487, line: 35, baseType: !489)
+!489 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !487, line: 30, size: 128, elements: !490)
+!490 = !{!491, !492}
+!491 = !DIDerivedType(tag: DW_TAG_member, name: "low", scope: !489, file: !487, line: 32, baseType: !10, size: 64)
+!492 = !DIDerivedType(tag: DW_TAG_member, name: "high", scope: !489, file: !487, line: 33, baseType: !10, size: 64, offset: 64)
+!493 = !DILocalVariable(name: "pad0len", scope: !472, file: !3, line: 301, type: !5)
+!494 = !DILocalVariable(name: "buf1", scope: !472, file: !3, line: 304, type: !267)
+!495 = !DILocalVariable(name: "buf2", scope: !472, file: !3, line: 305, type: !267)
+!496 = !DILocation(line: 0, scope: !472)
+!497 = !DILocation(line: 281, column: 3, scope: !472)
+!498 = !DILocation(line: 281, column: 11, scope: !472)
+!499 = !DILocation(line: 283, column: 11, scope: !500)
+!500 = distinct !DILexicalBlock(scope: !472, file: !3, line: 283, column: 7)
+!501 = !DILocation(line: 288, column: 7, scope: !472)
+!502 = !DILocation(line: 292, column: 30, scope: !472)
+!503 = !DILocation(line: 292, column: 3, scope: !472)
+!504 = !DILocation(line: 293, column: 17, scope: !472)
+!505 = !DILocation(line: 294, column: 35, scope: !472)
+!506 = !DILocation(line: 295, column: 3, scope: !472)
+!507 = !DILocation(line: 296, column: 3, scope: !472)
+!508 = !DILocation(line: 297, column: 48, scope: !472)
+!509 = !DILocation(line: 298, column: 9, scope: !472)
+!510 = !DILocation(line: 297, column: 30, scope: !472)
+!511 = !{!512, !92, i64 0}
+!512 = !{!"", !92, i64 0, !92, i64 8}
+!513 = !{!512, !92, i64 8}
+!514 = !DILocation(line: 297, column: 5, scope: !472)
+!515 = !DILocation(line: 302, column: 21, scope: !472)
+!516 = !DILocation(line: 303, column: 5, scope: !472)
+!517 = !DILocation(line: 305, column: 27, scope: !472)
+!518 = !DILocation(line: 305, column: 42, scope: !472)
+!519 = !DILocation(line: 306, column: 12, scope: !472)
+!520 = !{!93, !93, i64 0}
+!521 = !DILocation(line: 307, column: 3, scope: !472)
+!522 = !DILocation(line: 308, column: 3, scope: !472)
+!523 = !DILocation(line: 309, column: 1, scope: !472)
+!524 = distinct !DISubprogram(name: "Hacl_SHA2_384_finish", scope: !3, file: !3, line: 359, type: !265, scopeLine: 360, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !525)
+!525 = !{!526, !527}
+!526 = !DILocalVariable(name: "state", arg: 1, scope: !524, file: !3, line: 359, type: !32)
+!527 = !DILocalVariable(name: "hash1", arg: 2, scope: !524, file: !3, line: 359, type: !267)
+!528 = !DILocation(line: 0, scope: !524)
+!529 = !DILocation(line: 361, column: 3, scope: !524)
+!530 = !DILocation(line: 362, column: 1, scope: !524)
+!531 = distinct !DISubprogram(name: "Hacl_Impl_SHA2_384_finish", scope: !3, file: !3, line: 311, type: !265, scopeLine: 312, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !532)
+!532 = !{!533, !534, !535}
+!533 = !DILocalVariable(name: "state", arg: 1, scope: !531, file: !3, line: 311, type: !32)
+!534 = !DILocalVariable(name: "hash1", arg: 2, scope: !531, file: !3, line: 311, type: !267)
+!535 = !DILocalVariable(name: "hash_w", scope: !531, file: !3, line: 313, type: !32)
+!536 = !DILocation(line: 0, scope: !531)
+!537 = !DILocation(line: 313, column: 28, scope: !531)
+!538 = !DILocation(line: 314, column: 3, scope: !531)
+!539 = !DILocation(line: 315, column: 1, scope: !531)
+!540 = distinct !DISubprogram(name: "Hacl_SHA2_384_hash", scope: !3, file: !3, line: 364, type: !541, scopeLine: 365, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !543)
+!541 = !DISubroutineType(types: !542)
+!542 = !{null, !267, !267, !5}
+!543 = !{!544, !545, !546}
+!544 = !DILocalVariable(name: "hash1", arg: 1, scope: !540, file: !3, line: 364, type: !267)
+!545 = !DILocalVariable(name: "input", arg: 2, scope: !540, file: !3, line: 364, type: !267)
+!546 = !DILocalVariable(name: "len", arg: 3, scope: !540, file: !3, line: 364, type: !5)
+!547 = !DILocation(line: 0, scope: !540)
+!548 = !DILocation(line: 366, column: 3, scope: !540)
+!549 = !DILocation(line: 367, column: 1, scope: !540)
+!550 = distinct !DISubprogram(name: "Hacl_Impl_SHA2_384_hash", scope: !3, file: !3, line: 317, type: !541, scopeLine: 318, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !551)
+!551 = !{!552, !553, !554, !555, !559, !561, !562, !563, !564}
+!552 = !DILocalVariable(name: "hash1", arg: 1, scope: !550, file: !3, line: 317, type: !267)
+!553 = !DILocalVariable(name: "input", arg: 2, scope: !550, file: !3, line: 317, type: !267)
+!554 = !DILocalVariable(name: "len", arg: 3, scope: !550, file: !3, line: 317, type: !5)
+!555 = !DILocalVariable(name: "state", scope: !550, file: !3, line: 320, type: !556)
+!556 = !DICompositeType(tag: DW_TAG_array_type, baseType: !10, size: 10816, elements: !557)
+!557 = !{!558}
+!558 = !DISubrange(count: 169)
+!559 = !DILocalVariable(name: "_i", scope: !560, file: !3, line: 321, type: !5)
+!560 = distinct !DILexicalBlock(scope: !550, file: !3, line: 321, column: 3)
+!561 = !DILocalVariable(name: "n1", scope: !550, file: !3, line: 323, type: !5)
+!562 = !DILocalVariable(name: "r", scope: !550, file: !3, line: 324, type: !5)
+!563 = !DILocalVariable(name: "input_blocks", scope: !550, file: !3, line: 325, type: !267)
+!564 = !DILocalVariable(name: "input_last", scope: !550, file: !3, line: 326, type: !267)
+!565 = !DILocation(line: 0, scope: !550)
+!566 = !DILocation(line: 320, column: 3, scope: !550)
+!567 = !DILocation(line: 320, column: 12, scope: !550)
+!568 = !DILocation(line: 0, scope: !560)
+!569 = !DILocation(line: 322, column: 15, scope: !570)
+!570 = distinct !DILexicalBlock(scope: !560, file: !3, line: 321, column: 3)
+!571 = !DILocation(line: 323, column: 21, scope: !550)
+!572 = !DILocation(line: 324, column: 20, scope: !550)
+!573 = !DILocation(line: 326, column: 36, scope: !550)
+!574 = !DILocation(line: 326, column: 31, scope: !550)
+!575 = !DILocation(line: 327, column: 27, scope: !550)
+!576 = !DILocation(line: 327, column: 3, scope: !550)
+!577 = !DILocation(line: 328, column: 3, scope: !550)
+!578 = !DILocation(line: 329, column: 53, scope: !550)
+!579 = !DILocation(line: 329, column: 3, scope: !550)
+!580 = !DILocation(line: 330, column: 3, scope: !550)
+!581 = !DILocation(line: 331, column: 1, scope: !550)
+!582 = distinct !DISubprogram(name: "Hacl_Hash_Lib_LoadStore_uint64s_from_be_bytes", scope: !3, file: !3, line: 28, type: !431, scopeLine: 29, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !583)
+!583 = !{!584, !585, !586, !587, !589, !592}
+!584 = !DILocalVariable(name: "output", arg: 1, scope: !582, file: !3, line: 28, type: !32)
+!585 = !DILocalVariable(name: "input", arg: 2, scope: !582, file: !3, line: 28, type: !267)
+!586 = !DILocalVariable(name: "len", arg: 3, scope: !582, file: !3, line: 28, type: !5)
+!587 = !DILocalVariable(name: "i", scope: !588, file: !3, line: 30, type: !5)
+!588 = distinct !DILexicalBlock(scope: !582, file: !3, line: 30, column: 3)
+!589 = !DILocalVariable(name: "x0", scope: !590, file: !3, line: 32, type: !267)
+!590 = distinct !DILexicalBlock(scope: !591, file: !3, line: 31, column: 3)
+!591 = distinct !DILexicalBlock(scope: !588, file: !3, line: 30, column: 3)
+!592 = !DILocalVariable(name: "inputi", scope: !590, file: !3, line: 33, type: !10)
+!593 = !DILocation(line: 0, scope: !582)
+!594 = !DILocation(line: 0, scope: !588)
+!595 = !DILocation(line: 30, column: 3, scope: !588)
+!596 = !DILocation(line: 36, column: 1, scope: !582)
+!597 = !DILocation(line: 32, column: 40, scope: !590)
+!598 = !DILocation(line: 32, column: 25, scope: !590)
+!599 = !DILocation(line: 0, scope: !590)
+!600 = !DILocation(line: 33, column: 23, scope: !590)
+!601 = !DILocation(line: 34, column: 5, scope: !590)
+!602 = !DILocation(line: 34, column: 15, scope: !590)
+!603 = !DILocation(line: 30, column: 50, scope: !591)
+!604 = !DILocation(line: 30, column: 37, scope: !591)
+!605 = distinct !{!605, !595, !606, !381, !382}
+!606 = !DILocation(line: 35, column: 3, scope: !588)
+!607 = distinct !DISubprogram(name: "__bswap_64", scope: !608, file: !608, line: 70, type: !609, scopeLine: 71, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !611)
+!608 = !DIFile(filename: "/usr/include/bits/byteswap.h", directory: "", checksumkind: CSK_MD5, checksum: "98f83253ffd9c64e7486789204e9fa05")
+!609 = !DISubroutineType(types: !610)
+!610 = !{!11, !11}
+!611 = !{!612}
+!612 = !DILocalVariable(name: "__bsx", arg: 1, scope: !607, file: !608, line: 70, type: !11)
+!613 = !DILocation(line: 0, scope: !607)
+!614 = !DILocation(line: 75, column: 10, scope: !607)
+!615 = !DILocation(line: 75, column: 3, scope: !607)
+!616 = distinct !DISubprogram(name: "load64", scope: !617, file: !617, line: 347, type: !618, scopeLine: 347, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !620)
+!617 = !DIFile(filename: "hacl-c/hacl-c/kremlib.h", directory: "/mnt/c/Users/fwill/Documents/HS24/semester_project/tools/binsec/binsec/examples/hacl", checksumkind: CSK_MD5, checksum: "cde125f1f98cb7b9ee1f380d4178ebe4")
+!618 = !DISubroutineType(types: !619)
+!619 = !{!10, !267}
+!620 = !{!621, !622}
+!621 = !DILocalVariable(name: "b", arg: 1, scope: !616, file: !617, line: 347, type: !267)
+!622 = !DILocalVariable(name: "x", scope: !616, file: !617, line: 348, type: !10)
+!623 = !DILocation(line: 0, scope: !616)
+!624 = !DILocation(line: 349, column: 3, scope: !616)
+!625 = !DILocation(line: 350, column: 3, scope: !616)
+!626 = !DISubprogram(name: "FStar_UInt128_shift_left", scope: !487, file: !487, line: 57, type: !627, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !629)
+!627 = !DISubroutineType(types: !628)
+!628 = !{!488, !488, !5}
+!629 = !{}
+!630 = !DISubprogram(name: "FStar_UInt128_add", scope: !487, file: !487, line: 41, type: !631, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !629)
+!631 = !DISubroutineType(types: !632)
+!632 = !{!488, !488, !488}
+!633 = !DISubprogram(name: "FStar_UInt128_mul_wide", scope: !487, file: !487, line: 78, type: !634, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !629)
+!634 = !DISubroutineType(types: !635)
+!635 = !{!488, !10, !10}
+!636 = !DISubprogram(name: "FStar_UInt128_uint64_to_uint128", scope: !487, file: !487, line: 65, type: !637, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !629)
+!637 = !DISubroutineType(types: !638)
+!638 = !{!488, !10}
+!639 = distinct !DISubprogram(name: "store128_be", scope: !617, file: !617, line: 557, type: !640, scopeLine: 557, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !643)
+!640 = !DISubroutineType(types: !641)
+!641 = !{null, !267, !642}
+!642 = !DIDerivedType(tag: DW_TAG_typedef, name: "uint128_t", file: !617, line: 510, baseType: !488)
+!643 = !{!644, !645}
+!644 = !DILocalVariable(name: "b", arg: 1, scope: !639, file: !617, line: 557, type: !267)
+!645 = !DILocalVariable(name: "n", arg: 2, scope: !639, file: !617, line: 557, type: !642)
+!646 = !DILocation(line: 0, scope: !639)
+!647 = !DILocation(line: 557, column: 54, scope: !639)
+!648 = !DILocation(line: 557, column: 59, scope: !639)
+!649 = !DILocation(line: 557, column: 80, scope: !639)
+!650 = distinct !DISubprogram(name: "store128_be_", scope: !617, file: !617, line: 532, type: !651, scopeLine: 532, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !654)
+!651 = !DISubroutineType(types: !652)
+!652 = !{null, !267, !653}
+!653 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !642, size: 32)
+!654 = !{!655, !656}
+!655 = !DILocalVariable(name: "b", arg: 1, scope: !650, file: !617, line: 532, type: !267)
+!656 = !DILocalVariable(name: "n", arg: 2, scope: !650, file: !617, line: 532, type: !653)
+!657 = !DILocation(line: 0, scope: !650)
+!658 = !DILocation(line: 533, column: 3, scope: !650)
+!659 = !DILocation(line: 534, column: 3, scope: !650)
+!660 = !DILocation(line: 535, column: 1, scope: !650)
+!661 = distinct !DISubprogram(name: "store64", scope: !617, file: !617, line: 357, type: !662, scopeLine: 357, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !664)
+!662 = !DISubroutineType(types: !663)
+!663 = !{null, !267, !10}
+!664 = !{!665, !666}
+!665 = !DILocalVariable(name: "b", arg: 1, scope: !661, file: !617, line: 357, type: !267)
+!666 = !DILocalVariable(name: "i", arg: 2, scope: !661, file: !617, line: 357, type: !10)
+!667 = !DILocation(line: 0, scope: !661)
+!668 = !DILocation(line: 357, column: 54, scope: !661)
+!669 = !DILocation(line: 357, column: 72, scope: !661)
+!670 = distinct !DISubprogram(name: "Hacl_Hash_Lib_LoadStore_uint64s_to_be_bytes", scope: !3, file: !3, line: 39, type: !671, scopeLine: 40, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !673)
+!671 = !DISubroutineType(types: !672)
+!672 = !{null, !267, !32, !5}
+!673 = !{!674, !675, !676, !677, !679, !682}
+!674 = !DILocalVariable(name: "output", arg: 1, scope: !670, file: !3, line: 39, type: !267)
+!675 = !DILocalVariable(name: "input", arg: 2, scope: !670, file: !3, line: 39, type: !32)
+!676 = !DILocalVariable(name: "len", arg: 3, scope: !670, file: !3, line: 39, type: !5)
+!677 = !DILocalVariable(name: "i", scope: !678, file: !3, line: 41, type: !5)
+!678 = distinct !DILexicalBlock(scope: !670, file: !3, line: 41, column: 3)
+!679 = !DILocalVariable(name: "hd1", scope: !680, file: !3, line: 43, type: !10)
+!680 = distinct !DILexicalBlock(scope: !681, file: !3, line: 42, column: 3)
+!681 = distinct !DILexicalBlock(scope: !678, file: !3, line: 41, column: 3)
+!682 = !DILocalVariable(name: "x0", scope: !680, file: !3, line: 44, type: !267)
+!683 = !DILocation(line: 0, scope: !670)
+!684 = !DILocation(line: 0, scope: !678)
+!685 = !DILocation(line: 41, column: 3, scope: !678)
+!686 = !DILocation(line: 47, column: 1, scope: !670)
+!687 = !DILocation(line: 43, column: 20, scope: !680)
+!688 = !DILocation(line: 0, scope: !680)
+!689 = !DILocation(line: 44, column: 41, scope: !680)
+!690 = !DILocation(line: 44, column: 26, scope: !680)
+!691 = !DILocation(line: 45, column: 5, scope: !680)
+!692 = !DILocation(line: 41, column: 50, scope: !681)
+!693 = !DILocation(line: 41, column: 37, scope: !681)
+!694 = distinct !{!694, !685, !695, !381, !382}
+!695 = !DILocation(line: 46, column: 3, scope: !678)

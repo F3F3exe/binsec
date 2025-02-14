@@ -18,7 +18,7 @@ if [[ ! "$CLANG" =~ ^(clang-14|clang-12|clang-19)$ ]]; then
 fi
 
 targets=(
-  01 02 03 04 05 07 08 09 10 
+chacha20 salsa20 sha256 sha512 sodium_add sodium_sub sodium_is_zero sodium_compare sodium_increment sodium_memcmp
 )
 
 if [[ $# -eq 3 ]]; then
@@ -36,11 +36,27 @@ echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): $
 SOURCE_FILE="$specific_target.c"  # Change this if needed
 BASE_NAME=$specific_target
 SNAPSHOT_SCRIPT="make_coredump.sh"
-BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
+BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 100"
 CFLAGS="-m32 -march=i386 -static"
 LIBS="-L../../__libsym__/ -lsym"
+L_LIB=""
+SALSA20_LIBS="sodium/utils.c																			 \
+                    randombytes/sysrandom/randombytes_sysrandom.c	 \
+                    randombytes/randombytes.c											 \
+                    crypto_core/salsa20/ref/core_salsa20.c         \
+										crypto_stream/salsa20/stream_salsa20_api.c     \
+										crypto_stream/salsa20/ref/xor_salsa20_ref.c"
+SHA256_LIBS="libsodium/src/libsodium/sodium/utils.c libsodium/src/libsodium/randombytes/sysrandom/randombytes_sysrandom.c libsodium/src/libsodium/randombytes/randombytes.c libsodium/src/libsodium/crypto_hash/sha256/cp/hash_sha256.c"
+SHA512_LIBS="sodium/utils.c																			\
+                   randombytes/sysrandom/randombytes_sysrandom.c	\
+                   randombytes/randombytes.c											\
+                   crypto_hash/sha512/cp/hash_sha512.c"
+LIBDIR="libsodium/src/libsodium"
 
-# List of LLVM optimization passe
+NAME=$BASE_NAME
+WRAPPER=${NAME}_wrapper.c
+
+# List of LLVM optimization passes
 OPTIMIZATIONS=(
   "scev-aa" "adce" "always-inline" "argpromotion" "break-crit-edges"  
   "codegenprepare" "constmerge" "dce" "deadargelim" "dse" "function-attrs" "globaldce"  
@@ -53,14 +69,36 @@ OPTIMIZATIONS=(
 )
 
 # Ensure source file exists
-if [[ ! -f "$SOURCE_FILE" ]]; then
-    echo "Error: Source file $SOURCE_FILE not found!"
+if [[ ! -f "$WRAPPER" ]]; then
+    echo "Error: Source file $WRAPPER not found!"
     exit 1
 fi
 
 # Compile to LLVM IR (-O0 to disable optimizations)
-#echo clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
-clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+
+LL_LIB=""
+
+if [ "$BASE_NAME" = "sha256" ]; then
+    echo 13
+    $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm  -Ilibsodium/src/libsodium/include/sodium libsodium/src/libsodium/sodium/utils.c -o libsodium/src/libsodium/sodium/utils.ll
+    echo 14
+    echo     $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm -Ilibsodium/src/libsodium/include/sodium libsodium/src/libsodium/randombytes/sysrandom/randombytes_sysrandom.c -o libsodium/src/libsodium/randombytes/sysrandom/randombytes_sysrandom.ll
+    $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm -Ilibsodium/src/libsodium/include/sodium libsodium/src/libsodium/randombytes/sysrandom/randombytes_sysrandom.c -o libsodium/src/libsodium/randombytes/sysrandom/randombytes_sysrandom.ll
+    echo 15
+    $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm -Ilibsodium/src/libsodium/include/sodium libsodium/src/libsodium/randombytes/randombytes.c -o libsodium/src/libsodium/randombytes/randombytes.ll
+    echo 16
+    $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm -Ilibsodium/src/libsodium/include/sodium libsodium/src/libsodium/crypto_hash/sha512/cp/hash_sha512.c -o libsodium/src/libsodium/crypto_hash/sha512/cp/hash_sha512.ll
+    echo 17
+
+    llvm-link -S libsodium/src/libsodium/sodium/utils.ll libsodium/src/libsodium/randombytes/randombytes.ll libsodium/src/libsodium/crypto_hash/sha512/cp/hash_sha512.ll libsodium/src/libsodium/randombytes/sysrandom/randombytes_sysrandom.ll -o ll_lib.ll
+
+    LL_LIB="ll_lib.ll"
+
+    echo 1
+    echo  $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm -Ilibsodium/src/libsodium/include $WRAPPER -o $BASE_NAME.ll
+    $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm -Ilibsodium/src/libsodium/include $WRAPPER -o $BASE_NAME.ll
+    echo 2
+fi
 
 
 # Create a results file to track the status
@@ -91,12 +129,18 @@ while read -r OPT_COMBO; do
     echo "Testing optimizations: $OPT_COMBO"
     
     # Apply optimization using opt
+    echo opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
+
     opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
-
+    opt -S $OPT_COMBO $LL_LIB -o $LL_LIB
     
+    echo 3
     # Recompile the optimized IR
-    clang -$OPT_LEVEL $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
-
+    echo a
+    echo $CLANG $CFLAGS ${BASE_NAME}.ll $LL_LIB -o ${BASE_NAME} $LIBS $SHA256_LIB
+    #$CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
+    $CLANG $CFLAGS ${BASE_NAME}.ll $LL_LIB -o ${BASE_NAME} $LIBS $SHA256_LIB
+    echo b
 
     # Construct the config file path
     config_file="checkct_${BASE_NAME}.cfg"
@@ -106,18 +150,20 @@ while read -r OPT_COMBO; do
       # If the file starts with "starting from core", run the core-based binsec command
       #echo "Running core-based binsec for $BASE_NAME..."
       core_dump="core_${BASE_NAME}.snapshot"
+      #echo make_coredump.sh "$core_dump" "$BASE_NAME"
       make_coredump.sh "$core_dump" "$BASE_NAME"
-      binsec_output=$(binsec -sse -sse-script "$config_file" -sse-depth 1000000 -checkct "$core_dump" -sse-timeout 10)
+      #echo binsec -sse -sse-script "$config_file" -sse-depth 100000000 -checkct "$core_dump" -sse-timeout 100
+      binsec_output=$(binsec -sse -sse-script "$config_file" -sse-depth 100000000 -checkct "$core_dump" -sse-timeout 100)
     else
       # Otherwise, run the normal binsec command
       stats_file="./${target_with_opt}.csv"
       #echo "Running standard binsec for $target_with_opt..."
-      #$BINSEC_SCRIPT ${BASE_NAME}
+      #echo $BINSEC_SCRIPT ${BASE_NAME}
       binsec_output=$($BINSEC_SCRIPT ${BASE_NAME})
     fi
     
     # Run binsec
-    #echo "$binsec_output"
+    echo "$binsec_output"
     
     if [[ $? -ne 0 ]]; then
         echo -e "$OPT_COMBO, binsec failed" >> "$RESULTS_FILE"
@@ -133,7 +179,7 @@ while read -r OPT_COMBO; do
     fi
 
     # Append the result to the output file
-    #echo "$OPT_COMBO, $status" >> "$RESULTS_FILE"
+    echo "$OPT_COMBO, $status" >> "$RESULTS_FILE"
     
     #echo "Finished testing $OPT_COMBO."
     #echo "-------------------------------------"
@@ -141,3 +187,11 @@ done < <(generate_combinations "${OPTIMIZATIONS[@]}")
 
 echo "All optimization combinations tested!"
 echo "Results saved in $RESULTS_FILE"
+
+rm -f $BASE_NAME.ll
+rm -f *.snapshot
+rm -f ${BASE_NAME}
+
+
+
+

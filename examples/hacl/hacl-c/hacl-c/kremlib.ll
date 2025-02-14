@@ -8,7 +8,7 @@ target triple = "i386-pc-linux-gnu"
 @.str = private unnamed_addr constant [3 x i8] c"%s\00", align 1
 @.str.1 = private unnamed_addr constant [5 x i8] c"%02x\00", align 1
 
-; Function Attrs: nofree nounwind uwtable
+; Function Attrs: nofree noinline nounwind uwtable
 define dso_local void @print_string(i8* noundef %0) local_unnamed_addr #0 !dbg !16 {
   call void @llvm.dbg.value(metadata i8* %0, metadata !23, metadata !DIExpression()), !dbg !24
   %2 = call i32 (i8*, ...) @printf(i8* noundef nonnull dereferenceable(1) getelementptr inbounds ([3 x i8], [3 x i8]* @.str, i32 0, i32 0), i8* noundef %0), !dbg !25
@@ -18,7 +18,7 @@ define dso_local void @print_string(i8* noundef %0) local_unnamed_addr #0 !dbg !
 ; Function Attrs: nofree nounwind
 declare noundef i32 @printf(i8* nocapture noundef readonly, ...) local_unnamed_addr #1
 
-; Function Attrs: nofree nounwind uwtable
+; Function Attrs: nofree noinline nounwind uwtable
 define dso_local void @print_bytes(i8* nocapture noundef readonly %0, i32 noundef %1) local_unnamed_addr #0 !dbg !27 {
   call void @llvm.dbg.value(metadata i8* %0, metadata !40, metadata !DIExpression()), !dbg !43
   call void @llvm.dbg.value(metadata i32 %1, metadata !41, metadata !DIExpression()), !dbg !43
@@ -49,7 +49,7 @@ declare void @llvm.dbg.value(metadata, metadata, metadata) #2
 ; Function Attrs: nofree nounwind
 declare noundef i32 @putchar(i32 noundef) local_unnamed_addr #3
 
-attributes #0 = { nofree nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
+attributes #0 = { nofree noinline nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
 attributes #1 = { nofree nounwind "frame-pointer"="none" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
 attributes #2 = { nofree nosync nounwind readnone speculatable willreturn }
 attributes #3 = { nofree nounwind }
