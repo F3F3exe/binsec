@@ -117,7 +117,7 @@ while read -r OPT_COMBO; do
     fi
     
     # Run binsec
-    #echo "$binsec_output"
+    echo "$binsec_output"
     
     if [[ $? -ne 0 ]]; then
         echo -e "$OPT_COMBO, binsec failed" >> "$RESULTS_FILE"
