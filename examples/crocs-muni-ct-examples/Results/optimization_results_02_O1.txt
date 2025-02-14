@@ -1,0 +1,6 @@
+Optimization,Result
+-scev-aa, insecure
+-adce, insecure
+-scev-aa -adce, insecure
+-always-inline, insecure
+-scev-aa -always-inline, insecure

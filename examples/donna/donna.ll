@@ -3,8 +3,8 @@ source_filename = "donna_wrapper.c"
 target datalayout = "e-m:e-p:32:32-p270:32:32-p271:32:32-p272:64:64-f64:32:64-f80:32-n8:16:32-S128"
 target triple = "i386-pc-linux-gnu"
 
-; Function Attrs: noinline nounwind optnone uwtable
-define dso_local i32 @curve25519_donna(i8* noundef %0, i8* noundef %1, i8* noundef %2) #0 {
+; Function Attrs: noinline nounwind optnone
+define dso_local i32 @curve25519_donna(i8* %0, i8* %1, i8* %2) #0 {
   %4 = alloca i8*, align 4
   %5 = alloca i8*, align 4
   %6 = alloca i8*, align 4
@@ -39,7 +39,7 @@ define dso_local i32 @curve25519_donna(i8* noundef %0, i8* noundef %1, i8* nound
   %24 = load i32, i32* %12, align 4
   %25 = add nsw i32 %24, 1
   store i32 %25, i32* %12, align 4
-  br label %13, !llvm.loop !7
+  br label %13, !llvm.loop !3
 
 26:                                               ; preds = %13
   %27 = getelementptr inbounds [32 x i8], [32 x i8]* %11, i32 0, i32 0
@@ -62,27 +62,27 @@ define dso_local i32 @curve25519_donna(i8* noundef %0, i8* noundef %1, i8* nound
   store i8 %41, i8* %37, align 1
   %42 = getelementptr inbounds [10 x i64], [10 x i64]* %7, i32 0, i32 0
   %43 = load i8*, i8** %6, align 4
-  call void @fexpand(i64* noundef %42, i8* noundef %43)
+  call void @fexpand(i64* %42, i8* %43)
   %44 = getelementptr inbounds [10 x i64], [10 x i64]* %8, i32 0, i32 0
   %45 = getelementptr inbounds [11 x i64], [11 x i64]* %9, i32 0, i32 0
   %46 = getelementptr inbounds [32 x i8], [32 x i8]* %11, i32 0, i32 0
   %47 = getelementptr inbounds [10 x i64], [10 x i64]* %7, i32 0, i32 0
-  call void @cmult(i64* noundef %44, i64* noundef %45, i8* noundef %46, i64* noundef %47)
+  call void @cmult(i64* %44, i64* %45, i8* %46, i64* %47)
   %48 = getelementptr inbounds [10 x i64], [10 x i64]* %10, i32 0, i32 0
   %49 = getelementptr inbounds [11 x i64], [11 x i64]* %9, i32 0, i32 0
-  call void @crecip(i64* noundef %48, i64* noundef %49)
+  call void @crecip(i64* %48, i64* %49)
   %50 = getelementptr inbounds [11 x i64], [11 x i64]* %9, i32 0, i32 0
   %51 = getelementptr inbounds [10 x i64], [10 x i64]* %8, i32 0, i32 0
   %52 = getelementptr inbounds [10 x i64], [10 x i64]* %10, i32 0, i32 0
-  call void @fmul(i64* noundef %50, i64* noundef %51, i64* noundef %52)
+  call void @fmul(i64* %50, i64* %51, i64* %52)
   %53 = load i8*, i8** %4, align 4
   %54 = getelementptr inbounds [11 x i64], [11 x i64]* %9, i32 0, i32 0
-  call void @fcontract(i8* noundef %53, i64* noundef %54)
+  call void @fcontract(i8* %53, i64* %54)
   ret i32 0
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal void @fexpand(i64* noundef %0, i8* noundef %1) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal void @fexpand(i64* %0, i8* %1) #0 {
   %3 = alloca i64*, align 4
   %4 = alloca i8*, align 4
   store i64* %0, i64** %3, align 4
@@ -360,8 +360,8 @@ define internal void @fexpand(i64* noundef %0, i8* noundef %1) #0 {
   ret void
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal void @cmult(i64* noundef %0, i64* noundef %1, i8* noundef %2, i64* noundef %3) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal void @cmult(i64* %0, i64* %1, i8* %2, i64* %3) #0 {
   %5 = alloca i64*, align 4
   %6 = alloca i64*, align 4
   %7 = alloca i8*, align 4
@@ -472,11 +472,11 @@ define internal void @cmult(i64* noundef %0, i64* noundef %1, i8* noundef %2, i6
   %75 = load i64*, i64** %15, align 4
   %76 = load i64*, i64** %13, align 4
   %77 = load i64, i64* %29, align 8
-  call void @swap_conditional(i64* noundef %75, i64* noundef %76, i64 noundef %77)
+  call void @swap_conditional(i64* %75, i64* %76, i64 %77)
   %78 = load i64*, i64** %16, align 4
   %79 = load i64*, i64** %14, align 4
   %80 = load i64, i64* %29, align 8
-  call void @swap_conditional(i64* noundef %78, i64* noundef %79, i64 noundef %80)
+  call void @swap_conditional(i64* %78, i64* %79, i64 %80)
   %81 = load i64*, i64** %24, align 4
   %82 = load i64*, i64** %25, align 4
   %83 = load i64*, i64** %22, align 4
@@ -486,15 +486,15 @@ define internal void @cmult(i64* noundef %0, i64* noundef %1, i8* noundef %2, i6
   %87 = load i64*, i64** %13, align 4
   %88 = load i64*, i64** %14, align 4
   %89 = load i64*, i64** %8, align 4
-  call void @fmonty(i64* noundef %81, i64* noundef %82, i64* noundef %83, i64* noundef %84, i64* noundef %85, i64* noundef %86, i64* noundef %87, i64* noundef %88, i64* noundef %89)
+  call void @fmonty(i64* %81, i64* %82, i64* %83, i64* %84, i64* %85, i64* %86, i64* %87, i64* %88, i64* %89)
   %90 = load i64*, i64** %24, align 4
   %91 = load i64*, i64** %22, align 4
   %92 = load i64, i64* %29, align 8
-  call void @swap_conditional(i64* noundef %90, i64* noundef %91, i64 noundef %92)
+  call void @swap_conditional(i64* %90, i64* %91, i64 %92)
   %93 = load i64*, i64** %25, align 4
   %94 = load i64*, i64** %23, align 4
   %95 = load i64, i64* %29, align 8
-  call void @swap_conditional(i64* noundef %93, i64* noundef %94, i64 noundef %95)
+  call void @swap_conditional(i64* %93, i64* %94, i64 %95)
   %96 = load i64*, i64** %15, align 4
   store i64* %96, i64** %17, align 4
   %97 = load i64*, i64** %24, align 4
@@ -530,7 +530,7 @@ define internal void @cmult(i64* noundef %0, i64* noundef %1, i8* noundef %2, i6
   %113 = load i32, i32* %27, align 4
   %114 = add i32 %113, 1
   store i32 %114, i32* %27, align 4
-  br label %67, !llvm.loop !9
+  br label %67, !llvm.loop !5
 
 115:                                              ; preds = %67
   br label %116
@@ -539,7 +539,7 @@ define internal void @cmult(i64* noundef %0, i64* noundef %1, i8* noundef %2, i6
   %117 = load i32, i32* %26, align 4
   %118 = add i32 %117, 1
   store i32 %118, i32* %26, align 4
-  br label %58, !llvm.loop !10
+  br label %58, !llvm.loop !6
 
 119:                                              ; preds = %58
   %120 = load i64*, i64** %5, align 4
@@ -555,8 +555,8 @@ define internal void @cmult(i64* noundef %0, i64* noundef %1, i8* noundef %2, i6
   ret void
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal void @crecip(i64* noundef %0, i64* noundef %1) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal void @crecip(i64* %0, i64* %1) #0 {
   %3 = alloca i64*, align 4
   %4 = alloca i64*, align 4
   %5 = alloca [10 x i64], align 8
@@ -574,53 +574,53 @@ define internal void @crecip(i64* noundef %0, i64* noundef %1) #0 {
   store i64* %1, i64** %4, align 4
   %16 = getelementptr inbounds [10 x i64], [10 x i64]* %5, i32 0, i32 0
   %17 = load i64*, i64** %4, align 4
-  call void @fsquare(i64* noundef %16, i64* noundef %17)
+  call void @fsquare(i64* %16, i64* %17)
   %18 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %19 = getelementptr inbounds [10 x i64], [10 x i64]* %5, i32 0, i32 0
-  call void @fsquare(i64* noundef %18, i64* noundef %19)
+  call void @fsquare(i64* %18, i64* %19)
   %20 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %21 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
-  call void @fsquare(i64* noundef %20, i64* noundef %21)
+  call void @fsquare(i64* %20, i64* %21)
   %22 = getelementptr inbounds [10 x i64], [10 x i64]* %6, i32 0, i32 0
   %23 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %24 = load i64*, i64** %4, align 4
-  call void @fmul(i64* noundef %22, i64* noundef %23, i64* noundef %24)
+  call void @fmul(i64* %22, i64* %23, i64* %24)
   %25 = getelementptr inbounds [10 x i64], [10 x i64]* %7, i32 0, i32 0
   %26 = getelementptr inbounds [10 x i64], [10 x i64]* %6, i32 0, i32 0
   %27 = getelementptr inbounds [10 x i64], [10 x i64]* %5, i32 0, i32 0
-  call void @fmul(i64* noundef %25, i64* noundef %26, i64* noundef %27)
+  call void @fmul(i64* %25, i64* %26, i64* %27)
   %28 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %29 = getelementptr inbounds [10 x i64], [10 x i64]* %7, i32 0, i32 0
-  call void @fsquare(i64* noundef %28, i64* noundef %29)
+  call void @fsquare(i64* %28, i64* %29)
   %30 = getelementptr inbounds [10 x i64], [10 x i64]* %8, i32 0, i32 0
   %31 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %32 = getelementptr inbounds [10 x i64], [10 x i64]* %6, i32 0, i32 0
-  call void @fmul(i64* noundef %30, i64* noundef %31, i64* noundef %32)
+  call void @fmul(i64* %30, i64* %31, i64* %32)
   %33 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %34 = getelementptr inbounds [10 x i64], [10 x i64]* %8, i32 0, i32 0
-  call void @fsquare(i64* noundef %33, i64* noundef %34)
+  call void @fsquare(i64* %33, i64* %34)
   %35 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %36 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
-  call void @fsquare(i64* noundef %35, i64* noundef %36)
+  call void @fsquare(i64* %35, i64* %36)
   %37 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %38 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
-  call void @fsquare(i64* noundef %37, i64* noundef %38)
+  call void @fsquare(i64* %37, i64* %38)
   %39 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %40 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
-  call void @fsquare(i64* noundef %39, i64* noundef %40)
+  call void @fsquare(i64* %39, i64* %40)
   %41 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %42 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
-  call void @fsquare(i64* noundef %41, i64* noundef %42)
+  call void @fsquare(i64* %41, i64* %42)
   %43 = getelementptr inbounds [10 x i64], [10 x i64]* %9, i32 0, i32 0
   %44 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %45 = getelementptr inbounds [10 x i64], [10 x i64]* %8, i32 0, i32 0
-  call void @fmul(i64* noundef %43, i64* noundef %44, i64* noundef %45)
+  call void @fmul(i64* %43, i64* %44, i64* %45)
   %46 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %47 = getelementptr inbounds [10 x i64], [10 x i64]* %9, i32 0, i32 0
-  call void @fsquare(i64* noundef %46, i64* noundef %47)
+  call void @fsquare(i64* %46, i64* %47)
   %48 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %49 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
-  call void @fsquare(i64* noundef %48, i64* noundef %49)
+  call void @fsquare(i64* %48, i64* %49)
   store i32 2, i32* %15, align 4
   br label %50
 
@@ -632,29 +632,29 @@ define internal void @crecip(i64* noundef %0, i64* noundef %1) #0 {
 53:                                               ; preds = %50
   %54 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %55 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
-  call void @fsquare(i64* noundef %54, i64* noundef %55)
+  call void @fsquare(i64* %54, i64* %55)
   %56 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %57 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
-  call void @fsquare(i64* noundef %56, i64* noundef %57)
+  call void @fsquare(i64* %56, i64* %57)
   br label %58
 
 58:                                               ; preds = %53
   %59 = load i32, i32* %15, align 4
   %60 = add nsw i32 %59, 2
   store i32 %60, i32* %15, align 4
-  br label %50, !llvm.loop !11
+  br label %50, !llvm.loop !7
 
 61:                                               ; preds = %50
   %62 = getelementptr inbounds [10 x i64], [10 x i64]* %10, i32 0, i32 0
   %63 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %64 = getelementptr inbounds [10 x i64], [10 x i64]* %9, i32 0, i32 0
-  call void @fmul(i64* noundef %62, i64* noundef %63, i64* noundef %64)
+  call void @fmul(i64* %62, i64* %63, i64* %64)
   %65 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %66 = getelementptr inbounds [10 x i64], [10 x i64]* %10, i32 0, i32 0
-  call void @fsquare(i64* noundef %65, i64* noundef %66)
+  call void @fsquare(i64* %65, i64* %66)
   %67 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %68 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
-  call void @fsquare(i64* noundef %67, i64* noundef %68)
+  call void @fsquare(i64* %67, i64* %68)
   store i32 2, i32* %15, align 4
   br label %69
 
@@ -666,29 +666,29 @@ define internal void @crecip(i64* noundef %0, i64* noundef %1) #0 {
 72:                                               ; preds = %69
   %73 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %74 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
-  call void @fsquare(i64* noundef %73, i64* noundef %74)
+  call void @fsquare(i64* %73, i64* %74)
   %75 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %76 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
-  call void @fsquare(i64* noundef %75, i64* noundef %76)
+  call void @fsquare(i64* %75, i64* %76)
   br label %77
 
 77:                                               ; preds = %72
   %78 = load i32, i32* %15, align 4
   %79 = add nsw i32 %78, 2
   store i32 %79, i32* %15, align 4
-  br label %69, !llvm.loop !12
+  br label %69, !llvm.loop !8
 
 80:                                               ; preds = %69
   %81 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %82 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %83 = getelementptr inbounds [10 x i64], [10 x i64]* %10, i32 0, i32 0
-  call void @fmul(i64* noundef %81, i64* noundef %82, i64* noundef %83)
+  call void @fmul(i64* %81, i64* %82, i64* %83)
   %84 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %85 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
-  call void @fsquare(i64* noundef %84, i64* noundef %85)
+  call void @fsquare(i64* %84, i64* %85)
   %86 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %87 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
-  call void @fsquare(i64* noundef %86, i64* noundef %87)
+  call void @fsquare(i64* %86, i64* %87)
   store i32 2, i32* %15, align 4
   br label %88
 
@@ -700,29 +700,29 @@ define internal void @crecip(i64* noundef %0, i64* noundef %1) #0 {
 91:                                               ; preds = %88
   %92 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %93 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
-  call void @fsquare(i64* noundef %92, i64* noundef %93)
+  call void @fsquare(i64* %92, i64* %93)
   %94 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %95 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
-  call void @fsquare(i64* noundef %94, i64* noundef %95)
+  call void @fsquare(i64* %94, i64* %95)
   br label %96
 
 96:                                               ; preds = %91
   %97 = load i32, i32* %15, align 4
   %98 = add nsw i32 %97, 2
   store i32 %98, i32* %15, align 4
-  br label %88, !llvm.loop !13
+  br label %88, !llvm.loop !9
 
 99:                                               ; preds = %88
   %100 = getelementptr inbounds [10 x i64], [10 x i64]* %11, i32 0, i32 0
   %101 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %102 = getelementptr inbounds [10 x i64], [10 x i64]* %9, i32 0, i32 0
-  call void @fmul(i64* noundef %100, i64* noundef %101, i64* noundef %102)
+  call void @fmul(i64* %100, i64* %101, i64* %102)
   %103 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %104 = getelementptr inbounds [10 x i64], [10 x i64]* %11, i32 0, i32 0
-  call void @fsquare(i64* noundef %103, i64* noundef %104)
+  call void @fsquare(i64* %103, i64* %104)
   %105 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %106 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
-  call void @fsquare(i64* noundef %105, i64* noundef %106)
+  call void @fsquare(i64* %105, i64* %106)
   store i32 2, i32* %15, align 4
   br label %107
 
@@ -734,29 +734,29 @@ define internal void @crecip(i64* noundef %0, i64* noundef %1) #0 {
 110:                                              ; preds = %107
   %111 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %112 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
-  call void @fsquare(i64* noundef %111, i64* noundef %112)
+  call void @fsquare(i64* %111, i64* %112)
   %113 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %114 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
-  call void @fsquare(i64* noundef %113, i64* noundef %114)
+  call void @fsquare(i64* %113, i64* %114)
   br label %115
 
 115:                                              ; preds = %110
   %116 = load i32, i32* %15, align 4
   %117 = add nsw i32 %116, 2
   store i32 %117, i32* %15, align 4
-  br label %107, !llvm.loop !14
+  br label %107, !llvm.loop !10
 
 118:                                              ; preds = %107
   %119 = getelementptr inbounds [10 x i64], [10 x i64]* %12, i32 0, i32 0
   %120 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %121 = getelementptr inbounds [10 x i64], [10 x i64]* %11, i32 0, i32 0
-  call void @fmul(i64* noundef %119, i64* noundef %120, i64* noundef %121)
+  call void @fmul(i64* %119, i64* %120, i64* %121)
   %122 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %123 = getelementptr inbounds [10 x i64], [10 x i64]* %12, i32 0, i32 0
-  call void @fsquare(i64* noundef %122, i64* noundef %123)
+  call void @fsquare(i64* %122, i64* %123)
   %124 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %125 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
-  call void @fsquare(i64* noundef %124, i64* noundef %125)
+  call void @fsquare(i64* %124, i64* %125)
   store i32 2, i32* %15, align 4
   br label %126
 
@@ -768,29 +768,29 @@ define internal void @crecip(i64* noundef %0, i64* noundef %1) #0 {
 129:                                              ; preds = %126
   %130 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %131 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
-  call void @fsquare(i64* noundef %130, i64* noundef %131)
+  call void @fsquare(i64* %130, i64* %131)
   %132 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %133 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
-  call void @fsquare(i64* noundef %132, i64* noundef %133)
+  call void @fsquare(i64* %132, i64* %133)
   br label %134
 
 134:                                              ; preds = %129
   %135 = load i32, i32* %15, align 4
   %136 = add nsw i32 %135, 2
   store i32 %136, i32* %15, align 4
-  br label %126, !llvm.loop !15
+  br label %126, !llvm.loop !11
 
 137:                                              ; preds = %126
   %138 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %139 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %140 = getelementptr inbounds [10 x i64], [10 x i64]* %12, i32 0, i32 0
-  call void @fmul(i64* noundef %138, i64* noundef %139, i64* noundef %140)
+  call void @fmul(i64* %138, i64* %139, i64* %140)
   %141 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %142 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
-  call void @fsquare(i64* noundef %141, i64* noundef %142)
+  call void @fsquare(i64* %141, i64* %142)
   %143 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %144 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
-  call void @fsquare(i64* noundef %143, i64* noundef %144)
+  call void @fsquare(i64* %143, i64* %144)
   store i32 2, i32* %15, align 4
   br label %145
 
@@ -802,47 +802,47 @@ define internal void @crecip(i64* noundef %0, i64* noundef %1) #0 {
 148:                                              ; preds = %145
   %149 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %150 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
-  call void @fsquare(i64* noundef %149, i64* noundef %150)
+  call void @fsquare(i64* %149, i64* %150)
   %151 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %152 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
-  call void @fsquare(i64* noundef %151, i64* noundef %152)
+  call void @fsquare(i64* %151, i64* %152)
   br label %153
 
 153:                                              ; preds = %148
   %154 = load i32, i32* %15, align 4
   %155 = add nsw i32 %154, 2
   store i32 %155, i32* %15, align 4
-  br label %145, !llvm.loop !16
+  br label %145, !llvm.loop !12
 
 156:                                              ; preds = %145
   %157 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %158 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %159 = getelementptr inbounds [10 x i64], [10 x i64]* %11, i32 0, i32 0
-  call void @fmul(i64* noundef %157, i64* noundef %158, i64* noundef %159)
+  call void @fmul(i64* %157, i64* %158, i64* %159)
   %160 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %161 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
-  call void @fsquare(i64* noundef %160, i64* noundef %161)
+  call void @fsquare(i64* %160, i64* %161)
   %162 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %163 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
-  call void @fsquare(i64* noundef %162, i64* noundef %163)
+  call void @fsquare(i64* %162, i64* %163)
   %164 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %165 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
-  call void @fsquare(i64* noundef %164, i64* noundef %165)
+  call void @fsquare(i64* %164, i64* %165)
   %166 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
   %167 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
-  call void @fsquare(i64* noundef %166, i64* noundef %167)
+  call void @fsquare(i64* %166, i64* %167)
   %168 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %169 = getelementptr inbounds [10 x i64], [10 x i64]* %13, i32 0, i32 0
-  call void @fsquare(i64* noundef %168, i64* noundef %169)
+  call void @fsquare(i64* %168, i64* %169)
   %170 = load i64*, i64** %3, align 4
   %171 = getelementptr inbounds [10 x i64], [10 x i64]* %14, i32 0, i32 0
   %172 = getelementptr inbounds [10 x i64], [10 x i64]* %7, i32 0, i32 0
-  call void @fmul(i64* noundef %170, i64* noundef %171, i64* noundef %172)
+  call void @fmul(i64* %170, i64* %171, i64* %172)
   ret void
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal void @fmul(i64* noundef %0, i64* noundef %1, i64* noundef %2) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal void @fmul(i64* %0, i64* %1, i64* %2) #0 {
   %4 = alloca i64*, align 4
   %5 = alloca i64*, align 4
   %6 = alloca i64*, align 4
@@ -853,11 +853,11 @@ define internal void @fmul(i64* noundef %0, i64* noundef %1, i64* noundef %2) #0
   %8 = getelementptr inbounds [19 x i64], [19 x i64]* %7, i32 0, i32 0
   %9 = load i64*, i64** %5, align 4
   %10 = load i64*, i64** %6, align 4
-  call void @fproduct(i64* noundef %8, i64* noundef %9, i64* noundef %10)
+  call void @fproduct(i64* %8, i64* %9, i64* %10)
   %11 = getelementptr inbounds [19 x i64], [19 x i64]* %7, i32 0, i32 0
-  call void @freduce_degree(i64* noundef %11)
+  call void @freduce_degree(i64* %11)
   %12 = getelementptr inbounds [19 x i64], [19 x i64]* %7, i32 0, i32 0
-  call void @freduce_coefficients(i64* noundef %12)
+  call void @freduce_coefficients(i64* %12)
   %13 = load i64*, i64** %4, align 4
   %14 = bitcast i64* %13 to i8*
   %15 = getelementptr inbounds [19 x i64], [19 x i64]* %7, i32 0, i32 0
@@ -866,8 +866,8 @@ define internal void @fmul(i64* noundef %0, i64* noundef %1, i64* noundef %2) #0
   ret void
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal void @fcontract(i8* noundef %0, i64* noundef %1) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal void @fcontract(i8* %0, i64* %1) #0 {
   %3 = alloca i8*, align 4
   %4 = alloca i64*, align 4
   %5 = alloca i32, align 4
@@ -910,7 +910,7 @@ define internal void @fcontract(i8* noundef %0, i64* noundef %1) #0 {
   %32 = load i32, i32* %5, align 4
   %33 = add nsw i32 %32, 1
   store i32 %33, i32* %5, align 4
-  br label %20, !llvm.loop !17
+  br label %20, !llvm.loop !13
 
 34:                                               ; preds = %20
   store i32 0, i32* %6, align 4
@@ -1013,7 +1013,7 @@ define internal void @fcontract(i8* noundef %0, i64* noundef %1) #0 {
   %106 = load i32, i32* %5, align 4
   %107 = add nsw i32 %106, 1
   store i32 %107, i32* %5, align 4
-  br label %39, !llvm.loop !18
+  br label %39, !llvm.loop !14
 
 108:                                              ; preds = %39
   %109 = getelementptr inbounds [10 x i32], [10 x i32]* %7, i32 0, i32 9
@@ -1047,7 +1047,7 @@ define internal void @fcontract(i8* noundef %0, i64* noundef %1) #0 {
   %131 = load i32, i32* %6, align 4
   %132 = add nsw i32 %131, 1
   store i32 %132, i32* %6, align 4
-  br label %35, !llvm.loop !19
+  br label %35, !llvm.loop !15
 
 133:                                              ; preds = %35
   %134 = getelementptr inbounds [10 x i32], [10 x i32]* %7, i32 0, i32 0
@@ -1144,7 +1144,7 @@ define internal void @fcontract(i8* noundef %0, i64* noundef %1) #0 {
   %197 = load i32, i32* %5, align 4
   %198 = add nsw i32 %197, 1
   store i32 %198, i32* %5, align 4
-  br label %158, !llvm.loop !20
+  br label %158, !llvm.loop !16
 
 199:                                              ; preds = %158
   %200 = getelementptr inbounds [10 x i32], [10 x i32]* %7, i32 0, i32 9
@@ -1167,12 +1167,12 @@ define internal void @fcontract(i8* noundef %0, i64* noundef %1) #0 {
   %212 = load i32, i32* %6, align 4
   %213 = add nsw i32 %212, 1
   store i32 %213, i32* %6, align 4
-  br label %154, !llvm.loop !21
+  br label %154, !llvm.loop !17
 
 214:                                              ; preds = %154
   %215 = getelementptr inbounds [10 x i32], [10 x i32]* %7, i32 0, i32 0
   %216 = load i32, i32* %215, align 4
-  %217 = call i32 @s32_gte(i32 noundef %216, i32 noundef 67108845)
+  %217 = call i32 @s32_gte(i32 %216, i32 67108845)
   store i32 %217, i32* %8, align 4
   store i32 1, i32* %5, align 4
   br label %218
@@ -1192,7 +1192,7 @@ define internal void @fcontract(i8* noundef %0, i64* noundef %1) #0 {
   %226 = load i32, i32* %5, align 4
   %227 = getelementptr inbounds [10 x i32], [10 x i32]* %7, i32 0, i32 %226
   %228 = load i32, i32* %227, align 4
-  %229 = call i32 @s32_eq(i32 noundef %228, i32 noundef 33554431)
+  %229 = call i32 @s32_eq(i32 %228, i32 33554431)
   %230 = load i32, i32* %8, align 4
   %231 = and i32 %230, %229
   store i32 %231, i32* %8, align 4
@@ -1202,7 +1202,7 @@ define internal void @fcontract(i8* noundef %0, i64* noundef %1) #0 {
   %233 = load i32, i32* %5, align 4
   %234 = getelementptr inbounds [10 x i32], [10 x i32]* %7, i32 0, i32 %233
   %235 = load i32, i32* %234, align 4
-  %236 = call i32 @s32_eq(i32 noundef %235, i32 noundef 67108863)
+  %236 = call i32 @s32_eq(i32 %235, i32 67108863)
   %237 = load i32, i32* %8, align 4
   %238 = and i32 %237, %236
   store i32 %238, i32* %8, align 4
@@ -1215,7 +1215,7 @@ define internal void @fcontract(i8* noundef %0, i64* noundef %1) #0 {
   %241 = load i32, i32* %5, align 4
   %242 = add nsw i32 %241, 1
   store i32 %242, i32* %5, align 4
-  br label %218, !llvm.loop !22
+  br label %218, !llvm.loop !18
 
 243:                                              ; preds = %218
   %244 = load i32, i32* %8, align 4
@@ -1265,7 +1265,7 @@ define internal void @fcontract(i8* noundef %0, i64* noundef %1) #0 {
   %272 = load i32, i32* %5, align 4
   %273 = add nsw i32 %272, 1
   store i32 %273, i32* %5, align 4
-  br label %249, !llvm.loop !23
+  br label %249, !llvm.loop !19
 
 274:                                              ; preds = %249
   %275 = getelementptr inbounds [10 x i32], [10 x i32]* %7, i32 0, i32 1
@@ -1649,7 +1649,7 @@ define internal void @fcontract(i8* noundef %0, i64* noundef %1) #0 {
   ret void
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
+; Function Attrs: noinline nounwind optnone
 define dso_local i32 @main() #0 {
   %1 = alloca i32, align 4
   %2 = alloca [32 x i8], align 1
@@ -1658,32 +1658,32 @@ define dso_local i32 @main() #0 {
   %5 = alloca i32, align 4
   store i32 0, i32* %1, align 4
   %6 = getelementptr inbounds [32 x i8], [32 x i8]* %2, i32 0, i32 0
-  call void @high_input_32(i8* noundef %6)
+  call void @high_input_32(i8* %6)
   %7 = getelementptr inbounds [32 x i8], [32 x i8]* %3, i32 0, i32 0
-  call void @high_input_32(i8* noundef %7)
+  call void @high_input_32(i8* %7)
   %8 = getelementptr inbounds [32 x i8], [32 x i8]* %4, i32 0, i32 0
-  call void @low_input_32(i8* noundef %8)
+  call void @low_input_32(i8* %8)
   %9 = getelementptr inbounds [32 x i8], [32 x i8]* %2, i32 0, i32 0
   %10 = getelementptr inbounds [32 x i8], [32 x i8]* %3, i32 0, i32 0
   %11 = getelementptr inbounds [32 x i8], [32 x i8]* %4, i32 0, i32 0
-  %12 = call i32 @curve25519_donna(i8* noundef %9, i8* noundef %10, i8* noundef %11)
+  %12 = call i32 @curve25519_donna(i8* %9, i8* %10, i8* %11)
   store i32 %12, i32* %5, align 4
   %13 = load i32, i32* %5, align 4
   ret i32 %13
 }
 
-declare void @high_input_32(i8* noundef) #1
+declare dso_local void @high_input_32(i8*) #1
 
-declare void @low_input_32(i8* noundef) #1
+declare dso_local void @low_input_32(i8*) #1
 
-; Function Attrs: argmemonly nofree nounwind willreturn writeonly
+; Function Attrs: argmemonly nounwind willreturn
 declare void @llvm.memset.p0i8.i32(i8* nocapture writeonly, i8, i32, i1 immarg) #2
 
-; Function Attrs: argmemonly nofree nounwind willreturn
-declare void @llvm.memcpy.p0i8.p0i8.i32(i8* noalias nocapture writeonly, i8* noalias nocapture readonly, i32, i1 immarg) #3
+; Function Attrs: argmemonly nounwind willreturn
+declare void @llvm.memcpy.p0i8.p0i8.i32(i8* noalias nocapture writeonly, i8* noalias nocapture readonly, i32, i1 immarg) #2
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal void @swap_conditional(i64* noundef %0, i64* noundef %1, i64 noundef %2) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal void @swap_conditional(i64* %0, i64* %1, i64 %2) #0 {
   %4 = alloca i64*, align 4
   %5 = alloca i64*, align 4
   %6 = alloca i64, align 8
@@ -1750,14 +1750,14 @@ define internal void @swap_conditional(i64* noundef %0, i64* noundef %1, i64 nou
   %53 = load i32, i32* %7, align 4
   %54 = add i32 %53, 1
   store i32 %54, i32* %7, align 4
-  br label %13, !llvm.loop !24
+  br label %13, !llvm.loop !20
 
 55:                                               ; preds = %13
   ret void
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal void @fmonty(i64* noundef %0, i64* noundef %1, i64* noundef %2, i64* noundef %3, i64* noundef %4, i64* noundef %5, i64* noundef %6, i64* noundef %7, i64* noundef %8) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal void @fmonty(i64* %0, i64* %1, i64* %2, i64* %3, i64* %4, i64* %5, i64* %6, i64* %7, i64* %8) #0 {
   %10 = alloca i64*, align 4
   %11 = alloca i64*, align 4
   %12 = alloca i64*, align 4
@@ -1792,10 +1792,10 @@ define internal void @fmonty(i64* noundef %0, i64* noundef %1, i64* noundef %2, 
   call void @llvm.memcpy.p0i8.p0i8.i32(i8* align 8 %29, i8* align 4 %31, i32 80, i1 false)
   %32 = load i64*, i64** %14, align 4
   %33 = load i64*, i64** %15, align 4
-  call void @fsum(i64* noundef %32, i64* noundef %33)
+  call void @fsum(i64* %32, i64* %33)
   %34 = load i64*, i64** %15, align 4
   %35 = getelementptr inbounds [10 x i64], [10 x i64]* %19, i32 0, i32 0
-  call void @fdifference(i64* noundef %34, i64* noundef %35)
+  call void @fdifference(i64* %34, i64* %35)
   %36 = getelementptr inbounds [10 x i64], [10 x i64]* %20, i32 0, i32 0
   %37 = bitcast i64* %36 to i8*
   %38 = load i64*, i64** %16, align 4
@@ -1803,26 +1803,26 @@ define internal void @fmonty(i64* noundef %0, i64* noundef %1, i64* noundef %2, 
   call void @llvm.memcpy.p0i8.p0i8.i32(i8* align 8 %37, i8* align 4 %39, i32 80, i1 false)
   %40 = load i64*, i64** %16, align 4
   %41 = load i64*, i64** %17, align 4
-  call void @fsum(i64* noundef %40, i64* noundef %41)
+  call void @fsum(i64* %40, i64* %41)
   %42 = load i64*, i64** %17, align 4
   %43 = getelementptr inbounds [10 x i64], [10 x i64]* %20, i32 0, i32 0
-  call void @fdifference(i64* noundef %42, i64* noundef %43)
+  call void @fdifference(i64* %42, i64* %43)
   %44 = getelementptr inbounds [19 x i64], [19 x i64]* %24, i32 0, i32 0
   %45 = load i64*, i64** %16, align 4
   %46 = load i64*, i64** %15, align 4
-  call void @fproduct(i64* noundef %44, i64* noundef %45, i64* noundef %46)
+  call void @fproduct(i64* %44, i64* %45, i64* %46)
   %47 = getelementptr inbounds [19 x i64], [19 x i64]* %25, i32 0, i32 0
   %48 = load i64*, i64** %14, align 4
   %49 = load i64*, i64** %17, align 4
-  call void @fproduct(i64* noundef %47, i64* noundef %48, i64* noundef %49)
+  call void @fproduct(i64* %47, i64* %48, i64* %49)
   %50 = getelementptr inbounds [19 x i64], [19 x i64]* %24, i32 0, i32 0
-  call void @freduce_degree(i64* noundef %50)
+  call void @freduce_degree(i64* %50)
   %51 = getelementptr inbounds [19 x i64], [19 x i64]* %24, i32 0, i32 0
-  call void @freduce_coefficients(i64* noundef %51)
+  call void @freduce_coefficients(i64* %51)
   %52 = getelementptr inbounds [19 x i64], [19 x i64]* %25, i32 0, i32 0
-  call void @freduce_degree(i64* noundef %52)
+  call void @freduce_degree(i64* %52)
   %53 = getelementptr inbounds [19 x i64], [19 x i64]* %25, i32 0, i32 0
-  call void @freduce_coefficients(i64* noundef %53)
+  call void @freduce_coefficients(i64* %53)
   %54 = getelementptr inbounds [10 x i64], [10 x i64]* %20, i32 0, i32 0
   %55 = bitcast i64* %54 to i8*
   %56 = getelementptr inbounds [19 x i64], [19 x i64]* %24, i32 0, i32 0
@@ -1830,24 +1830,24 @@ define internal void @fmonty(i64* noundef %0, i64* noundef %1, i64* noundef %2, 
   call void @llvm.memcpy.p0i8.p0i8.i32(i8* align 8 %55, i8* align 8 %57, i32 80, i1 false)
   %58 = getelementptr inbounds [19 x i64], [19 x i64]* %24, i32 0, i32 0
   %59 = getelementptr inbounds [19 x i64], [19 x i64]* %25, i32 0, i32 0
-  call void @fsum(i64* noundef %58, i64* noundef %59)
+  call void @fsum(i64* %58, i64* %59)
   %60 = getelementptr inbounds [19 x i64], [19 x i64]* %25, i32 0, i32 0
   %61 = getelementptr inbounds [10 x i64], [10 x i64]* %20, i32 0, i32 0
-  call void @fdifference(i64* noundef %60, i64* noundef %61)
+  call void @fdifference(i64* %60, i64* %61)
   %62 = getelementptr inbounds [19 x i64], [19 x i64]* %27, i32 0, i32 0
   %63 = getelementptr inbounds [19 x i64], [19 x i64]* %24, i32 0, i32 0
-  call void @fsquare(i64* noundef %62, i64* noundef %63)
+  call void @fsquare(i64* %62, i64* %63)
   %64 = getelementptr inbounds [19 x i64], [19 x i64]* %26, i32 0, i32 0
   %65 = getelementptr inbounds [19 x i64], [19 x i64]* %25, i32 0, i32 0
-  call void @fsquare(i64* noundef %64, i64* noundef %65)
+  call void @fsquare(i64* %64, i64* %65)
   %66 = getelementptr inbounds [19 x i64], [19 x i64]* %25, i32 0, i32 0
   %67 = getelementptr inbounds [19 x i64], [19 x i64]* %26, i32 0, i32 0
   %68 = load i64*, i64** %18, align 4
-  call void @fproduct(i64* noundef %66, i64* noundef %67, i64* noundef %68)
+  call void @fproduct(i64* %66, i64* %67, i64* %68)
   %69 = getelementptr inbounds [19 x i64], [19 x i64]* %25, i32 0, i32 0
-  call void @freduce_degree(i64* noundef %69)
+  call void @freduce_degree(i64* %69)
   %70 = getelementptr inbounds [19 x i64], [19 x i64]* %25, i32 0, i32 0
-  call void @freduce_coefficients(i64* noundef %70)
+  call void @freduce_coefficients(i64* %70)
   %71 = load i64*, i64** %12, align 4
   %72 = bitcast i64* %71 to i8*
   %73 = getelementptr inbounds [19 x i64], [19 x i64]* %27, i32 0, i32 0
@@ -1860,46 +1860,46 @@ define internal void @fmonty(i64* noundef %0, i64* noundef %1, i64* noundef %2, 
   call void @llvm.memcpy.p0i8.p0i8.i32(i8* align 4 %76, i8* align 8 %78, i32 80, i1 false)
   %79 = getelementptr inbounds [19 x i64], [19 x i64]* %22, i32 0, i32 0
   %80 = load i64*, i64** %14, align 4
-  call void @fsquare(i64* noundef %79, i64* noundef %80)
+  call void @fsquare(i64* %79, i64* %80)
   %81 = getelementptr inbounds [19 x i64], [19 x i64]* %23, i32 0, i32 0
   %82 = load i64*, i64** %15, align 4
-  call void @fsquare(i64* noundef %81, i64* noundef %82)
+  call void @fsquare(i64* %81, i64* %82)
   %83 = load i64*, i64** %10, align 4
   %84 = getelementptr inbounds [19 x i64], [19 x i64]* %22, i32 0, i32 0
   %85 = getelementptr inbounds [19 x i64], [19 x i64]* %23, i32 0, i32 0
-  call void @fproduct(i64* noundef %83, i64* noundef %84, i64* noundef %85)
+  call void @fproduct(i64* %83, i64* %84, i64* %85)
   %86 = load i64*, i64** %10, align 4
-  call void @freduce_degree(i64* noundef %86)
+  call void @freduce_degree(i64* %86)
   %87 = load i64*, i64** %10, align 4
-  call void @freduce_coefficients(i64* noundef %87)
+  call void @freduce_coefficients(i64* %87)
   %88 = getelementptr inbounds [19 x i64], [19 x i64]* %23, i32 0, i32 0
   %89 = getelementptr inbounds [19 x i64], [19 x i64]* %22, i32 0, i32 0
-  call void @fdifference(i64* noundef %88, i64* noundef %89)
+  call void @fdifference(i64* %88, i64* %89)
   %90 = getelementptr inbounds [19 x i64], [19 x i64]* %21, i32 0, i32 0
   %91 = getelementptr inbounds i64, i64* %90, i32 10
   %92 = bitcast i64* %91 to i8*
   call void @llvm.memset.p0i8.i32(i8* align 4 %92, i8 0, i32 72, i1 false)
   %93 = getelementptr inbounds [19 x i64], [19 x i64]* %21, i32 0, i32 0
   %94 = getelementptr inbounds [19 x i64], [19 x i64]* %23, i32 0, i32 0
-  call void @fscalar_product(i64* noundef %93, i64* noundef %94, i64 noundef 121665)
+  call void @fscalar_product(i64* %93, i64* %94, i64 121665)
   %95 = getelementptr inbounds [19 x i64], [19 x i64]* %21, i32 0, i32 0
-  call void @freduce_coefficients(i64* noundef %95)
+  call void @freduce_coefficients(i64* %95)
   %96 = getelementptr inbounds [19 x i64], [19 x i64]* %21, i32 0, i32 0
   %97 = getelementptr inbounds [19 x i64], [19 x i64]* %22, i32 0, i32 0
-  call void @fsum(i64* noundef %96, i64* noundef %97)
+  call void @fsum(i64* %96, i64* %97)
   %98 = load i64*, i64** %11, align 4
   %99 = getelementptr inbounds [19 x i64], [19 x i64]* %23, i32 0, i32 0
   %100 = getelementptr inbounds [19 x i64], [19 x i64]* %21, i32 0, i32 0
-  call void @fproduct(i64* noundef %98, i64* noundef %99, i64* noundef %100)
+  call void @fproduct(i64* %98, i64* %99, i64* %100)
   %101 = load i64*, i64** %11, align 4
-  call void @freduce_degree(i64* noundef %101)
+  call void @freduce_degree(i64* %101)
   %102 = load i64*, i64** %11, align 4
-  call void @freduce_coefficients(i64* noundef %102)
+  call void @freduce_coefficients(i64* %102)
   ret void
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal void @fsum(i64* noundef %0, i64* noundef %1) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal void @fsum(i64* %0, i64* %1) #0 {
   %3 = alloca i64*, align 4
   %4 = alloca i64*, align 4
   %5 = alloca i32, align 4
@@ -1952,14 +1952,14 @@ define internal void @fsum(i64* noundef %0, i64* noundef %1) #0 {
   %41 = load i32, i32* %5, align 4
   %42 = add i32 %41, 2
   store i32 %42, i32* %5, align 4
-  br label %6, !llvm.loop !25
+  br label %6, !llvm.loop !21
 
 43:                                               ; preds = %6
   ret void
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal void @fdifference(i64* noundef %0, i64* noundef %1) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal void @fdifference(i64* %0, i64* %1) #0 {
   %3 = alloca i64*, align 4
   %4 = alloca i64*, align 4
   %5 = alloca i32, align 4
@@ -1993,14 +1993,14 @@ define internal void @fdifference(i64* noundef %0, i64* noundef %1) #0 {
   %23 = load i32, i32* %5, align 4
   %24 = add i32 %23, 1
   store i32 %24, i32* %5, align 4
-  br label %6, !llvm.loop !26
+  br label %6, !llvm.loop !22
 
 25:                                               ; preds = %6
   ret void
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal void @fproduct(i64* noundef %0, i64* noundef %1, i64* noundef %2) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal void @fproduct(i64* %0, i64* %1, i64* %2) #0 {
   %4 = alloca i64*, align 4
   %5 = alloca i64*, align 4
   %6 = alloca i64*, align 4
@@ -3257,8 +3257,8 @@ define internal void @fproduct(i64* noundef %0, i64* noundef %1, i64* noundef %2
   ret void
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal void @freduce_degree(i64* noundef %0) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal void @freduce_degree(i64* %0) #0 {
   %2 = alloca i64*, align 4
   store i64* %0, i64** %2, align 4
   %3 = load i64*, i64** %2, align 4
@@ -3498,8 +3498,8 @@ define internal void @freduce_degree(i64* noundef %0) #0 {
   ret void
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal void @freduce_coefficients(i64* noundef %0) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal void @freduce_coefficients(i64* %0) #0 {
   %2 = alloca i64*, align 4
   %3 = alloca i32, align 4
   %4 = alloca i64, align 8
@@ -3521,7 +3521,7 @@ define internal void @freduce_coefficients(i64* noundef %0) #0 {
   %13 = load i32, i32* %3, align 4
   %14 = getelementptr inbounds i64, i64* %12, i32 %13
   %15 = load i64, i64* %14, align 4
-  %16 = call i64 @div_by_2_26(i64 noundef %15)
+  %16 = call i64 @div_by_2_26(i64 %15)
   store i64 %16, i64* %4, align 8
   %17 = load i64, i64* %4, align 8
   %18 = shl i64 %17, 26
@@ -3544,7 +3544,7 @@ define internal void @freduce_coefficients(i64* noundef %0) #0 {
   %33 = add i32 %32, 1
   %34 = getelementptr inbounds i64, i64* %31, i32 %33
   %35 = load i64, i64* %34, align 4
-  %36 = call i64 @div_by_2_25(i64 noundef %35)
+  %36 = call i64 @div_by_2_25(i64 %35)
   store i64 %36, i64* %4, align 8
   %37 = load i64, i64* %4, align 8
   %38 = shl i64 %37, 25
@@ -3569,7 +3569,7 @@ define internal void @freduce_coefficients(i64* noundef %0) #0 {
   %53 = load i32, i32* %3, align 4
   %54 = add i32 %53, 2
   store i32 %54, i32* %3, align 4
-  br label %8, !llvm.loop !27
+  br label %8, !llvm.loop !23
 
 55:                                               ; preds = %8
   %56 = load i64*, i64** %2, align 4
@@ -3604,7 +3604,7 @@ define internal void @freduce_coefficients(i64* noundef %0) #0 {
   %81 = load i64*, i64** %2, align 4
   %82 = getelementptr inbounds i64, i64* %81, i32 0
   %83 = load i64, i64* %82, align 4
-  %84 = call i64 @div_by_2_26(i64 noundef %83)
+  %84 = call i64 @div_by_2_26(i64 %83)
   store i64 %84, i64* %5, align 8
   %85 = load i64, i64* %5, align 8
   %86 = shl i64 %85, 26
@@ -3622,8 +3622,8 @@ define internal void @freduce_coefficients(i64* noundef %0) #0 {
   ret void
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal void @fsquare(i64* noundef %0, i64* noundef %1) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal void @fsquare(i64* %0, i64* %1) #0 {
   %3 = alloca i64*, align 4
   %4 = alloca i64*, align 4
   %5 = alloca [19 x i64], align 8
@@ -3631,11 +3631,11 @@ define internal void @fsquare(i64* noundef %0, i64* noundef %1) #0 {
   store i64* %1, i64** %4, align 4
   %6 = getelementptr inbounds [19 x i64], [19 x i64]* %5, i32 0, i32 0
   %7 = load i64*, i64** %4, align 4
-  call void @fsquare_inner(i64* noundef %6, i64* noundef %7)
+  call void @fsquare_inner(i64* %6, i64* %7)
   %8 = getelementptr inbounds [19 x i64], [19 x i64]* %5, i32 0, i32 0
-  call void @freduce_degree(i64* noundef %8)
+  call void @freduce_degree(i64* %8)
   %9 = getelementptr inbounds [19 x i64], [19 x i64]* %5, i32 0, i32 0
-  call void @freduce_coefficients(i64* noundef %9)
+  call void @freduce_coefficients(i64* %9)
   %10 = load i64*, i64** %3, align 4
   %11 = bitcast i64* %10 to i8*
   %12 = getelementptr inbounds [19 x i64], [19 x i64]* %5, i32 0, i32 0
@@ -3644,8 +3644,8 @@ define internal void @fsquare(i64* noundef %0, i64* noundef %1) #0 {
   ret void
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal void @fscalar_product(i64* noundef %0, i64* noundef %1, i64 noundef %2) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal void @fscalar_product(i64* %0, i64* %1, i64 %2) #0 {
   %4 = alloca i64*, align 4
   %5 = alloca i64*, align 4
   %6 = alloca i64, align 8
@@ -3678,14 +3678,14 @@ define internal void @fscalar_product(i64* noundef %0, i64* noundef %1, i64 noun
   %22 = load i32, i32* %7, align 4
   %23 = add i32 %22, 1
   store i32 %23, i32* %7, align 4
-  br label %8, !llvm.loop !28
+  br label %8, !llvm.loop !24
 
 24:                                               ; preds = %8
   ret void
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal i64 @div_by_2_26(i64 noundef %0) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal i64 @div_by_2_26(i64 %0) #0 {
   %2 = alloca i64, align 8
   %3 = alloca i32, align 4
   %4 = alloca i32, align 4
@@ -3709,8 +3709,8 @@ define internal i64 @div_by_2_26(i64 noundef %0) #0 {
   ret i64 %17
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal i64 @div_by_2_25(i64 noundef %0) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal i64 @div_by_2_25(i64 %0) #0 {
   %2 = alloca i64, align 8
   %3 = alloca i32, align 4
   %4 = alloca i32, align 4
@@ -3734,8 +3734,8 @@ define internal i64 @div_by_2_25(i64 noundef %0) #0 {
   ret i64 %17
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal void @fsquare_inner(i64* noundef %0, i64* noundef %1) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal void @fsquare_inner(i64* %0, i64* %1) #0 {
   %3 = alloca i64*, align 4
   %4 = alloca i64*, align 4
   store i64* %0, i64** %3, align 4
@@ -4465,8 +4465,8 @@ define internal void @fsquare_inner(i64* noundef %0, i64* noundef %1) #0 {
   ret void
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal i32 @s32_gte(i32 noundef %0, i32 noundef %1) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal i32 @s32_gte(i32 %0, i32 %1) #0 {
   %3 = alloca i32, align 4
   %4 = alloca i32, align 4
   store i32 %0, i32* %3, align 4
@@ -4481,8 +4481,8 @@ define internal i32 @s32_gte(i32 noundef %0, i32 noundef %1) #0 {
   ret i32 %10
 }
 
-; Function Attrs: noinline nounwind optnone uwtable
-define internal i32 @s32_eq(i32 noundef %0, i32 noundef %1) #0 {
+; Function Attrs: noinline nounwind optnone
+define internal i32 @s32_eq(i32 %0, i32 %1) #0 {
   %3 = alloca i32, align 4
   %4 = alloca i32, align 4
   store i32 %0, i32* %3, align 4
@@ -4522,40 +4522,35 @@ define internal i32 @s32_eq(i32 noundef %0, i32 noundef %1) #0 {
   ret i32 %30
 }
 
-attributes #0 = { noinline nounwind optnone uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i386" "target-features"="+x87" }
-attributes #1 = { "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i386" "target-features"="+x87" }
-attributes #2 = { argmemonly nofree nounwind willreturn writeonly }
-attributes #3 = { argmemonly nofree nounwind willreturn }
+attributes #0 = { noinline nounwind optnone "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i386" "target-features"="+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i386" "target-features"="+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { argmemonly nounwind willreturn }
 
-!llvm.module.flags = !{!0, !1, !2, !3, !4, !5}
-!llvm.ident = !{!6}
+!llvm.module.flags = !{!0, !1}
+!llvm.ident = !{!2}
 
 !0 = !{i32 1, !"NumRegisterParameters", i32 0}
 !1 = !{i32 1, !"wchar_size", i32 4}
-!2 = !{i32 7, !"PIC Level", i32 2}
-!3 = !{i32 7, !"PIE Level", i32 2}
-!4 = !{i32 7, !"uwtable", i32 1}
-!5 = !{i32 7, !"frame-pointer", i32 2}
-!6 = !{!"Ubuntu clang version 14.0.0-1ubuntu1.1"}
-!7 = distinct !{!7, !8}
-!8 = !{!"llvm.loop.mustprogress"}
-!9 = distinct !{!9, !8}
-!10 = distinct !{!10, !8}
-!11 = distinct !{!11, !8}
-!12 = distinct !{!12, !8}
-!13 = distinct !{!13, !8}
-!14 = distinct !{!14, !8}
-!15 = distinct !{!15, !8}
-!16 = distinct !{!16, !8}
-!17 = distinct !{!17, !8}
-!18 = distinct !{!18, !8}
-!19 = distinct !{!19, !8}
-!20 = distinct !{!20, !8}
-!21 = distinct !{!21, !8}
-!22 = distinct !{!22, !8}
-!23 = distinct !{!23, !8}
-!24 = distinct !{!24, !8}
-!25 = distinct !{!25, !8}
-!26 = distinct !{!26, !8}
-!27 = distinct !{!27, !8}
-!28 = distinct !{!28, !8}
+!2 = !{!"Ubuntu clang version 12.0.0-3ubuntu1~20.04.5"}
+!3 = distinct !{!3, !4}
+!4 = !{!"llvm.loop.mustprogress"}
+!5 = distinct !{!5, !4}
+!6 = distinct !{!6, !4}
+!7 = distinct !{!7, !4}
+!8 = distinct !{!8, !4}
+!9 = distinct !{!9, !4}
+!10 = distinct !{!10, !4}
+!11 = distinct !{!11, !4}
+!12 = distinct !{!12, !4}
+!13 = distinct !{!13, !4}
+!14 = distinct !{!14, !4}
+!15 = distinct !{!15, !4}
+!16 = distinct !{!16, !4}
+!17 = distinct !{!17, !4}
+!18 = distinct !{!18, !4}
+!19 = distinct !{!19, !4}
+!20 = distinct !{!20, !4}
+!21 = distinct !{!21, !4}
+!22 = distinct !{!22, !4}
+!23 = distinct !{!23, !4}
+!24 = distinct !{!24, !4}

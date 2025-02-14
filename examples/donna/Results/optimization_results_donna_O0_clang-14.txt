@@ -1,3 +1,7 @@
 Optimization,Result
--scev-aa, secure
--adce, secure
+-scev-aa, unknown
+-adce, unknown
+-scev-aa -adce, unknown
+-always-inline, unknown
+-scev-aa -always-inline, unknown
+-adce -always-inline, unknown
