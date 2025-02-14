@@ -87,7 +87,7 @@ while read -r OPT_COMBO; do
 
     
     # Recompile the optimized IR
-    clang $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
+    clang -$OPT_LEVEL $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
 
 
     # Construct the config file path

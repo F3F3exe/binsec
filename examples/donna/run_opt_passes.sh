@@ -62,14 +62,14 @@ if [[ ! -f "$WRAPPER" ]]; then
 fi
 
 # Compile to LLVM IR (-O0 to disable optimizations)
-echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $WRAPPER -o $BASE_NAME.ll
+#echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $WRAPPER -o $BASE_NAME.ll
 $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $WRAPPER -o $BASE_NAME.ll
 
 
 # Create a results file to track the status
 # Ensure the Results directory exists
 mkdir -p Results
-RESULTS_FILE="Results/optimization_results_$(basename $FILE .c)_$OPT_LEVEL_$CLANG.txt"
+RESULTS_FILE="Results/optimization_results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG}.txt"
 echo "Optimization,Result" > $RESULTS_FILE
 
 # Function to generate power set of optimizations
@@ -94,12 +94,12 @@ while read -r OPT_COMBO; do
     echo "Testing optimizations: $OPT_COMBO"
     
     # Apply optimization using opt
-    echo opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
+    #echo opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
     opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
 
     
     # Recompile the optimized IR
-    echo $CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
+    #echo $CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
     $CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
 
 
@@ -109,22 +109,22 @@ while read -r OPT_COMBO; do
     # Check if the cfg file contains "starting from core" at the start
     if grep -q "^starting from core" "$config_file"; then
       # If the file starts with "starting from core", run the core-based binsec command
-      echo "Running core-based binsec for $BASE_NAME..."
+      #echo "Running core-based binsec for $BASE_NAME..."
       core_dump="core_${BASE_NAME}.snapshot"
-      echo make_coredump.sh "$core_dump" "$BASE_NAME"
+      #echo make_coredump.sh "$core_dump" "$BASE_NAME"
       make_coredump.sh "$core_dump" "$BASE_NAME"
-      echo binsec -sse -sse-script "$config_file" -sse-depth 100000000 -checkct "$core_dump" -sse-timeout 100
+      #echo binsec -sse -sse-script "$config_file" -sse-depth 100000000 -checkct "$core_dump" -sse-timeout 100
       binsec_output=$(binsec -sse -sse-script "$config_file" -sse-depth 100000000 -checkct "$core_dump" -sse-timeout 100)
     else
       # Otherwise, run the normal binsec command
       stats_file="./${target_with_opt}.csv"
-      echo "Running standard binsec for $target_with_opt..."
-      echo $BINSEC_SCRIPT ${BASE_NAME}
+      #echo "Running standard binsec for $target_with_opt..."
+      #echo $BINSEC_SCRIPT ${BASE_NAME}
       binsec_output=$($BINSEC_SCRIPT ${BASE_NAME})
     fi
     
     # Run binsec
-    echo "$binsec_output"
+    #echo "$binsec_output"
     
     if [[ $? -ne 0 ]]; then
         echo -e "$OPT_COMBO, binsec failed" >> "$RESULTS_FILE"
@@ -142,9 +142,18 @@ while read -r OPT_COMBO; do
     # Append the result to the output file
     echo "$OPT_COMBO, $status" >> "$RESULTS_FILE"
     
-    echo "Finished testing $OPT_COMBO."
-    echo "-------------------------------------"
+    #echo "Finished testing $OPT_COMBO."
+    #echo "-------------------------------------"
 done < <(generate_combinations "${OPTIMIZATIONS[@]}")
 
 echo "All optimization combinations tested!"
 echo "Results saved in $RESULTS_FILE"
+
+rm -f $BASE_NAME.ll
+rm -f *.snapshot
+rm -f ${BASE_NAME}
+
+
+# clang-14 -O1 -m32 -g -march=i386 -static  -S -emit-llvm donna_wrapper.c -o donna_wrapper.ll
+# make_coredump.sh core_donna.snapshot donna_wrapper
+# binsec -sse -sse-script checkct_donna.cfg -sse-depth 100000000 -checkct core_donna.snapshot
