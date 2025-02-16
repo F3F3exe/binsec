@@ -44,6 +44,8 @@ LIBS="-L../../__libsym__/ -lsym"
 OPTIMIZATIONS=(
   "scev-aa" "adce" "always-inline" "argpromotion" "break-crit-edges"  
   "codegenprepare" "constmerge" "dce" "deadargelim" "dse" "globaldce"  
+  "globalopt" "gvn" "indvars" "inline" "instcombine" "aggressive-instcombine" "ipsccp" 
+  "loop-simplify" "loop-unroll" "loweratomic" "lowerinvoke" "memcpyopt" "mergefunc" 
   )
   #"globalopt" "gvn" "indvars" "inline" "instcombine" "aggressive-instcombine" "ipsccp"  
   #"jump-threading" "lcssa" "licm" "loop-deletion" "loop-extract" "loop-reduce" "loop-rotate"  
