@@ -43,7 +43,7 @@ LIBS="-L../../__libsym__/ -lsym"
 # List of LLVM optimization passe
 OPTIMIZATIONS=(
   "scev-aa" "adce" "always-inline" "argpromotion" "break-crit-edges"  
-  "codegenprepare" "constmerge" "dce" "deadargelim" "dse" "function-attrs" "globaldce"  
+  "codegenprepare" "constmerge" "dce" "deadargelim" "dse" "globaldce"  
   "globalopt" "gvn" "indvars" "inline" "instcombine" "aggressive-instcombine" "ipsccp"  
   "jump-threading" "lcssa" "licm" "loop-deletion" "loop-extract" "loop-reduce" "loop-rotate"  
   "loop-simplify" "loop-unroll" "loweratomic" "lowerinvoke" "memcpyopt" "mergefunc"  
