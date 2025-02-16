@@ -18,7 +18,7 @@ if [[ ! "$CLANG" =~ ^(clang-14|clang-12|clang-19)$ ]]; then
 fi
 
 targets=(
-  01 02 03 04 05 07 08 09 10 
+ct_eq_8 ct_eq_int ct_is_zero_8 ct_lt ct_select ct_eq ct_ge_8 ct_is_zero ct_msb ct_eq_int_8 ct_ge ct_lt_8 ct_select_8
 )
 
 if [[ $# -eq 3 ]]; then
@@ -43,15 +43,14 @@ LIBS="-L../../__libsym__/ -lsym"
 # List of LLVM optimization passe
 OPTIMIZATIONS=(
   "scev-aa" "adce" "always-inline" "argpromotion" "break-crit-edges"  
-  "codegenprepare" "constmerge" "dce" "deadargelim" "dse" "globaldce"  
-  )
-  #"globalopt" "gvn" "indvars" "inline" "instcombine" "aggressive-instcombine" "ipsccp"  
-  #"jump-threading" "lcssa" "licm" "loop-deletion" "loop-extract" "loop-reduce" "loop-rotate"  
-  #"loop-simplify" "loop-unroll" "loweratomic" "lowerinvoke" "memcpyopt" "mergefunc"  
-  #"mergereturn" "partial-inliner" "reassociate" "tailcallelim" "strip-dead-prototypes" "strip"  
-  #"simple-loop-unswitch" "sink" "simplifycfg" "mem2reg" "memcpyopt" "sccp" "sroa" "reg2mem"
-  #"scalar-evolution"
-
+  "codegenprepare" "constmerge" "dce" "deadargelim" "dse" "function-attrs" "globaldce"  
+  "globalopt" "gvn" "indvars" "inline" "instcombine" "aggressive-instcombine" "ipsccp"  
+  "jump-threading" "lcssa" "licm" "loop-deletion" "loop-extract" "loop-reduce" "loop-rotate"  
+  "loop-simplify" "loop-unroll" "loweratomic" "lowerinvoke" "memcpyopt" "mergefunc"  
+  "mergereturn" "partial-inliner" "reassociate" "tailcallelim" "strip-dead-prototypes" "strip"  
+  "simple-loop-unswitch" "sink" "simplifycfg" "mem2reg" "memcpyopt" "sccp" "sroa" "reg2mem"
+  "scalar-evolution"
+)
 
 # Ensure source file exists
 if [[ ! -f "$SOURCE_FILE" ]]; then
@@ -75,7 +74,7 @@ clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
 # Create a results file to track the status
 # Ensure the Results directory exists
 mkdir -p Results
-RESULTS_FILE="Results/optimization_results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG}_$(date +%Y%m%d_%H%M%S).txt"
+RESULTS_FILE="Results/optimization_results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG}.txt"
 echo "Optimization,Result" > $RESULTS_FILE
 
 # Function to generate power set of optimizations
