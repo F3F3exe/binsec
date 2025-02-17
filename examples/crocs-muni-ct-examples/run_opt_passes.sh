@@ -112,7 +112,20 @@ generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
     clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o ${BASE_NAME}_{#}.ll
     eval opt -S {} ${BASE_NAME}_{#}.ll -o ${BASE_NAME}_{#}.ll &&
     $CLANG -$OPT_LEVEL $CFLAGS ${BASE_NAME}_{#}.ll -o ${BASE_NAME}_{#} $LIBS &&
-    binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct ${BASE_NAME}_{#} -sse-timeout 10 | tee -a ${RESULTS_FILE}_{#}.txt
+    # binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct ${BASE_NAME}_{#} -sse-timeout 10 | tee -a ${RESULTS_FILE}_{#}.txt
+    binsec_output=$(binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct ${BASE_NAME}_{#} -sse-timeout 10)
+    if [[ $? -ne 0 ]]; then
+        echo -e "$OPT_COMBO, binsec failed" >> "$RESULTS_FILE"
+        continue
+    fi
+
+    status=$(echo "$binsec_output" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')
+
+    if [[ -z "$status" ]]; then
+        status="unknown"
+    fi
+    echo "$OPT_COMBO, $status" >> "${RESULTS_FILE}_{#}.txt"
+
 "
 
 cat ${RESULTS_FILE}_*.txt >> ${RESULTS_FILE}.txt
