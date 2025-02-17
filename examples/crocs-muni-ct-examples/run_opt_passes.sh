@@ -155,6 +155,9 @@ export LIBS
 export CLANG
 
 generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
+    echo opt -S {} ${BASE_NAME}.ll -o ${BASE_NAME}_opt.ll &&
+    echo  $CLANG -$OPT_LEVEL $CFLAGS ${BASE_NAME}_opt.ll -o ${BASE_NAME} $LIBS &&
+    echo binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct -sse-timeout 10 &&
     opt -S {} ${BASE_NAME}.ll -o ${BASE_NAME}_opt.ll &&
     $CLANG -$OPT_LEVEL $CFLAGS ${BASE_NAME}_opt.ll -o ${BASE_NAME} $LIBS &&
     binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct -sse-timeout 10 | tee -a Results/optimization_results.txt
