@@ -162,14 +162,13 @@ generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
     UNIQUE_BASE=${BASE_NAME}_\$UNIQUE_ID
 
     clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll
-    echo eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
     eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
-    echo $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE $LIBS &&
     $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE $LIBS &&
-    echo binsec -sse -sse-script checkct_\$UNIQUE_BASE.cfg -sse-depth 1000000 -checkct -sse-timeout 10 &&
-    binsec -sse -sse-script checkct_\$UNIQUE_BASE.cfg -sse-depth 1000000 -checkct -sse-timeout 10 | tee -a Results/optimization_results.txt
+    binsec -sse -sse-script checkct_\$UNIQUE_BASE.cfg -sse-depth 1000000 -checkct -sse-timeout 10 | tee -a Results/${RESULTS_FILE}_${UNIQUE_ID}.txt
 "
 
+cat Results/${RESULTS_FILE}_*.txt >> Results/${RESULTS_FILE}.txt
+rm Results/${RESULTS_FILE}_*.txt
 
 
 echo "All optimization combinations tested!"
