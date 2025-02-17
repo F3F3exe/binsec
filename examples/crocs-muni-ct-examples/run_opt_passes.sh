@@ -168,7 +168,7 @@ generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
 "
 
 cat ${RESULTS_FILE}_*.txt >> ${RESULTS_FILE}.txt
-rm ${RESULTS_FILE}_*.txt
+#rm ${RESULTS_FILE}_*.txt
 
 
 echo "All optimization combinations tested!"
