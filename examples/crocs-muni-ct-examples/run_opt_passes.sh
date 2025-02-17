@@ -44,9 +44,11 @@ LIBS="-L../../__libsym__/ -lsym"
 
 # List of LLVM optimization passe
 OPTIMIZATIONS=(
-  "scev-aa" "adce" "always-inline" "argpromotion" "break-crit-edges"  
-  "codegenprepare" "constmerge" "dce" "deadargelim" "dse" "globaldce"  
+  "scev-aa" "adce" 
   )
+  #"always-inline" "argpromotion" "break-crit-edges"  
+  #"codegenprepare" "constmerge" "dce" "deadargelim" "dse" "globaldce"  
+  #)
   # "globalopt" "gvn" "indvars" "inline" "instcombine" "aggressive-instcombine" "ipsccp"  
   # "jump-threading" "lcssa" "licm" "loop-deletion" "loop-extract" "loop-reduce" "loop-rotate"  
   # "loop-simplify" "loop-unroll" "loweratomic" "lowerinvoke" "memcpyopt" "mergefunc"  
@@ -62,7 +64,7 @@ if [[ ! -f "$SOURCE_FILE" ]]; then
 fi
 
 # Compile to LLVM IR (-O0 to disable optimizations)
-#echo clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+echo clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
 clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
 
 for OPT in "${OPTIMIZATIONS[@]}"; do
