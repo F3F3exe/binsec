@@ -73,7 +73,6 @@ for OPT in "${OPTIMIZATIONS[@]}"; do
   opt -S -$OPT $BASE_NAME.ll -o ${BASE_NAME}.ll
 done
 
-clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
 
 
 # Create a results file to track the status
@@ -159,13 +158,18 @@ export LIBS
 export CLANG
 
 generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
-    echo eval opt -S {} ${BASE_NAME}.ll -o ${BASE_NAME}.ll &&
-    eval opt -S {} ${BASE_NAME}.ll -o ${BASE_NAME}.ll &&
-    echo $CLANG -$OPT_LEVEL $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS &&
-    $CLANG -$OPT_LEVEL $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS &&
-    echo binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct -sse-timeout 10 &&
-    binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct -sse-timeout 10 | tee -a Results/optimization_results.txt
+    UNIQUE_ID={#}  # Unique job number provided by parallel
+    UNIQUE_BASE=${BASE_NAME}_\$UNIQUE_ID
+
+    clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll
+    echo eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
+    eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
+    echo $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE $LIBS &&
+    $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE $LIBS &&
+    echo binsec -sse -sse-script checkct_\$UNIQUE_BASE.cfg -sse-depth 1000000 -checkct -sse-timeout 10 &&
+    binsec -sse -sse-script checkct_\$UNIQUE_BASE.cfg -sse-depth 1000000 -checkct -sse-timeout 10 | tee -a Results/optimization_results.txt
 "
+
 
 
 echo "All optimization combinations tested!"
