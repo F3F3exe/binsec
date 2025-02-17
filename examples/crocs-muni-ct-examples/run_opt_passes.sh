@@ -106,12 +106,13 @@ export CLANG
 
 generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
     UNIQUE_ID={#}  # Unique job number provided by parallel
-    UNIQUE_BASE=${BASE_NAME}_\$UNIQUE_ID
-
-    clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll
-    eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
-    $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE $LIBS &&
-    binsec -sse -sse-script checkct_\$UNIQUE_BASE.cfg -sse-depth 1000000 -checkct -sse-timeout 10 | tee -a ${RESULTS_FILE}_${UNIQUE_ID}.txt
+    UNIQUE_BASE=${BASE_NAME}_{#}
+    echo "UNIQUE_ID: " {#}
+    echo $UNIQUE_BASE ${BASE_NAME}_{#}
+    clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o ${BASE_NAME}_{#}.ll
+    eval opt -S {} ${BASE_NAME}_{#}.ll -o ${BASE_NAME}_{#}.ll &&
+    $CLANG -$OPT_LEVEL $CFLAGS ${BASE_NAME}_{#}.ll -o ${BASE_NAME}_{#} $LIBS &&
+    binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct ${BASE_NAME}_{#} -sse-timeout 10 | tee -a ${RESULTS_FILE}_{#}.txt
 "
 
 cat ${RESULTS_FILE}_*.txt >> ${RESULTS_FILE}.txt
