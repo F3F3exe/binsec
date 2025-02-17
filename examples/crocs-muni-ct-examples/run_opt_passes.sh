@@ -112,7 +112,7 @@ generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
     $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE $LIBS &&
     
     # Capture binsec output correctly
-    binsec_output=\"\$(binsec -sse -sse-script checkct_\$UNIQUE_BASE.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE -sse-timeout 10)\"
+    binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE -sse-timeout 10)\"
 
     # Debugging: Log the output to check its content
     echo \"binsec output for \$UNIQUE_BASE:\" >> debug_log.txt
