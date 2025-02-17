@@ -164,11 +164,11 @@ generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
     clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll
     eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
     $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE $LIBS &&
-    binsec -sse -sse-script checkct_\$UNIQUE_BASE.cfg -sse-depth 1000000 -checkct -sse-timeout 10 | tee -a Results/${RESULTS_FILE}_${UNIQUE_ID}.txt
+    binsec -sse -sse-script checkct_\$UNIQUE_BASE.cfg -sse-depth 1000000 -checkct -sse-timeout 10 | tee -a ${RESULTS_FILE}_${UNIQUE_ID}.txt
 "
 
-cat Results/${RESULTS_FILE}_*.txt >> Results/${RESULTS_FILE}.txt
-rm Results/${RESULTS_FILE}_*.txt
+cat ${RESULTS_FILE}_*.txt >> ${RESULTS_FILE}.txt
+rm ${RESULTS_FILE}_*.txt
 
 
 echo "All optimization combinations tested!"
