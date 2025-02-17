@@ -108,17 +108,13 @@ generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
     UNIQUE_ID={#}  # Unique job number provided by parallel
     UNIQUE_BASE=${BASE_NAME}_{#}
     echo "UNIQUE_ID: " {#}
-    echo $UNIQUE_BASE ${BASE_NAME}_{#}
+    echo "base" $UNIQUE_BASE ", " ${BASE_NAME}_{#}
     clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o ${BASE_NAME}_{#}.ll
     eval opt -S {} ${BASE_NAME}_{#}.ll -o ${BASE_NAME}_{#}.ll &&
     $CLANG -$OPT_LEVEL $CFLAGS ${BASE_NAME}_{#}.ll -o ${BASE_NAME}_{#} $LIBS &&
     binsec_output=$(binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct ${BASE_NAME}_{#} -sse-timeout 10) &&
     
-    status=$(echo "$binsec_output" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')
-
-    if [[ -z "$status" ]]; then
-        status="unknown"
-    fi
+    status=$(echo "$binsec_output" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+') &&
     echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
 "
 # binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct ${BASE_NAME}_{#} -sse-timeout 10 | tee -a ${RESULTS_FILE}_{#}.txt
