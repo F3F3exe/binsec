@@ -3,9 +3,9 @@ source_filename = "02.c"
 target datalayout = "e-m:e-p:32:32-p270:32:32-p271:32:32-p272:64:64-f64:32:64-f80:32-n8:16:32-S128"
 target triple = "i386-pc-linux-gnu"
 
-@a = common dso_local global i32 0, align 4
-@b = common dso_local global i32 0, align 4
-@c = common dso_local global i32 0, align 4
+@a = common dso_local local_unnamed_addr global i32 0, align 4
+@b = common dso_local local_unnamed_addr global i32 0, align 4
+@c = common dso_local local_unnamed_addr global i32 0, align 4
 
 ; Function Attrs: noinline nounwind optnone
 define dso_local zeroext i8 @issue(i32 %0, i8 zeroext %1, i8 zeroext %2) #0 {
@@ -37,7 +37,7 @@ define dso_local zeroext i8 @issue(i32 %0, i8 zeroext %1, i8 zeroext %2) #0 {
 }
 
 ; Function Attrs: noinline nounwind optnone
-define dso_local i32 @main(i32 %0, i8** %1) #0 {
+define dso_local i32 @main(i32 %0, i8** %1) local_unnamed_addr #0 {
   %3 = alloca i32, align 4
   %4 = alloca i32, align 4
   %5 = alloca i8**, align 4
@@ -69,9 +69,9 @@ define dso_local i32 @main(i32 %0, i8** %1) #0 {
   ret i32 %20
 }
 
-declare dso_local void @high_input_4(i8*) #1
+declare dso_local void @high_input_4(i8*) local_unnamed_addr #1
 
-declare dso_local void @low_input_4(i8*) #1
+declare dso_local void @low_input_4(i8*) local_unnamed_addr #1
 
 attributes #0 = { noinline nounwind optnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "min-legal-vector-width"="0" "no-infs-fp-math"="false" "no-jump-tables"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="i386" "target-features"="+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #1 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "target-cpu"="i386" "target-features"="+x87" "unsafe-fp-math"="false" "use-soft-float"="false" }
