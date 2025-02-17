@@ -128,7 +128,7 @@ generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
     fi
 
     # Append results to the output file
-    echo \"{} \$status\" | tee -a \"${RESULTS_FILE}\"
+    echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
 "
 
 # binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct ${BASE_NAME}_{#} -sse-timeout 10 | tee -a ${RESULTS_FILE}_{#}.txt
