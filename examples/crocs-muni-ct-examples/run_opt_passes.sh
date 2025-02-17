@@ -78,8 +78,8 @@ done
 # Create a results file to track the status
 # Ensure the Results directory exists
 mkdir -p Results
-RESULTS_FILE="Results/optimization_results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG}_$(date +%Y%m%d_%H%M%S).txt"
-echo "Optimization,Result" > $RESULTS_FILE
+RESULTS_FILE="Results/optimization_results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG}_$(date +%Y%m%d_%H%M%S)" #.txt"
+echo "Optimization,Result" > ${RESULTS_FILE}.txt
 
 # Function to generate power set of optimizations
 generate_combinations() {
@@ -97,59 +97,6 @@ generate_combinations() {
         echo "${combination[*]}"
     done
 }
-
-# # Test each optimization combination
-# while read -r OPT_COMBO; do
-#     echo "Testing optimizations: $OPT_COMBO"
-    
-#     # Apply optimization using opt
-#     opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
-
-    
-#     # Recompile the optimized IR
-#     clang -$OPT_LEVEL $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
-
-
-#     # Construct the config file path
-#     config_file="checkct_${BASE_NAME}.cfg"
-
-#     # Check if the cfg file contains "starting from core" at the start
-#     if grep -q "^starting from core" "$config_file"; then
-#       # If the file starts with "starting from core", run the core-based binsec command
-#       #echo "Running core-based binsec for $BASE_NAME..."
-#       core_dump="core_${BASE_NAME}.snapshot"
-#       make_coredump.sh "$core_dump" "$BASE_NAME"
-#       binsec_output=$(binsec -sse -sse-script "$config_file" -sse-depth 1000000 -checkct "$core_dump" -sse-timeout 10)
-#     else
-#       # Otherwise, run the normal binsec command
-#       stats_file="./${target_with_opt}.csv"
-#       #echo "Running standard binsec for $target_with_opt..."
-#       #$BINSEC_SCRIPT ${BASE_NAME}
-#       binsec_output=$($BINSEC_SCRIPT ${BASE_NAME})
-#     fi
-    
-#     # Run binsec
-#     #echo "$binsec_output"
-    
-#     if [[ $? -ne 0 ]]; then
-#         echo -e "$OPT_COMBO, binsec failed" >> "$RESULTS_FILE"
-#         continue
-#     fi
-
-#     # Parse the binsec output for security status
-#     status=$(echo "$binsec_output" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')
-
-#     # If no status found, assume unknown
-#     if [[ -z "$status" ]]; then
-#         status="unknown"
-#     fi
-
-#     # Append the result to the output file
-#     echo "$OPT_COMBO, $status" >> "$RESULTS_FILE"
-    
-#     #echo "Finished testing $OPT_COMBO."
-#     #echo "-------------------------------------"
-# done < <(generate_combinations "${OPTIMIZATIONS[@]}")
 
 export BASE_NAME
 export OPT_LEVEL
