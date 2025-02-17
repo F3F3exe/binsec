@@ -105,19 +105,32 @@ export LIBS
 export CLANG
 
 generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
-    UNIQUE_ID={#}  # Unique job number provided by parallel
-    UNIQUE_BASE=${BASE_NAME}_{#}
-    echo "UNIQUE_ID: " {#}
-    echo "base" $UNIQUE_BASE ", " ${BASE_NAME}_{#}
-    clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o ${BASE_NAME}_{#}.ll
-    eval opt -S {} ${BASE_NAME}_{#}.ll -o ${BASE_NAME}_{#}.ll &&
-    $CLANG -$OPT_LEVEL $CFLAGS ${BASE_NAME}_{#}.ll -o ${BASE_NAME}_{#} $LIBS &&
-    binsec_output=$(binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct ${BASE_NAME}_{#} -sse-timeout 10) &&
+    UNIQUE_BASE=${BASE_NAME}_{#}  # Ensuring unique filenames
+
+    clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll
+    eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
+    $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE $LIBS &&
     
-    status=$(echo "$binsec_output" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+') &&
-    echo \"{} \$status\" &&
-    echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
+    # Capture binsec output correctly
+    binsec_output=\"\$(binsec -sse -sse-script checkct_\$UNIQUE_BASE.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE -sse-timeout 10)\"
+
+    # Debugging: Log the output to check its content
+    echo \"binsec output for \$UNIQUE_BASE:\" >> debug_log.txt
+    echo \"\$binsec_output\" >> debug_log.txt
+
+    # Extract status
+    status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
+
+    # If status is empty, log it
+    if [[ -z \"\$status\" ]]; then
+        status=\"unknown\"
+        echo \"Warning: Status not found for \$UNIQUE_BASE\" >> debug_log.txt
+    fi
+
+    # Append results to the output file
+    echo \"{} \$status\" | tee -a \"${RESULTS_FILE}\"
 "
+
 # binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct ${BASE_NAME}_{#} -sse-timeout 10 | tee -a ${RESULTS_FILE}_{#}.txt
 
 cat ${RESULTS_FILE}_*.txt >> ${RESULTS_FILE}.txt
