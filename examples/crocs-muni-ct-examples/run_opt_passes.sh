@@ -1,3 +1,5 @@
+#!/bin/bash
+
 OPT_LEVEL=$1
 FILE=$2
 CLANG=$3
@@ -42,9 +44,10 @@ LIBS="-L../../__libsym__/ -lsym"
 
 # List of LLVM optimization passe
 OPTIMIZATIONS=(
-  "scev-aa" "adce" "always-inline" "argpromotion" "break-crit-edges"  
-  "codegenprepare" "constmerge" "dce" "deadargelim" "dse" "globaldce"  
-  )
+  "scev-aa" "adce")
+# "always-inline" "argpromotion" "break-crit-edges"  
+ # "codegenprepare" "constmerge" "dce" "deadargelim" "dse" "globaldce"  
+#  )
   # "globalopt" "gvn" "indvars" "inline" "instcombine" "aggressive-instcombine" "ipsccp"  
   # "jump-threading" "lcssa" "licm" "loop-deletion" "loop-extract" "loop-reduce" "loop-rotate"  
   # "loop-simplify" "loop-unroll" "loweratomic" "lowerinvoke" "memcpyopt" "mergefunc"  
@@ -155,10 +158,10 @@ export LIBS
 export CLANG
 
 generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
-    echo opt -S {} ${BASE_NAME}.ll -o ${BASE_NAME}_opt.ll &&
+    echo eval opt -S {} ${BASE_NAME}.ll -o ${BASE_NAME}_opt.ll &&
     echo  $CLANG -$OPT_LEVEL $CFLAGS ${BASE_NAME}_opt.ll -o ${BASE_NAME} $LIBS &&
     echo binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct -sse-timeout 10 &&
-    opt -S {} ${BASE_NAME}.ll -o ${BASE_NAME}_opt.ll &&
+    eval opt -S {} ${BASE_NAME}.ll -o ${BASE_NAME}_opt.ll &&
     $CLANG -$OPT_LEVEL $CFLAGS ${BASE_NAME}_opt.ll -o ${BASE_NAME} $LIBS &&
     binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct -sse-timeout 10 | tee -a Results/optimization_results.txt
 "
