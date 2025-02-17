@@ -39,7 +39,7 @@ SOURCE_FILE="$specific_target.c"  # Change this if needed
 BASE_NAME=$specific_target
 SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
-CFLAGS="-m32 -march=i386 -static"
+CFLAGS="-m32 -static"
 LIBS="-L../../__libsym__/ -lsym"
 
 # List of LLVM optimization passe
@@ -157,8 +157,11 @@ export LIBS
 export CLANG
 
 generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
-    eval opt -S {} ${BASE_NAME}.ll -o ${BASE_NAME}_opt.ll &&
-    $CLANG -$OPT_LEVEL $CFLAGS ${BASE_NAME}_opt.ll -o ${BASE_NAME} $LIBS &&
+    echo eval opt -S {} ${BASE_NAME}.ll -o ${BASE_NAME}.ll &&
+    eval opt -S {} ${BASE_NAME}.ll -o ${BASE_NAME}.ll &&
+    echo $CLANG -$OPT_LEVEL $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS &&
+    $CLANG -$OPT_LEVEL $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS &&
+    echo binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct -sse-timeout 10 &&
     binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct -sse-timeout 10 | tee -a Results/optimization_results.txt
 "
 
