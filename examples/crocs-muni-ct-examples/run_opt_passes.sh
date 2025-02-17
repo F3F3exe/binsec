@@ -115,12 +115,13 @@ generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
     binsec_output=$(binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct ${BASE_NAME}_{#} -sse-timeout 10) &&
     
     status=$(echo "$binsec_output" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+') &&
+    echo \"{} \$status\" &&
     echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
 "
 # binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct ${BASE_NAME}_{#} -sse-timeout 10 | tee -a ${RESULTS_FILE}_{#}.txt
 
 cat ${RESULTS_FILE}_*.txt >> ${RESULTS_FILE}.txt
-rm ${RESULTS_FILE}_*.txt
+#rm ${RESULTS_FILE}_*.txt
 
 
 echo "All optimization combinations tested!"
