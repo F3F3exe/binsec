@@ -20,7 +20,7 @@ if [[ ! "$CLANG" =~ ^(clang-14|clang-12|clang-19)$ ]]; then
 fi
 
 targets=(
-  01 02 03 04 05 07 08 09 10 
+ct_eq_8 ct_eq_int ct_is_zero_8 ct_lt ct_select ct_eq ct_ge_8 ct_is_zero ct_msb ct_eq_int_8 ct_ge ct_lt_8 ct_select_8
 )
 
 if [[ $# -eq 3 ]]; then
