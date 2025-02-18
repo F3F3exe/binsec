@@ -40,11 +40,12 @@ BASE_NAME=$specific_target
 SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
 CFLAGS="-m32 -static"
-LIBS="-L../../__libsym__/ -lsym"
+LIBS="-L../../__libsym__/ -lsym Hacl_Policies.c"
 
 # List of LLVM optimization passe
 OPTIMIZATIONS=(
   "funroll-loops" "fstrict-aliasing" "fno-math-errno" "finline-hint-functions" "finline-functions" 
+  "fno-unroll-loops" "fno-inline-functions"
   )
 
 #"fvectorize" "fslp-vectorize"
