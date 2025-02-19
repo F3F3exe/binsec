@@ -44,18 +44,12 @@ LIBS="-L../../__libsym__/ -lsym"
 
 # List of LLVM optimization passe
 OPTIMIZATIONS=(
-  "scev-aa" "adce" 
-  )
-  #"always-inline" "argpromotion" "break-crit-edges"  
-  #"codegenprepare" "constmerge" "dce" "deadargelim" "dse" "globaldce"  
-  #)
-  # "globalopt" "gvn" "indvars" "inline" "instcombine" "aggressive-instcombine" "ipsccp"  
-  # "jump-threading" "lcssa" "licm" "loop-deletion" "loop-extract" "loop-reduce" "loop-rotate"  
-  # "loop-simplify" "loop-unroll" "loweratomic" "lowerinvoke" "memcpyopt" "mergefunc"  
-  # "mergereturn" "partial-inliner" "reassociate" "tailcallelim" "strip-dead-prototypes" "strip"  
-  # "simple-loop-unswitch" "sink" "simplifycfg" "mem2reg" "memcpyopt" "sccp" "sroa" "reg2mem"
-  # "scalar-evolution"
-
+  "adce" "argpromotion" "dse" "globaldce"  
+  "globalopt" "gvn" "inline" "aggressive-instcombine"  
+   "loop-unroll" "mergefunc"  
+   "simple-loop-unswitch" "sink" "sccp"
+)
+#"partial-inliner"
 
 # Ensure source file exists
 if [[ ! -f "$SOURCE_FILE" ]]; then
@@ -105,33 +99,28 @@ export LIBS
 export CLANG
 
 generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
-    UNIQUE_BASE=${BASE_NAME}_{#}  # Ensuring unique filenames
+    UNIQUE_BASE=${BASE_NAME}_{#} 
 
-    clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll
+    clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
     eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
     $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE $LIBS &&
     
     binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE -sse-timeout 10)\"
 
-    # Debugging
-    #echo \"binsec output for \$UNIQUE_BASE:\" >> debug_log.txt
-    #echo \"\$binsec_output\" >> debug_log.txt
-
     status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
 
     if [[ -z \"\$status\" ]]; then
         status=\"unknown\"
-        #echo \"Warning: Status not found for \$UNIQUE_BASE\" >> debug_log.txt
+        #echo \"Warning: Status not found \$UNIQUE_BASE\" >> debug_log.txt
     fi
 
     echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
 "
 
-# binsec -sse -sse-script checkct_${BASE_NAME}.cfg -sse-depth 1000000 -checkct ${BASE_NAME}_{#} -sse-timeout 10 | tee -a ${RESULTS_FILE}_{#}.txt
 
 cat ${RESULTS_FILE}_*.txt >> ${RESULTS_FILE}.txt
 rm ${RESULTS_FILE}_*.txt
 
 
-echo "All optimization combinations tested!"
-echo "Results saved in $RESULTS_FILE"
+echo "All optimization combinations tested"
+echo "Results saved in ${RESULTS_FILE}.txt"

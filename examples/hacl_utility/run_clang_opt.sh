@@ -87,10 +87,8 @@ export LIBS
 export CLANG
 
 generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
-    UNIQUE_BASE=${BASE_NAME}_{#}  # Ensuring unique filenames
-    echo     $CLANG $CFLAGS -$OPT_LEVEL {} $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBS &&
+    UNIQUE_BASE=${BASE_NAME}_{#}  
     eval $CLANG $CFLAGS -$OPT_LEVEL {} $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBS &&
-    echo     binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
     binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
 
     # Debugging
@@ -101,7 +99,7 @@ generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
 
     if [[ -z \"\$status\" ]]; then
         status=\"unknown\"
-        #echo \"Warning: Status not found for \$UNIQUE_BASE\" >> debug_log.txt
+        #echo \"Status not found: \$UNIQUE_BASE\" >> debug_log.txt
     fi
 
     echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
@@ -113,5 +111,5 @@ cat ${RESULTS_FILE}_*.txt >> ${RESULTS_FILE}.txt
 rm ${RESULTS_FILE}_*.txt
 
 
-echo "All optimization combinations tested!"
-echo "Results saved in $RESULTS_FILE"
+echo "All optimization combinations tested"
+echo "Results saved in ${RESULTS_FILE}.txt"
