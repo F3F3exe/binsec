@@ -47,9 +47,9 @@ OPTIMIZATIONS=(
   "adce" "argpromotion" "dse" "globaldce"  
   "globalopt" "gvn" "inline" "aggressive-instcombine"  
    "loop-unroll" "mergefunc"  
-   "simple-loop-unswitch" "sink" "sccp"
+   "simple-loop-unswitch" "sink" "sccp" "partial-inliner"
 )
-#"partial-inliner"
+#
 
 # Ensure source file exists
 if [[ ! -f "$SOURCE_FILE" ]]; then
