@@ -147,7 +147,7 @@ generate_combinations() {
                 combination+=("${elements[j]}")
             fi
           done
-          echo "\"$(IFS=,; echo "${combination[*]}")\""
+          echo "$(IFS=,; echo "${combination[*]}")"
 
         else
           for ((j = 0; j < num_elements; j++)); do
