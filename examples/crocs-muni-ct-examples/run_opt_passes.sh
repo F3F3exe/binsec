@@ -108,6 +108,11 @@ for OPTIMIZATION in "${LOW_OPTIMIZATIONS[@]}"; do
   fi
 done
 
+echo "-------------------------------------------------------"
+echo $VALID_HIGH_OPTIMIZATIONS
+echo "-------------------------------------------------------"
+echo $VALID_LOW_OPTIMIZATIONS
+echo "-------------------------------------------------------"
 
 # Create a results file to track the status
 # Ensure the Results directory exists
