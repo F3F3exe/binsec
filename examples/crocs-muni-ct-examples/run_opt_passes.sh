@@ -80,25 +80,25 @@ clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
 
 VALID_HIGH_OPTIMIZATIONS=()
 
-for OPT in "${HIGH_OPTIMIZATIONS[@]}"; do
-  echo "Checking optimization: $OPT"
+for OPTIMIZATION in "${HIGH_OPTIMIZATIONS[@]}"; do
+  echo "Checking optimization: $OPTIMIZATION"
   
-  ERROR_OUTPUT=$(opt -S -$OPT $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
+  ERROR_OUTPUT=$(opt -S -$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
   
   if [[ -z "$ERROR_OUTPUT" ]]; then
-    VALID_HIGH_OPTIMIZATIONS+=("$OPT")
+    VALID_HIGH_OPTIMIZATIONS+=("$OPTIMIZATION")
   fi
 done
 
 VALID_LOW_OPTIMIZATIONS=()
 
-for OPT in "${LOW_OPTIMIZATIONS[@]}"; do
-  echo "Checking optimization: $OPT"
+for OPTIMIZATION in "${LOW_OPTIMIZATIONS[@]}"; do
+  echo "Checking optimization: $OPTIMIZATION"
   
-  ERROR_OUTPUT=$(opt -S -$OPT $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
+  ERROR_OUTPUT=$(opt -S -$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
   
   if [[ -z "$ERROR_OUTPUT" ]]; then
-    VALID_LOW_OPTIMIZATIONS+=("$OPT")
+    VALID_LOW_OPTIMIZATIONS+=("$OPTIMIZATION")
   fi
 done
 
