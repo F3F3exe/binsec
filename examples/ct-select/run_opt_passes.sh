@@ -17,6 +17,13 @@ if [[ ! "$CLANG" =~ ^(clang-14|clang-12|clang-19)$ ]]; then
     exit 1
 fi
 
+case "$CLANG" in
+    clang-7.1) OPT="opt-7" ;;
+    clang-14)  OPT="opt-14" ;;
+    clang-12)  OPT="opt-12" ;;
+    clang-19)  OPT="opt-19" ;;
+esac
+
 targets=(
   sort sort_multiplex sort_negative
 )

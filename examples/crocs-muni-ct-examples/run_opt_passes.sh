@@ -3,6 +3,8 @@
 OPT_LEVEL=$1
 FILE=$2
 CLANG=$3
+OPT="opt"
+
 
 if [[ -z "$OPT_LEVEL" || -z "$FILE" || -z "$CLANG" ]]; then
     echo "Usage: $0 <OPT_LEVEL> <FILE> <CLANG>"
@@ -18,6 +20,14 @@ if [[ ! "$CLANG" =~ ^(clang-7.1|clang-14|clang-12|clang-19)$ ]]; then
     echo "Error: CLANG must be one of clang-7.1, clang-14, clang-12, or clang-19."
     exit 1
 fi
+
+case "$CLANG" in
+    clang-7.1) OPT="opt-7" ;;
+    clang-14)  OPT="opt-14" ;;
+    clang-12)  OPT="opt-12" ;;
+    clang-19)  OPT="opt-19" ;;
+esac
+
 
 targets=(
   01 02 03 04 05 07 08 09 10 
@@ -113,7 +123,7 @@ if grep -q "^starting from core" "$config_file"; then
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
-        eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
+        eval $OPT -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
         $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
         
         core_dump="core_\$UNIQUE_BASE.snapshot"
@@ -138,10 +148,10 @@ else
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
         echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
-        echo eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
+        echo eval $OPT -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
         echo $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
-        eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
+        eval $OPT -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
         $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
         
         binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
@@ -173,7 +183,7 @@ if grep -q "^starting from core" "$config_file"; then
         echo OPT {}
 
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
-        eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
+        eval $OPT -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
         $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
         
         core_dump=\"core_\$UNIQUE_BASE.snapshot\"
@@ -199,7 +209,7 @@ else
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
-        eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
+        eval $OPT -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
         $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
         
         binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
