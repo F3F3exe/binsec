@@ -86,6 +86,7 @@ for OPTIMIZATION in "${HIGH_OPTIMIZATIONS[@]}"; do
   ERROR_OUTPUT=$(opt -S -$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
   
   if [[ -z "$ERROR_OUTPUT" ]]; then
+    echo "got error, adding it"
     VALID_HIGH_OPTIMIZATIONS+=("$OPTIMIZATION")
   fi
 done
