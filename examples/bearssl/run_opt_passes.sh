@@ -20,7 +20,7 @@ if [[ ! "$CLANG" =~ ^(clang-7.1|clang-14|clang-12|clang-19)$ ]]; then
 fi
 
 targets=(
-  01 02 03 04 05 07 08 09 10 
+  aes_big des_tab des_ct_cbcenc des_ct_cbcdec aes_ct_cbcdec aes_ct_cbcenc chacha20_ct aes_ct_ctr aes_ct64_cbcdec aes_ct64_cbcenc aes_ct64_ctr ghash_ctmul
 )
 
 if [[ $# -eq 3 ]]; then
@@ -102,7 +102,7 @@ if grep -q "^starting from core" "$config_file"; then
     generate_combinations "${HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
-        clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
+        $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
         eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
         $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
         
@@ -127,7 +127,7 @@ else
     generate_combinations "${HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
-        clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
+        $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
         eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
         $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
         
@@ -157,7 +157,7 @@ if grep -q "^starting from core" "$config_file"; then
     done | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
-        clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
+        $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
         eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
         $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
         
@@ -183,7 +183,7 @@ else
     done | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
-        clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
+        $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
         eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
         $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
         

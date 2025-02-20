@@ -112,7 +112,7 @@ if grep -q "^starting from core" "$config_file"; then
     generate_combinations "${HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
-        clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
+        $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
         eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
         $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
         
@@ -137,7 +137,7 @@ else
     generate_combinations "${HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
-        clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
+        $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
         eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
         $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
         
@@ -169,7 +169,7 @@ if grep -q "^starting from core" "$config_file"; then
         UNIQUE_BASE=${BASE_NAME}_{#} 
         echo OPT {}
 
-        clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
+        $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
         eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
         $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
         
@@ -195,7 +195,7 @@ else
     done | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
-        clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
+        $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
         eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
         $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
         
