@@ -88,6 +88,8 @@ for OPTIMIZATION in "${HIGH_OPTIMIZATIONS[@]}"; do
   if [[ -z "$ERROR_OUTPUT" ]]; then
     echo "got error, adding it" $ERROR_OUTPUT
     VALID_HIGH_OPTIMIZATIONS+=("$OPTIMIZATION")
+  else
+    echo "error: " $ERROR_OUTPUT
   fi
 done
 
