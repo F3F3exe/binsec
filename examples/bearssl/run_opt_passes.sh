@@ -43,13 +43,19 @@ CFLAGS="-m32 -static"
 LIBS="-L../../__libsym__/ -lsym -I./inc -L./. -lbearssl"
 
 # List of LLVM optimization passe
-OPTIMIZATIONS=(
+HIGH_OPTIMIZATIONS=(
   "adce" "argpromotion" "dse" "globaldce"  
   "globalopt" "gvn" "inline" "aggressive-instcombine"  
    "loop-unroll" "mergefunc"  
    "simple-loop-unswitch" "sink" "sccp" "partial-inliner"
 )
-#
+
+MODERATE_OPTIMIZATIONS=(
+  "block-placement" "codegenprepare" "dce" "deadargelim" "function-attr" "globaldce"
+  "indvars" "instcombine" "ipsccp" "jump-threading" "licm" "loop-reduce" "loop-rotate" 
+  "looop-simplify" "lower-atomic" "mem2reg" "memcpyopt" "mergereturn" "reg2mem" "sora" 
+  "simplifycfg" "tailcallelim"  
+)
 
 # Ensure source file exists
 if [[ ! -f "$SOURCE_FILE" ]]; then
@@ -89,9 +95,11 @@ export CLANG
 # Construct the config file path
 config_file="checkct_${BASE_NAME}.cfg"
 
+
+## check high risk optimizations
 if grep -q "^starting from core" "$config_file"; then
 
-    generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
+    generate_combinations "${HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
         clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
@@ -116,7 +124,7 @@ if grep -q "^starting from core" "$config_file"; then
 
 else
 
-    generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
+    generate_combinations "${HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
         clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
@@ -134,10 +142,63 @@ else
 
         echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
     "
-
 fi
 
 
+##check moderate risk optimizations
+if grep -q "^starting from core" "$config_file"; then
+    HIGH_OPTIMIZATIONS_WITH_PREFIX=("${HIGH_OPTIMIZATIONS[@]/#/-}")
+
+    # Generate combinations of HIGH_OPTIMIZATIONS
+    generate_combinations "${HIGH_OPTIMIZATIONS_WITH_PREFIX[@]}" | while read high_combination; do
+        for low_opt in "${MODERATE_OPTIMIZATIONS[@]}"; do
+            echo "$high_combination $low_opt"
+        done
+    done | parallel -j 28 "
+        UNIQUE_BASE=${BASE_NAME}_{#} 
+
+        clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
+        eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
+        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
+        
+        core_dump=\"core_\$UNIQUE_BASE.snapshot\"
+        make_coredump.sh \"\$core_dump\" \$UNIQUE_BASE.out
+
+        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$core_dump -sse-timeout 10)\"
+
+        status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
+
+        if [[ -z \"\$status\" ]]; then
+            status=\"unknown\"
+        fi
+
+        echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
+    "
+    
+else
+    generate_combinations "${HIGH_OPTIMIZATIONS_WITH_PREFIX[@]}" | while read high_combination; do
+        for low_opt in "${MODERATE_OPTIMIZATIONS[@]}"; do
+            echo "$high_combination $low_opt"
+        done
+    done | parallel -j 28 "
+        UNIQUE_BASE=${BASE_NAME}_{#} 
+
+        clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
+        eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
+        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
+        
+        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
+
+        status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
+
+        if [[ -z \"\$status\" ]]; then
+            status=\"unknown\"
+            #echo \"Warning: Status not found \$UNIQUE_BASE\" >> debug_log.txt
+        fi
+
+        echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
+    "
+fi
 
 
 
