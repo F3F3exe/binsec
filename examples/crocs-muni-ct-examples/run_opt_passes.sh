@@ -101,7 +101,10 @@ for OPTIMIZATION in "${LOW_OPTIMIZATIONS[@]}"; do
   ERROR_OUTPUT=$(opt -S -$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
   
   if [[ -z "$ERROR_OUTPUT" ]]; then
+    echo "got error, adding it" $ERROR_OUTPUT
     VALID_LOW_OPTIMIZATIONS+=("$OPTIMIZATION")
+  else
+    echo "error: " $ERROR_OUTPUT
   fi
 done
 
