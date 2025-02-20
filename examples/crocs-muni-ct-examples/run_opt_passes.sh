@@ -98,8 +98,13 @@ VALID_LOW_OPTIMIZATIONS=()
 for OPTIMIZATION in "${LOW_OPTIMIZATIONS[@]}"; do
   echo "Checking optimization: $OPTIMIZATION"
   
-  ERROR_OUTPUT=$($OPT -S -$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
-  
+  ERROR_OUTPUT=""
+  if [[ "$OPT" == "opt-19" ]]; then
+    ERROR_OUTPUT=$($OPT -S -passes=$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
+  else
+    ERROR_OUTPUT=$($OPT -S -$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
+  fi
+
   if [[ -z "$ERROR_OUTPUT" ]]; then
     echo "got error, adding it" $ERROR_OUTPUT
     VALID_LOW_OPTIMIZATIONS+=("$OPTIMIZATION")
@@ -128,14 +133,21 @@ generate_combinations() {
     
     for ((i = 1; i < num_combinations; i++)); do
         local combination=()
+        
         for ((j = 0; j < num_elements; j++)); do
             if (( (i >> j) & 1 )); then
-                combination+=("-${elements[j]}")
+                combination+=("${elements[j]}")
             fi
         done
-        echo "${combination[*]}"
+        
+        if [[ "$OPT" == "clang-19" ]]; then
+            echo "-passes=\"$(IFS=,; echo "${combination[*]}")\""
+        else
+            echo "-${combination[*]}"
+        fi
     done
 }
+
 
 export BASE_NAME
 export OPT_LEVEL
