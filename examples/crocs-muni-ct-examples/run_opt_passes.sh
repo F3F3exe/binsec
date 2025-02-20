@@ -55,11 +55,11 @@ LIBS="-L../../__libsym__/ -lsym"
 
 # List of LLVM optimization passe
 HIGH_OPTIMIZATIONS=(
-  "adce" "argpromotion" "dse"   
-  "globalopt" "gvn" "inline" "aggressive-instcombine"  
-   "loop-unroll" "mergefunc"  
-   "simple-loop-unswitch" "sink" "sccp" "partial-inliner"
-)
+  "adce" "argpromotion" "dse"   )
+#   "globalopt" "gvn" "inline" "aggressive-instcombine"  
+#    "loop-unroll" "mergefunc"  
+#    "simple-loop-unswitch" "sink" "sccp" "partial-inliner"
+# )
 
 LOW_OPTIMIZATIONS=()
 #   "block-placement" "codegenprepare" "dce" "deadargelim" "function-attr" "globaldce"
@@ -217,7 +217,7 @@ else
         $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
         
         binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
-
+        echo $binsec_output
         status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
 
         if [[ -z \"\$status\" ]]; then
