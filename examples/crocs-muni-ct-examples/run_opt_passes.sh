@@ -82,9 +82,15 @@ VALID_HIGH_OPTIMIZATIONS=()
 
 for OPTIMIZATION in "${HIGH_OPTIMIZATIONS[@]}"; do
   echo "Checking optimization: $OPTIMIZATION"
-  
-  ERROR_OUTPUT=$($OPT -S -$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
-  
+  clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+
+  ERROR_OUTPUT=""
+  if [[ "$OPT" == "opt-19" ]]; then
+    ERROR_OUTPUT=$($OPT -S -passes=$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
+  else
+    ERROR_OUTPUT=$($OPT -S -$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
+  fi
+
   if [[ -z "$ERROR_OUTPUT" ]]; then
     echo "got error, adding it" $ERROR_OUTPUT
     VALID_HIGH_OPTIMIZATIONS+=("$OPTIMIZATION")
@@ -97,7 +103,8 @@ VALID_LOW_OPTIMIZATIONS=()
 
 for OPTIMIZATION in "${LOW_OPTIMIZATIONS[@]}"; do
   echo "Checking optimization: $OPTIMIZATION"
-  
+  clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+
   ERROR_OUTPUT=""
   if [[ "$OPT" == "opt-19" ]]; then
     ERROR_OUTPUT=$($OPT -S -passes=$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
