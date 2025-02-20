@@ -1,3 +1,5 @@
+#!/bin/bash
+
 OPT_LEVEL=$1
 FILE=$2
 CLANG=$3
@@ -12,13 +14,13 @@ if [[ ! "$OPT_LEVEL" =~ ^O[0-3]$ ]]; then
     exit 1
 fi
 
-if [[ ! "$CLANG" =~ ^(clang-14|clang-12|clang-19)$ ]]; then
-    echo "Error: CLANG must be one of clang-14, clang-12, or clang-19."
+if [[ ! "$CLANG" =~ ^(clang-7.1|clang-14|clang-12|clang-19)$ ]]; then
+    echo "Error: CLANG must be one of clang-7.1, clang-14, clang-12, or clang-19."
     exit 1
 fi
 
 targets=(
-  aes_big  des_tab des_ct_cbcenc des_ct_cbcdec aes_ct_cbcdec aes_ct_cbcenc chacha20_ct aes_ct_ctr aes_ct64_cbcdec aes_ct64_cbcenc aes_ct64_ctr ghash_ctmul
+  01 02 03 04 05 07 08 09 10 
 )
 
 if [[ $# -eq 3 ]]; then
@@ -36,42 +38,30 @@ echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): $
 SOURCE_FILE="$specific_target.c"  # Change this if needed
 BASE_NAME=$specific_target
 SNAPSHOT_SCRIPT="make_coredump.sh"
-BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 100"
-CFLAGS="-m32 -march=i386 -static"
-LIBS="-L../../__libsym__/ -lsym"
-LIBBEARSSL="-I./inc -L./. -lbearssl"
+BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
+CFLAGS="-m32 -static"
+LIBS="-L../../__libsym__/ -lsym -I./inc -L./. -lbearssl"
 
-NAME=$BASE_NAME
-WRAPPER=${NAME}_wrapper.c
-
-# List of LLVM optimization passes
+# List of LLVM optimization passe
 OPTIMIZATIONS=(
-  "scev-aa" "adce" "always-inline" "argpromotion" "break-crit-edges"  
-  "codegenprepare" "constmerge" "dce" "deadargelim" "dse" "function-attrs" "globaldce"  
-  "globalopt" "gvn" "indvars" "inline" "instcombine" "aggressive-instcombine" "ipsccp"  
-  "jump-threading" "lcssa" "licm" "loop-deletion" "loop-extract" "loop-reduce" "loop-rotate"  
-  "loop-simplify" "loop-unroll" "loweratomic" "lowerinvoke" "memcpyopt" "mergefunc"  
-  "mergereturn" "partial-inliner" "reassociate" "tailcallelim" "strip-dead-prototypes" "strip"  
-  "simple-loop-unswitch" "sink" "simplifycfg" "mem2reg" "memcpyopt" "sccp" "sroa" "reg2mem"
-  "scalar-evolution"
+  "adce" "argpromotion" "dse" "globaldce"  
+  "globalopt" "gvn" "inline" "aggressive-instcombine"  
+   "loop-unroll" "mergefunc"  
+   "simple-loop-unswitch" "sink" "sccp" "partial-inliner"
 )
+#
 
 # Ensure source file exists
-if [[ ! -f "$WRAPPER" ]]; then
-    echo "Error: Source file $WRAPPER not found!"
+if [[ ! -f "$SOURCE_FILE" ]]; then
+    echo "Error: Source file $SOURCE_FILE not found!"
     exit 1
 fi
 
-# Compile to LLVM IR (-O0 to disable optimizations)
-echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $WRAPPER -o $BASE_NAME.ll
-$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $WRAPPER -o $BASE_NAME.ll
-
 
 # Create a results file to track the status
-# Ensure the Results directory exists
 mkdir -p Results
-RESULTS_FILE="Results/optimization_results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG}.txt"
-echo "Optimization,Result" > $RESULTS_FILE
+RESULTS_FILE="Results/optimization_results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG}_$(date +%Y%m%d_%H%M%S)" #.txt"
+echo "Optimization,Result" > ${RESULTS_FILE}.txt
 
 # Function to generate power set of optimizations
 generate_combinations() {
@@ -90,73 +80,75 @@ generate_combinations() {
     done
 }
 
-# Test each optimization combination
-while read -r OPT_COMBO; do
-    echo "Testing optimizations: $OPT_COMBO"
-    
-    # Apply optimization using opt
-    echo opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
+export BASE_NAME
+export OPT_LEVEL
+export CFLAGS
+export LIBS
+export CLANG
 
-    opt -S $OPT_COMBO $BASE_NAME.ll -o ${BASE_NAME}.ll
+# Construct the config file path
+config_file="checkct_${BASE_NAME}.cfg"
 
-    
-    # Recompile the optimized IR
-    #echo $CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
-    echo $CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS $LIBBEARSSL
-    #$CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS
-    $CLANG $CFLAGS ${BASE_NAME}.ll -o ${BASE_NAME} $LIBS $LIBBEARSSL
+if grep -q "^starting from core" "$config_file"; then
 
+    generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
+        UNIQUE_BASE=${BASE_NAME}_{#} 
 
-    # Construct the config file path
-    config_file="checkct_${BASE_NAME}.cfg"
+        clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
+        eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
+        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
+        
+        core_dump="core_\$UNIQUE_BASE.snapshot"
+        make_coredump.sh "$core_dump" \$UNIQUE_BASE.out
 
-    # Check if the cfg file contains "starting from core" at the start
-    if grep -q "^starting from core" "$config_file"; then
-      # If the file starts with "starting from core", run the core-based binsec command
-      #echo "Running core-based binsec for $BASE_NAME..."
-      core_dump="core_${BASE_NAME}.snapshot"
-      #echo make_coredump.sh "$core_dump" "$BASE_NAME"
-      make_coredump.sh "$core_dump" "$BASE_NAME"
-      #echo binsec -sse -sse-script "$config_file" -sse-depth 100000000 -checkct "$core_dump" -sse-timeout 100
-      binsec_output=$(binsec -sse -sse-script "$config_file" -sse-depth 100000000 -checkct "$core_dump" -sse-timeout 100)
-    else
-      # Otherwise, run the normal binsec command
-      stats_file="./${target_with_opt}.csv"
-      #echo "Running standard binsec for $target_with_opt..."
-      #echo $BINSEC_SCRIPT ${BASE_NAME}
-      binsec_output=$($BINSEC_SCRIPT ${BASE_NAME})
-    fi
-    
-    # Run binsec
-    echo "$binsec_output"
-    
-    if [[ $? -ne 0 ]]; then
-        echo -e "$OPT_COMBO, binsec failed" >> "$RESULTS_FILE"
-        continue
-    fi
+        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct $core_dump -sse-timeout 10)\"
 
-    # Parse the binsec output for security status
-    status=$(echo "$binsec_output" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')
+        status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
 
-    # If no status found, assume unknown
-    if [[ -z "$status" ]]; then
-        status="unknown"
-    fi
+        if [[ -z \"\$status\" ]]; then
+            status=\"unknown\"
+            #echo \"Warning: Status not found \$UNIQUE_BASE\" >> debug_log.txt
+        fi
 
-    # Append the result to the output file
-    echo "$OPT_COMBO, $status" >> "$RESULTS_FILE"
-    
-    #echo "Finished testing $OPT_COMBO."
-    #echo "-------------------------------------"
-done < <(generate_combinations "${OPTIMIZATIONS[@]}")
-
-echo "All optimization combinations tested!"
-echo "Results saved in $RESULTS_FILE"
-
-rm -f $BASE_NAME.ll
-rm -f *.snapshot
-rm -f ${BASE_NAME}
+        echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
+    "
 
 
+else
+
+    generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
+        UNIQUE_BASE=${BASE_NAME}_{#} 
+
+        clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
+        eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
+        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
+        
+        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
+
+        status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
+
+        if [[ -z \"\$status\" ]]; then
+            status=\"unknown\"
+            #echo \"Warning: Status not found \$UNIQUE_BASE\" >> debug_log.txt
+        fi
+
+        echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
+    "
+
+fi
+
+
+
+
+
+cat ${RESULTS_FILE}_*.txt >> ${RESULTS_FILE}.txt
+rm ${RESULTS_FILE}_*.txt
+rm *.out
+rm *.ll
+rm *.snapshot
+
+
+echo "All optimization combinations tested"
+echo "Results saved in ${RESULTS_FILE}.txt"
 
 

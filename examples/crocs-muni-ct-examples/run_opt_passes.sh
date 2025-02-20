@@ -14,8 +14,8 @@ if [[ ! "$OPT_LEVEL" =~ ^O[0-3]$ ]]; then
     exit 1
 fi
 
-if [[ ! "$CLANG" =~ ^(clang-14|clang-12|clang-19)$ ]]; then
-    echo "Error: CLANG must be one of clang-14, clang-12, or clang-19."
+if [[ ! "$CLANG" =~ ^(clang-7.1|clang-14|clang-12|clang-19)$ ]]; then
+    echo "Error: CLANG must be one of clang-7.1, clang-14, clang-12, or clang-19."
     exit 1
 fi
 
@@ -58,14 +58,14 @@ if [[ ! -f "$SOURCE_FILE" ]]; then
 fi
 
 # Compile to LLVM IR (-O0 to disable optimizations)
-echo clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
-clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+# echo clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+# clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
 
-for OPT in "${OPTIMIZATIONS[@]}"; do
-  echo "Checking optimizations: $OPT"
-  echo opt -S -$OPT $BASE_NAME.ll -o ${BASE_NAME}.ll
-  opt -S -$OPT $BASE_NAME.ll -o ${BASE_NAME}.ll
-done
+# for OPT in "${OPTIMIZATIONS[@]}"; do
+#   echo "Checking optimizations: $OPT"
+#   echo opt -S -$OPT $BASE_NAME.ll -o ${BASE_NAME}.ll
+#   opt -S -$OPT $BASE_NAME.ll -o ${BASE_NAME}.ll
+# done
 
 
 
@@ -98,28 +98,66 @@ export CFLAGS
 export LIBS
 export CLANG
 
-generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
-    UNIQUE_BASE=${BASE_NAME}_{#} 
+# Construct the config file path
+config_file="checkct_${BASE_NAME}.cfg"
 
-    clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
-    eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
-    $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE $LIBS &&
-    
-    binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE -sse-timeout 10)\"
+if grep -q "^starting from core" "$config_file"; then
 
-    status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
+    generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
+        UNIQUE_BASE=${BASE_NAME}_{#} 
 
-    if [[ -z \"\$status\" ]]; then
-        status=\"unknown\"
-        #echo \"Warning: Status not found \$UNIQUE_BASE\" >> debug_log.txt
-    fi
+        clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
+        eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
+        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
+        
+        core_dump="core_\$UNIQUE_BASE.snapshot"
+        make_coredump.sh "$core_dump" \$UNIQUE_BASE.out
 
-    echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
-"
+        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct $core_dump -sse-timeout 10)\"
+
+        status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
+
+        if [[ -z \"\$status\" ]]; then
+            status=\"unknown\"
+            #echo \"Warning: Status not found \$UNIQUE_BASE\" >> debug_log.txt
+        fi
+
+        echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
+    "
+
+
+else
+
+    generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
+        UNIQUE_BASE=${BASE_NAME}_{#} 
+
+        clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
+        eval opt -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
+        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
+        
+        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
+
+        status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
+
+        if [[ -z \"\$status\" ]]; then
+            status=\"unknown\"
+            #echo \"Warning: Status not found \$UNIQUE_BASE\" >> debug_log.txt
+        fi
+
+        echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
+    "
+
+fi
+
+
+
 
 
 cat ${RESULTS_FILE}_*.txt >> ${RESULTS_FILE}.txt
 rm ${RESULTS_FILE}_*.txt
+rm *.out
+rm *.ll
+rm *.snapshot
 
 
 echo "All optimization combinations tested"
