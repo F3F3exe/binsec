@@ -141,16 +141,21 @@ generate_combinations() {
     for ((i = 1; i < num_combinations; i++)); do
         local combination=()
         
-        for ((j = 0; j < num_elements; j++)); do
+        if [[ "$OPT" == "clang-19" ]]; then
+          for ((j = 0; j < num_elements; j++)); do
             if (( (i >> j) & 1 )); then
                 combination+=("${elements[j]}")
             fi
-        done
-        
-        if [[ "$OPT" == "clang-19" ]]; then
-            echo "-passes=\"$(IFS=,; echo "${combination[*]}")\""
+          done
+          echo "-passes=\"$(IFS=,; echo "${combination[*]}")\""
+
         else
-            echo "-${combination[*]}"
+          for ((j = 0; j < num_elements; j++)); do
+            if (( (i >> j) & 1 )); then
+                combination+=("-${elements[j]}")
+            fi
+          done
+            echo "${combination[*]}"
         fi
     done
 }
