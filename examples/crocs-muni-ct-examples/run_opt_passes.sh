@@ -141,7 +141,7 @@ generate_combinations() {
     for ((i = 1; i < num_combinations; i++)); do
         local combination=()
         
-        if [[ "$OPT" == "clang-19" ]]; then
+        if [[ "$OPT" == "opt-19" ]]; then
           for ((j = 0; j < num_elements; j++)); do
             if (( (i >> j) & 1 )); then
                 combination+=("${elements[j]}")
