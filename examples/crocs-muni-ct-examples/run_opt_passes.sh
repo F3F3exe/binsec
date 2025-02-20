@@ -55,7 +55,7 @@ LIBS="-L../../__libsym__/ -lsym"
 
 # List of LLVM optimization passe
 HIGH_OPTIMIZATIONS=(
-  "adce" "argpromotion" "dse" "globaldce"  
+  "adce" "argpromotion" "dse"   
   "globalopt" "gvn" "inline" "aggressive-instcombine"  
    "loop-unroll" "mergefunc"  
    "simple-loop-unswitch" "sink" "sccp" "partial-inliner"
