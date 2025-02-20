@@ -61,12 +61,12 @@ HIGH_OPTIMIZATIONS=(
    "simple-loop-unswitch" "sink" "sccp" "partial-inliner"
 )
 
-LOW_OPTIMIZATIONS=(
-  "block-placement" "codegenprepare" "dce" "deadargelim" "function-attr" "globaldce"
-  "indvars" "instcombine" "ipsccp" "jump-threading" "licm" "loop-reduce" "loop-rotate" 
-  "loop-simplify" "lower-atomic" "mem2reg" "memcpyopt" "mergereturn" "reg2mem" "sora" 
-  "simplifycfg" "tailcallelim"  
-)
+LOW_OPTIMIZATIONS=()
+#   "block-placement" "codegenprepare" "dce" "deadargelim" "function-attr" "globaldce"
+#   "indvars" "instcombine" "ipsccp" "jump-threading" "licm" "loop-reduce" "loop-rotate" 
+#   "loop-simplify" "lower-atomic" "mem2reg" "memcpyopt" "mergereturn" "reg2mem" "sora" 
+#   "simplifycfg" "tailcallelim"  
+# )
 
 # Ensure source file exists
 if [[ ! -f "$SOURCE_FILE" ]]; then
