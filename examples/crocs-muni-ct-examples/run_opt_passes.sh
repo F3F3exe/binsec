@@ -194,7 +194,7 @@ else
 
     generate_combinations "${VALID_HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
-
+        echo "-------------" {}
         echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
         echo eval "${OPT} -S {} ${UNIQUE_BASE}.ll -o ${UNIQUE_BASE}.ll" &&
         echo $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
