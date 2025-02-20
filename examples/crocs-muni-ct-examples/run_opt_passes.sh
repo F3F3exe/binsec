@@ -205,7 +205,8 @@ else
 
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
         echo "HALLO" &&
-        for PASS in $(echo {} | tr ',' ' '); do
+        IFS=',' read -ra PASSES <<< '{}'
+        for PASS in \"\${PASSES[@]}\"; do          
           echo 'Applying pass:' \$PASS
           echo eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll
           eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll
