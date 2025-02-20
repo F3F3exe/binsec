@@ -60,7 +60,7 @@ HIGH_OPTIMIZATIONS=(
    "simple-loop-unswitch" "sink" "sccp" "partial-inliner"
 )
 
-MODERATE_OPTIMIZATIONS=(
+LOW_OPTIMIZATIONS=(
   "block-placement" "codegenprepare" "dce" "deadargelim" "function-attr" "globaldce"
   "indvars" "instcombine" "ipsccp" "jump-threading" "licm" "loop-reduce" "loop-rotate" 
   "looop-simplify" "lower-atomic" "mem2reg" "memcpyopt" "mergereturn" "reg2mem" "sora" 
@@ -74,15 +74,32 @@ if [[ ! -f "$SOURCE_FILE" ]]; then
 fi
 
 # Compile to LLVM IR (-O0 to disable optimizations)
-# echo clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
-# clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+echo clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
 
-# for OPT in "${OPTIMIZATIONS[@]}"; do
-#   echo "Checking optimizations: $OPT"
-#   echo opt -S -$OPT $BASE_NAME.ll -o ${BASE_NAME}.ll
-#   opt -S -$OPT $BASE_NAME.ll -o ${BASE_NAME}.ll
-# done
+VALID_HIGH_OPTIMIZATIONS=()
 
+for OPT in "${HIGH_OPTIMIZATIONS[@]}"; do
+  echo "Checking optimization: $OPT"
+  
+  ERROR_OUTPUT=$(opt -S -$OPT $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
+  
+  if [[ -z "$ERROR_OUTPUT" ]]; then
+    VALID_HIGH_OPTIMIZATIONS+=("$OPT")
+  fi
+done
+
+VALID_LOW_OPTIMIZATIONS=()
+
+for OPT in "${LOW_OPTIMIZATIONS[@]}"; do
+  echo "Checking optimization: $OPT"
+  
+  ERROR_OUTPUT=$(opt -S -$OPT $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
+  
+  if [[ -z "$ERROR_OUTPUT" ]]; then
+    VALID_LOW_OPTIMIZATIONS+=("$OPT")
+  fi
+done
 
 
 # Create a results file to track the status
@@ -119,7 +136,7 @@ config_file="checkct_${BASE_NAME}.cfg"
 
 if grep -q "^starting from core" "$config_file"; then
 
-    generate_combinations "${HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
+    generate_combinations "${VALID_HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
@@ -144,7 +161,7 @@ if grep -q "^starting from core" "$config_file"; then
 
 else
 
-    generate_combinations "${HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
+    generate_combinations "${VALID_HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
         echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
@@ -171,11 +188,11 @@ fi
 
 ##check moderate risk optimizations
 if grep -q "^starting from core" "$config_file"; then
-    HIGH_OPTIMIZATIONS_WITH_PREFIX=("${HIGH_OPTIMIZATIONS[@]/#/-}")
+    HIGH_OPTIMIZATIONS_WITH_PREFIX=("${VALID_HIGH_OPTIMIZATIONS[@]/#/-}")
 
     # Generate combinations of HIGH_OPTIMIZATIONS
     generate_combinations "${HIGH_OPTIMIZATIONS_WITH_PREFIX[@]}" | while read high_combination; do
-        for low_opt in "${MODERATE_OPTIMIZATIONS[@]}"; do
+        for low_opt in "${VALID_LOW_OPTIMIZATIONS[@]}"; do
             echo "$high_combination $low_opt"
         done
     done | parallel -j 28 "
@@ -202,7 +219,7 @@ if grep -q "^starting from core" "$config_file"; then
     
 else
     generate_combinations "${HIGH_OPTIMIZATIONS_WITH_PREFIX[@]}" | while read high_combination; do
-        for low_opt in "${MODERATE_OPTIMIZATIONS[@]}"; do
+        for low_opt in "${VALID_LOW_OPTIMIZATIONS[@]}"; do
             echo "$high_combination $low_opt"
         done
     done | parallel -j 28 "
