@@ -152,7 +152,7 @@ generate_combinations() {
         else
           for ((j = 0; j < num_elements; j++)); do
             if (( (i >> j) & 1 )); then
-                combination+=("-${elements[j]}")
+                combination+=("${elements[j]}")
             fi
           done
             echo "\"$(IFS=,; echo "${combination[*]}")\""
