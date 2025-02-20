@@ -155,7 +155,7 @@ generate_combinations() {
                 combination+=("-${elements[j]}")
             fi
           done
-            echo "${combination[*]}"
+            echo "\"$(IFS=,; echo "${combination[*]}")\""
         fi
     done
 }
