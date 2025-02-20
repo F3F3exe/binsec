@@ -64,7 +64,7 @@ HIGH_OPTIMIZATIONS=(
 LOW_OPTIMIZATIONS=(
   "block-placement" "codegenprepare" "dce" "deadargelim" "function-attr" "globaldce"
   "indvars" "instcombine" "ipsccp" "jump-threading" "licm" "loop-reduce" "loop-rotate" 
-  "looop-simplify" "lower-atomic" "mem2reg" "memcpyopt" "mergereturn" "reg2mem" "sora" 
+  "loop-simplify" "lower-atomic" "mem2reg" "memcpyopt" "mergereturn" "reg2mem" "sora" 
   "simplifycfg" "tailcallelim"  
 )
 
@@ -121,9 +121,9 @@ for OPTIMIZATION in "${LOW_OPTIMIZATIONS[@]}"; do
 done
 
 echo "-------------------------------------------------------"
-echo $VALID_HIGH_OPTIMIZATIONS
+echo "${VALID_HIGH_OPTIMIZATIONS[@]}"
 echo "-------------------------------------------------------"
-echo $VALID_LOW_OPTIMIZATIONS
+echo "${VALID_LOW_OPTIMIZATIONS[@]}"
 echo "-------------------------------------------------------"
 
 # Create a results file to track the status
