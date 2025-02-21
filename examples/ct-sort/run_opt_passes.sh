@@ -80,14 +80,14 @@ if [[ ! -f "$SOURCE_FILE" ]]; then
 fi
 
 # Compile to LLVM IR (-O0 to disable optimizations)
-echo clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
-clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
 
 VALID_HIGH_OPTIMIZATIONS=()
 
 for OPTIMIZATION in "${HIGH_OPTIMIZATIONS[@]}"; do
   echo "Checking optimization: $OPTIMIZATION"
-  clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+  $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
 
   ERROR_OUTPUT=$($OPT -S -passes=$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
  
@@ -103,7 +103,7 @@ VALID_LOW_OPTIMIZATIONS=()
 
 for OPTIMIZATION in "${LOW_OPTIMIZATIONS[@]}"; do
   echo "Checking optimization: $OPTIMIZATION"
-  clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+  $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
 
   ERROR_OUTPUT=$($OPT -S -passes=$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
 
