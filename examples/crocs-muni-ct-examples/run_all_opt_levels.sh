@@ -1,11 +1,14 @@
 #!/bin/bash
 
 # List of optimization levels
-OPT_LEVELS=(O1 O2 O2 O3)
+OPT_LEVELS=(O1 O2 O3)
 
 # List of targets
 targets=(
   01 02 03 04 05 07 08 09 10 
+)
+clang_version=(
+  clang-7.1 clang-19
 )
 
 # Iterate over all optimization levels and targets

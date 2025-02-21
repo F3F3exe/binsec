@@ -198,16 +198,13 @@ if grep -q "^starting from core" "$config_file"; then
         done
 
         #compile .c libraries to .ll if present
-        if [[ -n "$LIBS" ]]; then
-          llvm-link -S hacl-c/hacl-c/*.ll -o ${UNIQUE_LIBS}.ll
-          for PASS in \"\${PASSES[@]}\"; do          
-            eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
-          done
+        llvm-link -S hacl-c/hacl-c/*.ll -o ${UNIQUE_LIBS}.ll
+        for PASS in \"\${PASSES[@]}\"; do          
+          eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
+        done
 
-          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll $LIBHACL
-        else
-          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
-        fi
+        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll $LIBHACL
+        
         
         core_dump="core_\$UNIQUE_BASE.snapshot"
         make_coredump.sh core_\$UNIQUE_BASE.snapshot \$UNIQUE_BASE.out
@@ -242,11 +239,10 @@ else
         done
 
         #compile .c libraries to .ll if present
-        if [[ -n "$LIBS" ]]; then
-          llvm-link -S hacl-c/hacl-c/*.ll -o ${UNIQUE_LIBS}.ll
-          for PASS in \"\${PASSES[@]}\"; do          
-            eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
-          done
+        llvm-link -S hacl-c/hacl-c/*.ll -o ${UNIQUE_LIBS}.ll
+        for PASS in \"\${PASSES[@]}\"; do          
+          eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
+        done
 
           $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll ${LIBHACL}
         else
@@ -290,16 +286,13 @@ if grep -q "^starting from core" "$config_file"; then
         done
 
         #compile .c libraries to .ll if present
-        if [[ -n "$LIBS" ]]; then
-          llvm-link -S hacl-c/hacl-c/*.ll -o ${UNIQUE_LIBS}.ll
-          for PASS in \"\${PASSES[@]}\"; do          
-            eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
-          done
+        llvm-link -S hacl-c/hacl-c/*.ll -o ${UNIQUE_LIBS}.ll
+        for PASS in \"\${PASSES[@]}\"; do          
+          eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
+        done
 
-          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll $LIBHACL
-        else
-          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
-        fi
+        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll $LIBHACL
+        
         
         core_dump=\"core_\$UNIQUE_BASE.snapshot\"
         make_coredump.sh \"\core_\$UNIQUE_BASE.snapshot\" \$UNIQUE_BASE.out
@@ -331,16 +324,13 @@ else
         done
 
         #compile .c libraries to .ll if present
-        if [[ -n "$LIBS" ]]; then
-          llvm-link -S hacl-c/hacl-c/*.ll -o ${UNIQUE_LIBS}.ll
-          for PASS in \"\${PASSES[@]}\"; do          
-            eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
-          done
+        llvm-link -S hacl-c/hacl-c/*.ll -o ${UNIQUE_LIBS}.ll
+        for PASS in \"\${PASSES[@]}\"; do          
+          eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
+        done
 
-          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll $LIBHACL
-        else
-          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
-        fi
+        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll $LIBHACL
+        
         
         binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
 
