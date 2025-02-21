@@ -185,9 +185,9 @@ if grep -q "^starting from core" "$config_file"; then
         fi
         
         core_dump="core_\$UNIQUE_BASE.snapshot"
-        make_coredump.sh "$core_dump" \$UNIQUE_BASE.out
+        make_coredump.sh core_\$UNIQUE_BASE.snapshot \$UNIQUE_BASE.out
 
-        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct $core_dump -sse-timeout 10)\"
+        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct core_\$UNIQUE_BASE.snapshot -sse-timeout 10)\"
 
         status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
 
@@ -277,9 +277,9 @@ if grep -q "^starting from core" "$config_file"; then
         fi
         
         core_dump=\"core_\$UNIQUE_BASE.snapshot\"
-        make_coredump.sh \"\$core_dump\" \$UNIQUE_BASE.out
+        make_coredump.sh \"\core_\$UNIQUE_BASE.snapshot\" \$UNIQUE_BASE.out
 
-        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$core_dump -sse-timeout 10)\"
+        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \core_\$UNIQUE_BASE.snapshot -sse-timeout 10)\"
 
         status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
 

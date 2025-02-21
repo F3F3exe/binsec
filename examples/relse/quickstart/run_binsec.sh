@@ -52,9 +52,9 @@ for target in "${targets[@]}"; do
       # If the file starts with "starting from core", run the core-based binsec command
       echo "Running core-based binsec for $target_with_opt..."
       core_dump="core_${target_with_opt}.snapshot"
-      make_coredump.sh "$core_dump" "$target_with_opt"
-      echo binsec -sse -sse-script "$config_file" -sse-depth "$depth" -checkct "$core_dump"
-      binsec_output=$(binsec -sse -sse-script "$config_file" -sse-depth "$depth" -checkct "$core_dump" -sse-timeout "$timeout")
+      make_coredump.sh core_\$UNIQUE_BASE.snapshot "$target_with_opt"
+      echo binsec -sse -sse-script "$config_file" -sse-depth "$depth" -checkct core_\$UNIQUE_BASE.snapshot
+      binsec_output=$(binsec -sse -sse-script "$config_file" -sse-depth "$depth" -checkct core_\$UNIQUE_BASE.snapshot -sse-timeout "$timeout")
     else
       # Otherwise, run the normal binsec command
       stats_file="./${target_with_opt}.csv"

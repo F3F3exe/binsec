@@ -160,10 +160,10 @@ while read -r OPT_COMBO; do
       # If the file starts with "starting from core", run the core-based binsec command
       #echo "Running core-based binsec for $BASE_NAME..."
       core_dump="core_${BASE_NAME}.snapshot"
-      #echo make_coredump.sh "$core_dump" "$BASE_NAME"
-      make_coredump.sh "$core_dump" "$BASE_NAME"
-      #echo binsec -sse -sse-script "$config_file" -sse-depth 100000000 -checkct "$core_dump" -sse-timeout 100
-      binsec_output=$(binsec -sse -sse-script "$config_file" -sse-depth 100000000 -checkct "$core_dump" -sse-timeout 100)
+      #echo make_coredump.sh core_\$UNIQUE_BASE.snapshot "$BASE_NAME"
+      make_coredump.sh core_\$UNIQUE_BASE.snapshot "$BASE_NAME"
+      #echo binsec -sse -sse-script "$config_file" -sse-depth 100000000 -checkct core_\$UNIQUE_BASE.snapshot -sse-timeout 100
+      binsec_output=$(binsec -sse -sse-script "$config_file" -sse-depth 100000000 -checkct core_\$UNIQUE_BASE.snapshot -sse-timeout 100)
     else
       # Otherwise, run the normal binsec command
       stats_file="./${target_with_opt}.csv"
