@@ -60,6 +60,8 @@ LIBSYM="-L../../__libsym__/ -lsym"
 
 if [[ -n "$LIBS" ]]; then
   echo "HELLO"
+else
+  echo "BYEE"
 fi
 
 #wrapper
@@ -177,25 +179,18 @@ if grep -q "^starting from core" "$config_file"; then
           echo eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll   
           eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll
         done
-        echo "LIBS: " $LIBS 
-        if [[ -n "$LIBS" ]]; then
-          echo "LIBS is not empty"
-        else
-            echo "LIBS is empty"
-        fi
-        echo "W"
 
         #compile .c libraries to .ll if present
-        if [[ -n "$LIBS" ]]; then
-          echo "HELLO"
-          # UNIQUE_LIBS=${LIBS}_{#}
-          # echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
-          # $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
-          # for PASS in \"\${PASSES[@]}\"; do          
-          #   eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
-          # done
+        if [[ -n "${LIBS:+x}" ]]; then
+          echo "WORKED"
+          UNIQUE_LIBS=${LIBS}_{#}
+          echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
+          $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
+          for PASS in \"\${PASSES[@]}\"; do          
+            eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
+          done
 
-          # $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll
         else
           echo $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
           $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
