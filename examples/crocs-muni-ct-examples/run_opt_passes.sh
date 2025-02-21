@@ -1,5 +1,12 @@
 #!/bin/bash
 
+targets=(
+  01 02 03 04 05 07 08 09 10 
+)
+
+LIB=""
+
+
 OPT_LEVEL=$1
 FILE=$2
 CLANG=$3
@@ -30,9 +37,7 @@ esac
 
 echo $CLANG $OPT
 
-targets=(
-  01 02 03 04 05 07 08 09 10 
-)
+
 
 if [[ $# -eq 3 ]]; then
   specific_target=$2
@@ -51,7 +56,8 @@ BASE_NAME=$specific_target
 SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
 CFLAGS="-m32 -static"
-LIBS="-L../../__libsym__/ -lsym"
+LIBSYM="-L../../__libsym__/ -lsym"
+
 
 # List of LLVM optimization passe
 HIGH_OPTIMIZATIONS=(
@@ -144,7 +150,7 @@ generate_combinations() {
 export BASE_NAME
 export OPT_LEVEL
 export CFLAGS
-export LIBS
+export LIBSYM
 export CLANG
 
 # Construct the config file path
@@ -155,10 +161,26 @@ if grep -q "^starting from core" "$config_file"; then
 
     generate_combinations "${VALID_HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
+        UNIQUE_LIBS=${LIBS}_{#}
 
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
-        eval "$OPT -S {} $UNIQUE_BASE.ll -o $UNIQUE_BASE.ll" &&
-        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
+        #eval "$OPT -S {} $UNIQUE_BASE.ll -o $UNIQUE_BASE.ll" &&
+        IFS=',' read -ra PASSES <<< '{}'
+        for PASS in \"\${PASSES[@]}\"; do          
+          eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll
+        done
+
+        #compile .c libraries to .ll if present
+        if [[ -n "$LIBS" ]]; then
+          $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
+          for PASS in \"\${PASSES[@]}\"; do          
+            eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
+          done
+
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll
+        else
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
+        fi
         
         core_dump="core_\$UNIQUE_BASE.snapshot"
         make_coredump.sh "$core_dump" \$UNIQUE_BASE.out
@@ -180,7 +202,8 @@ else
 
     generate_combinations "${VALID_HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
-       
+        UNIQUE_LIBS=${LIBS}_{#}
+
         echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
         
 
@@ -191,7 +214,18 @@ else
           eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll
         done
 
-        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
+        #compile .c libraries to .ll if present
+        if [[ -n "$LIBS" ]]; then
+          $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
+          for PASS in \"\${PASSES[@]}\"; do          
+            eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
+          done
+
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll
+        else
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
+        fi
+
         
         binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
         echo $binsec_output
@@ -219,11 +253,26 @@ if grep -q "^starting from core" "$config_file"; then
         done
     done | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
-        
+        UNIQUE_LIBS=${LIBS}_{#}
 
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
-        eval \$OPT -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
-        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
+
+        IFS=',' read -ra PASSES <<< '{}'
+        for PASS in \"\${PASSES[@]}\"; do          
+          eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll
+        done
+
+        #compile .c libraries to .ll if present
+        if [[ -n "$LIBS" ]]; then
+          $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
+          for PASS in \"\${PASSES[@]}\"; do          
+            eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
+          done
+
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll
+        else
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
+        fi
         
         core_dump=\"core_\$UNIQUE_BASE.snapshot\"
         make_coredump.sh \"\$core_dump\" \$UNIQUE_BASE.out
@@ -246,10 +295,25 @@ else
         done
     done | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
+        UNIQUE_LIBS=${LIBS}_{#}
 
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
-        eval $OPT -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
-        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
+        IFS=',' read -ra PASSES <<< '{}'
+        for PASS in \"\${PASSES[@]}\"; do          
+          eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll
+        done
+
+        #compile .c libraries to .ll if present
+        if [[ -n "$LIBS" ]]; then
+          $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
+          for PASS in \"\${PASSES[@]}\"; do          
+            eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
+          done
+
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll
+        else
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
+        fi
         
         binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
 
