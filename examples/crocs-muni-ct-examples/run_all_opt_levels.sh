@@ -8,7 +8,7 @@ targets=(
   02 03 04 05 07 08 10 
 )
 clang_version=(
-  clang-7.1 clang-19
+  clang-12 clang-19
 )
 
 # Iterate over all optimization levels and targets
