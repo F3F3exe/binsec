@@ -182,22 +182,15 @@ if grep -q "^starting from core" "$config_file"; then
 
         echo "HELLO"
         echo "LIBS: $LIBS"  # Debugging
-        LIBS="${LIBS:-}"    # Ensure LIBS is not unset
-        echo "DEBUG: LIBS='$LIBS'"
+       
 
         if [ -n "$LIBS" ]; then
           echo "BITCHEZ"
         fi
 
-        if [[ -n "${LIBS:+x}" ]]; then  # Prevent invalid empty condition
-            echo "LIBS is not empty"
-        else
-            echo "LIBS is empty"
-        fi
-
 
         #compile .c libraries to .ll if present
-        if [[ -n "${LIBS:+x}" ]]; then
+        if [ -n "$LIBS" ]; then
           echo "BYE"
           UNIQUE_LIBS=${LIBS}_{#}
           echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
