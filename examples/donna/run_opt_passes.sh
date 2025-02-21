@@ -183,6 +183,11 @@ if grep -q "^starting from core" "$config_file"; then
         echo "HELLO"
         echo "LIBS: $LIBS"  # Debugging
         LIBS="${LIBS:-}"    # Ensure LIBS is not unset
+        echo "DEBUG: LIBS='$LIBS'"
+
+        if [ -n "$LIBS" ]; then
+          echo "BITCHEZ"
+        fi
 
         if [[ -n "${LIBS:+x}" ]]; then  # Prevent invalid empty condition
             echo "LIBS is not empty"
