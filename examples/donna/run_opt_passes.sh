@@ -58,6 +58,10 @@ BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 1000000
 CFLAGS="-m32 -static"
 LIBSYM="-L../../__libsym__/ -lsym"
 
+if [[ -n "$LIBS" ]]; then
+  echo "HELLO"
+fi
+
 #wrapper
 SOURCE_FILE=${specific_target}_wrapper.c
 
@@ -165,13 +169,15 @@ if grep -q "^starting from core" "$config_file"; then
         UNIQUE_BASE=${BASE_NAME}_{#} 
         UNIQUE_LIBS=${LIBS}_{#}
 
+        echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
         #eval "$OPT -S {} $UNIQUE_BASE.ll -o $UNIQUE_BASE.ll" &&
         IFS=',' read -ra PASSES <<< '{}'
-        for PASS in \"\${PASSES[@]}\"; do          
+        for PASS in \"\${PASSES[@]}\"; do       
+          echo eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll   
           eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll
         done
-
+        echo "LIBS: " $LIBS
         #compile .c libraries to .ll if present
         if [[ -n "$LIBS" ]]; then
           $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
@@ -181,6 +187,7 @@ if grep -q "^starting from core" "$config_file"; then
 
           $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll
         else
+          echo $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
           $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
         fi
         
