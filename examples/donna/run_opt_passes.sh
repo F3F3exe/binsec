@@ -169,7 +169,7 @@ if grep -q "^starting from core" "$config_file"; then
 
     generate_combinations "${VALID_HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
-        
+        UNIQUE_LIBS=${LIBS}_{#}
 
         echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
@@ -181,18 +181,13 @@ if grep -q "^starting from core" "$config_file"; then
         done
 
         echo "HELLO"
-        echo "LIBS: $LIBS"  # Debugging
-       
-
-        if [ -n "$LIBS" ]; then
-          echo "BITCHEZ"
-        fi
+        echo "LIBS: $LIBS $UNIQUE_LIBS"  # Debugging
 
 
         #compile .c libraries to .ll if present
         if [ -n "$LIBS" ]; then
-          echo "BYE"
-          UNIQUE_LIBS=${LIBS}_{#}
+          echo "BYE" $LIBS \$LIBS
+          
           echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
           $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
           for PASS in \"\${PASSES[@]}\"; do          
