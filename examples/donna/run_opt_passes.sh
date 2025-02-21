@@ -178,8 +178,15 @@ if grep -q "^starting from core" "$config_file"; then
           eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll
         done
         echo "LIBS: " $LIBS
+        if [[ -n "$LIBS" ]]; then
+          echo "LIBS is not empty"
+        else
+            echo "LIBS is empty"
+        fi
+        echo "W"
+
         #compile .c libraries to .ll if present
-        if [[ -n $LIBS ]]; then
+        if [[ -n "$LIBS" ]]; then
           echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
           $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
           for PASS in \"\${PASSES[@]}\"; do          
