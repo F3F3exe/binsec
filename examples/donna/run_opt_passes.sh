@@ -187,14 +187,15 @@ if grep -q "^starting from core" "$config_file"; then
 
         #compile .c libraries to .ll if present
         if [[ -n "$LIBS" ]]; then
-          UNIQUE_LIBS=${LIBS}_{#}
-          echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
-          $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
-          for PASS in \"\${PASSES[@]}\"; do          
-            eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
-          done
+          echo "HELLO"
+          # UNIQUE_LIBS=${LIBS}_{#}
+          # echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
+          # $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
+          # for PASS in \"\${PASSES[@]}\"; do          
+          #   eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
+          # done
 
-          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll
+          # $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll
         else
           echo $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
           $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
