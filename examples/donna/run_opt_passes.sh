@@ -177,7 +177,7 @@ if grep -q "^starting from core" "$config_file"; then
           echo eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll   
           eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll
         done
-        echo "LIBS: " $LIBS
+        echo "LIBS: " $LIBS $UNIQUE_LIBS
         if [[ -n "$LIBS" ]]; then
           echo "LIBS is not empty"
         else
