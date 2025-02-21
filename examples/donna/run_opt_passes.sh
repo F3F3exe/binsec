@@ -183,7 +183,7 @@ if grep -q "^starting from core" "$config_file"; then
         $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
        
         
-        core_dump="core_\$UNIQUE_BASE.snapshot"
+        core_dump="core_${UNIQUE_BASE}.snapshot"
         echo make_coredump.sh "$core_dump" \$UNIQUE_BASE.out
         make_coredump.sh "$core_dump" \$UNIQUE_BASE.out
 
