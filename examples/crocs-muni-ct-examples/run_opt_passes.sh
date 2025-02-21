@@ -61,12 +61,12 @@ HIGH_OPTIMIZATIONS=(
     "simple-loop-unswitch" "sink" "sccp" "partial-inliner"
  )
 
-LOW_OPTIMIZATIONS=()
-#   "block-placement" "codegenprepare" "dce" "deadargelim" "function-attr" "globaldce"
-#   "indvars" "instcombine" "ipsccp" "jump-threading" "licm" "loop-reduce" "loop-rotate" 
-#   "loop-simplify" "lower-atomic" "mem2reg" "memcpyopt" "mergereturn" "reg2mem" "sora" 
-#   "simplifycfg" "tailcallelim"  
-# )
+LOW_OPTIMIZATIONS=(
+  "block-placement" "codegenprepare" "dce" "deadargelim" "function-attr" "globaldce"
+  "indvars" "instcombine" "ipsccp" "jump-threading" "licm" "loop-reduce" "loop-rotate" 
+  "loop-simplify" "lower-atomic" "mem2reg" "memcpyopt" "mergereturn" "reg2mem" "sora" 
+  "simplifycfg" "tailcallelim"  
+)
 
 # Ensure source file exists
 if [[ ! -f "$SOURCE_FILE" ]]; then
@@ -84,15 +84,10 @@ for OPTIMIZATION in "${HIGH_OPTIMIZATIONS[@]}"; do
   echo "Checking optimization: $OPTIMIZATION"
   clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
 
-  ERROR_OUTPUT=""
-  if [[ "$OPT" == "opt-19" ]]; then
-    ERROR_OUTPUT=$($OPT -S -passes=$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
-  else
-    ERROR_OUTPUT=$($OPT -S -$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
-  fi
+  ERROR_OUTPUT=$($OPT -S -passes=$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
+ 
 
   if [[ -z "$ERROR_OUTPUT" ]]; then
-    echo "got error, adding it" $ERROR_OUTPUT
     VALID_HIGH_OPTIMIZATIONS+=("$OPTIMIZATION")
   else
     echo "error: " $ERROR_OUTPUT
@@ -105,15 +100,9 @@ for OPTIMIZATION in "${LOW_OPTIMIZATIONS[@]}"; do
   echo "Checking optimization: $OPTIMIZATION"
   clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
 
-  ERROR_OUTPUT=""
-  if [[ "$OPT" == "opt-19" ]]; then
-    ERROR_OUTPUT=$($OPT -S -passes=$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
-  else
-    ERROR_OUTPUT=$($OPT -S -$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
-  fi
+  ERROR_OUTPUT=$($OPT -S -passes=$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
 
   if [[ -z "$ERROR_OUTPUT" ]]; then
-    echo "got error, adding it" $ERROR_OUTPUT
     VALID_LOW_OPTIMIZATIONS+=("$OPTIMIZATION")
   else
     echo "error: " $ERROR_OUTPUT
@@ -141,22 +130,13 @@ generate_combinations() {
     for ((i = 1; i < num_combinations; i++)); do
         local combination=()
         
-        if [[ "$OPT" == "opt-19" ]]; then
-          for ((j = 0; j < num_elements; j++)); do
+        for ((j = 0; j < num_elements; j++)); do
             if (( (i >> j) & 1 )); then
                 combination+=("${elements[j]}")
             fi
-          done
-          echo "$(IFS=,; echo "${combination[*]}")"
+        done
+        echo "$(IFS=,; echo "${combination[*]}")"
 
-        else
-          for ((j = 0; j < num_elements; j++)); do
-            if (( (i >> j) & 1 )); then
-                combination+=("${elements[j]}")
-            fi
-          done
-            echo "$(IFS=,; echo "${combination[*]}")"
-        fi
     done
 }
 
@@ -170,6 +150,7 @@ export CLANG
 # Construct the config file path
 config_file="checkct_${BASE_NAME}.cfg"
 
+#starting from core for all high risk combinations
 if grep -q "^starting from core" "$config_file"; then
 
     generate_combinations "${VALID_HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
@@ -194,25 +175,21 @@ if grep -q "^starting from core" "$config_file"; then
         echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
     "
 
-
+#not starting from core for all optimizations
 else
 
     generate_combinations "${VALID_HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
-        echo "-------------" {}
+       
         echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
         
 
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
-        echo "HALLO" &&
+        
         IFS=',' read -ra PASSES <<< '{}'
         for PASS in \"\${PASSES[@]}\"; do          
-          echo 'Applying pass:' \$PASS
-          echo eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll
           eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll
         done
-        echo "BYEEE"
-        echo $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
 
         $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
         
@@ -242,7 +219,7 @@ if grep -q "^starting from core" "$config_file"; then
         done
     done | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
-        echo OPT {}
+        
 
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
         eval \$OPT -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
