@@ -1,10 +1,10 @@
 #!/bin/bash
 
-LIBS="Hacl_Policies"
-
 targets=(
-cmp_bytes rotate32_left rotate32_right uint8_eq_mask uint8_gte_mask uint16_eq_mask uint16_gte_mask uint32_eq_mask uint32_gte_mask uint64_eq_mask uint64_gte_mask
+tea_decrypt tea_encrypt
 )
+
+LIBS=""
 
 
 OPT_LEVEL=$1
@@ -58,6 +58,8 @@ BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 1000000
 CFLAGS="-m32 -static"
 LIBSYM="-L../../__libsym__/ -lsym"
 
+#wrapper
+SOURCE_FILE=${specific_target}_wrapper.c
 
 # List of LLVM optimization passe
 HIGH_OPTIMIZATIONS=(

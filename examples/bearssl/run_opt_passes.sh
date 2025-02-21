@@ -1,9 +1,17 @@
 #!/bin/bash
 
+targets=(
+  aes_big des_tab des_ct_cbcenc des_ct_cbcdec aes_ct_cbcdec aes_ct_cbcenc chacha20_ct aes_ct_ctr aes_ct64_cbcdec aes_ct64_cbcenc aes_ct64_ctr ghash_ctmul
+)
+
+LIB=""
+
+
 OPT_LEVEL=$1
 FILE=$2
 CLANG=$3
 OPT="opt"
+
 
 if [[ -z "$OPT_LEVEL" || -z "$FILE" || -z "$CLANG" ]]; then
     echo "Usage: $0 <OPT_LEVEL> <FILE> <CLANG>"
@@ -27,9 +35,9 @@ case "$CLANG" in
     clang-19)  OPT="opt-19" ;;
 esac
 
-targets=(
-  aes_big des_tab des_ct_cbcenc des_ct_cbcdec aes_ct_cbcdec aes_ct_cbcenc chacha20_ct aes_ct_ctr aes_ct64_cbcdec aes_ct64_cbcenc aes_ct64_ctr ghash_ctmul
-)
+echo $CLANG $OPT
+
+
 
 if [[ $# -eq 3 ]]; then
   specific_target=$2
@@ -48,20 +56,21 @@ BASE_NAME=$specific_target
 SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
 CFLAGS="-m32 -static"
-LIBS="-L../../__libsym__/ -lsym -I./inc -L./. -lbearssl"
+LIBSYM="-L../../__libsym__/ -lsym -I./inc -L./. -lbearssl"
+
 
 # List of LLVM optimization passe
 HIGH_OPTIMIZATIONS=(
-  "adce" "argpromotion" "dse" "globaldce"  
-  "globalopt" "gvn" "inline" "aggressive-instcombine"  
-   "loop-unroll" "mergefunc"  
-   "simple-loop-unswitch" "sink" "sccp" "partial-inliner"
-)
+  "adce" "argpromotion" "dse"   
+   "globalopt" "gvn" "inline" "aggressive-instcombine"  
+    "loop-unroll" "mergefunc"  
+    "simple-loop-unswitch" "sink" "sccp" "partial-inliner"
+ )
 
-MODERATE_OPTIMIZATIONS=(
+LOW_OPTIMIZATIONS=(
   "block-placement" "codegenprepare" "dce" "deadargelim" "function-attr" "globaldce"
   "indvars" "instcombine" "ipsccp" "jump-threading" "licm" "loop-reduce" "loop-rotate" 
-  "looop-simplify" "lower-atomic" "mem2reg" "memcpyopt" "mergereturn" "reg2mem" "sora" 
+  "loop-simplify" "lower-atomic" "mem2reg" "memcpyopt" "mergereturn" "reg2mem" "sora" 
   "simplifycfg" "tailcallelim"  
 )
 
@@ -71,8 +80,49 @@ if [[ ! -f "$SOURCE_FILE" ]]; then
     exit 1
 fi
 
+# Compile to LLVM IR (-O0 to disable optimizations)
+echo clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+
+VALID_HIGH_OPTIMIZATIONS=()
+
+for OPTIMIZATION in "${HIGH_OPTIMIZATIONS[@]}"; do
+  echo "Checking optimization: $OPTIMIZATION"
+  clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+
+  ERROR_OUTPUT=$($OPT -S -passes=$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
+ 
+
+  if [[ -z "$ERROR_OUTPUT" ]]; then
+    VALID_HIGH_OPTIMIZATIONS+=("$OPTIMIZATION")
+  else
+    echo "error: " $ERROR_OUTPUT
+  fi
+done
+
+VALID_LOW_OPTIMIZATIONS=()
+
+for OPTIMIZATION in "${LOW_OPTIMIZATIONS[@]}"; do
+  echo "Checking optimization: $OPTIMIZATION"
+  clang $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+
+  ERROR_OUTPUT=$($OPT -S -passes=$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
+
+  if [[ -z "$ERROR_OUTPUT" ]]; then
+    VALID_LOW_OPTIMIZATIONS+=("$OPTIMIZATION")
+  else
+    echo "error: " $ERROR_OUTPUT
+  fi
+done
+
+echo "-------------------------------------------------------"
+echo "${VALID_HIGH_OPTIMIZATIONS[@]}"
+echo "-------------------------------------------------------"
+echo "${VALID_LOW_OPTIMIZATIONS[@]}"
+echo "-------------------------------------------------------"
 
 # Create a results file to track the status
+# Ensure the Results directory exists
 mkdir -p Results
 RESULTS_FILE="Results/optimization_results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG}_$(date +%Y%m%d_%H%M%S)" #.txt"
 echo "Optimization,Result" > ${RESULTS_FILE}.txt
@@ -85,34 +135,52 @@ generate_combinations() {
     
     for ((i = 1; i < num_combinations; i++)); do
         local combination=()
+        
         for ((j = 0; j < num_elements; j++)); do
             if (( (i >> j) & 1 )); then
-                combination+=("-${elements[j]}")
+                combination+=("${elements[j]}")
             fi
         done
-        echo "${combination[*]}"
+        echo "$(IFS=,; echo "${combination[*]}")"
+
     done
 }
+
 
 export BASE_NAME
 export OPT_LEVEL
 export CFLAGS
-export LIBS
+export LIBSYM
 export CLANG
 
 # Construct the config file path
 config_file="checkct_${BASE_NAME}.cfg"
 
-
-## check high risk optimizations
+#starting from core for all high risk combinations
 if grep -q "^starting from core" "$config_file"; then
 
-    generate_combinations "${HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
+    generate_combinations "${VALID_HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
+        UNIQUE_LIBS=${LIBS}_{#}
 
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
-        eval $OPT -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
-        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
+        #eval "$OPT -S {} $UNIQUE_BASE.ll -o $UNIQUE_BASE.ll" &&
+        IFS=',' read -ra PASSES <<< '{}'
+        for PASS in \"\${PASSES[@]}\"; do          
+          eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll
+        done
+
+        #compile .c libraries to .ll if present
+        if [[ -n "$LIBS" ]]; then
+          $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
+          for PASS in \"\${PASSES[@]}\"; do          
+            eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
+          done
+
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll
+        else
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
+        fi
         
         core_dump="core_\$UNIQUE_BASE.snapshot"
         make_coredump.sh "$core_dump" \$UNIQUE_BASE.out
@@ -129,18 +197,38 @@ if grep -q "^starting from core" "$config_file"; then
         echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
     "
 
-
+#not starting from core for all optimizations
 else
 
-    generate_combinations "${HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
+    generate_combinations "${VALID_HIGH_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
+        UNIQUE_LIBS=${LIBS}_{#}
+
+        echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
+        
 
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
-        eval $OPT -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
-        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
+        
+        IFS=',' read -ra PASSES <<< '{}'
+        for PASS in \"\${PASSES[@]}\"; do          
+          eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll
+        done
+
+        #compile .c libraries to .ll if present
+        if [[ -n "$LIBS" ]]; then
+          $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
+          for PASS in \"\${PASSES[@]}\"; do          
+            eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
+          done
+
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll
+        else
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
+        fi
+
         
         binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
-
+        echo $binsec_output
         status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
 
         if [[ -z \"\$status\" ]]; then
@@ -150,24 +238,41 @@ else
 
         echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
     "
+
 fi
 
 
 ##check moderate risk optimizations
 if grep -q "^starting from core" "$config_file"; then
-    HIGH_OPTIMIZATIONS_WITH_PREFIX=("${HIGH_OPTIMIZATIONS[@]/#/-}")
+    HIGH_OPTIMIZATIONS_WITH_PREFIX=("${VALID_HIGH_OPTIMIZATIONS[@]/#/-}")
 
     # Generate combinations of HIGH_OPTIMIZATIONS
     generate_combinations "${HIGH_OPTIMIZATIONS_WITH_PREFIX[@]}" | while read high_combination; do
-        for low_opt in "${MODERATE_OPTIMIZATIONS[@]}"; do
+        for low_opt in "${VALID_LOW_OPTIMIZATIONS[@]}"; do
             echo "$high_combination $low_opt"
         done
     done | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
+        UNIQUE_LIBS=${LIBS}_{#}
 
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
-        eval $OPT -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
-        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
+
+        IFS=',' read -ra PASSES <<< '{}'
+        for PASS in \"\${PASSES[@]}\"; do          
+          eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll
+        done
+
+        #compile .c libraries to .ll if present
+        if [[ -n "$LIBS" ]]; then
+          $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
+          for PASS in \"\${PASSES[@]}\"; do          
+            eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
+          done
+
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll
+        else
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
+        fi
         
         core_dump=\"core_\$UNIQUE_BASE.snapshot\"
         make_coredump.sh \"\$core_dump\" \$UNIQUE_BASE.out
@@ -185,15 +290,30 @@ if grep -q "^starting from core" "$config_file"; then
     
 else
     generate_combinations "${HIGH_OPTIMIZATIONS_WITH_PREFIX[@]}" | while read high_combination; do
-        for low_opt in "${MODERATE_OPTIMIZATIONS[@]}"; do
+        for low_opt in "${VALID_LOW_OPTIMIZATIONS[@]}"; do
             echo "$high_combination $low_opt"
         done
     done | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
+        UNIQUE_LIBS=${LIBS}_{#}
 
         $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.ll &&
-        eval $OPT -S {} \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll &&
-        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBS &&
+        IFS=',' read -ra PASSES <<< '{}'
+        for PASS in \"\${PASSES[@]}\"; do          
+          eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.ll
+        done
+
+        #compile .c libraries to .ll if present
+        if [[ -n "$LIBS" ]]; then
+          $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
+          for PASS in \"\${PASSES[@]}\"; do          
+            eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
+          done
+
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $UNIQUE_LIBS.ll
+        else
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
+        fi
         
         binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
 
@@ -219,5 +339,6 @@ rm *.snapshot
 
 echo "All optimization combinations tested"
 echo "Results saved in ${RESULTS_FILE}.txt"
+
 
 

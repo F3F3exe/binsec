@@ -4,7 +4,7 @@ targets=(
   01 02 03 04 05 07 08 09 10 
 )
 
-LIB=""
+LIBS=""
 
 
 OPT_LEVEL=$1
