@@ -35,7 +35,7 @@ fi
 echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): ${targets[@]}"
 
 # Configuration
-SOURCE_FILE="$specific_target.c"  # Change this if needed
+SOURCE_FILE="$specific_target.c" 
 BASE_NAME=$specific_target
 SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
@@ -88,7 +88,7 @@ export CLANG
 generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
     UNIQUE_BASE=${BASE_NAME}_{#}  # Ensuring unique filenames
     echo     $CLANG $CFLAGS -$OPT_LEVEL {} $SOURCE_FILE -o \$UNIQUE_BASE.out &&
-    $CLANG $CFLAGS -$OPT_LEVEL {} $SOURCE_FILE -o \$UNIQUE_BASE.out &&
+    $CLANG $CFLAGS -$OPT_LEVEL {} $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBS &&
     echo     binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
     binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
 

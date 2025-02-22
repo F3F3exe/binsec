@@ -299,7 +299,8 @@ rm ${RESULTS_FILE}_*.txt
 rm *.out
 rm *.ll
 rm *.snapshot
-
+rm *.tmp
+rm *.tmp
 
 echo "All optimization combinations tested"
 echo "Results saved in ${RESULTS_FILE}.txt"

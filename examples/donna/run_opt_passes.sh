@@ -309,6 +309,7 @@ rm ${RESULTS_FILE}_*.txt
 rm *.out
 rm *.ll
 rm *.snapshot
+rm *.tmp
 
 
 echo "All optimization combinations tested"
