@@ -11,6 +11,10 @@ clang_version=(
   clang-14 clang-19
 )
 
+RESULTS_FILE="Results/optimization_results_${target}_$(date +%Y%m%d_%H%M%S)" #.txt"
+echo "${target}" >  ${RESULTS_FILE}.txt
+echo "Optimization,Result" > ${RESULTS_FILE}.txt
+
 # Iterate over all optimization levels and targets
 for TARGET in "${targets[@]}"; do
   for CLANG in "${clang_version[@]}"; do
@@ -22,11 +26,21 @@ for TARGET in "${targets[@]}"; do
           RESULTS_FILE=$(./run_clang.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/optimization_results_.*\.txt')
 
           if grep -q "insecure" "$RESULTS_FILE"; then
-              echo "CT vulnerability detected!"
+              echo "  CT vulnerability detected!"
               RESULTS_FILE=$(./run_clang_opt.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/optimization_results_.*\.txt')
-
+              if grep -q " secure" "$RESULTS_FILE"; then
+                echo "    Clang frontend optimization caused CT violation!"
+              else
+                echo "    LLVM optimization passes cause CT violation!"
+                RESULTS_FILE=$(./run_clang_opt.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/optimization_results_.*\.txt')
+                if grep -q "insecure" "$RESULTS_FILE"; then
+                  echo "      LLVM pass caused CT violation!"
+                else
+                  echo "      Could not determine LLVM pass causing CT violation :("
+                fi
+              fi
           else
-              echo "No CT vulnerability found."
+              echo "  No CT vulnerability found."
           fi
 
 
