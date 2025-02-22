@@ -74,13 +74,13 @@ if [[ ! -f "$SOURCE_FILE" ]]; then
 fi
 
 # Compile to LLVM IR (-O0 to disable optimizations)
-echo $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
-$CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+
 
 VALID_OPTIMIZATIONS=()
 
 for OPTIMIZATION in "${OPTIMIZATIONS[@]}"; do
   echo "Checking optimization: $OPTIMIZATION"
+  echo $CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.out $LIBSYM
   ERROR_OUTPUT=$($CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.out $LIBSYM 2>&1)
 
  
