@@ -32,7 +32,7 @@ for TARGET in "${targets[@]}"; do
                 echo "    Clang frontend optimization caused CT violation!"
               else
                 echo "    LLVM optimization passes cause CT violation!"
-                RESULTS_FILE=$(./run_clang_opt.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/optimization_results_.*\.txt')
+                RESULTS_FILE=$(./run_opt_passes.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/optimization_results_.*\.txt')
                 if grep -q "insecure" "$RESULTS_FILE"; then
                   echo "      LLVM pass caused CT violation!"
                 else
