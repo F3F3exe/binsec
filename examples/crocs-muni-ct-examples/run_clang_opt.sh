@@ -81,9 +81,8 @@ VALID_OPTIMIZATIONS=()
 
 for OPTIMIZATION in "${OPTIMIZATIONS[@]}"; do
   echo "Checking optimization: $OPTIMIZATION"
-  $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.ll
+  ERROR_OUTPUT=$($CLANG $CFLAGS -$OPT_LEVEL $OPTIMIZATION -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.out $LIBSYM 2>&1)
 
-  ERROR_OUTPUT=$($OPT -S -passes=$OPTIMIZATION $BASE_NAME.ll -o ${BASE_NAME}.ll 2>&1)
  
 
   if [[ -z "$ERROR_OUTPUT" ]]; then
