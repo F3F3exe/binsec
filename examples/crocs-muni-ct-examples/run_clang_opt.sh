@@ -80,8 +80,8 @@ VALID_OPTIMIZATIONS=()
 
 for OPTIMIZATION in "${OPTIMIZATIONS[@]}"; do
   echo "Checking optimization: $OPTIMIZATION"
-  echo $CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.out $LIBSYM
-  ERROR_OUTPUT=$($CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION -S -emit-llvm $SOURCE_FILE -o $BASE_NAME.out $LIBSYM 2>&1)
+  echo $CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION  $SOURCE_FILE -o $BASE_NAME.out $LIBSYM
+  ERROR_OUTPUT=$($CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $SOURCE_FILE -o $BASE_NAME.out $LIBSYM 2>&1)
 
  
 
@@ -140,8 +140,8 @@ if grep -q "^starting from core" "$config_file"; then
         UNIQUE_BASE=${BASE_NAME}_{#} 
         
 
-        echo $CLANG $CFLAGS -$OPT_LEVEL {} -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
-        $CLANG $CFLAGS -$OPT_LEVEL {} -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
+        echo $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
+        $CLANG $CFLAGS -$OPT_LEVEL {} $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
 
         
         
