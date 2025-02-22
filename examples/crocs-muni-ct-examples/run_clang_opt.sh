@@ -118,7 +118,7 @@ generate_combinations() {
                 combination+=("${elements[j]}")
             fi
         done
-        echo "$(IFS=,; echo "-${combination[*]}")"
+        echo "$(IFS= ; echo "-${combination[*]}")"
 
     done
 }
@@ -166,8 +166,8 @@ else
     generate_combinations "${VALID_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
-        echo $CLANG $CFLAGS -$OPT_LEVEL {} -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
-        $CLANG $CFLAGS -$OPT_LEVEL {} -S -emit-llvm $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
+        echo $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
+        $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
         
         binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
         echo $binsec_output
