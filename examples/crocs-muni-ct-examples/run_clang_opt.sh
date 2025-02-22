@@ -31,8 +31,7 @@ fi
 CLANG_v=$CLANG
 
 case "$CLANG" in
-    clang-7.1) OPT="opt-7" 
-               CLANG="$HOME/clang-7.1/bin/clang" ;; 
+    clang-7.1) OPT="opt-7"  ;; 
     clang-14)  OPT="opt-14" ;;
     clang-12)  OPT="opt-12" ;;
     clang-19)  OPT="opt-19" ;;

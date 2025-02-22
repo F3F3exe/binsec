@@ -30,8 +30,11 @@ if [[ ! "$CLANG" =~ ^(clang-7.1|clang-14|clang-12|clang-19)$ ]]; then
     exit 1
 fi
 
+CLANG_v=$CLANG
+
 case "$CLANG" in
-    clang-7.1) OPT="opt-7" ;;
+    clang-7.1) OPT="opt-7" 
+               CLANG="$HOME/clang-7.1/bin/clang" ;; 
     clang-14)  OPT="opt-14" ;;
     clang-12)  OPT="opt-12" ;;
     clang-19)  OPT="opt-19" ;;
@@ -151,7 +154,7 @@ echo "-------------------------------------------------------"
 # Create a results file to track the status
 # Ensure the Results directory exists
 mkdir -p Results
-RESULTS_FILE="Results/optimization_results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG}_$(date +%Y%m%d_%H%M%S)" #.txt"
+RESULTS_FILE="Results/optimization_results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG_v}_$(date +%Y%m%d_%H%M%S)" #.txt"
 echo "Optimization,Result" > ${RESULTS_FILE}.txt
 
 # Function to generate power set of optimizations
