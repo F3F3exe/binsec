@@ -65,8 +65,8 @@ LIBSYM="-L../../__libsym__/ -lsym"
 # List of LLVM optimization passe
 OPTIMIZATIONS=(
   "funroll-loops" "fstrict-aliasing" "fno-math-errno" "finline-hint-functions" "finline-functions" 
+  "fno-unroll-loops" "fno-strict-aliasing" "fno-inline-functions" "fvectorize"
   )
-
 #"fvectorize" "fslp-vectorize"
 
 
