@@ -14,10 +14,16 @@ if [[ ! "$OPT_LEVEL" =~ ^O[0-3]$ ]]; then
     exit 1
 fi
 
-if [[ ! "$CLANG" =~ ^(clang-14|clang-12|clang-19)$ ]]; then
-    echo "Error: CLANG must be one of clang-14, clang-12, or clang-19."
+if [[ ! "$CLANG" =~ ^(clang-7.1|clang-14|clang-12|clang-19)$ ]]; then
+    echo "Error: CLANG must be one of clang-7.1, clang-14, clang-12, or clang-19."
     exit 1
 fi
+
+CLANG_v=$CLANG
+
+case "$CLANG" in
+    clang-7.1) CLANG="$HOME/clang-7.1/bin/clang" ;; 
+esac
 
 targets=(
   01 02 03 04 05 07 08 09 10 
