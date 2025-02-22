@@ -29,7 +29,8 @@ if [[ ! "$CLANG" =~ ^(clang-7.1|clang-14|clang-12|clang-19)$ ]]; then
 fi
 
 case "$CLANG" in
-    clang-7.1) OPT="opt-7" ;;
+    clang-7.1) OPT="opt-7" 
+               CLANG="$HOME/clang-7.1/bin/clang" ;; 
     clang-14)  OPT="opt-14" ;;
     clang-12)  OPT="opt-12" ;;
     clang-19)  OPT="opt-19" ;;
@@ -80,9 +81,6 @@ VALID_OPTIMIZATIONS=()
 
 for OPTIMIZATION in "${OPTIMIZATIONS[@]}"; do
   echo "Checking optimization: $OPTIMIZATION"
-  CLANG=$(which clang-7.1)  # Find the correct path
-  echo "Using CLANG: '$CLANG'"
-
   echo $CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION  $SOURCE_FILE -o $BASE_NAME.out $LIBSYM
   ERROR_OUTPUT=$("$CLANG" $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $SOURCE_FILE -o $BASE_NAME.out $LIBSYM 2>&1)
   echo $ERROR_OUTPUT
