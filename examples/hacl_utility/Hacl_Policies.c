@@ -22,33 +22,34 @@
  */
 
 
-#include "Hacl_Policies.h"
+ #include "Hacl_Policies.h"
 
-static inline uint8_t FStar_UInt8_eq_mask(uint8_t x, uint8_t y) {
-  x = ~(x ^ y);
-  x &= x << 4;
-  x &= x << 2;
-  x &= x << 1;
-  return (int8_t)x >> 7;
-}
-
-uint8_t Hacl_Policies_cmp_bytes_(uint8_t *b1, uint8_t *b2, uint32_t len, uint8_t *tmp)
-{
-  for (uint32_t i = (uint32_t)0U; i < len; i = i + (uint32_t)1U)
-  {
-    uint8_t bi1 = b1[i];
-    uint8_t bi2 = b2[i];
-    uint8_t z0 = tmp[0U];
-    tmp[0U] = FStar_UInt8_eq_mask(bi1, bi2) & z0;
-  }
-  return tmp[0U];
-}
-
-uint8_t Hacl_Policies_cmp_bytes(uint8_t *b1, uint8_t *b2, uint32_t len)
-{
-  uint8_t tmp[1U];
-  tmp[0U] = (uint8_t)255U;
-  uint8_t z = Hacl_Policies_cmp_bytes_(b1, b2, len, tmp);
-  return ~z;
-}
-
+ static inline uint8_t FStar_UInt8_eq_mask(uint8_t x, uint8_t y) {
+   x = ~(x ^ y);
+   x &= x << 4;
+   x &= x << 2;
+   x &= x << 1;
+   return (int8_t)x >> 7;
+ }
+ 
+ uint8_t Hacl_Policies_cmp_bytes_(uint8_t *b1, uint8_t *b2, uint32_t len, uint8_t *tmp)
+ {
+   for (uint32_t i = (uint32_t)0U; i < len; i = i + (uint32_t)1U)
+   {
+     uint8_t bi1 = b1[i];
+     uint8_t bi2 = b2[i];
+     uint8_t z0 = tmp[0U];
+     tmp[0U] = FStar_UInt8_eq_mask(bi1, bi2) & z0;
+   }
+   return tmp[0U];
+ }
+ 
+ uint8_t Hacl_Policies_cmp_bytes(uint8_t *b1, uint8_t *b2, uint32_t len)
+ {
+   uint8_t tmp[1U];
+   tmp[0U] = (uint8_t)255U;
+   uint8_t z = Hacl_Policies_cmp_bytes_(b1, b2, len, tmp);
+   return ~z;
+ }
+ 
+ 

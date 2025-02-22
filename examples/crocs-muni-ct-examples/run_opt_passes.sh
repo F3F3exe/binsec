@@ -58,7 +58,7 @@ SOURCE_FILE="$specific_target.c"  # Change this if needed
 BASE_NAME=$specific_target
 SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
-CFLAGS="-m32 -static"
+CFLAGS="-m32 -march=i386 -DKRML_NOUINT128 -static -Wall"
 LIBSYM="-L../../__libsym__/ -lsym"
 
 

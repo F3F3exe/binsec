@@ -39,8 +39,9 @@ SOURCE_FILE="$specific_target.c"  # Change this if needed
 BASE_NAME=$specific_target
 SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
-CFLAGS="-m32 -static"
-LIBS="-L../../__libsym__/ -lsym Hacl_Policies.c"
+CFLAGS="-m32 -march=i386 -DKRML_NOUINT128 -static -Wall"
+LIBSYM="-L../../__libsym__/ -lsym"
+LIBS="Hacl_Policies.c"
 
 # List of LLVM optimization passe
 OPTIMIZATIONS=(
@@ -83,12 +84,12 @@ generate_combinations() {
 export BASE_NAME
 export OPT_LEVEL
 export CFLAGS
-export LIBS
+export LIBSYM
 export CLANG
 
 generate_combinations "${OPTIMIZATIONS[@]}" | parallel -j 28 "
     UNIQUE_BASE=${BASE_NAME}_{#}  
-    eval $CLANG $CFLAGS -$OPT_LEVEL {} $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBS &&
+    eval $CLANG $CFLAGS -$OPT_LEVEL {} $LIBS $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
     binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
 
     # Debugging

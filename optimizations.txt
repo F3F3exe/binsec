@@ -137,3 +137,16 @@ opt -S  donna_wrapper.ll -o donna_wrapper.ll
 clang-14  -m32 -g -march=i386 -static donna_wrapper.ll -o donna_wrapper -L../../__libsym__/ -lsym
 make_coredump.sh core_donna.snapshot donna_wrapper
 binsec -sse -sse-script checkct_donna.cfg -sse-depth 100000000 -checkct core_donna.snapshot -sse-timeout 100
+
+
+
+
+
+
+
+
+
+clang-19 -m32 -march=i386 -DKRML_NOUINT128 -static cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym Hacl_Policies.c
+clang-19 -m32 -O2 -march=i386 -DKRML_NOUINT128 -static Hacl_Policies.c cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym
+clang-19 -m32 -O2 -static Hacl_Policies.c cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym
+clang-19 -m32 -O2 -march=i386 -static Hacl_Policies.c cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym

@@ -26,7 +26,7 @@ case "$CLANG" in
 esac
 
 targets=(
-  01 02 03 04 05 07 08 09 10 
+cmp_bytes rotate32_left rotate32_right uint8_eq_mask uint8_gte_mask uint16_eq_mask uint16_gte_mask uint32_eq_mask uint32_gte_mask uint64_eq_mask uint64_gte_mask
 )
 
 if [[ $# -eq 3 ]]; then
@@ -46,8 +46,8 @@ BASE_NAME=$specific_target
 SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
 CFLAGS="-m32 -march=i386 -DKRML_NOUINT128 -static -Wall"
-LIBS="-L../../__libsym__/ -lsym"
-
+LIBSYM="-L../../__libsym__/ -lsym"
+LIBS="Hacl_Policies.c"
 
 # Ensure source file exists
 if [[ ! -f "$SOURCE_FILE" ]]; then
@@ -65,13 +65,13 @@ echo "Optimization,Result" > ${RESULTS_FILE}.txt
 export BASE_NAME
 export OPT_LEVEL
 export CFLAGS
-export LIBS
+export LIBSYM
 export CLANG
 
     
-echo     $CLANG $CFLAGS -$OPT_LEVEL $SOURCE_FILE -o $BASE_NAME.out &&
-$CLANG $CFLAGS -$OPT_LEVEL $SOURCE_FILE -o $BASE_NAME.out $LIBS &&
-
+echo     $CLANG $CFLAGS -$OPT_LEVEL $LIBS $SOURCE_FILE -o $BASE_NAME.out $LIBSYM &&
+$CLANG $CFLAGS -$OPT_LEVEL $LIBS $SOURCE_FILE -o $BASE_NAME.out $LIBSYM &&
+echo binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 1000000 -checkct $BASE_NAME.out -sse-timeout 10
 binsec_output="$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 1000000 -checkct $BASE_NAME.out -sse-timeout 10)"
 
 status=$(echo "$binsec_output" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')

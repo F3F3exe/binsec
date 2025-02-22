@@ -3,7 +3,7 @@ CFLAGS=-m32 -march=i386 -DKRML_NOUINT128 -static
 LIB=-L../../__libsym__/ -lsym
 DEPS=Hacl_Policies.c
 
-CLANG ?= clang #/usr/bin/llvm-3.9.0/clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-16.04/bin/clang-3.9
+CLANG=clang-19 #/usr/bin/llvm-3.9.0/clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-16.04/bin/clang-3.9
 
 # Optimization levels to build
 OPT_LEVELS := O0 O1 O2 O3 Os Oz Ofast # Add optimization levels here
