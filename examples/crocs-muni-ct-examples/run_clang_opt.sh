@@ -115,7 +115,7 @@ generate_combinations() {
         
         for ((j = 0; j < num_elements; j++)); do
             if (( (i >> j) & 1 )); then
-                combination+=("${elements[j]}")
+                combination+=("-${elements[j]}")
             fi
         done
         echo "${combination[*]}" 
@@ -141,7 +141,7 @@ if grep -q "^starting from core" "$config_file"; then
         
 
         echo $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
-        $CLANG $CFLAGS -$OPT_LEVEL {} $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
+        eval $CLANG $CFLAGS -$OPT_LEVEL {} $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
 
         
         
@@ -167,7 +167,7 @@ else
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
         echo $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
-        $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
+        eval $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
         
         binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
         echo $binsec_output
