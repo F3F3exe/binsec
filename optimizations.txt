@@ -150,3 +150,13 @@ clang-19 -m32 -march=i386 -DKRML_NOUINT128 -static cmp_bytes.c -o cmp_bytes.out 
 clang-19 -m32 -O2 -march=i386 -DKRML_NOUINT128 -static Hacl_Policies.c cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym
 clang-19 -m32 -O2 -static Hacl_Policies.c cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym
 clang-19 -m32 -O2 -march=i386 -static Hacl_Policies.c cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym
+
+clang-19 -m32 -O1 -march=i386 -static  Hacl_Policies.c cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym -> insecure
+clang-19 -m32 -O1 -march=i386 -static -fno-inline-functions Hacl_Policies.c cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym -> secure
+clang-19 -m32 -O0 -march=i386 -static Hacl_Policies.c cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym -> secure
+clang-19 -m32 -O0 -march=i386 -static -finline-functions Hacl_Policies.c cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym -> secure
+clang-19 -m32 -O1 -march=i386 -static -Xclang -disable-llvm-passes Hacl_Policies.c cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym -> secure
+clang-19 -m32 -O0 -march=i386 -static -finline-functions -Xclang -disable-llvm-passes Hacl_Policies.c cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym -> secure
+
+
+

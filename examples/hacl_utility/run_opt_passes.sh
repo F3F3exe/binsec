@@ -174,7 +174,7 @@ if grep -q "^starting from core" "$config_file"; then
         done
 
         #compile .c libraries to .ll if present
-        $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll &&
+        $CLANG $CFLAGS -$OPT_LEVEL -S -emit-llvm $LIBS.c -o $UNIQUE_LIBS.ll 
         for PASS in \"\${PASSES[@]}\"; do          
           eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
         done
