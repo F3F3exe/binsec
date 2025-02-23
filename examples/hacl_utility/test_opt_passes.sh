@@ -1,10 +1,9 @@
 #!/bin/bash
 
 # Quellcode-Datei
-TARGET="sort_multiplex"
-SOURCE_C="sort_multiplex.c"
-LLVM_IR="sort_multiplex.ll"
-OPTIMIZED_LL="sort_multiplex.ll"
+SOURCE_C="cmp_bytes.c"
+LLVM_IR="cmp_bytes.ll"
+OPTIMIZED_LL="cmp_bytes.ll"
 
 # Clang-Befehl ausführen
 clang-14 -O0 -Xclang -disable-O0-optnone -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm "$SOURCE_C" -o "$LLVM_IR"
@@ -35,13 +34,13 @@ for pass in "${ALL_OPT_PASSES[@]}"; do
 done
 
 # Define output log file
-LOG_FILE="binsec_results_${TARGET}.log"
+LOG_FILE="binsec_results.log"
 echo "Binsec Results Log" > "$LOG_FILE"
 
 
 # Compile the source to LLVM IR
-clang-14 -O0 -Xclang -disable-O0-optnone -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm sort_multiplex.c -o sort_multiplex.ll
-clang-14 -O0 -Xclang -disable-O0-optnone -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm lib.c -o lib.ll
+clang-14 -O0 -Xclang -disable-O0-optnone -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm cmp_bytes.c -o cmp_bytes.ll
+clang-14 -O0 -Xclang -disable-O0-optnone -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm Hacl_Policies.c -o Hacl_Policies..ll
 
 # Apply passes one-by-one
 ADDED_PASSES=()  # Empty array to store added passes
@@ -51,14 +50,14 @@ for PASS in "${OPT_PASSES[@]}"; do
    
 
     # Run opt with the added pass
-    opt-14 -S -enable-new-pm=0 "${ADDED_PASSES[@]}" sort_multiplex.ll -o sort_multiplex.ll
-    opt-14 -S -enable-new-pm=0 "${ADDED_PASSES[@]}" lib.ll -o lib.ll
+    opt-14 -S -enable-new-pm=0 "${ADDED_PASSES[@]}" cmp_bytes.ll -o cmp_bytes.ll
+    opt-14 -S -enable-new-pm=0 "${ADDED_PASSES[@]}" Hacl_Policies..ll -o Hacl_Policies..ll
 
     # Compile the optimized IR back to an executable
-    clang-14 -O0 -m32 -march=i386 -DKRML_NOUINT128 -static lib.ll sort_multiplex.ll -o sort_multiplex_optnone.out -L../../__libsym__/ -lsym
+    clang-14 -O0 -m32 -march=i386 -DKRML_NOUINT128 -static Hacl_Policies..ll cmp_bytes.ll -o cmp_bytes_optnone.out -L../../__libsym__/ -lsym
 
     # Run binsec and log the result
-    BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_sort_multiplex.cfg -sse-depth 100000000 -checkct sort_multiplex_optnone.out 2>&1)
+    BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_cmp_bytes.cfg -sse-depth 100000000 -checkct cmp_bytes_optnone.out 2>&1)
 
     status=$(echo "$BINSEC_OUTPUT" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')
 

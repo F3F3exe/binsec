@@ -1,31 +1,87 @@
 #!/bin/bash
+targets=(
+  01 02 03 04 05 07 08 09 10 
+)
 
-# Quellcode-Datei
-SOURCE_C="02.c"
-LLVM_IR="02.ll"
-OPTIMIZED_LL="02.ll"
+OPT_LEVEL=$1
+OPT_LEVEL_CLANG="O0"
+FILE=$2
+CLANG=$3
+OPT="opt"
 
-# Clang-Befehl ausführen
-clang-14 -O0 -Xclang -disable-O0-optnone -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm "$SOURCE_C" -o "$LLVM_IR"
-echo "LLVM IR generiert: $LLVM_IR"
 
-# Opt-Befehl ausführen und die Ausgabe speichern
-OPT_OUTPUT=$(opt-14 -S -O1 -debug-pass=Arguments -enable-new-pm=0 "$LLVM_IR" -o "$OPTIMIZED_LL" 2>&1)
+if [[ -z "$OPT_LEVEL" || -z "$FILE" || -z "$CLANG" ]]; then
+    echo "Usage: $0 <OPT_LEVEL> <FILE> <CLANG>"
+    exit 1
+fi
+
+if [[ ! "$OPT_LEVEL" =~ ^O[0-3]$ ]]; then
+    echo "Error: OPT_LEVEL must be one of O0, O1, O2, or O3."
+    exit 1
+fi
+case "$OPT_LEVEL" in
+    O0) OPT_LEVEL_CLANG="O0"  ;; 
+    O1)  OPT_LEVEL_CLANG="O0" ;;
+    O2)  OPT_LEVEL_CLANG="O1" ;;
+    O3)  OPT_LEVEL_CLANG="O2" ;;
+esac
+
+echo $OPT_LEVEL $OPT_LEVEL_CLANG
+
+if [[ ! "$CLANG" =~ ^(clang-7.1|clang-14|clang-12|clang-19)$ ]]; then
+    echo "Error: CLANG must be one of clang-7.1, clang-14, clang-12, or clang-19."
+    exit 1
+fi
+
+CLANG_v=$CLANG
+
+case "$CLANG" in
+    clang-7.1) OPT="opt-7" 
+               CLANG="$HOME/clang-7.1/bin/clang" ;; 
+    clang-14)  OPT="opt-14" ;;
+    clang-12)  OPT="opt-12" ;;
+    clang-19)  OPT="opt-19" ;;
+esac
+
+echo $CLANG $OPT
+
+
+
+if [[ $# -eq 3 ]]; then
+  specific_target=$2
+  if [[ ! " ${targets[@]} " =~ " ${specific_target} " ]]; then
+    echo "Error: Target '$specific_target' is not in the predefined list."
+    exit 1
+  fi
+  targets=($specific_target)
+fi
+
+echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): ${targets[@]}"
+
+#configuration
+SOURCE_FILE="$specific_target.c"  # Change this if needed
+BASE_NAME=$specific_target
+LLVM_IR="$specific_target.ll"
+OPTIMIZED_LL="$specific_target.ll"
+SNAPSHOT_SCRIPT="make_coredump.sh"
+BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
+CFLAGS=" -m32 -march=i386 -DKRML_NOUINT128 -static -Wall "
+LIBSYM="-L../../__libsym__/ -lsym"
+
+$CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
+
+# get llvm opt passes
+OPT_OUTPUT=$($OPT -S -$OPT_LEVEL -debug-pass=Arguments -enable-new-pm=0 "$LLVM_IR" -o "$OPTIMIZED_LL" 2>&1)
 echo "$OPT_OUTPUT" > opt_output.txt
-echo "Erster Opt-Durchlauf abgeschlossen: $OPTIMIZED_LL"
 
-# Extrahiere die Passes aus den 'Pass Arguments:' Zeilen
 ALL_OPT_PASSES=($(echo "$OPT_OUTPUT" | grep "Pass Arguments:" | sed -E 's/Pass Arguments:  //g' | tr -s ' ' | tr ' ' '\n'))
 
-# Zeige die extrahierten Pässe an
 echo "Extrahierte OPT_PASSES:"
 echo "("${ALL_OPT_PASSES[@]}" )"
 
-# Blacklist von unerwünschten Passes definieren
-BLACKLIST=("-targetpassconfig -write-bitcode -print-module")
+# Blacklist passes
+BLACKLIST=("-targetpassconfig" "-write-bitcode" "-print-module" "-instcombine")
 
-
-# Entferne geblacklistete Pässe aus OPT_PASSES
 OPT_PASSES=()
 for pass in "${ALL_OPT_PASSES[@]}"; do
     if [[ ! " ${BLACKLIST[@]} " =~ " $pass " ]]; then
@@ -33,29 +89,25 @@ for pass in "${ALL_OPT_PASSES[@]}"; do
     fi
 done
 
-# Define output log file
-LOG_FILE="binsec_results.log"
+LOG_FILE="Results/opt_passes_${BASE_NAME}_${OPT_LEVEL}_$(date +%Y%m%d_%H%M%S).log"
 echo "Binsec Results Log" > "$LOG_FILE"
 
 
 # Compile the source to LLVM IR
-clang-14 -O0 -Xclang -disable-O0-optnone -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm 02.c -o 02.ll
+$CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
 
 # Apply passes one-by-one
-ADDED_PASSES=()  # Empty array to store added passes
+ADDED_PASSES=() 
 for PASS in "${OPT_PASSES[@]}"; do
-    ADDED_PASSES+=("$PASS")  # Add the new pass
+    ADDED_PASSES+=("$PASS") 
     echo "Adding pass: $PASS"
    
+    $OPT -S -enable-new-pm=0 "${ADDED_PASSES[@]}" "$LLVM_IR" -o "$OPTIMIZED_LL"
 
-    # Run opt with the added pass
-    opt-14 -S -enable-new-pm=0 "${ADDED_PASSES[@]}" 02.ll -o 02.ll
-
-    # Compile the optimized IR back to an executable
-    clang-14 -O0 -m32 -march=i386 -DKRML_NOUINT128 -static 02.ll -o 02_optnone.out -L../../__libsym__/ -lsym
+    $CLANG -$OPT_LEVEL_CLANG $CFLAGS $OPTIMIZED_LL -o ${BASE_NAME}.out -L../../__libsym__/ -lsym
 
     # Run binsec and log the result
-    BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_02.cfg -sse-depth 100000000 -checkct 02_optnone.out 2>&1)
+    BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct ${BASE_NAME}.out 2>&1)
 
     status=$(echo "$BINSEC_OUTPUT" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')
 

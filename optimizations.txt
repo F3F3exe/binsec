@@ -267,7 +267,7 @@ binsec -sse -sse-script checkct_cmp_bytes.cfg -sse-depth 100000000 -checkct cmp_
 
 clang -O0 -Xclang -disable-O0-optnone  -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm cmp_bytes.c -o cmp_bytes.ll 
 clang -O0 -Xclang -disable-O0-optnone  -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm Hacl_Policies.c -o Hacl_Policies.ll 
-opt -S -O3  cmp_bytes.ll -o cmp_bytes.ll 
-opt -S -O3  Hacl_Policies.ll -o Hacl_Policies.ll
-clang -O1 -m32 -march=i386 -DKRML_NOUINT128 -static Hacl_Policies.ll cmp_bytes.ll -o cmp_bytes_optnone.out -L../../__libsym__/ -lsym 
+opt -S -O2  cmp_bytes.ll -o cmp_bytes.ll 
+opt -S -O2  Hacl_Policies.ll -o Hacl_Policies.ll
+clang -O0 -m32 -march=i386 -DKRML_NOUINT128 -static Hacl_Policies.ll cmp_bytes.ll -o cmp_bytes_optnone.out -L../../__libsym__/ -lsym 
 binsec -sse -sse-script checkct_cmp_bytes.cfg -sse-depth 100000000 -checkct cmp_bytes_optnone.out
