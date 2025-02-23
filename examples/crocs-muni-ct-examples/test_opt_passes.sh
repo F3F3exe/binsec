@@ -34,12 +34,15 @@ if [[ ! "$CLANG" =~ ^(clang-7.1|clang-14|clang-12|clang-19)$ ]]; then
 fi
 
 CLANG_v=$CLANG
+NEW_PM=""
 
 case "$CLANG" in
     clang-7.1) OPT="opt-7" 
                CLANG="$HOME/clang-7.1/bin/clang" ;; 
-    clang-14)  OPT="opt-14" ;;
-    clang-12)  OPT="opt-12" ;;
+    clang-14)  OPT="opt-14" 
+               NEW_PM="-enable-new-pm=0" ;;
+    clang-12)  OPT="opt-12" 
+               NEW_PM="-enable-new-pm=0" ;;
     clang-19)  OPT="opt-19" ;;
 esac
 
@@ -71,7 +74,7 @@ LIBSYM="-L../../__libsym__/ -lsym"
 $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
 
 # get llvm opt passes
-OPT_OUTPUT=$($OPT -S -$OPT_LEVEL -debug-pass=Arguments -enable-new-pm=0 "$LLVM_IR" -o "$OPTIMIZED_LL" 2>&1)
+OPT_OUTPUT=$($OPT -S -$OPT_LEVEL -debug-pass=Arguments $NEW_PM "$LLVM_IR" -o "$OPTIMIZED_LL" 2>&1)
 echo "$OPT_OUTPUT" > opt_output.txt
 
 ALL_OPT_PASSES=($(echo "$OPT_OUTPUT" | grep "Pass Arguments:" | sed -E 's/Pass Arguments:  //g' | tr -s ' ' | tr ' ' '\n'))
@@ -80,7 +83,7 @@ echo "Extrahierte OPT_PASSES:"
 echo "("${ALL_OPT_PASSES[@]}" )"
 
 # Blacklist passes
-BLACKLIST=("-targetpassconfig" "-write-bitcode" "-print-module" "-instcombine")
+BLACKLIST=("-targetpassconfig" "-write-bitcode" "-print-module")
 
 OPT_PASSES=()
 for pass in "${ALL_OPT_PASSES[@]}"; do
@@ -102,7 +105,7 @@ for PASS in "${OPT_PASSES[@]}"; do
     ADDED_PASSES+=("$PASS") 
     echo "Adding pass: $PASS"
    
-    $OPT -S -enable-new-pm=0 "${ADDED_PASSES[@]}" "$LLVM_IR" -o "$OPTIMIZED_LL"
+    $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LLVM_IR" -o "$OPTIMIZED_LL"
 
     $CLANG -$OPT_LEVEL_CLANG $CFLAGS $OPTIMIZED_LL -o ${BASE_NAME}.out -L../../__libsym__/ -lsym
 
