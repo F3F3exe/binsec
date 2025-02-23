@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # List of optimization levels
-OPT_LEVELS=(O0 O1 O2 O3)
+OPT_LEVELS=(O0 O1)
 
 # List of targets
 targets=(
-  02 04 08 09
+  02 
 )
 clang_version=(
-  clang-14 clang-19
+  clang-12
 )
 
 
@@ -16,8 +16,8 @@ clang_version=(
 # Iterate over all optimization levels and targets
 for TARGET in "${targets[@]}"; do
 
-  LOG_FILE="Results/llvm_optimization_results_${target}_$(date +%Y%m%d_%H%M%S).txt"
-  echo "${target}" >  ${LOG_FILE}
+  LOG_FILE="Results/llvm_optimization_results_${TARGET}_$(date +%Y%m%d_%H%M%S).txt"
+  echo "${TARGET}" >  ${LOG_FILE}
   
 
   for CLANG in "${clang_version[@]}"; do
