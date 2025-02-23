@@ -32,13 +32,14 @@ for TARGET in "${targets[@]}"; do
 
           if grep -q "insecure" "$RESULTS_FILE1"; then
               echo "  CT vulnerability detected!"
-              echo "  CT vulnerability detected: ${RESULTS_FILE1}" >>  ${LOG_FILE}
+              echo "  CT vulnerability detected: " >>  ${LOG_FILE}
 
               echo "    Analysing Clang frontend optimizations:"
 
               RESULTS_FILE2=$(./run_clang_opt.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/clang_frontend_optimization_results_.*\.txt')
               if grep -q " secure" "$RESULTS_FILE2"; then
-                echo "    Clang frontend optimization caused CT violation:  ${RESULTS_FILE2}"  >>  ${LOG_FILE}
+                echo "    Clang frontend optimization caused CT violation: "  >>  ${LOG_FILE}
+                grep " secure" "$RESULTS_FILE3" >> ${LOG_FILE}
                 echo "    Clang frontend optimization caused CT violation:  ${RESULTS_FILE2}"
               fi
 
@@ -47,7 +48,8 @@ for TARGET in "${targets[@]}"; do
               
               RESULTS_FILE3=$(./test_opt_passes.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/opt_passes_.*\.txt')
               if grep -q "insecure" "$RESULTS_FILE3"; then
-                echo "      LLVM pass caused CT violation:  ${RESULTS_FILE2}"  >>  ${LOG_FILE}
+                echo "      LLVM pass caused CT violation: "  >>  ${LOG_FILE}
+                grep "insecure" "$RESULTS_FILE3" >> ${LOG_FILE}
                 echo "      LLVM pass caused CT violation:  ${RESULTS_FILE2}"
               fi
             
