@@ -4,7 +4,7 @@ target datalayout = "e-m:e-p:32:32-p270:32:32-p271:32:32-p272:64:64-f64:32:64-f8
 target triple = "i386-pc-linux-gnu"
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local zeroext i8 @Hacl_Policies_cmp_bytes_(i8* noundef %0, i8* noundef %1, i32 noundef %2, i8* noundef %3) #0 {
+define dso_local zeroext i8 @Hacl_Policies_cmp_bytes_(i8* noundef %0, i8* noundef %1, i32 noundef %2, i8* noundef %3) local_unnamed_addr #0 {
   %5 = alloca i8*, align 4
   %6 = alloca i8*, align 4
   %7 = alloca i32, align 4
@@ -43,7 +43,7 @@ define dso_local zeroext i8 @Hacl_Policies_cmp_bytes_(i8* noundef %0, i8* nounde
   store i8 %28, i8* %12, align 1
   %29 = load i8, i8* %10, align 1
   %30 = load i8, i8* %11, align 1
-  %31 = call zeroext i8 @FStar_UInt8_eq_mask(i8 noundef zeroext %29, i8 noundef zeroext %30)
+  %31 = call fastcc zeroext i8 @FStar_UInt8_eq_mask(i8 noundef zeroext %29, i8 noundef zeroext %30)
   %32 = zext i8 %31 to i32
   %33 = load i8, i8* %12, align 1
   %34 = zext i8 %33 to i32
@@ -68,7 +68,7 @@ define dso_local zeroext i8 @Hacl_Policies_cmp_bytes_(i8* noundef %0, i8* nounde
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define internal zeroext i8 @FStar_UInt8_eq_mask(i8 noundef zeroext %0, i8 noundef zeroext %1) #0 {
+define internal fastcc zeroext i8 @FStar_UInt8_eq_mask(i8 noundef zeroext %0, i8 noundef zeroext %1) unnamed_addr #0 {
   %3 = alloca i8, align 1
   %4 = alloca i8, align 1
   store i8 %0, i8* %3, align 1
@@ -113,7 +113,7 @@ define internal zeroext i8 @FStar_UInt8_eq_mask(i8 noundef zeroext %0, i8 nounde
 }
 
 ; Function Attrs: noinline nounwind optnone uwtable
-define dso_local zeroext i8 @Hacl_Policies_cmp_bytes(i8* noundef %0, i8* noundef %1, i32 noundef %2) #0 {
+define dso_local zeroext i8 @Hacl_Policies_cmp_bytes(i8* noundef %0, i8* noundef %1, i32 noundef %2) local_unnamed_addr #0 {
   %4 = alloca i8*, align 4
   %5 = alloca i8*, align 4
   %6 = alloca i32, align 4

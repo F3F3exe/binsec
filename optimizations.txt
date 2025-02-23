@@ -159,4 +159,44 @@ clang-19 -m32 -O1 -march=i386 -static -Xclang -disable-llvm-passes Hacl_Policies
 clang-19 -m32 -O0 -march=i386 -static -finline-functions -Xclang -disable-llvm-passes Hacl_Policies.c cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym -> secure
 
 
+bin/clang test/test.c -mllvm -print-after-all &> without_disabling_any_flag.ll
+clang-19 -m32 -O0 -march=i386 -static -mllvm -print-after-all Hacl_Policies.c cmp_bytes.c  -L../../__libsym__/ -lsym &> without_disabling_any_flag.ll
 
+
+clang -O0  -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm cmp_bytes.c -o cmp_bytes.ll 
+clang -O0 -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm Hacl_Policies.c -o Hacl_Policies.ll 
+
+opt -O1 -enable-new-pm=0 -debug-pass=Arguments -S cmp_bytes.ll -o cmp_bytes.ll 
+opt -O1 -S Hacl_Policies.ll -o Hacl_Policies.ll 
+
+
+clang -O0 -m32 -march=i386 -DKRML_NOUINT128 -static cmp_bytes.ll -o cmp_bytes -L../../__libsym__/ -lsym Hacl_Policies.ll
+binsec -sse -sse-script checkct_cmp_bytes.cfg -sse-depth 100000000 -checkct cmp_bytes
+
+
+finding llvm opt in 02:
+secure:
+clang-19 -m32 -march=i386 -DKRML_NOUINT128 -static 02.c -o 02.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_02.cfg -sse-depth 100000000 -checkct 02.out
+
+clang-14 -O1 -Xclang -disable-llvm-passes -m32 -march=i386 -DKRML_NOUINT128 -static 02.c -o 02_d.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_02.cfg -sse-depth 100000000 -checkct 02_d.out
+--> suggest llvm opt cause the CT violation
+
+insecure:
+clang-14 -O1 -m32 -march=i386 -DKRML_NOUINT128 -static 02.c -o 02_Os.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_02.cfg -sse-depth 100000000 -checkct 02_Os.out
+
+#split compilation -> secure
+clang-14 -Xclang -disable-llvm-passes  -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm 02.c -o 02.ll 
+opt-14 -O3   02.ll -o 02_opt.ll 
+llc-14 -O3 02_opt.ll -o 02.s 
+clang-14 -O0 -m32 -march=i386 -DKRML_NOUINT128 -static 02.s -o 02_p.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_02.cfg -sse-depth 100000000 -checkct 02_p.out
+
+#insecure
+clang-14 -O0 -Xclang -disable-O0-optnone  -m32 -march=i386 -DKRML_NOUINT128 -static -S -emit-llvm 02.c -o 02.ll 
+opt-14 -O3   02.ll -o 02_opt.ll 
+llc-14 -O3 02_opt.ll -o 02.s 
+clang-14 -O0 -m32 -march=i386 -DKRML_NOUINT128 -static 02.s -o 02_p.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_02.cfg -sse-depth 100000000 -checkct 02_p.out

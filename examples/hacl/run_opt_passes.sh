@@ -206,7 +206,7 @@ if grep -q "^starting from core" "$config_file"; then
           eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
         done
 
-        $CLANG -$OPT_LEVEL $CFLAGS $UNIQUE_LIBS.ll \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $LIBHACL
+        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_LIBS.ll \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $LIBHACL
         
         
         core_dump="core_\$UNIQUE_BASE.snapshot"
@@ -247,7 +247,7 @@ else
           eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
         done
 
-          $CLANG -$OPT_LEVEL $CFLAGS $UNIQUE_LIBS.ll \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM ${LIBHACL}
+          $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_LIBS.ll \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM ${LIBHACL}
         else
           $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM 
         fi
@@ -294,7 +294,7 @@ if grep -q "^starting from core" "$config_file"; then
           eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
         done
 
-        $CLANG -$OPT_LEVEL $CFLAGS $UNIQUE_LIBS.ll \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $LIBHACL
+        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_LIBS.ll \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $LIBHACL
         
         
         core_dump=\"core_\$UNIQUE_BASE.snapshot\"
@@ -332,7 +332,7 @@ else
           eval ${OPT} -S -passes=\"\$PASS\" \$UNIQUE_LIBS.ll -o \$UNIQUE_LIBS.ll
         done
 
-        $CLANG -$OPT_LEVEL $CFLAGS $UNIQUE_LIBS.ll \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $LIBHACL
+        $CLANG -$OPT_LEVEL $CFLAGS \$UNIQUE_LIBS.ll \$UNIQUE_BASE.ll -o \$UNIQUE_BASE.out $LIBSYM $LIBHACL
         
         
         binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
