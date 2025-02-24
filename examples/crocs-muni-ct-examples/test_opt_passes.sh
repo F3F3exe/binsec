@@ -1,4 +1,7 @@
 #!/bin/bash
+
+#no lib, no wrapper
+
 targets=(
   01 02 03 04 05 07 08 09 10 
 )

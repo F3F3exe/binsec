@@ -5,8 +5,11 @@ OPT_LEVELS=(O0 O1 O2 O3)
 
 # List of targets
 targets=(
-  02 04 08 09 
+cmp_bytes rotate32_left rotate32_right uint8_eq_mask uint8_gte_mask 
+uint16_eq_mask uint16_gte_mask uint32_eq_mask uint32_gte_mask 
+uint64_eq_mask uint64_gte_mask
 )
+
 clang_version=(
   clang-12 clang-7.1
 )
@@ -27,10 +30,9 @@ for TARGET in "${targets[@]}"; do
       
           echo "Running run_opt_passes.sh with OPT_LEVEL=$OPT_LEVEL and TARGET=$TARGET and CLANG=$CLANG"
 
-          #check if O0, O1, O2, O3 leads to CT vuln 
+          #check if O0, O1, O2, O3 leads to CT vuln
           RESULTS_FILE1=$(./run_clang.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/clang_optimization_results_.*\.txt')
-            echo ./run_clang.sh "$OPT_LEVEL" "$TARGET" "$CLANG"
-            echo $RESULTS_FILE1
+
           if grep -q "insecure" "$RESULTS_FILE1"; then
               echo "  CT vulnerability detected!"
               echo "  CT vulnerability detected: " >>  ${LOG_FILE}
