@@ -31,7 +31,7 @@ for TARGET in "${targets[@]}"; do
           #check if O0, O1, O2, O3 leads to CT vuln 
           RESULTS_FILE1=$(./run_clang.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/clang_optimization_results_.*\.txt')
             echo ./run_clang.sh "$OPT_LEVEL" "$TARGET" "$CLANG"
-            echo $RESULTS_FILE1
+            grep "insecure" $RESULTS_FILE1
           if grep -q "insecure" "$RESULTS_FILE1"; then
               echo "  CT vulnerability detected!"
               echo "  CT vulnerability detected: " >>  ${LOG_FILE}
@@ -57,6 +57,7 @@ for TARGET in "${targets[@]}"; do
             
           else
               echo "  No CT vulnerability found." >>  ${LOG_FILE}
+              echo "  No CT vulnerability found."
           fi
 
       done
