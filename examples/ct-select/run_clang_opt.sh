@@ -1,0 +1,198 @@
+#!/bin/bash
+
+targets=(
+ct_select_v1 ct_select_v2 ct_select_v3 ct_select_v4 naive_select
+)
+
+LIBS="lib"
+
+
+OPT_LEVEL=$1
+FILE=$2
+CLANG=$3
+OPT="opt"
+
+
+if [[ -z "$OPT_LEVEL" || -z "$FILE" || -z "$CLANG" ]]; then
+    echo "Usage: $0 <OPT_LEVEL> <FILE> <CLANG>"
+    exit 1
+fi
+
+if [[ ! "$OPT_LEVEL" =~ ^O[0-3]$ ]]; then
+    echo "Error: OPT_LEVEL must be one of O0, O1, O2, or O3."
+    exit 1
+fi
+
+if [[ ! "$CLANG" =~ ^(clang-7.1|clang-14|clang-12|clang-19)$ ]]; then
+    echo "Error: CLANG must be one of clang-7.1, clang-14, clang-12, or clang-19."
+    exit 1
+fi
+
+CLANG_v=$CLANG
+
+case "$CLANG" in
+    clang-7.1) OPT="opt-7" 
+               CLANG="$HOME/clang-7.1/bin/clang" ;; 
+    clang-14)  OPT="opt-14" ;;
+    clang-12)  OPT="opt-12" ;;
+    clang-19)  OPT="opt-19" ;;
+esac
+
+echo $CLANG $OPT
+
+
+
+if [[ $# -eq 3 ]]; then
+  specific_target=$2
+  if [[ ! " ${targets[@]} " =~ " ${specific_target} " ]]; then
+    echo "Error: Target '$specific_target' is not in the predefined list."
+    exit 1
+  fi
+  targets=($specific_target)
+fi
+
+echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): ${targets[@]}"
+
+# Configuration
+SOURCE_FILE="$specific_target.c"  # Change this if needed
+BASE_NAME=$specific_target
+SNAPSHOT_SCRIPT="make_coredump.sh"
+BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
+CFLAGS="-m32 -march=i386 -DKRML_NOUINT128 -static -Wall"
+LIBSYM="-L../../__libsym__/ -lsym"
+
+
+# List of LLVM optimization passe
+OPTIMIZATIONS=(
+  "funroll-loops" "fstrict-aliasing" "fno-math-errno" "finline-hint-functions" "finline-functions" 
+  "fno-unroll-loops" "fno-strict-aliasing" "fno-inline-functions" "fno-builtin"
+  )
+#"fvectorize" "fslp-vectorize"
+
+
+# Ensure source file exists
+if [[ ! -f "$SOURCE_FILE" ]]; then
+    echo "Error: Source file $SOURCE_FILE not found!"
+    exit 1
+fi
+
+# Compile to LLVM IR (-O0 to disable optimizations)
+
+
+VALID_OPTIMIZATIONS=()
+
+for OPTIMIZATION in "${OPTIMIZATIONS[@]}"; do
+  echo "Checking optimization: $OPTIMIZATION"
+  echo $CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $LIBS.c $SOURCE_FILE -o $BASE_NAME.out $LIBSYM
+  ERROR_OUTPUT=$($CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $LIBS.c $SOURCE_FILE -o $BASE_NAME.out $LIBSYM 2>&1)
+  echo $ERROR_OUTPUT
+ 
+
+  if [[ -z "$ERROR_OUTPUT" ]]; then
+    VALID_OPTIMIZATIONS+=("$OPTIMIZATION")
+  else
+    echo "error: " $ERROR_OUTPUT
+  fi
+done
+
+
+echo "-------------------------------------------------------"
+echo "${VALID_OPTIMIZATIONS[@]}"
+echo "-------------------------------------------------------"
+
+
+# Create a results file to track the status
+# Ensure the Results directory exists
+mkdir -p Results
+RESULTS_FILE="Results/clang_frontend_optimization_results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG_v}_$(date +%Y%m%d_%H%M%S)" #.txt"
+echo "Optimization,Result" > ${RESULTS_FILE}.txt
+
+# Function to generate power set of optimizations
+generate_combinations() {
+    local elements=("$@")
+    local num_elements=${#elements[@]}
+    local num_combinations=$((1 << num_elements))
+    
+    for ((i = 1; i < num_combinations; i++)); do
+        local combination=()
+        
+        for ((j = 0; j < num_elements; j++)); do
+            if (( (i >> j) & 1 )); then
+                combination+=("-${elements[j]}")
+            fi
+        done
+        echo "${combination[*]}" 
+
+    done
+}
+
+
+export BASE_NAME
+export OPT_LEVEL
+export CFLAGS
+export LIBSYM
+export CLANG
+
+# Construct the config file path
+config_file="checkct_${BASE_NAME}.cfg"
+
+#starting from core for all high risk combinations
+if grep -q "^starting from core" "$config_file"; then
+
+    generate_combinations "${VALID_OPTIMIZATIONS[@]}" | parallel -j 28 "
+        UNIQUE_BASE=${BASE_NAME}_{#} 
+        
+
+        echo $CLANG $CFLAGS -$OPT_LEVEL {} $LIBS.c $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
+        eval $CLANG $CFLAGS -$OPT_LEVEL {} $LIBS.c $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
+
+        
+        
+        core_dump="core_\$UNIQUE_BASE.snapshot"
+        make_coredump.sh core_\$UNIQUE_BASE.snapshot \$UNIQUE_BASE.out
+
+        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct core_\$UNIQUE_BASE.snapshot -sse-timeout 10)\"
+
+        status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
+
+        if [[ -z \"\$status\" ]]; then
+            status=\"unknown\"
+            #echo \"Warning: Status not found \$UNIQUE_BASE\" >> debug_log.txt
+        fi
+
+        echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
+    "
+
+#not starting from core for all optimizations
+else
+
+    generate_combinations "${VALID_OPTIMIZATIONS[@]}" | parallel -j 28 "
+        UNIQUE_BASE=${BASE_NAME}_{#} 
+
+        echo $CLANG $CFLAGS -$OPT_LEVEL {} $LIBS.c $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
+        eval $CLANG $CFLAGS -$OPT_LEVEL {} $LIBS.c $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
+        
+        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
+        echo $binsec_output
+        status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
+
+        if [[ -z \"\$status\" ]]; then
+            status=\"unknown\"
+            #echo \"Warning: Status not found \$UNIQUE_BASE\" >> debug_log.txt
+        fi
+
+        echo \"{} \$status\" | tee -a \"${RESULTS_FILE}_{#}.txt\"
+    "
+
+fi
+
+cat ${RESULTS_FILE}_*.txt >> ${RESULTS_FILE}.txt
+rm ${RESULTS_FILE}_*.txt
+rm *.out
+rm *.ll
+rm *.snapshot
+rm *.tmp
+rm *.tmp
+
+echo "All optimization combinations tested"
+echo "Results saved in ${RESULTS_FILE}.txt"

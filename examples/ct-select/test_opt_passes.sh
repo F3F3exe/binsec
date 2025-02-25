@@ -3,7 +3,7 @@
 #lib, no wrapper
 
 targets=(
-sort sort_multiplex sort_negative
+ct_select_v1 ct_select_v2 ct_select_v3 ct_select_v4 naive_select
 )
 
 OPT_LEVEL=$1
@@ -100,7 +100,6 @@ mkdir -p Results
 LOG_FILE="Results/opt_passes_${BASE_NAME}_${OPT_LEVEL}_$(date +%Y%m%d_%H%M%S).txt"
 echo "Binsec Results Log" > "$LOG_FILE"
 
-
 # Compile the source to LLVM IR
 $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
 $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$LIBS.c" -o "$LIBS.ll"
@@ -114,7 +113,7 @@ for PASS in "${OPT_PASSES[@]}"; do
     $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LLVM_IR" -o "$OPTIMIZED_LL"
     $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LIBS.ll" -o "$LIBS.ll"
 
-    $CLANG -$OPT_LEVEL_CLANG $CFLAGS $LIBS.ll $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
+    $CLANG -$OPT_LEVEL_CLANG $CFLAGS $LIBS.ll $OPTIMIZED_LL -o ${BASE_NAME}.out -L../../__libsym__/ -lsym
 
     # Run binsec and log the result
     BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct ${BASE_NAME}.out 2>&1)
