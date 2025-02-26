@@ -152,9 +152,9 @@ if grep -q "^starting from core" "$config_file"; then
         
         core_dump="core_\$UNIQUE_BASE.snapshot"
         make_coredump.sh core_\$UNIQUE_BASE.snapshot \$UNIQUE_BASE.out
-
+        echo binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 100000000 -checkct core_\$UNIQUE_BASE.snapshot -sse-timeout 50
         binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 100000000 -checkct core_\$UNIQUE_BASE.snapshot -sse-timeout 50)\"
-
+        echo "binsec output" $binsec_output
         status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
 
         if [[ -z \"\$status\" ]]; then
