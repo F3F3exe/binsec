@@ -84,8 +84,8 @@ VALID_OPTIMIZATIONS=()
 
 for OPTIMIZATION in "${OPTIMIZATIONS[@]}"; do
   echo "Checking optimization: $OPTIMIZATION"
-  echo $CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $SOURCE_FILE -o $BASE_NAME.out $LIBSYM
-  ERROR_OUTPUT=$($CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $SOURCE_FILE -o $BASE_NAME.out $LIBSYM 2>&1)
+  echo $CLANG -w $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $SOURCE_FILE -o $BASE_NAME.out $LIBSYM
+  ERROR_OUTPUT=$($CLANG -w $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $SOURCE_FILE -o $BASE_NAME.out $LIBSYM 2>&1)
   echo $ERROR_OUTPUT
  
 
@@ -153,7 +153,7 @@ if grep -q "^starting from core" "$config_file"; then
         core_dump="core_\$UNIQUE_BASE.snapshot"
         make_coredump.sh core_\$UNIQUE_BASE.snapshot \$UNIQUE_BASE.out
 
-        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth \$depth -checkct core_\$UNIQUE_BASE.snapshot -sse-timeout \$timeout)\"
+        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 100000000 -checkct core_\$UNIQUE_BASE.snapshot -sse-timeout 50)\"
 
         status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
 
@@ -174,7 +174,7 @@ else
         echo $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
         eval $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
         
-        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth \$depth -checkct \$UNIQUE_BASE.out -sse-timeout \$timeout)\"
+        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 100000000 -checkct \$UNIQUE_BASE.out -sse-timeout 50)\"
         echo $binsec_output
         status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
 
