@@ -40,6 +40,8 @@ fi
 
 echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): ${targets[@]}"
 
+depth=100000000
+timeout=50
 # Configuration
 SOURCE_FILE="$specific_target.c"  # Change this if needed
 BASE_NAME=$specific_target
@@ -73,7 +75,9 @@ export CLANG
 echo     $CLANG $CFLAGS -$OPT_LEVEL $SOURCE_FILE -o $BASE_NAME.out &&
 $CLANG $CFLAGS -$OPT_LEVEL $SOURCE_FILE -o $BASE_NAME.out $LIBS &&
 
-binsec_output="$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 1000000 -checkct $BASE_NAME.out -sse-timeout 10)"
+echo "$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 1000000 -checkct $BASE_NAME.out -sse-timeout 10)"
+
+binsec_output="$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct $BASE_NAME.out -sse-timeout $timeout)"
 
 status=$(echo "$binsec_output" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')
 

@@ -83,12 +83,12 @@ if grep -q "^starting from core" "$config_file"; then
     core_dump="core_${BASE_NAME}.snapshot"
     make_coredump.sh core_${BASE_NAME}.snapshot ${BASE_NAME}.out
 
-    binsec_output=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth \$depth -checkct core_${BASE_NAME}.snapshot -sse-timeout \$timeout 2>&1)
+    binsec_output=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct core_${BASE_NAME}.snapshot -sse-timeout $timeout 2>&1)
 else
-    binsec_output=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth \$depth -checkct ${BASE_NAME}.out -sse-timeout \$timeout 2>&1)
+    binsec_output=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct ${BASE_NAME}.out -sse-timeout $timeout 2>&1)
 fi
 
-
+echo $binsec_output
 status=$(echo "$binsec_output" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')
 
 if [[ -z "$status" ]]; then
