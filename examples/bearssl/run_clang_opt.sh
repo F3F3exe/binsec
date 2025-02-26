@@ -53,11 +53,15 @@ fi
 
 echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): ${targets[@]}"
 
+depth=100000000
+timeout=50
+depth=100000000
+timeout=50
 # Configuration
 SOURCE_FILE=${specific_target}_wrapper.c
 BASE_NAME=$specific_target
 SNAPSHOT_SCRIPT="make_coredump.sh"
-BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
+BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct -sse-timeout $timeout"
 CFLAGS="-m32 -march=i386 -DKRML_NOUINT128 -static -Wall"
 LIBSYM="-L../../__libsym__/ -lsym -I./inc -L./. -lbearssl"
 
@@ -83,7 +87,7 @@ VALID_OPTIMIZATIONS=()
 for OPTIMIZATION in "${OPTIMIZATIONS[@]}"; do
   echo "Checking optimization: $OPTIMIZATION"
   echo $CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $SOURCE_FILE -o $BASE_NAME.out $LIBSYM
-  ERROR_OUTPUT=$($CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $LIBSYM $SOURCE_FILE -o $BASE_NAME.out  2>&1)
+  ERROR_OUTPUT=$($CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $SOURCE_FILE -o $BASE_NAME.out $LIBSYM 2>&1)
   echo $ERROR_OUTPUT
  
 
@@ -151,7 +155,7 @@ if grep -q "^starting from core" "$config_file"; then
         core_dump="core_\$UNIQUE_BASE.snapshot"
         make_coredump.sh core_\$UNIQUE_BASE.snapshot \$UNIQUE_BASE.out
 
-        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct core_\$UNIQUE_BASE.snapshot -sse-timeout 10)\"
+        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth \$depth -checkct core_\$UNIQUE_BASE.snapshot -sse-timeout \$timeout)\"
 
         status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
 
@@ -172,7 +176,7 @@ else
         echo $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
         eval $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
         
-        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
+        binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth \$depth -checkct \$UNIQUE_BASE.out -sse-timeout \$timeout)\"
         echo $binsec_output
         status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
 

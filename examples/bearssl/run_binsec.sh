@@ -13,6 +13,7 @@ optimizations=("O0" "O1" "O2" "O3" "Os" "Oz" "Ofast" "flto")
 
 # Depth and config script variables
 depth=100000000
+timeout=50
 
 # Check if a specific target is provided as an argument
 if [[ $# -eq 1 ]]; then
@@ -53,12 +54,12 @@ for target in "${targets[@]}"; do
       core_dump="core_${target_with_opt}.snapshot"
       make_coredump.sh core_\$UNIQUE_BASE.snapshot "$target_with_opt"
       stats_file="./${target_with_opt}.csv"
-      binsec_output=$(binsec -sse  -checkct-stats-file "$stats_file" -sse-script "$config_file" -sse-depth "$depth" -checkct core_\$UNIQUE_BASE.snapshot)
+      binsec_output=$(binsec -sse  -checkct-stats-file "$stats_file" -sse-script "$config_file" -sse-depth "$depth" -checkct core_\$UNIQUE_BASE.snapshot -sse-timeout $timeout)
     else
       # Otherwise, run the normal binsec command
       stats_file="./${target_with_opt}.csv"
       echo "Running standard binsec for $target_with_opt..."
-      binsec_output=$(binsec -sse -checkct-stats-file "$stats_file" -sse-script "$config_file" -sse-depth "$depth" -checkct "$target_with_opt")
+      binsec_output=$(binsec -sse -checkct-stats-file "$stats_file" -sse-script "$config_file" -sse-depth "$depth" -checkct "$target_with_opt" -sse-timeout $timeout)
     fi
 
     # Output the full binsec result to the console

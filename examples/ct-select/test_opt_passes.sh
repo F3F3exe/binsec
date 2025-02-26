@@ -70,7 +70,7 @@ BASE_NAME=$specific_target
 LLVM_IR="$specific_target.ll"
 OPTIMIZED_LL="$specific_target.ll"
 SNAPSHOT_SCRIPT="make_coredump.sh"
-BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
+BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct -sse-timeout $timeout"
 CFLAGS=" -m32 -march=i386 -DKRML_NOUINT128 -static -Wall "
 LIBSYM="-L../../__libsym__/ -lsym"
 LIBS="lib"
@@ -118,7 +118,8 @@ for PASS in "${OPT_PASSES[@]}"; do
     $CLANG -$OPT_LEVEL_CLANG $CFLAGS $LIBS.ll $OPTIMIZED_LL -o ${BASE_NAME}.out -L../../__libsym__/ -lsym
 
     # Run binsec and log the result
-    BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct ${BASE_NAME}.out 2>&1)
+            BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth \$depth  -checkct ${BASE_NAME}.out -sse-timeout \$timeout 2>&1)
+
 
     status=$(echo "$BINSEC_OUTPUT" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')
 

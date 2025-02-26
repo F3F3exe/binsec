@@ -40,11 +40,13 @@ fi
 
 echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): ${targets[@]}"
 
+depth=100000000
+timeout=50
 # Configuration
 SOURCE_FILE=${specific_target}.c
 BASE_NAME=$specific_target
 SNAPSHOT_SCRIPT="make_coredump.sh"
-BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
+BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct -sse-timeout $timeout"
 CFLAGS="-m32 -march=i386 -DKRML_NOUINT128 -static -Wall"
 LIBS="-L../../__libsym__/ -lsym"
 

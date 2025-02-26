@@ -64,13 +64,15 @@ fi
 
 echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): ${targets[@]}"
 
+depth=100000000
+timeout=50
 #configuration
 SOURCE_FILE=${specific_target}_wrapper.c
 BASE_NAME=$specific_target
 LLVM_IR="$specific_target.ll"
 OPTIMIZED_LL="$specific_target.ll"
 SNAPSHOT_SCRIPT="make_coredump.sh"
-BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct -sse-timeout 10"
+BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct -sse-timeout $timeout"
 CFLAGS=" -m32 -march=i386 -DKRML_NOUINT128 -static -Wall "
 LIBSYM="-L../../__libsym__/ -lsym"
 
@@ -123,7 +125,7 @@ for PASS in "${OPT_PASSES[@]}"; do
         core_dump="core_${BASE_NAME}.snapshot"
         make_coredump.sh core_${BASE_NAME}.snapshot ${BASE_NAME}.out
 
-        BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct core_${BASE_NAME}.snapshot 2>&1)
+        BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth \$depth  -checkct core_${BASE_NAME}.snapshot -sse-timeout \$timeout 2>&1)
     else
         BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct ${BASE_NAME}.out 2>&1)
     fi
