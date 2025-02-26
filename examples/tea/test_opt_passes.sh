@@ -137,7 +137,7 @@ for PASS in "${OPT_PASSES[@]}"; do
         echo "Status is insecure!"
         echo "$PASS, $status" >> "$LOG_FILE"
         echo "-----------------------------------------------------" >> "$LOG_FILE"
-        break
+        #break
     fi
     
 
