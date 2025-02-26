@@ -1,2 +1,0 @@
-Pass Arguments:  -tti -verify
-Pass Arguments:  -targetlibinfo -tti -targetpassconfig -assumption-cache-tracker -profile-summary-info -annotation2metadata -forceattrs -basiccg -always-inline -barrier -annotation-remarks -verify -write-bitcode

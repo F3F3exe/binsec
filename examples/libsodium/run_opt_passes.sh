@@ -76,7 +76,6 @@ fi
 
 
 
-# Compile to LLVM IR (-O0 to disable optimizations)
 
 LL_LIB=""
 

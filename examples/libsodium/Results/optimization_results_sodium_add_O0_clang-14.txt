@@ -1,4 +1,0 @@
-Optimization,Result
--scev-aa, secure
--adce, secure
--scev-aa -adce, secure

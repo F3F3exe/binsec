@@ -97,7 +97,9 @@ for pass in "${ALL_OPT_PASSES[@]}"; do
     fi
 done
 
-LOG_FILE="Results/opt_passes_${BASE_NAME}_${OPT_LEVEL}_$(date +%Y%m%d_%H%M%S).txt"
+mkdir -p Results
+mkdir -p Results/llvm_opt_passes
+LOG_FILE="Results/llvm_opt_passes/results_${BASE_NAME}_${OPT_LEVEL}_$(date +%Y%m%d_%H%M%S).txt"
 echo "Binsec Results Log" > "$LOG_FILE"
 
 

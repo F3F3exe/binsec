@@ -1,3 +1,0 @@
-Target			O0		O1		O2		O3		Os		Oz		Of
-tea_decrypt	secure	secure	secure	secure	secure	secure	secure
-tea_encrypt	secure	secure	secure	secure	secure	secure	secure

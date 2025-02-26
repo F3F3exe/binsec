@@ -75,7 +75,6 @@ if [[ ! -f "$SOURCE_FILE" ]]; then
     exit 1
 fi
 
-# Compile to LLVM IR (-O0 to disable optimizations)
 
 
 VALID_OPTIMIZATIONS=()
@@ -103,7 +102,8 @@ echo "-------------------------------------------------------"
 # Create a results file to track the status
 # Ensure the Results directory exists
 mkdir -p Results
-RESULTS_FILE="Results/clang_frontend_optimization_results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG_v}_$(date +%Y%m%d_%H%M%S)" #.txt"
+mkdir -p Results/clang_frontend_optimizations
+RESULTS_FILE="Results/clang_frontend_optimizations/results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG_v}_$(date +%Y%m%d_%H%M%S)" #.txt"
 echo "Optimization,Result" > ${RESULTS_FILE}.txt
 
 # Function to generate power set of optimizations
