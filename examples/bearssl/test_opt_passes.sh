@@ -66,8 +66,6 @@ echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): $
 
 depth=100000000
 timeout=50
-depth=100000000
-timeout=50
 #configuration
 SOURCE_FILE=${specific_target}_wrapper.c
 BASE_NAME=$specific_target
@@ -128,6 +126,7 @@ for PASS in "${OPT_PASSES[@]}"; do
 
         BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth \$depth  -checkct core_${BASE_NAME}.snapshot -sse-timeout \$timeout 2>&1)
     else
+        echo binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth \$depth  -checkct ${BASE_NAME}.out -sse-timeout \$timeout
         BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth \$depth  -checkct ${BASE_NAME}.out -sse-timeout \$timeout 2>&1)
 
     fi
