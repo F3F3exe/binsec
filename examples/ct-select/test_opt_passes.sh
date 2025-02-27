@@ -101,7 +101,7 @@ done
 mkdir -p Results
 mkdir -p Results
 mkdir -p Results/llvm_opt_passes
-LOG_FILE="Results/llvm_opt_passes/results_${BASE_NAME}_${OPT_LEVEL}_$(date +%Y%m%d_%H%M%S).txt"
+LOG_FILE="Results/llvm_opt_passes/results_${BASE_NAME}_${OPT_LEVEL}__${CLANG_v}_$(date +%Y%m%d_%H%M%S).txt"
 echo "Binsec Results Log" > "$LOG_FILE"
 
 # Compile the source to LLVM IR
