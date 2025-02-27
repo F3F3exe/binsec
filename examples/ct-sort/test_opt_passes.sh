@@ -121,8 +121,7 @@ for PASS in "${OPT_PASSES[@]}"; do
     $CLANG -$OPT_LEVEL_CLANG $CFLAGS $LIBS.ll $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
 
     # Run binsec and log the result
-            BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct ${BASE_NAME}.out -sse-timeout $timeout 2>&1)
-$BASE_NAME.out -sse-timeout $timeout)"
+    BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct ${BASE_NAME}.out -sse-timeout $timeout 2>&1)
 
 
     status=$(echo "$BINSEC_OUTPUT" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')
