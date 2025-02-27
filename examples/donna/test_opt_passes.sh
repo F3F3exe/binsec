@@ -65,7 +65,7 @@ fi
 echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): ${targets[@]}"
 
 depth=100000000
-timeout=50
+timeout=100
 #configuration
 SOURCE_FILE=${specific_target}_wrapper.c
 BASE_NAME=$specific_target

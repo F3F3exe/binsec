@@ -83,9 +83,9 @@ if grep -q "^starting from core" "$config_file"; then
     core_dump="core_${BASE_NAME}.snapshot"
     make_coredump.sh core_${BASE_NAME}.snapshot ${BASE_NAME}.out
 
-    binsec_output=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct core_${BASE_NAME}.snapshot 2>&1)
+    binsec_output=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct core_${BASE_NAME}.snapshot -sse-timeout $timeout 2>&1)
 else
-    binsec_output=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct ${BASE_NAME}.out 2>&1)
+    binsec_output=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct ${BASE_NAME}.out -sse-timeout $timeout 2>&1)
 fi
 
 

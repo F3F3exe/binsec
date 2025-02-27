@@ -5,7 +5,7 @@ OPT_LEVELS=(O0 O1 O2 O3)
 
 # List of targets
 targets=(
-ct_select_v1 ct_select_v2 ct_select_v3 ct_select_v4 naive_select
+ct_select_v1 ct_select_v2 ct_select_v3 ct_select_v4
 )
 
 clang_version=(

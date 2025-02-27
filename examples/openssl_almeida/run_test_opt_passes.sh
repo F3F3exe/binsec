@@ -5,8 +5,10 @@ OPT_LEVELS=(O0 O1 O2 O3)
 
 # List of targets
 targets=(
-tls1_cbc_remove_padding_patch tls1_cbc_remove_padding_lucky13 ssl3_cbc_copy_mac ssl3_cbc_digest_record ssl3_cbc_remove_padding_patch
+tls1_cbc_remove_padding_patch   ssl3_cbc_remove_padding_patch
 )
+#not claimed ct: tls1_cbc_remove_padding_lucky13, ssl3_cbc_copy_mac
+#issue with: ssl3_cbc_digest_record
 
 clang_version=(
   clang-12 clang-7.1

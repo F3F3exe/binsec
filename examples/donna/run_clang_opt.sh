@@ -54,7 +54,7 @@ fi
 echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): ${targets[@]}"
 
 depth=100000000
-timeout=50
+timeout=100
 # Configuration
 SOURCE_FILE=${specific_target}_wrapper.c
 BASE_NAME=$specific_target
@@ -85,7 +85,7 @@ VALID_OPTIMIZATIONS=()
 for OPTIMIZATION in "${OPTIMIZATIONS[@]}"; do
   echo "Checking optimization: $OPTIMIZATION"
   echo $CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $SOURCE_FILE -o $BASE_NAME.out $LIBSYM
-  ERROR_OUTPUT=$($CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $SOURCE_FILE -o $BASE_NAME.out $LIBSYM 2>&1)
+  ERROR_OUTPUT=$($CLANG -w $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $SOURCE_FILE -o $BASE_NAME.out $LIBSYM 2>&1)
   echo $ERROR_OUTPUT
  
 

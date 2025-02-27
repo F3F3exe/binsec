@@ -25,19 +25,19 @@ int main(){
   int is_sslv3;                                     // public
 
 
-  // HIGH_INPUT(EVP_MAX_MD_SIZE)(md_out);
-  // HIGH_INPUT(EVP_MAX_MD_SIZE)(md_data);
-  // HIGH_INPUT(LEN)(data);
-  // HIGH_INPUT(EVP_MAX_MD_SIZE)(mac_secret);
-  // HIGH_INPUT(4)(data_plus_mac_size);
+  HIGH_INPUT(EVP_MAX_MD_SIZE)(md_out);
+  HIGH_INPUT(EVP_MAX_MD_SIZE)(md_data);
+  HIGH_INPUT(LEN)(data);
+  HIGH_INPUT(EVP_MAX_MD_SIZE)(mac_secret);
+  HIGH_INPUT(4)(data_plus_mac_size);
 
  
   // // these lengths are all public
-  // LOW_INPUT(4)(&md_out_size);
-  // LOW_INPUT(4)(&flags);
-  // LOW_INPUT(4)(&data_plus_mac_plus_padding_size);
-  // LOW_INPUT(4)(&mac_secret_length);
-  // LOW_INPUT(4)(&is_sslv3);
+  LOW_INPUT(4)(&md_out_size);
+  LOW_INPUT(4)(&flags);
+  LOW_INPUT(4)(&data_plus_mac_plus_padding_size);
+  LOW_INPUT(4)(&mac_secret_length);
+  LOW_INPUT(4)(&is_sslv3);
   LOW_INPUT(4)(type);
 
   struct env_md_st evp_md_obj = { type };
