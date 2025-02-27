@@ -125,7 +125,7 @@ for PASS in "${OPT_PASSES[@]}"; do
         core_dump="core_${BASE_NAME}.snapshot"
         make_coredump.sh core_${BASE_NAME}.snapshot ${BASE_NAME}.out
 
-        BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth \$depth  -checkct core_${BASE_NAME}.snapshot -sse-timeout \$timeout 2>&1)
+        BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct core_${BASE_NAME}.snapshot -sse-timeout $timeout 2>&1)
     else
         BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 100000000 -checkct ${BASE_NAME}.out 2>&1)
     fi
