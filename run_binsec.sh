@@ -36,7 +36,7 @@ fi
 
 # Iterate through the folders and run the scripts
 for folder in "${FOLDERS[@]}"; do
-    RUN_SCRIPT="$BASE_DIR/$folder/run_binsec.sh"
+    RUN_SCRIPT="$BASE_DIR/$folder/run_test_opt_passes.sh"
 
     if [[ -f $RUN_SCRIPT && -x $RUN_SCRIPT ]]; then
         echo "Running $RUN_SCRIPT in $folder..."
