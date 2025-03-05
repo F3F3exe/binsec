@@ -46,13 +46,11 @@ for TARGET in "${targets[@]}"; do
 
               #echo "    Analysing LLVM optimization passes:" 
 
-              RESULTS_FILE3=$(./test_opt_passes.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/llvm_opt_passes/results_.*\.txt')
-              #if grep -q "insecure" "$RESULTS_FILE3"; then
-              #  echo "      LLVM pass caused CT violation: "  >>  ${LOG_FILE}
-              #  grep "insecure" "$RESULTS_FILE3" >> ${LOG_FILE}
-              #  echo "      LLVM pass caused CT violation:  ${RESULTS_FILE2}"
-              #fi
-              RESULTS_FILE4=$(./test_opt19_passes.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/llvm_opt_passes/results_.*\.txt')
+              if [[ "$CLANG" == "clang-19" ]]; then
+                RESULTS_FILE4=$(./test_opt19_passes.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/llvm_opt_passes/results_.*\.txt')
+              else
+                RESULTS_FILE3=$(./test_opt_passes.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/llvm_opt_passes/results_.*\.txt')
+              fi
 
               RESULTS_FILE4=$(./test_opt19_passes.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/llvm_opt_passes/results_.*\.txt')
 
