@@ -122,7 +122,7 @@ declare -A PASS_MAP=(
     ["LCSSAPass"]="lcssa"
     ["LoopDistributePass"]="loop-distribute"
     ["LoopVectorizePass"]="loop-vectorize"
-    ["InferAlignmentPass"]="infer-align"
+    ["InferAlignmentPass"]="infer-alignment"
     ["LoopLoadEliminationPass"]="loop-loadelim"
     ["VectorCombinePass"]="vector-combine"
     ["LoopUnrollPass"]="loop-unroll"
@@ -209,7 +209,7 @@ for PASS in "${OPT_PASSES[@]}"; do
     echo "Adding pass: $PASS"
 
     PASSES_STRING=$(IFS=,; echo "${ADDED_PASSES[*]}")
-    
+
     $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
     $LLVM_LINK -S hacl-c/hacl-c/*.ll -o ${LIBS}.ll
 
