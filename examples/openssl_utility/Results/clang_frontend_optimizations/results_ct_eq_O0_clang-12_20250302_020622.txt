@@ -1,0 +1,512 @@
+Optimization,Result
+-funroll-loops secure
+-fstrict-aliasing\ -finline-hint-functions secure
+-fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-fno-math-errno\ -finline-hint-functions secure
+-finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-fno-inline-functions secure
+-funroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions secure
+-fstrict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-inline-functions secure
+-fno-math-errno\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-inline-functions secure
+-finline-hint-functions\ -fno-inline-functions secure
+-funroll-loops\ -finline-hint-functions\ -fno-inline-functions secure
+-fstrict-aliasing\ -finline-hint-functions\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions secure
+-fno-math-errno\ -finline-hint-functions\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-inline-functions secure
+-finline-functions\ -fno-inline-functions secure
+-funroll-loops\ -finline-functions\ -fno-inline-functions secure
+-fstrict-aliasing\ -finline-functions\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-inline-functions secure
+-fno-math-errno\ -finline-functions\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-inline-functions secure
+-finline-hint-functions\ -finline-functions\ -fno-inline-functions secure
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions secure
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions secure
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions secure
+-finline-functions secure
+-fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -fno-unroll-loops\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-unroll-loops\ -fno-inline-functions secure
+-fno-math-errno\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -fno-unroll-loops\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-inline-functions secure
+-finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -finline-functions secure
+-fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-finline-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-fstrict-aliasing\ -finline-functions secure
+-fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -finline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions secure
+-fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fno-math-errno\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fstrict-aliasing secure
+-fno-math-errno\ -finline-functions secure
+-finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fstrict-aliasing\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-finline-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -finline-functions secure
+-fstrict-aliasing\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions secure
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-finline-hint-functions\ -finline-functions secure
+-finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -finline-hint-functions\ -finline-functions secure
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions secure
+-fno-builtin secure
+-funroll-loops\ -fno-builtin secure
+-fstrict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-builtin secure
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions secure
+-fno-math-errno\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-builtin secure
+-finline-hint-functions\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -fno-builtin secure
+-fstrict-aliasing\ -finline-hint-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-builtin secure
+-fno-math-errno\ -finline-hint-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-builtin secure
+-finline-functions\ -fno-builtin secure
+-funroll-loops\ -finline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -finline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-builtin secure
+-fno-math-errno\ -finline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-builtin secure
+-fno-math-errno\ -finline-hint-functions\ -finline-functions secure
+-finline-hint-functions\ -finline-functions\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-builtin secure
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-builtin secure
+-fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions secure
+-fstrict-aliasing\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-unroll-loops\ -fno-builtin secure
+-fno-math-errno\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -fno-unroll-loops\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-builtin secure
+-finline-hint-functions\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -fno-unroll-loops\ -fno-builtin secure
+-fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions secure
+-fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-builtin secure
+-finline-functions\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -finline-functions\ -fno-unroll-loops\ -fno-builtin secure
+-fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-builtin secure
+-fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-builtin secure
+-finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-builtin secure
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-builtin secure
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-builtin secure
+-fno-unroll-loops secure
+-fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-fstrict-aliasing\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-strict-aliasing\ -fno-builtin secure
+-fno-math-errno\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -fno-strict-aliasing\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-strict-aliasing\ -fno-builtin secure
+-finline-hint-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fno-unroll-loops secure
+-fstrict-aliasing\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-finline-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-fstrict-aliasing\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-fstrict-aliasing\ -fno-unroll-loops secure
+-fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-unroll-loops secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin secure
+-fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-fstrict-aliasing\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-fno-math-errno\ -fno-unroll-loops secure
+-finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -fno-unroll-loops secure
+-fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops secure
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin secure
+-fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fno-math-errno\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops secure
+-fstrict-aliasing\ -fno-math-errno\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-inline-functions\ -fno-builtin secure
+-finline-hint-functions\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -finline-hint-functions\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-inline-functions\ -fno-builtin secure
+-fno-math-errno\ -finline-hint-functions\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-inline-functions\ -fno-builtin secure
+-fno-math-errno secure
+-finline-hint-functions\ -fno-unroll-loops secure
+-finline-functions\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -finline-functions\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -finline-functions\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-inline-functions\ -fno-builtin secure
+-fno-math-errno\ -finline-functions\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-inline-functions\ -fno-builtin secure
+-finline-hint-functions\ -finline-functions\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -fno-unroll-loops secure
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions\ -fno-builtin secure
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions\ -fno-builtin secure
+-fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops secure
+-fno-math-errno\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops secure
+-finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin secure
+-fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops secure
+-fstrict-aliasing\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fno-math-errno\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops secure
+-fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-finline-functions\ -fno-unroll-loops secure
+-fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -finline-functions\ -fno-unroll-loops secure
+-fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno secure
+-fstrict-aliasing\ -finline-functions\ -fno-unroll-loops secure
+-fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-unroll-loops secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin secure
+-fno-math-errno\ -finline-functions\ -fno-unroll-loops secure
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops secure
+-finline-hint-functions\ -finline-functions\ -fno-unroll-loops secure
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops secure
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops secure
+-fstrict-aliasing\ -fno-math-errno secure
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops secure
+-fno-strict-aliasing secure
+-funroll-loops\ -fno-strict-aliasing secure
+-fstrict-aliasing\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -fno-strict-aliasing secure
+-fno-math-errno\ -fno-strict-aliasing secure
+-funroll-loops\ -fno-math-errno\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno secure
+-fstrict-aliasing\ -fno-math-errno\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-strict-aliasing secure
+-finline-hint-functions\ -fno-strict-aliasing secure
+-funroll-loops\ -finline-hint-functions\ -fno-strict-aliasing secure
+-fstrict-aliasing\ -finline-hint-functions\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-strict-aliasing secure
+-fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing secure
+-finline-hint-functions secure
+-finline-functions\ -fno-strict-aliasing secure
+-funroll-loops\ -finline-functions\ -fno-strict-aliasing secure
+-fstrict-aliasing\ -finline-functions\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-strict-aliasing secure
+-fno-math-errno\ -finline-functions\ -fno-strict-aliasing secure
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing secure
+-finline-hint-functions\ -finline-functions\ -fno-strict-aliasing secure
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing secure
+-funroll-loops\ -finline-hint-functions secure
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing secure
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing secure
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing secure
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing secure
+-fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-fstrict-aliasing\ -fno-unroll-loops\ -fno-strict-aliasing secure
+-funroll-loops\ -fstrict-aliasing\ -fno-unroll-loops\ -fno-strict-aliasing secure
