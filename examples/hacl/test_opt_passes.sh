@@ -74,7 +74,7 @@ OPTIMIZED_LL="$specific_target.ll"
 SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct -sse-timeout $timeout"
 CFLAGS=" -m32 -march=i386 -DKRML_NOUINT128 -static -Wall "
-LIBSYM="-L../../__libsym__/ -lsym -I./inc -L./. -lbearssl"
+LIBSYM="-L../../__libsym__/ -lsym"
 LIBHACL="-I./hacl-c/hacl-c/ -L./hacl-c/hacl-c/ -lhacl32"
 LIBS="hacl_c"
 

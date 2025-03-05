@@ -183,7 +183,7 @@ for PASS in "${OPT_PASSES[@]}"; do
 
     PASSES_STRING=$(IFS=,; echo "${ADDED_PASSES[*]}")
    
-    $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LLVM_IR" -o "$OPTIMIZED_LL"
+    $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LLVM_IR" -o "$OPTIMIZED_LL"
 
     $CLANG -$OPT_LEVEL_CLANG $CFLAGS $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
 

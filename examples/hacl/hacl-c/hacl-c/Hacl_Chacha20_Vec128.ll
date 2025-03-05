@@ -1,2417 +1,2917 @@
 ; ModuleID = 'hacl-c/hacl-c/Hacl_Chacha20_Vec128.c'
 source_filename = "hacl-c/hacl-c/Hacl_Chacha20_Vec128.c"
-target datalayout = "e-m:e-p:32:32-p270:32:32-p271:32:32-p272:64:64-f64:32:64-f80:32-n8:16:32-S128"
+target datalayout = "e-m:e-p:32:32-p270:32:32-p271:32:32-p272:64:64-i128:128-f64:32:64-f80:32-n8:16:32-S128"
 target triple = "i386-pc-linux-gnu"
 
 %struct.vec = type { [4 x i32] }
 
-; Function Attrs: nofree noinline nosync nounwind uwtable
-define dso_local void @Hacl_Chacha20_Vec128_chacha20(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32 noundef %2, i8* nocapture noundef readonly %3, i8* nocapture noundef readonly %4, i32 noundef %5) local_unnamed_addr #0 !dbg !20 {
-  call void @llvm.dbg.value(metadata i8* %0, metadata !24, metadata !DIExpression()), !dbg !30
-  call void @llvm.dbg.value(metadata i8* %1, metadata !25, metadata !DIExpression()), !dbg !30
-  call void @llvm.dbg.value(metadata i32 %2, metadata !26, metadata !DIExpression()), !dbg !30
-  call void @llvm.dbg.value(metadata i8* %3, metadata !27, metadata !DIExpression()), !dbg !30
-  call void @llvm.dbg.value(metadata i8* %4, metadata !28, metadata !DIExpression()), !dbg !30
-  call void @llvm.dbg.value(metadata i32 %5, metadata !29, metadata !DIExpression()), !dbg !30
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20(i8* noundef %0, i8* noundef %1, i32 noundef %2, i8* noundef %3, i8* noundef %4, i32 noundef %5), !dbg !31
-  ret void, !dbg !32
+; Function Attrs: noinline nounwind uwtable
+define dso_local void @Hacl_Chacha20_Vec128_chacha20(ptr noundef %0, ptr noundef %1, i32 noundef %2, ptr noundef %3, ptr noundef %4, i32 noundef %5) #0 {
+  %7 = alloca ptr, align 4
+  %8 = alloca ptr, align 4
+  %9 = alloca i32, align 4
+  %10 = alloca ptr, align 4
+  %11 = alloca ptr, align 4
+  %12 = alloca i32, align 4
+  store ptr %0, ptr %7, align 4
+  store ptr %1, ptr %8, align 4
+  store i32 %2, ptr %9, align 4
+  store ptr %3, ptr %10, align 4
+  store ptr %4, ptr %11, align 4
+  store i32 %5, ptr %12, align 4
+  %13 = load ptr, ptr %7, align 4
+  %14 = load ptr, ptr %8, align 4
+  %15 = load i32, ptr %9, align 4
+  %16 = load ptr, ptr %10, align 4
+  %17 = load ptr, ptr %11, align 4
+  %18 = load i32, ptr %12, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_chacha20(ptr noundef %13, ptr noundef %14, i32 noundef %15, ptr noundef %16, ptr noundef %17, i32 noundef %18)
+  ret void
 }
 
-; Function Attrs: mustprogress nofree nosync nounwind readnone speculatable willreturn
-declare void @llvm.dbg.declare(metadata, metadata, metadata) #1
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_chacha20(ptr noundef %0, ptr noundef %1, i32 noundef %2, ptr noundef %3, ptr noundef %4, i32 noundef %5) #0 {
+  %7 = alloca ptr, align 4
+  %8 = alloca i32, align 4
+  %9 = alloca i32, align 4
+  %10 = alloca i32, align 4
+  %11 = alloca i32, align 4
+  %12 = alloca ptr, align 4
+  %13 = alloca ptr, align 4
+  %14 = alloca i32, align 4
+  %15 = alloca ptr, align 4
+  %16 = alloca ptr, align 4
+  %17 = alloca i32, align 4
+  %18 = alloca [4 x %struct.vec], align 4
+  %19 = alloca i32, align 4
+  %20 = alloca %struct.vec, align 4
+  %21 = alloca ptr, align 4
+  store ptr %0, ptr %12, align 4
+  store ptr %1, ptr %13, align 4
+  store i32 %2, ptr %14, align 4
+  store ptr %3, ptr %15, align 4
+  store ptr %4, ptr %16, align 4
+  store i32 %5, ptr %17, align 4
+  store i32 0, ptr %19, align 4
+  br label %22
 
-; Function Attrs: nofree noinline nosync nounwind uwtable
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32 noundef %2, i8* nocapture noundef readonly %3, i8* nocapture noundef readonly %4, i32 noundef %5) unnamed_addr #0 !dbg !33 {
-  %7 = alloca [4 x %struct.vec], align 4
-  %8 = bitcast [4 x %struct.vec]* %7 to i8*, !dbg !55
-  call void @llvm.dbg.value(metadata i8* %0, metadata !35, metadata !DIExpression()), !dbg !55
-  call void @llvm.dbg.value(metadata i8* %1, metadata !36, metadata !DIExpression()), !dbg !55
-  call void @llvm.dbg.value(metadata i32 %2, metadata !37, metadata !DIExpression()), !dbg !55
-  call void @llvm.dbg.value(metadata i8* %3, metadata !38, metadata !DIExpression()), !dbg !55
-  call void @llvm.dbg.value(metadata i8* %4, metadata !39, metadata !DIExpression()), !dbg !55
-  call void @llvm.dbg.value(metadata i32 %5, metadata !40, metadata !DIExpression()), !dbg !55
-  %9 = bitcast [4 x %struct.vec]* %7 to i8*, !dbg !56
-  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %9) #10, !dbg !56
-  call void @llvm.dbg.declare(metadata [4 x %struct.vec]* %7, metadata !41, metadata !DIExpression()), !dbg !57
-  call void @llvm.dbg.value(metadata i32 0, metadata !51, metadata !DIExpression()), !dbg !58
-  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(64) %8, i8 0, i32 64, i1 false), !dbg !59
-  call void @llvm.dbg.value(metadata i32 undef, metadata !51, metadata !DIExpression()), !dbg !58
-  call void @llvm.dbg.value(metadata i32 undef, metadata !51, metadata !DIExpression(DW_OP_plus_uconst, 1, DW_OP_stack_value)), !dbg !58
-  %10 = getelementptr inbounds [4 x %struct.vec], [4 x %struct.vec]* %7, i32 0, i32 0, !dbg !61
-  call void @llvm.dbg.value(metadata %struct.vec* %10, metadata !53, metadata !DIExpression()), !dbg !55
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_init(%struct.vec* noundef nonnull %10, i8* noundef %3, i8* noundef %4, i32 noundef %5), !dbg !62
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_counter_mode(i8* noundef %0, i8* noundef %1, i32 noundef %2, %struct.vec* noundef nonnull %10), !dbg !63
-  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %9) #10, !dbg !64
-  ret void, !dbg !64
+22:                                               ; preds = %35, %6
+  %23 = load i32, ptr %19, align 4
+  %24 = icmp ult i32 %23, 4
+  br i1 %24, label %25, label %38
+
+25:                                               ; preds = %22
+  %26 = load i32, ptr %19, align 4
+  %27 = getelementptr inbounds [4 x %struct.vec], ptr %18, i32 0, i32 %26
+  call void @llvm.experimental.noalias.scope.decl(metadata !7)
+  store ptr %20, ptr %7, align 4, !noalias !7
+  store i32 0, ptr %8, align 4, !noalias !7
+  store i32 0, ptr %9, align 4, !noalias !7
+  store i32 0, ptr %10, align 4, !noalias !7
+  store i32 0, ptr %11, align 4, !noalias !7
+  %28 = load i32, ptr %8, align 4, !noalias !7
+  store i32 %28, ptr %20, align 4, !alias.scope !7
+  %29 = load i32, ptr %9, align 4, !noalias !7
+  %30 = getelementptr inbounds [4 x i32], ptr %20, i32 0, i32 1
+  store i32 %29, ptr %30, align 4, !alias.scope !7
+  %31 = load i32, ptr %10, align 4, !noalias !7
+  %32 = getelementptr inbounds [4 x i32], ptr %20, i32 0, i32 2
+  store i32 %31, ptr %32, align 4, !alias.scope !7
+  %33 = load i32, ptr %11, align 4, !noalias !7
+  %34 = getelementptr inbounds [4 x i32], ptr %20, i32 0, i32 3
+  store i32 %33, ptr %34, align 4, !alias.scope !7
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %27, ptr align 4 %20, i32 16, i1 false)
+  br label %35
+
+35:                                               ; preds = %25
+  %36 = load i32, ptr %19, align 4
+  %37 = add i32 %36, 1
+  store i32 %37, ptr %19, align 4
+  br label %22, !llvm.loop !10
+
+38:                                               ; preds = %22
+  %39 = getelementptr inbounds [4 x %struct.vec], ptr %18, i32 0, i32 0
+  store ptr %39, ptr %21, align 4
+  %40 = load ptr, ptr %21, align 4
+  %41 = load ptr, ptr %15, align 4
+  %42 = load ptr, ptr %16, align 4
+  %43 = load i32, ptr %17, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_init(ptr noundef %40, ptr noundef %41, ptr noundef %42, i32 noundef %43)
+  %44 = load ptr, ptr %12, align 4
+  %45 = load ptr, ptr %13, align 4
+  %46 = load i32, ptr %14, align 4
+  %47 = load ptr, ptr %21, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_chacha20_counter_mode(ptr noundef %44, ptr noundef %45, i32 noundef %46, ptr noundef %47)
+  ret void
 }
 
-; Function Attrs: argmemonly mustprogress nofree nosync nounwind willreturn
-declare void @llvm.lifetime.start.p0i8(i64 immarg, i8* nocapture) #2
+; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: readwrite)
+declare void @llvm.memcpy.p0.p0.i32(ptr noalias nocapture writeonly, ptr noalias nocapture readonly, i32, i1 immarg) #1
 
-; Function Attrs: argmemonly mustprogress nofree nounwind willreturn
-declare void @llvm.memcpy.p0i8.p0i8.i32(i8* noalias nocapture writeonly, i8* noalias nocapture readonly, i32, i1 immarg) #3
-
-; Function Attrs: argmemonly mustprogress nofree nosync nounwind willreturn
-declare void @llvm.lifetime.end.p0i8(i64 immarg, i8* nocapture) #2
-
-; Function Attrs: mustprogress nofree noinline nosync nounwind uwtable willreturn
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_init(%struct.vec* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i8* nocapture noundef readonly %2, i32 noundef %3) unnamed_addr #4 !dbg !65 {
-  call void @llvm.dbg.value(metadata %struct.vec* %0, metadata !69, metadata !DIExpression()), !dbg !73
-  call void @llvm.dbg.value(metadata i8* %1, metadata !70, metadata !DIExpression()), !dbg !73
-  call void @llvm.dbg.value(metadata i8* %2, metadata !71, metadata !DIExpression()), !dbg !73
-  call void @llvm.dbg.value(metadata i32 %3, metadata !72, metadata !DIExpression()), !dbg !73
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_State_state_setup(%struct.vec* noundef %0, i8* noundef %1, i8* noundef %2, i32 noundef %3), !dbg !74
-  ret void, !dbg !75
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_init(ptr noundef %0, ptr noundef %1, ptr noundef %2, i32 noundef %3) #0 {
+  %5 = alloca ptr, align 4
+  %6 = alloca ptr, align 4
+  %7 = alloca ptr, align 4
+  %8 = alloca i32, align 4
+  store ptr %0, ptr %5, align 4
+  store ptr %1, ptr %6, align 4
+  store ptr %2, ptr %7, align 4
+  store i32 %3, ptr %8, align 4
+  %9 = load ptr, ptr %5, align 4
+  %10 = load ptr, ptr %6, align 4
+  %11 = load ptr, ptr %7, align 4
+  %12 = load i32, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_State_state_setup(ptr noundef %9, ptr noundef %10, ptr noundef %11, i32 noundef %12)
+  ret void
 }
 
-; Function Attrs: nofree noinline nosync nounwind uwtable
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_counter_mode(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32 noundef %2, %struct.vec* nocapture noundef %3) unnamed_addr #0 !dbg !76 {
-  call void @llvm.dbg.value(metadata i8* %0, metadata !80, metadata !DIExpression()), !dbg !90
-  call void @llvm.dbg.value(metadata i8* %1, metadata !81, metadata !DIExpression()), !dbg !90
-  call void @llvm.dbg.value(metadata i32 %2, metadata !82, metadata !DIExpression()), !dbg !90
-  call void @llvm.dbg.value(metadata %struct.vec* %3, metadata !83, metadata !DIExpression()), !dbg !90
-  %5 = lshr i32 %2, 6, !dbg !91
-  call void @llvm.dbg.value(metadata i32 %5, metadata !84, metadata !DIExpression()), !dbg !90
-  %6 = and i32 %2, 63, !dbg !92
-  call void @llvm.dbg.value(metadata i32 %6, metadata !85, metadata !DIExpression()), !dbg !90
-  call void @llvm.dbg.value(metadata i8* %0, metadata !86, metadata !DIExpression()), !dbg !90
-  call void @llvm.dbg.value(metadata i8* %1, metadata !87, metadata !DIExpression()), !dbg !90
-  %7 = and i32 %2, -64, !dbg !93
-  call void @llvm.dbg.value(metadata !DIArgList(i8* %0, i32 %7), metadata !88, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)), !dbg !90
-  call void @llvm.dbg.value(metadata !DIArgList(i8* %1, i32 %7), metadata !89, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)), !dbg !90
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_counter_mode_blocks(i8* noundef %0, i8* noundef %1, i32 noundef %5, %struct.vec* noundef %3), !dbg !94
-  %8 = icmp eq i32 %6, 0, !dbg !95
-  br i1 %8, label %12, label %9, !dbg !97
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_chacha20_counter_mode(ptr noundef %0, ptr noundef %1, i32 noundef %2, ptr noundef %3) #0 {
+  %5 = alloca ptr, align 4
+  %6 = alloca ptr, align 4
+  %7 = alloca i32, align 4
+  %8 = alloca ptr, align 4
+  %9 = alloca i32, align 4
+  %10 = alloca i32, align 4
+  %11 = alloca ptr, align 4
+  %12 = alloca ptr, align 4
+  %13 = alloca ptr, align 4
+  %14 = alloca ptr, align 4
+  store ptr %0, ptr %5, align 4
+  store ptr %1, ptr %6, align 4
+  store i32 %2, ptr %7, align 4
+  store ptr %3, ptr %8, align 4
+  %15 = load i32, ptr %7, align 4
+  %16 = lshr i32 %15, 6
+  store i32 %16, ptr %9, align 4
+  %17 = load i32, ptr %7, align 4
+  %18 = and i32 %17, 63
+  store i32 %18, ptr %10, align 4
+  %19 = load ptr, ptr %5, align 4
+  store ptr %19, ptr %11, align 4
+  %20 = load ptr, ptr %6, align 4
+  store ptr %20, ptr %12, align 4
+  %21 = load ptr, ptr %5, align 4
+  %22 = load i32, ptr %9, align 4
+  %23 = mul i32 64, %22
+  %24 = getelementptr inbounds i8, ptr %21, i32 %23
+  store ptr %24, ptr %13, align 4
+  %25 = load ptr, ptr %6, align 4
+  %26 = load i32, ptr %9, align 4
+  %27 = mul i32 64, %26
+  %28 = getelementptr inbounds i8, ptr %25, i32 %27
+  store ptr %28, ptr %14, align 4
+  %29 = load ptr, ptr %11, align 4
+  %30 = load ptr, ptr %12, align 4
+  %31 = load i32, ptr %9, align 4
+  %32 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_chacha20_counter_mode_blocks(ptr noundef %29, ptr noundef %30, i32 noundef %31, ptr noundef %32)
+  %33 = load i32, ptr %10, align 4
+  %34 = icmp ugt i32 %33, 0
+  br i1 %34, label %35, label %40
 
-9:                                                ; preds = %4
-  %10 = getelementptr inbounds i8, i8* %1, i32 %7, !dbg !98
-  call void @llvm.dbg.value(metadata i8* %10, metadata !89, metadata !DIExpression()), !dbg !90
-  %11 = getelementptr inbounds i8, i8* %0, i32 %7, !dbg !99
-  call void @llvm.dbg.value(metadata i8* %11, metadata !88, metadata !DIExpression()), !dbg !90
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_update_last(i8* noundef %11, i8* noundef %10, i32 noundef %6, %struct.vec* noundef %3), !dbg !100
-  br label %12, !dbg !100
+35:                                               ; preds = %4
+  %36 = load ptr, ptr %13, align 4
+  %37 = load ptr, ptr %14, align 4
+  %38 = load i32, ptr %10, align 4
+  %39 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_update_last(ptr noundef %36, ptr noundef %37, i32 noundef %38, ptr noundef %39)
+  br label %40
 
-12:                                               ; preds = %9, %4
-  ret void, !dbg !101
+40:                                               ; preds = %35, %4
+  ret void
 }
 
-; Function Attrs: mustprogress nofree noinline nosync nounwind uwtable willreturn
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_State_state_setup(%struct.vec* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i8* nocapture noundef readonly %2, i32 noundef %3) unnamed_addr #4 !dbg !102 {
-  call void @llvm.dbg.value(metadata %struct.vec* %0, metadata !104, metadata !DIExpression()), !dbg !116
-  call void @llvm.dbg.value(metadata i8* %1, metadata !105, metadata !DIExpression()), !dbg !116
-  call void @llvm.dbg.value(metadata i8* %2, metadata !106, metadata !DIExpression()), !dbg !116
-  call void @llvm.dbg.value(metadata i32 %3, metadata !107, metadata !DIExpression()), !dbg !116
-  %5 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 0, i32 0, i32 0, !dbg !117
-  store i32 1634760805, i32* %5, align 4, !dbg !117, !tbaa.struct !118
-  %6 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 0, i32 0, i32 1, !dbg !117
-  store i32 857760878, i32* %6, align 4, !dbg !117, !tbaa.struct !122
-  %7 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 0, i32 0, i32 2, !dbg !117
-  store i32 2036477234, i32* %7, align 4, !dbg !117, !tbaa.struct !123
-  %8 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 0, i32 0, i32 3, !dbg !117
-  store i32 1797285236, i32* %8, align 4, !dbg !117, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i8* %1, metadata !125, metadata !DIExpression()) #10, !dbg !132
-  call void @llvm.dbg.value(metadata i8* undef, metadata !134, metadata !DIExpression(DW_OP_deref)) #10, !dbg !142
-  call void @llvm.dbg.value(metadata i8* %1, metadata !141, metadata !DIExpression()) #10, !dbg !142
-  %9 = call fastcc i32 @load32(i8* noundef %1) #10, !dbg !144, !noalias !145
-  call void @llvm.dbg.value(metadata i32 %9, metadata !108, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !116
-  %10 = getelementptr inbounds i8, i8* %1, i32 4, !dbg !150
-  %11 = call fastcc i32 @load32(i8* noundef nonnull %10) #10, !dbg !150, !noalias !145
-  call void @llvm.dbg.value(metadata i32 %11, metadata !108, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !116
-  %12 = getelementptr inbounds i8, i8* %1, i32 8, !dbg !151
-  %13 = call fastcc i32 @load32(i8* noundef nonnull %12) #10, !dbg !151, !noalias !145
-  call void @llvm.dbg.value(metadata i32 %13, metadata !108, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !116
-  %14 = getelementptr inbounds i8, i8* %1, i32 12, !dbg !152
-  %15 = call fastcc i32 @load32(i8* noundef nonnull %14) #10, !dbg !152, !noalias !145
-  call void @llvm.dbg.value(metadata i32 %15, metadata !108, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !116
-  %16 = getelementptr inbounds i8, i8* %1, i32 16, !dbg !153
-  call void @llvm.dbg.value(metadata i8* %16, metadata !125, metadata !DIExpression()) #10, !dbg !154
-  call void @llvm.dbg.value(metadata i8* undef, metadata !134, metadata !DIExpression(DW_OP_deref)) #10, !dbg !156
-  call void @llvm.dbg.value(metadata i8* %16, metadata !141, metadata !DIExpression()) #10, !dbg !156
-  %17 = call fastcc i32 @load32(i8* noundef nonnull %16) #10, !dbg !158, !noalias !159
-  call void @llvm.dbg.value(metadata i32 %17, metadata !109, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !116
-  %18 = getelementptr inbounds i8, i8* %1, i32 20, !dbg !164
-  %19 = call fastcc i32 @load32(i8* noundef nonnull %18) #10, !dbg !164, !noalias !159
-  call void @llvm.dbg.value(metadata i32 %19, metadata !109, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !116
-  %20 = getelementptr inbounds i8, i8* %1, i32 24, !dbg !165
-  %21 = call fastcc i32 @load32(i8* noundef nonnull %20) #10, !dbg !165, !noalias !159
-  call void @llvm.dbg.value(metadata i32 %21, metadata !109, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !116
-  %22 = getelementptr inbounds i8, i8* %1, i32 28, !dbg !166
-  %23 = call fastcc i32 @load32(i8* noundef nonnull %22) #10, !dbg !166, !noalias !159
-  call void @llvm.dbg.value(metadata i32 %23, metadata !109, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !116
-  %24 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, i32 0, i32 0, !dbg !167
-  store i32 %9, i32* %24, align 4, !dbg !167, !tbaa.struct !118
-  %25 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, i32 0, i32 1, !dbg !167
-  store i32 %11, i32* %25, align 4, !dbg !167, !tbaa.struct !122
-  %26 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, i32 0, i32 2, !dbg !167
-  store i32 %13, i32* %26, align 4, !dbg !167, !tbaa.struct !123
-  %27 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, i32 0, i32 3, !dbg !167
-  store i32 %15, i32* %27, align 4, !dbg !167, !tbaa.struct !124
-  %28 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, i32 0, i32 0, !dbg !168
-  store i32 %17, i32* %28, align 4, !dbg !168, !tbaa.struct !118
-  %29 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, i32 0, i32 1, !dbg !168
-  store i32 %19, i32* %29, align 4, !dbg !168, !tbaa.struct !122
-  %30 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, i32 0, i32 2, !dbg !168
-  store i32 %21, i32* %30, align 4, !dbg !168, !tbaa.struct !123
-  %31 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, i32 0, i32 3, !dbg !168
-  store i32 %23, i32* %31, align 4, !dbg !168, !tbaa.struct !124
-  %32 = call fastcc i32 @load32(i8* noundef %2), !dbg !169
-  call void @llvm.dbg.value(metadata i32 %32, metadata !110, metadata !DIExpression()), !dbg !116
-  %33 = getelementptr inbounds i8, i8* %2, i32 4, !dbg !170
-  call void @llvm.dbg.value(metadata i8* %33, metadata !111, metadata !DIExpression()), !dbg !116
-  %34 = call fastcc i32 @load32(i8* noundef nonnull %33), !dbg !171
-  call void @llvm.dbg.value(metadata i32 %34, metadata !112, metadata !DIExpression()), !dbg !116
-  %35 = getelementptr inbounds i8, i8* %2, i32 8, !dbg !172
-  call void @llvm.dbg.value(metadata i8* %35, metadata !113, metadata !DIExpression()), !dbg !116
-  %36 = call fastcc i32 @load32(i8* noundef nonnull %35), !dbg !173
-  call void @llvm.dbg.value(metadata i32 %36, metadata !114, metadata !DIExpression()), !dbg !116
-  call void @llvm.dbg.value(metadata i32 %3, metadata !115, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !116
-  call void @llvm.dbg.value(metadata i32 %32, metadata !115, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !116
-  call void @llvm.dbg.value(metadata i32 %34, metadata !115, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !116
-  call void @llvm.dbg.value(metadata i32 %36, metadata !115, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !116
-  %37 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 0, !dbg !174
-  store i32 %3, i32* %37, align 4, !dbg !174, !tbaa.struct !118
-  %38 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 1, !dbg !174
-  store i32 %32, i32* %38, align 4, !dbg !174, !tbaa.struct !122
-  %39 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 2, !dbg !174
-  store i32 %34, i32* %39, align 4, !dbg !174, !tbaa.struct !123
-  %40 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 3, !dbg !174
-  store i32 %36, i32* %40, align 4, !dbg !174, !tbaa.struct !124
-  ret void, !dbg !175
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_State_state_setup(ptr noundef %0, ptr noundef %1, ptr noundef %2, i32 noundef %3) #0 {
+  %5 = alloca ptr, align 4
+  %6 = alloca ptr, align 4
+  %7 = alloca ptr, align 4
+  %8 = alloca ptr, align 4
+  %9 = alloca ptr, align 4
+  %10 = alloca ptr, align 4
+  %11 = alloca ptr, align 4
+  %12 = alloca ptr, align 4
+  %13 = alloca ptr, align 4
+  %14 = alloca i32, align 4
+  %15 = alloca i32, align 4
+  %16 = alloca i32, align 4
+  %17 = alloca i32, align 4
+  %18 = alloca ptr, align 4
+  %19 = alloca i32, align 4
+  %20 = alloca i32, align 4
+  %21 = alloca i32, align 4
+  %22 = alloca i32, align 4
+  %23 = alloca ptr, align 4
+  %24 = alloca ptr, align 4
+  %25 = alloca ptr, align 4
+  %26 = alloca i32, align 4
+  %27 = alloca %struct.vec, align 4
+  %28 = alloca %struct.vec, align 4
+  %29 = alloca %struct.vec, align 4
+  %30 = alloca i32, align 4
+  %31 = alloca ptr, align 4
+  %32 = alloca i32, align 4
+  %33 = alloca ptr, align 4
+  %34 = alloca i32, align 4
+  %35 = alloca %struct.vec, align 4
+  store ptr %0, ptr %23, align 4
+  store ptr %1, ptr %24, align 4
+  store ptr %2, ptr %25, align 4
+  store i32 %3, ptr %26, align 4
+  %36 = load ptr, ptr %23, align 4
+  %37 = getelementptr inbounds %struct.vec, ptr %36, i32 0
+  call void @llvm.experimental.noalias.scope.decl(metadata !12)
+  store ptr %27, ptr %13, align 4, !noalias !12
+  store i32 1634760805, ptr %14, align 4, !noalias !12
+  store i32 857760878, ptr %15, align 4, !noalias !12
+  store i32 2036477234, ptr %16, align 4, !noalias !12
+  store i32 1797285236, ptr %17, align 4, !noalias !12
+  %38 = load i32, ptr %14, align 4, !noalias !12
+  store i32 %38, ptr %27, align 4, !alias.scope !12
+  %39 = load i32, ptr %15, align 4, !noalias !12
+  %40 = getelementptr inbounds [4 x i32], ptr %27, i32 0, i32 1
+  store i32 %39, ptr %40, align 4, !alias.scope !12
+  %41 = load i32, ptr %16, align 4, !noalias !12
+  %42 = getelementptr inbounds [4 x i32], ptr %27, i32 0, i32 2
+  store i32 %41, ptr %42, align 4, !alias.scope !12
+  %43 = load i32, ptr %17, align 4, !noalias !12
+  %44 = getelementptr inbounds [4 x i32], ptr %27, i32 0, i32 3
+  store i32 %43, ptr %44, align 4, !alias.scope !12
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %37, ptr align 4 %27, i32 16, i1 false)
+  %45 = load ptr, ptr %24, align 4
+  call void @llvm.experimental.noalias.scope.decl(metadata !15)
+  store ptr %28, ptr %9, align 4, !noalias !15
+  store ptr %45, ptr %10, align 4, !noalias !15
+  %46 = load ptr, ptr %10, align 4, !noalias !15
+  call void @llvm.experimental.noalias.scope.decl(metadata !18)
+  store ptr %28, ptr %7, align 4, !noalias !18
+  store ptr %46, ptr %8, align 4, !noalias !18
+  %47 = load ptr, ptr %8, align 4, !noalias !18
+  %48 = call i32 @load32(ptr noundef %47)
+  %49 = call i32 @__uint32_identity(i32 noundef %48)
+  store i32 %49, ptr %28, align 4, !alias.scope !18
+  %50 = load ptr, ptr %8, align 4, !noalias !18
+  %51 = getelementptr inbounds i8, ptr %50, i32 4
+  %52 = call i32 @load32(ptr noundef %51)
+  %53 = call i32 @__uint32_identity(i32 noundef %52)
+  %54 = getelementptr inbounds [4 x i32], ptr %28, i32 0, i32 1
+  store i32 %53, ptr %54, align 4, !alias.scope !18
+  %55 = load ptr, ptr %8, align 4, !noalias !18
+  %56 = getelementptr inbounds i8, ptr %55, i32 8
+  %57 = call i32 @load32(ptr noundef %56)
+  %58 = call i32 @__uint32_identity(i32 noundef %57)
+  %59 = getelementptr inbounds [4 x i32], ptr %28, i32 0, i32 2
+  store i32 %58, ptr %59, align 4, !alias.scope !18
+  %60 = load ptr, ptr %8, align 4, !noalias !18
+  %61 = getelementptr inbounds i8, ptr %60, i32 12
+  %62 = call i32 @load32(ptr noundef %61)
+  %63 = call i32 @__uint32_identity(i32 noundef %62)
+  %64 = getelementptr inbounds [4 x i32], ptr %28, i32 0, i32 3
+  store i32 %63, ptr %64, align 4, !alias.scope !18
+  %65 = load ptr, ptr %24, align 4
+  %66 = getelementptr inbounds i8, ptr %65, i32 16
+  call void @llvm.experimental.noalias.scope.decl(metadata !21)
+  store ptr %29, ptr %11, align 4, !noalias !21
+  store ptr %66, ptr %12, align 4, !noalias !21
+  %67 = load ptr, ptr %12, align 4, !noalias !21
+  call void @llvm.experimental.noalias.scope.decl(metadata !24)
+  store ptr %29, ptr %5, align 4, !noalias !24
+  store ptr %67, ptr %6, align 4, !noalias !24
+  %68 = load ptr, ptr %6, align 4, !noalias !24
+  %69 = call i32 @load32(ptr noundef %68)
+  %70 = call i32 @__uint32_identity(i32 noundef %69)
+  store i32 %70, ptr %29, align 4, !alias.scope !24
+  %71 = load ptr, ptr %6, align 4, !noalias !24
+  %72 = getelementptr inbounds i8, ptr %71, i32 4
+  %73 = call i32 @load32(ptr noundef %72)
+  %74 = call i32 @__uint32_identity(i32 noundef %73)
+  %75 = getelementptr inbounds [4 x i32], ptr %29, i32 0, i32 1
+  store i32 %74, ptr %75, align 4, !alias.scope !24
+  %76 = load ptr, ptr %6, align 4, !noalias !24
+  %77 = getelementptr inbounds i8, ptr %76, i32 8
+  %78 = call i32 @load32(ptr noundef %77)
+  %79 = call i32 @__uint32_identity(i32 noundef %78)
+  %80 = getelementptr inbounds [4 x i32], ptr %29, i32 0, i32 2
+  store i32 %79, ptr %80, align 4, !alias.scope !24
+  %81 = load ptr, ptr %6, align 4, !noalias !24
+  %82 = getelementptr inbounds i8, ptr %81, i32 12
+  %83 = call i32 @load32(ptr noundef %82)
+  %84 = call i32 @__uint32_identity(i32 noundef %83)
+  %85 = getelementptr inbounds [4 x i32], ptr %29, i32 0, i32 3
+  store i32 %84, ptr %85, align 4, !alias.scope !24
+  %86 = load ptr, ptr %23, align 4
+  %87 = getelementptr inbounds %struct.vec, ptr %86, i32 1
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %87, ptr align 4 %28, i32 16, i1 false)
+  %88 = load ptr, ptr %23, align 4
+  %89 = getelementptr inbounds %struct.vec, ptr %88, i32 2
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %89, ptr align 4 %29, i32 16, i1 false)
+  %90 = load ptr, ptr %25, align 4
+  %91 = call i32 @load32(ptr noundef %90)
+  %92 = call i32 @__uint32_identity(i32 noundef %91)
+  store i32 %92, ptr %30, align 4
+  %93 = load ptr, ptr %25, align 4
+  %94 = getelementptr inbounds i8, ptr %93, i32 4
+  store ptr %94, ptr %31, align 4
+  %95 = load ptr, ptr %31, align 4
+  %96 = call i32 @load32(ptr noundef %95)
+  %97 = call i32 @__uint32_identity(i32 noundef %96)
+  store i32 %97, ptr %32, align 4
+  %98 = load ptr, ptr %25, align 4
+  %99 = getelementptr inbounds i8, ptr %98, i32 8
+  store ptr %99, ptr %33, align 4
+  %100 = load ptr, ptr %33, align 4
+  %101 = call i32 @load32(ptr noundef %100)
+  %102 = call i32 @__uint32_identity(i32 noundef %101)
+  store i32 %102, ptr %34, align 4
+  %103 = load i32, ptr %26, align 4
+  %104 = load i32, ptr %30, align 4
+  %105 = load i32, ptr %32, align 4
+  %106 = load i32, ptr %34, align 4
+  call void @llvm.experimental.noalias.scope.decl(metadata !27)
+  store ptr %35, ptr %18, align 4, !noalias !27
+  store i32 %103, ptr %19, align 4, !noalias !27
+  store i32 %104, ptr %20, align 4, !noalias !27
+  store i32 %105, ptr %21, align 4, !noalias !27
+  store i32 %106, ptr %22, align 4, !noalias !27
+  %107 = load i32, ptr %19, align 4, !noalias !27
+  store i32 %107, ptr %35, align 4, !alias.scope !27
+  %108 = load i32, ptr %20, align 4, !noalias !27
+  %109 = getelementptr inbounds [4 x i32], ptr %35, i32 0, i32 1
+  store i32 %108, ptr %109, align 4, !alias.scope !27
+  %110 = load i32, ptr %21, align 4, !noalias !27
+  %111 = getelementptr inbounds [4 x i32], ptr %35, i32 0, i32 2
+  store i32 %110, ptr %111, align 4, !alias.scope !27
+  %112 = load i32, ptr %22, align 4, !noalias !27
+  %113 = getelementptr inbounds [4 x i32], ptr %35, i32 0, i32 3
+  store i32 %112, ptr %113, align 4, !alias.scope !27
+  %114 = load ptr, ptr %23, align 4
+  %115 = getelementptr inbounds %struct.vec, ptr %114, i32 3
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %115, ptr align 4 %35, i32 16, i1 false)
+  ret void
 }
 
-; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind readonly uwtable willreturn
-define internal fastcc i32 @load32(i8* nocapture noundef readonly %0) unnamed_addr #5 !dbg !176 {
-  call void @llvm.dbg.value(metadata i8* %0, metadata !180, metadata !DIExpression()), !dbg !182
-  %2 = bitcast i8* %0 to i32*, !dbg !183
-  %3 = load i32, i32* %2, align 1, !dbg !183
-  call void @llvm.dbg.value(metadata i32 %3, metadata !181, metadata !DIExpression()), !dbg !182
-  ret i32 %3, !dbg !184
+; Function Attrs: noinline nounwind uwtable
+define internal i32 @__uint32_identity(i32 noundef %0) #0 {
+  %2 = alloca i32, align 4
+  store i32 %0, ptr %2, align 4
+  %3 = load i32, ptr %2, align 4
+  ret i32 %3
 }
 
-; Function Attrs: nofree noinline nosync nounwind uwtable
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_counter_mode_blocks(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32 noundef %2, %struct.vec* nocapture noundef %3) unnamed_addr #0 !dbg !185 {
-  call void @llvm.dbg.value(metadata i8* %0, metadata !187, metadata !DIExpression()), !dbg !203
-  call void @llvm.dbg.value(metadata i8* %1, metadata !188, metadata !DIExpression()), !dbg !203
-  call void @llvm.dbg.value(metadata i32 %2, metadata !189, metadata !DIExpression()), !dbg !203
-  call void @llvm.dbg.value(metadata %struct.vec* %3, metadata !190, metadata !DIExpression()), !dbg !203
-  %5 = udiv i32 %2, 3, !dbg !204
-  call void @llvm.dbg.value(metadata i32 %5, metadata !191, metadata !DIExpression()), !dbg !203
-  %6 = urem i32 %2, 3, !dbg !205
-  call void @llvm.dbg.value(metadata i32 %6, metadata !192, metadata !DIExpression()), !dbg !203
-  call void @llvm.dbg.value(metadata i8* %1, metadata !193, metadata !DIExpression()), !dbg !203
-  %7 = mul i32 %5, 192, !dbg !206
-  %8 = getelementptr inbounds i8, i8* %1, i32 %7, !dbg !207
-  call void @llvm.dbg.value(metadata i8* %8, metadata !194, metadata !DIExpression()), !dbg !203
-  call void @llvm.dbg.value(metadata i8* %0, metadata !195, metadata !DIExpression()), !dbg !203
-  %9 = getelementptr inbounds i8, i8* %0, i32 %7, !dbg !208
-  call void @llvm.dbg.value(metadata i8* %9, metadata !196, metadata !DIExpression()), !dbg !203
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_counter_mode_blocks3(i8* noundef %0, i8* noundef %1, i32 noundef %5, %struct.vec* noundef %3), !dbg !209
-  switch i32 %6, label %15 [
-    i32 2, label %10
-    i32 1, label %13
-  ], !dbg !210
-
-10:                                               ; preds = %4
-  call void @llvm.dbg.value(metadata i8* %8, metadata !197, metadata !DIExpression()), !dbg !211
-  %11 = getelementptr inbounds i8, i8* %8, i32 64, !dbg !212
-  call void @llvm.dbg.value(metadata i8* %11, metadata !200, metadata !DIExpression()), !dbg !211
-  call void @llvm.dbg.value(metadata i8* %9, metadata !201, metadata !DIExpression()), !dbg !211
-  %12 = getelementptr inbounds i8, i8* %9, i32 64, !dbg !213
-  call void @llvm.dbg.value(metadata i8* %12, metadata !202, metadata !DIExpression()), !dbg !211
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_update(i8* noundef %9, i8* noundef %8, %struct.vec* noundef %3), !dbg !214
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_state_incr(%struct.vec* noundef %3), !dbg !215
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_update(i8* noundef nonnull %12, i8* noundef nonnull %11, %struct.vec* noundef %3), !dbg !216
-  br label %14, !dbg !217
-
-13:                                               ; preds = %4
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_update(i8* noundef %9, i8* noundef %8, %struct.vec* noundef %3), !dbg !218
-  br label %14, !dbg !221
-
-14:                                               ; preds = %10, %13
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_state_incr(%struct.vec* noundef %3), !dbg !222
-  br label %15, !dbg !223
-
-15:                                               ; preds = %14, %4
-  ret void, !dbg !223
+; Function Attrs: noinline nounwind uwtable
+define internal i32 @load32(ptr noundef %0) #0 {
+  %2 = alloca ptr, align 4
+  %3 = alloca i32, align 4
+  store ptr %0, ptr %2, align 4
+  %4 = load ptr, ptr %2, align 4
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %3, ptr align 1 %4, i32 4, i1 false)
+  %5 = load i32, ptr %3, align 4
+  ret i32 %5
 }
 
-; Function Attrs: nofree noinline nosync nounwind uwtable
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_update_last(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32 noundef %2, %struct.vec* nocapture noundef readonly %3) unnamed_addr #0 !dbg !224 {
-  %5 = alloca [64 x i8], align 1
-  call void @llvm.dbg.value(metadata i8* %0, metadata !226, metadata !DIExpression()), !dbg !241
-  call void @llvm.dbg.value(metadata i8* %1, metadata !227, metadata !DIExpression()), !dbg !241
-  call void @llvm.dbg.value(metadata i32 %2, metadata !228, metadata !DIExpression()), !dbg !241
-  call void @llvm.dbg.value(metadata %struct.vec* %3, metadata !229, metadata !DIExpression()), !dbg !241
-  %6 = getelementptr inbounds [64 x i8], [64 x i8]* %5, i32 0, i32 0, !dbg !242
-  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %6) #10, !dbg !242
-  call void @llvm.dbg.declare(metadata [64 x i8]* %5, metadata !230, metadata !DIExpression()), !dbg !243
-  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 1 dereferenceable(64) %6, i8 0, i32 64, i1 false), !dbg !243
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_block(i8* noundef nonnull %6, %struct.vec* noundef %3), !dbg !244
-  call void @llvm.dbg.value(metadata i8* %6, metadata !234, metadata !DIExpression()), !dbg !241
-  call void @llvm.dbg.value(metadata i32 0, metadata !235, metadata !DIExpression()), !dbg !245
-  %7 = icmp eq i32 %2, 0, !dbg !246
-  br i1 %7, label %8, label %9, !dbg !247
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_chacha20_counter_mode_blocks(ptr noundef %0, ptr noundef %1, i32 noundef %2, ptr noundef %3) #0 {
+  %5 = alloca ptr, align 4
+  %6 = alloca ptr, align 4
+  %7 = alloca i32, align 4
+  %8 = alloca ptr, align 4
+  %9 = alloca i32, align 4
+  %10 = alloca i32, align 4
+  %11 = alloca ptr, align 4
+  %12 = alloca ptr, align 4
+  %13 = alloca ptr, align 4
+  %14 = alloca ptr, align 4
+  %15 = alloca ptr, align 4
+  %16 = alloca ptr, align 4
+  %17 = alloca ptr, align 4
+  %18 = alloca ptr, align 4
+  store ptr %0, ptr %5, align 4
+  store ptr %1, ptr %6, align 4
+  store i32 %2, ptr %7, align 4
+  store ptr %3, ptr %8, align 4
+  %19 = load i32, ptr %7, align 4
+  %20 = udiv i32 %19, 3
+  store i32 %20, ptr %9, align 4
+  %21 = load i32, ptr %7, align 4
+  %22 = urem i32 %21, 3
+  store i32 %22, ptr %10, align 4
+  %23 = load ptr, ptr %6, align 4
+  store ptr %23, ptr %11, align 4
+  %24 = load ptr, ptr %6, align 4
+  %25 = load i32, ptr %9, align 4
+  %26 = mul i32 192, %25
+  %27 = getelementptr inbounds i8, ptr %24, i32 %26
+  store ptr %27, ptr %12, align 4
+  %28 = load ptr, ptr %5, align 4
+  store ptr %28, ptr %13, align 4
+  %29 = load ptr, ptr %5, align 4
+  %30 = load i32, ptr %9, align 4
+  %31 = mul i32 192, %30
+  %32 = getelementptr inbounds i8, ptr %29, i32 %31
+  store ptr %32, ptr %14, align 4
+  %33 = load ptr, ptr %13, align 4
+  %34 = load ptr, ptr %11, align 4
+  %35 = load i32, ptr %9, align 4
+  %36 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_chacha20_counter_mode_blocks3(ptr noundef %33, ptr noundef %34, i32 noundef %35, ptr noundef %36)
+  %37 = load i32, ptr %10, align 4
+  %38 = icmp eq i32 %37, 2
+  br i1 %38, label %39, label %54
 
-8:                                                ; preds = %9, %4
-  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %6) #10, !dbg !248
-  ret void, !dbg !248
+39:                                               ; preds = %4
+  %40 = load ptr, ptr %12, align 4
+  store ptr %40, ptr %15, align 4
+  %41 = load ptr, ptr %12, align 4
+  %42 = getelementptr inbounds i8, ptr %41, i32 64
+  store ptr %42, ptr %16, align 4
+  %43 = load ptr, ptr %14, align 4
+  store ptr %43, ptr %17, align 4
+  %44 = load ptr, ptr %14, align 4
+  %45 = getelementptr inbounds i8, ptr %44, i32 64
+  store ptr %45, ptr %18, align 4
+  %46 = load ptr, ptr %17, align 4
+  %47 = load ptr, ptr %15, align 4
+  %48 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_update(ptr noundef %46, ptr noundef %47, ptr noundef %48)
+  %49 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_state_incr(ptr noundef %49)
+  %50 = load ptr, ptr %18, align 4
+  %51 = load ptr, ptr %16, align 4
+  %52 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_update(ptr noundef %50, ptr noundef %51, ptr noundef %52)
+  %53 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_state_incr(ptr noundef %53)
+  br label %63
 
-9:                                                ; preds = %4, %9
-  %10 = phi i32 [ %17, %9 ], [ 0, %4 ]
-  call void @llvm.dbg.value(metadata i32 %10, metadata !235, metadata !DIExpression()), !dbg !245
-  %11 = getelementptr inbounds i8, i8* %1, i32 %10, !dbg !249
-  %12 = load i8, i8* %11, align 1, !dbg !249, !tbaa !119
-  call void @llvm.dbg.value(metadata i8 %12, metadata !237, metadata !DIExpression()), !dbg !250
-  %13 = getelementptr inbounds [64 x i8], [64 x i8]* %5, i32 0, i32 %10, !dbg !251
-  %14 = load i8, i8* %13, align 1, !dbg !251, !tbaa !119
-  call void @llvm.dbg.value(metadata i8 %14, metadata !240, metadata !DIExpression()), !dbg !250
-  %15 = xor i8 %14, %12, !dbg !252
-  %16 = getelementptr inbounds i8, i8* %0, i32 %10, !dbg !253
-  store i8 %15, i8* %16, align 1, !dbg !254, !tbaa !119
-  %17 = add nuw i32 %10, 1, !dbg !255
-  call void @llvm.dbg.value(metadata i32 %17, metadata !235, metadata !DIExpression()), !dbg !245
-  %18 = icmp eq i32 %17, %2, !dbg !246
-  br i1 %18, label %8, label %9, !dbg !247, !llvm.loop !256
+54:                                               ; preds = %4
+  %55 = load i32, ptr %10, align 4
+  %56 = icmp eq i32 %55, 1
+  br i1 %56, label %57, label %62
+
+57:                                               ; preds = %54
+  %58 = load ptr, ptr %14, align 4
+  %59 = load ptr, ptr %12, align 4
+  %60 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_update(ptr noundef %58, ptr noundef %59, ptr noundef %60)
+  %61 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_state_incr(ptr noundef %61)
+  br label %62
+
+62:                                               ; preds = %57, %54
+  br label %63
+
+63:                                               ; preds = %62, %39
+  ret void
 }
 
-; Function Attrs: nofree noinline nosync nounwind uwtable
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_counter_mode_blocks3(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, i32 noundef %2, %struct.vec* nocapture noundef %3) unnamed_addr #0 !dbg !260 {
-  call void @llvm.dbg.value(metadata i8* %0, metadata !262, metadata !DIExpression()), !dbg !268
-  call void @llvm.dbg.value(metadata i8* %1, metadata !263, metadata !DIExpression()), !dbg !268
-  call void @llvm.dbg.value(metadata i32 %2, metadata !264, metadata !DIExpression()), !dbg !268
-  call void @llvm.dbg.value(metadata %struct.vec* %3, metadata !265, metadata !DIExpression()), !dbg !268
-  call void @llvm.dbg.value(metadata i32 0, metadata !266, metadata !DIExpression()), !dbg !269
-  %5 = icmp eq i32 %2, 0, !dbg !270
-  br i1 %5, label %6, label %7, !dbg !272
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_update_last(ptr noundef %0, ptr noundef %1, i32 noundef %2, ptr noundef %3) #0 {
+  %5 = alloca ptr, align 4
+  %6 = alloca ptr, align 4
+  %7 = alloca i32, align 4
+  %8 = alloca ptr, align 4
+  %9 = alloca [64 x i8], align 1
+  %10 = alloca ptr, align 4
+  %11 = alloca i32, align 4
+  %12 = alloca i8, align 1
+  %13 = alloca i8, align 1
+  store ptr %0, ptr %5, align 4
+  store ptr %1, ptr %6, align 4
+  store i32 %2, ptr %7, align 4
+  store ptr %3, ptr %8, align 4
+  call void @llvm.memset.p0.i32(ptr align 1 %9, i8 0, i32 64, i1 false)
+  %14 = getelementptr inbounds [64 x i8], ptr %9, i32 0, i32 0
+  %15 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_chacha20_block(ptr noundef %14, ptr noundef %15)
+  %16 = getelementptr inbounds [64 x i8], ptr %9, i32 0, i32 0
+  store ptr %16, ptr %10, align 4
+  store i32 0, ptr %11, align 4
+  br label %17
 
-6:                                                ; preds = %7, %4
-  ret void, !dbg !273
+17:                                               ; preds = %39, %4
+  %18 = load i32, ptr %11, align 4
+  %19 = load i32, ptr %7, align 4
+  %20 = icmp ult i32 %18, %19
+  br i1 %20, label %21, label %42
 
-7:                                                ; preds = %4, %7
-  %8 = phi i32 [ %9, %7 ], [ 0, %4 ]
-  call void @llvm.dbg.value(metadata i32 %8, metadata !266, metadata !DIExpression()), !dbg !269
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_update3_(i8* noundef %0, i8* noundef %1, %struct.vec* noundef %3, i32 noundef %8), !dbg !274
-  %9 = add nuw i32 %8, 1, !dbg !275
-  call void @llvm.dbg.value(metadata i32 %9, metadata !266, metadata !DIExpression()), !dbg !269
-  %10 = icmp eq i32 %9, %2, !dbg !270
-  br i1 %10, label %6, label %7, !dbg !272, !llvm.loop !276
+21:                                               ; preds = %17
+  %22 = load ptr, ptr %6, align 4
+  %23 = load i32, ptr %11, align 4
+  %24 = getelementptr inbounds i8, ptr %22, i32 %23
+  %25 = load i8, ptr %24, align 1
+  store i8 %25, ptr %12, align 1
+  %26 = load ptr, ptr %10, align 4
+  %27 = load i32, ptr %11, align 4
+  %28 = getelementptr inbounds i8, ptr %26, i32 %27
+  %29 = load i8, ptr %28, align 1
+  store i8 %29, ptr %13, align 1
+  %30 = load i8, ptr %12, align 1
+  %31 = zext i8 %30 to i32
+  %32 = load i8, ptr %13, align 1
+  %33 = zext i8 %32 to i32
+  %34 = xor i32 %31, %33
+  %35 = trunc i32 %34 to i8
+  %36 = load ptr, ptr %5, align 4
+  %37 = load i32, ptr %11, align 4
+  %38 = getelementptr inbounds i8, ptr %36, i32 %37
+  store i8 %35, ptr %38, align 1
+  br label %39
+
+39:                                               ; preds = %21
+  %40 = load i32, ptr %11, align 4
+  %41 = add i32 %40, 1
+  store i32 %41, ptr %11, align 4
+  br label %17, !llvm.loop !30
+
+42:                                               ; preds = %17
+  ret void
 }
 
-; Function Attrs: nofree noinline nosync nounwind uwtable
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_update(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, %struct.vec* nocapture noundef readonly %2) unnamed_addr #0 !dbg !278 {
-  %4 = alloca [4 x %struct.vec], align 4
-  %5 = bitcast [4 x %struct.vec]* %4 to i8*, !dbg !288
-  call void @llvm.dbg.value(metadata i8* %0, metadata !282, metadata !DIExpression()), !dbg !288
-  call void @llvm.dbg.value(metadata i8* %1, metadata !283, metadata !DIExpression()), !dbg !288
-  call void @llvm.dbg.value(metadata %struct.vec* %2, metadata !284, metadata !DIExpression()), !dbg !288
-  %6 = bitcast [4 x %struct.vec]* %4 to i8*, !dbg !289
-  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %6) #10, !dbg !289
-  call void @llvm.dbg.declare(metadata [4 x %struct.vec]* %4, metadata !285, metadata !DIExpression()), !dbg !290
-  call void @llvm.dbg.value(metadata i32 0, metadata !286, metadata !DIExpression()), !dbg !291
-  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(64) %5, i8 0, i32 64, i1 false), !dbg !292
-  call void @llvm.dbg.value(metadata i32 undef, metadata !286, metadata !DIExpression()), !dbg !291
-  call void @llvm.dbg.value(metadata i32 undef, metadata !286, metadata !DIExpression(DW_OP_plus_uconst, 1, DW_OP_stack_value)), !dbg !291
-  %7 = getelementptr inbounds [4 x %struct.vec], [4 x %struct.vec]* %4, i32 0, i32 0, !dbg !294
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_core(%struct.vec* noundef nonnull %7, %struct.vec* noundef %2), !dbg !295
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_xor_block(i8* noundef %0, i8* noundef %1, %struct.vec* noundef nonnull %7), !dbg !296
-  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %6) #10, !dbg !297
-  ret void, !dbg !297
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_chacha20_counter_mode_blocks3(ptr noundef %0, ptr noundef %1, i32 noundef %2, ptr noundef %3) #0 {
+  %5 = alloca ptr, align 4
+  %6 = alloca ptr, align 4
+  %7 = alloca i32, align 4
+  %8 = alloca ptr, align 4
+  %9 = alloca i32, align 4
+  store ptr %0, ptr %5, align 4
+  store ptr %1, ptr %6, align 4
+  store i32 %2, ptr %7, align 4
+  store ptr %3, ptr %8, align 4
+  store i32 0, ptr %9, align 4
+  br label %10
+
+10:                                               ; preds = %20, %4
+  %11 = load i32, ptr %9, align 4
+  %12 = load i32, ptr %7, align 4
+  %13 = icmp ult i32 %11, %12
+  br i1 %13, label %14, label %23
+
+14:                                               ; preds = %10
+  %15 = load ptr, ptr %5, align 4
+  %16 = load ptr, ptr %6, align 4
+  %17 = load i32, ptr %7, align 4
+  %18 = load ptr, ptr %8, align 4
+  %19 = load i32, ptr %9, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_update3_(ptr noundef %15, ptr noundef %16, i32 noundef %17, ptr noundef %18, i32 noundef %19)
+  br label %20
+
+20:                                               ; preds = %14
+  %21 = load i32, ptr %9, align 4
+  %22 = add i32 %21, 1
+  store i32 %22, ptr %9, align 4
+  br label %10, !llvm.loop !31
+
+23:                                               ; preds = %10
+  ret void
 }
 
-; Function Attrs: mustprogress nofree noinline nosync nounwind uwtable willreturn
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_state_incr(%struct.vec* nocapture noundef %0) unnamed_addr #4 !dbg !298 {
-  call void @llvm.dbg.value(metadata %struct.vec* %0, metadata !302, metadata !DIExpression()), !dbg !303
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_State_state_incr(%struct.vec* noundef %0), !dbg !304
-  ret void, !dbg !305
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_update(ptr noundef %0, ptr noundef %1, ptr noundef %2) #0 {
+  %4 = alloca ptr, align 4
+  %5 = alloca i32, align 4
+  %6 = alloca i32, align 4
+  %7 = alloca i32, align 4
+  %8 = alloca i32, align 4
+  %9 = alloca ptr, align 4
+  %10 = alloca ptr, align 4
+  %11 = alloca ptr, align 4
+  %12 = alloca [4 x %struct.vec], align 4
+  %13 = alloca i32, align 4
+  %14 = alloca %struct.vec, align 4
+  store ptr %0, ptr %9, align 4
+  store ptr %1, ptr %10, align 4
+  store ptr %2, ptr %11, align 4
+  store i32 0, ptr %13, align 4
+  br label %15
+
+15:                                               ; preds = %28, %3
+  %16 = load i32, ptr %13, align 4
+  %17 = icmp ult i32 %16, 4
+  br i1 %17, label %18, label %31
+
+18:                                               ; preds = %15
+  %19 = load i32, ptr %13, align 4
+  %20 = getelementptr inbounds [4 x %struct.vec], ptr %12, i32 0, i32 %19
+  call void @llvm.experimental.noalias.scope.decl(metadata !32)
+  store ptr %14, ptr %4, align 4, !noalias !32
+  store i32 0, ptr %5, align 4, !noalias !32
+  store i32 0, ptr %6, align 4, !noalias !32
+  store i32 0, ptr %7, align 4, !noalias !32
+  store i32 0, ptr %8, align 4, !noalias !32
+  %21 = load i32, ptr %5, align 4, !noalias !32
+  store i32 %21, ptr %14, align 4, !alias.scope !32
+  %22 = load i32, ptr %6, align 4, !noalias !32
+  %23 = getelementptr inbounds [4 x i32], ptr %14, i32 0, i32 1
+  store i32 %22, ptr %23, align 4, !alias.scope !32
+  %24 = load i32, ptr %7, align 4, !noalias !32
+  %25 = getelementptr inbounds [4 x i32], ptr %14, i32 0, i32 2
+  store i32 %24, ptr %25, align 4, !alias.scope !32
+  %26 = load i32, ptr %8, align 4, !noalias !32
+  %27 = getelementptr inbounds [4 x i32], ptr %14, i32 0, i32 3
+  store i32 %26, ptr %27, align 4, !alias.scope !32
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %20, ptr align 4 %14, i32 16, i1 false)
+  br label %28
+
+28:                                               ; preds = %18
+  %29 = load i32, ptr %13, align 4
+  %30 = add i32 %29, 1
+  store i32 %30, ptr %13, align 4
+  br label %15, !llvm.loop !35
+
+31:                                               ; preds = %15
+  %32 = getelementptr inbounds [4 x %struct.vec], ptr %12, i32 0, i32 0
+  %33 = load ptr, ptr %11, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_chacha20_core(ptr noundef %32, ptr noundef %33)
+  %34 = load ptr, ptr %9, align 4
+  %35 = load ptr, ptr %10, align 4
+  %36 = getelementptr inbounds [4 x %struct.vec], ptr %12, i32 0, i32 0
+  call void @Hacl_Impl_Chacha20_Vec128_xor_block(ptr noundef %34, ptr noundef %35, ptr noundef %36)
+  ret void
 }
 
-; Function Attrs: nofree noinline nosync nounwind uwtable
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_update3_(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, %struct.vec* nocapture noundef %2, i32 noundef %3) unnamed_addr #0 !dbg !306 {
-  call void @llvm.dbg.value(metadata i8* %0, metadata !310, metadata !DIExpression()), !dbg !317
-  call void @llvm.dbg.value(metadata i8* %1, metadata !311, metadata !DIExpression()), !dbg !317
-  call void @llvm.dbg.value(metadata i32 undef, metadata !312, metadata !DIExpression()), !dbg !317
-  call void @llvm.dbg.value(metadata %struct.vec* %2, metadata !313, metadata !DIExpression()), !dbg !317
-  call void @llvm.dbg.value(metadata i32 %3, metadata !314, metadata !DIExpression()), !dbg !317
-  %5 = mul i32 %3, 192, !dbg !318
-  %6 = getelementptr inbounds i8, i8* %0, i32 %5, !dbg !319
-  call void @llvm.dbg.value(metadata i8* %6, metadata !315, metadata !DIExpression()), !dbg !317
-  %7 = getelementptr inbounds i8, i8* %1, i32 %5, !dbg !320
-  call void @llvm.dbg.value(metadata i8* %7, metadata !316, metadata !DIExpression()), !dbg !317
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_update3(i8* noundef %6, i8* noundef %7, %struct.vec* noundef %2), !dbg !321
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_state_incr(%struct.vec* noundef %2), !dbg !322
-  ret void, !dbg !323
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_state_incr(ptr noundef %0) #0 {
+  %2 = alloca ptr, align 4
+  store ptr %0, ptr %2, align 4
+  %3 = load ptr, ptr %2, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_State_state_incr(ptr noundef %3)
+  ret void
 }
 
-; Function Attrs: nofree noinline nosync nounwind uwtable
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_update3(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, %struct.vec* nocapture noundef %2) unnamed_addr #0 !dbg !324 {
-  %4 = alloca [4 x %struct.vec], align 4
-  %5 = bitcast [4 x %struct.vec]* %4 to i8*
-  %6 = alloca [4 x %struct.vec], align 4
-  %7 = alloca [4 x %struct.vec], align 4
-  %8 = bitcast [4 x %struct.vec]* %7 to i8*, !dbg !344
-  call void @llvm.dbg.value(metadata i8* %0, metadata !326, metadata !DIExpression()), !dbg !344
-  call void @llvm.dbg.value(metadata i8* %1, metadata !327, metadata !DIExpression()), !dbg !344
-  call void @llvm.dbg.value(metadata %struct.vec* %2, metadata !328, metadata !DIExpression()), !dbg !344
-  %9 = bitcast [4 x %struct.vec]* %4 to i8*, !dbg !345
-  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %9) #10, !dbg !345
-  call void @llvm.dbg.declare(metadata [4 x %struct.vec]* %4, metadata !329, metadata !DIExpression()), !dbg !346
-  call void @llvm.dbg.value(metadata i32 0, metadata !330, metadata !DIExpression()), !dbg !347
-  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(64) %5, i8 0, i32 64, i1 false), !dbg !348
-  %10 = bitcast [4 x %struct.vec]* %6 to i8*
-  call void @llvm.dbg.value(metadata i32 undef, metadata !330, metadata !DIExpression()), !dbg !347
-  call void @llvm.dbg.value(metadata i32 undef, metadata !330, metadata !DIExpression(DW_OP_plus_uconst, 1, DW_OP_stack_value)), !dbg !347
-  %11 = bitcast [4 x %struct.vec]* %6 to i8*, !dbg !350
-  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %11) #10, !dbg !350
-  call void @llvm.dbg.declare(metadata [4 x %struct.vec]* %6, metadata !332, metadata !DIExpression()), !dbg !351
-  call void @llvm.dbg.value(metadata i32 0, metadata !333, metadata !DIExpression()), !dbg !352
-  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(64) %10, i8 0, i32 64, i1 false), !dbg !353
-  call void @llvm.dbg.value(metadata i32 undef, metadata !333, metadata !DIExpression()), !dbg !352
-  call void @llvm.dbg.value(metadata i32 undef, metadata !333, metadata !DIExpression(DW_OP_plus_uconst, 1, DW_OP_stack_value)), !dbg !352
-  %12 = bitcast [4 x %struct.vec]* %7 to i8*, !dbg !355
-  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %12) #10, !dbg !355
-  call void @llvm.dbg.declare(metadata [4 x %struct.vec]* %7, metadata !335, metadata !DIExpression()), !dbg !356
-  call void @llvm.dbg.value(metadata i32 0, metadata !336, metadata !DIExpression()), !dbg !357
-  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(64) %8, i8 0, i32 64, i1 false), !dbg !358
-  call void @llvm.dbg.value(metadata i32 undef, metadata !336, metadata !DIExpression()), !dbg !357
-  call void @llvm.dbg.value(metadata i32 undef, metadata !336, metadata !DIExpression(DW_OP_plus_uconst, 1, DW_OP_stack_value)), !dbg !357
-  %13 = getelementptr inbounds [4 x %struct.vec], [4 x %struct.vec]* %4, i32 0, i32 0, !dbg !360
-  %14 = getelementptr inbounds [4 x %struct.vec], [4 x %struct.vec]* %6, i32 0, i32 0, !dbg !361
-  %15 = getelementptr inbounds [4 x %struct.vec], [4 x %struct.vec]* %7, i32 0, i32 0, !dbg !362
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_core3(%struct.vec* noundef nonnull %13, %struct.vec* noundef nonnull %14, %struct.vec* noundef nonnull %15, %struct.vec* noundef %2), !dbg !363
-  call void @llvm.dbg.value(metadata i8* %1, metadata !338, metadata !DIExpression()), !dbg !344
-  %16 = getelementptr inbounds i8, i8* %1, i32 64, !dbg !364
-  call void @llvm.dbg.value(metadata i8* %16, metadata !339, metadata !DIExpression()), !dbg !344
-  %17 = getelementptr inbounds i8, i8* %1, i32 128, !dbg !365
-  call void @llvm.dbg.value(metadata i8* %17, metadata !340, metadata !DIExpression()), !dbg !344
-  call void @llvm.dbg.value(metadata i8* %0, metadata !341, metadata !DIExpression()), !dbg !344
-  %18 = getelementptr inbounds i8, i8* %0, i32 64, !dbg !366
-  call void @llvm.dbg.value(metadata i8* %18, metadata !342, metadata !DIExpression()), !dbg !344
-  %19 = getelementptr inbounds i8, i8* %0, i32 128, !dbg !367
-  call void @llvm.dbg.value(metadata i8* %19, metadata !343, metadata !DIExpression()), !dbg !344
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_xor_block(i8* noundef %0, i8* noundef %1, %struct.vec* noundef nonnull %13), !dbg !368
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_xor_block(i8* noundef nonnull %18, i8* noundef nonnull %16, %struct.vec* noundef nonnull %14), !dbg !369
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_xor_block(i8* noundef nonnull %19, i8* noundef nonnull %17, %struct.vec* noundef nonnull %15), !dbg !370
-  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %12) #10, !dbg !371
-  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %11) #10, !dbg !371
-  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %9) #10, !dbg !371
-  ret void, !dbg !371
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_update3_(ptr noundef %0, ptr noundef %1, i32 noundef %2, ptr noundef %3, i32 noundef %4) #0 {
+  %6 = alloca ptr, align 4
+  %7 = alloca ptr, align 4
+  %8 = alloca i32, align 4
+  %9 = alloca ptr, align 4
+  %10 = alloca i32, align 4
+  %11 = alloca ptr, align 4
+  %12 = alloca ptr, align 4
+  store ptr %0, ptr %6, align 4
+  store ptr %1, ptr %7, align 4
+  store i32 %2, ptr %8, align 4
+  store ptr %3, ptr %9, align 4
+  store i32 %4, ptr %10, align 4
+  %13 = load ptr, ptr %6, align 4
+  %14 = load i32, ptr %10, align 4
+  %15 = mul i32 192, %14
+  %16 = getelementptr inbounds i8, ptr %13, i32 %15
+  store ptr %16, ptr %11, align 4
+  %17 = load ptr, ptr %7, align 4
+  %18 = load i32, ptr %10, align 4
+  %19 = mul i32 192, %18
+  %20 = getelementptr inbounds i8, ptr %17, i32 %19
+  store ptr %20, ptr %12, align 4
+  %21 = load ptr, ptr %11, align 4
+  %22 = load ptr, ptr %12, align 4
+  %23 = load ptr, ptr %9, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_update3(ptr noundef %21, ptr noundef %22, ptr noundef %23)
+  %24 = load ptr, ptr %9, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_state_incr(ptr noundef %24)
+  ret void
 }
 
-; Function Attrs: nofree noinline nosync nounwind uwtable
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_core3(%struct.vec* nocapture noundef %0, %struct.vec* nocapture noundef %1, %struct.vec* nocapture noundef %2, %struct.vec* nocapture noundef %3) unnamed_addr #0 !dbg !372 {
-  call void @llvm.dbg.value(metadata %struct.vec* %0, metadata !376, metadata !DIExpression()), !dbg !382
-  call void @llvm.dbg.value(metadata %struct.vec* %1, metadata !377, metadata !DIExpression()), !dbg !382
-  call void @llvm.dbg.value(metadata %struct.vec* %2, metadata !378, metadata !DIExpression()), !dbg !382
-  call void @llvm.dbg.value(metadata %struct.vec* %3, metadata !379, metadata !DIExpression()), !dbg !382
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_incr3(%struct.vec* noundef %0, %struct.vec* noundef %1, %struct.vec* noundef %2, %struct.vec* noundef %3), !dbg !383
-  call void @llvm.dbg.value(metadata i32 0, metadata !380, metadata !DIExpression()), !dbg !384
-  br label %6, !dbg !385
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_update3(ptr noundef %0, ptr noundef %1, ptr noundef %2) #0 {
+  %4 = alloca ptr, align 4
+  %5 = alloca i32, align 4
+  %6 = alloca i32, align 4
+  %7 = alloca i32, align 4
+  %8 = alloca i32, align 4
+  %9 = alloca ptr, align 4
+  %10 = alloca i32, align 4
+  %11 = alloca i32, align 4
+  %12 = alloca i32, align 4
+  %13 = alloca i32, align 4
+  %14 = alloca ptr, align 4
+  %15 = alloca i32, align 4
+  %16 = alloca i32, align 4
+  %17 = alloca i32, align 4
+  %18 = alloca i32, align 4
+  %19 = alloca ptr, align 4
+  %20 = alloca ptr, align 4
+  %21 = alloca ptr, align 4
+  %22 = alloca [4 x %struct.vec], align 4
+  %23 = alloca i32, align 4
+  %24 = alloca %struct.vec, align 4
+  %25 = alloca [4 x %struct.vec], align 4
+  %26 = alloca i32, align 4
+  %27 = alloca %struct.vec, align 4
+  %28 = alloca [4 x %struct.vec], align 4
+  %29 = alloca i32, align 4
+  %30 = alloca %struct.vec, align 4
+  %31 = alloca ptr, align 4
+  %32 = alloca ptr, align 4
+  %33 = alloca ptr, align 4
+  %34 = alloca ptr, align 4
+  %35 = alloca ptr, align 4
+  %36 = alloca ptr, align 4
+  store ptr %0, ptr %19, align 4
+  store ptr %1, ptr %20, align 4
+  store ptr %2, ptr %21, align 4
+  store i32 0, ptr %23, align 4
+  br label %37
 
-5:                                                ; preds = %6
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_sum3(%struct.vec* noundef %0, %struct.vec* noundef %1, %struct.vec* noundef %2, %struct.vec* noundef %3), !dbg !386
-  ret void, !dbg !387
+37:                                               ; preds = %50, %3
+  %38 = load i32, ptr %23, align 4
+  %39 = icmp ult i32 %38, 4
+  br i1 %39, label %40, label %53
 
-6:                                                ; preds = %4, %6
-  %7 = phi i32 [ 0, %4 ], [ %8, %6 ]
-  call void @llvm.dbg.value(metadata i32 %7, metadata !380, metadata !DIExpression()), !dbg !384
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_double_round3(%struct.vec* noundef %0, %struct.vec* noundef %1, %struct.vec* noundef %2), !dbg !388
-  %8 = add nuw nsw i32 %7, 1, !dbg !390
-  call void @llvm.dbg.value(metadata i32 %8, metadata !380, metadata !DIExpression()), !dbg !384
-  %9 = icmp eq i32 %8, 10, !dbg !391
-  br i1 %9, label %5, label %6, !dbg !385, !llvm.loop !392
+40:                                               ; preds = %37
+  %41 = load i32, ptr %23, align 4
+  %42 = getelementptr inbounds [4 x %struct.vec], ptr %22, i32 0, i32 %41
+  call void @llvm.experimental.noalias.scope.decl(metadata !36)
+  store ptr %24, ptr %4, align 4, !noalias !36
+  store i32 0, ptr %5, align 4, !noalias !36
+  store i32 0, ptr %6, align 4, !noalias !36
+  store i32 0, ptr %7, align 4, !noalias !36
+  store i32 0, ptr %8, align 4, !noalias !36
+  %43 = load i32, ptr %5, align 4, !noalias !36
+  store i32 %43, ptr %24, align 4, !alias.scope !36
+  %44 = load i32, ptr %6, align 4, !noalias !36
+  %45 = getelementptr inbounds [4 x i32], ptr %24, i32 0, i32 1
+  store i32 %44, ptr %45, align 4, !alias.scope !36
+  %46 = load i32, ptr %7, align 4, !noalias !36
+  %47 = getelementptr inbounds [4 x i32], ptr %24, i32 0, i32 2
+  store i32 %46, ptr %47, align 4, !alias.scope !36
+  %48 = load i32, ptr %8, align 4, !noalias !36
+  %49 = getelementptr inbounds [4 x i32], ptr %24, i32 0, i32 3
+  store i32 %48, ptr %49, align 4, !alias.scope !36
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %42, ptr align 4 %24, i32 16, i1 false)
+  br label %50
+
+50:                                               ; preds = %40
+  %51 = load i32, ptr %23, align 4
+  %52 = add i32 %51, 1
+  store i32 %52, ptr %23, align 4
+  br label %37, !llvm.loop !39
+
+53:                                               ; preds = %37
+  store i32 0, ptr %26, align 4
+  br label %54
+
+54:                                               ; preds = %67, %53
+  %55 = load i32, ptr %26, align 4
+  %56 = icmp ult i32 %55, 4
+  br i1 %56, label %57, label %70
+
+57:                                               ; preds = %54
+  %58 = load i32, ptr %26, align 4
+  %59 = getelementptr inbounds [4 x %struct.vec], ptr %25, i32 0, i32 %58
+  call void @llvm.experimental.noalias.scope.decl(metadata !40)
+  store ptr %27, ptr %9, align 4, !noalias !40
+  store i32 0, ptr %10, align 4, !noalias !40
+  store i32 0, ptr %11, align 4, !noalias !40
+  store i32 0, ptr %12, align 4, !noalias !40
+  store i32 0, ptr %13, align 4, !noalias !40
+  %60 = load i32, ptr %10, align 4, !noalias !40
+  store i32 %60, ptr %27, align 4, !alias.scope !40
+  %61 = load i32, ptr %11, align 4, !noalias !40
+  %62 = getelementptr inbounds [4 x i32], ptr %27, i32 0, i32 1
+  store i32 %61, ptr %62, align 4, !alias.scope !40
+  %63 = load i32, ptr %12, align 4, !noalias !40
+  %64 = getelementptr inbounds [4 x i32], ptr %27, i32 0, i32 2
+  store i32 %63, ptr %64, align 4, !alias.scope !40
+  %65 = load i32, ptr %13, align 4, !noalias !40
+  %66 = getelementptr inbounds [4 x i32], ptr %27, i32 0, i32 3
+  store i32 %65, ptr %66, align 4, !alias.scope !40
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %59, ptr align 4 %27, i32 16, i1 false)
+  br label %67
+
+67:                                               ; preds = %57
+  %68 = load i32, ptr %26, align 4
+  %69 = add i32 %68, 1
+  store i32 %69, ptr %26, align 4
+  br label %54, !llvm.loop !43
+
+70:                                               ; preds = %54
+  store i32 0, ptr %29, align 4
+  br label %71
+
+71:                                               ; preds = %84, %70
+  %72 = load i32, ptr %29, align 4
+  %73 = icmp ult i32 %72, 4
+  br i1 %73, label %74, label %87
+
+74:                                               ; preds = %71
+  %75 = load i32, ptr %29, align 4
+  %76 = getelementptr inbounds [4 x %struct.vec], ptr %28, i32 0, i32 %75
+  call void @llvm.experimental.noalias.scope.decl(metadata !44)
+  store ptr %30, ptr %14, align 4, !noalias !44
+  store i32 0, ptr %15, align 4, !noalias !44
+  store i32 0, ptr %16, align 4, !noalias !44
+  store i32 0, ptr %17, align 4, !noalias !44
+  store i32 0, ptr %18, align 4, !noalias !44
+  %77 = load i32, ptr %15, align 4, !noalias !44
+  store i32 %77, ptr %30, align 4, !alias.scope !44
+  %78 = load i32, ptr %16, align 4, !noalias !44
+  %79 = getelementptr inbounds [4 x i32], ptr %30, i32 0, i32 1
+  store i32 %78, ptr %79, align 4, !alias.scope !44
+  %80 = load i32, ptr %17, align 4, !noalias !44
+  %81 = getelementptr inbounds [4 x i32], ptr %30, i32 0, i32 2
+  store i32 %80, ptr %81, align 4, !alias.scope !44
+  %82 = load i32, ptr %18, align 4, !noalias !44
+  %83 = getelementptr inbounds [4 x i32], ptr %30, i32 0, i32 3
+  store i32 %82, ptr %83, align 4, !alias.scope !44
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %76, ptr align 4 %30, i32 16, i1 false)
+  br label %84
+
+84:                                               ; preds = %74
+  %85 = load i32, ptr %29, align 4
+  %86 = add i32 %85, 1
+  store i32 %86, ptr %29, align 4
+  br label %71, !llvm.loop !47
+
+87:                                               ; preds = %71
+  %88 = getelementptr inbounds [4 x %struct.vec], ptr %22, i32 0, i32 0
+  %89 = getelementptr inbounds [4 x %struct.vec], ptr %25, i32 0, i32 0
+  %90 = getelementptr inbounds [4 x %struct.vec], ptr %28, i32 0, i32 0
+  %91 = load ptr, ptr %21, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_chacha20_core3(ptr noundef %88, ptr noundef %89, ptr noundef %90, ptr noundef %91)
+  %92 = load ptr, ptr %20, align 4
+  store ptr %92, ptr %31, align 4
+  %93 = load ptr, ptr %20, align 4
+  %94 = getelementptr inbounds i8, ptr %93, i32 64
+  store ptr %94, ptr %32, align 4
+  %95 = load ptr, ptr %20, align 4
+  %96 = getelementptr inbounds i8, ptr %95, i32 128
+  store ptr %96, ptr %33, align 4
+  %97 = load ptr, ptr %19, align 4
+  store ptr %97, ptr %34, align 4
+  %98 = load ptr, ptr %19, align 4
+  %99 = getelementptr inbounds i8, ptr %98, i32 64
+  store ptr %99, ptr %35, align 4
+  %100 = load ptr, ptr %19, align 4
+  %101 = getelementptr inbounds i8, ptr %100, i32 128
+  store ptr %101, ptr %36, align 4
+  %102 = load ptr, ptr %34, align 4
+  %103 = load ptr, ptr %31, align 4
+  %104 = getelementptr inbounds [4 x %struct.vec], ptr %22, i32 0, i32 0
+  call void @Hacl_Impl_Chacha20_Vec128_xor_block(ptr noundef %102, ptr noundef %103, ptr noundef %104)
+  %105 = load ptr, ptr %35, align 4
+  %106 = load ptr, ptr %32, align 4
+  %107 = getelementptr inbounds [4 x %struct.vec], ptr %25, i32 0, i32 0
+  call void @Hacl_Impl_Chacha20_Vec128_xor_block(ptr noundef %105, ptr noundef %106, ptr noundef %107)
+  %108 = load ptr, ptr %36, align 4
+  %109 = load ptr, ptr %33, align 4
+  %110 = getelementptr inbounds [4 x %struct.vec], ptr %28, i32 0, i32 0
+  call void @Hacl_Impl_Chacha20_Vec128_xor_block(ptr noundef %108, ptr noundef %109, ptr noundef %110)
+  ret void
 }
 
-; Function Attrs: mustprogress nofree noinline nosync nounwind uwtable willreturn
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_xor_block(i8* nocapture noundef writeonly %0, i8* nocapture noundef readonly %1, %struct.vec* nocapture noundef readonly %2) unnamed_addr #4 !dbg !394 {
-  call void @llvm.dbg.value(metadata i8* %0, metadata !396, metadata !DIExpression()), !dbg !415
-  call void @llvm.dbg.value(metadata i8* %1, metadata !397, metadata !DIExpression()), !dbg !415
-  call void @llvm.dbg.value(metadata %struct.vec* %2, metadata !398, metadata !DIExpression()), !dbg !415
-  call void @llvm.dbg.value(metadata i8* undef, metadata !134, metadata !DIExpression(DW_OP_deref)) #10, !dbg !416
-  call void @llvm.dbg.value(metadata i8* %1, metadata !141, metadata !DIExpression()) #10, !dbg !416
-  %4 = call fastcc i32 @load32(i8* noundef %1) #10, !dbg !418, !noalias !419
-  call void @llvm.dbg.value(metadata i32 %4, metadata !399, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !415
-  %5 = getelementptr inbounds i8, i8* %1, i32 4, !dbg !422
-  %6 = call fastcc i32 @load32(i8* noundef nonnull %5) #10, !dbg !422, !noalias !419
-  call void @llvm.dbg.value(metadata i32 %6, metadata !399, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !415
-  %7 = getelementptr inbounds i8, i8* %1, i32 8, !dbg !423
-  %8 = call fastcc i32 @load32(i8* noundef nonnull %7) #10, !dbg !423, !noalias !419
-  call void @llvm.dbg.value(metadata i32 %8, metadata !399, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !415
-  %9 = getelementptr inbounds i8, i8* %1, i32 12, !dbg !424
-  %10 = call fastcc i32 @load32(i8* noundef nonnull %9) #10, !dbg !424, !noalias !419
-  call void @llvm.dbg.value(metadata i32 %10, metadata !399, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !415
-  %11 = getelementptr inbounds i8, i8* %1, i32 16, !dbg !425
-  call void @llvm.dbg.value(metadata i8* undef, metadata !134, metadata !DIExpression(DW_OP_deref)) #10, !dbg !426
-  call void @llvm.dbg.value(metadata i8* %11, metadata !141, metadata !DIExpression()) #10, !dbg !426
-  %12 = call fastcc i32 @load32(i8* noundef nonnull %11) #10, !dbg !428, !noalias !429
-  call void @llvm.dbg.value(metadata i32 %12, metadata !400, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !415
-  %13 = getelementptr inbounds i8, i8* %1, i32 20, !dbg !432
-  %14 = call fastcc i32 @load32(i8* noundef nonnull %13) #10, !dbg !432, !noalias !429
-  call void @llvm.dbg.value(metadata i32 %14, metadata !400, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !415
-  %15 = getelementptr inbounds i8, i8* %1, i32 24, !dbg !433
-  %16 = call fastcc i32 @load32(i8* noundef nonnull %15) #10, !dbg !433, !noalias !429
-  call void @llvm.dbg.value(metadata i32 %16, metadata !400, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !415
-  %17 = getelementptr inbounds i8, i8* %1, i32 28, !dbg !434
-  %18 = call fastcc i32 @load32(i8* noundef nonnull %17) #10, !dbg !434, !noalias !429
-  call void @llvm.dbg.value(metadata i32 %18, metadata !400, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !415
-  %19 = getelementptr inbounds i8, i8* %1, i32 32, !dbg !435
-  call void @llvm.dbg.value(metadata i8* undef, metadata !134, metadata !DIExpression(DW_OP_deref)) #10, !dbg !436
-  call void @llvm.dbg.value(metadata i8* %19, metadata !141, metadata !DIExpression()) #10, !dbg !436
-  %20 = call fastcc i32 @load32(i8* noundef nonnull %19) #10, !dbg !438, !noalias !439
-  call void @llvm.dbg.value(metadata i32 %20, metadata !401, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !415
-  %21 = getelementptr inbounds i8, i8* %1, i32 36, !dbg !442
-  %22 = call fastcc i32 @load32(i8* noundef nonnull %21) #10, !dbg !442, !noalias !439
-  call void @llvm.dbg.value(metadata i32 %22, metadata !401, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !415
-  %23 = getelementptr inbounds i8, i8* %1, i32 40, !dbg !443
-  %24 = call fastcc i32 @load32(i8* noundef nonnull %23) #10, !dbg !443, !noalias !439
-  call void @llvm.dbg.value(metadata i32 %24, metadata !401, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !415
-  %25 = getelementptr inbounds i8, i8* %1, i32 44, !dbg !444
-  %26 = call fastcc i32 @load32(i8* noundef nonnull %25) #10, !dbg !444, !noalias !439
-  call void @llvm.dbg.value(metadata i32 %26, metadata !401, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !415
-  %27 = getelementptr inbounds i8, i8* %1, i32 48, !dbg !445
-  call void @llvm.dbg.value(metadata i8* undef, metadata !134, metadata !DIExpression(DW_OP_deref)) #10, !dbg !446
-  call void @llvm.dbg.value(metadata i8* %27, metadata !141, metadata !DIExpression()) #10, !dbg !446
-  %28 = call fastcc i32 @load32(i8* noundef nonnull %27) #10, !dbg !448, !noalias !449
-  call void @llvm.dbg.value(metadata i32 %28, metadata !402, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !415
-  %29 = getelementptr inbounds i8, i8* %1, i32 52, !dbg !452
-  %30 = call fastcc i32 @load32(i8* noundef nonnull %29) #10, !dbg !452, !noalias !449
-  call void @llvm.dbg.value(metadata i32 %30, metadata !402, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !415
-  %31 = getelementptr inbounds i8, i8* %1, i32 56, !dbg !453
-  %32 = call fastcc i32 @load32(i8* noundef nonnull %31) #10, !dbg !453, !noalias !449
-  call void @llvm.dbg.value(metadata i32 %32, metadata !402, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !415
-  %33 = getelementptr inbounds i8, i8* %1, i32 60, !dbg !454
-  %34 = call fastcc i32 @load32(i8* noundef nonnull %33) #10, !dbg !454, !noalias !449
-  call void @llvm.dbg.value(metadata i32 %34, metadata !402, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !415
-  %35 = getelementptr inbounds %struct.vec, %struct.vec* %2, i32 0, i32 0, i32 0, !dbg !455
-  %36 = load i32, i32* %35, align 4, !dbg !455, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %36, metadata !403, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !415
-  %37 = getelementptr inbounds %struct.vec, %struct.vec* %2, i32 0, i32 0, i32 1, !dbg !455
-  %38 = load i32, i32* %37, align 4, !dbg !455, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %38, metadata !403, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !415
-  %39 = getelementptr inbounds %struct.vec, %struct.vec* %2, i32 0, i32 0, i32 2, !dbg !455
-  %40 = load i32, i32* %39, align 4, !dbg !455, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %40, metadata !403, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !415
-  %41 = getelementptr inbounds %struct.vec, %struct.vec* %2, i32 0, i32 0, i32 3, !dbg !455
-  %42 = load i32, i32* %41, align 4, !dbg !455, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %42, metadata !403, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !415
-  %43 = getelementptr inbounds %struct.vec, %struct.vec* %2, i32 1, i32 0, i32 0, !dbg !456
-  %44 = load i32, i32* %43, align 4, !dbg !456, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %44, metadata !404, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !415
-  %45 = getelementptr inbounds %struct.vec, %struct.vec* %2, i32 1, i32 0, i32 1, !dbg !456
-  %46 = load i32, i32* %45, align 4, !dbg !456, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %46, metadata !404, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !415
-  %47 = getelementptr inbounds %struct.vec, %struct.vec* %2, i32 1, i32 0, i32 2, !dbg !456
-  %48 = load i32, i32* %47, align 4, !dbg !456, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %48, metadata !404, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !415
-  %49 = getelementptr inbounds %struct.vec, %struct.vec* %2, i32 1, i32 0, i32 3, !dbg !456
-  %50 = load i32, i32* %49, align 4, !dbg !456, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %50, metadata !404, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !415
-  %51 = getelementptr inbounds %struct.vec, %struct.vec* %2, i32 2, i32 0, i32 0, !dbg !457
-  %52 = load i32, i32* %51, align 4, !dbg !457, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %52, metadata !405, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !415
-  %53 = getelementptr inbounds %struct.vec, %struct.vec* %2, i32 2, i32 0, i32 1, !dbg !457
-  %54 = load i32, i32* %53, align 4, !dbg !457, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %54, metadata !405, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !415
-  %55 = getelementptr inbounds %struct.vec, %struct.vec* %2, i32 2, i32 0, i32 2, !dbg !457
-  %56 = load i32, i32* %55, align 4, !dbg !457, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %56, metadata !405, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !415
-  %57 = getelementptr inbounds %struct.vec, %struct.vec* %2, i32 2, i32 0, i32 3, !dbg !457
-  %58 = load i32, i32* %57, align 4, !dbg !457, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %58, metadata !405, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !415
-  %59 = getelementptr inbounds %struct.vec, %struct.vec* %2, i32 3, i32 0, i32 0, !dbg !458
-  %60 = load i32, i32* %59, align 4, !dbg !458, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %60, metadata !406, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !415
-  %61 = getelementptr inbounds %struct.vec, %struct.vec* %2, i32 3, i32 0, i32 1, !dbg !458
-  %62 = load i32, i32* %61, align 4, !dbg !458, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %62, metadata !406, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !415
-  %63 = getelementptr inbounds %struct.vec, %struct.vec* %2, i32 3, i32 0, i32 2, !dbg !458
-  %64 = load i32, i32* %63, align 4, !dbg !458, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %64, metadata !406, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !415
-  %65 = getelementptr inbounds %struct.vec, %struct.vec* %2, i32 3, i32 0, i32 3, !dbg !458
-  %66 = load i32, i32* %65, align 4, !dbg !458, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %66, metadata !406, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !415
-  call void @llvm.dbg.value(metadata i32 %36, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !466
-  call void @llvm.dbg.value(metadata i32 %38, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !466
-  call void @llvm.dbg.value(metadata i32 %40, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !466
-  call void @llvm.dbg.value(metadata i32 %42, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !466
-  call void @llvm.dbg.value(metadata i32 %4, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !466
-  call void @llvm.dbg.value(metadata i32 %6, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !466
-  call void @llvm.dbg.value(metadata i32 %8, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !466
-  call void @llvm.dbg.value(metadata i32 %10, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !466
-  call void @llvm.dbg.value(metadata i8* undef, metadata !465, metadata !DIExpression(DW_OP_deref)), !dbg !466
-  %67 = xor i32 %36, %4, !dbg !468
-  call void @llvm.dbg.value(metadata i32 %67, metadata !407, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !415
-  %68 = xor i32 %38, %6, !dbg !469
-  call void @llvm.dbg.value(metadata i32 %68, metadata !407, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !415
-  %69 = xor i32 %40, %8, !dbg !470
-  call void @llvm.dbg.value(metadata i32 %69, metadata !407, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !415
-  %70 = xor i32 %42, %10, !dbg !471
-  call void @llvm.dbg.value(metadata i32 %70, metadata !407, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !415
-  call void @llvm.dbg.value(metadata i32 %44, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !472
-  call void @llvm.dbg.value(metadata i32 %46, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !472
-  call void @llvm.dbg.value(metadata i32 %48, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !472
-  call void @llvm.dbg.value(metadata i32 %50, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !472
-  call void @llvm.dbg.value(metadata i32 %12, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !472
-  call void @llvm.dbg.value(metadata i32 %14, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !472
-  call void @llvm.dbg.value(metadata i32 %16, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !472
-  call void @llvm.dbg.value(metadata i32 %18, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !472
-  call void @llvm.dbg.value(metadata i8* undef, metadata !465, metadata !DIExpression(DW_OP_deref)), !dbg !472
-  %71 = xor i32 %44, %12, !dbg !474
-  call void @llvm.dbg.value(metadata i32 %71, metadata !408, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !415
-  %72 = xor i32 %46, %14, !dbg !475
-  call void @llvm.dbg.value(metadata i32 %72, metadata !408, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !415
-  %73 = xor i32 %48, %16, !dbg !476
-  call void @llvm.dbg.value(metadata i32 %73, metadata !408, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !415
-  %74 = xor i32 %50, %18, !dbg !477
-  call void @llvm.dbg.value(metadata i32 %74, metadata !408, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !415
-  call void @llvm.dbg.value(metadata i32 %52, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !478
-  call void @llvm.dbg.value(metadata i32 %54, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !478
-  call void @llvm.dbg.value(metadata i32 %56, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !478
-  call void @llvm.dbg.value(metadata i32 %58, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !478
-  call void @llvm.dbg.value(metadata i32 %20, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !478
-  call void @llvm.dbg.value(metadata i32 %22, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !478
-  call void @llvm.dbg.value(metadata i32 %24, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !478
-  call void @llvm.dbg.value(metadata i32 %26, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !478
-  call void @llvm.dbg.value(metadata i8* undef, metadata !465, metadata !DIExpression(DW_OP_deref)), !dbg !478
-  %75 = xor i32 %52, %20, !dbg !480
-  call void @llvm.dbg.value(metadata i32 %75, metadata !409, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !415
-  %76 = xor i32 %54, %22, !dbg !481
-  call void @llvm.dbg.value(metadata i32 %76, metadata !409, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !415
-  %77 = xor i32 %56, %24, !dbg !482
-  call void @llvm.dbg.value(metadata i32 %77, metadata !409, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !415
-  %78 = xor i32 %58, %26, !dbg !483
-  call void @llvm.dbg.value(metadata i32 %78, metadata !409, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !415
-  call void @llvm.dbg.value(metadata i32 %60, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !484
-  call void @llvm.dbg.value(metadata i32 %62, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !484
-  call void @llvm.dbg.value(metadata i32 %64, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !484
-  call void @llvm.dbg.value(metadata i32 %66, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !484
-  call void @llvm.dbg.value(metadata i32 %28, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !484
-  call void @llvm.dbg.value(metadata i32 %30, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !484
-  call void @llvm.dbg.value(metadata i32 %32, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !484
-  call void @llvm.dbg.value(metadata i32 %34, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !484
-  call void @llvm.dbg.value(metadata i8* undef, metadata !465, metadata !DIExpression(DW_OP_deref)), !dbg !484
-  %79 = xor i32 %60, %28, !dbg !486
-  call void @llvm.dbg.value(metadata i32 %79, metadata !410, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !415
-  %80 = xor i32 %62, %30, !dbg !487
-  call void @llvm.dbg.value(metadata i32 %80, metadata !410, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !415
-  %81 = xor i32 %64, %32, !dbg !488
-  call void @llvm.dbg.value(metadata i32 %81, metadata !410, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !415
-  %82 = xor i32 %66, %34, !dbg !489
-  call void @llvm.dbg.value(metadata i32 %82, metadata !410, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !415
-  call void @llvm.dbg.value(metadata i8* %0, metadata !411, metadata !DIExpression()), !dbg !415
-  %83 = getelementptr inbounds i8, i8* %0, i32 16, !dbg !490
-  call void @llvm.dbg.value(metadata i8* %83, metadata !412, metadata !DIExpression()), !dbg !415
-  %84 = getelementptr inbounds i8, i8* %0, i32 32, !dbg !491
-  call void @llvm.dbg.value(metadata i8* %84, metadata !413, metadata !DIExpression()), !dbg !415
-  %85 = getelementptr inbounds i8, i8* %0, i32 48, !dbg !492
-  call void @llvm.dbg.value(metadata i8* %85, metadata !414, metadata !DIExpression()), !dbg !415
-  call void @llvm.dbg.value(metadata i32 %67, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !500
-  call void @llvm.dbg.value(metadata i32 %68, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !500
-  call void @llvm.dbg.value(metadata i32 %69, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !500
-  call void @llvm.dbg.value(metadata i32 %70, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !500
-  call void @llvm.dbg.value(metadata i8* %0, metadata !499, metadata !DIExpression()) #10, !dbg !500
-  call fastcc void @store32(i8* noundef %0, i32 noundef %67) #10, !dbg !502
-  %86 = getelementptr inbounds i8, i8* %0, i32 4, !dbg !503
-  call fastcc void @store32(i8* noundef nonnull %86, i32 noundef %68) #10, !dbg !503
-  %87 = getelementptr inbounds i8, i8* %0, i32 8, !dbg !504
-  call fastcc void @store32(i8* noundef nonnull %87, i32 noundef %69) #10, !dbg !504
-  %88 = getelementptr inbounds i8, i8* %0, i32 12, !dbg !505
-  call fastcc void @store32(i8* noundef nonnull %88, i32 noundef %70) #10, !dbg !505
-  call void @llvm.dbg.value(metadata i32 %71, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !506
-  call void @llvm.dbg.value(metadata i32 %72, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !506
-  call void @llvm.dbg.value(metadata i32 %73, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !506
-  call void @llvm.dbg.value(metadata i32 %74, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !506
-  call void @llvm.dbg.value(metadata i8* %83, metadata !499, metadata !DIExpression()) #10, !dbg !506
-  call fastcc void @store32(i8* noundef nonnull %83, i32 noundef %71) #10, !dbg !508
-  %89 = getelementptr inbounds i8, i8* %0, i32 20, !dbg !509
-  call fastcc void @store32(i8* noundef nonnull %89, i32 noundef %72) #10, !dbg !509
-  %90 = getelementptr inbounds i8, i8* %0, i32 24, !dbg !510
-  call fastcc void @store32(i8* noundef nonnull %90, i32 noundef %73) #10, !dbg !510
-  %91 = getelementptr inbounds i8, i8* %0, i32 28, !dbg !511
-  call fastcc void @store32(i8* noundef nonnull %91, i32 noundef %74) #10, !dbg !511
-  call void @llvm.dbg.value(metadata i32 %75, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !512
-  call void @llvm.dbg.value(metadata i32 %76, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !512
-  call void @llvm.dbg.value(metadata i32 %77, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !512
-  call void @llvm.dbg.value(metadata i32 %78, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !512
-  call void @llvm.dbg.value(metadata i8* %84, metadata !499, metadata !DIExpression()) #10, !dbg !512
-  call fastcc void @store32(i8* noundef nonnull %84, i32 noundef %75) #10, !dbg !514
-  %92 = getelementptr inbounds i8, i8* %0, i32 36, !dbg !515
-  call fastcc void @store32(i8* noundef nonnull %92, i32 noundef %76) #10, !dbg !515
-  %93 = getelementptr inbounds i8, i8* %0, i32 40, !dbg !516
-  call fastcc void @store32(i8* noundef nonnull %93, i32 noundef %77) #10, !dbg !516
-  %94 = getelementptr inbounds i8, i8* %0, i32 44, !dbg !517
-  call fastcc void @store32(i8* noundef nonnull %94, i32 noundef %78) #10, !dbg !517
-  call void @llvm.dbg.value(metadata i32 %79, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !518
-  call void @llvm.dbg.value(metadata i32 %80, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !518
-  call void @llvm.dbg.value(metadata i32 %81, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !518
-  call void @llvm.dbg.value(metadata i32 %82, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !518
-  call void @llvm.dbg.value(metadata i8* %85, metadata !499, metadata !DIExpression()) #10, !dbg !518
-  call fastcc void @store32(i8* noundef nonnull %85, i32 noundef %79) #10, !dbg !520
-  %95 = getelementptr inbounds i8, i8* %0, i32 52, !dbg !521
-  call fastcc void @store32(i8* noundef nonnull %95, i32 noundef %80) #10, !dbg !521
-  %96 = getelementptr inbounds i8, i8* %0, i32 56, !dbg !522
-  call fastcc void @store32(i8* noundef nonnull %96, i32 noundef %81) #10, !dbg !522
-  %97 = getelementptr inbounds i8, i8* %0, i32 60, !dbg !523
-  call fastcc void @store32(i8* noundef nonnull %97, i32 noundef %82) #10, !dbg !523
-  ret void, !dbg !524
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_chacha20_core3(ptr noundef %0, ptr noundef %1, ptr noundef %2, ptr noundef %3) #0 {
+  %5 = alloca ptr, align 4
+  %6 = alloca ptr, align 4
+  %7 = alloca ptr, align 4
+  %8 = alloca ptr, align 4
+  %9 = alloca i32, align 4
+  store ptr %0, ptr %5, align 4
+  store ptr %1, ptr %6, align 4
+  store ptr %2, ptr %7, align 4
+  store ptr %3, ptr %8, align 4
+  %10 = load ptr, ptr %5, align 4
+  %11 = load ptr, ptr %6, align 4
+  %12 = load ptr, ptr %7, align 4
+  %13 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_chacha20_incr3(ptr noundef %10, ptr noundef %11, ptr noundef %12, ptr noundef %13)
+  store i32 0, ptr %9, align 4
+  br label %14
+
+14:                                               ; preds = %21, %4
+  %15 = load i32, ptr %9, align 4
+  %16 = icmp ult i32 %15, 10
+  br i1 %16, label %17, label %24
+
+17:                                               ; preds = %14
+  %18 = load ptr, ptr %5, align 4
+  %19 = load ptr, ptr %6, align 4
+  %20 = load ptr, ptr %7, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_double_round3(ptr noundef %18, ptr noundef %19, ptr noundef %20)
+  br label %21
+
+21:                                               ; preds = %17
+  %22 = load i32, ptr %9, align 4
+  %23 = add i32 %22, 1
+  store i32 %23, ptr %9, align 4
+  br label %14, !llvm.loop !48
+
+24:                                               ; preds = %14
+  %25 = load ptr, ptr %5, align 4
+  %26 = load ptr, ptr %6, align 4
+  %27 = load ptr, ptr %7, align 4
+  %28 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_chacha20_sum3(ptr noundef %25, ptr noundef %26, ptr noundef %27, ptr noundef %28)
+  ret void
 }
 
-; Function Attrs: mustprogress nofree noinline nosync nounwind uwtable willreturn
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_incr3(%struct.vec* nocapture noundef writeonly %0, %struct.vec* nocapture noundef %1, %struct.vec* nocapture noundef %2, %struct.vec* nocapture noundef readonly %3) unnamed_addr #4 !dbg !525 {
-  call void @llvm.dbg.value(metadata %struct.vec* %0, metadata !527, metadata !DIExpression()), !dbg !531
-  call void @llvm.dbg.value(metadata %struct.vec* %1, metadata !528, metadata !DIExpression()), !dbg !531
-  call void @llvm.dbg.value(metadata %struct.vec* %2, metadata !529, metadata !DIExpression()), !dbg !531
-  call void @llvm.dbg.value(metadata %struct.vec* %3, metadata !530, metadata !DIExpression()), !dbg !531
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_copy_state(%struct.vec* noundef %0, %struct.vec* noundef %3), !dbg !532
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_copy_state(%struct.vec* noundef %1, %struct.vec* noundef %3), !dbg !533
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_state_incr(%struct.vec* noundef %1), !dbg !534
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_copy_state(%struct.vec* noundef %2, %struct.vec* noundef %1), !dbg !535
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_state_incr(%struct.vec* noundef %2), !dbg !536
-  ret void, !dbg !537
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_xor_block(ptr noundef %0, ptr noundef %1, ptr noundef %2) #0 {
+  %4 = alloca ptr, align 4
+  %5 = alloca %struct.vec, align 8
+  %6 = alloca ptr, align 4
+  %7 = alloca %struct.vec, align 8
+  %8 = alloca ptr, align 4
+  %9 = alloca %struct.vec, align 8
+  %10 = alloca ptr, align 4
+  %11 = alloca %struct.vec, align 8
+  %12 = alloca ptr, align 4
+  %13 = alloca %struct.vec, align 8
+  %14 = alloca %struct.vec, align 8
+  %15 = alloca ptr, align 4
+  %16 = alloca %struct.vec, align 8
+  %17 = alloca %struct.vec, align 8
+  %18 = alloca ptr, align 4
+  %19 = alloca %struct.vec, align 8
+  %20 = alloca %struct.vec, align 8
+  %21 = alloca ptr, align 4
+  %22 = alloca %struct.vec, align 8
+  %23 = alloca %struct.vec, align 8
+  %24 = alloca ptr, align 4
+  %25 = alloca ptr, align 4
+  %26 = alloca ptr, align 4
+  %27 = alloca ptr, align 4
+  %28 = alloca ptr, align 4
+  %29 = alloca ptr, align 4
+  %30 = alloca ptr, align 4
+  %31 = alloca ptr, align 4
+  %32 = alloca ptr, align 4
+  %33 = alloca ptr, align 4
+  %34 = alloca ptr, align 4
+  %35 = alloca %struct.vec, align 4
+  %36 = alloca %struct.vec, align 4
+  %37 = alloca %struct.vec, align 4
+  %38 = alloca %struct.vec, align 4
+  %39 = alloca %struct.vec, align 4
+  %40 = alloca %struct.vec, align 4
+  %41 = alloca %struct.vec, align 4
+  %42 = alloca %struct.vec, align 4
+  %43 = alloca %struct.vec, align 4
+  %44 = alloca %struct.vec, align 4
+  %45 = alloca %struct.vec, align 4
+  %46 = alloca %struct.vec, align 4
+  %47 = alloca ptr, align 4
+  %48 = alloca ptr, align 4
+  %49 = alloca ptr, align 4
+  %50 = alloca ptr, align 4
+  store ptr %0, ptr %32, align 4
+  store ptr %1, ptr %33, align 4
+  store ptr %2, ptr %34, align 4
+  %51 = load ptr, ptr %33, align 4
+  call void @llvm.experimental.noalias.scope.decl(metadata !49)
+  store ptr %35, ptr %24, align 4, !noalias !49
+  store ptr %51, ptr %25, align 4, !noalias !49
+  %52 = load ptr, ptr %25, align 4, !noalias !49
+  %53 = call i32 @load32(ptr noundef %52)
+  %54 = call i32 @__uint32_identity(i32 noundef %53)
+  store i32 %54, ptr %35, align 4, !alias.scope !49
+  %55 = load ptr, ptr %25, align 4, !noalias !49
+  %56 = getelementptr inbounds i8, ptr %55, i32 4
+  %57 = call i32 @load32(ptr noundef %56)
+  %58 = call i32 @__uint32_identity(i32 noundef %57)
+  %59 = getelementptr inbounds [4 x i32], ptr %35, i32 0, i32 1
+  store i32 %58, ptr %59, align 4, !alias.scope !49
+  %60 = load ptr, ptr %25, align 4, !noalias !49
+  %61 = getelementptr inbounds i8, ptr %60, i32 8
+  %62 = call i32 @load32(ptr noundef %61)
+  %63 = call i32 @__uint32_identity(i32 noundef %62)
+  %64 = getelementptr inbounds [4 x i32], ptr %35, i32 0, i32 2
+  store i32 %63, ptr %64, align 4, !alias.scope !49
+  %65 = load ptr, ptr %25, align 4, !noalias !49
+  %66 = getelementptr inbounds i8, ptr %65, i32 12
+  %67 = call i32 @load32(ptr noundef %66)
+  %68 = call i32 @__uint32_identity(i32 noundef %67)
+  %69 = getelementptr inbounds [4 x i32], ptr %35, i32 0, i32 3
+  store i32 %68, ptr %69, align 4, !alias.scope !49
+  %70 = load ptr, ptr %33, align 4
+  %71 = getelementptr inbounds i8, ptr %70, i32 16
+  call void @llvm.experimental.noalias.scope.decl(metadata !52)
+  store ptr %36, ptr %26, align 4, !noalias !52
+  store ptr %71, ptr %27, align 4, !noalias !52
+  %72 = load ptr, ptr %27, align 4, !noalias !52
+  %73 = call i32 @load32(ptr noundef %72)
+  %74 = call i32 @__uint32_identity(i32 noundef %73)
+  store i32 %74, ptr %36, align 4, !alias.scope !52
+  %75 = load ptr, ptr %27, align 4, !noalias !52
+  %76 = getelementptr inbounds i8, ptr %75, i32 4
+  %77 = call i32 @load32(ptr noundef %76)
+  %78 = call i32 @__uint32_identity(i32 noundef %77)
+  %79 = getelementptr inbounds [4 x i32], ptr %36, i32 0, i32 1
+  store i32 %78, ptr %79, align 4, !alias.scope !52
+  %80 = load ptr, ptr %27, align 4, !noalias !52
+  %81 = getelementptr inbounds i8, ptr %80, i32 8
+  %82 = call i32 @load32(ptr noundef %81)
+  %83 = call i32 @__uint32_identity(i32 noundef %82)
+  %84 = getelementptr inbounds [4 x i32], ptr %36, i32 0, i32 2
+  store i32 %83, ptr %84, align 4, !alias.scope !52
+  %85 = load ptr, ptr %27, align 4, !noalias !52
+  %86 = getelementptr inbounds i8, ptr %85, i32 12
+  %87 = call i32 @load32(ptr noundef %86)
+  %88 = call i32 @__uint32_identity(i32 noundef %87)
+  %89 = getelementptr inbounds [4 x i32], ptr %36, i32 0, i32 3
+  store i32 %88, ptr %89, align 4, !alias.scope !52
+  %90 = load ptr, ptr %33, align 4
+  %91 = getelementptr inbounds i8, ptr %90, i32 32
+  call void @llvm.experimental.noalias.scope.decl(metadata !55)
+  store ptr %37, ptr %28, align 4, !noalias !55
+  store ptr %91, ptr %29, align 4, !noalias !55
+  %92 = load ptr, ptr %29, align 4, !noalias !55
+  %93 = call i32 @load32(ptr noundef %92)
+  %94 = call i32 @__uint32_identity(i32 noundef %93)
+  store i32 %94, ptr %37, align 4, !alias.scope !55
+  %95 = load ptr, ptr %29, align 4, !noalias !55
+  %96 = getelementptr inbounds i8, ptr %95, i32 4
+  %97 = call i32 @load32(ptr noundef %96)
+  %98 = call i32 @__uint32_identity(i32 noundef %97)
+  %99 = getelementptr inbounds [4 x i32], ptr %37, i32 0, i32 1
+  store i32 %98, ptr %99, align 4, !alias.scope !55
+  %100 = load ptr, ptr %29, align 4, !noalias !55
+  %101 = getelementptr inbounds i8, ptr %100, i32 8
+  %102 = call i32 @load32(ptr noundef %101)
+  %103 = call i32 @__uint32_identity(i32 noundef %102)
+  %104 = getelementptr inbounds [4 x i32], ptr %37, i32 0, i32 2
+  store i32 %103, ptr %104, align 4, !alias.scope !55
+  %105 = load ptr, ptr %29, align 4, !noalias !55
+  %106 = getelementptr inbounds i8, ptr %105, i32 12
+  %107 = call i32 @load32(ptr noundef %106)
+  %108 = call i32 @__uint32_identity(i32 noundef %107)
+  %109 = getelementptr inbounds [4 x i32], ptr %37, i32 0, i32 3
+  store i32 %108, ptr %109, align 4, !alias.scope !55
+  %110 = load ptr, ptr %33, align 4
+  %111 = getelementptr inbounds i8, ptr %110, i32 48
+  call void @llvm.experimental.noalias.scope.decl(metadata !58)
+  store ptr %38, ptr %30, align 4, !noalias !58
+  store ptr %111, ptr %31, align 4, !noalias !58
+  %112 = load ptr, ptr %31, align 4, !noalias !58
+  %113 = call i32 @load32(ptr noundef %112)
+  %114 = call i32 @__uint32_identity(i32 noundef %113)
+  store i32 %114, ptr %38, align 4, !alias.scope !58
+  %115 = load ptr, ptr %31, align 4, !noalias !58
+  %116 = getelementptr inbounds i8, ptr %115, i32 4
+  %117 = call i32 @load32(ptr noundef %116)
+  %118 = call i32 @__uint32_identity(i32 noundef %117)
+  %119 = getelementptr inbounds [4 x i32], ptr %38, i32 0, i32 1
+  store i32 %118, ptr %119, align 4, !alias.scope !58
+  %120 = load ptr, ptr %31, align 4, !noalias !58
+  %121 = getelementptr inbounds i8, ptr %120, i32 8
+  %122 = call i32 @load32(ptr noundef %121)
+  %123 = call i32 @__uint32_identity(i32 noundef %122)
+  %124 = getelementptr inbounds [4 x i32], ptr %38, i32 0, i32 2
+  store i32 %123, ptr %124, align 4, !alias.scope !58
+  %125 = load ptr, ptr %31, align 4, !noalias !58
+  %126 = getelementptr inbounds i8, ptr %125, i32 12
+  %127 = call i32 @load32(ptr noundef %126)
+  %128 = call i32 @__uint32_identity(i32 noundef %127)
+  %129 = getelementptr inbounds [4 x i32], ptr %38, i32 0, i32 3
+  store i32 %128, ptr %129, align 4, !alias.scope !58
+  %130 = load ptr, ptr %34, align 4
+  %131 = getelementptr inbounds %struct.vec, ptr %130, i32 0
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %39, ptr align 4 %131, i32 16, i1 false)
+  %132 = load ptr, ptr %34, align 4
+  %133 = getelementptr inbounds %struct.vec, ptr %132, i32 1
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %40, ptr align 4 %133, i32 16, i1 false)
+  %134 = load ptr, ptr %34, align 4
+  %135 = getelementptr inbounds %struct.vec, ptr %134, i32 2
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %41, ptr align 4 %135, i32 16, i1 false)
+  %136 = load ptr, ptr %34, align 4
+  %137 = getelementptr inbounds %struct.vec, ptr %136, i32 3
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %42, ptr align 4 %137, i32 16, i1 false)
+  call void @llvm.experimental.noalias.scope.decl(metadata !61)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %13, ptr align 1 %39, i64 16, i1 false)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %14, ptr align 1 %35, i64 16, i1 false)
+  store ptr %43, ptr %12, align 4, !noalias !61
+  %138 = load i32, ptr %14, align 4, !noalias !61
+  %139 = load i32, ptr %13, align 4, !noalias !61
+  %140 = xor i32 %138, %139
+  store i32 %140, ptr %43, align 4, !alias.scope !61
+  %141 = getelementptr inbounds [4 x i32], ptr %14, i32 0, i32 1
+  %142 = load i32, ptr %141, align 4, !noalias !61
+  %143 = getelementptr inbounds [4 x i32], ptr %13, i32 0, i32 1
+  %144 = load i32, ptr %143, align 4, !noalias !61
+  %145 = xor i32 %142, %144
+  %146 = getelementptr inbounds [4 x i32], ptr %43, i32 0, i32 1
+  store i32 %145, ptr %146, align 4, !alias.scope !61
+  %147 = getelementptr inbounds [4 x i32], ptr %14, i32 0, i32 2
+  %148 = load i32, ptr %147, align 4, !noalias !61
+  %149 = getelementptr inbounds [4 x i32], ptr %13, i32 0, i32 2
+  %150 = load i32, ptr %149, align 4, !noalias !61
+  %151 = xor i32 %148, %150
+  %152 = getelementptr inbounds [4 x i32], ptr %43, i32 0, i32 2
+  store i32 %151, ptr %152, align 4, !alias.scope !61
+  %153 = getelementptr inbounds [4 x i32], ptr %14, i32 0, i32 3
+  %154 = load i32, ptr %153, align 4, !noalias !61
+  %155 = getelementptr inbounds [4 x i32], ptr %13, i32 0, i32 3
+  %156 = load i32, ptr %155, align 4, !noalias !61
+  %157 = xor i32 %154, %156
+  %158 = getelementptr inbounds [4 x i32], ptr %43, i32 0, i32 3
+  store i32 %157, ptr %158, align 4, !alias.scope !61
+  call void @llvm.experimental.noalias.scope.decl(metadata !64)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %16, ptr align 1 %40, i64 16, i1 false)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %17, ptr align 1 %36, i64 16, i1 false)
+  store ptr %44, ptr %15, align 4, !noalias !64
+  %159 = load i32, ptr %17, align 4, !noalias !64
+  %160 = load i32, ptr %16, align 4, !noalias !64
+  %161 = xor i32 %159, %160
+  store i32 %161, ptr %44, align 4, !alias.scope !64
+  %162 = getelementptr inbounds [4 x i32], ptr %17, i32 0, i32 1
+  %163 = load i32, ptr %162, align 4, !noalias !64
+  %164 = getelementptr inbounds [4 x i32], ptr %16, i32 0, i32 1
+  %165 = load i32, ptr %164, align 4, !noalias !64
+  %166 = xor i32 %163, %165
+  %167 = getelementptr inbounds [4 x i32], ptr %44, i32 0, i32 1
+  store i32 %166, ptr %167, align 4, !alias.scope !64
+  %168 = getelementptr inbounds [4 x i32], ptr %17, i32 0, i32 2
+  %169 = load i32, ptr %168, align 4, !noalias !64
+  %170 = getelementptr inbounds [4 x i32], ptr %16, i32 0, i32 2
+  %171 = load i32, ptr %170, align 4, !noalias !64
+  %172 = xor i32 %169, %171
+  %173 = getelementptr inbounds [4 x i32], ptr %44, i32 0, i32 2
+  store i32 %172, ptr %173, align 4, !alias.scope !64
+  %174 = getelementptr inbounds [4 x i32], ptr %17, i32 0, i32 3
+  %175 = load i32, ptr %174, align 4, !noalias !64
+  %176 = getelementptr inbounds [4 x i32], ptr %16, i32 0, i32 3
+  %177 = load i32, ptr %176, align 4, !noalias !64
+  %178 = xor i32 %175, %177
+  %179 = getelementptr inbounds [4 x i32], ptr %44, i32 0, i32 3
+  store i32 %178, ptr %179, align 4, !alias.scope !64
+  call void @llvm.experimental.noalias.scope.decl(metadata !67)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %19, ptr align 1 %41, i64 16, i1 false)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %20, ptr align 1 %37, i64 16, i1 false)
+  store ptr %45, ptr %18, align 4, !noalias !67
+  %180 = load i32, ptr %20, align 4, !noalias !67
+  %181 = load i32, ptr %19, align 4, !noalias !67
+  %182 = xor i32 %180, %181
+  store i32 %182, ptr %45, align 4, !alias.scope !67
+  %183 = getelementptr inbounds [4 x i32], ptr %20, i32 0, i32 1
+  %184 = load i32, ptr %183, align 4, !noalias !67
+  %185 = getelementptr inbounds [4 x i32], ptr %19, i32 0, i32 1
+  %186 = load i32, ptr %185, align 4, !noalias !67
+  %187 = xor i32 %184, %186
+  %188 = getelementptr inbounds [4 x i32], ptr %45, i32 0, i32 1
+  store i32 %187, ptr %188, align 4, !alias.scope !67
+  %189 = getelementptr inbounds [4 x i32], ptr %20, i32 0, i32 2
+  %190 = load i32, ptr %189, align 4, !noalias !67
+  %191 = getelementptr inbounds [4 x i32], ptr %19, i32 0, i32 2
+  %192 = load i32, ptr %191, align 4, !noalias !67
+  %193 = xor i32 %190, %192
+  %194 = getelementptr inbounds [4 x i32], ptr %45, i32 0, i32 2
+  store i32 %193, ptr %194, align 4, !alias.scope !67
+  %195 = getelementptr inbounds [4 x i32], ptr %20, i32 0, i32 3
+  %196 = load i32, ptr %195, align 4, !noalias !67
+  %197 = getelementptr inbounds [4 x i32], ptr %19, i32 0, i32 3
+  %198 = load i32, ptr %197, align 4, !noalias !67
+  %199 = xor i32 %196, %198
+  %200 = getelementptr inbounds [4 x i32], ptr %45, i32 0, i32 3
+  store i32 %199, ptr %200, align 4, !alias.scope !67
+  call void @llvm.experimental.noalias.scope.decl(metadata !70)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %22, ptr align 1 %42, i64 16, i1 false)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %23, ptr align 1 %38, i64 16, i1 false)
+  store ptr %46, ptr %21, align 4, !noalias !70
+  %201 = load i32, ptr %23, align 4, !noalias !70
+  %202 = load i32, ptr %22, align 4, !noalias !70
+  %203 = xor i32 %201, %202
+  store i32 %203, ptr %46, align 4, !alias.scope !70
+  %204 = getelementptr inbounds [4 x i32], ptr %23, i32 0, i32 1
+  %205 = load i32, ptr %204, align 4, !noalias !70
+  %206 = getelementptr inbounds [4 x i32], ptr %22, i32 0, i32 1
+  %207 = load i32, ptr %206, align 4, !noalias !70
+  %208 = xor i32 %205, %207
+  %209 = getelementptr inbounds [4 x i32], ptr %46, i32 0, i32 1
+  store i32 %208, ptr %209, align 4, !alias.scope !70
+  %210 = getelementptr inbounds [4 x i32], ptr %23, i32 0, i32 2
+  %211 = load i32, ptr %210, align 4, !noalias !70
+  %212 = getelementptr inbounds [4 x i32], ptr %22, i32 0, i32 2
+  %213 = load i32, ptr %212, align 4, !noalias !70
+  %214 = xor i32 %211, %213
+  %215 = getelementptr inbounds [4 x i32], ptr %46, i32 0, i32 2
+  store i32 %214, ptr %215, align 4, !alias.scope !70
+  %216 = getelementptr inbounds [4 x i32], ptr %23, i32 0, i32 3
+  %217 = load i32, ptr %216, align 4, !noalias !70
+  %218 = getelementptr inbounds [4 x i32], ptr %22, i32 0, i32 3
+  %219 = load i32, ptr %218, align 4, !noalias !70
+  %220 = xor i32 %217, %219
+  %221 = getelementptr inbounds [4 x i32], ptr %46, i32 0, i32 3
+  store i32 %220, ptr %221, align 4, !alias.scope !70
+  %222 = load ptr, ptr %32, align 4
+  store ptr %222, ptr %47, align 4
+  %223 = load ptr, ptr %32, align 4
+  %224 = getelementptr inbounds i8, ptr %223, i32 16
+  store ptr %224, ptr %48, align 4
+  %225 = load ptr, ptr %32, align 4
+  %226 = getelementptr inbounds i8, ptr %225, i32 32
+  store ptr %226, ptr %49, align 4
+  %227 = load ptr, ptr %32, align 4
+  %228 = getelementptr inbounds i8, ptr %227, i32 48
+  store ptr %228, ptr %50, align 4
+  %229 = load ptr, ptr %47, align 4
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %5, ptr align 1 %43, i64 16, i1 false)
+  store ptr %229, ptr %4, align 4
+  %230 = load ptr, ptr %4, align 4
+  %231 = load i32, ptr %5, align 4
+  %232 = call i32 @__uint32_identity(i32 noundef %231)
+  call void @store32(ptr noundef %230, i32 noundef %232)
+  %233 = load ptr, ptr %4, align 4
+  %234 = getelementptr inbounds i8, ptr %233, i32 4
+  %235 = getelementptr inbounds [4 x i32], ptr %5, i32 0, i32 1
+  %236 = load i32, ptr %235, align 4
+  %237 = call i32 @__uint32_identity(i32 noundef %236)
+  call void @store32(ptr noundef %234, i32 noundef %237)
+  %238 = load ptr, ptr %4, align 4
+  %239 = getelementptr inbounds i8, ptr %238, i32 8
+  %240 = getelementptr inbounds [4 x i32], ptr %5, i32 0, i32 2
+  %241 = load i32, ptr %240, align 4
+  %242 = call i32 @__uint32_identity(i32 noundef %241)
+  call void @store32(ptr noundef %239, i32 noundef %242)
+  %243 = load ptr, ptr %4, align 4
+  %244 = getelementptr inbounds i8, ptr %243, i32 12
+  %245 = getelementptr inbounds [4 x i32], ptr %5, i32 0, i32 3
+  %246 = load i32, ptr %245, align 4
+  %247 = call i32 @__uint32_identity(i32 noundef %246)
+  call void @store32(ptr noundef %244, i32 noundef %247)
+  %248 = load ptr, ptr %48, align 4
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %7, ptr align 1 %44, i64 16, i1 false)
+  store ptr %248, ptr %6, align 4
+  %249 = load ptr, ptr %6, align 4
+  %250 = load i32, ptr %7, align 4
+  %251 = call i32 @__uint32_identity(i32 noundef %250)
+  call void @store32(ptr noundef %249, i32 noundef %251)
+  %252 = load ptr, ptr %6, align 4
+  %253 = getelementptr inbounds i8, ptr %252, i32 4
+  %254 = getelementptr inbounds [4 x i32], ptr %7, i32 0, i32 1
+  %255 = load i32, ptr %254, align 4
+  %256 = call i32 @__uint32_identity(i32 noundef %255)
+  call void @store32(ptr noundef %253, i32 noundef %256)
+  %257 = load ptr, ptr %6, align 4
+  %258 = getelementptr inbounds i8, ptr %257, i32 8
+  %259 = getelementptr inbounds [4 x i32], ptr %7, i32 0, i32 2
+  %260 = load i32, ptr %259, align 4
+  %261 = call i32 @__uint32_identity(i32 noundef %260)
+  call void @store32(ptr noundef %258, i32 noundef %261)
+  %262 = load ptr, ptr %6, align 4
+  %263 = getelementptr inbounds i8, ptr %262, i32 12
+  %264 = getelementptr inbounds [4 x i32], ptr %7, i32 0, i32 3
+  %265 = load i32, ptr %264, align 4
+  %266 = call i32 @__uint32_identity(i32 noundef %265)
+  call void @store32(ptr noundef %263, i32 noundef %266)
+  %267 = load ptr, ptr %49, align 4
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %9, ptr align 1 %45, i64 16, i1 false)
+  store ptr %267, ptr %8, align 4
+  %268 = load ptr, ptr %8, align 4
+  %269 = load i32, ptr %9, align 4
+  %270 = call i32 @__uint32_identity(i32 noundef %269)
+  call void @store32(ptr noundef %268, i32 noundef %270)
+  %271 = load ptr, ptr %8, align 4
+  %272 = getelementptr inbounds i8, ptr %271, i32 4
+  %273 = getelementptr inbounds [4 x i32], ptr %9, i32 0, i32 1
+  %274 = load i32, ptr %273, align 4
+  %275 = call i32 @__uint32_identity(i32 noundef %274)
+  call void @store32(ptr noundef %272, i32 noundef %275)
+  %276 = load ptr, ptr %8, align 4
+  %277 = getelementptr inbounds i8, ptr %276, i32 8
+  %278 = getelementptr inbounds [4 x i32], ptr %9, i32 0, i32 2
+  %279 = load i32, ptr %278, align 4
+  %280 = call i32 @__uint32_identity(i32 noundef %279)
+  call void @store32(ptr noundef %277, i32 noundef %280)
+  %281 = load ptr, ptr %8, align 4
+  %282 = getelementptr inbounds i8, ptr %281, i32 12
+  %283 = getelementptr inbounds [4 x i32], ptr %9, i32 0, i32 3
+  %284 = load i32, ptr %283, align 4
+  %285 = call i32 @__uint32_identity(i32 noundef %284)
+  call void @store32(ptr noundef %282, i32 noundef %285)
+  %286 = load ptr, ptr %50, align 4
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %11, ptr align 1 %46, i64 16, i1 false)
+  store ptr %286, ptr %10, align 4
+  %287 = load ptr, ptr %10, align 4
+  %288 = load i32, ptr %11, align 4
+  %289 = call i32 @__uint32_identity(i32 noundef %288)
+  call void @store32(ptr noundef %287, i32 noundef %289)
+  %290 = load ptr, ptr %10, align 4
+  %291 = getelementptr inbounds i8, ptr %290, i32 4
+  %292 = getelementptr inbounds [4 x i32], ptr %11, i32 0, i32 1
+  %293 = load i32, ptr %292, align 4
+  %294 = call i32 @__uint32_identity(i32 noundef %293)
+  call void @store32(ptr noundef %291, i32 noundef %294)
+  %295 = load ptr, ptr %10, align 4
+  %296 = getelementptr inbounds i8, ptr %295, i32 8
+  %297 = getelementptr inbounds [4 x i32], ptr %11, i32 0, i32 2
+  %298 = load i32, ptr %297, align 4
+  %299 = call i32 @__uint32_identity(i32 noundef %298)
+  call void @store32(ptr noundef %296, i32 noundef %299)
+  %300 = load ptr, ptr %10, align 4
+  %301 = getelementptr inbounds i8, ptr %300, i32 12
+  %302 = getelementptr inbounds [4 x i32], ptr %11, i32 0, i32 3
+  %303 = load i32, ptr %302, align 4
+  %304 = call i32 @__uint32_identity(i32 noundef %303)
+  call void @store32(ptr noundef %301, i32 noundef %304)
+  ret void
 }
 
-; Function Attrs: mustprogress nofree noinline nosync nounwind uwtable willreturn
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_double_round3(%struct.vec* nocapture noundef %0, %struct.vec* nocapture noundef %1, %struct.vec* nocapture noundef %2) unnamed_addr #4 !dbg !538 {
-  call void @llvm.dbg.value(metadata %struct.vec* %0, metadata !542, metadata !DIExpression()), !dbg !545
-  call void @llvm.dbg.value(metadata %struct.vec* %1, metadata !543, metadata !DIExpression()), !dbg !545
-  call void @llvm.dbg.value(metadata %struct.vec* %2, metadata !544, metadata !DIExpression()), !dbg !545
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_double_round(%struct.vec* noundef %0), !dbg !546
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_double_round(%struct.vec* noundef %1), !dbg !547
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_double_round(%struct.vec* noundef %2), !dbg !548
-  ret void, !dbg !549
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_chacha20_incr3(ptr noundef %0, ptr noundef %1, ptr noundef %2, ptr noundef %3) #0 {
+  %5 = alloca ptr, align 4
+  %6 = alloca ptr, align 4
+  %7 = alloca ptr, align 4
+  %8 = alloca ptr, align 4
+  store ptr %0, ptr %5, align 4
+  store ptr %1, ptr %6, align 4
+  store ptr %2, ptr %7, align 4
+  store ptr %3, ptr %8, align 4
+  %9 = load ptr, ptr %5, align 4
+  %10 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_copy_state(ptr noundef %9, ptr noundef %10)
+  %11 = load ptr, ptr %6, align 4
+  %12 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_copy_state(ptr noundef %11, ptr noundef %12)
+  %13 = load ptr, ptr %6, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_state_incr(ptr noundef %13)
+  %14 = load ptr, ptr %7, align 4
+  %15 = load ptr, ptr %6, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_copy_state(ptr noundef %14, ptr noundef %15)
+  %16 = load ptr, ptr %7, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_state_incr(ptr noundef %16)
+  ret void
 }
 
-; Function Attrs: mustprogress nofree noinline nosync nounwind uwtable willreturn
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_sum3(%struct.vec* nocapture noundef %0, %struct.vec* nocapture noundef %1, %struct.vec* nocapture noundef %2, %struct.vec* nocapture noundef %3) unnamed_addr #4 !dbg !550 {
-  call void @llvm.dbg.value(metadata %struct.vec* %0, metadata !552, metadata !DIExpression()), !dbg !556
-  call void @llvm.dbg.value(metadata %struct.vec* %1, metadata !553, metadata !DIExpression()), !dbg !556
-  call void @llvm.dbg.value(metadata %struct.vec* %2, metadata !554, metadata !DIExpression()), !dbg !556
-  call void @llvm.dbg.value(metadata %struct.vec* %3, metadata !555, metadata !DIExpression()), !dbg !556
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_sum_states(%struct.vec* noundef %0, %struct.vec* noundef %3), !dbg !557
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_state_incr(%struct.vec* noundef %3), !dbg !558
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_sum_states(%struct.vec* noundef %1, %struct.vec* noundef %3), !dbg !559
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_state_incr(%struct.vec* noundef %3), !dbg !560
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_sum_states(%struct.vec* noundef %2, %struct.vec* noundef %3), !dbg !561
-  ret void, !dbg !562
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_double_round3(ptr noundef %0, ptr noundef %1, ptr noundef %2) #0 {
+  %4 = alloca ptr, align 4
+  %5 = alloca ptr, align 4
+  %6 = alloca ptr, align 4
+  store ptr %0, ptr %4, align 4
+  store ptr %1, ptr %5, align 4
+  store ptr %2, ptr %6, align 4
+  %7 = load ptr, ptr %4, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_double_round(ptr noundef %7)
+  %8 = load ptr, ptr %5, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_double_round(ptr noundef %8)
+  %9 = load ptr, ptr %6, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_double_round(ptr noundef %9)
+  ret void
 }
 
-; Function Attrs: mustprogress nofree noinline nosync nounwind uwtable willreturn
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_copy_state(%struct.vec* nocapture noundef writeonly %0, %struct.vec* nocapture noundef readonly %1) unnamed_addr #4 !dbg !563 {
-  %3 = alloca [4 x i32], align 4
-  call void @llvm.dbg.declare(metadata [4 x i32]* %3, metadata !570, metadata !DIExpression()), !dbg !573
-  %4 = alloca [4 x i32], align 4
-  call void @llvm.dbg.declare(metadata [4 x i32]* %4, metadata !571, metadata !DIExpression()), !dbg !574
-  %5 = alloca [4 x i32], align 4
-  call void @llvm.dbg.declare(metadata [4 x i32]* %5, metadata !572, metadata !DIExpression()), !dbg !575
-  call void @llvm.dbg.value(metadata %struct.vec* %0, metadata !567, metadata !DIExpression()), !dbg !576
-  call void @llvm.dbg.value(metadata %struct.vec* %1, metadata !568, metadata !DIExpression()), !dbg !576
-  %6 = bitcast %struct.vec* %1 to i8*, !dbg !577
-  %7 = bitcast [4 x i32]* %3 to i8*, !dbg !578
-  %8 = bitcast [4 x i32]* %3 to i8*, !dbg !578
-  call void @llvm.lifetime.start.p0i8(i64 16, i8* nonnull %8), !dbg !578
-  %9 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 1, !dbg !579
-  %10 = bitcast %struct.vec* %9 to i8*, !dbg !579
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(16) %7, i8* noundef nonnull align 4 dereferenceable(16) %10, i32 16, i1 false), !dbg !579, !tbaa.struct !118
-  %11 = bitcast [4 x i32]* %4 to i8*, !dbg !580
-  %12 = bitcast [4 x i32]* %4 to i8*, !dbg !580
-  call void @llvm.lifetime.start.p0i8(i64 16, i8* nonnull %12), !dbg !580
-  %13 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 2, !dbg !581
-  %14 = bitcast %struct.vec* %13 to i8*, !dbg !581
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(16) %11, i8* noundef nonnull align 4 dereferenceable(16) %14, i32 16, i1 false), !dbg !581, !tbaa.struct !118
-  %15 = bitcast [4 x i32]* %5 to i8*, !dbg !582
-  %16 = bitcast [4 x i32]* %5 to i8*, !dbg !582
-  call void @llvm.lifetime.start.p0i8(i64 16, i8* nonnull %16), !dbg !582
-  %17 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 3, !dbg !583
-  %18 = bitcast %struct.vec* %17 to i8*, !dbg !583
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(16) %15, i8* noundef nonnull align 4 dereferenceable(16) %18, i32 16, i1 false), !dbg !583, !tbaa.struct !118
-  %19 = bitcast %struct.vec* %0 to i8*, !dbg !584
-  call void @llvm.memmove.p0i8.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(16) %19, i8* noundef nonnull align 4 dereferenceable(16) %6, i32 16, i1 false), !dbg !584
-  %20 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, !dbg !585
-  %21 = bitcast %struct.vec* %20 to i8*, !dbg !585
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(16) %21, i8* noundef nonnull align 4 dereferenceable(16) %7, i32 16, i1 false), !dbg !585, !tbaa.struct !118
-  %22 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, !dbg !586
-  %23 = bitcast %struct.vec* %22 to i8*, !dbg !586
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(16) %23, i8* noundef nonnull align 4 dereferenceable(16) %11, i32 16, i1 false), !dbg !586, !tbaa.struct !118
-  %24 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, !dbg !587
-  %25 = bitcast %struct.vec* %24 to i8*, !dbg !587
-  call void @llvm.memcpy.p0i8.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(16) %25, i8* noundef nonnull align 4 dereferenceable(16) %15, i32 16, i1 false), !dbg !587, !tbaa.struct !118
-  %26 = bitcast [4 x i32]* %5 to i8*, !dbg !588
-  call void @llvm.lifetime.end.p0i8(i64 16, i8* nonnull %26), !dbg !588
-  %27 = bitcast [4 x i32]* %4 to i8*, !dbg !588
-  call void @llvm.lifetime.end.p0i8(i64 16, i8* nonnull %27), !dbg !588
-  %28 = bitcast [4 x i32]* %3 to i8*, !dbg !588
-  call void @llvm.lifetime.end.p0i8(i64 16, i8* nonnull %28), !dbg !588
-  ret void, !dbg !588
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_chacha20_sum3(ptr noundef %0, ptr noundef %1, ptr noundef %2, ptr noundef %3) #0 {
+  %5 = alloca ptr, align 4
+  %6 = alloca ptr, align 4
+  %7 = alloca ptr, align 4
+  %8 = alloca ptr, align 4
+  store ptr %0, ptr %5, align 4
+  store ptr %1, ptr %6, align 4
+  store ptr %2, ptr %7, align 4
+  store ptr %3, ptr %8, align 4
+  %9 = load ptr, ptr %5, align 4
+  %10 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_sum_states(ptr noundef %9, ptr noundef %10)
+  %11 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_state_incr(ptr noundef %11)
+  %12 = load ptr, ptr %6, align 4
+  %13 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_sum_states(ptr noundef %12, ptr noundef %13)
+  %14 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_state_incr(ptr noundef %14)
+  %15 = load ptr, ptr %7, align 4
+  %16 = load ptr, ptr %8, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_sum_states(ptr noundef %15, ptr noundef %16)
+  ret void
 }
 
-; Function Attrs: mustprogress nofree noinline nosync nounwind uwtable willreturn
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_double_round(%struct.vec* nocapture noundef %0) unnamed_addr #4 !dbg !589 {
-  call void @llvm.dbg.value(metadata %struct.vec* %0, metadata !591, metadata !DIExpression()), !dbg !598
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_round(%struct.vec* noundef %0), !dbg !599
-  %2 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, i32 0, i32 0, !dbg !600
-  %3 = load i32, i32* %2, align 4, !dbg !600, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %3, metadata !592, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !598
-  %4 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, i32 0, i32 1, !dbg !600
-  %5 = load i32, i32* %4, align 4, !dbg !600, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %5, metadata !592, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !598
-  %6 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, i32 0, i32 2, !dbg !600
-  %7 = load i32, i32* %6, align 4, !dbg !600, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %7, metadata !592, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !598
-  %8 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, i32 0, i32 3, !dbg !600
-  %9 = load i32, i32* %8, align 4, !dbg !600, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %9, metadata !592, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !598
-  %10 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, i32 0, i32 0, !dbg !601
-  %11 = load i32, i32* %10, align 4, !dbg !601, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %11, metadata !593, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !598
-  %12 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, i32 0, i32 1, !dbg !601
-  %13 = load i32, i32* %12, align 4, !dbg !601, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %13, metadata !593, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !598
-  %14 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, i32 0, i32 2, !dbg !601
-  %15 = load i32, i32* %14, align 4, !dbg !601, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %15, metadata !593, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !598
-  %16 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, i32 0, i32 3, !dbg !601
-  %17 = load i32, i32* %16, align 4, !dbg !601, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %17, metadata !593, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !598
-  %18 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 0, !dbg !602
-  %19 = load i32, i32* %18, align 4, !dbg !602, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %19, metadata !594, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !598
-  %20 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 1, !dbg !602
-  %21 = load i32, i32* %20, align 4, !dbg !602, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %21, metadata !594, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !598
-  %22 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 2, !dbg !602
-  %23 = load i32, i32* %22, align 4, !dbg !602, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %23, metadata !594, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !598
-  %24 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 3, !dbg !602
-  %25 = load i32, i32* %24, align 4, !dbg !602, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %25, metadata !594, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !598
-  store i32 %5, i32* %2, align 4, !dbg !603, !tbaa.struct !118
-  store i32 %7, i32* %4, align 4, !dbg !603, !tbaa.struct !122
-  store i32 %9, i32* %6, align 4, !dbg !603, !tbaa.struct !123
-  store i32 %3, i32* %8, align 4, !dbg !603, !tbaa.struct !124
-  store i32 %15, i32* %10, align 4, !dbg !604, !tbaa.struct !118
-  store i32 %17, i32* %12, align 4, !dbg !604, !tbaa.struct !122
-  store i32 %11, i32* %14, align 4, !dbg !604, !tbaa.struct !123
-  store i32 %13, i32* %16, align 4, !dbg !604, !tbaa.struct !124
-  store i32 %25, i32* %18, align 4, !dbg !605, !tbaa.struct !118
-  store i32 %19, i32* %20, align 4, !dbg !605, !tbaa.struct !122
-  store i32 %21, i32* %22, align 4, !dbg !605, !tbaa.struct !123
-  store i32 %23, i32* %24, align 4, !dbg !605, !tbaa.struct !124
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_round(%struct.vec* noundef %0), !dbg !606
-  %26 = load i32, i32* %2, align 4, !dbg !607, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %26, metadata !595, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !598
-  %27 = load i32, i32* %4, align 4, !dbg !607, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %27, metadata !595, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !598
-  %28 = load i32, i32* %6, align 4, !dbg !607, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %28, metadata !595, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !598
-  %29 = load i32, i32* %8, align 4, !dbg !607, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %29, metadata !595, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !598
-  %30 = load i32, i32* %10, align 4, !dbg !608, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %30, metadata !596, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !598
-  %31 = load i32, i32* %12, align 4, !dbg !608, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %31, metadata !596, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !598
-  %32 = load i32, i32* %14, align 4, !dbg !608, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %32, metadata !596, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !598
-  %33 = load i32, i32* %16, align 4, !dbg !608, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %33, metadata !596, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !598
-  %34 = load i32, i32* %18, align 4, !dbg !609, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %34, metadata !597, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !598
-  %35 = load i32, i32* %20, align 4, !dbg !609, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %35, metadata !597, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !598
-  %36 = load i32, i32* %22, align 4, !dbg !609, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %36, metadata !597, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !598
-  %37 = load i32, i32* %24, align 4, !dbg !609, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %37, metadata !597, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !598
-  store i32 %29, i32* %2, align 4, !dbg !610, !tbaa.struct !118
-  store i32 %26, i32* %4, align 4, !dbg !610, !tbaa.struct !122
-  store i32 %27, i32* %6, align 4, !dbg !610, !tbaa.struct !123
-  store i32 %28, i32* %8, align 4, !dbg !610, !tbaa.struct !124
-  store i32 %32, i32* %10, align 4, !dbg !611, !tbaa.struct !118
-  store i32 %33, i32* %12, align 4, !dbg !611, !tbaa.struct !122
-  store i32 %30, i32* %14, align 4, !dbg !611, !tbaa.struct !123
-  store i32 %31, i32* %16, align 4, !dbg !611, !tbaa.struct !124
-  store i32 %35, i32* %18, align 4, !dbg !612, !tbaa.struct !118
-  store i32 %36, i32* %20, align 4, !dbg !612, !tbaa.struct !122
-  store i32 %37, i32* %22, align 4, !dbg !612, !tbaa.struct !123
-  store i32 %34, i32* %24, align 4, !dbg !612, !tbaa.struct !124
-  ret void, !dbg !613
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_copy_state(ptr noundef %0, ptr noundef %1) #0 {
+  %3 = alloca ptr, align 4
+  %4 = alloca ptr, align 4
+  %5 = alloca %struct.vec, align 4
+  %6 = alloca %struct.vec, align 4
+  %7 = alloca %struct.vec, align 4
+  %8 = alloca %struct.vec, align 4
+  store ptr %0, ptr %3, align 4
+  store ptr %1, ptr %4, align 4
+  %9 = load ptr, ptr %4, align 4
+  %10 = getelementptr inbounds %struct.vec, ptr %9, i32 0
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %5, ptr align 4 %10, i32 16, i1 false)
+  %11 = load ptr, ptr %4, align 4
+  %12 = getelementptr inbounds %struct.vec, ptr %11, i32 1
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %6, ptr align 4 %12, i32 16, i1 false)
+  %13 = load ptr, ptr %4, align 4
+  %14 = getelementptr inbounds %struct.vec, ptr %13, i32 2
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %7, ptr align 4 %14, i32 16, i1 false)
+  %15 = load ptr, ptr %4, align 4
+  %16 = getelementptr inbounds %struct.vec, ptr %15, i32 3
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %8, ptr align 4 %16, i32 16, i1 false)
+  %17 = load ptr, ptr %3, align 4
+  %18 = getelementptr inbounds %struct.vec, ptr %17, i32 0
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %18, ptr align 4 %5, i32 16, i1 false)
+  %19 = load ptr, ptr %3, align 4
+  %20 = getelementptr inbounds %struct.vec, ptr %19, i32 1
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %20, ptr align 4 %6, i32 16, i1 false)
+  %21 = load ptr, ptr %3, align 4
+  %22 = getelementptr inbounds %struct.vec, ptr %21, i32 2
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %22, ptr align 4 %7, i32 16, i1 false)
+  %23 = load ptr, ptr %3, align 4
+  %24 = getelementptr inbounds %struct.vec, ptr %23, i32 3
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %24, ptr align 4 %8, i32 16, i1 false)
+  ret void
 }
 
-; Function Attrs: mustprogress nofree noinline nosync nounwind uwtable willreturn
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_round(%struct.vec* nocapture noundef %0) unnamed_addr #4 !dbg !614 {
-  call void @llvm.dbg.value(metadata %struct.vec* %0, metadata !616, metadata !DIExpression()), !dbg !637
-  %2 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 0, i32 0, i32 0, !dbg !638
-  %3 = load i32, i32* %2, align 4, !dbg !638, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %3, metadata !617, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  %4 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 0, i32 0, i32 1, !dbg !638
-  %5 = load i32, i32* %4, align 4, !dbg !638, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %5, metadata !617, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  %6 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 0, i32 0, i32 2, !dbg !638
-  %7 = load i32, i32* %6, align 4, !dbg !638, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %7, metadata !617, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  %8 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 0, i32 0, i32 3, !dbg !638
-  %9 = load i32, i32* %8, align 4, !dbg !638, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %9, metadata !617, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  %10 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, i32 0, i32 0, !dbg !639
-  %11 = load i32, i32* %10, align 4, !dbg !639, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %11, metadata !618, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  %12 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, i32 0, i32 1, !dbg !639
-  %13 = load i32, i32* %12, align 4, !dbg !639, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %13, metadata !618, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  %14 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, i32 0, i32 2, !dbg !639
-  %15 = load i32, i32* %14, align 4, !dbg !639, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %15, metadata !618, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  %16 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, i32 0, i32 3, !dbg !639
-  %17 = load i32, i32* %16, align 4, !dbg !639, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %17, metadata !618, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  %18 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 0, !dbg !640
-  %19 = load i32, i32* %18, align 4, !dbg !640, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %19, metadata !619, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  %20 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 1, !dbg !640
-  %21 = load i32, i32* %20, align 4, !dbg !640, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %21, metadata !619, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  %22 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 2, !dbg !640
-  %23 = load i32, i32* %22, align 4, !dbg !640, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %23, metadata !619, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  %24 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 3, !dbg !640
-  %25 = load i32, i32* %24, align 4, !dbg !640, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %25, metadata !619, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %11, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !646
-  call void @llvm.dbg.value(metadata i32 %13, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !646
-  call void @llvm.dbg.value(metadata i32 %15, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !646
-  call void @llvm.dbg.value(metadata i32 %17, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !646
-  call void @llvm.dbg.value(metadata i32 %3, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !646
-  call void @llvm.dbg.value(metadata i32 %5, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !646
-  call void @llvm.dbg.value(metadata i32 %7, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !646
-  call void @llvm.dbg.value(metadata i32 %9, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !646
-  call void @llvm.dbg.value(metadata i8* undef, metadata !645, metadata !DIExpression(DW_OP_deref)), !dbg !646
-  %26 = add i32 %11, %3, !dbg !648
-  call void @llvm.dbg.value(metadata i32 %26, metadata !620, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  %27 = add i32 %13, %5, !dbg !649
-  call void @llvm.dbg.value(metadata i32 %27, metadata !620, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  %28 = add i32 %15, %7, !dbg !650
-  call void @llvm.dbg.value(metadata i32 %28, metadata !620, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  %29 = add i32 %17, %9, !dbg !651
-  call void @llvm.dbg.value(metadata i32 %29, metadata !620, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %26, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !652
-  call void @llvm.dbg.value(metadata i32 %27, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !652
-  call void @llvm.dbg.value(metadata i32 %28, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !652
-  call void @llvm.dbg.value(metadata i32 %29, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !652
-  call void @llvm.dbg.value(metadata i32 %19, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !652
-  call void @llvm.dbg.value(metadata i32 %21, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !652
-  call void @llvm.dbg.value(metadata i32 %23, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !652
-  call void @llvm.dbg.value(metadata i32 %25, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !652
-  call void @llvm.dbg.value(metadata i8* undef, metadata !465, metadata !DIExpression(DW_OP_deref)), !dbg !652
-  %30 = xor i32 %19, %26, !dbg !654
-  %31 = xor i32 %21, %27, !dbg !655
-  %32 = xor i32 %23, %28, !dbg !656
-  %33 = xor i32 %25, %29, !dbg !657
-  call void @llvm.dbg.value(metadata i32 %30, metadata !658, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !665
-  call void @llvm.dbg.value(metadata i32 %31, metadata !658, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !665
-  call void @llvm.dbg.value(metadata i32 %32, metadata !658, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !665
-  call void @llvm.dbg.value(metadata i32 %33, metadata !658, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !665
-  call void @llvm.dbg.value(metadata i8* undef, metadata !664, metadata !DIExpression(DW_OP_deref)), !dbg !665
-  call void @llvm.dbg.value(metadata i32 16, metadata !663, metadata !DIExpression()), !dbg !665
-  %34 = call i32 @llvm.fshl.i32(i32 %30, i32 %30, i32 16), !dbg !667
-  call void @llvm.dbg.value(metadata i32 %34, metadata !621, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  %35 = call i32 @llvm.fshl.i32(i32 %31, i32 %31, i32 16), !dbg !668
-  call void @llvm.dbg.value(metadata i32 %35, metadata !621, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  %36 = call i32 @llvm.fshl.i32(i32 %32, i32 %32, i32 16), !dbg !669
-  call void @llvm.dbg.value(metadata i32 %36, metadata !621, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  %37 = call i32 @llvm.fshl.i32(i32 %33, i32 %33, i32 16), !dbg !670
-  call void @llvm.dbg.value(metadata i32 %37, metadata !621, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  store i32 %26, i32* %2, align 4, !dbg !671, !tbaa.struct !118
-  store i32 %27, i32* %4, align 4, !dbg !671, !tbaa.struct !122
-  store i32 %28, i32* %6, align 4, !dbg !671, !tbaa.struct !123
-  store i32 %29, i32* %8, align 4, !dbg !671, !tbaa.struct !124
-  store i32 %34, i32* %18, align 4, !dbg !672, !tbaa.struct !118
-  store i32 %35, i32* %20, align 4, !dbg !672, !tbaa.struct !122
-  store i32 %36, i32* %22, align 4, !dbg !672, !tbaa.struct !123
-  store i32 %37, i32* %24, align 4, !dbg !672, !tbaa.struct !124
-  %38 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, i32 0, i32 0, !dbg !673
-  %39 = load i32, i32* %38, align 4, !dbg !673, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %39, metadata !622, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  %40 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, i32 0, i32 1, !dbg !673
-  %41 = load i32, i32* %40, align 4, !dbg !673, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %41, metadata !622, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  %42 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, i32 0, i32 2, !dbg !673
-  %43 = load i32, i32* %42, align 4, !dbg !673, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %43, metadata !622, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  %44 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, i32 0, i32 3, !dbg !673
-  %45 = load i32, i32* %44, align 4, !dbg !673, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %45, metadata !622, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %34, metadata !623, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %35, metadata !623, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %36, metadata !623, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %37, metadata !623, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %11, metadata !624, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %13, metadata !624, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %15, metadata !624, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %17, metadata !624, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %34, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !674
-  call void @llvm.dbg.value(metadata i32 %35, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !674
-  call void @llvm.dbg.value(metadata i32 %36, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !674
-  call void @llvm.dbg.value(metadata i32 %37, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !674
-  call void @llvm.dbg.value(metadata i32 %39, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !674
-  call void @llvm.dbg.value(metadata i32 %41, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !674
-  call void @llvm.dbg.value(metadata i32 %43, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !674
-  call void @llvm.dbg.value(metadata i32 %45, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !674
-  call void @llvm.dbg.value(metadata i8* undef, metadata !645, metadata !DIExpression(DW_OP_deref)), !dbg !674
-  %46 = add i32 %39, %34, !dbg !676
-  call void @llvm.dbg.value(metadata i32 %46, metadata !625, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  %47 = add i32 %41, %35, !dbg !677
-  call void @llvm.dbg.value(metadata i32 %47, metadata !625, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  %48 = add i32 %43, %36, !dbg !678
-  call void @llvm.dbg.value(metadata i32 %48, metadata !625, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  %49 = add i32 %45, %37, !dbg !679
-  call void @llvm.dbg.value(metadata i32 %49, metadata !625, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %46, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !680
-  call void @llvm.dbg.value(metadata i32 %47, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !680
-  call void @llvm.dbg.value(metadata i32 %48, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !680
-  call void @llvm.dbg.value(metadata i32 %49, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !680
-  call void @llvm.dbg.value(metadata i32 %11, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !680
-  call void @llvm.dbg.value(metadata i32 %13, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !680
-  call void @llvm.dbg.value(metadata i32 %15, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !680
-  call void @llvm.dbg.value(metadata i32 %17, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !680
-  call void @llvm.dbg.value(metadata i8* undef, metadata !465, metadata !DIExpression(DW_OP_deref)), !dbg !680
-  %50 = xor i32 %46, %11, !dbg !682
-  %51 = xor i32 %47, %13, !dbg !683
-  %52 = xor i32 %48, %15, !dbg !684
-  %53 = xor i32 %49, %17, !dbg !685
-  call void @llvm.dbg.value(metadata i32 %50, metadata !658, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !686
-  call void @llvm.dbg.value(metadata i32 %51, metadata !658, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !686
-  call void @llvm.dbg.value(metadata i32 %52, metadata !658, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !686
-  call void @llvm.dbg.value(metadata i32 %53, metadata !658, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !686
-  call void @llvm.dbg.value(metadata i8* undef, metadata !664, metadata !DIExpression(DW_OP_deref)), !dbg !686
-  call void @llvm.dbg.value(metadata i32 12, metadata !663, metadata !DIExpression()), !dbg !686
-  %54 = call i32 @llvm.fshl.i32(i32 %50, i32 %50, i32 12), !dbg !688
-  call void @llvm.dbg.value(metadata i32 %54, metadata !626, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  %55 = call i32 @llvm.fshl.i32(i32 %51, i32 %51, i32 12), !dbg !689
-  call void @llvm.dbg.value(metadata i32 %55, metadata !626, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  %56 = call i32 @llvm.fshl.i32(i32 %52, i32 %52, i32 12), !dbg !690
-  call void @llvm.dbg.value(metadata i32 %56, metadata !626, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  %57 = call i32 @llvm.fshl.i32(i32 %53, i32 %53, i32 12), !dbg !691
-  call void @llvm.dbg.value(metadata i32 %57, metadata !626, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  store i32 %46, i32* %38, align 4, !dbg !692, !tbaa.struct !118
-  store i32 %47, i32* %40, align 4, !dbg !692, !tbaa.struct !122
-  store i32 %48, i32* %42, align 4, !dbg !692, !tbaa.struct !123
-  store i32 %49, i32* %44, align 4, !dbg !692, !tbaa.struct !124
-  store i32 %54, i32* %10, align 4, !dbg !693, !tbaa.struct !118
-  store i32 %55, i32* %12, align 4, !dbg !693, !tbaa.struct !122
-  store i32 %56, i32* %14, align 4, !dbg !693, !tbaa.struct !123
-  store i32 %57, i32* %16, align 4, !dbg !693, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %26, metadata !627, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %27, metadata !627, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %28, metadata !627, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %29, metadata !627, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %54, metadata !628, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %55, metadata !628, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %56, metadata !628, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %57, metadata !628, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %34, metadata !629, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %35, metadata !629, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %36, metadata !629, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %37, metadata !629, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %54, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !694
-  call void @llvm.dbg.value(metadata i32 %55, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !694
-  call void @llvm.dbg.value(metadata i32 %56, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !694
-  call void @llvm.dbg.value(metadata i32 %57, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !694
-  call void @llvm.dbg.value(metadata i32 %26, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !694
-  call void @llvm.dbg.value(metadata i32 %27, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !694
-  call void @llvm.dbg.value(metadata i32 %28, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !694
-  call void @llvm.dbg.value(metadata i32 %29, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !694
-  call void @llvm.dbg.value(metadata i8* undef, metadata !645, metadata !DIExpression(DW_OP_deref)), !dbg !694
-  %58 = add i32 %54, %26, !dbg !696
-  call void @llvm.dbg.value(metadata i32 %58, metadata !630, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  %59 = add i32 %55, %27, !dbg !697
-  call void @llvm.dbg.value(metadata i32 %59, metadata !630, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  %60 = add i32 %56, %28, !dbg !698
-  call void @llvm.dbg.value(metadata i32 %60, metadata !630, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  %61 = add i32 %57, %29, !dbg !699
-  call void @llvm.dbg.value(metadata i32 %61, metadata !630, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %58, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !700
-  call void @llvm.dbg.value(metadata i32 %59, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !700
-  call void @llvm.dbg.value(metadata i32 %60, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !700
-  call void @llvm.dbg.value(metadata i32 %61, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !700
-  call void @llvm.dbg.value(metadata i32 %34, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !700
-  call void @llvm.dbg.value(metadata i32 %35, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !700
-  call void @llvm.dbg.value(metadata i32 %36, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !700
-  call void @llvm.dbg.value(metadata i32 %37, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !700
-  call void @llvm.dbg.value(metadata i8* undef, metadata !465, metadata !DIExpression(DW_OP_deref)), !dbg !700
-  %62 = xor i32 %58, %34, !dbg !702
-  %63 = xor i32 %59, %35, !dbg !703
-  %64 = xor i32 %60, %36, !dbg !704
-  %65 = xor i32 %61, %37, !dbg !705
-  call void @llvm.dbg.value(metadata i32 %62, metadata !658, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !706
-  call void @llvm.dbg.value(metadata i32 %63, metadata !658, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !706
-  call void @llvm.dbg.value(metadata i32 %64, metadata !658, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !706
-  call void @llvm.dbg.value(metadata i32 %65, metadata !658, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !706
-  call void @llvm.dbg.value(metadata i8* undef, metadata !664, metadata !DIExpression(DW_OP_deref)), !dbg !706
-  call void @llvm.dbg.value(metadata i32 8, metadata !663, metadata !DIExpression()), !dbg !706
-  %66 = call i32 @llvm.fshl.i32(i32 %62, i32 %62, i32 8), !dbg !708
-  call void @llvm.dbg.value(metadata i32 %66, metadata !631, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  %67 = call i32 @llvm.fshl.i32(i32 %63, i32 %63, i32 8), !dbg !709
-  call void @llvm.dbg.value(metadata i32 %67, metadata !631, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  %68 = call i32 @llvm.fshl.i32(i32 %64, i32 %64, i32 8), !dbg !710
-  call void @llvm.dbg.value(metadata i32 %68, metadata !631, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  %69 = call i32 @llvm.fshl.i32(i32 %65, i32 %65, i32 8), !dbg !711
-  call void @llvm.dbg.value(metadata i32 %69, metadata !631, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  store i32 %58, i32* %2, align 4, !dbg !712, !tbaa.struct !118
-  store i32 %59, i32* %4, align 4, !dbg !712, !tbaa.struct !122
-  store i32 %60, i32* %6, align 4, !dbg !712, !tbaa.struct !123
-  store i32 %61, i32* %8, align 4, !dbg !712, !tbaa.struct !124
-  store i32 %66, i32* %18, align 4, !dbg !713, !tbaa.struct !118
-  store i32 %67, i32* %20, align 4, !dbg !713, !tbaa.struct !122
-  store i32 %68, i32* %22, align 4, !dbg !713, !tbaa.struct !123
-  store i32 %69, i32* %24, align 4, !dbg !713, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %46, metadata !632, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %47, metadata !632, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %48, metadata !632, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %49, metadata !632, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %66, metadata !633, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %67, metadata !633, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %68, metadata !633, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %69, metadata !633, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %54, metadata !634, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %55, metadata !634, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %56, metadata !634, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %57, metadata !634, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %66, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !714
-  call void @llvm.dbg.value(metadata i32 %67, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !714
-  call void @llvm.dbg.value(metadata i32 %68, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !714
-  call void @llvm.dbg.value(metadata i32 %69, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !714
-  call void @llvm.dbg.value(metadata i32 %46, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !714
-  call void @llvm.dbg.value(metadata i32 %47, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !714
-  call void @llvm.dbg.value(metadata i32 %48, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !714
-  call void @llvm.dbg.value(metadata i32 %49, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !714
-  call void @llvm.dbg.value(metadata i8* undef, metadata !645, metadata !DIExpression(DW_OP_deref)), !dbg !714
-  %70 = add i32 %66, %46, !dbg !716
-  call void @llvm.dbg.value(metadata i32 %70, metadata !635, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  %71 = add i32 %67, %47, !dbg !717
-  call void @llvm.dbg.value(metadata i32 %71, metadata !635, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  %72 = add i32 %68, %48, !dbg !718
-  call void @llvm.dbg.value(metadata i32 %72, metadata !635, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  %73 = add i32 %69, %49, !dbg !719
-  call void @llvm.dbg.value(metadata i32 %73, metadata !635, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  call void @llvm.dbg.value(metadata i32 %70, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !720
-  call void @llvm.dbg.value(metadata i32 %71, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !720
-  call void @llvm.dbg.value(metadata i32 %72, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !720
-  call void @llvm.dbg.value(metadata i32 %73, metadata !459, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !720
-  call void @llvm.dbg.value(metadata i32 %54, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !720
-  call void @llvm.dbg.value(metadata i32 %55, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !720
-  call void @llvm.dbg.value(metadata i32 %56, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !720
-  call void @llvm.dbg.value(metadata i32 %57, metadata !464, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !720
-  call void @llvm.dbg.value(metadata i8* undef, metadata !465, metadata !DIExpression(DW_OP_deref)), !dbg !720
-  %74 = xor i32 %70, %54, !dbg !722
-  %75 = xor i32 %71, %55, !dbg !723
-  %76 = xor i32 %72, %56, !dbg !724
-  %77 = xor i32 %73, %57, !dbg !725
-  call void @llvm.dbg.value(metadata i32 %74, metadata !658, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !726
-  call void @llvm.dbg.value(metadata i32 %75, metadata !658, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !726
-  call void @llvm.dbg.value(metadata i32 %76, metadata !658, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !726
-  call void @llvm.dbg.value(metadata i32 %77, metadata !658, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !726
-  call void @llvm.dbg.value(metadata i8* undef, metadata !664, metadata !DIExpression(DW_OP_deref)), !dbg !726
-  call void @llvm.dbg.value(metadata i32 7, metadata !663, metadata !DIExpression()), !dbg !726
-  %78 = call i32 @llvm.fshl.i32(i32 %74, i32 %74, i32 7), !dbg !728
-  call void @llvm.dbg.value(metadata i32 %78, metadata !636, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !637
-  %79 = call i32 @llvm.fshl.i32(i32 %75, i32 %75, i32 7), !dbg !729
-  call void @llvm.dbg.value(metadata i32 %79, metadata !636, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !637
-  %80 = call i32 @llvm.fshl.i32(i32 %76, i32 %76, i32 7), !dbg !730
-  call void @llvm.dbg.value(metadata i32 %80, metadata !636, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !637
-  %81 = call i32 @llvm.fshl.i32(i32 %77, i32 %77, i32 7), !dbg !731
-  call void @llvm.dbg.value(metadata i32 %81, metadata !636, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !637
-  store i32 %70, i32* %38, align 4, !dbg !732, !tbaa.struct !118
-  store i32 %71, i32* %40, align 4, !dbg !732, !tbaa.struct !122
-  store i32 %72, i32* %42, align 4, !dbg !732, !tbaa.struct !123
-  store i32 %73, i32* %44, align 4, !dbg !732, !tbaa.struct !124
-  store i32 %78, i32* %10, align 4, !dbg !733, !tbaa.struct !118
-  store i32 %79, i32* %12, align 4, !dbg !733, !tbaa.struct !122
-  store i32 %80, i32* %14, align 4, !dbg !733, !tbaa.struct !123
-  store i32 %81, i32* %16, align 4, !dbg !733, !tbaa.struct !124
-  ret void, !dbg !734
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_double_round(ptr noundef %0) #0 {
+  %2 = alloca ptr, align 4
+  %3 = alloca i32, align 4
+  %4 = alloca %struct.vec, align 8
+  %5 = alloca ptr, align 4
+  %6 = alloca i32, align 4
+  %7 = alloca %struct.vec, align 8
+  %8 = alloca ptr, align 4
+  %9 = alloca i32, align 4
+  %10 = alloca %struct.vec, align 8
+  %11 = alloca ptr, align 4
+  %12 = alloca i32, align 4
+  %13 = alloca %struct.vec, align 8
+  %14 = alloca ptr, align 4
+  %15 = alloca i32, align 4
+  %16 = alloca %struct.vec, align 8
+  %17 = alloca ptr, align 4
+  %18 = alloca i32, align 4
+  %19 = alloca %struct.vec, align 8
+  %20 = alloca ptr, align 4
+  %21 = alloca %struct.vec, align 4
+  %22 = alloca %struct.vec, align 4
+  %23 = alloca %struct.vec, align 4
+  %24 = alloca %struct.vec, align 4
+  %25 = alloca %struct.vec, align 4
+  %26 = alloca %struct.vec, align 4
+  %27 = alloca %struct.vec, align 4
+  %28 = alloca %struct.vec, align 4
+  %29 = alloca %struct.vec, align 4
+  %30 = alloca %struct.vec, align 4
+  %31 = alloca %struct.vec, align 4
+  %32 = alloca %struct.vec, align 4
+  store ptr %0, ptr %20, align 4
+  %33 = load ptr, ptr %20, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_round(ptr noundef %33)
+  %34 = load ptr, ptr %20, align 4
+  %35 = getelementptr inbounds %struct.vec, ptr %34, i32 1
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %21, ptr align 4 %35, i32 16, i1 false)
+  %36 = load ptr, ptr %20, align 4
+  %37 = getelementptr inbounds %struct.vec, ptr %36, i32 2
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %22, ptr align 4 %37, i32 16, i1 false)
+  %38 = load ptr, ptr %20, align 4
+  %39 = getelementptr inbounds %struct.vec, ptr %38, i32 3
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %23, ptr align 4 %39, i32 16, i1 false)
+  %40 = load ptr, ptr %20, align 4
+  %41 = getelementptr inbounds %struct.vec, ptr %40, i32 1
+  call void @llvm.experimental.noalias.scope.decl(metadata !73)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %4, ptr align 1 %21, i64 16, i1 false)
+  store ptr %24, ptr %2, align 4, !noalias !73
+  store i32 1, ptr %3, align 4, !noalias !73
+  %42 = load i32, ptr %3, align 4, !noalias !73
+  %43 = urem i32 %42, 4
+  %44 = getelementptr inbounds [4 x i32], ptr %4, i32 0, i32 %43
+  %45 = load i32, ptr %44, align 4, !noalias !73
+  store i32 %45, ptr %24, align 4, !alias.scope !73
+  %46 = load i32, ptr %3, align 4, !noalias !73
+  %47 = add i32 %46, 1
+  %48 = urem i32 %47, 4
+  %49 = getelementptr inbounds [4 x i32], ptr %4, i32 0, i32 %48
+  %50 = load i32, ptr %49, align 4, !noalias !73
+  %51 = getelementptr inbounds [4 x i32], ptr %24, i32 0, i32 1
+  store i32 %50, ptr %51, align 4, !alias.scope !73
+  %52 = load i32, ptr %3, align 4, !noalias !73
+  %53 = add i32 %52, 2
+  %54 = urem i32 %53, 4
+  %55 = getelementptr inbounds [4 x i32], ptr %4, i32 0, i32 %54
+  %56 = load i32, ptr %55, align 4, !noalias !73
+  %57 = getelementptr inbounds [4 x i32], ptr %24, i32 0, i32 2
+  store i32 %56, ptr %57, align 4, !alias.scope !73
+  %58 = load i32, ptr %3, align 4, !noalias !73
+  %59 = add i32 %58, 3
+  %60 = urem i32 %59, 4
+  %61 = getelementptr inbounds [4 x i32], ptr %4, i32 0, i32 %60
+  %62 = load i32, ptr %61, align 4, !noalias !73
+  %63 = getelementptr inbounds [4 x i32], ptr %24, i32 0, i32 3
+  store i32 %62, ptr %63, align 4, !alias.scope !73
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %41, ptr align 4 %24, i32 16, i1 false)
+  %64 = load ptr, ptr %20, align 4
+  %65 = getelementptr inbounds %struct.vec, ptr %64, i32 2
+  call void @llvm.experimental.noalias.scope.decl(metadata !76)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %7, ptr align 1 %22, i64 16, i1 false)
+  store ptr %25, ptr %5, align 4, !noalias !76
+  store i32 2, ptr %6, align 4, !noalias !76
+  %66 = load i32, ptr %6, align 4, !noalias !76
+  %67 = urem i32 %66, 4
+  %68 = getelementptr inbounds [4 x i32], ptr %7, i32 0, i32 %67
+  %69 = load i32, ptr %68, align 4, !noalias !76
+  store i32 %69, ptr %25, align 4, !alias.scope !76
+  %70 = load i32, ptr %6, align 4, !noalias !76
+  %71 = add i32 %70, 1
+  %72 = urem i32 %71, 4
+  %73 = getelementptr inbounds [4 x i32], ptr %7, i32 0, i32 %72
+  %74 = load i32, ptr %73, align 4, !noalias !76
+  %75 = getelementptr inbounds [4 x i32], ptr %25, i32 0, i32 1
+  store i32 %74, ptr %75, align 4, !alias.scope !76
+  %76 = load i32, ptr %6, align 4, !noalias !76
+  %77 = add i32 %76, 2
+  %78 = urem i32 %77, 4
+  %79 = getelementptr inbounds [4 x i32], ptr %7, i32 0, i32 %78
+  %80 = load i32, ptr %79, align 4, !noalias !76
+  %81 = getelementptr inbounds [4 x i32], ptr %25, i32 0, i32 2
+  store i32 %80, ptr %81, align 4, !alias.scope !76
+  %82 = load i32, ptr %6, align 4, !noalias !76
+  %83 = add i32 %82, 3
+  %84 = urem i32 %83, 4
+  %85 = getelementptr inbounds [4 x i32], ptr %7, i32 0, i32 %84
+  %86 = load i32, ptr %85, align 4, !noalias !76
+  %87 = getelementptr inbounds [4 x i32], ptr %25, i32 0, i32 3
+  store i32 %86, ptr %87, align 4, !alias.scope !76
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %65, ptr align 4 %25, i32 16, i1 false)
+  %88 = load ptr, ptr %20, align 4
+  %89 = getelementptr inbounds %struct.vec, ptr %88, i32 3
+  call void @llvm.experimental.noalias.scope.decl(metadata !79)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %10, ptr align 1 %23, i64 16, i1 false)
+  store ptr %26, ptr %8, align 4, !noalias !79
+  store i32 3, ptr %9, align 4, !noalias !79
+  %90 = load i32, ptr %9, align 4, !noalias !79
+  %91 = urem i32 %90, 4
+  %92 = getelementptr inbounds [4 x i32], ptr %10, i32 0, i32 %91
+  %93 = load i32, ptr %92, align 4, !noalias !79
+  store i32 %93, ptr %26, align 4, !alias.scope !79
+  %94 = load i32, ptr %9, align 4, !noalias !79
+  %95 = add i32 %94, 1
+  %96 = urem i32 %95, 4
+  %97 = getelementptr inbounds [4 x i32], ptr %10, i32 0, i32 %96
+  %98 = load i32, ptr %97, align 4, !noalias !79
+  %99 = getelementptr inbounds [4 x i32], ptr %26, i32 0, i32 1
+  store i32 %98, ptr %99, align 4, !alias.scope !79
+  %100 = load i32, ptr %9, align 4, !noalias !79
+  %101 = add i32 %100, 2
+  %102 = urem i32 %101, 4
+  %103 = getelementptr inbounds [4 x i32], ptr %10, i32 0, i32 %102
+  %104 = load i32, ptr %103, align 4, !noalias !79
+  %105 = getelementptr inbounds [4 x i32], ptr %26, i32 0, i32 2
+  store i32 %104, ptr %105, align 4, !alias.scope !79
+  %106 = load i32, ptr %9, align 4, !noalias !79
+  %107 = add i32 %106, 3
+  %108 = urem i32 %107, 4
+  %109 = getelementptr inbounds [4 x i32], ptr %10, i32 0, i32 %108
+  %110 = load i32, ptr %109, align 4, !noalias !79
+  %111 = getelementptr inbounds [4 x i32], ptr %26, i32 0, i32 3
+  store i32 %110, ptr %111, align 4, !alias.scope !79
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %89, ptr align 4 %26, i32 16, i1 false)
+  %112 = load ptr, ptr %20, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_round(ptr noundef %112)
+  %113 = load ptr, ptr %20, align 4
+  %114 = getelementptr inbounds %struct.vec, ptr %113, i32 1
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %27, ptr align 4 %114, i32 16, i1 false)
+  %115 = load ptr, ptr %20, align 4
+  %116 = getelementptr inbounds %struct.vec, ptr %115, i32 2
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %28, ptr align 4 %116, i32 16, i1 false)
+  %117 = load ptr, ptr %20, align 4
+  %118 = getelementptr inbounds %struct.vec, ptr %117, i32 3
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %29, ptr align 4 %118, i32 16, i1 false)
+  %119 = load ptr, ptr %20, align 4
+  %120 = getelementptr inbounds %struct.vec, ptr %119, i32 1
+  call void @llvm.experimental.noalias.scope.decl(metadata !82)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %13, ptr align 1 %27, i64 16, i1 false)
+  store ptr %30, ptr %11, align 4, !noalias !82
+  store i32 3, ptr %12, align 4, !noalias !82
+  %121 = load i32, ptr %12, align 4, !noalias !82
+  %122 = urem i32 %121, 4
+  %123 = getelementptr inbounds [4 x i32], ptr %13, i32 0, i32 %122
+  %124 = load i32, ptr %123, align 4, !noalias !82
+  store i32 %124, ptr %30, align 4, !alias.scope !82
+  %125 = load i32, ptr %12, align 4, !noalias !82
+  %126 = add i32 %125, 1
+  %127 = urem i32 %126, 4
+  %128 = getelementptr inbounds [4 x i32], ptr %13, i32 0, i32 %127
+  %129 = load i32, ptr %128, align 4, !noalias !82
+  %130 = getelementptr inbounds [4 x i32], ptr %30, i32 0, i32 1
+  store i32 %129, ptr %130, align 4, !alias.scope !82
+  %131 = load i32, ptr %12, align 4, !noalias !82
+  %132 = add i32 %131, 2
+  %133 = urem i32 %132, 4
+  %134 = getelementptr inbounds [4 x i32], ptr %13, i32 0, i32 %133
+  %135 = load i32, ptr %134, align 4, !noalias !82
+  %136 = getelementptr inbounds [4 x i32], ptr %30, i32 0, i32 2
+  store i32 %135, ptr %136, align 4, !alias.scope !82
+  %137 = load i32, ptr %12, align 4, !noalias !82
+  %138 = add i32 %137, 3
+  %139 = urem i32 %138, 4
+  %140 = getelementptr inbounds [4 x i32], ptr %13, i32 0, i32 %139
+  %141 = load i32, ptr %140, align 4, !noalias !82
+  %142 = getelementptr inbounds [4 x i32], ptr %30, i32 0, i32 3
+  store i32 %141, ptr %142, align 4, !alias.scope !82
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %120, ptr align 4 %30, i32 16, i1 false)
+  %143 = load ptr, ptr %20, align 4
+  %144 = getelementptr inbounds %struct.vec, ptr %143, i32 2
+  call void @llvm.experimental.noalias.scope.decl(metadata !85)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %16, ptr align 1 %28, i64 16, i1 false)
+  store ptr %31, ptr %14, align 4, !noalias !85
+  store i32 2, ptr %15, align 4, !noalias !85
+  %145 = load i32, ptr %15, align 4, !noalias !85
+  %146 = urem i32 %145, 4
+  %147 = getelementptr inbounds [4 x i32], ptr %16, i32 0, i32 %146
+  %148 = load i32, ptr %147, align 4, !noalias !85
+  store i32 %148, ptr %31, align 4, !alias.scope !85
+  %149 = load i32, ptr %15, align 4, !noalias !85
+  %150 = add i32 %149, 1
+  %151 = urem i32 %150, 4
+  %152 = getelementptr inbounds [4 x i32], ptr %16, i32 0, i32 %151
+  %153 = load i32, ptr %152, align 4, !noalias !85
+  %154 = getelementptr inbounds [4 x i32], ptr %31, i32 0, i32 1
+  store i32 %153, ptr %154, align 4, !alias.scope !85
+  %155 = load i32, ptr %15, align 4, !noalias !85
+  %156 = add i32 %155, 2
+  %157 = urem i32 %156, 4
+  %158 = getelementptr inbounds [4 x i32], ptr %16, i32 0, i32 %157
+  %159 = load i32, ptr %158, align 4, !noalias !85
+  %160 = getelementptr inbounds [4 x i32], ptr %31, i32 0, i32 2
+  store i32 %159, ptr %160, align 4, !alias.scope !85
+  %161 = load i32, ptr %15, align 4, !noalias !85
+  %162 = add i32 %161, 3
+  %163 = urem i32 %162, 4
+  %164 = getelementptr inbounds [4 x i32], ptr %16, i32 0, i32 %163
+  %165 = load i32, ptr %164, align 4, !noalias !85
+  %166 = getelementptr inbounds [4 x i32], ptr %31, i32 0, i32 3
+  store i32 %165, ptr %166, align 4, !alias.scope !85
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %144, ptr align 4 %31, i32 16, i1 false)
+  %167 = load ptr, ptr %20, align 4
+  %168 = getelementptr inbounds %struct.vec, ptr %167, i32 3
+  call void @llvm.experimental.noalias.scope.decl(metadata !88)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %19, ptr align 1 %29, i64 16, i1 false)
+  store ptr %32, ptr %17, align 4, !noalias !88
+  store i32 1, ptr %18, align 4, !noalias !88
+  %169 = load i32, ptr %18, align 4, !noalias !88
+  %170 = urem i32 %169, 4
+  %171 = getelementptr inbounds [4 x i32], ptr %19, i32 0, i32 %170
+  %172 = load i32, ptr %171, align 4, !noalias !88
+  store i32 %172, ptr %32, align 4, !alias.scope !88
+  %173 = load i32, ptr %18, align 4, !noalias !88
+  %174 = add i32 %173, 1
+  %175 = urem i32 %174, 4
+  %176 = getelementptr inbounds [4 x i32], ptr %19, i32 0, i32 %175
+  %177 = load i32, ptr %176, align 4, !noalias !88
+  %178 = getelementptr inbounds [4 x i32], ptr %32, i32 0, i32 1
+  store i32 %177, ptr %178, align 4, !alias.scope !88
+  %179 = load i32, ptr %18, align 4, !noalias !88
+  %180 = add i32 %179, 2
+  %181 = urem i32 %180, 4
+  %182 = getelementptr inbounds [4 x i32], ptr %19, i32 0, i32 %181
+  %183 = load i32, ptr %182, align 4, !noalias !88
+  %184 = getelementptr inbounds [4 x i32], ptr %32, i32 0, i32 2
+  store i32 %183, ptr %184, align 4, !alias.scope !88
+  %185 = load i32, ptr %18, align 4, !noalias !88
+  %186 = add i32 %185, 3
+  %187 = urem i32 %186, 4
+  %188 = getelementptr inbounds [4 x i32], ptr %19, i32 0, i32 %187
+  %189 = load i32, ptr %188, align 4, !noalias !88
+  %190 = getelementptr inbounds [4 x i32], ptr %32, i32 0, i32 3
+  store i32 %189, ptr %190, align 4, !alias.scope !88
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %168, ptr align 4 %32, i32 16, i1 false)
+  ret void
 }
 
-; Function Attrs: mustprogress nofree noinline nosync nounwind uwtable willreturn
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_sum_states(%struct.vec* nocapture noundef %0, %struct.vec* nocapture noundef readonly %1) unnamed_addr #4 !dbg !735 {
-  call void @llvm.dbg.value(metadata %struct.vec* %0, metadata !737, metadata !DIExpression()), !dbg !747
-  call void @llvm.dbg.value(metadata %struct.vec* %1, metadata !738, metadata !DIExpression()), !dbg !747
-  %3 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 0, i32 0, i32 0, !dbg !748
-  %4 = load i32, i32* %3, align 4, !dbg !748, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %4, metadata !739, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !747
-  %5 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 0, i32 0, i32 1, !dbg !748
-  %6 = load i32, i32* %5, align 4, !dbg !748, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %6, metadata !739, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !747
-  %7 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 0, i32 0, i32 2, !dbg !748
-  %8 = load i32, i32* %7, align 4, !dbg !748, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %8, metadata !739, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !747
-  %9 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 0, i32 0, i32 3, !dbg !748
-  %10 = load i32, i32* %9, align 4, !dbg !748, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %10, metadata !739, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !747
-  %11 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 1, i32 0, i32 0, !dbg !749
-  %12 = load i32, i32* %11, align 4, !dbg !749, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %12, metadata !740, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !747
-  %13 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 1, i32 0, i32 1, !dbg !749
-  %14 = load i32, i32* %13, align 4, !dbg !749, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %14, metadata !740, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !747
-  %15 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 1, i32 0, i32 2, !dbg !749
-  %16 = load i32, i32* %15, align 4, !dbg !749, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %16, metadata !740, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !747
-  %17 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 1, i32 0, i32 3, !dbg !749
-  %18 = load i32, i32* %17, align 4, !dbg !749, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %18, metadata !740, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !747
-  %19 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 2, i32 0, i32 0, !dbg !750
-  %20 = load i32, i32* %19, align 4, !dbg !750, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %20, metadata !741, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !747
-  %21 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 2, i32 0, i32 1, !dbg !750
-  %22 = load i32, i32* %21, align 4, !dbg !750, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %22, metadata !741, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !747
-  %23 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 2, i32 0, i32 2, !dbg !750
-  %24 = load i32, i32* %23, align 4, !dbg !750, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %24, metadata !741, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !747
-  %25 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 2, i32 0, i32 3, !dbg !750
-  %26 = load i32, i32* %25, align 4, !dbg !750, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %26, metadata !741, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !747
-  %27 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 3, i32 0, i32 0, !dbg !751
-  %28 = load i32, i32* %27, align 4, !dbg !751, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %28, metadata !742, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !747
-  %29 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 3, i32 0, i32 1, !dbg !751
-  %30 = load i32, i32* %29, align 4, !dbg !751, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %30, metadata !742, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !747
-  %31 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 3, i32 0, i32 2, !dbg !751
-  %32 = load i32, i32* %31, align 4, !dbg !751, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %32, metadata !742, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !747
-  %33 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 3, i32 0, i32 3, !dbg !751
-  %34 = load i32, i32* %33, align 4, !dbg !751, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %34, metadata !742, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !747
-  %35 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 0, i32 0, i32 0, !dbg !752
-  %36 = load i32, i32* %35, align 4, !dbg !752, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %36, metadata !743, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !747
-  %37 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 0, i32 0, i32 1, !dbg !752
-  %38 = load i32, i32* %37, align 4, !dbg !752, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %38, metadata !743, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !747
-  %39 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 0, i32 0, i32 2, !dbg !752
-  %40 = load i32, i32* %39, align 4, !dbg !752, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %40, metadata !743, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !747
-  %41 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 0, i32 0, i32 3, !dbg !752
-  %42 = load i32, i32* %41, align 4, !dbg !752, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %42, metadata !743, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !747
-  %43 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, i32 0, i32 0, !dbg !753
-  %44 = load i32, i32* %43, align 4, !dbg !753, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %44, metadata !744, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !747
-  %45 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, i32 0, i32 1, !dbg !753
-  %46 = load i32, i32* %45, align 4, !dbg !753, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %46, metadata !744, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !747
-  %47 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, i32 0, i32 2, !dbg !753
-  %48 = load i32, i32* %47, align 4, !dbg !753, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %48, metadata !744, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !747
-  %49 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 1, i32 0, i32 3, !dbg !753
-  %50 = load i32, i32* %49, align 4, !dbg !753, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %50, metadata !744, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !747
-  %51 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, i32 0, i32 0, !dbg !754
-  %52 = load i32, i32* %51, align 4, !dbg !754, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %52, metadata !745, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !747
-  %53 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, i32 0, i32 1, !dbg !754
-  %54 = load i32, i32* %53, align 4, !dbg !754, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %54, metadata !745, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !747
-  %55 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, i32 0, i32 2, !dbg !754
-  %56 = load i32, i32* %55, align 4, !dbg !754, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %56, metadata !745, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !747
-  %57 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 2, i32 0, i32 3, !dbg !754
-  %58 = load i32, i32* %57, align 4, !dbg !754, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %58, metadata !745, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !747
-  %59 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 0, !dbg !755
-  %60 = load i32, i32* %59, align 4, !dbg !755, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %60, metadata !746, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !747
-  %61 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 1, !dbg !755
-  %62 = load i32, i32* %61, align 4, !dbg !755, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %62, metadata !746, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !747
-  %63 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 2, !dbg !755
-  %64 = load i32, i32* %63, align 4, !dbg !755, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %64, metadata !746, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !747
-  %65 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 3, !dbg !755
-  %66 = load i32, i32* %65, align 4, !dbg !755, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %66, metadata !746, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !747
-  call void @llvm.dbg.value(metadata i32 %4, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !756
-  call void @llvm.dbg.value(metadata i32 %6, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !756
-  call void @llvm.dbg.value(metadata i32 %8, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !756
-  call void @llvm.dbg.value(metadata i32 %10, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !756
-  call void @llvm.dbg.value(metadata i32 %36, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !756
-  call void @llvm.dbg.value(metadata i32 %38, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !756
-  call void @llvm.dbg.value(metadata i32 %40, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !756
-  call void @llvm.dbg.value(metadata i32 %42, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !756
-  call void @llvm.dbg.value(metadata i8* undef, metadata !645, metadata !DIExpression(DW_OP_deref)), !dbg !756
-  %67 = add i32 %36, %4, !dbg !758
-  %68 = add i32 %38, %6, !dbg !759
-  %69 = add i32 %40, %8, !dbg !760
-  %70 = add i32 %42, %10, !dbg !761
-  store i32 %67, i32* %35, align 4, !dbg !762, !tbaa.struct !118
-  store i32 %68, i32* %37, align 4, !dbg !762, !tbaa.struct !122
-  store i32 %69, i32* %39, align 4, !dbg !762, !tbaa.struct !123
-  store i32 %70, i32* %41, align 4, !dbg !762, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %12, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !763
-  call void @llvm.dbg.value(metadata i32 %14, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !763
-  call void @llvm.dbg.value(metadata i32 %16, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !763
-  call void @llvm.dbg.value(metadata i32 %18, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !763
-  call void @llvm.dbg.value(metadata i32 %44, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !763
-  call void @llvm.dbg.value(metadata i32 %46, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !763
-  call void @llvm.dbg.value(metadata i32 %48, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !763
-  call void @llvm.dbg.value(metadata i32 %50, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !763
-  call void @llvm.dbg.value(metadata i8* undef, metadata !645, metadata !DIExpression(DW_OP_deref)), !dbg !763
-  %71 = add i32 %44, %12, !dbg !765
-  %72 = add i32 %46, %14, !dbg !766
-  %73 = add i32 %48, %16, !dbg !767
-  %74 = add i32 %50, %18, !dbg !768
-  store i32 %71, i32* %43, align 4, !dbg !769, !tbaa.struct !118
-  store i32 %72, i32* %45, align 4, !dbg !769, !tbaa.struct !122
-  store i32 %73, i32* %47, align 4, !dbg !769, !tbaa.struct !123
-  store i32 %74, i32* %49, align 4, !dbg !769, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %20, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !770
-  call void @llvm.dbg.value(metadata i32 %22, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !770
-  call void @llvm.dbg.value(metadata i32 %24, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !770
-  call void @llvm.dbg.value(metadata i32 %26, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !770
-  call void @llvm.dbg.value(metadata i32 %52, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !770
-  call void @llvm.dbg.value(metadata i32 %54, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !770
-  call void @llvm.dbg.value(metadata i32 %56, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !770
-  call void @llvm.dbg.value(metadata i32 %58, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !770
-  call void @llvm.dbg.value(metadata i8* undef, metadata !645, metadata !DIExpression(DW_OP_deref)), !dbg !770
-  %75 = add i32 %52, %20, !dbg !772
-  %76 = add i32 %54, %22, !dbg !773
-  %77 = add i32 %56, %24, !dbg !774
-  %78 = add i32 %58, %26, !dbg !775
-  store i32 %75, i32* %51, align 4, !dbg !776, !tbaa.struct !118
-  store i32 %76, i32* %53, align 4, !dbg !776, !tbaa.struct !122
-  store i32 %77, i32* %55, align 4, !dbg !776, !tbaa.struct !123
-  store i32 %78, i32* %57, align 4, !dbg !776, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %28, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !777
-  call void @llvm.dbg.value(metadata i32 %30, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !777
-  call void @llvm.dbg.value(metadata i32 %32, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !777
-  call void @llvm.dbg.value(metadata i32 %34, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !777
-  call void @llvm.dbg.value(metadata i32 %60, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !777
-  call void @llvm.dbg.value(metadata i32 %62, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !777
-  call void @llvm.dbg.value(metadata i32 %64, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !777
-  call void @llvm.dbg.value(metadata i32 %66, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !777
-  call void @llvm.dbg.value(metadata i8* undef, metadata !645, metadata !DIExpression(DW_OP_deref)), !dbg !777
-  %79 = add i32 %60, %28, !dbg !779
-  %80 = add i32 %62, %30, !dbg !780
-  %81 = add i32 %64, %32, !dbg !781
-  %82 = add i32 %66, %34, !dbg !782
-  store i32 %79, i32* %59, align 4, !dbg !783, !tbaa.struct !118
-  store i32 %80, i32* %61, align 4, !dbg !783, !tbaa.struct !122
-  store i32 %81, i32* %63, align 4, !dbg !783, !tbaa.struct !123
-  store i32 %82, i32* %65, align 4, !dbg !783, !tbaa.struct !124
-  ret void, !dbg !784
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_round(ptr noundef %0) #0 {
+  %2 = alloca ptr, align 4
+  %3 = alloca %struct.vec, align 8
+  %4 = alloca %struct.vec, align 8
+  %5 = alloca ptr, align 4
+  %6 = alloca %struct.vec, align 8
+  %7 = alloca %struct.vec, align 8
+  %8 = alloca ptr, align 4
+  %9 = alloca %struct.vec, align 8
+  %10 = alloca %struct.vec, align 8
+  %11 = alloca ptr, align 4
+  %12 = alloca %struct.vec, align 8
+  %13 = alloca %struct.vec, align 8
+  %14 = alloca ptr, align 4
+  %15 = alloca i32, align 4
+  %16 = alloca %struct.vec, align 8
+  %17 = alloca ptr, align 4
+  %18 = alloca i32, align 4
+  %19 = alloca %struct.vec, align 8
+  %20 = alloca ptr, align 4
+  %21 = alloca i32, align 4
+  %22 = alloca %struct.vec, align 8
+  %23 = alloca ptr, align 4
+  %24 = alloca i32, align 4
+  %25 = alloca %struct.vec, align 8
+  %26 = alloca ptr, align 4
+  %27 = alloca %struct.vec, align 8
+  %28 = alloca %struct.vec, align 8
+  %29 = alloca ptr, align 4
+  %30 = alloca %struct.vec, align 8
+  %31 = alloca %struct.vec, align 8
+  %32 = alloca ptr, align 4
+  %33 = alloca %struct.vec, align 8
+  %34 = alloca %struct.vec, align 8
+  %35 = alloca ptr, align 4
+  %36 = alloca %struct.vec, align 8
+  %37 = alloca %struct.vec, align 8
+  %38 = alloca ptr, align 4
+  %39 = alloca %struct.vec, align 4
+  %40 = alloca %struct.vec, align 4
+  %41 = alloca %struct.vec, align 4
+  %42 = alloca %struct.vec, align 4
+  %43 = alloca %struct.vec, align 4
+  %44 = alloca %struct.vec, align 4
+  %45 = alloca %struct.vec, align 4
+  %46 = alloca %struct.vec, align 4
+  %47 = alloca %struct.vec, align 4
+  %48 = alloca %struct.vec, align 4
+  %49 = alloca %struct.vec, align 4
+  %50 = alloca %struct.vec, align 4
+  %51 = alloca %struct.vec, align 4
+  %52 = alloca %struct.vec, align 4
+  %53 = alloca %struct.vec, align 4
+  %54 = alloca %struct.vec, align 4
+  %55 = alloca %struct.vec, align 4
+  %56 = alloca %struct.vec, align 4
+  %57 = alloca %struct.vec, align 4
+  %58 = alloca %struct.vec, align 4
+  %59 = alloca %struct.vec, align 4
+  %60 = alloca %struct.vec, align 4
+  %61 = alloca %struct.vec, align 4
+  %62 = alloca %struct.vec, align 4
+  store ptr %0, ptr %38, align 4
+  %63 = load ptr, ptr %38, align 4
+  %64 = getelementptr inbounds %struct.vec, ptr %63, i32 0
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %39, ptr align 4 %64, i32 16, i1 false)
+  %65 = load ptr, ptr %38, align 4
+  %66 = getelementptr inbounds %struct.vec, ptr %65, i32 1
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %40, ptr align 4 %66, i32 16, i1 false)
+  %67 = load ptr, ptr %38, align 4
+  %68 = getelementptr inbounds %struct.vec, ptr %67, i32 3
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %41, ptr align 4 %68, i32 16, i1 false)
+  call void @llvm.experimental.noalias.scope.decl(metadata !91)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %27, ptr align 1 %40, i64 16, i1 false)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %28, ptr align 1 %39, i64 16, i1 false)
+  store ptr %42, ptr %26, align 4, !noalias !91
+  %69 = load i32, ptr %28, align 4, !noalias !91
+  %70 = load i32, ptr %27, align 4, !noalias !91
+  %71 = add i32 %69, %70
+  store i32 %71, ptr %42, align 4, !alias.scope !91
+  %72 = getelementptr inbounds [4 x i32], ptr %28, i32 0, i32 1
+  %73 = load i32, ptr %72, align 4, !noalias !91
+  %74 = getelementptr inbounds [4 x i32], ptr %27, i32 0, i32 1
+  %75 = load i32, ptr %74, align 4, !noalias !91
+  %76 = add i32 %73, %75
+  %77 = getelementptr inbounds [4 x i32], ptr %42, i32 0, i32 1
+  store i32 %76, ptr %77, align 4, !alias.scope !91
+  %78 = getelementptr inbounds [4 x i32], ptr %28, i32 0, i32 2
+  %79 = load i32, ptr %78, align 4, !noalias !91
+  %80 = getelementptr inbounds [4 x i32], ptr %27, i32 0, i32 2
+  %81 = load i32, ptr %80, align 4, !noalias !91
+  %82 = add i32 %79, %81
+  %83 = getelementptr inbounds [4 x i32], ptr %42, i32 0, i32 2
+  store i32 %82, ptr %83, align 4, !alias.scope !91
+  %84 = getelementptr inbounds [4 x i32], ptr %28, i32 0, i32 3
+  %85 = load i32, ptr %84, align 4, !noalias !91
+  %86 = getelementptr inbounds [4 x i32], ptr %27, i32 0, i32 3
+  %87 = load i32, ptr %86, align 4, !noalias !91
+  %88 = add i32 %85, %87
+  %89 = getelementptr inbounds [4 x i32], ptr %42, i32 0, i32 3
+  store i32 %88, ptr %89, align 4, !alias.scope !91
+  call void @llvm.experimental.noalias.scope.decl(metadata !94)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %3, ptr align 1 %42, i64 16, i1 false)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %4, ptr align 1 %41, i64 16, i1 false)
+  store ptr %44, ptr %2, align 4, !noalias !94
+  %90 = load i32, ptr %4, align 4, !noalias !94
+  %91 = load i32, ptr %3, align 4, !noalias !94
+  %92 = xor i32 %90, %91
+  store i32 %92, ptr %44, align 4, !alias.scope !94
+  %93 = getelementptr inbounds [4 x i32], ptr %4, i32 0, i32 1
+  %94 = load i32, ptr %93, align 4, !noalias !94
+  %95 = getelementptr inbounds [4 x i32], ptr %3, i32 0, i32 1
+  %96 = load i32, ptr %95, align 4, !noalias !94
+  %97 = xor i32 %94, %96
+  %98 = getelementptr inbounds [4 x i32], ptr %44, i32 0, i32 1
+  store i32 %97, ptr %98, align 4, !alias.scope !94
+  %99 = getelementptr inbounds [4 x i32], ptr %4, i32 0, i32 2
+  %100 = load i32, ptr %99, align 4, !noalias !94
+  %101 = getelementptr inbounds [4 x i32], ptr %3, i32 0, i32 2
+  %102 = load i32, ptr %101, align 4, !noalias !94
+  %103 = xor i32 %100, %102
+  %104 = getelementptr inbounds [4 x i32], ptr %44, i32 0, i32 2
+  store i32 %103, ptr %104, align 4, !alias.scope !94
+  %105 = getelementptr inbounds [4 x i32], ptr %4, i32 0, i32 3
+  %106 = load i32, ptr %105, align 4, !noalias !94
+  %107 = getelementptr inbounds [4 x i32], ptr %3, i32 0, i32 3
+  %108 = load i32, ptr %107, align 4, !noalias !94
+  %109 = xor i32 %106, %108
+  %110 = getelementptr inbounds [4 x i32], ptr %44, i32 0, i32 3
+  store i32 %109, ptr %110, align 4, !alias.scope !94
+  call void @llvm.experimental.noalias.scope.decl(metadata !97)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %16, ptr align 1 %44, i64 16, i1 false)
+  store ptr %43, ptr %14, align 4, !noalias !97
+  store i32 16, ptr %15, align 4, !noalias !97
+  %111 = load i32, ptr %16, align 4, !noalias !97
+  %112 = load i32, ptr %15, align 4, !noalias !97
+  %113 = shl i32 %111, %112
+  %114 = load i32, ptr %16, align 4, !noalias !97
+  %115 = load i32, ptr %15, align 4, !noalias !97
+  %116 = sub i32 32, %115
+  %117 = lshr i32 %114, %116
+  %118 = xor i32 %113, %117
+  store i32 %118, ptr %43, align 4, !alias.scope !97
+  %119 = getelementptr inbounds [4 x i32], ptr %16, i32 0, i32 1
+  %120 = load i32, ptr %119, align 4, !noalias !97
+  %121 = load i32, ptr %15, align 4, !noalias !97
+  %122 = shl i32 %120, %121
+  %123 = getelementptr inbounds [4 x i32], ptr %16, i32 0, i32 1
+  %124 = load i32, ptr %123, align 4, !noalias !97
+  %125 = load i32, ptr %15, align 4, !noalias !97
+  %126 = sub i32 32, %125
+  %127 = lshr i32 %124, %126
+  %128 = xor i32 %122, %127
+  %129 = getelementptr inbounds [4 x i32], ptr %43, i32 0, i32 1
+  store i32 %128, ptr %129, align 4, !alias.scope !97
+  %130 = getelementptr inbounds [4 x i32], ptr %16, i32 0, i32 2
+  %131 = load i32, ptr %130, align 4, !noalias !97
+  %132 = load i32, ptr %15, align 4, !noalias !97
+  %133 = shl i32 %131, %132
+  %134 = getelementptr inbounds [4 x i32], ptr %16, i32 0, i32 2
+  %135 = load i32, ptr %134, align 4, !noalias !97
+  %136 = load i32, ptr %15, align 4, !noalias !97
+  %137 = sub i32 32, %136
+  %138 = lshr i32 %135, %137
+  %139 = xor i32 %133, %138
+  %140 = getelementptr inbounds [4 x i32], ptr %43, i32 0, i32 2
+  store i32 %139, ptr %140, align 4, !alias.scope !97
+  %141 = getelementptr inbounds [4 x i32], ptr %16, i32 0, i32 3
+  %142 = load i32, ptr %141, align 4, !noalias !97
+  %143 = load i32, ptr %15, align 4, !noalias !97
+  %144 = shl i32 %142, %143
+  %145 = getelementptr inbounds [4 x i32], ptr %16, i32 0, i32 3
+  %146 = load i32, ptr %145, align 4, !noalias !97
+  %147 = load i32, ptr %15, align 4, !noalias !97
+  %148 = sub i32 32, %147
+  %149 = lshr i32 %146, %148
+  %150 = xor i32 %144, %149
+  %151 = getelementptr inbounds [4 x i32], ptr %43, i32 0, i32 3
+  store i32 %150, ptr %151, align 4, !alias.scope !97
+  %152 = load ptr, ptr %38, align 4
+  %153 = getelementptr inbounds %struct.vec, ptr %152, i32 0
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %153, ptr align 4 %42, i32 16, i1 false)
+  %154 = load ptr, ptr %38, align 4
+  %155 = getelementptr inbounds %struct.vec, ptr %154, i32 3
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %155, ptr align 4 %43, i32 16, i1 false)
+  %156 = load ptr, ptr %38, align 4
+  %157 = getelementptr inbounds %struct.vec, ptr %156, i32 2
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %45, ptr align 4 %157, i32 16, i1 false)
+  %158 = load ptr, ptr %38, align 4
+  %159 = getelementptr inbounds %struct.vec, ptr %158, i32 3
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %46, ptr align 4 %159, i32 16, i1 false)
+  %160 = load ptr, ptr %38, align 4
+  %161 = getelementptr inbounds %struct.vec, ptr %160, i32 1
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %47, ptr align 4 %161, i32 16, i1 false)
+  call void @llvm.experimental.noalias.scope.decl(metadata !100)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %30, ptr align 1 %46, i64 16, i1 false)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %31, ptr align 1 %45, i64 16, i1 false)
+  store ptr %48, ptr %29, align 4, !noalias !100
+  %162 = load i32, ptr %31, align 4, !noalias !100
+  %163 = load i32, ptr %30, align 4, !noalias !100
+  %164 = add i32 %162, %163
+  store i32 %164, ptr %48, align 4, !alias.scope !100
+  %165 = getelementptr inbounds [4 x i32], ptr %31, i32 0, i32 1
+  %166 = load i32, ptr %165, align 4, !noalias !100
+  %167 = getelementptr inbounds [4 x i32], ptr %30, i32 0, i32 1
+  %168 = load i32, ptr %167, align 4, !noalias !100
+  %169 = add i32 %166, %168
+  %170 = getelementptr inbounds [4 x i32], ptr %48, i32 0, i32 1
+  store i32 %169, ptr %170, align 4, !alias.scope !100
+  %171 = getelementptr inbounds [4 x i32], ptr %31, i32 0, i32 2
+  %172 = load i32, ptr %171, align 4, !noalias !100
+  %173 = getelementptr inbounds [4 x i32], ptr %30, i32 0, i32 2
+  %174 = load i32, ptr %173, align 4, !noalias !100
+  %175 = add i32 %172, %174
+  %176 = getelementptr inbounds [4 x i32], ptr %48, i32 0, i32 2
+  store i32 %175, ptr %176, align 4, !alias.scope !100
+  %177 = getelementptr inbounds [4 x i32], ptr %31, i32 0, i32 3
+  %178 = load i32, ptr %177, align 4, !noalias !100
+  %179 = getelementptr inbounds [4 x i32], ptr %30, i32 0, i32 3
+  %180 = load i32, ptr %179, align 4, !noalias !100
+  %181 = add i32 %178, %180
+  %182 = getelementptr inbounds [4 x i32], ptr %48, i32 0, i32 3
+  store i32 %181, ptr %182, align 4, !alias.scope !100
+  call void @llvm.experimental.noalias.scope.decl(metadata !103)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %6, ptr align 1 %48, i64 16, i1 false)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %7, ptr align 1 %47, i64 16, i1 false)
+  store ptr %50, ptr %5, align 4, !noalias !103
+  %183 = load i32, ptr %7, align 4, !noalias !103
+  %184 = load i32, ptr %6, align 4, !noalias !103
+  %185 = xor i32 %183, %184
+  store i32 %185, ptr %50, align 4, !alias.scope !103
+  %186 = getelementptr inbounds [4 x i32], ptr %7, i32 0, i32 1
+  %187 = load i32, ptr %186, align 4, !noalias !103
+  %188 = getelementptr inbounds [4 x i32], ptr %6, i32 0, i32 1
+  %189 = load i32, ptr %188, align 4, !noalias !103
+  %190 = xor i32 %187, %189
+  %191 = getelementptr inbounds [4 x i32], ptr %50, i32 0, i32 1
+  store i32 %190, ptr %191, align 4, !alias.scope !103
+  %192 = getelementptr inbounds [4 x i32], ptr %7, i32 0, i32 2
+  %193 = load i32, ptr %192, align 4, !noalias !103
+  %194 = getelementptr inbounds [4 x i32], ptr %6, i32 0, i32 2
+  %195 = load i32, ptr %194, align 4, !noalias !103
+  %196 = xor i32 %193, %195
+  %197 = getelementptr inbounds [4 x i32], ptr %50, i32 0, i32 2
+  store i32 %196, ptr %197, align 4, !alias.scope !103
+  %198 = getelementptr inbounds [4 x i32], ptr %7, i32 0, i32 3
+  %199 = load i32, ptr %198, align 4, !noalias !103
+  %200 = getelementptr inbounds [4 x i32], ptr %6, i32 0, i32 3
+  %201 = load i32, ptr %200, align 4, !noalias !103
+  %202 = xor i32 %199, %201
+  %203 = getelementptr inbounds [4 x i32], ptr %50, i32 0, i32 3
+  store i32 %202, ptr %203, align 4, !alias.scope !103
+  call void @llvm.experimental.noalias.scope.decl(metadata !106)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %19, ptr align 1 %50, i64 16, i1 false)
+  store ptr %49, ptr %17, align 4, !noalias !106
+  store i32 12, ptr %18, align 4, !noalias !106
+  %204 = load i32, ptr %19, align 4, !noalias !106
+  %205 = load i32, ptr %18, align 4, !noalias !106
+  %206 = shl i32 %204, %205
+  %207 = load i32, ptr %19, align 4, !noalias !106
+  %208 = load i32, ptr %18, align 4, !noalias !106
+  %209 = sub i32 32, %208
+  %210 = lshr i32 %207, %209
+  %211 = xor i32 %206, %210
+  store i32 %211, ptr %49, align 4, !alias.scope !106
+  %212 = getelementptr inbounds [4 x i32], ptr %19, i32 0, i32 1
+  %213 = load i32, ptr %212, align 4, !noalias !106
+  %214 = load i32, ptr %18, align 4, !noalias !106
+  %215 = shl i32 %213, %214
+  %216 = getelementptr inbounds [4 x i32], ptr %19, i32 0, i32 1
+  %217 = load i32, ptr %216, align 4, !noalias !106
+  %218 = load i32, ptr %18, align 4, !noalias !106
+  %219 = sub i32 32, %218
+  %220 = lshr i32 %217, %219
+  %221 = xor i32 %215, %220
+  %222 = getelementptr inbounds [4 x i32], ptr %49, i32 0, i32 1
+  store i32 %221, ptr %222, align 4, !alias.scope !106
+  %223 = getelementptr inbounds [4 x i32], ptr %19, i32 0, i32 2
+  %224 = load i32, ptr %223, align 4, !noalias !106
+  %225 = load i32, ptr %18, align 4, !noalias !106
+  %226 = shl i32 %224, %225
+  %227 = getelementptr inbounds [4 x i32], ptr %19, i32 0, i32 2
+  %228 = load i32, ptr %227, align 4, !noalias !106
+  %229 = load i32, ptr %18, align 4, !noalias !106
+  %230 = sub i32 32, %229
+  %231 = lshr i32 %228, %230
+  %232 = xor i32 %226, %231
+  %233 = getelementptr inbounds [4 x i32], ptr %49, i32 0, i32 2
+  store i32 %232, ptr %233, align 4, !alias.scope !106
+  %234 = getelementptr inbounds [4 x i32], ptr %19, i32 0, i32 3
+  %235 = load i32, ptr %234, align 4, !noalias !106
+  %236 = load i32, ptr %18, align 4, !noalias !106
+  %237 = shl i32 %235, %236
+  %238 = getelementptr inbounds [4 x i32], ptr %19, i32 0, i32 3
+  %239 = load i32, ptr %238, align 4, !noalias !106
+  %240 = load i32, ptr %18, align 4, !noalias !106
+  %241 = sub i32 32, %240
+  %242 = lshr i32 %239, %241
+  %243 = xor i32 %237, %242
+  %244 = getelementptr inbounds [4 x i32], ptr %49, i32 0, i32 3
+  store i32 %243, ptr %244, align 4, !alias.scope !106
+  %245 = load ptr, ptr %38, align 4
+  %246 = getelementptr inbounds %struct.vec, ptr %245, i32 2
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %246, ptr align 4 %48, i32 16, i1 false)
+  %247 = load ptr, ptr %38, align 4
+  %248 = getelementptr inbounds %struct.vec, ptr %247, i32 1
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %248, ptr align 4 %49, i32 16, i1 false)
+  %249 = load ptr, ptr %38, align 4
+  %250 = getelementptr inbounds %struct.vec, ptr %249, i32 0
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %51, ptr align 4 %250, i32 16, i1 false)
+  %251 = load ptr, ptr %38, align 4
+  %252 = getelementptr inbounds %struct.vec, ptr %251, i32 1
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %52, ptr align 4 %252, i32 16, i1 false)
+  %253 = load ptr, ptr %38, align 4
+  %254 = getelementptr inbounds %struct.vec, ptr %253, i32 3
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %53, ptr align 4 %254, i32 16, i1 false)
+  call void @llvm.experimental.noalias.scope.decl(metadata !109)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %33, ptr align 1 %52, i64 16, i1 false)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %34, ptr align 1 %51, i64 16, i1 false)
+  store ptr %54, ptr %32, align 4, !noalias !109
+  %255 = load i32, ptr %34, align 4, !noalias !109
+  %256 = load i32, ptr %33, align 4, !noalias !109
+  %257 = add i32 %255, %256
+  store i32 %257, ptr %54, align 4, !alias.scope !109
+  %258 = getelementptr inbounds [4 x i32], ptr %34, i32 0, i32 1
+  %259 = load i32, ptr %258, align 4, !noalias !109
+  %260 = getelementptr inbounds [4 x i32], ptr %33, i32 0, i32 1
+  %261 = load i32, ptr %260, align 4, !noalias !109
+  %262 = add i32 %259, %261
+  %263 = getelementptr inbounds [4 x i32], ptr %54, i32 0, i32 1
+  store i32 %262, ptr %263, align 4, !alias.scope !109
+  %264 = getelementptr inbounds [4 x i32], ptr %34, i32 0, i32 2
+  %265 = load i32, ptr %264, align 4, !noalias !109
+  %266 = getelementptr inbounds [4 x i32], ptr %33, i32 0, i32 2
+  %267 = load i32, ptr %266, align 4, !noalias !109
+  %268 = add i32 %265, %267
+  %269 = getelementptr inbounds [4 x i32], ptr %54, i32 0, i32 2
+  store i32 %268, ptr %269, align 4, !alias.scope !109
+  %270 = getelementptr inbounds [4 x i32], ptr %34, i32 0, i32 3
+  %271 = load i32, ptr %270, align 4, !noalias !109
+  %272 = getelementptr inbounds [4 x i32], ptr %33, i32 0, i32 3
+  %273 = load i32, ptr %272, align 4, !noalias !109
+  %274 = add i32 %271, %273
+  %275 = getelementptr inbounds [4 x i32], ptr %54, i32 0, i32 3
+  store i32 %274, ptr %275, align 4, !alias.scope !109
+  call void @llvm.experimental.noalias.scope.decl(metadata !112)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %9, ptr align 1 %54, i64 16, i1 false)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %10, ptr align 1 %53, i64 16, i1 false)
+  store ptr %56, ptr %8, align 4, !noalias !112
+  %276 = load i32, ptr %10, align 4, !noalias !112
+  %277 = load i32, ptr %9, align 4, !noalias !112
+  %278 = xor i32 %276, %277
+  store i32 %278, ptr %56, align 4, !alias.scope !112
+  %279 = getelementptr inbounds [4 x i32], ptr %10, i32 0, i32 1
+  %280 = load i32, ptr %279, align 4, !noalias !112
+  %281 = getelementptr inbounds [4 x i32], ptr %9, i32 0, i32 1
+  %282 = load i32, ptr %281, align 4, !noalias !112
+  %283 = xor i32 %280, %282
+  %284 = getelementptr inbounds [4 x i32], ptr %56, i32 0, i32 1
+  store i32 %283, ptr %284, align 4, !alias.scope !112
+  %285 = getelementptr inbounds [4 x i32], ptr %10, i32 0, i32 2
+  %286 = load i32, ptr %285, align 4, !noalias !112
+  %287 = getelementptr inbounds [4 x i32], ptr %9, i32 0, i32 2
+  %288 = load i32, ptr %287, align 4, !noalias !112
+  %289 = xor i32 %286, %288
+  %290 = getelementptr inbounds [4 x i32], ptr %56, i32 0, i32 2
+  store i32 %289, ptr %290, align 4, !alias.scope !112
+  %291 = getelementptr inbounds [4 x i32], ptr %10, i32 0, i32 3
+  %292 = load i32, ptr %291, align 4, !noalias !112
+  %293 = getelementptr inbounds [4 x i32], ptr %9, i32 0, i32 3
+  %294 = load i32, ptr %293, align 4, !noalias !112
+  %295 = xor i32 %292, %294
+  %296 = getelementptr inbounds [4 x i32], ptr %56, i32 0, i32 3
+  store i32 %295, ptr %296, align 4, !alias.scope !112
+  call void @llvm.experimental.noalias.scope.decl(metadata !115)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %22, ptr align 1 %56, i64 16, i1 false)
+  store ptr %55, ptr %20, align 4, !noalias !115
+  store i32 8, ptr %21, align 4, !noalias !115
+  %297 = load i32, ptr %22, align 4, !noalias !115
+  %298 = load i32, ptr %21, align 4, !noalias !115
+  %299 = shl i32 %297, %298
+  %300 = load i32, ptr %22, align 4, !noalias !115
+  %301 = load i32, ptr %21, align 4, !noalias !115
+  %302 = sub i32 32, %301
+  %303 = lshr i32 %300, %302
+  %304 = xor i32 %299, %303
+  store i32 %304, ptr %55, align 4, !alias.scope !115
+  %305 = getelementptr inbounds [4 x i32], ptr %22, i32 0, i32 1
+  %306 = load i32, ptr %305, align 4, !noalias !115
+  %307 = load i32, ptr %21, align 4, !noalias !115
+  %308 = shl i32 %306, %307
+  %309 = getelementptr inbounds [4 x i32], ptr %22, i32 0, i32 1
+  %310 = load i32, ptr %309, align 4, !noalias !115
+  %311 = load i32, ptr %21, align 4, !noalias !115
+  %312 = sub i32 32, %311
+  %313 = lshr i32 %310, %312
+  %314 = xor i32 %308, %313
+  %315 = getelementptr inbounds [4 x i32], ptr %55, i32 0, i32 1
+  store i32 %314, ptr %315, align 4, !alias.scope !115
+  %316 = getelementptr inbounds [4 x i32], ptr %22, i32 0, i32 2
+  %317 = load i32, ptr %316, align 4, !noalias !115
+  %318 = load i32, ptr %21, align 4, !noalias !115
+  %319 = shl i32 %317, %318
+  %320 = getelementptr inbounds [4 x i32], ptr %22, i32 0, i32 2
+  %321 = load i32, ptr %320, align 4, !noalias !115
+  %322 = load i32, ptr %21, align 4, !noalias !115
+  %323 = sub i32 32, %322
+  %324 = lshr i32 %321, %323
+  %325 = xor i32 %319, %324
+  %326 = getelementptr inbounds [4 x i32], ptr %55, i32 0, i32 2
+  store i32 %325, ptr %326, align 4, !alias.scope !115
+  %327 = getelementptr inbounds [4 x i32], ptr %22, i32 0, i32 3
+  %328 = load i32, ptr %327, align 4, !noalias !115
+  %329 = load i32, ptr %21, align 4, !noalias !115
+  %330 = shl i32 %328, %329
+  %331 = getelementptr inbounds [4 x i32], ptr %22, i32 0, i32 3
+  %332 = load i32, ptr %331, align 4, !noalias !115
+  %333 = load i32, ptr %21, align 4, !noalias !115
+  %334 = sub i32 32, %333
+  %335 = lshr i32 %332, %334
+  %336 = xor i32 %330, %335
+  %337 = getelementptr inbounds [4 x i32], ptr %55, i32 0, i32 3
+  store i32 %336, ptr %337, align 4, !alias.scope !115
+  %338 = load ptr, ptr %38, align 4
+  %339 = getelementptr inbounds %struct.vec, ptr %338, i32 0
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %339, ptr align 4 %54, i32 16, i1 false)
+  %340 = load ptr, ptr %38, align 4
+  %341 = getelementptr inbounds %struct.vec, ptr %340, i32 3
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %341, ptr align 4 %55, i32 16, i1 false)
+  %342 = load ptr, ptr %38, align 4
+  %343 = getelementptr inbounds %struct.vec, ptr %342, i32 2
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %57, ptr align 4 %343, i32 16, i1 false)
+  %344 = load ptr, ptr %38, align 4
+  %345 = getelementptr inbounds %struct.vec, ptr %344, i32 3
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %58, ptr align 4 %345, i32 16, i1 false)
+  %346 = load ptr, ptr %38, align 4
+  %347 = getelementptr inbounds %struct.vec, ptr %346, i32 1
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %59, ptr align 4 %347, i32 16, i1 false)
+  call void @llvm.experimental.noalias.scope.decl(metadata !118)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %36, ptr align 1 %58, i64 16, i1 false)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %37, ptr align 1 %57, i64 16, i1 false)
+  store ptr %60, ptr %35, align 4, !noalias !118
+  %348 = load i32, ptr %37, align 4, !noalias !118
+  %349 = load i32, ptr %36, align 4, !noalias !118
+  %350 = add i32 %348, %349
+  store i32 %350, ptr %60, align 4, !alias.scope !118
+  %351 = getelementptr inbounds [4 x i32], ptr %37, i32 0, i32 1
+  %352 = load i32, ptr %351, align 4, !noalias !118
+  %353 = getelementptr inbounds [4 x i32], ptr %36, i32 0, i32 1
+  %354 = load i32, ptr %353, align 4, !noalias !118
+  %355 = add i32 %352, %354
+  %356 = getelementptr inbounds [4 x i32], ptr %60, i32 0, i32 1
+  store i32 %355, ptr %356, align 4, !alias.scope !118
+  %357 = getelementptr inbounds [4 x i32], ptr %37, i32 0, i32 2
+  %358 = load i32, ptr %357, align 4, !noalias !118
+  %359 = getelementptr inbounds [4 x i32], ptr %36, i32 0, i32 2
+  %360 = load i32, ptr %359, align 4, !noalias !118
+  %361 = add i32 %358, %360
+  %362 = getelementptr inbounds [4 x i32], ptr %60, i32 0, i32 2
+  store i32 %361, ptr %362, align 4, !alias.scope !118
+  %363 = getelementptr inbounds [4 x i32], ptr %37, i32 0, i32 3
+  %364 = load i32, ptr %363, align 4, !noalias !118
+  %365 = getelementptr inbounds [4 x i32], ptr %36, i32 0, i32 3
+  %366 = load i32, ptr %365, align 4, !noalias !118
+  %367 = add i32 %364, %366
+  %368 = getelementptr inbounds [4 x i32], ptr %60, i32 0, i32 3
+  store i32 %367, ptr %368, align 4, !alias.scope !118
+  call void @llvm.experimental.noalias.scope.decl(metadata !121)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %12, ptr align 1 %60, i64 16, i1 false)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %13, ptr align 1 %59, i64 16, i1 false)
+  store ptr %62, ptr %11, align 4, !noalias !121
+  %369 = load i32, ptr %13, align 4, !noalias !121
+  %370 = load i32, ptr %12, align 4, !noalias !121
+  %371 = xor i32 %369, %370
+  store i32 %371, ptr %62, align 4, !alias.scope !121
+  %372 = getelementptr inbounds [4 x i32], ptr %13, i32 0, i32 1
+  %373 = load i32, ptr %372, align 4, !noalias !121
+  %374 = getelementptr inbounds [4 x i32], ptr %12, i32 0, i32 1
+  %375 = load i32, ptr %374, align 4, !noalias !121
+  %376 = xor i32 %373, %375
+  %377 = getelementptr inbounds [4 x i32], ptr %62, i32 0, i32 1
+  store i32 %376, ptr %377, align 4, !alias.scope !121
+  %378 = getelementptr inbounds [4 x i32], ptr %13, i32 0, i32 2
+  %379 = load i32, ptr %378, align 4, !noalias !121
+  %380 = getelementptr inbounds [4 x i32], ptr %12, i32 0, i32 2
+  %381 = load i32, ptr %380, align 4, !noalias !121
+  %382 = xor i32 %379, %381
+  %383 = getelementptr inbounds [4 x i32], ptr %62, i32 0, i32 2
+  store i32 %382, ptr %383, align 4, !alias.scope !121
+  %384 = getelementptr inbounds [4 x i32], ptr %13, i32 0, i32 3
+  %385 = load i32, ptr %384, align 4, !noalias !121
+  %386 = getelementptr inbounds [4 x i32], ptr %12, i32 0, i32 3
+  %387 = load i32, ptr %386, align 4, !noalias !121
+  %388 = xor i32 %385, %387
+  %389 = getelementptr inbounds [4 x i32], ptr %62, i32 0, i32 3
+  store i32 %388, ptr %389, align 4, !alias.scope !121
+  call void @llvm.experimental.noalias.scope.decl(metadata !124)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %25, ptr align 1 %62, i64 16, i1 false)
+  store ptr %61, ptr %23, align 4, !noalias !124
+  store i32 7, ptr %24, align 4, !noalias !124
+  %390 = load i32, ptr %25, align 4, !noalias !124
+  %391 = load i32, ptr %24, align 4, !noalias !124
+  %392 = shl i32 %390, %391
+  %393 = load i32, ptr %25, align 4, !noalias !124
+  %394 = load i32, ptr %24, align 4, !noalias !124
+  %395 = sub i32 32, %394
+  %396 = lshr i32 %393, %395
+  %397 = xor i32 %392, %396
+  store i32 %397, ptr %61, align 4, !alias.scope !124
+  %398 = getelementptr inbounds [4 x i32], ptr %25, i32 0, i32 1
+  %399 = load i32, ptr %398, align 4, !noalias !124
+  %400 = load i32, ptr %24, align 4, !noalias !124
+  %401 = shl i32 %399, %400
+  %402 = getelementptr inbounds [4 x i32], ptr %25, i32 0, i32 1
+  %403 = load i32, ptr %402, align 4, !noalias !124
+  %404 = load i32, ptr %24, align 4, !noalias !124
+  %405 = sub i32 32, %404
+  %406 = lshr i32 %403, %405
+  %407 = xor i32 %401, %406
+  %408 = getelementptr inbounds [4 x i32], ptr %61, i32 0, i32 1
+  store i32 %407, ptr %408, align 4, !alias.scope !124
+  %409 = getelementptr inbounds [4 x i32], ptr %25, i32 0, i32 2
+  %410 = load i32, ptr %409, align 4, !noalias !124
+  %411 = load i32, ptr %24, align 4, !noalias !124
+  %412 = shl i32 %410, %411
+  %413 = getelementptr inbounds [4 x i32], ptr %25, i32 0, i32 2
+  %414 = load i32, ptr %413, align 4, !noalias !124
+  %415 = load i32, ptr %24, align 4, !noalias !124
+  %416 = sub i32 32, %415
+  %417 = lshr i32 %414, %416
+  %418 = xor i32 %412, %417
+  %419 = getelementptr inbounds [4 x i32], ptr %61, i32 0, i32 2
+  store i32 %418, ptr %419, align 4, !alias.scope !124
+  %420 = getelementptr inbounds [4 x i32], ptr %25, i32 0, i32 3
+  %421 = load i32, ptr %420, align 4, !noalias !124
+  %422 = load i32, ptr %24, align 4, !noalias !124
+  %423 = shl i32 %421, %422
+  %424 = getelementptr inbounds [4 x i32], ptr %25, i32 0, i32 3
+  %425 = load i32, ptr %424, align 4, !noalias !124
+  %426 = load i32, ptr %24, align 4, !noalias !124
+  %427 = sub i32 32, %426
+  %428 = lshr i32 %425, %427
+  %429 = xor i32 %423, %428
+  %430 = getelementptr inbounds [4 x i32], ptr %61, i32 0, i32 3
+  store i32 %429, ptr %430, align 4, !alias.scope !124
+  %431 = load ptr, ptr %38, align 4
+  %432 = getelementptr inbounds %struct.vec, ptr %431, i32 2
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %432, ptr align 4 %60, i32 16, i1 false)
+  %433 = load ptr, ptr %38, align 4
+  %434 = getelementptr inbounds %struct.vec, ptr %433, i32 1
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %434, ptr align 4 %61, i32 16, i1 false)
+  ret void
 }
 
-; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind uwtable willreturn writeonly
-define internal fastcc void @store32(i8* nocapture noundef writeonly %0, i32 noundef %1) unnamed_addr #6 !dbg !785 {
-  call void @llvm.dbg.value(metadata i8* %0, metadata !789, metadata !DIExpression()), !dbg !791
-  call void @llvm.dbg.value(metadata i32 %1, metadata !790, metadata !DIExpression()), !dbg !791
-  %3 = bitcast i8* %0 to i32*, !dbg !792
-  store i32 %1, i32* %3, align 1, !dbg !792
-  ret void, !dbg !793
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_sum_states(ptr noundef %0, ptr noundef %1) #0 {
+  %3 = alloca ptr, align 4
+  %4 = alloca %struct.vec, align 8
+  %5 = alloca %struct.vec, align 8
+  %6 = alloca ptr, align 4
+  %7 = alloca %struct.vec, align 8
+  %8 = alloca %struct.vec, align 8
+  %9 = alloca ptr, align 4
+  %10 = alloca %struct.vec, align 8
+  %11 = alloca %struct.vec, align 8
+  %12 = alloca ptr, align 4
+  %13 = alloca %struct.vec, align 8
+  %14 = alloca %struct.vec, align 8
+  %15 = alloca ptr, align 4
+  %16 = alloca ptr, align 4
+  %17 = alloca %struct.vec, align 4
+  %18 = alloca %struct.vec, align 4
+  %19 = alloca %struct.vec, align 4
+  %20 = alloca %struct.vec, align 4
+  %21 = alloca %struct.vec, align 4
+  %22 = alloca %struct.vec, align 4
+  %23 = alloca %struct.vec, align 4
+  %24 = alloca %struct.vec, align 4
+  %25 = alloca %struct.vec, align 4
+  %26 = alloca %struct.vec, align 4
+  %27 = alloca %struct.vec, align 4
+  %28 = alloca %struct.vec, align 4
+  store ptr %0, ptr %15, align 4
+  store ptr %1, ptr %16, align 4
+  %29 = load ptr, ptr %16, align 4
+  %30 = getelementptr inbounds %struct.vec, ptr %29, i32 0
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %17, ptr align 4 %30, i32 16, i1 false)
+  %31 = load ptr, ptr %16, align 4
+  %32 = getelementptr inbounds %struct.vec, ptr %31, i32 1
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %18, ptr align 4 %32, i32 16, i1 false)
+  %33 = load ptr, ptr %16, align 4
+  %34 = getelementptr inbounds %struct.vec, ptr %33, i32 2
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %19, ptr align 4 %34, i32 16, i1 false)
+  %35 = load ptr, ptr %16, align 4
+  %36 = getelementptr inbounds %struct.vec, ptr %35, i32 3
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %20, ptr align 4 %36, i32 16, i1 false)
+  %37 = load ptr, ptr %15, align 4
+  %38 = getelementptr inbounds %struct.vec, ptr %37, i32 0
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %21, ptr align 4 %38, i32 16, i1 false)
+  %39 = load ptr, ptr %15, align 4
+  %40 = getelementptr inbounds %struct.vec, ptr %39, i32 1
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %22, ptr align 4 %40, i32 16, i1 false)
+  %41 = load ptr, ptr %15, align 4
+  %42 = getelementptr inbounds %struct.vec, ptr %41, i32 2
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %23, ptr align 4 %42, i32 16, i1 false)
+  %43 = load ptr, ptr %15, align 4
+  %44 = getelementptr inbounds %struct.vec, ptr %43, i32 3
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %24, ptr align 4 %44, i32 16, i1 false)
+  %45 = load ptr, ptr %15, align 4
+  %46 = getelementptr inbounds %struct.vec, ptr %45, i32 0
+  call void @llvm.experimental.noalias.scope.decl(metadata !127)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %4, ptr align 1 %17, i64 16, i1 false)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %5, ptr align 1 %21, i64 16, i1 false)
+  store ptr %25, ptr %3, align 4, !noalias !127
+  %47 = load i32, ptr %5, align 4, !noalias !127
+  %48 = load i32, ptr %4, align 4, !noalias !127
+  %49 = add i32 %47, %48
+  store i32 %49, ptr %25, align 4, !alias.scope !127
+  %50 = getelementptr inbounds [4 x i32], ptr %5, i32 0, i32 1
+  %51 = load i32, ptr %50, align 4, !noalias !127
+  %52 = getelementptr inbounds [4 x i32], ptr %4, i32 0, i32 1
+  %53 = load i32, ptr %52, align 4, !noalias !127
+  %54 = add i32 %51, %53
+  %55 = getelementptr inbounds [4 x i32], ptr %25, i32 0, i32 1
+  store i32 %54, ptr %55, align 4, !alias.scope !127
+  %56 = getelementptr inbounds [4 x i32], ptr %5, i32 0, i32 2
+  %57 = load i32, ptr %56, align 4, !noalias !127
+  %58 = getelementptr inbounds [4 x i32], ptr %4, i32 0, i32 2
+  %59 = load i32, ptr %58, align 4, !noalias !127
+  %60 = add i32 %57, %59
+  %61 = getelementptr inbounds [4 x i32], ptr %25, i32 0, i32 2
+  store i32 %60, ptr %61, align 4, !alias.scope !127
+  %62 = getelementptr inbounds [4 x i32], ptr %5, i32 0, i32 3
+  %63 = load i32, ptr %62, align 4, !noalias !127
+  %64 = getelementptr inbounds [4 x i32], ptr %4, i32 0, i32 3
+  %65 = load i32, ptr %64, align 4, !noalias !127
+  %66 = add i32 %63, %65
+  %67 = getelementptr inbounds [4 x i32], ptr %25, i32 0, i32 3
+  store i32 %66, ptr %67, align 4, !alias.scope !127
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %46, ptr align 4 %25, i32 16, i1 false)
+  %68 = load ptr, ptr %15, align 4
+  %69 = getelementptr inbounds %struct.vec, ptr %68, i32 1
+  call void @llvm.experimental.noalias.scope.decl(metadata !130)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %7, ptr align 1 %18, i64 16, i1 false)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %8, ptr align 1 %22, i64 16, i1 false)
+  store ptr %26, ptr %6, align 4, !noalias !130
+  %70 = load i32, ptr %8, align 4, !noalias !130
+  %71 = load i32, ptr %7, align 4, !noalias !130
+  %72 = add i32 %70, %71
+  store i32 %72, ptr %26, align 4, !alias.scope !130
+  %73 = getelementptr inbounds [4 x i32], ptr %8, i32 0, i32 1
+  %74 = load i32, ptr %73, align 4, !noalias !130
+  %75 = getelementptr inbounds [4 x i32], ptr %7, i32 0, i32 1
+  %76 = load i32, ptr %75, align 4, !noalias !130
+  %77 = add i32 %74, %76
+  %78 = getelementptr inbounds [4 x i32], ptr %26, i32 0, i32 1
+  store i32 %77, ptr %78, align 4, !alias.scope !130
+  %79 = getelementptr inbounds [4 x i32], ptr %8, i32 0, i32 2
+  %80 = load i32, ptr %79, align 4, !noalias !130
+  %81 = getelementptr inbounds [4 x i32], ptr %7, i32 0, i32 2
+  %82 = load i32, ptr %81, align 4, !noalias !130
+  %83 = add i32 %80, %82
+  %84 = getelementptr inbounds [4 x i32], ptr %26, i32 0, i32 2
+  store i32 %83, ptr %84, align 4, !alias.scope !130
+  %85 = getelementptr inbounds [4 x i32], ptr %8, i32 0, i32 3
+  %86 = load i32, ptr %85, align 4, !noalias !130
+  %87 = getelementptr inbounds [4 x i32], ptr %7, i32 0, i32 3
+  %88 = load i32, ptr %87, align 4, !noalias !130
+  %89 = add i32 %86, %88
+  %90 = getelementptr inbounds [4 x i32], ptr %26, i32 0, i32 3
+  store i32 %89, ptr %90, align 4, !alias.scope !130
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %69, ptr align 4 %26, i32 16, i1 false)
+  %91 = load ptr, ptr %15, align 4
+  %92 = getelementptr inbounds %struct.vec, ptr %91, i32 2
+  call void @llvm.experimental.noalias.scope.decl(metadata !133)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %10, ptr align 1 %19, i64 16, i1 false)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %11, ptr align 1 %23, i64 16, i1 false)
+  store ptr %27, ptr %9, align 4, !noalias !133
+  %93 = load i32, ptr %11, align 4, !noalias !133
+  %94 = load i32, ptr %10, align 4, !noalias !133
+  %95 = add i32 %93, %94
+  store i32 %95, ptr %27, align 4, !alias.scope !133
+  %96 = getelementptr inbounds [4 x i32], ptr %11, i32 0, i32 1
+  %97 = load i32, ptr %96, align 4, !noalias !133
+  %98 = getelementptr inbounds [4 x i32], ptr %10, i32 0, i32 1
+  %99 = load i32, ptr %98, align 4, !noalias !133
+  %100 = add i32 %97, %99
+  %101 = getelementptr inbounds [4 x i32], ptr %27, i32 0, i32 1
+  store i32 %100, ptr %101, align 4, !alias.scope !133
+  %102 = getelementptr inbounds [4 x i32], ptr %11, i32 0, i32 2
+  %103 = load i32, ptr %102, align 4, !noalias !133
+  %104 = getelementptr inbounds [4 x i32], ptr %10, i32 0, i32 2
+  %105 = load i32, ptr %104, align 4, !noalias !133
+  %106 = add i32 %103, %105
+  %107 = getelementptr inbounds [4 x i32], ptr %27, i32 0, i32 2
+  store i32 %106, ptr %107, align 4, !alias.scope !133
+  %108 = getelementptr inbounds [4 x i32], ptr %11, i32 0, i32 3
+  %109 = load i32, ptr %108, align 4, !noalias !133
+  %110 = getelementptr inbounds [4 x i32], ptr %10, i32 0, i32 3
+  %111 = load i32, ptr %110, align 4, !noalias !133
+  %112 = add i32 %109, %111
+  %113 = getelementptr inbounds [4 x i32], ptr %27, i32 0, i32 3
+  store i32 %112, ptr %113, align 4, !alias.scope !133
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %92, ptr align 4 %27, i32 16, i1 false)
+  %114 = load ptr, ptr %15, align 4
+  %115 = getelementptr inbounds %struct.vec, ptr %114, i32 3
+  call void @llvm.experimental.noalias.scope.decl(metadata !136)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %13, ptr align 1 %20, i64 16, i1 false)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %14, ptr align 1 %24, i64 16, i1 false)
+  store ptr %28, ptr %12, align 4, !noalias !136
+  %116 = load i32, ptr %14, align 4, !noalias !136
+  %117 = load i32, ptr %13, align 4, !noalias !136
+  %118 = add i32 %116, %117
+  store i32 %118, ptr %28, align 4, !alias.scope !136
+  %119 = getelementptr inbounds [4 x i32], ptr %14, i32 0, i32 1
+  %120 = load i32, ptr %119, align 4, !noalias !136
+  %121 = getelementptr inbounds [4 x i32], ptr %13, i32 0, i32 1
+  %122 = load i32, ptr %121, align 4, !noalias !136
+  %123 = add i32 %120, %122
+  %124 = getelementptr inbounds [4 x i32], ptr %28, i32 0, i32 1
+  store i32 %123, ptr %124, align 4, !alias.scope !136
+  %125 = getelementptr inbounds [4 x i32], ptr %14, i32 0, i32 2
+  %126 = load i32, ptr %125, align 4, !noalias !136
+  %127 = getelementptr inbounds [4 x i32], ptr %13, i32 0, i32 2
+  %128 = load i32, ptr %127, align 4, !noalias !136
+  %129 = add i32 %126, %128
+  %130 = getelementptr inbounds [4 x i32], ptr %28, i32 0, i32 2
+  store i32 %129, ptr %130, align 4, !alias.scope !136
+  %131 = getelementptr inbounds [4 x i32], ptr %14, i32 0, i32 3
+  %132 = load i32, ptr %131, align 4, !noalias !136
+  %133 = getelementptr inbounds [4 x i32], ptr %13, i32 0, i32 3
+  %134 = load i32, ptr %133, align 4, !noalias !136
+  %135 = add i32 %132, %134
+  %136 = getelementptr inbounds [4 x i32], ptr %28, i32 0, i32 3
+  store i32 %135, ptr %136, align 4, !alias.scope !136
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %115, ptr align 4 %28, i32 16, i1 false)
+  ret void
 }
 
-; Function Attrs: nofree noinline nosync nounwind uwtable
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_core(%struct.vec* nocapture noundef %0, %struct.vec* nocapture noundef readonly %1) unnamed_addr #0 !dbg !794 {
-  call void @llvm.dbg.value(metadata %struct.vec* %0, metadata !796, metadata !DIExpression()), !dbg !800
-  call void @llvm.dbg.value(metadata %struct.vec* %1, metadata !797, metadata !DIExpression()), !dbg !800
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_copy_state(%struct.vec* noundef %0, %struct.vec* noundef %1), !dbg !801
-  call void @llvm.dbg.value(metadata i32 0, metadata !798, metadata !DIExpression()), !dbg !802
-  br label %4, !dbg !803
-
-3:                                                ; preds = %4
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_sum_states(%struct.vec* noundef %0, %struct.vec* noundef %1), !dbg !804
-  ret void, !dbg !805
-
-4:                                                ; preds = %2, %4
-  %5 = phi i32 [ 0, %2 ], [ %6, %4 ]
-  call void @llvm.dbg.value(metadata i32 %5, metadata !798, metadata !DIExpression()), !dbg !802
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_double_round(%struct.vec* noundef %0), !dbg !806
-  %6 = add nuw nsw i32 %5, 1, !dbg !808
-  call void @llvm.dbg.value(metadata i32 %6, metadata !798, metadata !DIExpression()), !dbg !802
-  %7 = icmp eq i32 %6, 10, !dbg !809
-  br i1 %7, label %3, label %4, !dbg !803, !llvm.loop !810
+; Function Attrs: noinline nounwind uwtable
+define internal void @store32(ptr noundef %0, i32 noundef %1) #0 {
+  %3 = alloca ptr, align 4
+  %4 = alloca i32, align 4
+  store ptr %0, ptr %3, align 4
+  store i32 %1, ptr %4, align 4
+  %5 = load ptr, ptr %3, align 4
+  call void @llvm.memcpy.p0.p0.i32(ptr align 1 %5, ptr align 4 %4, i32 4, i1 false)
+  ret void
 }
 
-; Function Attrs: mustprogress nofree noinline nosync nounwind uwtable willreturn
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_State_state_incr(%struct.vec* nocapture noundef %0) unnamed_addr #4 !dbg !812 {
-  call void @llvm.dbg.value(metadata %struct.vec* %0, metadata !814, metadata !DIExpression()), !dbg !816
-  %2 = getelementptr inbounds %struct.vec, %struct.vec* %0, i32 3, i32 0, i32 0, !dbg !817
-  %3 = load i32, i32* %2, align 4, !dbg !817, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %3, metadata !815, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !816
-  call void @llvm.dbg.value(metadata i32 undef, metadata !815, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !816
-  call void @llvm.dbg.value(metadata i32 undef, metadata !815, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !816
-  call void @llvm.dbg.value(metadata i32 undef, metadata !815, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !816
-  call void @llvm.dbg.value(metadata i32 %3, metadata !818, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !824
-  call void @llvm.dbg.value(metadata i32 undef, metadata !818, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !824
-  call void @llvm.dbg.value(metadata i32 undef, metadata !818, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !824
-  call void @llvm.dbg.value(metadata i32 undef, metadata !818, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !824
-  call void @llvm.dbg.value(metadata i32 1, metadata !823, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !824
-  call void @llvm.dbg.value(metadata i32 0, metadata !823, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !824
-  call void @llvm.dbg.value(metadata i32 0, metadata !823, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !824
-  call void @llvm.dbg.value(metadata i32 0, metadata !823, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !824
-  call void @llvm.dbg.value(metadata i32 1, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !826
-  call void @llvm.dbg.value(metadata i32 0, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !826
-  call void @llvm.dbg.value(metadata i32 0, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !826
-  call void @llvm.dbg.value(metadata i32 0, metadata !641, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !826
-  call void @llvm.dbg.value(metadata i32 %3, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !826
-  call void @llvm.dbg.value(metadata i32 undef, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !826
-  call void @llvm.dbg.value(metadata i32 undef, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !826
-  call void @llvm.dbg.value(metadata i32 undef, metadata !644, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !826
-  call void @llvm.dbg.value(metadata i8* undef, metadata !645, metadata !DIExpression(DW_OP_deref)), !dbg !826
-  %4 = add i32 %3, 1, !dbg !828
-  store i32 %4, i32* %2, align 4, !dbg !829, !tbaa.struct !118
-  ret void, !dbg !830
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_chacha20_core(ptr noundef %0, ptr noundef %1) #0 {
+  %3 = alloca ptr, align 4
+  %4 = alloca ptr, align 4
+  %5 = alloca i32, align 4
+  store ptr %0, ptr %3, align 4
+  store ptr %1, ptr %4, align 4
+  %6 = load ptr, ptr %3, align 4
+  %7 = load ptr, ptr %4, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_copy_state(ptr noundef %6, ptr noundef %7)
+  store i32 0, ptr %5, align 4
+  br label %8
+
+8:                                                ; preds = %13, %2
+  %9 = load i32, ptr %5, align 4
+  %10 = icmp ult i32 %9, 10
+  br i1 %10, label %11, label %16
+
+11:                                               ; preds = %8
+  %12 = load ptr, ptr %3, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_double_round(ptr noundef %12)
+  br label %13
+
+13:                                               ; preds = %11
+  %14 = load i32, ptr %5, align 4
+  %15 = add i32 %14, 1
+  store i32 %15, ptr %5, align 4
+  br label %8, !llvm.loop !139
+
+16:                                               ; preds = %8
+  %17 = load ptr, ptr %3, align 4
+  %18 = load ptr, ptr %4, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_sum_states(ptr noundef %17, ptr noundef %18)
+  ret void
 }
 
-; Function Attrs: argmemonly mustprogress nofree nounwind willreturn writeonly
-declare void @llvm.memset.p0i8.i32(i8* nocapture writeonly, i8, i32, i1 immarg) #7
-
-; Function Attrs: nofree noinline nosync nounwind uwtable
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_block(i8* nocapture noundef writeonly %0, %struct.vec* nocapture noundef readonly %1) unnamed_addr #0 !dbg !831 {
-  %3 = alloca [4 x %struct.vec], align 4
-  %4 = bitcast [4 x %struct.vec]* %3 to i8*, !dbg !840
-  call void @llvm.dbg.value(metadata i8* %0, metadata !835, metadata !DIExpression()), !dbg !840
-  call void @llvm.dbg.value(metadata %struct.vec* %1, metadata !836, metadata !DIExpression()), !dbg !840
-  %5 = bitcast [4 x %struct.vec]* %3 to i8*, !dbg !841
-  call void @llvm.lifetime.start.p0i8(i64 64, i8* nonnull %5) #10, !dbg !841
-  call void @llvm.dbg.declare(metadata [4 x %struct.vec]* %3, metadata !837, metadata !DIExpression()), !dbg !842
-  call void @llvm.dbg.value(metadata i32 0, metadata !838, metadata !DIExpression()), !dbg !843
-  call void @llvm.memset.p0i8.i32(i8* noundef nonnull align 4 dereferenceable(64) %4, i8 0, i32 64, i1 false), !dbg !844
-  call void @llvm.dbg.value(metadata i32 undef, metadata !838, metadata !DIExpression()), !dbg !843
-  call void @llvm.dbg.value(metadata i32 undef, metadata !838, metadata !DIExpression(DW_OP_plus_uconst, 1, DW_OP_stack_value)), !dbg !843
-  %6 = getelementptr inbounds [4 x %struct.vec], [4 x %struct.vec]* %3, i32 0, i32 0, !dbg !846
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_core(%struct.vec* noundef nonnull %6, %struct.vec* noundef %1), !dbg !847
-  call fastcc void @Hacl_Impl_Chacha20_Vec128_State_state_to_key_block(i8* noundef %0, %struct.vec* noundef nonnull %6), !dbg !848
-  call void @llvm.lifetime.end.p0i8(i64 64, i8* nonnull %5) #10, !dbg !849
-  ret void, !dbg !849
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_State_state_incr(ptr noundef %0) #0 {
+  %2 = alloca ptr, align 4
+  %3 = alloca %struct.vec, align 8
+  %4 = alloca %struct.vec, align 8
+  %5 = alloca ptr, align 4
+  %6 = alloca i32, align 4
+  %7 = alloca i32, align 4
+  %8 = alloca i32, align 4
+  %9 = alloca i32, align 4
+  %10 = alloca ptr, align 4
+  %11 = alloca %struct.vec, align 4
+  %12 = alloca %struct.vec, align 8
+  %13 = alloca ptr, align 4
+  %14 = alloca %struct.vec, align 4
+  %15 = alloca %struct.vec, align 4
+  store ptr %0, ptr %13, align 4
+  %16 = load ptr, ptr %13, align 4
+  %17 = getelementptr inbounds %struct.vec, ptr %16, i32 3
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %14, ptr align 4 %17, i32 16, i1 false)
+  %18 = load ptr, ptr %13, align 4
+  %19 = getelementptr inbounds %struct.vec, ptr %18, i32 3
+  call void @llvm.experimental.noalias.scope.decl(metadata !140)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %12, ptr align 1 %14, i64 16, i1 false)
+  store ptr %15, ptr %10, align 4, !noalias !140
+  call void @llvm.experimental.noalias.scope.decl(metadata !143)
+  store ptr %11, ptr %5, align 4, !noalias !146
+  store i32 1, ptr %6, align 4, !noalias !146
+  store i32 0, ptr %7, align 4, !noalias !146
+  store i32 0, ptr %8, align 4, !noalias !146
+  store i32 0, ptr %9, align 4, !noalias !146
+  %20 = load i32, ptr %6, align 4, !noalias !146
+  store i32 %20, ptr %11, align 4, !alias.scope !143, !noalias !140
+  %21 = load i32, ptr %7, align 4, !noalias !146
+  %22 = getelementptr inbounds [4 x i32], ptr %11, i32 0, i32 1
+  store i32 %21, ptr %22, align 4, !alias.scope !143, !noalias !140
+  %23 = load i32, ptr %8, align 4, !noalias !146
+  %24 = getelementptr inbounds [4 x i32], ptr %11, i32 0, i32 2
+  store i32 %23, ptr %24, align 4, !alias.scope !143, !noalias !140
+  %25 = load i32, ptr %9, align 4, !noalias !146
+  %26 = getelementptr inbounds [4 x i32], ptr %11, i32 0, i32 3
+  store i32 %25, ptr %26, align 4, !alias.scope !143, !noalias !140
+  call void @llvm.experimental.noalias.scope.decl(metadata !147)
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %3, ptr align 1 %11, i64 16, i1 false), !noalias !140
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %4, ptr align 1 %12, i64 16, i1 false), !noalias !140
+  store ptr %15, ptr %2, align 4, !noalias !150
+  %27 = load i32, ptr %4, align 4, !noalias !150
+  %28 = load i32, ptr %3, align 4, !noalias !150
+  %29 = add i32 %27, %28
+  store i32 %29, ptr %15, align 4, !alias.scope !150
+  %30 = getelementptr inbounds [4 x i32], ptr %4, i32 0, i32 1
+  %31 = load i32, ptr %30, align 4, !noalias !150
+  %32 = getelementptr inbounds [4 x i32], ptr %3, i32 0, i32 1
+  %33 = load i32, ptr %32, align 4, !noalias !150
+  %34 = add i32 %31, %33
+  %35 = getelementptr inbounds [4 x i32], ptr %15, i32 0, i32 1
+  store i32 %34, ptr %35, align 4, !alias.scope !150
+  %36 = getelementptr inbounds [4 x i32], ptr %4, i32 0, i32 2
+  %37 = load i32, ptr %36, align 4, !noalias !150
+  %38 = getelementptr inbounds [4 x i32], ptr %3, i32 0, i32 2
+  %39 = load i32, ptr %38, align 4, !noalias !150
+  %40 = add i32 %37, %39
+  %41 = getelementptr inbounds [4 x i32], ptr %15, i32 0, i32 2
+  store i32 %40, ptr %41, align 4, !alias.scope !150
+  %42 = getelementptr inbounds [4 x i32], ptr %4, i32 0, i32 3
+  %43 = load i32, ptr %42, align 4, !noalias !150
+  %44 = getelementptr inbounds [4 x i32], ptr %3, i32 0, i32 3
+  %45 = load i32, ptr %44, align 4, !noalias !150
+  %46 = add i32 %43, %45
+  %47 = getelementptr inbounds [4 x i32], ptr %15, i32 0, i32 3
+  store i32 %46, ptr %47, align 4, !alias.scope !150
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %19, ptr align 4 %15, i32 16, i1 false)
+  ret void
 }
 
-; Function Attrs: mustprogress nofree noinline nosync nounwind uwtable willreturn
-define internal fastcc void @Hacl_Impl_Chacha20_Vec128_State_state_to_key_block(i8* nocapture noundef writeonly %0, %struct.vec* nocapture noundef readonly %1) unnamed_addr #4 !dbg !850 {
-  call void @llvm.dbg.value(metadata i8* %0, metadata !852, metadata !DIExpression()), !dbg !862
-  call void @llvm.dbg.value(metadata %struct.vec* %1, metadata !853, metadata !DIExpression()), !dbg !862
-  %3 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 0, i32 0, i32 0, !dbg !863
-  %4 = load i32, i32* %3, align 4, !dbg !863, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %4, metadata !854, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !862
-  %5 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 0, i32 0, i32 1, !dbg !863
-  %6 = load i32, i32* %5, align 4, !dbg !863, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %6, metadata !854, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !862
-  %7 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 0, i32 0, i32 2, !dbg !863
-  %8 = load i32, i32* %7, align 4, !dbg !863, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %8, metadata !854, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !862
-  %9 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 0, i32 0, i32 3, !dbg !863
-  %10 = load i32, i32* %9, align 4, !dbg !863, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %10, metadata !854, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !862
-  %11 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 1, i32 0, i32 0, !dbg !864
-  %12 = load i32, i32* %11, align 4, !dbg !864, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %12, metadata !855, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !862
-  %13 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 1, i32 0, i32 1, !dbg !864
-  %14 = load i32, i32* %13, align 4, !dbg !864, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %14, metadata !855, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !862
-  %15 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 1, i32 0, i32 2, !dbg !864
-  %16 = load i32, i32* %15, align 4, !dbg !864, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %16, metadata !855, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !862
-  %17 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 1, i32 0, i32 3, !dbg !864
-  %18 = load i32, i32* %17, align 4, !dbg !864, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %18, metadata !855, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !862
-  %19 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 2, i32 0, i32 0, !dbg !865
-  %20 = load i32, i32* %19, align 4, !dbg !865, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %20, metadata !856, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !862
-  %21 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 2, i32 0, i32 1, !dbg !865
-  %22 = load i32, i32* %21, align 4, !dbg !865, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %22, metadata !856, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !862
-  %23 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 2, i32 0, i32 2, !dbg !865
-  %24 = load i32, i32* %23, align 4, !dbg !865, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %24, metadata !856, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !862
-  %25 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 2, i32 0, i32 3, !dbg !865
-  %26 = load i32, i32* %25, align 4, !dbg !865, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %26, metadata !856, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !862
-  %27 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 3, i32 0, i32 0, !dbg !866
-  %28 = load i32, i32* %27, align 4, !dbg !866, !tbaa.struct !118
-  call void @llvm.dbg.value(metadata i32 %28, metadata !857, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !862
-  %29 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 3, i32 0, i32 1, !dbg !866
-  %30 = load i32, i32* %29, align 4, !dbg !866, !tbaa.struct !122
-  call void @llvm.dbg.value(metadata i32 %30, metadata !857, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !862
-  %31 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 3, i32 0, i32 2, !dbg !866
-  %32 = load i32, i32* %31, align 4, !dbg !866, !tbaa.struct !123
-  call void @llvm.dbg.value(metadata i32 %32, metadata !857, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !862
-  %33 = getelementptr inbounds %struct.vec, %struct.vec* %1, i32 3, i32 0, i32 3, !dbg !866
-  %34 = load i32, i32* %33, align 4, !dbg !866, !tbaa.struct !124
-  call void @llvm.dbg.value(metadata i32 %34, metadata !857, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !862
-  call void @llvm.dbg.value(metadata i8* %0, metadata !858, metadata !DIExpression()), !dbg !862
-  %35 = getelementptr inbounds i8, i8* %0, i32 16, !dbg !867
-  call void @llvm.dbg.value(metadata i8* %35, metadata !859, metadata !DIExpression()), !dbg !862
-  %36 = getelementptr inbounds i8, i8* %0, i32 32, !dbg !868
-  call void @llvm.dbg.value(metadata i8* %36, metadata !860, metadata !DIExpression()), !dbg !862
-  %37 = getelementptr inbounds i8, i8* %0, i32 48, !dbg !869
-  call void @llvm.dbg.value(metadata i8* %37, metadata !861, metadata !DIExpression()), !dbg !862
-  call void @llvm.dbg.value(metadata i32 %4, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !870
-  call void @llvm.dbg.value(metadata i32 %6, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !870
-  call void @llvm.dbg.value(metadata i32 %8, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !870
-  call void @llvm.dbg.value(metadata i32 %10, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !870
-  call void @llvm.dbg.value(metadata i8* %0, metadata !499, metadata !DIExpression()) #10, !dbg !870
-  call fastcc void @store32(i8* noundef %0, i32 noundef %4) #10, !dbg !872
-  %38 = getelementptr inbounds i8, i8* %0, i32 4, !dbg !873
-  call fastcc void @store32(i8* noundef nonnull %38, i32 noundef %6) #10, !dbg !873
-  %39 = getelementptr inbounds i8, i8* %0, i32 8, !dbg !874
-  call fastcc void @store32(i8* noundef nonnull %39, i32 noundef %8) #10, !dbg !874
-  %40 = getelementptr inbounds i8, i8* %0, i32 12, !dbg !875
-  call fastcc void @store32(i8* noundef nonnull %40, i32 noundef %10) #10, !dbg !875
-  call void @llvm.dbg.value(metadata i32 %12, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !876
-  call void @llvm.dbg.value(metadata i32 %14, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !876
-  call void @llvm.dbg.value(metadata i32 %16, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !876
-  call void @llvm.dbg.value(metadata i32 %18, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !876
-  call void @llvm.dbg.value(metadata i8* %35, metadata !499, metadata !DIExpression()) #10, !dbg !876
-  call fastcc void @store32(i8* noundef nonnull %35, i32 noundef %12) #10, !dbg !878
-  %41 = getelementptr inbounds i8, i8* %0, i32 20, !dbg !879
-  call fastcc void @store32(i8* noundef nonnull %41, i32 noundef %14) #10, !dbg !879
-  %42 = getelementptr inbounds i8, i8* %0, i32 24, !dbg !880
-  call fastcc void @store32(i8* noundef nonnull %42, i32 noundef %16) #10, !dbg !880
-  %43 = getelementptr inbounds i8, i8* %0, i32 28, !dbg !881
-  call fastcc void @store32(i8* noundef nonnull %43, i32 noundef %18) #10, !dbg !881
-  call void @llvm.dbg.value(metadata i32 %20, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !882
-  call void @llvm.dbg.value(metadata i32 %22, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !882
-  call void @llvm.dbg.value(metadata i32 %24, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !882
-  call void @llvm.dbg.value(metadata i32 %26, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !882
-  call void @llvm.dbg.value(metadata i8* %36, metadata !499, metadata !DIExpression()) #10, !dbg !882
-  call fastcc void @store32(i8* noundef nonnull %36, i32 noundef %20) #10, !dbg !884
-  %44 = getelementptr inbounds i8, i8* %0, i32 36, !dbg !885
-  call fastcc void @store32(i8* noundef nonnull %44, i32 noundef %22) #10, !dbg !885
-  %45 = getelementptr inbounds i8, i8* %0, i32 40, !dbg !886
-  call fastcc void @store32(i8* noundef nonnull %45, i32 noundef %24) #10, !dbg !886
-  %46 = getelementptr inbounds i8, i8* %0, i32 44, !dbg !887
-  call fastcc void @store32(i8* noundef nonnull %46, i32 noundef %26) #10, !dbg !887
-  call void @llvm.dbg.value(metadata i32 %28, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 0, 32)), !dbg !888
-  call void @llvm.dbg.value(metadata i32 %30, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 32, 32)), !dbg !888
-  call void @llvm.dbg.value(metadata i32 %32, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 64, 32)), !dbg !888
-  call void @llvm.dbg.value(metadata i32 %34, metadata !493, metadata !DIExpression(DW_OP_LLVM_fragment, 96, 32)), !dbg !888
-  call void @llvm.dbg.value(metadata i8* %37, metadata !499, metadata !DIExpression()) #10, !dbg !888
-  call fastcc void @store32(i8* noundef nonnull %37, i32 noundef %28) #10, !dbg !890
-  %47 = getelementptr inbounds i8, i8* %0, i32 52, !dbg !891
-  call fastcc void @store32(i8* noundef nonnull %47, i32 noundef %30) #10, !dbg !891
-  %48 = getelementptr inbounds i8, i8* %0, i32 56, !dbg !892
-  call fastcc void @store32(i8* noundef nonnull %48, i32 noundef %32) #10, !dbg !892
-  %49 = getelementptr inbounds i8, i8* %0, i32 60, !dbg !893
-  call fastcc void @store32(i8* noundef nonnull %49, i32 noundef %34) #10, !dbg !893
-  ret void, !dbg !894
+; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: write)
+declare void @llvm.memset.p0.i32(ptr nocapture writeonly, i8, i32, i1 immarg) #2
+
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_chacha20_block(ptr noundef %0, ptr noundef %1) #0 {
+  %3 = alloca ptr, align 4
+  %4 = alloca i32, align 4
+  %5 = alloca i32, align 4
+  %6 = alloca i32, align 4
+  %7 = alloca i32, align 4
+  %8 = alloca ptr, align 4
+  %9 = alloca ptr, align 4
+  %10 = alloca [4 x %struct.vec], align 4
+  %11 = alloca i32, align 4
+  %12 = alloca %struct.vec, align 4
+  store ptr %0, ptr %8, align 4
+  store ptr %1, ptr %9, align 4
+  store i32 0, ptr %11, align 4
+  br label %13
+
+13:                                               ; preds = %26, %2
+  %14 = load i32, ptr %11, align 4
+  %15 = icmp ult i32 %14, 4
+  br i1 %15, label %16, label %29
+
+16:                                               ; preds = %13
+  %17 = load i32, ptr %11, align 4
+  %18 = getelementptr inbounds [4 x %struct.vec], ptr %10, i32 0, i32 %17
+  call void @llvm.experimental.noalias.scope.decl(metadata !151)
+  store ptr %12, ptr %3, align 4, !noalias !151
+  store i32 0, ptr %4, align 4, !noalias !151
+  store i32 0, ptr %5, align 4, !noalias !151
+  store i32 0, ptr %6, align 4, !noalias !151
+  store i32 0, ptr %7, align 4, !noalias !151
+  %19 = load i32, ptr %4, align 4, !noalias !151
+  store i32 %19, ptr %12, align 4, !alias.scope !151
+  %20 = load i32, ptr %5, align 4, !noalias !151
+  %21 = getelementptr inbounds [4 x i32], ptr %12, i32 0, i32 1
+  store i32 %20, ptr %21, align 4, !alias.scope !151
+  %22 = load i32, ptr %6, align 4, !noalias !151
+  %23 = getelementptr inbounds [4 x i32], ptr %12, i32 0, i32 2
+  store i32 %22, ptr %23, align 4, !alias.scope !151
+  %24 = load i32, ptr %7, align 4, !noalias !151
+  %25 = getelementptr inbounds [4 x i32], ptr %12, i32 0, i32 3
+  store i32 %24, ptr %25, align 4, !alias.scope !151
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %18, ptr align 4 %12, i32 16, i1 false)
+  br label %26
+
+26:                                               ; preds = %16
+  %27 = load i32, ptr %11, align 4
+  %28 = add i32 %27, 1
+  store i32 %28, ptr %11, align 4
+  br label %13, !llvm.loop !154
+
+29:                                               ; preds = %13
+  %30 = getelementptr inbounds [4 x %struct.vec], ptr %10, i32 0, i32 0
+  %31 = load ptr, ptr %9, align 4
+  call void @Hacl_Impl_Chacha20_Vec128_chacha20_core(ptr noundef %30, ptr noundef %31)
+  %32 = load ptr, ptr %8, align 4
+  %33 = getelementptr inbounds [4 x %struct.vec], ptr %10, i32 0, i32 0
+  call void @Hacl_Impl_Chacha20_Vec128_State_state_to_key_block(ptr noundef %32, ptr noundef %33)
+  ret void
 }
 
-; Function Attrs: nofree nosync nounwind readnone speculatable willreturn
-declare void @llvm.dbg.value(metadata, metadata, metadata) #8
+; Function Attrs: noinline nounwind uwtable
+define internal void @Hacl_Impl_Chacha20_Vec128_State_state_to_key_block(ptr noundef %0, ptr noundef %1) #0 {
+  %3 = alloca ptr, align 4
+  %4 = alloca %struct.vec, align 8
+  %5 = alloca ptr, align 4
+  %6 = alloca %struct.vec, align 8
+  %7 = alloca ptr, align 4
+  %8 = alloca %struct.vec, align 8
+  %9 = alloca ptr, align 4
+  %10 = alloca %struct.vec, align 8
+  %11 = alloca ptr, align 4
+  %12 = alloca ptr, align 4
+  %13 = alloca %struct.vec, align 4
+  %14 = alloca %struct.vec, align 4
+  %15 = alloca %struct.vec, align 4
+  %16 = alloca %struct.vec, align 4
+  %17 = alloca ptr, align 4
+  %18 = alloca ptr, align 4
+  %19 = alloca ptr, align 4
+  %20 = alloca ptr, align 4
+  store ptr %0, ptr %11, align 4
+  store ptr %1, ptr %12, align 4
+  %21 = load ptr, ptr %12, align 4
+  %22 = getelementptr inbounds %struct.vec, ptr %21, i32 0
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %13, ptr align 4 %22, i32 16, i1 false)
+  %23 = load ptr, ptr %12, align 4
+  %24 = getelementptr inbounds %struct.vec, ptr %23, i32 1
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %14, ptr align 4 %24, i32 16, i1 false)
+  %25 = load ptr, ptr %12, align 4
+  %26 = getelementptr inbounds %struct.vec, ptr %25, i32 2
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %15, ptr align 4 %26, i32 16, i1 false)
+  %27 = load ptr, ptr %12, align 4
+  %28 = getelementptr inbounds %struct.vec, ptr %27, i32 3
+  call void @llvm.memcpy.p0.p0.i32(ptr align 4 %16, ptr align 4 %28, i32 16, i1 false)
+  %29 = load ptr, ptr %11, align 4
+  store ptr %29, ptr %17, align 4
+  %30 = load ptr, ptr %11, align 4
+  %31 = getelementptr inbounds i8, ptr %30, i32 16
+  store ptr %31, ptr %18, align 4
+  %32 = load ptr, ptr %11, align 4
+  %33 = getelementptr inbounds i8, ptr %32, i32 32
+  store ptr %33, ptr %19, align 4
+  %34 = load ptr, ptr %11, align 4
+  %35 = getelementptr inbounds i8, ptr %34, i32 48
+  store ptr %35, ptr %20, align 4
+  %36 = load ptr, ptr %17, align 4
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %4, ptr align 1 %13, i64 16, i1 false)
+  store ptr %36, ptr %3, align 4
+  %37 = load ptr, ptr %3, align 4
+  %38 = load i32, ptr %4, align 4
+  %39 = call i32 @__uint32_identity(i32 noundef %38)
+  call void @store32(ptr noundef %37, i32 noundef %39)
+  %40 = load ptr, ptr %3, align 4
+  %41 = getelementptr inbounds i8, ptr %40, i32 4
+  %42 = getelementptr inbounds [4 x i32], ptr %4, i32 0, i32 1
+  %43 = load i32, ptr %42, align 4
+  %44 = call i32 @__uint32_identity(i32 noundef %43)
+  call void @store32(ptr noundef %41, i32 noundef %44)
+  %45 = load ptr, ptr %3, align 4
+  %46 = getelementptr inbounds i8, ptr %45, i32 8
+  %47 = getelementptr inbounds [4 x i32], ptr %4, i32 0, i32 2
+  %48 = load i32, ptr %47, align 4
+  %49 = call i32 @__uint32_identity(i32 noundef %48)
+  call void @store32(ptr noundef %46, i32 noundef %49)
+  %50 = load ptr, ptr %3, align 4
+  %51 = getelementptr inbounds i8, ptr %50, i32 12
+  %52 = getelementptr inbounds [4 x i32], ptr %4, i32 0, i32 3
+  %53 = load i32, ptr %52, align 4
+  %54 = call i32 @__uint32_identity(i32 noundef %53)
+  call void @store32(ptr noundef %51, i32 noundef %54)
+  %55 = load ptr, ptr %18, align 4
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %6, ptr align 1 %14, i64 16, i1 false)
+  store ptr %55, ptr %5, align 4
+  %56 = load ptr, ptr %5, align 4
+  %57 = load i32, ptr %6, align 4
+  %58 = call i32 @__uint32_identity(i32 noundef %57)
+  call void @store32(ptr noundef %56, i32 noundef %58)
+  %59 = load ptr, ptr %5, align 4
+  %60 = getelementptr inbounds i8, ptr %59, i32 4
+  %61 = getelementptr inbounds [4 x i32], ptr %6, i32 0, i32 1
+  %62 = load i32, ptr %61, align 4
+  %63 = call i32 @__uint32_identity(i32 noundef %62)
+  call void @store32(ptr noundef %60, i32 noundef %63)
+  %64 = load ptr, ptr %5, align 4
+  %65 = getelementptr inbounds i8, ptr %64, i32 8
+  %66 = getelementptr inbounds [4 x i32], ptr %6, i32 0, i32 2
+  %67 = load i32, ptr %66, align 4
+  %68 = call i32 @__uint32_identity(i32 noundef %67)
+  call void @store32(ptr noundef %65, i32 noundef %68)
+  %69 = load ptr, ptr %5, align 4
+  %70 = getelementptr inbounds i8, ptr %69, i32 12
+  %71 = getelementptr inbounds [4 x i32], ptr %6, i32 0, i32 3
+  %72 = load i32, ptr %71, align 4
+  %73 = call i32 @__uint32_identity(i32 noundef %72)
+  call void @store32(ptr noundef %70, i32 noundef %73)
+  %74 = load ptr, ptr %19, align 4
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %8, ptr align 1 %15, i64 16, i1 false)
+  store ptr %74, ptr %7, align 4
+  %75 = load ptr, ptr %7, align 4
+  %76 = load i32, ptr %8, align 4
+  %77 = call i32 @__uint32_identity(i32 noundef %76)
+  call void @store32(ptr noundef %75, i32 noundef %77)
+  %78 = load ptr, ptr %7, align 4
+  %79 = getelementptr inbounds i8, ptr %78, i32 4
+  %80 = getelementptr inbounds [4 x i32], ptr %8, i32 0, i32 1
+  %81 = load i32, ptr %80, align 4
+  %82 = call i32 @__uint32_identity(i32 noundef %81)
+  call void @store32(ptr noundef %79, i32 noundef %82)
+  %83 = load ptr, ptr %7, align 4
+  %84 = getelementptr inbounds i8, ptr %83, i32 8
+  %85 = getelementptr inbounds [4 x i32], ptr %8, i32 0, i32 2
+  %86 = load i32, ptr %85, align 4
+  %87 = call i32 @__uint32_identity(i32 noundef %86)
+  call void @store32(ptr noundef %84, i32 noundef %87)
+  %88 = load ptr, ptr %7, align 4
+  %89 = getelementptr inbounds i8, ptr %88, i32 12
+  %90 = getelementptr inbounds [4 x i32], ptr %8, i32 0, i32 3
+  %91 = load i32, ptr %90, align 4
+  %92 = call i32 @__uint32_identity(i32 noundef %91)
+  call void @store32(ptr noundef %89, i32 noundef %92)
+  %93 = load ptr, ptr %20, align 4
+  call void @llvm.memcpy.p0.p0.i64(ptr align 1 %10, ptr align 1 %16, i64 16, i1 false)
+  store ptr %93, ptr %9, align 4
+  %94 = load ptr, ptr %9, align 4
+  %95 = load i32, ptr %10, align 4
+  %96 = call i32 @__uint32_identity(i32 noundef %95)
+  call void @store32(ptr noundef %94, i32 noundef %96)
+  %97 = load ptr, ptr %9, align 4
+  %98 = getelementptr inbounds i8, ptr %97, i32 4
+  %99 = getelementptr inbounds [4 x i32], ptr %10, i32 0, i32 1
+  %100 = load i32, ptr %99, align 4
+  %101 = call i32 @__uint32_identity(i32 noundef %100)
+  call void @store32(ptr noundef %98, i32 noundef %101)
+  %102 = load ptr, ptr %9, align 4
+  %103 = getelementptr inbounds i8, ptr %102, i32 8
+  %104 = getelementptr inbounds [4 x i32], ptr %10, i32 0, i32 2
+  %105 = load i32, ptr %104, align 4
+  %106 = call i32 @__uint32_identity(i32 noundef %105)
+  call void @store32(ptr noundef %103, i32 noundef %106)
+  %107 = load ptr, ptr %9, align 4
+  %108 = getelementptr inbounds i8, ptr %107, i32 12
+  %109 = getelementptr inbounds [4 x i32], ptr %10, i32 0, i32 3
+  %110 = load i32, ptr %109, align 4
+  %111 = call i32 @__uint32_identity(i32 noundef %110)
+  call void @store32(ptr noundef %108, i32 noundef %111)
+  ret void
+}
 
-; Function Attrs: argmemonly nofree nounwind willreturn
-declare void @llvm.memmove.p0i8.p0i8.i32(i8* nocapture writeonly, i8* nocapture readonly, i32, i1 immarg) #9
+; Function Attrs: nocallback nofree nosync nounwind willreturn memory(inaccessiblemem: readwrite)
+declare void @llvm.experimental.noalias.scope.decl(metadata) #3
 
-; Function Attrs: nofree nosync nounwind readnone speculatable willreturn
-declare i32 @llvm.fshl.i32(i32, i32, i32) #8
+; Function Attrs: nocallback nofree nounwind willreturn memory(argmem: readwrite)
+declare void @llvm.memcpy.p0.p0.i64(ptr noalias nocapture writeonly, ptr noalias nocapture readonly, i64, i1 immarg) #1
 
-attributes #0 = { nofree noinline nosync nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
-attributes #1 = { mustprogress nofree nosync nounwind readnone speculatable willreturn }
-attributes #2 = { argmemonly mustprogress nofree nosync nounwind willreturn }
-attributes #3 = { argmemonly mustprogress nofree nounwind willreturn }
-attributes #4 = { mustprogress nofree noinline nosync nounwind uwtable willreturn "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
-attributes #5 = { mustprogress nofree noinline norecurse nosync nounwind readonly uwtable willreturn "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
-attributes #6 = { mustprogress nofree noinline norecurse nosync nounwind uwtable willreturn writeonly "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i686" "target-features"="+cx8,+x87" "tune-cpu"="generic" }
-attributes #7 = { argmemonly mustprogress nofree nounwind willreturn writeonly }
-attributes #8 = { nofree nosync nounwind readnone speculatable willreturn }
-attributes #9 = { argmemonly nofree nounwind willreturn }
-attributes #10 = { nounwind }
+attributes #0 = { noinline nounwind uwtable "frame-pointer"="all" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="i386" "target-features"="+x87" }
+attributes #1 = { nocallback nofree nounwind willreturn memory(argmem: readwrite) }
+attributes #2 = { nocallback nofree nounwind willreturn memory(argmem: write) }
+attributes #3 = { nocallback nofree nosync nounwind willreturn memory(inaccessiblemem: readwrite) }
 
-!llvm.dbg.cu = !{!0}
-!llvm.module.flags = !{!12, !13, !14, !15, !16, !17, !18}
-!llvm.ident = !{!19}
+!llvm.module.flags = !{!0, !1, !2, !3, !4, !5}
+!llvm.ident = !{!6}
 
-!0 = distinct !DICompileUnit(language: DW_LANG_C99, file: !1, producer: "Ubuntu clang version 14.0.0-1ubuntu1.1", isOptimized: true, runtimeVersion: 0, emissionKind: FullDebug, retainedTypes: !2, splitDebugInlining: false, nameTableKind: None)
-!1 = !DIFile(filename: "hacl-c/hacl-c/Hacl_Chacha20_Vec128.c", directory: "/mnt/c/Users/fwill/Documents/HS24/semester_project/tools/binsec/binsec/examples/hacl", checksumkind: CSK_MD5, checksum: "51fb5cb2112720e6dfe789eef5b087de")
-!2 = !{!3, !8}
-!3 = !DIDerivedType(tag: DW_TAG_typedef, name: "uint32_t", file: !4, line: 26, baseType: !5)
-!4 = !DIFile(filename: "/usr/include/bits/stdint-uintn.h", directory: "", checksumkind: CSK_MD5, checksum: "2bf2ae53c58c01b1a1b9383b5195125c")
-!5 = !DIDerivedType(tag: DW_TAG_typedef, name: "__uint32_t", file: !6, line: 42, baseType: !7)
-!6 = !DIFile(filename: "/usr/include/bits/types.h", directory: "", checksumkind: CSK_MD5, checksum: "d108b5f93a74c50510d7d9bc0ab36df9")
-!7 = !DIBasicType(name: "unsigned int", size: 32, encoding: DW_ATE_unsigned)
-!8 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !9, size: 32)
-!9 = !DIDerivedType(tag: DW_TAG_typedef, name: "uint8_t", file: !4, line: 24, baseType: !10)
-!10 = !DIDerivedType(tag: DW_TAG_typedef, name: "__uint8_t", file: !6, line: 38, baseType: !11)
-!11 = !DIBasicType(name: "unsigned char", size: 8, encoding: DW_ATE_unsigned_char)
-!12 = !{i32 1, !"NumRegisterParameters", i32 0}
-!13 = !{i32 7, !"Dwarf Version", i32 5}
-!14 = !{i32 2, !"Debug Info Version", i32 3}
-!15 = !{i32 1, !"wchar_size", i32 4}
-!16 = !{i32 7, !"PIC Level", i32 2}
-!17 = !{i32 7, !"PIE Level", i32 2}
-!18 = !{i32 7, !"uwtable", i32 1}
-!19 = !{!"Ubuntu clang version 14.0.0-1ubuntu1.1"}
-!20 = distinct !DISubprogram(name: "Hacl_Chacha20_Vec128_chacha20", scope: !1, file: !1, line: 384, type: !21, scopeLine: 392, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !23)
-!21 = !DISubroutineType(types: !22)
-!22 = !{null, !8, !8, !3, !8, !8, !3}
-!23 = !{!24, !25, !26, !27, !28, !29}
-!24 = !DILocalVariable(name: "output", arg: 1, scope: !20, file: !1, line: 385, type: !8)
-!25 = !DILocalVariable(name: "plain", arg: 2, scope: !20, file: !1, line: 386, type: !8)
-!26 = !DILocalVariable(name: "len", arg: 3, scope: !20, file: !1, line: 387, type: !3)
-!27 = !DILocalVariable(name: "k", arg: 4, scope: !20, file: !1, line: 388, type: !8)
-!28 = !DILocalVariable(name: "n1", arg: 5, scope: !20, file: !1, line: 389, type: !8)
-!29 = !DILocalVariable(name: "ctr", arg: 6, scope: !20, file: !1, line: 390, type: !3)
-!30 = !DILocation(line: 0, scope: !20)
-!31 = !DILocation(line: 393, column: 3, scope: !20)
-!32 = !DILocation(line: 394, column: 1, scope: !20)
-!33 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_chacha20", scope: !1, file: !1, line: 365, type: !21, scopeLine: 373, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !34)
-!34 = !{!35, !36, !37, !38, !39, !40, !41, !51, !53}
-!35 = !DILocalVariable(name: "output", arg: 1, scope: !33, file: !1, line: 366, type: !8)
-!36 = !DILocalVariable(name: "plain", arg: 2, scope: !33, file: !1, line: 367, type: !8)
-!37 = !DILocalVariable(name: "len", arg: 3, scope: !33, file: !1, line: 368, type: !3)
-!38 = !DILocalVariable(name: "k", arg: 4, scope: !33, file: !1, line: 369, type: !8)
-!39 = !DILocalVariable(name: "n1", arg: 5, scope: !33, file: !1, line: 370, type: !8)
-!40 = !DILocalVariable(name: "ctr", arg: 6, scope: !33, file: !1, line: 371, type: !3)
-!41 = !DILocalVariable(name: "buf", scope: !33, file: !1, line: 375, type: !42)
-!42 = !DICompositeType(tag: DW_TAG_array_type, baseType: !43, size: 512, elements: !49)
-!43 = !DIDerivedType(tag: DW_TAG_typedef, name: "vec", file: !44, line: 184, baseType: !45)
-!44 = !DIFile(filename: "hacl-c/hacl-c/vec128.h", directory: "/mnt/c/Users/fwill/Documents/HS24/semester_project/tools/binsec/binsec/examples/hacl", checksumkind: CSK_MD5, checksum: "578bd5280e4e9469e7c4a9c26f12c01b")
-!45 = distinct !DICompositeType(tag: DW_TAG_structure_type, file: !44, line: 182, size: 128, elements: !46)
-!46 = !{!47}
-!47 = !DIDerivedType(tag: DW_TAG_member, name: "v", scope: !45, file: !44, line: 183, baseType: !48, size: 128)
-!48 = !DICompositeType(tag: DW_TAG_array_type, baseType: !3, size: 128, elements: !49)
+!0 = !{i32 1, !"NumRegisterParameters", i32 0}
+!1 = !{i32 1, !"wchar_size", i32 4}
+!2 = !{i32 8, !"PIC Level", i32 2}
+!3 = !{i32 7, !"PIE Level", i32 2}
+!4 = !{i32 7, !"uwtable", i32 2}
+!5 = !{i32 7, !"frame-pointer", i32 2}
+!6 = !{!"Ubuntu clang version 19.1.7 (++20250114103320+cd708029e0b2-1~exp1~20250114103432.75)"}
+!7 = !{!8}
+!8 = distinct !{!8, !9, !"vec_load_32x4: argument 0"}
+!9 = distinct !{!9, !"vec_load_32x4"}
+!10 = distinct !{!10, !11}
+!11 = !{!"llvm.loop.mustprogress"}
+!12 = !{!13}
+!13 = distinct !{!13, !14, !"vec_load_32x4: argument 0"}
+!14 = distinct !{!14, !"vec_load_32x4"}
+!15 = !{!16}
+!16 = distinct !{!16, !17, !"vec_load128_le: argument 0"}
+!17 = distinct !{!17, !"vec_load128_le"}
+!18 = !{!19}
+!19 = distinct !{!19, !20, !"vec_load_le: argument 0"}
+!20 = distinct !{!20, !"vec_load_le"}
+!21 = !{!22}
+!22 = distinct !{!22, !23, !"vec_load128_le: argument 0"}
+!23 = distinct !{!23, !"vec_load128_le"}
+!24 = !{!25}
+!25 = distinct !{!25, !26, !"vec_load_le: argument 0"}
+!26 = distinct !{!26, !"vec_load_le"}
+!27 = !{!28}
+!28 = distinct !{!28, !29, !"vec_load_32x4: argument 0"}
+!29 = distinct !{!29, !"vec_load_32x4"}
+!30 = distinct !{!30, !11}
+!31 = distinct !{!31, !11}
+!32 = !{!33}
+!33 = distinct !{!33, !34, !"vec_load_32x4: argument 0"}
+!34 = distinct !{!34, !"vec_load_32x4"}
+!35 = distinct !{!35, !11}
+!36 = !{!37}
+!37 = distinct !{!37, !38, !"vec_load_32x4: argument 0"}
+!38 = distinct !{!38, !"vec_load_32x4"}
+!39 = distinct !{!39, !11}
+!40 = !{!41}
+!41 = distinct !{!41, !42, !"vec_load_32x4: argument 0"}
+!42 = distinct !{!42, !"vec_load_32x4"}
+!43 = distinct !{!43, !11}
+!44 = !{!45}
+!45 = distinct !{!45, !46, !"vec_load_32x4: argument 0"}
+!46 = distinct !{!46, !"vec_load_32x4"}
+!47 = distinct !{!47, !11}
+!48 = distinct !{!48, !11}
 !49 = !{!50}
-!50 = !DISubrange(count: 4)
-!51 = !DILocalVariable(name: "_i", scope: !52, file: !1, line: 376, type: !3)
-!52 = distinct !DILexicalBlock(scope: !33, file: !1, line: 376, column: 3)
-!53 = !DILocalVariable(name: "st", scope: !33, file: !1, line: 378, type: !54)
-!54 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !43, size: 32)
-!55 = !DILocation(line: 0, scope: !33)
-!56 = !DILocation(line: 375, column: 3, scope: !33)
-!57 = !DILocation(line: 375, column: 7, scope: !33)
-!58 = !DILocation(line: 0, scope: !52)
-!59 = !DILocation(line: 377, column: 15, scope: !60)
-!60 = distinct !DILexicalBlock(scope: !52, file: !1, line: 376, column: 3)
-!61 = !DILocation(line: 378, column: 13, scope: !33)
-!62 = !DILocation(line: 379, column: 3, scope: !33)
-!63 = !DILocation(line: 380, column: 3, scope: !33)
-!64 = !DILocation(line: 381, column: 1, scope: !33)
-!65 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_init", scope: !1, file: !1, line: 206, type: !66, scopeLine: 207, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !68)
-!66 = !DISubroutineType(types: !67)
-!67 = !{null, !54, !8, !8, !3}
-!68 = !{!69, !70, !71, !72}
-!69 = !DILocalVariable(name: "st", arg: 1, scope: !65, file: !1, line: 206, type: !54)
-!70 = !DILocalVariable(name: "k", arg: 2, scope: !65, file: !1, line: 206, type: !8)
-!71 = !DILocalVariable(name: "n1", arg: 3, scope: !65, file: !1, line: 206, type: !8)
-!72 = !DILocalVariable(name: "ctr", arg: 4, scope: !65, file: !1, line: 206, type: !3)
-!73 = !DILocation(line: 0, scope: !65)
-!74 = !DILocation(line: 208, column: 3, scope: !65)
-!75 = !DILocation(line: 209, column: 1, scope: !65)
-!76 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_chacha20_counter_mode", scope: !1, file: !1, line: 346, type: !77, scopeLine: 352, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !79)
-!77 = !DISubroutineType(types: !78)
-!78 = !{null, !8, !8, !3, !54}
-!79 = !{!80, !81, !82, !83, !84, !85, !86, !87, !88, !89}
-!80 = !DILocalVariable(name: "output", arg: 1, scope: !76, file: !1, line: 347, type: !8)
-!81 = !DILocalVariable(name: "plain", arg: 2, scope: !76, file: !1, line: 348, type: !8)
-!82 = !DILocalVariable(name: "len", arg: 3, scope: !76, file: !1, line: 349, type: !3)
-!83 = !DILocalVariable(name: "st", arg: 4, scope: !76, file: !1, line: 350, type: !54)
-!84 = !DILocalVariable(name: "blocks_len", scope: !76, file: !1, line: 353, type: !3)
-!85 = !DILocalVariable(name: "part_len", scope: !76, file: !1, line: 354, type: !3)
-!86 = !DILocalVariable(name: "output_", scope: !76, file: !1, line: 355, type: !8)
-!87 = !DILocalVariable(name: "plain_", scope: !76, file: !1, line: 356, type: !8)
-!88 = !DILocalVariable(name: "output__", scope: !76, file: !1, line: 357, type: !8)
-!89 = !DILocalVariable(name: "plain__", scope: !76, file: !1, line: 358, type: !8)
-!90 = !DILocation(line: 0, scope: !76)
-!91 = !DILocation(line: 353, column: 29, scope: !76)
-!92 = !DILocation(line: 354, column: 27, scope: !76)
-!93 = !DILocation(line: 357, column: 46, scope: !76)
-!94 = !DILocation(line: 359, column: 3, scope: !76)
-!95 = !DILocation(line: 360, column: 16, scope: !96)
-!96 = distinct !DILexicalBlock(scope: !76, file: !1, line: 360, column: 7)
-!97 = !DILocation(line: 360, column: 7, scope: !76)
-!98 = !DILocation(line: 358, column: 28, scope: !76)
-!99 = !DILocation(line: 357, column: 30, scope: !76)
-!100 = !DILocation(line: 361, column: 5, scope: !96)
-!101 = !DILocation(line: 362, column: 1, scope: !76)
-!102 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_State_state_setup", scope: !1, file: !1, line: 51, type: !66, scopeLine: 52, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !103)
-!103 = !{!104, !105, !106, !107, !108, !109, !110, !111, !112, !113, !114, !115}
-!104 = !DILocalVariable(name: "st", arg: 1, scope: !102, file: !1, line: 51, type: !54)
-!105 = !DILocalVariable(name: "k", arg: 2, scope: !102, file: !1, line: 51, type: !8)
-!106 = !DILocalVariable(name: "n1", arg: 3, scope: !102, file: !1, line: 51, type: !8)
-!107 = !DILocalVariable(name: "c", arg: 4, scope: !102, file: !1, line: 51, type: !3)
-!108 = !DILocalVariable(name: "k0", scope: !102, file: !1, line: 58, type: !43)
-!109 = !DILocalVariable(name: "k1", scope: !102, file: !1, line: 59, type: !43)
-!110 = !DILocalVariable(name: "n0", scope: !102, file: !1, line: 62, type: !3)
-!111 = !DILocalVariable(name: "x00", scope: !102, file: !1, line: 63, type: !8)
-!112 = !DILocalVariable(name: "n10", scope: !102, file: !1, line: 64, type: !3)
-!113 = !DILocalVariable(name: "x0", scope: !102, file: !1, line: 65, type: !8)
-!114 = !DILocalVariable(name: "n2", scope: !102, file: !1, line: 66, type: !3)
-!115 = !DILocalVariable(name: "v1", scope: !102, file: !1, line: 67, type: !43)
-!116 = !DILocation(line: 0, scope: !102)
-!117 = !DILocation(line: 54, column: 5, scope: !102)
-!118 = !{i64 0, i64 16, !119}
-!119 = !{!120, !120, i64 0}
-!120 = !{!"omnipotent char", !121, i64 0}
-!121 = !{!"Simple C/C++ TBAA"}
-!122 = !{i64 0, i64 12, !119}
-!123 = !{i64 0, i64 8, !119}
-!124 = !{i64 0, i64 4, !119}
-!125 = !DILocalVariable(name: "in", arg: 1, scope: !126, file: !44, line: 258, type: !129)
-!126 = distinct !DISubprogram(name: "vec_load128_le", scope: !44, file: !44, line: 258, type: !127, scopeLine: 258, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !131)
-!127 = !DISubroutineType(types: !128)
-!128 = !{!43, !129}
-!129 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !130, size: 32)
-!130 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !11)
-!131 = !{!125}
-!132 = !DILocation(line: 0, scope: !126, inlinedAt: !133)
-!133 = distinct !DILocation(line: 58, column: 12, scope: !102)
-!134 = !DILocalVariable(name: "r", scope: !135, file: !44, line: 243, type: !43)
-!135 = distinct !DISubprogram(name: "vec_load_le", scope: !44, file: !44, line: 242, type: !136, scopeLine: 242, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !140)
-!136 = !DISubroutineType(types: !137)
-!137 = !{!43, !138}
-!138 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !139, size: 32)
-!139 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !9)
-!140 = !{!141, !134}
-!141 = !DILocalVariable(name: "in", arg: 1, scope: !135, file: !44, line: 242, type: !138)
-!142 = !DILocation(line: 0, scope: !135, inlinedAt: !143)
-!143 = distinct !DILocation(line: 259, column: 10, scope: !126, inlinedAt: !133)
-!144 = !DILocation(line: 244, column: 12, scope: !135, inlinedAt: !143)
-!145 = !{!146, !148}
-!146 = distinct !{!146, !147, !"vec_load_le: argument 0"}
-!147 = distinct !{!147, !"vec_load_le"}
-!148 = distinct !{!148, !149, !"vec_load128_le: argument 0"}
-!149 = distinct !{!149, !"vec_load128_le"}
-!150 = !DILocation(line: 245, column: 12, scope: !135, inlinedAt: !143)
-!151 = !DILocation(line: 246, column: 12, scope: !135, inlinedAt: !143)
-!152 = !DILocation(line: 247, column: 12, scope: !135, inlinedAt: !143)
-!153 = !DILocation(line: 59, column: 29, scope: !102)
-!154 = !DILocation(line: 0, scope: !126, inlinedAt: !155)
-!155 = distinct !DILocation(line: 59, column: 12, scope: !102)
-!156 = !DILocation(line: 0, scope: !135, inlinedAt: !157)
-!157 = distinct !DILocation(line: 259, column: 10, scope: !126, inlinedAt: !155)
-!158 = !DILocation(line: 244, column: 12, scope: !135, inlinedAt: !157)
-!159 = !{!160, !162}
-!160 = distinct !{!160, !161, !"vec_load_le: argument 0"}
-!161 = distinct !{!161, !"vec_load_le"}
-!162 = distinct !{!162, !163, !"vec_load128_le: argument 0"}
-!163 = distinct !{!163, !"vec_load128_le"}
-!164 = !DILocation(line: 245, column: 12, scope: !135, inlinedAt: !157)
-!165 = !DILocation(line: 246, column: 12, scope: !135, inlinedAt: !157)
-!166 = !DILocation(line: 247, column: 12, scope: !135, inlinedAt: !157)
-!167 = !DILocation(line: 60, column: 12, scope: !102)
-!168 = !DILocation(line: 61, column: 12, scope: !102)
-!169 = !DILocation(line: 62, column: 17, scope: !102)
-!170 = !DILocation(line: 63, column: 21, scope: !102)
-!171 = !DILocation(line: 64, column: 18, scope: !102)
-!172 = !DILocation(line: 65, column: 20, scope: !102)
-!173 = !DILocation(line: 66, column: 17, scope: !102)
-!174 = !DILocation(line: 68, column: 12, scope: !102)
-!175 = !DILocation(line: 69, column: 1, scope: !102)
-!176 = distinct !DISubprogram(name: "load32", scope: !177, file: !177, line: 341, type: !178, scopeLine: 341, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !179)
-!177 = !DIFile(filename: "hacl-c/hacl-c/kremlib.h", directory: "/mnt/c/Users/fwill/Documents/HS24/semester_project/tools/binsec/binsec/examples/hacl", checksumkind: CSK_MD5, checksum: "cde125f1f98cb7b9ee1f380d4178ebe4")
-!178 = !DISubroutineType(types: !2)
-!179 = !{!180, !181}
-!180 = !DILocalVariable(name: "b", arg: 1, scope: !176, file: !177, line: 341, type: !8)
-!181 = !DILocalVariable(name: "x", scope: !176, file: !177, line: 342, type: !3)
-!182 = !DILocation(line: 0, scope: !176)
-!183 = !DILocation(line: 343, column: 3, scope: !176)
-!184 = !DILocation(line: 344, column: 3, scope: !176)
-!185 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_chacha20_counter_mode_blocks", scope: !1, file: !1, line: 313, type: !77, scopeLine: 319, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !186)
-!186 = !{!187, !188, !189, !190, !191, !192, !193, !194, !195, !196, !197, !200, !201, !202}
-!187 = !DILocalVariable(name: "output", arg: 1, scope: !185, file: !1, line: 314, type: !8)
-!188 = !DILocalVariable(name: "plain", arg: 2, scope: !185, file: !1, line: 315, type: !8)
-!189 = !DILocalVariable(name: "len", arg: 3, scope: !185, file: !1, line: 316, type: !3)
-!190 = !DILocalVariable(name: "st", arg: 4, scope: !185, file: !1, line: 317, type: !54)
-!191 = !DILocalVariable(name: "len3", scope: !185, file: !1, line: 320, type: !3)
-!192 = !DILocalVariable(name: "rest3", scope: !185, file: !1, line: 321, type: !3)
-!193 = !DILocalVariable(name: "plain_", scope: !185, file: !1, line: 322, type: !8)
-!194 = !DILocalVariable(name: "blocks1", scope: !185, file: !1, line: 323, type: !8)
-!195 = !DILocalVariable(name: "output_", scope: !185, file: !1, line: 324, type: !8)
-!196 = !DILocalVariable(name: "outs", scope: !185, file: !1, line: 325, type: !8)
-!197 = !DILocalVariable(name: "block0", scope: !198, file: !1, line: 329, type: !8)
-!198 = distinct !DILexicalBlock(scope: !199, file: !1, line: 328, column: 3)
-!199 = distinct !DILexicalBlock(scope: !185, file: !1, line: 327, column: 7)
-!200 = !DILocalVariable(name: "block1", scope: !198, file: !1, line: 330, type: !8)
-!201 = !DILocalVariable(name: "out0", scope: !198, file: !1, line: 331, type: !8)
-!202 = !DILocalVariable(name: "out1", scope: !198, file: !1, line: 332, type: !8)
-!203 = !DILocation(line: 0, scope: !185)
-!204 = !DILocation(line: 320, column: 23, scope: !185)
-!205 = !DILocation(line: 321, column: 24, scope: !185)
-!206 = !DILocation(line: 323, column: 45, scope: !185)
-!207 = !DILocation(line: 323, column: 28, scope: !185)
-!208 = !DILocation(line: 325, column: 26, scope: !185)
-!209 = !DILocation(line: 326, column: 3, scope: !185)
-!210 = !DILocation(line: 327, column: 7, scope: !185)
-!211 = !DILocation(line: 0, scope: !198)
-!212 = !DILocation(line: 330, column: 31, scope: !198)
-!213 = !DILocation(line: 332, column: 26, scope: !198)
-!214 = !DILocation(line: 333, column: 5, scope: !198)
-!215 = !DILocation(line: 334, column: 5, scope: !198)
-!216 = !DILocation(line: 335, column: 5, scope: !198)
-!217 = !DILocation(line: 337, column: 3, scope: !198)
-!218 = !DILocation(line: 340, column: 5, scope: !219)
-!219 = distinct !DILexicalBlock(scope: !220, file: !1, line: 339, column: 3)
-!220 = distinct !DILexicalBlock(scope: !199, file: !1, line: 338, column: 12)
-!221 = !DILocation(line: 342, column: 3, scope: !219)
-!222 = !DILocation(line: 0, scope: !199)
-!223 = !DILocation(line: 343, column: 1, scope: !185)
-!224 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_update_last", scope: !1, file: !1, line: 212, type: !77, scopeLine: 213, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !225)
-!225 = !{!226, !227, !228, !229, !230, !234, !235, !237, !240}
-!226 = !DILocalVariable(name: "output", arg: 1, scope: !224, file: !1, line: 212, type: !8)
-!227 = !DILocalVariable(name: "plain", arg: 2, scope: !224, file: !1, line: 212, type: !8)
-!228 = !DILocalVariable(name: "len", arg: 3, scope: !224, file: !1, line: 212, type: !3)
-!229 = !DILocalVariable(name: "st", arg: 4, scope: !224, file: !1, line: 212, type: !54)
-!230 = !DILocalVariable(name: "block", scope: !224, file: !1, line: 214, type: !231)
-!231 = !DICompositeType(tag: DW_TAG_array_type, baseType: !9, size: 512, elements: !232)
-!232 = !{!233}
-!233 = !DISubrange(count: 64)
-!234 = !DILocalVariable(name: "mask", scope: !224, file: !1, line: 216, type: !8)
-!235 = !DILocalVariable(name: "i", scope: !236, file: !1, line: 217, type: !3)
-!236 = distinct !DILexicalBlock(scope: !224, file: !1, line: 217, column: 3)
-!237 = !DILocalVariable(name: "xi", scope: !238, file: !1, line: 219, type: !9)
-!238 = distinct !DILexicalBlock(scope: !239, file: !1, line: 218, column: 3)
-!239 = distinct !DILexicalBlock(scope: !236, file: !1, line: 217, column: 3)
-!240 = !DILocalVariable(name: "yi", scope: !238, file: !1, line: 220, type: !9)
-!241 = !DILocation(line: 0, scope: !224)
-!242 = !DILocation(line: 214, column: 3, scope: !224)
-!243 = !DILocation(line: 214, column: 11, scope: !224)
-!244 = !DILocation(line: 215, column: 3, scope: !224)
-!245 = !DILocation(line: 0, scope: !236)
-!246 = !DILocation(line: 217, column: 37, scope: !239)
-!247 = !DILocation(line: 217, column: 3, scope: !236)
-!248 = !DILocation(line: 223, column: 1, scope: !224)
-!249 = !DILocation(line: 219, column: 18, scope: !238)
-!250 = !DILocation(line: 0, scope: !238)
-!251 = !DILocation(line: 220, column: 18, scope: !238)
-!252 = !DILocation(line: 221, column: 20, scope: !238)
-!253 = !DILocation(line: 221, column: 5, scope: !238)
-!254 = !DILocation(line: 221, column: 15, scope: !238)
-!255 = !DILocation(line: 217, column: 50, scope: !239)
-!256 = distinct !{!256, !247, !257, !258, !259}
-!257 = !DILocation(line: 222, column: 3, scope: !236)
-!258 = !{!"llvm.loop.mustprogress"}
-!259 = !{!"llvm.loop.unroll.disable"}
-!260 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_chacha20_counter_mode_blocks3", scope: !1, file: !1, line: 301, type: !77, scopeLine: 307, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !261)
-!261 = !{!262, !263, !264, !265, !266}
-!262 = !DILocalVariable(name: "output", arg: 1, scope: !260, file: !1, line: 302, type: !8)
-!263 = !DILocalVariable(name: "plain", arg: 2, scope: !260, file: !1, line: 303, type: !8)
-!264 = !DILocalVariable(name: "len", arg: 3, scope: !260, file: !1, line: 304, type: !3)
-!265 = !DILocalVariable(name: "st", arg: 4, scope: !260, file: !1, line: 305, type: !54)
-!266 = !DILocalVariable(name: "i", scope: !267, file: !1, line: 308, type: !3)
-!267 = distinct !DILexicalBlock(scope: !260, file: !1, line: 308, column: 3)
-!268 = !DILocation(line: 0, scope: !260)
-!269 = !DILocation(line: 0, scope: !267)
-!270 = !DILocation(line: 308, column: 37, scope: !271)
-!271 = distinct !DILexicalBlock(scope: !267, file: !1, line: 308, column: 3)
-!272 = !DILocation(line: 308, column: 3, scope: !267)
-!273 = !DILocation(line: 310, column: 1, scope: !260)
-!274 = !DILocation(line: 309, column: 5, scope: !271)
-!275 = !DILocation(line: 308, column: 50, scope: !271)
-!276 = distinct !{!276, !272, !277, !258, !259}
-!277 = !DILocation(line: 309, column: 65, scope: !267)
-!278 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_update", scope: !1, file: !1, line: 249, type: !279, scopeLine: 250, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !281)
-!279 = !DISubroutineType(types: !280)
-!280 = !{null, !8, !8, !54}
-!281 = !{!282, !283, !284, !285, !286}
-!282 = !DILocalVariable(name: "output", arg: 1, scope: !278, file: !1, line: 249, type: !8)
-!283 = !DILocalVariable(name: "plain", arg: 2, scope: !278, file: !1, line: 249, type: !8)
-!284 = !DILocalVariable(name: "st", arg: 3, scope: !278, file: !1, line: 249, type: !54)
-!285 = !DILocalVariable(name: "k", scope: !278, file: !1, line: 252, type: !42)
-!286 = !DILocalVariable(name: "_i", scope: !287, file: !1, line: 253, type: !3)
-!287 = distinct !DILexicalBlock(scope: !278, file: !1, line: 253, column: 3)
-!288 = !DILocation(line: 0, scope: !278)
-!289 = !DILocation(line: 252, column: 3, scope: !278)
-!290 = !DILocation(line: 252, column: 7, scope: !278)
-!291 = !DILocation(line: 0, scope: !287)
-!292 = !DILocation(line: 254, column: 13, scope: !293)
-!293 = distinct !DILexicalBlock(scope: !287, file: !1, line: 253, column: 3)
-!294 = !DILocation(line: 255, column: 43, scope: !278)
-!295 = !DILocation(line: 255, column: 3, scope: !278)
-!296 = !DILocation(line: 256, column: 3, scope: !278)
-!297 = !DILocation(line: 257, column: 1, scope: !278)
-!298 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_state_incr", scope: !1, file: !1, line: 164, type: !299, scopeLine: 165, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !301)
-!299 = !DISubroutineType(types: !300)
-!300 = !{null, !54}
-!301 = !{!302}
-!302 = !DILocalVariable(name: "st", arg: 1, scope: !298, file: !1, line: 164, type: !54)
-!303 = !DILocation(line: 0, scope: !298)
-!304 = !DILocation(line: 166, column: 3, scope: !298)
-!305 = !DILocation(line: 167, column: 1, scope: !298)
-!306 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_update3_", scope: !1, file: !1, line: 286, type: !307, scopeLine: 293, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !309)
-!307 = !DISubroutineType(types: !308)
-!308 = !{null, !8, !8, !3, !54, !3}
-!309 = !{!310, !311, !312, !313, !314, !315, !316}
-!310 = !DILocalVariable(name: "output", arg: 1, scope: !306, file: !1, line: 287, type: !8)
-!311 = !DILocalVariable(name: "plain", arg: 2, scope: !306, file: !1, line: 288, type: !8)
-!312 = !DILocalVariable(name: "len", arg: 3, scope: !306, file: !1, line: 289, type: !3)
-!313 = !DILocalVariable(name: "st", arg: 4, scope: !306, file: !1, line: 290, type: !54)
-!314 = !DILocalVariable(name: "i", arg: 5, scope: !306, file: !1, line: 291, type: !3)
-!315 = !DILocalVariable(name: "out_block", scope: !306, file: !1, line: 294, type: !8)
-!316 = !DILocalVariable(name: "plain_block", scope: !306, file: !1, line: 295, type: !8)
-!317 = !DILocation(line: 0, scope: !306)
-!318 = !DILocation(line: 294, column: 48, scope: !306)
-!319 = !DILocation(line: 294, column: 31, scope: !306)
-!320 = !DILocation(line: 295, column: 32, scope: !306)
-!321 = !DILocation(line: 296, column: 3, scope: !306)
-!322 = !DILocation(line: 297, column: 3, scope: !306)
-!323 = !DILocation(line: 298, column: 1, scope: !306)
-!324 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_update3", scope: !1, file: !1, line: 259, type: !279, scopeLine: 260, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !325)
-!325 = !{!326, !327, !328, !329, !330, !332, !333, !335, !336, !338, !339, !340, !341, !342, !343}
-!326 = !DILocalVariable(name: "output", arg: 1, scope: !324, file: !1, line: 259, type: !8)
-!327 = !DILocalVariable(name: "plain", arg: 2, scope: !324, file: !1, line: 259, type: !8)
-!328 = !DILocalVariable(name: "st", arg: 3, scope: !324, file: !1, line: 259, type: !54)
-!329 = !DILocalVariable(name: "k0", scope: !324, file: !1, line: 262, type: !42)
-!330 = !DILocalVariable(name: "_i", scope: !331, file: !1, line: 263, type: !3)
-!331 = distinct !DILexicalBlock(scope: !324, file: !1, line: 263, column: 3)
-!332 = !DILocalVariable(name: "k1", scope: !324, file: !1, line: 266, type: !42)
-!333 = !DILocalVariable(name: "_i", scope: !334, file: !1, line: 267, type: !3)
-!334 = distinct !DILexicalBlock(scope: !324, file: !1, line: 267, column: 3)
-!335 = !DILocalVariable(name: "k2", scope: !324, file: !1, line: 270, type: !42)
-!336 = !DILocalVariable(name: "_i", scope: !337, file: !1, line: 271, type: !3)
-!337 = distinct !DILexicalBlock(scope: !324, file: !1, line: 271, column: 3)
-!338 = !DILocalVariable(name: "p0", scope: !324, file: !1, line: 274, type: !8)
-!339 = !DILocalVariable(name: "p1", scope: !324, file: !1, line: 275, type: !8)
-!340 = !DILocalVariable(name: "p2", scope: !324, file: !1, line: 276, type: !8)
-!341 = !DILocalVariable(name: "o0", scope: !324, file: !1, line: 277, type: !8)
-!342 = !DILocalVariable(name: "o1", scope: !324, file: !1, line: 278, type: !8)
-!343 = !DILocalVariable(name: "o2", scope: !324, file: !1, line: 279, type: !8)
-!344 = !DILocation(line: 0, scope: !324)
-!345 = !DILocation(line: 262, column: 3, scope: !324)
-!346 = !DILocation(line: 262, column: 7, scope: !324)
-!347 = !DILocation(line: 0, scope: !331)
-!348 = !DILocation(line: 264, column: 14, scope: !349)
-!349 = distinct !DILexicalBlock(scope: !331, file: !1, line: 263, column: 3)
-!350 = !DILocation(line: 266, column: 3, scope: !324)
-!351 = !DILocation(line: 266, column: 7, scope: !324)
-!352 = !DILocation(line: 0, scope: !334)
-!353 = !DILocation(line: 268, column: 14, scope: !354)
-!354 = distinct !DILexicalBlock(scope: !334, file: !1, line: 267, column: 3)
-!355 = !DILocation(line: 270, column: 3, scope: !324)
-!356 = !DILocation(line: 270, column: 7, scope: !324)
-!357 = !DILocation(line: 0, scope: !337)
-!358 = !DILocation(line: 272, column: 14, scope: !359)
-!359 = distinct !DILexicalBlock(scope: !337, file: !1, line: 271, column: 3)
-!360 = !DILocation(line: 273, column: 44, scope: !324)
-!361 = !DILocation(line: 273, column: 48, scope: !324)
-!362 = !DILocation(line: 273, column: 52, scope: !324)
-!363 = !DILocation(line: 273, column: 3, scope: !324)
-!364 = !DILocation(line: 275, column: 23, scope: !324)
-!365 = !DILocation(line: 276, column: 23, scope: !324)
-!366 = !DILocation(line: 278, column: 24, scope: !324)
-!367 = !DILocation(line: 279, column: 24, scope: !324)
-!368 = !DILocation(line: 280, column: 3, scope: !324)
-!369 = !DILocation(line: 281, column: 3, scope: !324)
-!370 = !DILocation(line: 282, column: 3, scope: !324)
-!371 = !DILocation(line: 283, column: 1, scope: !324)
-!372 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_chacha20_core3", scope: !1, file: !1, line: 187, type: !373, scopeLine: 188, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !375)
-!373 = !DISubroutineType(types: !374)
-!374 = !{null, !54, !54, !54, !54}
-!375 = !{!376, !377, !378, !379, !380}
-!376 = !DILocalVariable(name: "k0", arg: 1, scope: !372, file: !1, line: 187, type: !54)
-!377 = !DILocalVariable(name: "k1", arg: 2, scope: !372, file: !1, line: 187, type: !54)
-!378 = !DILocalVariable(name: "k2", arg: 3, scope: !372, file: !1, line: 187, type: !54)
-!379 = !DILocalVariable(name: "st", arg: 4, scope: !372, file: !1, line: 187, type: !54)
-!380 = !DILocalVariable(name: "i", scope: !381, file: !1, line: 190, type: !3)
-!381 = distinct !DILexicalBlock(scope: !372, file: !1, line: 190, column: 3)
-!382 = !DILocation(line: 0, scope: !372)
-!383 = !DILocation(line: 189, column: 3, scope: !372)
-!384 = !DILocation(line: 0, scope: !381)
-!385 = !DILocation(line: 190, column: 3, scope: !381)
-!386 = !DILocation(line: 192, column: 3, scope: !372)
-!387 = !DILocation(line: 193, column: 1, scope: !372)
-!388 = !DILocation(line: 191, column: 5, scope: !389)
-!389 = distinct !DILexicalBlock(scope: !381, file: !1, line: 190, column: 3)
-!390 = !DILocation(line: 190, column: 60, scope: !389)
-!391 = !DILocation(line: 190, column: 37, scope: !389)
-!392 = distinct !{!392, !385, !393, !258, !259}
-!393 = !DILocation(line: 191, column: 55, scope: !381)
-!394 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_xor_block", scope: !1, file: !1, line: 225, type: !279, scopeLine: 226, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !395)
-!395 = !{!396, !397, !398, !399, !400, !401, !402, !403, !404, !405, !406, !407, !408, !409, !410, !411, !412, !413, !414}
-!396 = !DILocalVariable(name: "output", arg: 1, scope: !394, file: !1, line: 225, type: !8)
-!397 = !DILocalVariable(name: "plain", arg: 2, scope: !394, file: !1, line: 225, type: !8)
-!398 = !DILocalVariable(name: "st", arg: 3, scope: !394, file: !1, line: 225, type: !54)
-!399 = !DILocalVariable(name: "p0", scope: !394, file: !1, line: 227, type: !43)
-!400 = !DILocalVariable(name: "p1", scope: !394, file: !1, line: 228, type: !43)
-!401 = !DILocalVariable(name: "p2", scope: !394, file: !1, line: 229, type: !43)
-!402 = !DILocalVariable(name: "p3", scope: !394, file: !1, line: 230, type: !43)
-!403 = !DILocalVariable(name: "k0", scope: !394, file: !1, line: 231, type: !43)
-!404 = !DILocalVariable(name: "k1", scope: !394, file: !1, line: 232, type: !43)
-!405 = !DILocalVariable(name: "k2", scope: !394, file: !1, line: 233, type: !43)
-!406 = !DILocalVariable(name: "k3", scope: !394, file: !1, line: 234, type: !43)
-!407 = !DILocalVariable(name: "o00", scope: !394, file: !1, line: 235, type: !43)
-!408 = !DILocalVariable(name: "o10", scope: !394, file: !1, line: 236, type: !43)
-!409 = !DILocalVariable(name: "o20", scope: !394, file: !1, line: 237, type: !43)
-!410 = !DILocalVariable(name: "o30", scope: !394, file: !1, line: 238, type: !43)
-!411 = !DILocalVariable(name: "o0", scope: !394, file: !1, line: 239, type: !8)
-!412 = !DILocalVariable(name: "o1", scope: !394, file: !1, line: 240, type: !8)
-!413 = !DILocalVariable(name: "o2", scope: !394, file: !1, line: 241, type: !8)
-!414 = !DILocalVariable(name: "o3", scope: !394, file: !1, line: 242, type: !8)
-!415 = !DILocation(line: 0, scope: !394)
-!416 = !DILocation(line: 0, scope: !135, inlinedAt: !417)
-!417 = distinct !DILocation(line: 227, column: 12, scope: !394)
-!418 = !DILocation(line: 244, column: 12, scope: !135, inlinedAt: !417)
-!419 = !{!420}
-!420 = distinct !{!420, !421, !"vec_load_le: argument 0"}
-!421 = distinct !{!421, !"vec_load_le"}
-!422 = !DILocation(line: 245, column: 12, scope: !135, inlinedAt: !417)
-!423 = !DILocation(line: 246, column: 12, scope: !135, inlinedAt: !417)
-!424 = !DILocation(line: 247, column: 12, scope: !135, inlinedAt: !417)
-!425 = !DILocation(line: 228, column: 30, scope: !394)
-!426 = !DILocation(line: 0, scope: !135, inlinedAt: !427)
-!427 = distinct !DILocation(line: 228, column: 12, scope: !394)
-!428 = !DILocation(line: 244, column: 12, scope: !135, inlinedAt: !427)
-!429 = !{!430}
-!430 = distinct !{!430, !431, !"vec_load_le: argument 0"}
-!431 = distinct !{!431, !"vec_load_le"}
-!432 = !DILocation(line: 245, column: 12, scope: !135, inlinedAt: !427)
-!433 = !DILocation(line: 246, column: 12, scope: !135, inlinedAt: !427)
-!434 = !DILocation(line: 247, column: 12, scope: !135, inlinedAt: !427)
-!435 = !DILocation(line: 229, column: 30, scope: !394)
-!436 = !DILocation(line: 0, scope: !135, inlinedAt: !437)
-!437 = distinct !DILocation(line: 229, column: 12, scope: !394)
-!438 = !DILocation(line: 244, column: 12, scope: !135, inlinedAt: !437)
-!439 = !{!440}
-!440 = distinct !{!440, !441, !"vec_load_le: argument 0"}
-!441 = distinct !{!441, !"vec_load_le"}
-!442 = !DILocation(line: 245, column: 12, scope: !135, inlinedAt: !437)
-!443 = !DILocation(line: 246, column: 12, scope: !135, inlinedAt: !437)
-!444 = !DILocation(line: 247, column: 12, scope: !135, inlinedAt: !437)
-!445 = !DILocation(line: 230, column: 30, scope: !394)
-!446 = !DILocation(line: 0, scope: !135, inlinedAt: !447)
-!447 = distinct !DILocation(line: 230, column: 12, scope: !394)
-!448 = !DILocation(line: 244, column: 12, scope: !135, inlinedAt: !447)
-!449 = !{!450}
-!450 = distinct !{!450, !451, !"vec_load_le: argument 0"}
-!451 = distinct !{!451, !"vec_load_le"}
-!452 = !DILocation(line: 245, column: 12, scope: !135, inlinedAt: !447)
-!453 = !DILocation(line: 246, column: 12, scope: !135, inlinedAt: !447)
-!454 = !DILocation(line: 247, column: 12, scope: !135, inlinedAt: !447)
-!455 = !DILocation(line: 231, column: 12, scope: !394)
-!456 = !DILocation(line: 232, column: 12, scope: !394)
-!457 = !DILocation(line: 233, column: 12, scope: !394)
-!458 = !DILocation(line: 234, column: 12, scope: !394)
-!459 = !DILocalVariable(name: "v2", arg: 2, scope: !460, file: !44, line: 186, type: !43)
-!460 = distinct !DISubprogram(name: "vec_xor", scope: !44, file: !44, line: 186, type: !461, scopeLine: 186, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !463)
-!461 = !DISubroutineType(types: !462)
-!462 = !{!43, !43, !43}
-!463 = !{!464, !459, !465}
-!464 = !DILocalVariable(name: "v1", arg: 1, scope: !460, file: !44, line: 186, type: !43)
-!465 = !DILocalVariable(name: "r", scope: !460, file: !44, line: 187, type: !43)
-!466 = !DILocation(line: 0, scope: !460, inlinedAt: !467)
-!467 = distinct !DILocation(line: 235, column: 13, scope: !394)
-!468 = !DILocation(line: 188, column: 20, scope: !460, inlinedAt: !467)
-!469 = !DILocation(line: 189, column: 20, scope: !460, inlinedAt: !467)
-!470 = !DILocation(line: 190, column: 20, scope: !460, inlinedAt: !467)
-!471 = !DILocation(line: 191, column: 20, scope: !460, inlinedAt: !467)
-!472 = !DILocation(line: 0, scope: !460, inlinedAt: !473)
-!473 = distinct !DILocation(line: 236, column: 13, scope: !394)
-!474 = !DILocation(line: 188, column: 20, scope: !460, inlinedAt: !473)
-!475 = !DILocation(line: 189, column: 20, scope: !460, inlinedAt: !473)
-!476 = !DILocation(line: 190, column: 20, scope: !460, inlinedAt: !473)
-!477 = !DILocation(line: 191, column: 20, scope: !460, inlinedAt: !473)
-!478 = !DILocation(line: 0, scope: !460, inlinedAt: !479)
-!479 = distinct !DILocation(line: 237, column: 13, scope: !394)
-!480 = !DILocation(line: 188, column: 20, scope: !460, inlinedAt: !479)
-!481 = !DILocation(line: 189, column: 20, scope: !460, inlinedAt: !479)
-!482 = !DILocation(line: 190, column: 20, scope: !460, inlinedAt: !479)
-!483 = !DILocation(line: 191, column: 20, scope: !460, inlinedAt: !479)
-!484 = !DILocation(line: 0, scope: !460, inlinedAt: !485)
-!485 = distinct !DILocation(line: 238, column: 13, scope: !394)
-!486 = !DILocation(line: 188, column: 20, scope: !460, inlinedAt: !485)
-!487 = !DILocation(line: 189, column: 20, scope: !460, inlinedAt: !485)
-!488 = !DILocation(line: 190, column: 20, scope: !460, inlinedAt: !485)
-!489 = !DILocation(line: 191, column: 20, scope: !460, inlinedAt: !485)
-!490 = !DILocation(line: 240, column: 24, scope: !394)
-!491 = !DILocation(line: 241, column: 24, scope: !394)
-!492 = !DILocation(line: 242, column: 24, scope: !394)
-!493 = !DILocalVariable(name: "r", arg: 2, scope: !494, file: !44, line: 251, type: !43)
-!494 = distinct !DISubprogram(name: "vec_store_le", scope: !44, file: !44, line: 251, type: !495, scopeLine: 251, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !498)
-!495 = !DISubroutineType(types: !496)
-!496 = !{null, !497, !43}
-!497 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !11, size: 32)
-!498 = !{!499, !493}
-!499 = !DILocalVariable(name: "out", arg: 1, scope: !494, file: !44, line: 251, type: !497)
-!500 = !DILocation(line: 0, scope: !494, inlinedAt: !501)
-!501 = distinct !DILocation(line: 243, column: 3, scope: !394)
-!502 = !DILocation(line: 252, column: 3, scope: !494, inlinedAt: !501)
-!503 = !DILocation(line: 253, column: 3, scope: !494, inlinedAt: !501)
-!504 = !DILocation(line: 254, column: 3, scope: !494, inlinedAt: !501)
-!505 = !DILocation(line: 255, column: 3, scope: !494, inlinedAt: !501)
-!506 = !DILocation(line: 0, scope: !494, inlinedAt: !507)
-!507 = distinct !DILocation(line: 244, column: 3, scope: !394)
-!508 = !DILocation(line: 252, column: 3, scope: !494, inlinedAt: !507)
-!509 = !DILocation(line: 253, column: 3, scope: !494, inlinedAt: !507)
-!510 = !DILocation(line: 254, column: 3, scope: !494, inlinedAt: !507)
-!511 = !DILocation(line: 255, column: 3, scope: !494, inlinedAt: !507)
-!512 = !DILocation(line: 0, scope: !494, inlinedAt: !513)
-!513 = distinct !DILocation(line: 245, column: 3, scope: !394)
-!514 = !DILocation(line: 252, column: 3, scope: !494, inlinedAt: !513)
-!515 = !DILocation(line: 253, column: 3, scope: !494, inlinedAt: !513)
-!516 = !DILocation(line: 254, column: 3, scope: !494, inlinedAt: !513)
-!517 = !DILocation(line: 255, column: 3, scope: !494, inlinedAt: !513)
-!518 = !DILocation(line: 0, scope: !494, inlinedAt: !519)
-!519 = distinct !DILocation(line: 246, column: 3, scope: !394)
-!520 = !DILocation(line: 252, column: 3, scope: !494, inlinedAt: !519)
-!521 = !DILocation(line: 253, column: 3, scope: !494, inlinedAt: !519)
-!522 = !DILocation(line: 254, column: 3, scope: !494, inlinedAt: !519)
-!523 = !DILocation(line: 255, column: 3, scope: !494, inlinedAt: !519)
-!524 = !DILocation(line: 247, column: 1, scope: !394)
-!525 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_chacha20_incr3", scope: !1, file: !1, line: 169, type: !373, scopeLine: 170, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !526)
-!526 = !{!527, !528, !529, !530}
-!527 = !DILocalVariable(name: "k0", arg: 1, scope: !525, file: !1, line: 169, type: !54)
-!528 = !DILocalVariable(name: "k1", arg: 2, scope: !525, file: !1, line: 169, type: !54)
-!529 = !DILocalVariable(name: "k2", arg: 3, scope: !525, file: !1, line: 169, type: !54)
-!530 = !DILocalVariable(name: "st", arg: 4, scope: !525, file: !1, line: 169, type: !54)
-!531 = !DILocation(line: 0, scope: !525)
-!532 = !DILocation(line: 171, column: 3, scope: !525)
-!533 = !DILocation(line: 172, column: 3, scope: !525)
-!534 = !DILocation(line: 173, column: 3, scope: !525)
-!535 = !DILocation(line: 174, column: 3, scope: !525)
-!536 = !DILocation(line: 175, column: 3, scope: !525)
-!537 = !DILocation(line: 176, column: 1, scope: !525)
-!538 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_double_round3", scope: !1, file: !1, line: 121, type: !539, scopeLine: 122, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !541)
-!539 = !DISubroutineType(types: !540)
-!540 = !{null, !54, !54, !54}
-!541 = !{!542, !543, !544}
-!542 = !DILocalVariable(name: "st", arg: 1, scope: !538, file: !1, line: 121, type: !54)
-!543 = !DILocalVariable(name: "st_", arg: 2, scope: !538, file: !1, line: 121, type: !54)
-!544 = !DILocalVariable(name: "st__", arg: 3, scope: !538, file: !1, line: 121, type: !54)
-!545 = !DILocation(line: 0, scope: !538)
-!546 = !DILocation(line: 123, column: 3, scope: !538)
-!547 = !DILocation(line: 124, column: 3, scope: !538)
-!548 = !DILocation(line: 125, column: 3, scope: !538)
-!549 = !DILocation(line: 126, column: 1, scope: !538)
-!550 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_chacha20_sum3", scope: !1, file: !1, line: 178, type: !373, scopeLine: 179, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !551)
-!551 = !{!552, !553, !554, !555}
-!552 = !DILocalVariable(name: "k0", arg: 1, scope: !550, file: !1, line: 178, type: !54)
-!553 = !DILocalVariable(name: "k1", arg: 2, scope: !550, file: !1, line: 178, type: !54)
-!554 = !DILocalVariable(name: "k2", arg: 3, scope: !550, file: !1, line: 178, type: !54)
-!555 = !DILocalVariable(name: "st", arg: 4, scope: !550, file: !1, line: 178, type: !54)
-!556 = !DILocation(line: 0, scope: !550)
-!557 = !DILocation(line: 180, column: 3, scope: !550)
-!558 = !DILocation(line: 181, column: 3, scope: !550)
-!559 = !DILocation(line: 182, column: 3, scope: !550)
-!560 = !DILocation(line: 183, column: 3, scope: !550)
-!561 = !DILocation(line: 184, column: 3, scope: !550)
-!562 = !DILocation(line: 185, column: 1, scope: !550)
-!563 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_copy_state", scope: !1, file: !1, line: 144, type: !564, scopeLine: 145, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !566)
-!564 = !DISubroutineType(types: !565)
-!565 = !{null, !54, !54}
-!566 = !{!567, !568, !569, !570, !571, !572}
-!567 = !DILocalVariable(name: "st_", arg: 1, scope: !563, file: !1, line: 144, type: !54)
-!568 = !DILocalVariable(name: "st", arg: 2, scope: !563, file: !1, line: 144, type: !54)
-!569 = !DILocalVariable(name: "st0", scope: !563, file: !1, line: 146, type: !43)
-!570 = !DILocalVariable(name: "st1", scope: !563, file: !1, line: 147, type: !43)
-!571 = !DILocalVariable(name: "st2", scope: !563, file: !1, line: 148, type: !43)
-!572 = !DILocalVariable(name: "st3", scope: !563, file: !1, line: 149, type: !43)
-!573 = !DILocation(line: 147, column: 7, scope: !563)
-!574 = !DILocation(line: 148, column: 7, scope: !563)
-!575 = !DILocation(line: 149, column: 7, scope: !563)
-!576 = !DILocation(line: 0, scope: !563)
-!577 = !DILocation(line: 146, column: 13, scope: !563)
-!578 = !DILocation(line: 147, column: 3, scope: !563)
-!579 = !DILocation(line: 147, column: 13, scope: !563)
-!580 = !DILocation(line: 148, column: 3, scope: !563)
-!581 = !DILocation(line: 148, column: 13, scope: !563)
-!582 = !DILocation(line: 149, column: 3, scope: !563)
-!583 = !DILocation(line: 149, column: 13, scope: !563)
-!584 = !DILocation(line: 150, column: 13, scope: !563)
-!585 = !DILocation(line: 151, column: 13, scope: !563)
-!586 = !DILocation(line: 152, column: 13, scope: !563)
-!587 = !DILocation(line: 153, column: 13, scope: !563)
-!588 = !DILocation(line: 154, column: 1, scope: !563)
-!589 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_double_round", scope: !1, file: !1, line: 103, type: !299, scopeLine: 104, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !590)
-!590 = !{!591, !592, !593, !594, !595, !596, !597}
-!591 = !DILocalVariable(name: "st", arg: 1, scope: !589, file: !1, line: 103, type: !54)
-!592 = !DILocalVariable(name: "r1", scope: !589, file: !1, line: 106, type: !43)
-!593 = !DILocalVariable(name: "r20", scope: !589, file: !1, line: 107, type: !43)
-!594 = !DILocalVariable(name: "r30", scope: !589, file: !1, line: 108, type: !43)
-!595 = !DILocalVariable(name: "r10", scope: !589, file: !1, line: 113, type: !43)
-!596 = !DILocalVariable(name: "r2", scope: !589, file: !1, line: 114, type: !43)
-!597 = !DILocalVariable(name: "r3", scope: !589, file: !1, line: 115, type: !43)
-!598 = !DILocation(line: 0, scope: !589)
-!599 = !DILocation(line: 105, column: 3, scope: !589)
-!600 = !DILocation(line: 106, column: 12, scope: !589)
-!601 = !DILocation(line: 107, column: 13, scope: !589)
-!602 = !DILocation(line: 108, column: 13, scope: !589)
-!603 = !DILocation(line: 109, column: 12, scope: !589)
-!604 = !DILocation(line: 110, column: 12, scope: !589)
-!605 = !DILocation(line: 111, column: 12, scope: !589)
-!606 = !DILocation(line: 112, column: 3, scope: !589)
-!607 = !DILocation(line: 113, column: 13, scope: !589)
-!608 = !DILocation(line: 114, column: 12, scope: !589)
-!609 = !DILocation(line: 115, column: 12, scope: !589)
-!610 = !DILocation(line: 116, column: 12, scope: !589)
-!611 = !DILocation(line: 117, column: 12, scope: !589)
-!612 = !DILocation(line: 118, column: 12, scope: !589)
-!613 = !DILocation(line: 119, column: 1, scope: !589)
-!614 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_round", scope: !1, file: !1, line: 71, type: !299, scopeLine: 72, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !615)
-!615 = !{!616, !617, !618, !619, !620, !621, !622, !623, !624, !625, !626, !627, !628, !629, !630, !631, !632, !633, !634, !635, !636}
-!616 = !DILocalVariable(name: "st", arg: 1, scope: !614, file: !1, line: 71, type: !54)
-!617 = !DILocalVariable(name: "sa", scope: !614, file: !1, line: 73, type: !43)
-!618 = !DILocalVariable(name: "sb0", scope: !614, file: !1, line: 74, type: !43)
-!619 = !DILocalVariable(name: "sd0", scope: !614, file: !1, line: 75, type: !43)
-!620 = !DILocalVariable(name: "sa10", scope: !614, file: !1, line: 76, type: !43)
-!621 = !DILocalVariable(name: "sd10", scope: !614, file: !1, line: 77, type: !43)
-!622 = !DILocalVariable(name: "sa0", scope: !614, file: !1, line: 80, type: !43)
-!623 = !DILocalVariable(name: "sb1", scope: !614, file: !1, line: 81, type: !43)
-!624 = !DILocalVariable(name: "sd2", scope: !614, file: !1, line: 82, type: !43)
-!625 = !DILocalVariable(name: "sa11", scope: !614, file: !1, line: 83, type: !43)
-!626 = !DILocalVariable(name: "sd11", scope: !614, file: !1, line: 84, type: !43)
-!627 = !DILocalVariable(name: "sa2", scope: !614, file: !1, line: 87, type: !43)
-!628 = !DILocalVariable(name: "sb2", scope: !614, file: !1, line: 88, type: !43)
-!629 = !DILocalVariable(name: "sd3", scope: !614, file: !1, line: 89, type: !43)
-!630 = !DILocalVariable(name: "sa12", scope: !614, file: !1, line: 90, type: !43)
-!631 = !DILocalVariable(name: "sd12", scope: !614, file: !1, line: 91, type: !43)
-!632 = !DILocalVariable(name: "sa3", scope: !614, file: !1, line: 94, type: !43)
-!633 = !DILocalVariable(name: "sb", scope: !614, file: !1, line: 95, type: !43)
-!634 = !DILocalVariable(name: "sd", scope: !614, file: !1, line: 96, type: !43)
-!635 = !DILocalVariable(name: "sa1", scope: !614, file: !1, line: 97, type: !43)
-!636 = !DILocalVariable(name: "sd1", scope: !614, file: !1, line: 98, type: !43)
-!637 = !DILocation(line: 0, scope: !614)
-!638 = !DILocation(line: 73, column: 12, scope: !614)
-!639 = !DILocation(line: 74, column: 13, scope: !614)
-!640 = !DILocation(line: 75, column: 13, scope: !614)
-!641 = !DILocalVariable(name: "v2", arg: 2, scope: !642, file: !44, line: 263, type: !43)
-!642 = distinct !DISubprogram(name: "vec_add", scope: !44, file: !44, line: 263, type: !461, scopeLine: 263, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !643)
-!643 = !{!644, !641, !645}
-!644 = !DILocalVariable(name: "v1", arg: 1, scope: !642, file: !44, line: 263, type: !43)
-!645 = !DILocalVariable(name: "r", scope: !642, file: !44, line: 264, type: !43)
-!646 = !DILocation(line: 0, scope: !642, inlinedAt: !647)
-!647 = distinct !DILocation(line: 76, column: 14, scope: !614)
-!648 = !DILocation(line: 265, column: 20, scope: !642, inlinedAt: !647)
-!649 = !DILocation(line: 266, column: 20, scope: !642, inlinedAt: !647)
-!650 = !DILocation(line: 267, column: 20, scope: !642, inlinedAt: !647)
-!651 = !DILocation(line: 268, column: 20, scope: !642, inlinedAt: !647)
-!652 = !DILocation(line: 0, scope: !460, inlinedAt: !653)
-!653 = distinct !DILocation(line: 77, column: 30, scope: !614)
-!654 = !DILocation(line: 188, column: 20, scope: !460, inlinedAt: !653)
-!655 = !DILocation(line: 189, column: 20, scope: !460, inlinedAt: !653)
-!656 = !DILocation(line: 190, column: 20, scope: !460, inlinedAt: !653)
-!657 = !DILocation(line: 191, column: 20, scope: !460, inlinedAt: !653)
-!658 = !DILocalVariable(name: "v", arg: 1, scope: !659, file: !44, line: 195, type: !43)
-!659 = distinct !DISubprogram(name: "vec_rotate_left", scope: !44, file: !44, line: 195, type: !660, scopeLine: 195, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !662)
-!660 = !DISubroutineType(types: !661)
-!661 = !{!43, !43, !7}
-!662 = !{!658, !663, !664}
-!663 = !DILocalVariable(name: "n", arg: 2, scope: !659, file: !44, line: 195, type: !7)
-!664 = !DILocalVariable(name: "r", scope: !659, file: !44, line: 196, type: !43)
-!665 = !DILocation(line: 0, scope: !659, inlinedAt: !666)
-!666 = distinct !DILocation(line: 77, column: 14, scope: !614)
-!667 = !DILocation(line: 197, column: 26, scope: !659, inlinedAt: !666)
-!668 = !DILocation(line: 198, column: 26, scope: !659, inlinedAt: !666)
-!669 = !DILocation(line: 199, column: 26, scope: !659, inlinedAt: !666)
-!670 = !DILocation(line: 200, column: 26, scope: !659, inlinedAt: !666)
-!671 = !DILocation(line: 78, column: 12, scope: !614)
-!672 = !DILocation(line: 79, column: 12, scope: !614)
-!673 = !DILocation(line: 80, column: 13, scope: !614)
-!674 = !DILocation(line: 0, scope: !642, inlinedAt: !675)
-!675 = distinct !DILocation(line: 83, column: 14, scope: !614)
-!676 = !DILocation(line: 265, column: 20, scope: !642, inlinedAt: !675)
-!677 = !DILocation(line: 266, column: 20, scope: !642, inlinedAt: !675)
-!678 = !DILocation(line: 267, column: 20, scope: !642, inlinedAt: !675)
-!679 = !DILocation(line: 268, column: 20, scope: !642, inlinedAt: !675)
-!680 = !DILocation(line: 0, scope: !460, inlinedAt: !681)
-!681 = distinct !DILocation(line: 84, column: 30, scope: !614)
-!682 = !DILocation(line: 188, column: 20, scope: !460, inlinedAt: !681)
-!683 = !DILocation(line: 189, column: 20, scope: !460, inlinedAt: !681)
-!684 = !DILocation(line: 190, column: 20, scope: !460, inlinedAt: !681)
-!685 = !DILocation(line: 191, column: 20, scope: !460, inlinedAt: !681)
-!686 = !DILocation(line: 0, scope: !659, inlinedAt: !687)
-!687 = distinct !DILocation(line: 84, column: 14, scope: !614)
-!688 = !DILocation(line: 197, column: 26, scope: !659, inlinedAt: !687)
-!689 = !DILocation(line: 198, column: 26, scope: !659, inlinedAt: !687)
-!690 = !DILocation(line: 199, column: 26, scope: !659, inlinedAt: !687)
-!691 = !DILocation(line: 200, column: 26, scope: !659, inlinedAt: !687)
-!692 = !DILocation(line: 85, column: 12, scope: !614)
-!693 = !DILocation(line: 86, column: 12, scope: !614)
-!694 = !DILocation(line: 0, scope: !642, inlinedAt: !695)
-!695 = distinct !DILocation(line: 90, column: 14, scope: !614)
-!696 = !DILocation(line: 265, column: 20, scope: !642, inlinedAt: !695)
-!697 = !DILocation(line: 266, column: 20, scope: !642, inlinedAt: !695)
-!698 = !DILocation(line: 267, column: 20, scope: !642, inlinedAt: !695)
-!699 = !DILocation(line: 268, column: 20, scope: !642, inlinedAt: !695)
-!700 = !DILocation(line: 0, scope: !460, inlinedAt: !701)
-!701 = distinct !DILocation(line: 91, column: 30, scope: !614)
-!702 = !DILocation(line: 188, column: 20, scope: !460, inlinedAt: !701)
-!703 = !DILocation(line: 189, column: 20, scope: !460, inlinedAt: !701)
-!704 = !DILocation(line: 190, column: 20, scope: !460, inlinedAt: !701)
-!705 = !DILocation(line: 191, column: 20, scope: !460, inlinedAt: !701)
-!706 = !DILocation(line: 0, scope: !659, inlinedAt: !707)
-!707 = distinct !DILocation(line: 91, column: 14, scope: !614)
-!708 = !DILocation(line: 197, column: 26, scope: !659, inlinedAt: !707)
-!709 = !DILocation(line: 198, column: 26, scope: !659, inlinedAt: !707)
-!710 = !DILocation(line: 199, column: 26, scope: !659, inlinedAt: !707)
-!711 = !DILocation(line: 200, column: 26, scope: !659, inlinedAt: !707)
-!712 = !DILocation(line: 92, column: 12, scope: !614)
-!713 = !DILocation(line: 93, column: 12, scope: !614)
-!714 = !DILocation(line: 0, scope: !642, inlinedAt: !715)
-!715 = distinct !DILocation(line: 97, column: 13, scope: !614)
-!716 = !DILocation(line: 265, column: 20, scope: !642, inlinedAt: !715)
-!717 = !DILocation(line: 266, column: 20, scope: !642, inlinedAt: !715)
-!718 = !DILocation(line: 267, column: 20, scope: !642, inlinedAt: !715)
-!719 = !DILocation(line: 268, column: 20, scope: !642, inlinedAt: !715)
-!720 = !DILocation(line: 0, scope: !460, inlinedAt: !721)
-!721 = distinct !DILocation(line: 98, column: 29, scope: !614)
-!722 = !DILocation(line: 188, column: 20, scope: !460, inlinedAt: !721)
-!723 = !DILocation(line: 189, column: 20, scope: !460, inlinedAt: !721)
-!724 = !DILocation(line: 190, column: 20, scope: !460, inlinedAt: !721)
-!725 = !DILocation(line: 191, column: 20, scope: !460, inlinedAt: !721)
-!726 = !DILocation(line: 0, scope: !659, inlinedAt: !727)
-!727 = distinct !DILocation(line: 98, column: 13, scope: !614)
-!728 = !DILocation(line: 197, column: 26, scope: !659, inlinedAt: !727)
-!729 = !DILocation(line: 198, column: 26, scope: !659, inlinedAt: !727)
-!730 = !DILocation(line: 199, column: 26, scope: !659, inlinedAt: !727)
-!731 = !DILocation(line: 200, column: 26, scope: !659, inlinedAt: !727)
-!732 = !DILocation(line: 99, column: 12, scope: !614)
-!733 = !DILocation(line: 100, column: 12, scope: !614)
-!734 = !DILocation(line: 101, column: 1, scope: !614)
-!735 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_sum_states", scope: !1, file: !1, line: 128, type: !564, scopeLine: 129, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !736)
-!736 = !{!737, !738, !739, !740, !741, !742, !743, !744, !745, !746}
-!737 = !DILocalVariable(name: "st_", arg: 1, scope: !735, file: !1, line: 128, type: !54)
-!738 = !DILocalVariable(name: "st", arg: 2, scope: !735, file: !1, line: 128, type: !54)
-!739 = !DILocalVariable(name: "s0", scope: !735, file: !1, line: 130, type: !43)
-!740 = !DILocalVariable(name: "s1", scope: !735, file: !1, line: 131, type: !43)
-!741 = !DILocalVariable(name: "s2", scope: !735, file: !1, line: 132, type: !43)
-!742 = !DILocalVariable(name: "s3", scope: !735, file: !1, line: 133, type: !43)
-!743 = !DILocalVariable(name: "s0_", scope: !735, file: !1, line: 134, type: !43)
-!744 = !DILocalVariable(name: "s1_", scope: !735, file: !1, line: 135, type: !43)
-!745 = !DILocalVariable(name: "s2_", scope: !735, file: !1, line: 136, type: !43)
-!746 = !DILocalVariable(name: "s3_", scope: !735, file: !1, line: 137, type: !43)
-!747 = !DILocation(line: 0, scope: !735)
-!748 = !DILocation(line: 130, column: 12, scope: !735)
-!749 = !DILocation(line: 131, column: 12, scope: !735)
-!750 = !DILocation(line: 132, column: 12, scope: !735)
-!751 = !DILocation(line: 133, column: 12, scope: !735)
-!752 = !DILocation(line: 134, column: 13, scope: !735)
-!753 = !DILocation(line: 135, column: 13, scope: !735)
-!754 = !DILocation(line: 136, column: 13, scope: !735)
-!755 = !DILocation(line: 137, column: 13, scope: !735)
-!756 = !DILocation(line: 0, scope: !642, inlinedAt: !757)
-!757 = distinct !DILocation(line: 138, column: 13, scope: !735)
-!758 = !DILocation(line: 265, column: 20, scope: !642, inlinedAt: !757)
-!759 = !DILocation(line: 266, column: 20, scope: !642, inlinedAt: !757)
-!760 = !DILocation(line: 267, column: 20, scope: !642, inlinedAt: !757)
-!761 = !DILocation(line: 268, column: 20, scope: !642, inlinedAt: !757)
-!762 = !DILocation(line: 138, column: 13, scope: !735)
-!763 = !DILocation(line: 0, scope: !642, inlinedAt: !764)
-!764 = distinct !DILocation(line: 139, column: 13, scope: !735)
-!765 = !DILocation(line: 265, column: 20, scope: !642, inlinedAt: !764)
-!766 = !DILocation(line: 266, column: 20, scope: !642, inlinedAt: !764)
-!767 = !DILocation(line: 267, column: 20, scope: !642, inlinedAt: !764)
-!768 = !DILocation(line: 268, column: 20, scope: !642, inlinedAt: !764)
-!769 = !DILocation(line: 139, column: 13, scope: !735)
-!770 = !DILocation(line: 0, scope: !642, inlinedAt: !771)
-!771 = distinct !DILocation(line: 140, column: 13, scope: !735)
-!772 = !DILocation(line: 265, column: 20, scope: !642, inlinedAt: !771)
-!773 = !DILocation(line: 266, column: 20, scope: !642, inlinedAt: !771)
-!774 = !DILocation(line: 267, column: 20, scope: !642, inlinedAt: !771)
-!775 = !DILocation(line: 268, column: 20, scope: !642, inlinedAt: !771)
-!776 = !DILocation(line: 140, column: 13, scope: !735)
-!777 = !DILocation(line: 0, scope: !642, inlinedAt: !778)
-!778 = distinct !DILocation(line: 141, column: 13, scope: !735)
-!779 = !DILocation(line: 265, column: 20, scope: !642, inlinedAt: !778)
-!780 = !DILocation(line: 266, column: 20, scope: !642, inlinedAt: !778)
-!781 = !DILocation(line: 267, column: 20, scope: !642, inlinedAt: !778)
-!782 = !DILocation(line: 268, column: 20, scope: !642, inlinedAt: !778)
-!783 = !DILocation(line: 141, column: 13, scope: !735)
-!784 = !DILocation(line: 142, column: 1, scope: !735)
-!785 = distinct !DISubprogram(name: "store32", scope: !177, file: !177, line: 355, type: !786, scopeLine: 355, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !788)
-!786 = !DISubroutineType(types: !787)
-!787 = !{null, !8, !3}
-!788 = !{!789, !790}
-!789 = !DILocalVariable(name: "b", arg: 1, scope: !785, file: !177, line: 355, type: !8)
-!790 = !DILocalVariable(name: "i", arg: 2, scope: !785, file: !177, line: 355, type: !3)
-!791 = !DILocation(line: 0, scope: !785)
-!792 = !DILocation(line: 355, column: 54, scope: !785)
-!793 = !DILocation(line: 355, column: 72, scope: !785)
-!794 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_chacha20_core", scope: !1, file: !1, line: 156, type: !564, scopeLine: 157, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !795)
-!795 = !{!796, !797, !798}
-!796 = !DILocalVariable(name: "k", arg: 1, scope: !794, file: !1, line: 156, type: !54)
-!797 = !DILocalVariable(name: "st", arg: 2, scope: !794, file: !1, line: 156, type: !54)
-!798 = !DILocalVariable(name: "i", scope: !799, file: !1, line: 159, type: !3)
-!799 = distinct !DILexicalBlock(scope: !794, file: !1, line: 159, column: 3)
-!800 = !DILocation(line: 0, scope: !794)
-!801 = !DILocation(line: 158, column: 3, scope: !794)
-!802 = !DILocation(line: 0, scope: !799)
-!803 = !DILocation(line: 159, column: 3, scope: !799)
-!804 = !DILocation(line: 161, column: 3, scope: !794)
-!805 = !DILocation(line: 162, column: 1, scope: !794)
-!806 = !DILocation(line: 160, column: 5, scope: !807)
-!807 = distinct !DILexicalBlock(scope: !799, file: !1, line: 159, column: 3)
-!808 = !DILocation(line: 159, column: 60, scope: !807)
-!809 = !DILocation(line: 159, column: 37, scope: !807)
-!810 = distinct !{!810, !803, !811, !258, !259}
-!811 = !DILocation(line: 160, column: 45, scope: !799)
-!812 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_State_state_incr", scope: !1, file: !1, line: 27, type: !299, scopeLine: 28, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !813)
-!813 = !{!814, !815}
-!814 = !DILocalVariable(name: "k", arg: 1, scope: !812, file: !1, line: 27, type: !54)
-!815 = !DILocalVariable(name: "k3", scope: !812, file: !1, line: 29, type: !43)
-!816 = !DILocation(line: 0, scope: !812)
-!817 = !DILocation(line: 29, column: 12, scope: !812)
-!818 = !DILocalVariable(name: "v1", arg: 1, scope: !819, file: !44, line: 277, type: !43)
-!819 = distinct !DISubprogram(name: "vec_increment", scope: !44, file: !44, line: 277, type: !820, scopeLine: 277, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !822)
-!820 = !DISubroutineType(types: !821)
-!821 = !{!43, !43}
-!822 = !{!818, !823}
-!823 = !DILocalVariable(name: "one", scope: !819, file: !44, line: 278, type: !43)
-!824 = !DILocation(line: 0, scope: !819, inlinedAt: !825)
-!825 = distinct !DILocation(line: 30, column: 11, scope: !812)
-!826 = !DILocation(line: 0, scope: !642, inlinedAt: !827)
-!827 = distinct !DILocation(line: 279, column: 10, scope: !819, inlinedAt: !825)
-!828 = !DILocation(line: 265, column: 20, scope: !642, inlinedAt: !827)
-!829 = !DILocation(line: 30, column: 11, scope: !812)
-!830 = !DILocation(line: 31, column: 1, scope: !812)
-!831 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_chacha20_block", scope: !1, file: !1, line: 195, type: !832, scopeLine: 196, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !834)
-!832 = !DISubroutineType(types: !833)
-!833 = !{null, !8, !54}
-!834 = !{!835, !836, !837, !838}
-!835 = !DILocalVariable(name: "stream_block", arg: 1, scope: !831, file: !1, line: 195, type: !8)
-!836 = !DILocalVariable(name: "st", arg: 2, scope: !831, file: !1, line: 195, type: !54)
-!837 = !DILocalVariable(name: "k", scope: !831, file: !1, line: 198, type: !42)
-!838 = !DILocalVariable(name: "_i", scope: !839, file: !1, line: 199, type: !3)
-!839 = distinct !DILexicalBlock(scope: !831, file: !1, line: 199, column: 3)
-!840 = !DILocation(line: 0, scope: !831)
-!841 = !DILocation(line: 198, column: 3, scope: !831)
-!842 = !DILocation(line: 198, column: 7, scope: !831)
-!843 = !DILocation(line: 0, scope: !839)
-!844 = !DILocation(line: 200, column: 13, scope: !845)
-!845 = distinct !DILexicalBlock(scope: !839, file: !1, line: 199, column: 3)
-!846 = !DILocation(line: 201, column: 43, scope: !831)
-!847 = !DILocation(line: 201, column: 3, scope: !831)
-!848 = !DILocation(line: 202, column: 3, scope: !831)
-!849 = !DILocation(line: 203, column: 1, scope: !831)
-!850 = distinct !DISubprogram(name: "Hacl_Impl_Chacha20_Vec128_State_state_to_key_block", scope: !1, file: !1, line: 34, type: !832, scopeLine: 35, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !0, retainedNodes: !851)
-!851 = !{!852, !853, !854, !855, !856, !857, !858, !859, !860, !861}
-!852 = !DILocalVariable(name: "stream_block", arg: 1, scope: !850, file: !1, line: 34, type: !8)
-!853 = !DILocalVariable(name: "k", arg: 2, scope: !850, file: !1, line: 34, type: !54)
-!854 = !DILocalVariable(name: "k0", scope: !850, file: !1, line: 36, type: !43)
-!855 = !DILocalVariable(name: "k1", scope: !850, file: !1, line: 37, type: !43)
-!856 = !DILocalVariable(name: "k2", scope: !850, file: !1, line: 38, type: !43)
-!857 = !DILocalVariable(name: "k3", scope: !850, file: !1, line: 39, type: !43)
-!858 = !DILocalVariable(name: "a", scope: !850, file: !1, line: 40, type: !8)
-!859 = !DILocalVariable(name: "b", scope: !850, file: !1, line: 41, type: !8)
-!860 = !DILocalVariable(name: "c", scope: !850, file: !1, line: 42, type: !8)
-!861 = !DILocalVariable(name: "d", scope: !850, file: !1, line: 43, type: !8)
-!862 = !DILocation(line: 0, scope: !850)
-!863 = !DILocation(line: 36, column: 12, scope: !850)
-!864 = !DILocation(line: 37, column: 12, scope: !850)
-!865 = !DILocation(line: 38, column: 12, scope: !850)
-!866 = !DILocation(line: 39, column: 12, scope: !850)
-!867 = !DILocation(line: 41, column: 29, scope: !850)
-!868 = !DILocation(line: 42, column: 29, scope: !850)
-!869 = !DILocation(line: 43, column: 29, scope: !850)
-!870 = !DILocation(line: 0, scope: !494, inlinedAt: !871)
-!871 = distinct !DILocation(line: 44, column: 3, scope: !850)
-!872 = !DILocation(line: 252, column: 3, scope: !494, inlinedAt: !871)
-!873 = !DILocation(line: 253, column: 3, scope: !494, inlinedAt: !871)
-!874 = !DILocation(line: 254, column: 3, scope: !494, inlinedAt: !871)
-!875 = !DILocation(line: 255, column: 3, scope: !494, inlinedAt: !871)
-!876 = !DILocation(line: 0, scope: !494, inlinedAt: !877)
-!877 = distinct !DILocation(line: 45, column: 3, scope: !850)
-!878 = !DILocation(line: 252, column: 3, scope: !494, inlinedAt: !877)
-!879 = !DILocation(line: 253, column: 3, scope: !494, inlinedAt: !877)
-!880 = !DILocation(line: 254, column: 3, scope: !494, inlinedAt: !877)
-!881 = !DILocation(line: 255, column: 3, scope: !494, inlinedAt: !877)
-!882 = !DILocation(line: 0, scope: !494, inlinedAt: !883)
-!883 = distinct !DILocation(line: 46, column: 3, scope: !850)
-!884 = !DILocation(line: 252, column: 3, scope: !494, inlinedAt: !883)
-!885 = !DILocation(line: 253, column: 3, scope: !494, inlinedAt: !883)
-!886 = !DILocation(line: 254, column: 3, scope: !494, inlinedAt: !883)
-!887 = !DILocation(line: 255, column: 3, scope: !494, inlinedAt: !883)
-!888 = !DILocation(line: 0, scope: !494, inlinedAt: !889)
-!889 = distinct !DILocation(line: 47, column: 3, scope: !850)
-!890 = !DILocation(line: 252, column: 3, scope: !494, inlinedAt: !889)
-!891 = !DILocation(line: 253, column: 3, scope: !494, inlinedAt: !889)
-!892 = !DILocation(line: 254, column: 3, scope: !494, inlinedAt: !889)
-!893 = !DILocation(line: 255, column: 3, scope: !494, inlinedAt: !889)
-!894 = !DILocation(line: 48, column: 1, scope: !850)
+!50 = distinct !{!50, !51, !"vec_load_le: argument 0"}
+!51 = distinct !{!51, !"vec_load_le"}
+!52 = !{!53}
+!53 = distinct !{!53, !54, !"vec_load_le: argument 0"}
+!54 = distinct !{!54, !"vec_load_le"}
+!55 = !{!56}
+!56 = distinct !{!56, !57, !"vec_load_le: argument 0"}
+!57 = distinct !{!57, !"vec_load_le"}
+!58 = !{!59}
+!59 = distinct !{!59, !60, !"vec_load_le: argument 0"}
+!60 = distinct !{!60, !"vec_load_le"}
+!61 = !{!62}
+!62 = distinct !{!62, !63, !"vec_xor: argument 0"}
+!63 = distinct !{!63, !"vec_xor"}
+!64 = !{!65}
+!65 = distinct !{!65, !66, !"vec_xor: argument 0"}
+!66 = distinct !{!66, !"vec_xor"}
+!67 = !{!68}
+!68 = distinct !{!68, !69, !"vec_xor: argument 0"}
+!69 = distinct !{!69, !"vec_xor"}
+!70 = !{!71}
+!71 = distinct !{!71, !72, !"vec_xor: argument 0"}
+!72 = distinct !{!72, !"vec_xor"}
+!73 = !{!74}
+!74 = distinct !{!74, !75, !"vec_shuffle_right: argument 0"}
+!75 = distinct !{!75, !"vec_shuffle_right"}
+!76 = !{!77}
+!77 = distinct !{!77, !78, !"vec_shuffle_right: argument 0"}
+!78 = distinct !{!78, !"vec_shuffle_right"}
+!79 = !{!80}
+!80 = distinct !{!80, !81, !"vec_shuffle_right: argument 0"}
+!81 = distinct !{!81, !"vec_shuffle_right"}
+!82 = !{!83}
+!83 = distinct !{!83, !84, !"vec_shuffle_right: argument 0"}
+!84 = distinct !{!84, !"vec_shuffle_right"}
+!85 = !{!86}
+!86 = distinct !{!86, !87, !"vec_shuffle_right: argument 0"}
+!87 = distinct !{!87, !"vec_shuffle_right"}
+!88 = !{!89}
+!89 = distinct !{!89, !90, !"vec_shuffle_right: argument 0"}
+!90 = distinct !{!90, !"vec_shuffle_right"}
+!91 = !{!92}
+!92 = distinct !{!92, !93, !"vec_add: argument 0"}
+!93 = distinct !{!93, !"vec_add"}
+!94 = !{!95}
+!95 = distinct !{!95, !96, !"vec_xor: argument 0"}
+!96 = distinct !{!96, !"vec_xor"}
+!97 = !{!98}
+!98 = distinct !{!98, !99, !"vec_rotate_left: argument 0"}
+!99 = distinct !{!99, !"vec_rotate_left"}
+!100 = !{!101}
+!101 = distinct !{!101, !102, !"vec_add: argument 0"}
+!102 = distinct !{!102, !"vec_add"}
+!103 = !{!104}
+!104 = distinct !{!104, !105, !"vec_xor: argument 0"}
+!105 = distinct !{!105, !"vec_xor"}
+!106 = !{!107}
+!107 = distinct !{!107, !108, !"vec_rotate_left: argument 0"}
+!108 = distinct !{!108, !"vec_rotate_left"}
+!109 = !{!110}
+!110 = distinct !{!110, !111, !"vec_add: argument 0"}
+!111 = distinct !{!111, !"vec_add"}
+!112 = !{!113}
+!113 = distinct !{!113, !114, !"vec_xor: argument 0"}
+!114 = distinct !{!114, !"vec_xor"}
+!115 = !{!116}
+!116 = distinct !{!116, !117, !"vec_rotate_left: argument 0"}
+!117 = distinct !{!117, !"vec_rotate_left"}
+!118 = !{!119}
+!119 = distinct !{!119, !120, !"vec_add: argument 0"}
+!120 = distinct !{!120, !"vec_add"}
+!121 = !{!122}
+!122 = distinct !{!122, !123, !"vec_xor: argument 0"}
+!123 = distinct !{!123, !"vec_xor"}
+!124 = !{!125}
+!125 = distinct !{!125, !126, !"vec_rotate_left: argument 0"}
+!126 = distinct !{!126, !"vec_rotate_left"}
+!127 = !{!128}
+!128 = distinct !{!128, !129, !"vec_add: argument 0"}
+!129 = distinct !{!129, !"vec_add"}
+!130 = !{!131}
+!131 = distinct !{!131, !132, !"vec_add: argument 0"}
+!132 = distinct !{!132, !"vec_add"}
+!133 = !{!134}
+!134 = distinct !{!134, !135, !"vec_add: argument 0"}
+!135 = distinct !{!135, !"vec_add"}
+!136 = !{!137}
+!137 = distinct !{!137, !138, !"vec_add: argument 0"}
+!138 = distinct !{!138, !"vec_add"}
+!139 = distinct !{!139, !11}
+!140 = !{!141}
+!141 = distinct !{!141, !142, !"vec_increment: argument 0"}
+!142 = distinct !{!142, !"vec_increment"}
+!143 = !{!144}
+!144 = distinct !{!144, !145, !"vec_load_32x4: argument 0"}
+!145 = distinct !{!145, !"vec_load_32x4"}
+!146 = !{!144, !141}
+!147 = !{!148}
+!148 = distinct !{!148, !149, !"vec_add: argument 0"}
+!149 = distinct !{!149, !"vec_add"}
+!150 = !{!148, !141}
+!151 = !{!152}
+!152 = distinct !{!152, !153, !"vec_load_32x4: argument 0"}
+!153 = distinct !{!153, !"vec_load_32x4"}
+!154 = distinct !{!154, !11}

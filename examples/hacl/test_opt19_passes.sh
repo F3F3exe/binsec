@@ -74,7 +74,7 @@ OPTIMIZED_LL="$specific_target.ll"
 SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct -sse-timeout $timeout"
 CFLAGS=" -m32 -march=i386 -DKRML_NOUINT128 -static -Wall "
-LIBSYM="-L../../__libsym__/ -lsym -I./inc -L./. -lbearssl"
+LIBSYM="-L../../__libsym__/ -lsym"
 LIBHACL="-I./hacl-c/hacl-c/ -L./hacl-c/hacl-c/ -lhacl32"
 LIBS="hacl_c"
 
@@ -205,8 +205,10 @@ for PASS in "${OPT_PASSES[@]}"; do
 
     PASSES_STRING=$(IFS=,; echo "${ADDED_PASSES[*]}")
    
-    $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LLVM_IR" -o "$OPTIMIZED_LL"
-    $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LIBS.ll" -o "${LIBS}_opt.ll"
+    $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LLVM_IR" -o "$OPTIMIZED_LL"
+    $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LIBS.ll" -o "${LIBS}_opt.ll"
+
+    echo     $CLANG -$OPT_LEVEL_CLANG $CFLAGS ${LIBS}_opt.ll $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM $LIBHACL
 
     $CLANG -$OPT_LEVEL_CLANG $CFLAGS ${LIBS}_opt.ll $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM $LIBHACL
 
