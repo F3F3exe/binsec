@@ -15,8 +15,7 @@ uint32_t a,b,c;
 
 int main(int argc, char *argv[]) {
   uint32_t a = 2, b = 5, c = 0;
-  // c is our secret value, we read its content from the environment so the
-  // compiler cannot play tricks on us by inlining
+  // c is our secret value
  
   HIGH_INPUT(4)(&c);
   LOW_INPUT(4)(&a);

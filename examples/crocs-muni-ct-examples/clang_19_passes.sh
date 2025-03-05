@@ -73,7 +73,7 @@ while IFS= read -r line; do
         short_name="${PASS_MAP[$pass_name]:-$pass_name}"
         passes+=("$short_name")
     fi
-done < <(opt-19 -S -O1 -debug-pass-manager   04.ll -o 04_opt.ll 2>&1)
+done < <(opt-19 -S -O1 -debug-pass-manager   02.ll -o 02_opt.ll 2>&1)
 
 
 # Output the comma-separated list
