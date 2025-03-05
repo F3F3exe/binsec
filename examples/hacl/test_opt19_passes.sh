@@ -209,6 +209,10 @@ for PASS in "${OPT_PASSES[@]}"; do
     echo "Adding pass: $PASS"
 
     PASSES_STRING=$(IFS=,; echo "${ADDED_PASSES[*]}")
+    
+    $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
+    $LLVM_LINK -S hacl-c/hacl-c/*.ll -o ${LIBS}.ll
+
    
     $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LLVM_IR" -o "$OPTIMIZED_LL"
     echo $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LIBS.ll" -o "${LIBS}_opt.ll"
