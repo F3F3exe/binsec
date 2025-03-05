@@ -17,6 +17,8 @@ if [[ ! "$CLANG" =~ ^(clang-14|clang-12|clang-19)$ ]]; then
     exit 1
 fi
 
+
+
 targets=(
 chacha20 salsa20 sha256 sha512 sodium_add sodium_sub sodium_is_zero sodium_compare sodium_increment sodium_memcmp
 )

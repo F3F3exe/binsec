@@ -39,14 +39,19 @@ fi
 CLANG_v=$CLANG
 NEW_PM=""
 
+LLVM_LINK="llvm-link"
 case "$CLANG" in
     clang-7.1) OPT="opt-7" 
-               CLANG="$HOME/clang-7.1/bin/clang" ;; 
+               CLANG="$HOME/clang-7.1/bin/clang" 
+               LLVM_LINK="llvm-link-19" ;; 
     clang-14)  OPT="opt-14" 
-               NEW_PM="-enable-new-pm=0" ;;
+               NEW_PM="-enable-new-pm=0" 
+               LLVM_LINK="llvm-link-19" ;;
     clang-12)  OPT="opt-12" 
-               NEW_PM="-enable-new-pm=0" ;;
-    clang-19)  OPT="opt-19" ;;
+               NEW_PM="-enable-new-pm=0" 
+               LLVM_LINK="llvm-link-19" ;;
+    clang-19)  OPT="opt-19" 
+               LLVM_LINK="llvm-link-19" ;;
 esac
 
 echo $CLANG $OPT
@@ -195,7 +200,7 @@ $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm hacl-
 $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm hacl-c/hacl-c/haclnacl.c -o hacl-c/hacl-c/haclnacl.ll
 $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm hacl-c/hacl-c/kremlib.c -o hacl-c/hacl-c/kremlib.ll
 
-llvm-link -S hacl-c/hacl-c/*.ll -o ${LIBS}.ll
+$LLVM_LINK -S hacl-c/hacl-c/*.ll -o ${LIBS}.ll
 
 # Apply passes one-by-one
 ADDED_PASSES=() 
@@ -206,6 +211,7 @@ for PASS in "${OPT_PASSES[@]}"; do
     PASSES_STRING=$(IFS=,; echo "${ADDED_PASSES[*]}")
    
     $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LLVM_IR" -o "$OPTIMIZED_LL"
+    echo $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LIBS.ll" -o "${LIBS}_opt.ll"
     $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LIBS.ll" -o "${LIBS}_opt.ll"
 
     echo     $CLANG -$OPT_LEVEL_CLANG $CFLAGS ${LIBS}_opt.ll $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM $LIBHACL
