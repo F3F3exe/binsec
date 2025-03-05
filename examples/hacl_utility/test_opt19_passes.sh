@@ -1,9 +1,11 @@
 #!/bin/bash
 
-#no lib, no wrapper
+#lib, no wrapper
 
 targets=(
-  01 02 03 04 05 07 08 09 10 
+cmp_bytes rotate32_left rotate32_right uint8_eq_mask uint8_gte_mask 
+uint16_eq_mask uint16_gte_mask uint32_eq_mask uint32_gte_mask 
+uint64_eq_mask uint64_gte_mask
 )
 
 OPT_LEVEL=$1
@@ -75,6 +77,7 @@ SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct -sse-timeout $timeout"
 CFLAGS=" -m32 -march=i386 -DKRML_NOUINT128 -static -Wall "
 LIBSYM="-L../../__libsym__/ -lsym"
+LIB="Hacl_Policies"
 
 $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
 
@@ -173,6 +176,8 @@ echo "Binsec Results Log" > "$LOG_FILE"
 
 # Compile the source to LLVM IR
 $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
+$CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$LIB.c" -o "$LIB.ll"
+
 
 # Apply passes one-by-one
 ADDED_PASSES=() 
@@ -181,11 +186,11 @@ for PASS in "${OPT_PASSES[@]}"; do
     echo "Adding pass: $PASS"
 
     PASSES_STRING=$(IFS=,; echo "${ADDED_PASSES[*]}")
-    
-    echo $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LLVM_IR" -o "$OPTIMIZED_LL"
-    $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LLVM_IR" -o "$OPTIMIZED_LL"
+   
+    $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LLVM_IR" -o "$OPTIMIZED_LL"
+    $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LIB.ll" -o "$LIB.ll"
 
-    $CLANG -$OPT_LEVEL_CLANG $CFLAGS $OPTIMIZED_LL -o ${BASE_NAME}.out -L../../__libsym__/ -lsym
+    $CLANG -$OPT_LEVEL_CLANG $CFLAGS $LIB.ll $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
 
     # Run binsec and log the result
     BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct ${BASE_NAME}.out -sse-timeout $timeout 2>&1)

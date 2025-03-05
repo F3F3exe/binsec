@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#no lib, no wrapper
+#no lib, no wrapper, from core
 
 targets=(
-  01 02 03 04 05 07 08 09 10 
+ct_eq_8 ct_eq_int ct_is_zero_8 ct_lt ct_select ct_eq ct_ge_8 ct_is_zero ct_msb ct_eq_int_8 ct_ge ct_lt_8 ct_select_8
 )
 
 OPT_LEVEL=$1
@@ -25,8 +25,8 @@ fi
 case "$OPT_LEVEL" in
     O0) OPT_LEVEL_CLANG="O0"  ;; 
     O1)  OPT_LEVEL_CLANG="O0" ;;
-    O2)  OPT_LEVEL_CLANG="O1" ;;
-    O3)  OPT_LEVEL_CLANG="O2" ;;
+    O2)  OPT_LEVEL_CLANG="O0" ;;
+    O3)  OPT_LEVEL_CLANG="O0" ;;
 esac
 
 echo $OPT_LEVEL $OPT_LEVEL_CLANG
@@ -65,9 +65,9 @@ fi
 echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): ${targets[@]}"
 
 depth=100000000
-timeout=20
+timeout=50
 #configuration
-SOURCE_FILE="$specific_target.c"  # Change this if needed
+SOURCE_FILE=${specific_target}.c
 BASE_NAME=$specific_target
 LLVM_IR="$specific_target.ll"
 OPTIMIZED_LL="$specific_target.ll"
@@ -75,6 +75,7 @@ SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct -sse-timeout $timeout"
 CFLAGS=" -m32 -march=i386 -DKRML_NOUINT128 -static -Wall "
 LIBSYM="-L../../__libsym__/ -lsym"
+
 
 $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
 
@@ -181,16 +182,25 @@ for PASS in "${OPT_PASSES[@]}"; do
     echo "Adding pass: $PASS"
 
     PASSES_STRING=$(IFS=,; echo "${ADDED_PASSES[*]}")
-    
-    echo $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LLVM_IR" -o "$OPTIMIZED_LL"
-    $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LLVM_IR" -o "$OPTIMIZED_LL"
+   
+    $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LLVM_IR" -o "$OPTIMIZED_LL"
 
-    $CLANG -$OPT_LEVEL_CLANG $CFLAGS $OPTIMIZED_LL -o ${BASE_NAME}.out -L../../__libsym__/ -lsym
-
-    # Run binsec and log the result
-    BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct ${BASE_NAME}.out -sse-timeout $timeout 2>&1)
+    $CLANG -$OPT_LEVEL_CLANG $CFLAGS $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
 
 
+    config_file="checkct_${BASE_NAME}.cfg"
+    BINSEC_OUTPUT=""
+
+    if grep -q "^starting from core" "$config_file"; then
+        core_dump="core_${BASE_NAME}.snapshot"
+        make_coredump.sh core_${BASE_NAME}.snapshot ${BASE_NAME}.out
+
+        BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct core_${BASE_NAME}.snapshot -sse-timeout $timeout 2>&1)
+    else
+        BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct ${BASE_NAME}.out -sse-timeout $timeout 2>&1)
+
+
+    fi
 
     status=$(echo "$BINSEC_OUTPUT" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')
 

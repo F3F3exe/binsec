@@ -9,7 +9,7 @@ chacha20 curve25519 sha256 sha512 cmp_bytes
 )
 
 clang_version=(
-  clang-12 clang-7.1
+  clang-19
 )
 
 #LOG_FILE="Results/llvm_optimization_results_$(date +%Y%m%d_%H%M%S).txt"
@@ -53,6 +53,8 @@ for TARGET in "${targets[@]}"; do
               #  grep "insecure" "$RESULTS_FILE3" >> ${LOG_FILE}
               #  echo "      LLVM pass caused CT violation:  ${RESULTS_FILE2}"
               #fi
+              RESULTS_FILE4=$(./test_opt19_passes.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/llvm_opt_passes/results_.*\.txt')
+
             
           
 

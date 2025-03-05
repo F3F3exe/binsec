@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#no lib, no wrapper
+#lib, no wrapper
 
 targets=(
-  01 02 03 04 05 07 08 09 10 
+sort sort_multiplex sort_negative
 )
 
 OPT_LEVEL=$1
@@ -75,6 +75,7 @@ SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct -sse-timeout $timeout"
 CFLAGS=" -m32 -march=i386 -DKRML_NOUINT128 -static -Wall "
 LIBSYM="-L../../__libsym__/ -lsym"
+LIBS="lib"
 
 $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
 
@@ -166,6 +167,7 @@ echo "Extrahierte OPT_PASSES:"
 echo "("${OPT_PASSES[@]}" )"
 
 mkdir -p Results
+mkdir -p Results
 mkdir -p Results/llvm_opt_passes
 LOG_FILE="Results/llvm_opt_passes/results_${BASE_NAME}_${OPT_LEVEL}__${CLANG_v}_$(date +%Y%m%d_%H%M%S).txt"
 echo "Binsec Results Log" > "$LOG_FILE"
@@ -173,6 +175,7 @@ echo "Binsec Results Log" > "$LOG_FILE"
 
 # Compile the source to LLVM IR
 $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
+$CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$LIBS.c" -o "$LIBS.ll"
 
 # Apply passes one-by-one
 ADDED_PASSES=() 
@@ -181,15 +184,14 @@ for PASS in "${OPT_PASSES[@]}"; do
     echo "Adding pass: $PASS"
 
     PASSES_STRING=$(IFS=,; echo "${ADDED_PASSES[*]}")
-    
-    echo $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LLVM_IR" -o "$OPTIMIZED_LL"
-    $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LLVM_IR" -o "$OPTIMIZED_LL"
+   
+    $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LLVM_IR" -o "$OPTIMIZED_LL"
+    $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LIBS.ll" -o "$LIBS.ll"
 
-    $CLANG -$OPT_LEVEL_CLANG $CFLAGS $OPTIMIZED_LL -o ${BASE_NAME}.out -L../../__libsym__/ -lsym
+    $CLANG -$OPT_LEVEL_CLANG $CFLAGS $LIBS.ll $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
 
     # Run binsec and log the result
     BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct ${BASE_NAME}.out -sse-timeout $timeout 2>&1)
-
 
 
     status=$(echo "$BINSEC_OUTPUT" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')
