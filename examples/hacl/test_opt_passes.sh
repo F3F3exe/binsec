@@ -43,13 +43,13 @@ LLVM_LINK="llvm-link"
 case "$CLANG" in
     clang-7.1) OPT="opt-7" 
                CLANG="$HOME/clang-7.1/bin/clang" 
-               LLVM_LINK="llvm-link-19" ;; 
+               LLVM_LINK="llvm-link-7" ;; 
     clang-14)  OPT="opt-14" 
                NEW_PM="-enable-new-pm=0" 
-               LLVM_LINK="llvm-link-19" ;;
+               LLVM_LINK="llvm-link-14" ;;
     clang-12)  OPT="opt-12" 
                NEW_PM="-enable-new-pm=0" 
-               LLVM_LINK="llvm-link-19" ;;
+               LLVM_LINK="llvm-link-12" ;;
     clang-19)  OPT="opt-19" 
                LLVM_LINK="llvm-link-19" ;;
 esac
