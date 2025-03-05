@@ -77,7 +77,7 @@ done < <(opt-19 -S -O1 -debug-pass-manager   04.ll -o 04_opt.ll 2>&1)
 
 
 # Output the comma-separated list
-BLACKLIST=(" ")
+BLACKLIST=(" ",  "print", "targetpassconfig", "write-bitcode")
 
 OPT_PASSES=()
 for pass in "${passes[@]}"; do

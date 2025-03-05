@@ -152,7 +152,7 @@ done < <($OPT -S -$OPT_LEVEL -debug-pass-manager   $LLVM_IR -o $OPTIMIZED_LL 2>&
 
 
 # Blacklist passes
-BLACKLIST=(" ")
+BLACKLIST=(" ",  "print", "targetpassconfig", "write-bitcode")
 
 OPT_PASSES=()
 for pass in "${ALL_OPT_PASSES[@]}"; do
