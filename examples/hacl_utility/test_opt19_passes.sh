@@ -160,7 +160,7 @@ BLACKLIST=(" ",  "print", "targetpassconfig", "write-bitcode")
 OPT_PASSES=()
 for pass in "${ALL_OPT_PASSES[@]}"; do
     # Check if the pass is in the BLACKLIST or ends with "Pass"
-    if [[ ! " ${BLACKLIST[@]} " =~ " $pass " && ! $pass =~ Pass$ ]]; then
+    if [[ ! "${BLACKLIST[@]} " =~ "$pass" && ! $pass =~ Pass$ ]]; then
         OPT_PASSES+=("$pass")
     fi
 done
@@ -184,6 +184,9 @@ ADDED_PASSES=()
 for PASS in "${OPT_PASSES[@]}"; do
     ADDED_PASSES+=("$PASS")  
     echo "Adding pass: $PASS"
+    $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
+    $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$LIB.c" -o "$LIB.ll"
+
 
     PASSES_STRING=$(IFS=,; echo "${ADDED_PASSES[*]}")
    

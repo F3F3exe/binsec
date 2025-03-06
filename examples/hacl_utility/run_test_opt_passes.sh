@@ -11,7 +11,7 @@ uint64_eq_mask uint64_gte_mask
 )
 
 clang_version=(
-  clang-19
+  clang-19 clang-7.1 clang-12
 )
 
 #LOG_FILE="Results/llvm_optimization_results_$(date +%Y%m%d_%H%M%S).txt"

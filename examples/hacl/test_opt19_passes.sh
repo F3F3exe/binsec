@@ -164,7 +164,7 @@ BLACKLIST=(" ",  "print", "targetpassconfig", "write-bitcode")
 OPT_PASSES=()
 for pass in "${ALL_OPT_PASSES[@]}"; do
     # Check if the pass is in the BLACKLIST or ends with "Pass"
-    if [[ ! " ${BLACKLIST[@]} " =~ " $pass " && ! $pass =~ Pass$ ]]; then
+    if [[ ! "${BLACKLIST[@]} " =~ "$pass" && ! $pass =~ Pass$ ]]; then
         OPT_PASSES+=("$pass")
     fi
 done
