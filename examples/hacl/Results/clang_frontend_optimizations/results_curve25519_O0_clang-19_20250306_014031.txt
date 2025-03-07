@@ -1,0 +1,512 @@
+Optimization,Result
+-funroll-loops unknown
+-fstrict-aliasing\ -finline-hint-functions unknown
+-fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-fno-math-errno\ -finline-hint-functions unknown
+-finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-fno-inline-functions unknown
+-funroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions unknown
+-fstrict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-inline-functions unknown
+-fno-math-errno\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-inline-functions unknown
+-finline-hint-functions\ -fno-inline-functions unknown
+-funroll-loops\ -finline-hint-functions\ -fno-inline-functions unknown
+-fstrict-aliasing\ -finline-hint-functions\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions unknown
+-fno-math-errno\ -finline-hint-functions\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-inline-functions unknown
+-finline-functions\ -fno-inline-functions unknown
+-funroll-loops\ -finline-functions\ -fno-inline-functions unknown
+-fstrict-aliasing\ -finline-functions\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-inline-functions unknown
+-fno-math-errno\ -finline-functions\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-inline-functions unknown
+-finline-hint-functions\ -finline-functions\ -fno-inline-functions unknown
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions unknown
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions unknown
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions unknown
+-finline-functions unknown
+-fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -fno-unroll-loops\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-unroll-loops\ -fno-inline-functions unknown
+-fno-math-errno\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -fno-unroll-loops\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-inline-functions unknown
+-finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -finline-functions unknown
+-fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-finline-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-fstrict-aliasing\ -finline-functions unknown
+-fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions unknown
+-fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fno-math-errno\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fstrict-aliasing unknown
+-fno-math-errno\ -finline-functions unknown
+-finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fstrict-aliasing\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-finline-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -finline-functions unknown
+-fstrict-aliasing\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions unknown
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-finline-hint-functions\ -finline-functions unknown
+-finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -finline-hint-functions\ -finline-functions unknown
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions unknown
+-fno-builtin unknown
+-funroll-loops\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions unknown
+-fno-math-errno\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-builtin unknown
+-finline-hint-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-hint-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-builtin unknown
+-fno-math-errno\ -finline-hint-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-builtin unknown
+-finline-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-builtin unknown
+-fno-math-errno\ -finline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-builtin unknown
+-fno-math-errno\ -finline-hint-functions\ -finline-functions unknown
+-finline-hint-functions\ -finline-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-builtin unknown
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-builtin unknown
+-fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions unknown
+-fstrict-aliasing\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-unroll-loops\ -fno-builtin unknown
+-fno-math-errno\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -fno-unroll-loops\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-builtin unknown
+-finline-hint-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions unknown
+-fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-finline-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -finline-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-builtin unknown
+-fno-unroll-loops unknown
+-fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-strict-aliasing\ -fno-builtin unknown
+-fno-math-errno\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -fno-strict-aliasing\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-strict-aliasing\ -fno-builtin unknown
+-finline-hint-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fno-unroll-loops unknown
+-fstrict-aliasing\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-finline-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-unroll-loops unknown
+-fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-unroll-loops unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-builtin unknown
+-fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-fno-math-errno\ -fno-unroll-loops unknown
+-finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -fno-unroll-loops unknown
+-fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops unknown
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-builtin unknown
+-fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fno-math-errno\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops unknown
+-fstrict-aliasing\ -fno-math-errno\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-inline-functions\ -fno-builtin unknown
+-finline-hint-functions\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-hint-functions\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-inline-functions\ -fno-builtin unknown
+-fno-math-errno\ -finline-hint-functions\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-inline-functions\ -fno-builtin unknown
+-fno-math-errno unknown
+-finline-hint-functions\ -fno-unroll-loops unknown
+-finline-functions\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-functions\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-functions\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-inline-functions\ -fno-builtin unknown
+-fno-math-errno\ -finline-functions\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-inline-functions\ -fno-builtin unknown
+-finline-hint-functions\ -finline-functions\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -fno-unroll-loops unknown
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions\ -fno-builtin unknown
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-inline-functions\ -fno-builtin unknown
+-fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops unknown
+-fno-math-errno\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops unknown
+-finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-inline-functions\ -fno-builtin unknown
+-fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops unknown
+-fstrict-aliasing\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fno-math-errno\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops unknown
+-fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-finline-functions\ -fno-unroll-loops unknown
+-fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-functions\ -fno-unroll-loops unknown
+-fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno unknown
+-fstrict-aliasing\ -finline-functions\ -fno-unroll-loops unknown
+-fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-unroll-loops unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops\ -fno-strict-aliasing\ -fno-inline-functions\ -fno-builtin unknown
+-fno-math-errno\ -finline-functions\ -fno-unroll-loops unknown
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-unroll-loops unknown
+-finline-hint-functions\ -finline-functions\ -fno-unroll-loops unknown
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops unknown
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops unknown
+-fstrict-aliasing\ -fno-math-errno unknown
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-unroll-loops unknown
+-fno-strict-aliasing unknown
+-funroll-loops\ -fno-strict-aliasing unknown
+-fstrict-aliasing\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-strict-aliasing unknown
+-fno-math-errno\ -fno-strict-aliasing unknown
+-funroll-loops\ -fno-math-errno\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno unknown
+-fstrict-aliasing\ -fno-math-errno\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -fno-strict-aliasing unknown
+-finline-hint-functions\ -fno-strict-aliasing unknown
+-funroll-loops\ -finline-hint-functions\ -fno-strict-aliasing unknown
+-fstrict-aliasing\ -finline-hint-functions\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -fno-strict-aliasing unknown
+-fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -fno-strict-aliasing unknown
+-finline-hint-functions unknown
+-finline-functions\ -fno-strict-aliasing unknown
+-funroll-loops\ -finline-functions\ -fno-strict-aliasing unknown
+-fstrict-aliasing\ -finline-functions\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-functions\ -fno-strict-aliasing unknown
+-fno-math-errno\ -finline-functions\ -fno-strict-aliasing unknown
+-funroll-loops\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-functions\ -fno-strict-aliasing unknown
+-finline-hint-functions\ -finline-functions\ -fno-strict-aliasing unknown
+-funroll-loops\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing unknown
+-funroll-loops\ -finline-hint-functions unknown
+-fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing unknown
+-fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing unknown
+-funroll-loops\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing unknown
+-fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-math-errno\ -finline-hint-functions\ -finline-functions\ -fno-strict-aliasing unknown
+-fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-fstrict-aliasing\ -fno-unroll-loops\ -fno-strict-aliasing unknown
+-funroll-loops\ -fstrict-aliasing\ -fno-unroll-loops\ -fno-strict-aliasing unknown
