@@ -47,7 +47,9 @@ for TARGET in "${targets[@]}"; do
 
               #echo "    Analysing LLVM optimization passes:" 
               if [[ "$CLANG" == "clang-19" ]]; then
-                RESULTS_FILE4=$(./test_opt19_passes.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/llvm_opt_passes/results_.*\.txt')
+                if [[ "$OPT_LEVEL" == "O0" ]]; then
+                  RESULTS_FILE4=$(./test_opt19_passes.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/llvm_opt_passes/results_.*\.txt')
+                fi
               else
                 RESULTS_FILE3=$(./test_opt_passes.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/llvm_opt_passes/results_.*\.txt')
               fi

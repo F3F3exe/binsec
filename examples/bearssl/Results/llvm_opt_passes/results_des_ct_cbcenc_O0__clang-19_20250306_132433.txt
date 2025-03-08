@@ -1,0 +1,7 @@
+Binsec Results Log
+ee-instrument, secure
+-----------------------------------------------------
+always-inline, secure
+-----------------------------------------------------
+CoroConditionalWrapper, secure
+-----------------------------------------------------

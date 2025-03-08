@@ -70,7 +70,7 @@ timeout=50
 SOURCE_FILE=${specific_target}_wrapper.c
 BASE_NAME=$specific_target
 LLVM_IR="$specific_target.ll"
-OPTIMIZED_LL="$specific_target.ll"
+OPTIMIZED_LL="${specific_target}_opt.ll"
 SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct -sse-timeout $timeout"
 CFLAGS=" -m32 -march=i386 -DKRML_NOUINT128 -static -Wall "
@@ -135,10 +135,37 @@ declare -A PASS_MAP=(
     ["CoroSplitPass"]="coro-split"
     ["LibCallsShrinkWrapPass"]=" "
     ["ReassociatePass"]="reassociate"
+    ["SLPVectorizerPass"]="slp-vectorizer"
+    ["MoveAutoInitPass"]="move-auto-init"
+    ["DSEPass"]="dse"
+    ["CorrelatedValuePropagationPass"]="correlated-propagation"
+    ["JumpThreadingPass"]="jump-threading"
+    ["GVNPass"]="gvn"
+    ["MergedLoadStoreMotionPass"]="mldst-motion"
+    ["ConstraintEliminationPass"]="constraint-elimination"
+    ["AggressiveInstCombinePass"]="aggressive-instcombine"
+    ["SpeculativeExecutionPass"]="speculative-execution"
+    ["OpenMPOptCGSCCPass"]="openmp-opt-cgscc"
+    ["CallSiteSplittingPass"]="callsite-splitting"
+    ["ArgumentPromotionPass"]="argpromotion"
+    ["SLPVectorizerPass"]="slp-vectorizer"
+    ["MoveAutoInitPass"]="move-auto-init"
+    ["DSEPass"]="dse"
+    ["CorrelatedValuePropagationPass"]="correlated-propagation"
+    ["JumpThreadingPass"]="jump-threading"
+    ["GVNPass"]="gvn"
+    ["MergedLoadStoreMotionPass"]="mldst-motion"
+    ["ConstraintEliminationPass"]="constraint-elimination"
+    ["AggressiveInstCombinePass"]="aggressive-instcombine"
+    ["SpeculativeExecutionPass"]="speculative-execution"
+    ["OpenMPOptCGSCCPass"]="openmp-opt-cgscc"
+    ["CallSiteSplittingPass"]="callsite-splitting"
+    ["ArgumentPromotionPass"]="argpromotion"
 )
 
 # get llvm opt passes
 ALL_OPT_PASSES=()
+MISSING_PASSES=()
 while IFS= read -r line; do
     if [[ $line =~ Running\ pass:\ ([A-Za-z0-9]+) ]]; then
         pass_name="${BASH_REMATCH[1]}"
@@ -159,11 +186,13 @@ for pass in "${ALL_OPT_PASSES[@]}"; do
     # Check if the pass is in the BLACKLIST or ends with "Pass"
     if [[ ! "${BLACKLIST[@]} " =~ "$pass" && ! $pass =~ Pass$ ]]; then
         OPT_PASSES+=("$pass")
+    else
+        MISSING_PASSES+=("$pass")
     fi
 done
 
-echo "Extrahierte OPT_PASSES:"
-echo "("${OPT_PASSES[@]}" )"
+echo "missing passes: "
+echo "("${MISSING_PASSES[@]}" )"
 
 mkdir -p Results
 mkdir -p Results/llvm_opt_passes
@@ -179,10 +208,13 @@ ADDED_PASSES=()
 for PASS in "${OPT_PASSES[@]}"; do
     ADDED_PASSES+=("$PASS") 
     echo "Adding pass: $PASS"
+    echo     $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
+
     $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
 
     PASSES_STRING=$(IFS=,; echo "${ADDED_PASSES[*]}")
-   
+    echo     $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LLVM_IR" -o "$OPTIMIZED_LL"
+
     $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LLVM_IR" -o "$OPTIMIZED_LL"
 
     $CLANG -$OPT_LEVEL_CLANG $CFLAGS $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
@@ -219,3 +251,4 @@ for PASS in "${OPT_PASSES[@]}"; do
 done
 
 echo "All tests completed. Results saved in $LOG_FILE."
+
