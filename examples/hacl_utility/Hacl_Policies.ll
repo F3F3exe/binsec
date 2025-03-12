@@ -6,13 +6,10 @@ target triple = "i386-pc-linux-gnu"
 ; Function Attrs: nofree noinline norecurse nosync nounwind uwtable
 define dso_local zeroext i8 @Hacl_Policies_cmp_bytes_(i8* nocapture noundef readonly %0, i8* nocapture noundef readonly %1, i32 noundef %2, i8* nocapture noundef %3) local_unnamed_addr #0 {
   %.not = icmp eq i32 %2, 0
-  br i1 %.not, label %._crit_edge, label %.lr.ph.preheader
+  br i1 %.not, label %._crit_edge, label %.lr.ph
 
-.lr.ph.preheader:                                 ; preds = %4
-  br label %.lr.ph
-
-.lr.ph:                                           ; preds = %.lr.ph.preheader, %.lr.ph
-  %.01 = phi i32 [ %12, %.lr.ph ], [ 0, %.lr.ph.preheader ]
+.lr.ph:                                           ; preds = %4, %.lr.ph
+  %.01 = phi i32 [ %12, %.lr.ph ], [ 0, %4 ]
   %5 = getelementptr inbounds i8, i8* %0, i32 %.01
   %6 = load i8, i8* %5, align 1
   %7 = getelementptr inbounds i8, i8* %1, i32 %.01
@@ -23,12 +20,9 @@ define dso_local zeroext i8 @Hacl_Policies_cmp_bytes_(i8* nocapture noundef read
   store i8 %11, i8* %3, align 1
   %12 = add nuw i32 %.01, 1
   %exitcond.not = icmp eq i32 %12, %2
-  br i1 %exitcond.not, label %._crit_edge.loopexit, label %.lr.ph, !llvm.loop !7
+  br i1 %exitcond.not, label %._crit_edge, label %.lr.ph, !llvm.loop !7
 
-._crit_edge.loopexit:                             ; preds = %.lr.ph
-  br label %._crit_edge
-
-._crit_edge:                                      ; preds = %._crit_edge.loopexit, %4
+._crit_edge:                                      ; preds = %.lr.ph, %4
   %13 = load i8, i8* %3, align 1
   ret i8 %13
 }

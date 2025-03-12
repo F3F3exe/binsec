@@ -271,3 +271,36 @@ opt -S -O2  cmp_bytes.ll -o cmp_bytes.ll
 opt -S -O2  Hacl_Policies.ll -o Hacl_Policies.ll
 clang -O0 -m32 -march=i386 -DKRML_NOUINT128 -static Hacl_Policies.ll cmp_bytes.ll -o cmp_bytes_optnone.out -L../../__libsym__/ -lsym 
 binsec -sse -sse-script checkct_cmp_bytes.cfg -sse-depth 100000000 -checkct cmp_bytes_optnone.out
+
+
+
+
+
+
+for report:
+hacl_utility:
+
+-O0:
+clang-19 -O0 -m32 -march=i386 -DKRML_NOUINT128 -static lib.c sort_multiplex.c -o sort_multiplex.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_sort_multiplex.cfg -sse-depth 100000000 -checkct sort_multiplex.out
+
+-O3:
+clang-19 -O3 -m32 -march=i386 -DKRML_NOUINT128 -static lib.c sort_multiplex.c -o sort_multiplex.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_sort_multiplex.cfg -sse-depth 100000000 -checkct sort_multiplex.out
+
+-O3 -disable-llvm-passes:
+clang-19 -O3 -Xclang -disable-llvm-passes -m32 -march=i386 -DKRML_NOUINT128 -static lib.c sort_multiplex.c -o sort_multiplex.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_sort_multiplex.cfg -sse-depth 100000000 -checkct sort_multiplex.out
+
+hacl_utility:
+-O0:
+clang-7.1 -O0 -m32 -march=i386 -DKRML_NOUINT128 -static Hacl_Policies.c cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_cmp_bytes.cfg -sse-depth 100000000 -checkct cmp_bytes.out
+
+-O3:
+clang-7.1 -O3 -m32 -march=i386 -DKRML_NOUINT128 -static Hacl_Policies.c cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_cmp_bytes.cfg -sse-depth 100000000 -checkct cmp_bytes.out
+
+-O3 -no-opt:
+clang-7.1 -O3 -disable-llvm-passes -m32 -march=i386 -DKRML_NOUINT128 -static Hacl_Policies.c cmp_bytes.c -o cmp_bytes.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_cmp_bytes.cfg -sse-depth 100000000 -checkct cmp_bytes.out

@@ -1,0 +1,14 @@
+ct violation present after instcombine pass
+
+These commands give insecure:
+clang-19 -O0 -Xclang -disable-O0-optnone -m32 -march=i386 -DKRML_NOUINT128 -static -Wall -S -emit-llvm 02.c -o 02.ll
+opt-19 -S -passes=annotation2metadata,forceattrs,inferattrs,coro-early,ee-instrument,lower-expect,simplifycfg,sroa,early-cse,ee-instrument,lower-expect,simplifycfg,sroa,early-cse,openmp-opt,ipsccp,called-value-propagation,globalopt,mem2reg,instcombine 02.ll -o 02_insecure.ll
+clang-19 -O0 -m32 -march=i386 -DKRML_NOUINT128 -static -Wall 02_insecure.ll -o 02_insecure.out -L../../__libsym__/ -lsym
+binsec -sse -sse-script checkct_02.cfg -sse-depth 10000000000  -checkct 02_insecure.out -sse-timeout 10
+
+one less pass is secure:
+clang-19 -O0 -Xclang -disable-O0-optnone -m32 -march=i386 -DKRML_NOUINT128 -static -Wall -S -emit-llvm 02.c -o 02.ll
+opt-19 -S -passes=annotation2metadata,forceattrs,inferattrs,coro-early,ee-instrument,lower-expect,simplifycfg,sroa,early-cse,ee-instrument,lower-expect,simplifycfg,sroa,early-cse,openmp-opt,ipsccp,called-value-propagation,globalopt,mem2reg 02.ll -o 02_secure.ll
+clang-19 -O0 -m32 -march=i386 -DKRML_NOUINT128 -static -Wall 02_secure.ll -o 02_secure.out -L../../__libsym__/ -lsym
+binsec -sse -sse-script checkct_02.cfg -sse-depth 10000000000  -checkct 02_secure.out -sse-timeout 10
+

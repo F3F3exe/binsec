@@ -1,0 +1,119 @@
+-O0:
+clang-19 -O0 -m32 -march=i386 -DKRML_NOUINT128 -static Hacl_Policies.c uint16_gte_mask.c -o uint16_gte_mask.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_uint16_gte_mask.cfg -sse-depth 100000000 -checkct uint16_gte_mask.out
+
+-O3:
+clang-19 -O3 -m32 -march=i386 -DKRML_NOUINT128 -static Hacl_Policies.c uint16_gte_mask.c -o uint16_gte_mask.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_uint16_gte_mask.cfg -sse-depth 100000000 -checkct uint16_gte_mask.out
+
+-O3 -no-opt:
+clang-19 -O3 -Xclang -disable-llvm-passes -m32 -march=i386 -DKRML_NOUINT128 -static Hacl_Policies.c uint16_gte_mask.c -o uint16_gte_mask.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_uint16_gte_mask.cfg -sse-depth 100000000 -checkct uint16_gte_mask.out
+
+crocs-muni:
+-O0:
+clang-19 -O0 -m32 -march=i386 -DKRML_NOUINT128 -static  uint16_gte_mask.c -o uint16_gte_mask.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_uint16_gte_mask.cfg -sse-depth 100000000 -checkct uint16_gte_mask.out
+
+-O3:
+clang-19 -O3 -m32 -march=i386 -DKRML_NOUINT128 -static  uint16_gte_mask.c -o uint16_gte_mask.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_uint16_gte_mask.cfg -sse-depth 100000000 -checkct uint16_gte_mask.out
+
+-O3 -no-opt:
+clang-19 -O3 -Xclang -disable-llvm-passes -m32 -march=i386 -DKRML_NOUINT128 -static  uint16_gte_mask.c -o uint16_gte_mask.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_uint16_gte_mask.cfg -sse-depth 100000000 -checkct uint16_gte_mask.out
+
+
+clang-19 -O3 -Xclang -disable-llvm-passes -m32 -march=i386 -DKRML_NOUINT128 -static  tls1_cbc_remove_padding_patch.c -o tls1_cbc_remove_padding_patch.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_tls1_cbc_remove_padding_patch.cfg -sse-depth 100000000 -checkct tls1_cbc_remove_padding_patch.out
+
+
+
+
+openssl_almeida:
+clang-19 -O0 -Xclang -disable-O0-optnone -m32 -march=i386 -DKRML_NOUINT128 -static -Wall -S -emit-llvm tls1_cbc_remove_padding_patch_wrapper.c -o tls1_cbc_remove_padding_patch.ll
+opt-19 -S -O3 tls1_cbc_remove_padding_patch.ll -o tls1_cbc_remove_padding_patch.ll
+clang-19 -O3 -m32 -march=i386 -DKRML_NOUINT128 -static -Wall tls1_cbc_remove_padding_patch.ll -o tls1_cbc_remove_padding_patch.out -L../../__libsym__/ -lsym
+make_coredump.sh core_tls1_cbc_remove_padding_patch.snapshot tls1_cbc_remove_padding_patch.out
+binsec -sse -sse-script checkct_tls1_cbc_remove_padding_patch.cfg -sse-depth 100000000 -checkct core_tls1_cbc_remove_padding_patch.snapshot -sse-timeout 50
+
+
+
+
+
+clang-19 -O0 -Xclang -disable-O0-optnone -m32 -march=i386 -DKRML_NOUINT128 -static  -S -emit-llvm uint16_gte_mask.c -o uint16_gte_mask.ll
+clang-19 -O0 -Xclang -disable-O0-optnone -m32 -march=i386 -DKRML_NOUINT128 -static  -S -emit-llvm Hacl_Policies.c -o Hacl_Policies.ll
+opt-19 -S -O3 uint16_gte_mask.ll -o uint16_gte_mask.ll
+opt-19 -S -O3 Hacl_Policies.ll -o Hacl_Policies.ll
+clang-19 -O3 -m32 -march=i386 -DKRML_NOUINT128 -static Hacl_Policies.ll uint16_gte_mask.ll -o uint16_gte_mask.out -L../../__libsym__/ -lsym
+binsec -sse -sse-script checkct_uint16_gte_mask.cfg -sse-depth 100000000 -checkct uint16_gte_mask.out -sse-timeout 20
+
+
+clang-19 -O2 -Xclang -disable-llvm-passes -m32 -march=i386 -DKRML_NOUINT128 -static Hacl_Policies.c uint16_gte_mask.c -o uint16_gte_mask.out -L../../__libsym__/ -lsym 
+binsec -sse -sse-script checkct_uint16_gte_mask.cfg -sse-depth 100000000 -checkct uint16_gte_mask.out
+
+
+
+
+
+
+
+insecure:
+clang-14 -O0 -Xclang -disable-O0-optnone -m32 -march=i386 -DKRML_NOUINT128 -static -Wall -S -emit-llvm uint16_gte_mask.c -o uint16_gte_mask.ll
+clang-14 -O0 -Xclang -disable-O0-optnone -m32 -march=i386 -DKRML_NOUINT128 -static -Wall -S -emit-llvm Hacl_Policies.c -o Hacl_Policies.ll
+opt-14 -enable-new-pm=0 -S -tti -tbaa -scoped-noalias-aa -assumption-cache-tracker -targetlibinfo -verify -ee-instrument -simplifycfg -domtree -sroa -early-cse -lower-expect -targetlibinfo -tti -tbaa -scoped-noalias-aa -assumption-cache-tracker -profile-summary-info -annotation2metadata -forceattrs -inferattrs -ipsccp -called-value-propagation -globalopt -domtree -mem2reg -deadargelim -domtree -basic-aa -aa -loops -lazy-branch-prob -lazy-block-freq -opt-remark-emitter -instcombine -simplifycfg -basiccg -globals-aa -prune-eh -inline uint16_gte_mask.ll -o uint16_gte_mask_insecure.ll
+opt-14 -enable-new-pm=0 -S -tti -tbaa -scoped-noalias-aa -assumption-cache-tracker -targetlibinfo -verify -ee-instrument -simplifycfg -domtree -sroa -early-cse -lower-expect -targetlibinfo -tti -tbaa -scoped-noalias-aa -assumption-cache-tracker -profile-summary-info -annotation2metadata -forceattrs -inferattrs -ipsccp -called-value-propagation -globalopt -domtree -mem2reg -deadargelim -domtree -basic-aa -aa -loops -lazy-branch-prob -lazy-block-freq -opt-remark-emitter -instcombine -simplifycfg -basiccg -globals-aa -prune-eh  Hacl_Policies.ll -o Hacl_Policies.ll
+clang-14 -O0 -m32 -march=i386 -DKRML_NOUINT128 -static -Wall Hacl_Policies.ll uint16_gte_mask_insecure.ll -o uint16_gte_mask.out -L../../__libsym__/ -lsym
+binsec -sse -sse-script checkct_uint16_gte_mask.cfg -sse-depth 100000000 -checkct uint16_gte_mask.out -sse-timeout 20
+
+
+define dso_local i32 @main() local_unnamed_addr #0 {
+  %1 = alloca i16, align 2
+  %2 = alloca i16, align 2
+  %3 = bitcast i16* %1 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 2, i8* nonnull %3) #3
+  %4 = bitcast i16* %2 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 2, i8* nonnull %4) #3
+  call void @high_input_2(i8* nonnull %3) #3
+  call void @high_input_2(i8* nonnull %4) #3
+  %5 = load i16, i16* %1, align 2, !tbaa !3
+  %6 = load i16, i16* %2, align 2, !tbaa !3
+  %7 = icmp uge i16 %5, %6
+  %8 = sext i1 %7 to i16
+  %9 = zext i16 %8 to i32
+  call void @llvm.lifetime.end.p0i8(i64 2, i8* nonnull %4) #3
+  call void @llvm.lifetime.end.p0i8(i64 2, i8* nonnull %3) #3
+  ret i32 %9
+}
+
+secure:
+clang-14 -O0 -Xclang -disable-O0-optnone -m32 -march=i386 -DKRML_NOUINT128 -static -Wall -S -emit-llvm uint16_gte_mask.c -o uint16_gte_mask.ll
+clang-14 -O0 -Xclang -disable-O0-optnone -m32 -march=i386 -DKRML_NOUINT128 -static -Wall -S -emit-llvm Hacl_Policies.c -o Hacl_Policies.ll
+opt-14 -enable-new-pm=0 -S -tti -tbaa -scoped-noalias-aa -assumption-cache-tracker -targetlibinfo -verify -ee-instrument -simplifycfg -domtree -sroa -early-cse -lower-expect -targetlibinfo -tti -tbaa -scoped-noalias-aa -assumption-cache-tracker -profile-summary-info -annotation2metadata -forceattrs -inferattrs -ipsccp -called-value-propagation -globalopt -domtree -mem2reg -deadargelim -domtree -basic-aa -aa -loops -lazy-branch-prob -lazy-block-freq -opt-remark-emitter -instcombine -simplifycfg -basiccg -globals-aa -prune-eh uint16_gte_mask.ll -o uint16_gte_mask_secure.ll
+opt-14 -enable-new-pm=0 -S -tti -tbaa -scoped-noalias-aa -assumption-cache-tracker -targetlibinfo -verify -ee-instrument -simplifycfg -domtree -sroa -early-cse -lower-expect -targetlibinfo -tti -tbaa -scoped-noalias-aa -assumption-cache-tracker -profile-summary-info -annotation2metadata -forceattrs -inferattrs -ipsccp -called-value-propagation -globalopt -domtree -mem2reg -deadargelim -domtree -basic-aa -aa -loops -lazy-branch-prob -lazy-block-freq -opt-remark-emitter -instcombine -simplifycfg -basiccg -globals-aa -prune-eh Hacl_Policies.ll -o Hacl_Policies.ll
+clang-14 -O0 -m32 -march=i386 -DKRML_NOUINT128 -static -Wall Hacl_Policies.ll uint16_gte_mask_secure.ll -o uint16_gte_mask.out -L../../__libsym__/ -lsym
+binsec -sse -sse-script checkct_uint16_gte_mask.cfg -sse-depth 100000000 -checkct uint16_gte_mask.out -sse-timeout 20
+
+define dso_local i32 @main() local_unnamed_addr #0 {
+  %1 = alloca i16, align 2
+  %2 = alloca i16, align 2
+  %3 = bitcast i16* %1 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 2, i8* nonnull %3) #4
+  %4 = bitcast i16* %2 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 2, i8* nonnull %4) #4
+  call void @high_input_2(i8* nonnull %3) #4
+  call void @high_input_2(i8* nonnull %4) #4
+  %5 = load i16, i16* %1, align 2, !tbaa !3
+  %6 = load i16, i16* %2, align 2, !tbaa !3
+  %7 = call fastcc zeroext i16 @FStar_UInt16_gte_mask(i16 zeroext %5, i16 zeroext %6)
+  %8 = zext i16 %7 to i32
+  call void @llvm.lifetime.end.p0i8(i64 2, i8* nonnull %4) #4
+  call void @llvm.lifetime.end.p0i8(i64 2, i8* nonnull %3) #4
+  ret i32 %8
+}
+
+define internal fastcc zeroext i16 @FStar_UInt16_gte_mask(i16 zeroext %0, i16 zeroext %1) unnamed_addr #3 {
+  %3 = icmp uge i16 %0, %1
+  %4 = sext i1 %3 to i16
+  ret i16 %4
+}
