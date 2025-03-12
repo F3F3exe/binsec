@@ -75,12 +75,12 @@ define dso_local i32 @AEAD_Poly1305_64_selem(ptr noundef %0) local_unnamed_addr 
 
 ; Function Attrs: noinline nounwind uwtable
 define dso_local void @AEAD_Poly1305_64_mk_state(ptr dead_on_unwind noalias writable sret(%struct.Hacl_Impl_Poly1305_64_State_poly1305_state) align 4 %0, ptr noundef %1, ptr noundef %2) local_unnamed_addr #0 {
-  tail call fastcc void @Hacl_Impl_Poly1305_64_mk_state(ptr dead_on_unwind writable sret(%struct.Hacl_Impl_Poly1305_64_State_poly1305_state) align 4 %0, ptr noundef %1, ptr noundef %2)
+  tail call fastcc void @Hacl_Impl_Poly1305_64_mk_state(ptr dead_on_unwind noalias writable align 4 %0, ptr noundef %1, ptr noundef %2)
   ret void
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @Hacl_Impl_Poly1305_64_mk_state(ptr dead_on_unwind noalias writable sret(%struct.Hacl_Impl_Poly1305_64_State_poly1305_state) align 4 %0, ptr noundef %1, ptr noundef %2) unnamed_addr #0 {
+define internal fastcc void @Hacl_Impl_Poly1305_64_mk_state(ptr dead_on_unwind noalias writable align 4 %0, ptr noundef %1, ptr noundef %2) unnamed_addr #0 {
   store ptr %1, ptr %0, align 4
   %4 = getelementptr inbounds i8, ptr %0, i32 4
   store ptr %2, ptr %4, align 4
@@ -125,8 +125,7 @@ define internal fastcc void @Hacl_Impl_Poly1305_64_poly1305_update(ptr %0, ptr %
   %5 = alloca %struct.FStar_UInt128_uint128, align 8
   %6 = alloca %struct.FStar_UInt128_uint128, align 8
   %7 = alloca %struct.FStar_UInt128_uint128, align 8
-  call void @llvm.memset.p0.i32(ptr noundef nonnull align 8 dereferenceable(24) %4, i8 0, i32 24, i1 false)
-  call fastcc void @load128_le(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %5, ptr noundef %2)
+  call fastcc void @load128_le(ptr dead_on_unwind noalias nonnull writable align 4 %5, ptr noundef %2)
   %8 = load i64, ptr %5, align 8
   %9 = getelementptr inbounds i8, ptr %5, i32 8
   %10 = call i64 @FStar_UInt128_uint128_to_uint64(i64 %8, i64 poison)
@@ -153,7 +152,7 @@ define internal fastcc void @Hacl_Impl_Poly1305_64_poly1305_update(ptr %0, ptr %
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @load128_le(ptr dead_on_unwind noalias writable sret(%struct.FStar_UInt128_uint128) align 4 %0, ptr noundef %1) unnamed_addr #0 {
+define internal fastcc void @load128_le(ptr dead_on_unwind noalias writable align 4 %0, ptr noundef %1) unnamed_addr #0 {
   tail call fastcc void @load128_le_(ptr noundef %1, ptr noundef %0)
   ret void
 }
@@ -385,11 +384,13 @@ define internal fastcc void @Hacl_Bignum_Modulo_reduce(ptr noundef %0) unnamed_a
 
 ; Function Attrs: noinline nounwind uwtable
 define internal fastcc void @load128_le_(ptr noundef %0, ptr noundef %1) unnamed_addr #0 {
-  %3 = tail call fastcc i64 @load64(ptr noundef %0)
+  %.val = load i64, ptr %0, align 1
+  %3 = tail call fastcc i64 @load64(i64 %.val)
   %4 = tail call fastcc i64 @__uint64_identity(i64 noundef %3)
   store i64 %4, ptr %1, align 4
   %5 = getelementptr inbounds i8, ptr %0, i32 8
-  %6 = tail call fastcc i64 @load64(ptr noundef nonnull %5)
+  %.val4 = load i64, ptr %5, align 1
+  %6 = tail call fastcc i64 @load64(i64 %.val4)
   %7 = tail call fastcc i64 @__uint64_identity(i64 noundef %6)
   %8 = getelementptr inbounds i8, ptr %1, i32 8
   store i64 %7, ptr %8, align 4
@@ -397,9 +398,8 @@ define internal fastcc void @load128_le_(ptr noundef %0, ptr noundef %1) unnamed
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i64 @load64(ptr noundef %0) unnamed_addr #0 {
-  %.0.copyload = load i64, ptr %0, align 1
-  ret i64 %.0.copyload
+define internal fastcc i64 @load64(i64 %.0.val) unnamed_addr #0 {
+  ret i64 %.0.val
 }
 
 ; Function Attrs: noinline nounwind uwtable
@@ -429,7 +429,7 @@ define internal fastcc void @Hacl_Standalone_Poly1305_64_poly1305_partial(ptr %0
   %11 = alloca %struct.FStar_UInt128_uint128, align 8
   %12 = alloca %struct.FStar_UInt128_uint128, align 8
   %13 = alloca %struct.FStar_UInt128_uint128, align 8
-  call fastcc void @load128_le(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %6, ptr noundef %4)
+  call fastcc void @load128_le(ptr dead_on_unwind noalias nonnull writable align 4 %6, ptr noundef %4)
   call void @FStar_UInt128_uint64_to_uint128(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %10, i64 noundef 1152921487695413244)
   %14 = load i64, ptr %10, align 8
   %15 = getelementptr inbounds i8, ptr %10, i32 8
@@ -480,15 +480,15 @@ define internal fastcc void @Hacl_Standalone_Poly1305_64_poly1305_blocks(ptr %0,
   br label %tailrecurse
 
 tailrecurse:                                      ; preds = %6, %4
-  %.tr9 = phi ptr [ %2, %4 ], [ %7, %6 ]
-  %.tr10 = phi i64 [ %3, %4 ], [ %8, %6 ]
+  %.tr9 = phi ptr [ %2, %4 ], [ %8, %6 ]
+  %.tr10 = phi i64 [ %3, %4 ], [ %7, %6 ]
   %5 = icmp eq i64 %.tr10, 0
   br i1 %5, label %9, label %6
 
 6:                                                ; preds = %tailrecurse
-  %7 = getelementptr inbounds i8, ptr %.tr9, i32 16
+  %7 = add nsw i64 %.tr10, -1
+  %8 = getelementptr inbounds i8, ptr %.tr9, i32 16
   tail call fastcc void @Hacl_Impl_Poly1305_64_poly1305_update(ptr %0, ptr %1, ptr noundef %.tr9)
-  %8 = add nsw i64 %.tr10, -1
   br label %tailrecurse
 
 9:                                                ; preds = %tailrecurse
@@ -634,7 +634,7 @@ define dso_local void @AEAD_Poly1305_64_poly1305_blocks_finish(ptr %0, ptr %1, p
   %11 = alloca %struct.FStar_UInt128_uint128, align 8
   tail call fastcc void @Hacl_Impl_Poly1305_64_poly1305_update(ptr %0, ptr %1, ptr noundef %2)
   tail call fastcc void @Hacl_Impl_Poly1305_64_poly1305_last_pass(ptr noundef %1)
-  call fastcc void @load128_le(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %6, ptr noundef %4)
+  call fastcc void @load128_le(ptr dead_on_unwind noalias nonnull writable align 4 %6, ptr noundef %4)
   %12 = load i64, ptr %1, align 4
   %13 = getelementptr inbounds i8, ptr %1, i32 8
   %14 = load i64, ptr %13, align 4
@@ -756,12 +756,12 @@ define dso_local void @FStar_UInt128_sub(ptr dead_on_unwind noalias writable sre
 
 ; Function Attrs: noinline nounwind uwtable
 define dso_local void @FStar_UInt128_sub_mod(ptr dead_on_unwind noalias writable sret(%struct.FStar_UInt128_uint128) align 4 %0, i64 %1, i64 %2, i64 %3, i64 %4) local_unnamed_addr #0 {
-  tail call fastcc void @FStar_UInt128_sub_mod_impl(ptr dead_on_unwind writable sret(%struct.FStar_UInt128_uint128) align 4 %0, i64 %1, i64 %2, i64 %3, i64 %4)
+  tail call fastcc void @FStar_UInt128_sub_mod_impl(ptr dead_on_unwind noalias writable align 4 %0, i64 %1, i64 %2, i64 %3, i64 %4)
   ret void
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @FStar_UInt128_sub_mod_impl(ptr dead_on_unwind noalias writable sret(%struct.FStar_UInt128_uint128) align 4 %0, i64 %1, i64 %2, i64 %3, i64 %4) unnamed_addr #0 {
+define internal fastcc void @FStar_UInt128_sub_mod_impl(ptr dead_on_unwind noalias writable align 4 %0, i64 %1, i64 %2, i64 %3, i64 %4) unnamed_addr #0 {
   %6 = sub i64 %1, %3
   store i64 %6, ptr %0, align 4
   %7 = getelementptr inbounds i8, ptr %0, i32 8
@@ -818,11 +818,11 @@ define dso_local void @FStar_UInt128_shift_left(ptr dead_on_unwind noalias writa
   br i1 %5, label %6, label %7
 
 6:                                                ; preds = %4
-  tail call fastcc void @FStar_UInt128_shift_left_small(ptr dead_on_unwind writable sret(%struct.FStar_UInt128_uint128) align 4 %0, i64 %1, i64 %2, i32 noundef %3)
+  tail call fastcc void @FStar_UInt128_shift_left_small(ptr dead_on_unwind noalias writable align 4 %0, i64 %1, i64 %2, i32 noundef %3)
   br label %8
 
 7:                                                ; preds = %4
-  tail call fastcc void @FStar_UInt128_shift_left_large(ptr dead_on_unwind writable sret(%struct.FStar_UInt128_uint128) align 4 %0, i64 %1, i32 noundef %3)
+  tail call fastcc void @FStar_UInt128_shift_left_large(ptr dead_on_unwind noalias writable align 4 %0, i64 %1, i32 noundef %3)
   br label %8
 
 8:                                                ; preds = %7, %6
@@ -830,31 +830,27 @@ define dso_local void @FStar_UInt128_shift_left(ptr dead_on_unwind noalias writa
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @FStar_UInt128_shift_left_small(ptr dead_on_unwind noalias writable sret(%struct.FStar_UInt128_uint128) align 4 %0, i64 %1, i64 %2, i32 noundef %3) unnamed_addr #0 {
+define internal fastcc void @FStar_UInt128_shift_left_small(ptr dead_on_unwind noalias writable align 4 %0, i64 %1, i64 %2, i32 noundef %3) unnamed_addr #0 {
   %5 = icmp eq i32 %3, 0
-  br i1 %5, label %6, label %7
+  br i1 %5, label %10, label %6
 
 6:                                                ; preds = %4
-  store i64 %1, ptr %0, align 4
-  %.sroa.4.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 8
-  store i64 %2, ptr %.sroa.4.0..sroa_idx, align 4
-  br label %12
+  %7 = zext nneg i32 %3 to i64
+  %8 = shl i64 %1, %7
+  %9 = tail call fastcc i64 @FStar_UInt128_add_u64_shift_left_respec(i64 noundef %2, i64 noundef %1, i32 noundef %3)
+  br label %10
 
-7:                                                ; preds = %4
-  %8 = zext nneg i32 %3 to i64
-  %9 = shl i64 %1, %8
-  store i64 %9, ptr %0, align 4
-  %10 = getelementptr inbounds i8, ptr %0, i32 8
-  %11 = tail call fastcc i64 @FStar_UInt128_add_u64_shift_left_respec(i64 noundef %2, i64 noundef %1, i32 noundef %3)
-  store i64 %11, ptr %10, align 4
-  br label %12
-
-12:                                               ; preds = %7, %6
+10:                                               ; preds = %4, %6
+  %.sink4 = phi i64 [ %8, %6 ], [ %1, %4 ]
+  %.sink = phi i64 [ %9, %6 ], [ %2, %4 ]
+  store i64 %.sink4, ptr %0, align 4
+  %11 = getelementptr inbounds i8, ptr %0, i32 8
+  store i64 %.sink, ptr %11, align 4
   ret void
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @FStar_UInt128_shift_left_large(ptr dead_on_unwind noalias writable sret(%struct.FStar_UInt128_uint128) align 4 %0, i64 %1, i32 noundef %2) unnamed_addr #0 {
+define internal fastcc void @FStar_UInt128_shift_left_large(ptr dead_on_unwind noalias writable align 4 %0, i64 %1, i32 noundef %2) unnamed_addr #0 {
   store i64 0, ptr %0, align 4
   %4 = getelementptr inbounds i8, ptr %0, i32 8
   %5 = add i32 %2, -64
@@ -887,11 +883,11 @@ define dso_local void @FStar_UInt128_shift_right(ptr dead_on_unwind noalias writ
   br i1 %5, label %6, label %7
 
 6:                                                ; preds = %4
-  tail call fastcc void @FStar_UInt128_shift_right_small(ptr dead_on_unwind writable sret(%struct.FStar_UInt128_uint128) align 4 %0, i64 %1, i64 %2, i32 noundef %3)
+  tail call fastcc void @FStar_UInt128_shift_right_small(ptr dead_on_unwind noalias writable align 4 %0, i64 %1, i64 %2, i32 noundef %3)
   br label %8
 
 7:                                                ; preds = %4
-  tail call fastcc void @FStar_UInt128_shift_right_large(ptr dead_on_unwind writable sret(%struct.FStar_UInt128_uint128) align 4 %0, i64 %2, i32 noundef %3)
+  tail call fastcc void @FStar_UInt128_shift_right_large(ptr dead_on_unwind noalias writable align 4 %0, i64 %2, i32 noundef %3)
   br label %8
 
 8:                                                ; preds = %7, %6
@@ -899,31 +895,27 @@ define dso_local void @FStar_UInt128_shift_right(ptr dead_on_unwind noalias writ
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @FStar_UInt128_shift_right_small(ptr dead_on_unwind noalias writable sret(%struct.FStar_UInt128_uint128) align 4 %0, i64 %1, i64 %2, i32 noundef %3) unnamed_addr #0 {
+define internal fastcc void @FStar_UInt128_shift_right_small(ptr dead_on_unwind noalias writable align 4 %0, i64 %1, i64 %2, i32 noundef %3) unnamed_addr #0 {
   %5 = icmp eq i32 %3, 0
-  br i1 %5, label %6, label %7
+  br i1 %5, label %10, label %6
 
 6:                                                ; preds = %4
-  store i64 %1, ptr %0, align 4
-  %.sroa.3.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 8
-  store i64 %2, ptr %.sroa.3.0..sroa_idx, align 4
-  br label %12
+  %7 = tail call fastcc i64 @FStar_UInt128_add_u64_shift_right_respec(i64 noundef %2, i64 noundef %1, i32 noundef %3)
+  %8 = zext nneg i32 %3 to i64
+  %9 = lshr i64 %2, %8
+  br label %10
 
-7:                                                ; preds = %4
-  %8 = tail call fastcc i64 @FStar_UInt128_add_u64_shift_right_respec(i64 noundef %2, i64 noundef %1, i32 noundef %3)
-  store i64 %8, ptr %0, align 4
-  %9 = getelementptr inbounds i8, ptr %0, i32 8
-  %10 = zext nneg i32 %3 to i64
-  %11 = lshr i64 %2, %10
-  store i64 %11, ptr %9, align 4
-  br label %12
-
-12:                                               ; preds = %7, %6
+10:                                               ; preds = %4, %6
+  %.sink4 = phi i64 [ %7, %6 ], [ %1, %4 ]
+  %.sink = phi i64 [ %9, %6 ], [ %2, %4 ]
+  store i64 %.sink4, ptr %0, align 4
+  %11 = getelementptr inbounds i8, ptr %0, i32 8
+  store i64 %.sink, ptr %11, align 4
   ret void
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @FStar_UInt128_shift_right_large(ptr dead_on_unwind noalias writable sret(%struct.FStar_UInt128_uint128) align 4 %0, i64 %1, i32 noundef %2) unnamed_addr #0 {
+define internal fastcc void @FStar_UInt128_shift_right_large(ptr dead_on_unwind noalias writable align 4 %0, i64 %1, i32 noundef %2) unnamed_addr #0 {
   %4 = add i32 %2, -64
   %5 = zext nneg i32 %4 to i64
   %6 = lshr i64 %1, %5
@@ -1035,14 +1027,14 @@ define dso_local i64 @FStar_UInt128_uint128_to_uint64(i64 %0, i64 %1) local_unna
 
 ; Function Attrs: noinline nounwind uwtable
 define dso_local void @FStar_UInt128_mul_wide(ptr dead_on_unwind noalias writable sret(%struct.FStar_UInt128_uint128) align 4 %0, i64 noundef %1, i64 noundef %2) local_unnamed_addr #0 {
-  tail call fastcc void @FStar_UInt128_mul_wide_impl(ptr dead_on_unwind writable sret(%struct.FStar_UInt128_uint128) align 4 %0, i64 noundef %1, i64 noundef %2)
+  tail call fastcc void @FStar_UInt128_mul_wide_impl(ptr dead_on_unwind noalias writable align 4 %0, i64 noundef %1, i64 noundef %2)
   ret void
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @FStar_UInt128_mul_wide_impl(ptr dead_on_unwind noalias writable sret(%struct.FStar_UInt128_uint128) align 4 %0, i64 noundef %1, i64 noundef %2) unnamed_addr #0 {
+define internal fastcc void @FStar_UInt128_mul_wide_impl(ptr dead_on_unwind noalias writable align 4 %0, i64 noundef %1, i64 noundef %2) unnamed_addr #0 {
   %4 = alloca %struct.K___uint64_t_uint64_t_uint64_t_uint64_t, align 8
-  call fastcc void @FStar_UInt128_mul_wide_impl_t_(ptr dead_on_unwind nonnull writable sret(%struct.K___uint64_t_uint64_t_uint64_t_uint64_t) align 4 %4, i64 noundef %1, i64 noundef %2)
+  call fastcc void @FStar_UInt128_mul_wide_impl_t_(ptr dead_on_unwind noalias nonnull writable align 4 %4, i64 noundef %1, i64 noundef %2)
   %5 = load i64, ptr %4, align 8
   %6 = getelementptr inbounds i8, ptr %4, i32 8
   %7 = load i64, ptr %6, align 8
@@ -1069,7 +1061,7 @@ define internal fastcc void @FStar_UInt128_mul_wide_impl(ptr dead_on_unwind noal
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @FStar_UInt128_mul_wide_impl_t_(ptr dead_on_unwind noalias writable sret(%struct.K___uint64_t_uint64_t_uint64_t_uint64_t) align 4 %0, i64 noundef %1, i64 noundef %2) unnamed_addr #0 {
+define internal fastcc void @FStar_UInt128_mul_wide_impl_t_(ptr dead_on_unwind noalias writable align 4 %0, i64 noundef %1, i64 noundef %2) unnamed_addr #0 {
   %4 = tail call fastcc i64 @FStar_UInt128_u64_mod_32(i64 noundef %1)
   store i64 %4, ptr %0, align 4
   %5 = getelementptr inbounds i8, ptr %0, i32 8
@@ -1378,7 +1370,8 @@ define internal fastcc void @Hacl_Lib_LoadStore32_uint32s_from_le_bytes(ptr noun
 6:                                                ; preds = %4
   %7 = shl nuw nsw i32 %.0, 2
   %8 = getelementptr inbounds i8, ptr %1, i32 %7
-  %9 = tail call fastcc i32 @load32(ptr noundef %8)
+  %.val = load i32, ptr %8, align 1
+  %9 = tail call fastcc i32 @load32(i32 %.val)
   %10 = tail call fastcc i32 @__uint32_identity(i32 noundef %9)
   %11 = getelementptr inbounds i32, ptr %0, i32 %.0
   store i32 %10, ptr %11, align 4
@@ -1390,9 +1383,8 @@ define internal fastcc void @Hacl_Lib_LoadStore32_uint32s_from_le_bytes(ptr noun
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i32 @load32(ptr noundef %0) unnamed_addr #0 {
-  %.0.copyload = load i32, ptr %0, align 1
-  ret i32 %.0.copyload
+define internal fastcc i32 @load32(i32 %.0.val) unnamed_addr #0 {
+  ret i32 %.0.val
 }
 
 ; Function Attrs: noinline nounwind uwtable
@@ -1419,11 +1411,11 @@ define internal fastcc void @Hacl_Impl_Chacha20_chacha20_counter_mode(ptr nounde
   br i1 %.not, label %13, label %8
 
 8:                                                ; preds = %5
-  %9 = and i32 %2, -64
-  %10 = getelementptr inbounds i8, ptr %1, i32 %9
-  %11 = getelementptr inbounds i8, ptr %0, i32 %9
-  %12 = add i32 %6, %4
-  tail call fastcc void @Hacl_Impl_Chacha20_update_last(ptr noundef %11, ptr noundef %10, i32 noundef %7, ptr noundef %3, i32 noundef %12)
+  %9 = add i32 %6, %4
+  %10 = and i32 %2, -64
+  %11 = getelementptr inbounds i8, ptr %0, i32 %10
+  %12 = getelementptr inbounds i8, ptr %1, i32 %10
+  tail call fastcc void @Hacl_Impl_Chacha20_update_last(ptr noundef %11, ptr noundef %12, i32 noundef %7, ptr noundef %3, i32 noundef %9)
   br label %13
 
 13:                                               ; preds = %8, %5
@@ -1722,9 +1714,9 @@ define internal fastcc void @Hacl_Impl_Chacha20_Vec128_chacha20_counter_mode(ptr
 
 7:                                                ; preds = %4
   %8 = and i32 %2, -64
-  %9 = getelementptr inbounds i8, ptr %1, i32 %8
-  %10 = getelementptr inbounds i8, ptr %0, i32 %8
-  tail call fastcc void @Hacl_Impl_Chacha20_Vec128_update_last(ptr noundef %10, ptr noundef %9, i32 noundef %6, ptr noundef %3)
+  %9 = getelementptr inbounds i8, ptr %0, i32 %8
+  %10 = getelementptr inbounds i8, ptr %1, i32 %8
+  tail call fastcc void @Hacl_Impl_Chacha20_Vec128_update_last(ptr noundef %9, ptr noundef %10, i32 noundef %6, ptr noundef %3)
   br label %11
 
 11:                                               ; preds = %7, %4
@@ -1964,26 +1956,17 @@ define internal fastcc void @Hacl_Impl_Chacha20_Vec128_double_round(ptr noundef 
   %.sroa.03.sroa.4.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 60
   %.sroa.03.sroa.4.0.copyload = load i32, ptr %.sroa.03.sroa.4.0..sroa_idx, align 4
   store i32 %.sroa.05.sroa.2.0.copyload, ptr %2, align 4
-  %.sroa.2.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 20
-  store i32 %.sroa.05.sroa.3.0.copyload, ptr %.sroa.2.0..sroa_idx, align 4
-  %.sroa.3.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 24
-  store i32 %.sroa.05.sroa.4.0.copyload, ptr %.sroa.3.0..sroa_idx, align 4
-  %.sroa.4.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 28
-  store i32 %.sroa.05.sroa.0.0.copyload, ptr %.sroa.4.0..sroa_idx, align 4
+  store i32 %.sroa.05.sroa.3.0.copyload, ptr %.sroa.05.sroa.2.0..sroa_idx, align 4
+  store i32 %.sroa.05.sroa.4.0.copyload, ptr %.sroa.05.sroa.3.0..sroa_idx, align 4
+  store i32 %.sroa.05.sroa.0.0.copyload, ptr %.sroa.05.sroa.4.0..sroa_idx, align 4
   store i32 %.sroa.04.sroa.3.0.copyload, ptr %3, align 4
-  %.sroa.244.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 36
-  store i32 %.sroa.04.sroa.4.0.copyload, ptr %.sroa.244.0..sroa_idx, align 4
-  %.sroa.345.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 40
-  store i32 %.sroa.04.sroa.0.0.copyload, ptr %.sroa.345.0..sroa_idx, align 4
-  %.sroa.446.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 44
-  store i32 %.sroa.04.sroa.2.0.copyload, ptr %.sroa.446.0..sroa_idx, align 4
+  store i32 %.sroa.04.sroa.4.0.copyload, ptr %.sroa.04.sroa.2.0..sroa_idx, align 4
+  store i32 %.sroa.04.sroa.0.0.copyload, ptr %.sroa.04.sroa.3.0..sroa_idx, align 4
+  store i32 %.sroa.04.sroa.2.0.copyload, ptr %.sroa.04.sroa.4.0..sroa_idx, align 4
   store i32 %.sroa.03.sroa.4.0.copyload, ptr %4, align 4
-  %.sroa.248.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 52
-  store i32 %.sroa.03.sroa.0.0.copyload, ptr %.sroa.248.0..sroa_idx, align 4
-  %.sroa.349.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 56
-  store i32 %.sroa.03.sroa.2.0.copyload, ptr %.sroa.349.0..sroa_idx, align 4
-  %.sroa.450.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 60
-  store i32 %.sroa.03.sroa.3.0.copyload, ptr %.sroa.450.0..sroa_idx, align 4
+  store i32 %.sroa.03.sroa.0.0.copyload, ptr %.sroa.03.sroa.2.0..sroa_idx, align 4
+  store i32 %.sroa.03.sroa.2.0.copyload, ptr %.sroa.03.sroa.3.0..sroa_idx, align 4
+  store i32 %.sroa.03.sroa.3.0.copyload, ptr %.sroa.03.sroa.4.0..sroa_idx, align 4
   tail call fastcc void @Hacl_Impl_Chacha20_Vec128_round(ptr noundef %0)
   %.sroa.02.sroa.0.0.copyload = load i32, ptr %2, align 4
   %.sroa.02.sroa.2.0.copyload = load i32, ptr %.sroa.05.sroa.2.0..sroa_idx, align 4
@@ -1998,17 +1981,17 @@ define internal fastcc void @Hacl_Impl_Chacha20_Vec128_double_round(ptr noundef 
   %.sroa.0.sroa.3.0.copyload = load i32, ptr %.sroa.03.sroa.3.0..sroa_idx, align 4
   %.sroa.0.sroa.4.0.copyload = load i32, ptr %.sroa.03.sroa.4.0..sroa_idx, align 4
   store i32 %.sroa.02.sroa.4.0.copyload, ptr %2, align 4
-  store i32 %.sroa.02.sroa.0.0.copyload, ptr %.sroa.2.0..sroa_idx, align 4
-  store i32 %.sroa.02.sroa.2.0.copyload, ptr %.sroa.3.0..sroa_idx, align 4
-  store i32 %.sroa.02.sroa.3.0.copyload, ptr %.sroa.4.0..sroa_idx, align 4
+  store i32 %.sroa.02.sroa.0.0.copyload, ptr %.sroa.05.sroa.2.0..sroa_idx, align 4
+  store i32 %.sroa.02.sroa.2.0.copyload, ptr %.sroa.05.sroa.3.0..sroa_idx, align 4
+  store i32 %.sroa.02.sroa.3.0.copyload, ptr %.sroa.05.sroa.4.0..sroa_idx, align 4
   store i32 %.sroa.01.sroa.3.0.copyload, ptr %3, align 4
-  store i32 %.sroa.01.sroa.4.0.copyload, ptr %.sroa.244.0..sroa_idx, align 4
-  store i32 %.sroa.01.sroa.0.0.copyload, ptr %.sroa.345.0..sroa_idx, align 4
-  store i32 %.sroa.01.sroa.2.0.copyload, ptr %.sroa.446.0..sroa_idx, align 4
+  store i32 %.sroa.01.sroa.4.0.copyload, ptr %.sroa.04.sroa.2.0..sroa_idx, align 4
+  store i32 %.sroa.01.sroa.0.0.copyload, ptr %.sroa.04.sroa.3.0..sroa_idx, align 4
+  store i32 %.sroa.01.sroa.2.0.copyload, ptr %.sroa.04.sroa.4.0..sroa_idx, align 4
   store i32 %.sroa.0.sroa.2.0.copyload, ptr %4, align 4
-  store i32 %.sroa.0.sroa.3.0.copyload, ptr %.sroa.248.0..sroa_idx, align 4
-  store i32 %.sroa.0.sroa.4.0.copyload, ptr %.sroa.349.0..sroa_idx, align 4
-  store i32 %.sroa.0.sroa.0.0.copyload, ptr %.sroa.450.0..sroa_idx, align 4
+  store i32 %.sroa.0.sroa.3.0.copyload, ptr %.sroa.03.sroa.2.0..sroa_idx, align 4
+  store i32 %.sroa.0.sroa.4.0.copyload, ptr %.sroa.03.sroa.3.0..sroa_idx, align 4
+  store i32 %.sroa.0.sroa.0.0.copyload, ptr %.sroa.03.sroa.4.0..sroa_idx, align 4
   ret void
 }
 
@@ -2148,14 +2131,6 @@ define internal fastcc void @Hacl_Impl_Chacha20_Vec128_round(ptr noundef %0) unn
   %13 = tail call i32 @llvm.fshl.i32(i32 %9, i32 %9, i32 16)
   %14 = tail call i32 @llvm.fshl.i32(i32 %10, i32 %10, i32 16)
   %15 = tail call i32 @llvm.fshl.i32(i32 %11, i32 %11, i32 16)
-  store i32 %4, ptr %0, align 4
-  store i32 %5, ptr %.sroa.011.sroa.2.0..sroa_idx, align 4
-  store i32 %6, ptr %.sroa.011.sroa.3.0..sroa_idx, align 4
-  store i32 %7, ptr %.sroa.011.sroa.4.0..sroa_idx, align 4
-  store i32 %12, ptr %3, align 4
-  store i32 %13, ptr %.sroa.09.sroa.2.0..sroa_idx, align 4
-  store i32 %14, ptr %.sroa.09.sroa.3.0..sroa_idx, align 4
-  store i32 %15, ptr %.sroa.09.sroa.4.0..sroa_idx, align 4
   %16 = getelementptr inbounds i8, ptr %0, i32 32
   %.sroa.08.sroa.0.0.copyload = load i32, ptr %16, align 4
   %.sroa.08.sroa.2.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 36
@@ -2164,52 +2139,26 @@ define internal fastcc void @Hacl_Impl_Chacha20_Vec128_round(ptr noundef %0) unn
   %.sroa.08.sroa.3.0.copyload = load i32, ptr %.sroa.08.sroa.3.0..sroa_idx, align 4
   %.sroa.08.sroa.4.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 44
   %.sroa.08.sroa.4.0.copyload = load i32, ptr %.sroa.08.sroa.4.0..sroa_idx, align 4
-  %.sroa.07.sroa.0.0.copyload = load i32, ptr %3, align 4
-  %.sroa.07.sroa.2.0.copyload = load i32, ptr %.sroa.09.sroa.2.0..sroa_idx, align 4
-  %.sroa.07.sroa.3.0.copyload = load i32, ptr %.sroa.09.sroa.3.0..sroa_idx, align 4
-  %.sroa.06.sroa.0.0.copyload = load i32, ptr %2, align 4
-  %.sroa.06.sroa.2.0.copyload = load i32, ptr %.sroa.010.sroa.2.0..sroa_idx, align 4
-  %.sroa.06.sroa.3.0.copyload = load i32, ptr %.sroa.010.sroa.3.0..sroa_idx, align 4
-  %.sroa.06.sroa.4.0.copyload = load i32, ptr %.sroa.010.sroa.4.0..sroa_idx, align 4
-  %17 = add i32 %.sroa.07.sroa.0.0.copyload, %.sroa.08.sroa.0.0.copyload
-  %18 = add i32 %.sroa.07.sroa.2.0.copyload, %.sroa.08.sroa.2.0.copyload
-  %19 = add i32 %.sroa.07.sroa.3.0.copyload, %.sroa.08.sroa.3.0.copyload
+  %17 = add i32 %12, %.sroa.08.sroa.0.0.copyload
+  %18 = add i32 %13, %.sroa.08.sroa.2.0.copyload
+  %19 = add i32 %14, %.sroa.08.sroa.3.0.copyload
   %20 = add i32 %.sroa.08.sroa.4.0.copyload, %15
-  %21 = xor i32 %.sroa.06.sroa.0.0.copyload, %17
-  %22 = xor i32 %.sroa.06.sroa.2.0.copyload, %18
-  %23 = xor i32 %.sroa.06.sroa.3.0.copyload, %19
-  %24 = xor i32 %.sroa.06.sroa.4.0.copyload, %20
+  %21 = xor i32 %.sroa.010.sroa.0.0.copyload, %17
+  %22 = xor i32 %.sroa.010.sroa.2.0.copyload, %18
+  %23 = xor i32 %.sroa.010.sroa.3.0.copyload, %19
+  %24 = xor i32 %.sroa.010.sroa.4.0.copyload, %20
   %25 = tail call i32 @llvm.fshl.i32(i32 %21, i32 %21, i32 12)
   %26 = tail call i32 @llvm.fshl.i32(i32 %22, i32 %22, i32 12)
   %27 = tail call i32 @llvm.fshl.i32(i32 %23, i32 %23, i32 12)
   %28 = tail call i32 @llvm.fshl.i32(i32 %24, i32 %24, i32 12)
-  store i32 %17, ptr %16, align 4
-  store i32 %18, ptr %.sroa.08.sroa.2.0..sroa_idx, align 4
-  store i32 %19, ptr %.sroa.08.sroa.3.0..sroa_idx, align 4
-  store i32 %20, ptr %.sroa.08.sroa.4.0..sroa_idx, align 4
-  store i32 %25, ptr %2, align 4
-  store i32 %26, ptr %.sroa.010.sroa.2.0..sroa_idx, align 4
-  store i32 %27, ptr %.sroa.010.sroa.3.0..sroa_idx, align 4
-  store i32 %28, ptr %.sroa.010.sroa.4.0..sroa_idx, align 4
-  %.sroa.05.sroa.0.0.copyload = load i32, ptr %0, align 4
-  %.sroa.05.sroa.2.0.copyload = load i32, ptr %.sroa.011.sroa.2.0..sroa_idx, align 4
-  %.sroa.05.sroa.3.0.copyload = load i32, ptr %.sroa.011.sroa.3.0..sroa_idx, align 4
-  %.sroa.05.sroa.4.0.copyload = load i32, ptr %.sroa.011.sroa.4.0..sroa_idx, align 4
-  %.sroa.04.sroa.0.0.copyload = load i32, ptr %2, align 4
-  %.sroa.04.sroa.2.0.copyload = load i32, ptr %.sroa.010.sroa.2.0..sroa_idx, align 4
-  %.sroa.04.sroa.3.0.copyload = load i32, ptr %.sroa.010.sroa.3.0..sroa_idx, align 4
-  %.sroa.03.sroa.0.0.copyload = load i32, ptr %3, align 4
-  %.sroa.03.sroa.2.0.copyload = load i32, ptr %.sroa.09.sroa.2.0..sroa_idx, align 4
-  %.sroa.03.sroa.3.0.copyload = load i32, ptr %.sroa.09.sroa.3.0..sroa_idx, align 4
-  %.sroa.03.sroa.4.0.copyload = load i32, ptr %.sroa.09.sroa.4.0..sroa_idx, align 4
-  %29 = add i32 %.sroa.04.sroa.0.0.copyload, %.sroa.05.sroa.0.0.copyload
-  %30 = add i32 %.sroa.04.sroa.2.0.copyload, %.sroa.05.sroa.2.0.copyload
-  %31 = add i32 %.sroa.04.sroa.3.0.copyload, %.sroa.05.sroa.3.0.copyload
-  %32 = add i32 %.sroa.05.sroa.4.0.copyload, %28
-  %33 = xor i32 %.sroa.03.sroa.0.0.copyload, %29
-  %34 = xor i32 %.sroa.03.sroa.2.0.copyload, %30
-  %35 = xor i32 %.sroa.03.sroa.3.0.copyload, %31
-  %36 = xor i32 %.sroa.03.sroa.4.0.copyload, %32
+  %29 = add i32 %25, %4
+  %30 = add i32 %26, %5
+  %31 = add i32 %27, %6
+  %32 = add i32 %7, %28
+  %33 = xor i32 %12, %29
+  %34 = xor i32 %13, %30
+  %35 = xor i32 %14, %31
+  %36 = xor i32 %15, %32
   %37 = tail call i32 @llvm.fshl.i32(i32 %33, i32 %33, i32 8)
   %38 = tail call i32 @llvm.fshl.i32(i32 %34, i32 %34, i32 8)
   %39 = tail call i32 @llvm.fshl.i32(i32 %35, i32 %35, i32 8)
@@ -2222,25 +2171,14 @@ define internal fastcc void @Hacl_Impl_Chacha20_Vec128_round(ptr noundef %0) unn
   store i32 %38, ptr %.sroa.09.sroa.2.0..sroa_idx, align 4
   store i32 %39, ptr %.sroa.09.sroa.3.0..sroa_idx, align 4
   store i32 %40, ptr %.sroa.09.sroa.4.0..sroa_idx, align 4
-  %.sroa.02.sroa.0.0.copyload = load i32, ptr %16, align 4
-  %.sroa.02.sroa.2.0.copyload = load i32, ptr %.sroa.08.sroa.2.0..sroa_idx, align 4
-  %.sroa.02.sroa.3.0.copyload = load i32, ptr %.sroa.08.sroa.3.0..sroa_idx, align 4
-  %.sroa.02.sroa.4.0.copyload = load i32, ptr %.sroa.08.sroa.4.0..sroa_idx, align 4
-  %.sroa.01.sroa.0.0.copyload = load i32, ptr %3, align 4
-  %.sroa.01.sroa.2.0.copyload = load i32, ptr %.sroa.09.sroa.2.0..sroa_idx, align 4
-  %.sroa.01.sroa.3.0.copyload = load i32, ptr %.sroa.09.sroa.3.0..sroa_idx, align 4
-  %.sroa.0.sroa.0.0.copyload = load i32, ptr %2, align 4
-  %.sroa.0.sroa.2.0.copyload = load i32, ptr %.sroa.010.sroa.2.0..sroa_idx, align 4
-  %.sroa.0.sroa.3.0.copyload = load i32, ptr %.sroa.010.sroa.3.0..sroa_idx, align 4
-  %.sroa.0.sroa.4.0.copyload = load i32, ptr %.sroa.010.sroa.4.0..sroa_idx, align 4
-  %41 = add i32 %.sroa.01.sroa.0.0.copyload, %.sroa.02.sroa.0.0.copyload
-  %42 = add i32 %.sroa.01.sroa.2.0.copyload, %.sroa.02.sroa.2.0.copyload
-  %43 = add i32 %.sroa.01.sroa.3.0.copyload, %.sroa.02.sroa.3.0.copyload
-  %44 = add i32 %.sroa.02.sroa.4.0.copyload, %40
-  %45 = xor i32 %.sroa.0.sroa.0.0.copyload, %41
-  %46 = xor i32 %.sroa.0.sroa.2.0.copyload, %42
-  %47 = xor i32 %.sroa.0.sroa.3.0.copyload, %43
-  %48 = xor i32 %.sroa.0.sroa.4.0.copyload, %44
+  %41 = add i32 %37, %17
+  %42 = add i32 %38, %18
+  %43 = add i32 %39, %19
+  %44 = add i32 %20, %40
+  %45 = xor i32 %25, %41
+  %46 = xor i32 %26, %42
+  %47 = xor i32 %27, %43
+  %48 = xor i32 %28, %44
   %49 = tail call i32 @llvm.fshl.i32(i32 %45, i32 %45, i32 7)
   %50 = tail call i32 @llvm.fshl.i32(i32 %46, i32 %46, i32 7)
   %51 = tail call i32 @llvm.fshl.i32(i32 %47, i32 %47, i32 7)
@@ -2299,68 +2237,75 @@ define internal fastcc void @Hacl_Impl_Chacha20_Vec128_state_incr(ptr noundef %0
 define internal fastcc void @Hacl_Impl_Chacha20_Vec128_State_state_incr(ptr noundef %0) unnamed_addr #0 {
   %2 = getelementptr inbounds i8, ptr %0, i32 48
   %.sroa.0.sroa.0.0.copyload = load i32, ptr %2, align 4
-  %.sroa.0.sroa.2.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 52
-  %.sroa.0.sroa.2.0.copyload = load i32, ptr %.sroa.0.sroa.2.0..sroa_idx, align 4
-  %.sroa.0.sroa.3.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 56
-  %.sroa.0.sroa.3.0.copyload = load i32, ptr %.sroa.0.sroa.3.0..sroa_idx, align 4
-  %.sroa.0.sroa.4.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 60
-  %.sroa.0.sroa.4.0.copyload = load i32, ptr %.sroa.0.sroa.4.0..sroa_idx, align 4
   %3 = add i32 %.sroa.0.sroa.0.0.copyload, 1
   store i32 %3, ptr %2, align 4
-  store i32 %.sroa.0.sroa.2.0.copyload, ptr %.sroa.0.sroa.2.0..sroa_idx, align 4
-  store i32 %.sroa.0.sroa.3.0.copyload, ptr %.sroa.0.sroa.3.0..sroa_idx, align 4
-  store i32 %.sroa.0.sroa.4.0.copyload, ptr %.sroa.0.sroa.4.0..sroa_idx, align 4
   ret void
 }
 
 ; Function Attrs: noinline nounwind uwtable
 define internal fastcc void @Hacl_Impl_Chacha20_Vec128_xor_block(ptr noundef %0, ptr noundef %1, ptr noundef %2) unnamed_addr #0 {
-  %4 = tail call fastcc i32 @load32.25(ptr noundef %1)
+  %.val = load i32, ptr %1, align 1
+  %4 = tail call fastcc i32 @load32.25(i32 %.val)
   %5 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %4)
   %6 = getelementptr inbounds i8, ptr %1, i32 4
-  %7 = tail call fastcc i32 @load32.25(ptr noundef nonnull %6)
+  %.val123 = load i32, ptr %6, align 1
+  %7 = tail call fastcc i32 @load32.25(i32 %.val123)
   %8 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %7)
   %9 = getelementptr inbounds i8, ptr %1, i32 8
-  %10 = tail call fastcc i32 @load32.25(ptr noundef nonnull %9)
+  %.val124 = load i32, ptr %9, align 1
+  %10 = tail call fastcc i32 @load32.25(i32 %.val124)
   %11 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %10)
   %12 = getelementptr inbounds i8, ptr %1, i32 12
-  %13 = tail call fastcc i32 @load32.25(ptr noundef nonnull %12)
+  %.val125 = load i32, ptr %12, align 1
+  %13 = tail call fastcc i32 @load32.25(i32 %.val125)
   %14 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %13)
   %15 = getelementptr inbounds i8, ptr %1, i32 16
-  %16 = tail call fastcc i32 @load32.25(ptr noundef nonnull %15)
+  %.val126 = load i32, ptr %15, align 1
+  %16 = tail call fastcc i32 @load32.25(i32 %.val126)
   %17 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %16)
   %18 = getelementptr inbounds i8, ptr %1, i32 20
-  %19 = tail call fastcc i32 @load32.25(ptr noundef nonnull %18)
+  %.val127 = load i32, ptr %18, align 1
+  %19 = tail call fastcc i32 @load32.25(i32 %.val127)
   %20 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %19)
   %21 = getelementptr inbounds i8, ptr %1, i32 24
-  %22 = tail call fastcc i32 @load32.25(ptr noundef nonnull %21)
+  %.val128 = load i32, ptr %21, align 1
+  %22 = tail call fastcc i32 @load32.25(i32 %.val128)
   %23 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %22)
   %24 = getelementptr inbounds i8, ptr %1, i32 28
-  %25 = tail call fastcc i32 @load32.25(ptr noundef nonnull %24)
+  %.val129 = load i32, ptr %24, align 1
+  %25 = tail call fastcc i32 @load32.25(i32 %.val129)
   %26 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %25)
   %27 = getelementptr inbounds i8, ptr %1, i32 32
-  %28 = tail call fastcc i32 @load32.25(ptr noundef nonnull %27)
+  %.val130 = load i32, ptr %27, align 1
+  %28 = tail call fastcc i32 @load32.25(i32 %.val130)
   %29 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %28)
   %30 = getelementptr inbounds i8, ptr %1, i32 36
-  %31 = tail call fastcc i32 @load32.25(ptr noundef nonnull %30)
+  %.val131 = load i32, ptr %30, align 1
+  %31 = tail call fastcc i32 @load32.25(i32 %.val131)
   %32 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %31)
   %33 = getelementptr inbounds i8, ptr %1, i32 40
-  %34 = tail call fastcc i32 @load32.25(ptr noundef nonnull %33)
+  %.val132 = load i32, ptr %33, align 1
+  %34 = tail call fastcc i32 @load32.25(i32 %.val132)
   %35 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %34)
   %36 = getelementptr inbounds i8, ptr %1, i32 44
-  %37 = tail call fastcc i32 @load32.25(ptr noundef nonnull %36)
+  %.val133 = load i32, ptr %36, align 1
+  %37 = tail call fastcc i32 @load32.25(i32 %.val133)
   %38 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %37)
   %39 = getelementptr inbounds i8, ptr %1, i32 48
-  %40 = tail call fastcc i32 @load32.25(ptr noundef nonnull %39)
+  %.val134 = load i32, ptr %39, align 1
+  %40 = tail call fastcc i32 @load32.25(i32 %.val134)
   %41 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %40)
   %42 = getelementptr inbounds i8, ptr %1, i32 52
-  %43 = tail call fastcc i32 @load32.25(ptr noundef nonnull %42)
+  %.val135 = load i32, ptr %42, align 1
+  %43 = tail call fastcc i32 @load32.25(i32 %.val135)
   %44 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %43)
   %45 = getelementptr inbounds i8, ptr %1, i32 56
-  %46 = tail call fastcc i32 @load32.25(ptr noundef nonnull %45)
+  %.val136 = load i32, ptr %45, align 1
+  %46 = tail call fastcc i32 @load32.25(i32 %.val136)
   %47 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %46)
   %48 = getelementptr inbounds i8, ptr %1, i32 60
-  %49 = tail call fastcc i32 @load32.25(ptr noundef nonnull %48)
+  %.val137 = load i32, ptr %48, align 1
+  %49 = tail call fastcc i32 @load32.25(i32 %.val137)
   %50 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %49)
   %.sroa.06.sroa.0.0.copyload = load i32, ptr %2, align 4
   %.sroa.06.sroa.2.0..sroa_idx = getelementptr inbounds i8, ptr %2, i32 4
@@ -2460,9 +2405,8 @@ define internal fastcc void @Hacl_Impl_Chacha20_Vec128_xor_block(ptr noundef %0,
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i32 @load32.25(ptr noundef %0) unnamed_addr #0 {
-  %.0.copyload = load i32, ptr %0, align 1
-  ret i32 %.0.copyload
+define internal fastcc i32 @load32.25(i32 %.0.val) unnamed_addr #0 {
+  ret i32 %.0.val
 }
 
 ; Function Attrs: noinline nounwind uwtable
@@ -2567,28 +2511,36 @@ define internal fastcc void @Hacl_Impl_Chacha20_Vec128_State_state_setup(ptr nou
   store i32 2036477234, ptr %.sroa.338.0..sroa_idx, align 4
   %.sroa.439.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 12
   store i32 1797285236, ptr %.sroa.439.0..sroa_idx, align 4
-  %5 = tail call fastcc i32 @load32.25(ptr noundef %1)
+  %.val53 = load i32, ptr %1, align 1
+  %5 = tail call fastcc i32 @load32.25(i32 %.val53)
   %6 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %5)
   %7 = getelementptr inbounds i8, ptr %1, i32 4
-  %8 = tail call fastcc i32 @load32.25(ptr noundef nonnull %7)
+  %.val52 = load i32, ptr %7, align 1
+  %8 = tail call fastcc i32 @load32.25(i32 %.val52)
   %9 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %8)
   %10 = getelementptr inbounds i8, ptr %1, i32 8
-  %11 = tail call fastcc i32 @load32.25(ptr noundef nonnull %10)
+  %.val51 = load i32, ptr %10, align 1
+  %11 = tail call fastcc i32 @load32.25(i32 %.val51)
   %12 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %11)
   %13 = getelementptr inbounds i8, ptr %1, i32 12
-  %14 = tail call fastcc i32 @load32.25(ptr noundef nonnull %13)
+  %.val50 = load i32, ptr %13, align 1
+  %14 = tail call fastcc i32 @load32.25(i32 %.val50)
   %15 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %14)
   %16 = getelementptr inbounds i8, ptr %1, i32 16
-  %17 = tail call fastcc i32 @load32.25(ptr noundef nonnull %16)
+  %.val49 = load i32, ptr %16, align 1
+  %17 = tail call fastcc i32 @load32.25(i32 %.val49)
   %18 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %17)
   %19 = getelementptr inbounds i8, ptr %1, i32 20
-  %20 = tail call fastcc i32 @load32.25(ptr noundef nonnull %19)
+  %.val48 = load i32, ptr %19, align 1
+  %20 = tail call fastcc i32 @load32.25(i32 %.val48)
   %21 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %20)
   %22 = getelementptr inbounds i8, ptr %1, i32 24
-  %23 = tail call fastcc i32 @load32.25(ptr noundef nonnull %22)
+  %.val47 = load i32, ptr %22, align 1
+  %23 = tail call fastcc i32 @load32.25(i32 %.val47)
   %24 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %23)
   %25 = getelementptr inbounds i8, ptr %1, i32 28
-  %26 = tail call fastcc i32 @load32.25(ptr noundef nonnull %25)
+  %.val46 = load i32, ptr %25, align 1
+  %26 = tail call fastcc i32 @load32.25(i32 %.val46)
   %27 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %26)
   %28 = getelementptr inbounds i8, ptr %0, i32 16
   store i32 %6, ptr %28, align 4
@@ -2606,13 +2558,16 @@ define internal fastcc void @Hacl_Impl_Chacha20_Vec128_State_state_setup(ptr nou
   store i32 %24, ptr %.sroa.334.0..sroa_idx, align 4
   %.sroa.435.0..sroa_idx = getelementptr inbounds i8, ptr %0, i32 44
   store i32 %27, ptr %.sroa.435.0..sroa_idx, align 4
-  %30 = tail call fastcc i32 @load32.25(ptr noundef %2)
+  %.val45 = load i32, ptr %2, align 1
+  %30 = tail call fastcc i32 @load32.25(i32 %.val45)
   %31 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %30)
   %32 = getelementptr inbounds i8, ptr %2, i32 4
-  %33 = tail call fastcc i32 @load32.25(ptr noundef nonnull %32)
+  %.val44 = load i32, ptr %32, align 1
+  %33 = tail call fastcc i32 @load32.25(i32 %.val44)
   %34 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %33)
   %35 = getelementptr inbounds i8, ptr %2, i32 8
-  %36 = tail call fastcc i32 @load32.25(ptr noundef nonnull %35)
+  %.val = load i32, ptr %35, align 1
+  %36 = tail call fastcc i32 @load32.25(i32 %.val)
   %37 = tail call fastcc i32 @__uint32_identity.23(i32 noundef %36)
   %38 = getelementptr inbounds i8, ptr %0, i32 48
   store i32 %3, ptr %38, align 4
@@ -2643,7 +2598,8 @@ define dso_local void @Hacl_EC_crypto_scalarmult(ptr noundef %0, ptr noundef %1,
   %13 = or disjoint i8 %12, 64
   store i8 %11, ptr %5, align 1
   store i8 %13, ptr %9, align 1
-  call void @llvm.memset.p0.i32(ptr noundef nonnull align 8 dereferenceable(120) %6, i8 0, i32 120, i1 false)
+  %14 = getelementptr inbounds i8, ptr %6, i32 8
+  call void @llvm.memset.p0.i32(ptr noundef nonnull align 8 dereferenceable(120) %14, i8 0, i32 112, i1 false)
   store i64 1, ptr %6, align 8
   call fastcc void @Hacl_EC_Ladder_cmult(ptr noundef nonnull %6, ptr noundef nonnull %5, ptr noundef nonnull %4)
   call fastcc void @Hacl_EC_Format_scalar_of_point(ptr noundef %0, ptr noundef nonnull %6)
@@ -2652,19 +2608,24 @@ define dso_local void @Hacl_EC_crypto_scalarmult(ptr noundef %0, ptr noundef %1,
 
 ; Function Attrs: noinline nounwind uwtable
 define internal fastcc void @Hacl_EC_Format_fexpand(ptr noundef %0, ptr noundef %1) unnamed_addr #0 {
-  %3 = tail call fastcc i64 @load64.37(ptr noundef %1)
+  %.val = load i64, ptr %1, align 1
+  %3 = tail call fastcc i64 @load64.37(i64 %.val)
   %4 = tail call fastcc i64 @__uint64_identity.26(i64 noundef %3)
   %5 = getelementptr inbounds i8, ptr %1, i32 6
-  %6 = tail call fastcc i64 @load64.37(ptr noundef nonnull %5)
+  %.val23 = load i64, ptr %5, align 1
+  %6 = tail call fastcc i64 @load64.37(i64 %.val23)
   %7 = tail call fastcc i64 @__uint64_identity.26(i64 noundef %6)
   %8 = getelementptr inbounds i8, ptr %1, i32 12
-  %9 = tail call fastcc i64 @load64.37(ptr noundef nonnull %8)
+  %.val24 = load i64, ptr %8, align 1
+  %9 = tail call fastcc i64 @load64.37(i64 %.val24)
   %10 = tail call fastcc i64 @__uint64_identity.26(i64 noundef %9)
   %11 = getelementptr inbounds i8, ptr %1, i32 19
-  %12 = tail call fastcc i64 @load64.37(ptr noundef nonnull %11)
+  %.val25 = load i64, ptr %11, align 1
+  %12 = tail call fastcc i64 @load64.37(i64 %.val25)
   %13 = tail call fastcc i64 @__uint64_identity.26(i64 noundef %12)
   %14 = getelementptr inbounds i8, ptr %1, i32 24
-  %15 = tail call fastcc i64 @load64.37(ptr noundef nonnull %14)
+  %.val26 = load i64, ptr %14, align 1
+  %15 = tail call fastcc i64 @load64.37(i64 %.val26)
   %16 = tail call fastcc i64 @__uint64_identity.26(i64 noundef %15)
   %17 = and i64 %4, 2251799813685247
   %18 = lshr i64 %7, 3
@@ -3542,15 +3503,15 @@ define internal fastcc void @Hacl_EC_Ladder_SmallLoop_cmult_small_loop(ptr nound
   br label %tailrecurse
 
 tailrecurse:                                      ; preds = %9, %7
-  %.tr19 = phi i8 [ %5, %7 ], [ %11, %9 ]
-  %.tr20 = phi i32 [ %6, %7 ], [ %10, %9 ]
+  %.tr19 = phi i8 [ %5, %7 ], [ %10, %9 ]
+  %.tr20 = phi i32 [ %6, %7 ], [ %11, %9 ]
   %8 = icmp eq i32 %.tr20, 0
   br i1 %8, label %12, label %9
 
 9:                                                ; preds = %tailrecurse
-  %10 = add nsw i32 %.tr20, -1
+  %10 = shl i8 %.tr19, 2
+  %11 = add nsw i32 %.tr20, -1
   tail call fastcc void @Hacl_EC_Ladder_SmallLoop_cmult_small_loop_double_step(ptr noundef %0, ptr noundef %1, ptr noundef %2, ptr noundef %3, ptr noundef %4, i8 noundef zeroext %.tr19)
-  %11 = shl i8 %.tr19, 2
   br label %tailrecurse
 
 12:                                               ; preds = %tailrecurse
@@ -3783,8 +3744,8 @@ tailrecurse:                                      ; preds = %6, %4
   br i1 %5, label %8, label %6
 
 6:                                                ; preds = %tailrecurse
-  tail call fastcc void @Hacl_EC_Point_swap_conditional_step(ptr noundef %0, ptr noundef %1, i64 noundef %2, i32 noundef %.tr11)
   %7 = add nsw i32 %.tr11, -1
+  tail call fastcc void @Hacl_EC_Point_swap_conditional_step(ptr noundef %0, ptr noundef %1, i64 noundef %2, i32 noundef %.tr11)
   br label %tailrecurse
 
 8:                                                ; preds = %tailrecurse
@@ -3808,9 +3769,8 @@ define internal fastcc void @Hacl_EC_Point_swap_conditional_step(ptr noundef %0,
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i64 @load64.37(ptr noundef %0) unnamed_addr #0 {
-  %.0.copyload = load i64, ptr %0, align 1
-  ret i64 %.0.copyload
+define internal fastcc i64 @load64.37(i64 %.0.val) unnamed_addr #0 {
+  ret i64 %.0.val
 }
 
 ; Function Attrs: noinline nounwind uwtable
@@ -3948,23 +3908,28 @@ define internal fastcc void @Hacl_Impl_Ed25519_Sign_Steps_copy_bytes(ptr noundef
 
 ; Function Attrs: noinline nounwind uwtable
 define internal fastcc void @Hacl_Impl_Load56_load_32_bytes(ptr noundef %0, ptr noundef %1) unnamed_addr #0 {
-  %3 = tail call fastcc i64 @load64.38(ptr noundef %1)
+  %.val = load i64, ptr %1, align 1
+  %3 = tail call fastcc i64 @load64.38(i64 %.val)
   %4 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %3)
   %5 = and i64 %4, 72057594037927935
   %6 = getelementptr inbounds i8, ptr %1, i32 7
-  %7 = tail call fastcc i64 @load64.38(ptr noundef nonnull %6)
+  %.val24 = load i64, ptr %6, align 1
+  %7 = tail call fastcc i64 @load64.38(i64 %.val24)
   %8 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %7)
   %9 = and i64 %8, 72057594037927935
   %10 = getelementptr inbounds i8, ptr %1, i32 14
-  %11 = tail call fastcc i64 @load64.38(ptr noundef nonnull %10)
+  %.val25 = load i64, ptr %10, align 1
+  %11 = tail call fastcc i64 @load64.38(i64 %.val25)
   %12 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %11)
   %13 = and i64 %12, 72057594037927935
   %14 = getelementptr inbounds i8, ptr %1, i32 21
-  %15 = tail call fastcc i64 @load64.38(ptr noundef nonnull %14)
+  %.val26 = load i64, ptr %14, align 1
+  %15 = tail call fastcc i64 @load64.38(i64 %.val26)
   %16 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %15)
   %17 = and i64 %16, 72057594037927935
   %18 = getelementptr inbounds i8, ptr %1, i32 28
-  %19 = tail call fastcc i32 @load32.40(ptr noundef nonnull %18)
+  %.val27 = load i32, ptr %18, align 1
+  %19 = tail call fastcc i32 @load32.40(i32 %.val27)
   %20 = tail call fastcc i32 @__uint32_identity.41(i32 noundef %19)
   %21 = zext i32 %20 to i64
   tail call fastcc void @Hacl_Lib_Create64_make_h64_5(ptr noundef %0, i64 noundef %5, i64 noundef %9, i64 noundef %13, i64 noundef %17, i64 noundef %21)
@@ -5038,9 +5003,8 @@ define internal fastcc void @Hacl_Lib_Create128_make_h128_9(ptr noundef %0, i64 
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i64 @load64.38(ptr noundef %0) unnamed_addr #0 {
-  %.0.copyload = load i64, ptr %0, align 1
-  ret i64 %.0.copyload
+define internal fastcc i64 @load64.38(i64 %.0.val) unnamed_addr #0 {
+  ret i64 %.0.val
 }
 
 ; Function Attrs: noinline nounwind uwtable
@@ -5049,9 +5013,8 @@ define internal fastcc i64 @__uint64_identity.39(i64 noundef %0) unnamed_addr #0
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i32 @load32.40(ptr noundef %0) unnamed_addr #0 {
-  %.0.copyload = load i32, ptr %0, align 1
-  ret i32 %.0.copyload
+define internal fastcc i32 @load32.40(i32 %.0.val) unnamed_addr #0 {
+  ret i32 %.0.val
 }
 
 ; Function Attrs: noinline nounwind uwtable
@@ -5085,39 +5048,48 @@ define internal fastcc void @Hacl_Impl_Sha512_sha512_pre_pre2_msg(ptr noundef %0
 
 ; Function Attrs: noinline nounwind uwtable
 define internal fastcc void @Hacl_Impl_Load56_load_64_bytes(ptr noundef %0, ptr noundef %1) unnamed_addr #0 {
-  %3 = tail call fastcc i64 @load64.38(ptr noundef %1)
+  %.val55 = load i64, ptr %1, align 1
+  %3 = tail call fastcc i64 @load64.38(i64 %.val55)
   %4 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %3)
   %5 = and i64 %4, 72057594037927935
   %6 = getelementptr inbounds i8, ptr %1, i32 7
-  %7 = tail call fastcc i64 @load64.38(ptr noundef nonnull %6)
+  %.val54 = load i64, ptr %6, align 1
+  %7 = tail call fastcc i64 @load64.38(i64 %.val54)
   %8 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %7)
   %9 = and i64 %8, 72057594037927935
   %10 = getelementptr inbounds i8, ptr %1, i32 14
-  %11 = tail call fastcc i64 @load64.38(ptr noundef nonnull %10)
+  %.val53 = load i64, ptr %10, align 1
+  %11 = tail call fastcc i64 @load64.38(i64 %.val53)
   %12 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %11)
   %13 = and i64 %12, 72057594037927935
   %14 = getelementptr inbounds i8, ptr %1, i32 21
-  %15 = tail call fastcc i64 @load64.38(ptr noundef nonnull %14)
+  %.val52 = load i64, ptr %14, align 1
+  %15 = tail call fastcc i64 @load64.38(i64 %.val52)
   %16 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %15)
   %17 = and i64 %16, 72057594037927935
   %18 = getelementptr inbounds i8, ptr %1, i32 28
-  %19 = tail call fastcc i64 @load64.38(ptr noundef nonnull %18)
+  %.val51 = load i64, ptr %18, align 1
+  %19 = tail call fastcc i64 @load64.38(i64 %.val51)
   %20 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %19)
   %21 = and i64 %20, 72057594037927935
   %22 = getelementptr inbounds i8, ptr %1, i32 35
-  %23 = tail call fastcc i64 @load64.38(ptr noundef nonnull %22)
+  %.val50 = load i64, ptr %22, align 1
+  %23 = tail call fastcc i64 @load64.38(i64 %.val50)
   %24 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %23)
   %25 = and i64 %24, 72057594037927935
   %26 = getelementptr inbounds i8, ptr %1, i32 42
-  %27 = tail call fastcc i64 @load64.38(ptr noundef nonnull %26)
+  %.val49 = load i64, ptr %26, align 1
+  %27 = tail call fastcc i64 @load64.38(i64 %.val49)
   %28 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %27)
   %29 = and i64 %28, 72057594037927935
   %30 = getelementptr inbounds i8, ptr %1, i32 49
-  %31 = tail call fastcc i64 @load64.38(ptr noundef nonnull %30)
+  %.val48 = load i64, ptr %30, align 1
+  %31 = tail call fastcc i64 @load64.38(i64 %.val48)
   %32 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %31)
   %33 = and i64 %32, 72057594037927935
   %34 = getelementptr inbounds i8, ptr %1, i32 56
-  %35 = tail call fastcc i64 @load64.38(ptr noundef nonnull %34)
+  %.val = load i64, ptr %34, align 1
+  %35 = tail call fastcc i64 @load64.38(i64 %.val)
   %36 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %35)
   %37 = and i64 %36, 72057594037927935
   %38 = getelementptr inbounds i8, ptr %1, i32 63
@@ -5783,7 +5755,8 @@ define internal fastcc void @Hacl_Hash_Lib_LoadStore_uint64s_from_be_bytes(ptr n
 5:                                                ; preds = %3
   %6 = shl nuw nsw i32 %.0, 3
   %7 = getelementptr inbounds i8, ptr %1, i32 %6
-  %8 = tail call fastcc i64 @load64.38(ptr noundef %7)
+  %.val = load i64, ptr %7, align 1
+  %8 = tail call fastcc i64 @load64.38(i64 %.val)
   %9 = tail call fastcc i64 @__bswap_64(i64 noundef %8)
   %10 = getelementptr inbounds i64, ptr %0, i32 %.0
   store i64 %9, ptr %10, align 4
@@ -5852,7 +5825,8 @@ define internal fastcc void @Hacl_Impl_Ed25519_PointCompress_point_compress(ptr 
   call fastcc void @Hacl_Bignum25519_reduce(ptr noundef nonnull %4)
   call fastcc void @Hacl_Bignum25519_fmul(ptr noundef nonnull %5, ptr noundef %7, ptr noundef nonnull %3)
   call fastcc void @Hacl_Bignum25519_reduce(ptr noundef nonnull %5)
-  %9 = call fastcc i64 @Hacl_Impl_Ed25519_PointCompress_x_mod_2(ptr noundef nonnull %4)
+  %.val = load i64, ptr %4, align 8
+  %9 = call fastcc i64 @Hacl_Impl_Ed25519_PointCompress_x_mod_2(i64 %.val)
   call fastcc void @Hacl_Impl_Store51_store_51_(ptr noundef %0, ptr noundef nonnull %5)
   %10 = trunc nuw nsw i64 %9 to i8
   %11 = getelementptr inbounds i8, ptr %0, i32 31
@@ -5899,10 +5873,9 @@ define internal fastcc void @Hacl_Bignum25519_reduce(ptr noundef %0) unnamed_add
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc range(i64 0, 2) i64 @Hacl_Impl_Ed25519_PointCompress_x_mod_2(ptr noundef %0) unnamed_addr #0 {
-  %2 = load i64, ptr %0, align 4
-  %3 = and i64 %2, 1
-  ret i64 %3
+define internal fastcc range(i64 0, 2) i64 @Hacl_Impl_Ed25519_PointCompress_x_mod_2(i64 %.0.val) unnamed_addr #0 {
+  %1 = and i64 %.0.val, 1
+  ret i64 %1
 }
 
 ; Function Attrs: noinline nounwind uwtable
@@ -6888,48 +6861,49 @@ define internal fastcc void @Hacl_Impl_Ed25519_PointDouble_point_double(ptr noun
 ; Function Attrs: noinline nounwind uwtable
 define internal fastcc void @Hacl_Impl_Ed25519_PointAdd_point_add(ptr noundef %0, ptr noundef %1, ptr noundef %2) unnamed_addr #0 {
   %4 = alloca [30 x i64], align 8
-  call void @llvm.memset.p0.i32(ptr noundef nonnull align 8 dereferenceable(240) %4, i8 0, i32 240, i1 false)
-  %5 = getelementptr inbounds i8, ptr %4, i32 40
-  %6 = getelementptr inbounds i8, ptr %4, i32 80
-  %7 = getelementptr inbounds i8, ptr %4, i32 120
-  %8 = tail call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_getx(ptr noundef %1)
-  %9 = tail call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_gety(ptr noundef %1)
-  %10 = tail call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_getx(ptr noundef %2)
-  %11 = tail call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_gety(ptr noundef %2)
-  call void @llvm.memcpy.p0.p0.i32(ptr noundef nonnull align 8 dereferenceable(40) %4, ptr noundef nonnull align 4 dereferenceable(40) %8, i32 40, i1 false)
-  call void @llvm.memcpy.p0.p0.i32(ptr noundef nonnull align 8 dereferenceable(40) %5, ptr noundef nonnull align 4 dereferenceable(40) %10, i32 40, i1 false)
-  call fastcc void @Hacl_Bignum25519_fdifference_reduced(ptr noundef nonnull %4, ptr noundef %9)
-  call fastcc void @Hacl_Bignum25519_fdifference(ptr noundef nonnull %5, ptr noundef %11)
-  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef nonnull %6, ptr noundef nonnull %4, ptr noundef nonnull %5)
+  %5 = getelementptr inbounds i8, ptr %4, i32 80
+  call void @llvm.memset.p0.i32(ptr noundef nonnull align 8 dereferenceable(240) %5, i8 0, i32 160, i1 false)
+  %6 = getelementptr inbounds i8, ptr %4, i32 40
+  %7 = getelementptr inbounds i8, ptr %4, i32 80
+  %8 = getelementptr inbounds i8, ptr %4, i32 120
+  %9 = tail call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_getx(ptr noundef %1)
+  %10 = tail call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_gety(ptr noundef %1)
+  %11 = tail call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_getx(ptr noundef %2)
+  %12 = tail call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_gety(ptr noundef %2)
   call void @llvm.memcpy.p0.p0.i32(ptr noundef nonnull align 8 dereferenceable(40) %4, ptr noundef nonnull align 4 dereferenceable(40) %9, i32 40, i1 false)
-  call void @llvm.memcpy.p0.p0.i32(ptr noundef nonnull align 8 dereferenceable(40) %5, ptr noundef nonnull align 4 dereferenceable(40) %11, i32 40, i1 false)
-  call fastcc void @Hacl_Bignum25519_fsum(ptr noundef nonnull %4, ptr noundef %8)
-  call fastcc void @Hacl_Bignum25519_fsum(ptr noundef nonnull %5, ptr noundef %10)
-  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef nonnull %7, ptr noundef nonnull %4, ptr noundef nonnull %5)
-  %12 = getelementptr inbounds i8, ptr %4, i32 160
-  %13 = getelementptr inbounds i8, ptr %4, i32 200
-  %14 = call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_getz(ptr noundef %1)
-  %15 = call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_gett(ptr noundef %1)
-  %16 = call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_getz(ptr noundef %2)
-  %17 = call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_gett(ptr noundef %2)
-  call fastcc void @Hacl_Bignum25519_times_2d(ptr noundef nonnull %4, ptr noundef %15)
-  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef nonnull %5, ptr noundef nonnull %4, ptr noundef %17)
-  call fastcc void @Hacl_Bignum25519_times_2(ptr noundef nonnull %4, ptr noundef %14)
-  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef nonnull %12, ptr noundef nonnull %4, ptr noundef %16)
-  call void @llvm.memcpy.p0.p0.i32(ptr noundef nonnull align 8 dereferenceable(40) %4, ptr noundef nonnull align 8 dereferenceable(40) %6, i32 40, i1 false)
-  call void @llvm.memcpy.p0.p0.i32(ptr noundef nonnull align 8 dereferenceable(40) %13, ptr noundef nonnull align 8 dereferenceable(40) %5, i32 40, i1 false)
-  call fastcc void @Hacl_Bignum25519_fdifference_reduced(ptr noundef nonnull %4, ptr noundef nonnull %7)
-  call fastcc void @Hacl_Bignum25519_fdifference(ptr noundef nonnull %13, ptr noundef nonnull %12)
-  call fastcc void @Hacl_Bignum25519_fsum(ptr noundef nonnull %12, ptr noundef nonnull %5)
-  call fastcc void @Hacl_Bignum25519_fsum(ptr noundef nonnull %7, ptr noundef nonnull %6)
-  %18 = call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_getx(ptr noundef %0)
-  %19 = call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_gety(ptr noundef %0)
-  %20 = call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_getz(ptr noundef %0)
-  %21 = call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_gett(ptr noundef %0)
-  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef %18, ptr noundef nonnull %4, ptr noundef nonnull %13)
-  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef %19, ptr noundef nonnull %12, ptr noundef nonnull %7)
-  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef %21, ptr noundef nonnull %4, ptr noundef nonnull %7)
-  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef %20, ptr noundef nonnull %12, ptr noundef nonnull %13)
+  call void @llvm.memcpy.p0.p0.i32(ptr noundef nonnull align 8 dereferenceable(40) %6, ptr noundef nonnull align 4 dereferenceable(40) %11, i32 40, i1 false)
+  call fastcc void @Hacl_Bignum25519_fdifference_reduced(ptr noundef nonnull %4, ptr noundef %10)
+  call fastcc void @Hacl_Bignum25519_fdifference(ptr noundef nonnull %6, ptr noundef %12)
+  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef nonnull %7, ptr noundef nonnull %4, ptr noundef nonnull %6)
+  call void @llvm.memcpy.p0.p0.i32(ptr noundef nonnull align 8 dereferenceable(40) %4, ptr noundef nonnull align 4 dereferenceable(40) %10, i32 40, i1 false)
+  call void @llvm.memcpy.p0.p0.i32(ptr noundef nonnull align 8 dereferenceable(40) %6, ptr noundef nonnull align 4 dereferenceable(40) %12, i32 40, i1 false)
+  call fastcc void @Hacl_Bignum25519_fsum(ptr noundef nonnull %4, ptr noundef %9)
+  call fastcc void @Hacl_Bignum25519_fsum(ptr noundef nonnull %6, ptr noundef %11)
+  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef nonnull %8, ptr noundef nonnull %4, ptr noundef nonnull %6)
+  %13 = getelementptr inbounds i8, ptr %4, i32 160
+  %14 = getelementptr inbounds i8, ptr %4, i32 200
+  %15 = call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_getz(ptr noundef %1)
+  %16 = call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_gett(ptr noundef %1)
+  %17 = call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_getz(ptr noundef %2)
+  %18 = call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_gett(ptr noundef %2)
+  call fastcc void @Hacl_Bignum25519_times_2d(ptr noundef nonnull %4, ptr noundef %16)
+  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef nonnull %6, ptr noundef nonnull %4, ptr noundef %18)
+  call fastcc void @Hacl_Bignum25519_times_2(ptr noundef nonnull %4, ptr noundef %15)
+  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef nonnull %13, ptr noundef nonnull %4, ptr noundef %17)
+  call void @llvm.memcpy.p0.p0.i32(ptr noundef nonnull align 8 dereferenceable(40) %4, ptr noundef nonnull align 8 dereferenceable(40) %7, i32 40, i1 false)
+  call void @llvm.memcpy.p0.p0.i32(ptr noundef nonnull align 8 dereferenceable(40) %14, ptr noundef nonnull align 8 dereferenceable(40) %6, i32 40, i1 false)
+  call fastcc void @Hacl_Bignum25519_fdifference_reduced(ptr noundef nonnull %4, ptr noundef nonnull %8)
+  call fastcc void @Hacl_Bignum25519_fdifference(ptr noundef nonnull %14, ptr noundef nonnull %13)
+  call fastcc void @Hacl_Bignum25519_fsum(ptr noundef nonnull %13, ptr noundef nonnull %6)
+  call fastcc void @Hacl_Bignum25519_fsum(ptr noundef nonnull %8, ptr noundef nonnull %7)
+  %19 = call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_getx(ptr noundef %0)
+  %20 = call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_gety(ptr noundef %0)
+  %21 = call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_getz(ptr noundef %0)
+  %22 = call fastcc ptr @Hacl_Impl_Ed25519_ExtPoint_gett(ptr noundef %0)
+  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef %19, ptr noundef nonnull %4, ptr noundef nonnull %14)
+  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef %20, ptr noundef nonnull %13, ptr noundef nonnull %8)
+  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef %22, ptr noundef nonnull %4, ptr noundef nonnull %8)
+  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef %21, ptr noundef nonnull %13, ptr noundef nonnull %14)
   ret void
 }
 
@@ -7587,7 +7561,7 @@ define internal fastcc zeroext i1 @Hacl_Impl_Ed25519_RecoverX_recover_x_(ptr nou
   %19 = getelementptr inbounds i8, ptr %1, i32 32
   %20 = load i64, ptr %19, align 4
   %21 = icmp eq i64 %20, 2251799813685247
-  br i1 %21, label %40, label %.critedge
+  br i1 %21, label %.thread90, label %.critedge
 
 .critedge:                                        ; preds = %4, %18
   call void @llvm.memset.p0.i32(ptr noundef nonnull align 8 dereferenceable(200) %5, i8 0, i32 200, i1 false)
@@ -7608,57 +7582,47 @@ define internal fastcc zeroext i1 @Hacl_Impl_Ed25519_RecoverX_recover_x_(ptr nou
 
 26:                                               ; preds = %.critedge
   %27 = icmp eq i64 %2, 0
-  br i1 %27, label %28, label %29
+  br i1 %27, label %28, label %.thread90
 
 28:                                               ; preds = %26
   call fastcc void @Hacl_Lib_Create64_make_h64_5(ptr noundef %0, i64 noundef 0, i64 noundef 0, i64 noundef 0, i64 noundef 0, i64 noundef 0)
-  br label %29
+  br label %.thread90
 
-29:                                               ; preds = %.critedge, %28, %26
-  %.086 = phi i32 [ 1, %28 ], [ 0, %26 ], [ 2, %.critedge ]
-  switch i32 %.086, label %31 [
-    i32 0, label %40
-    i32 1, label %30
-  ]
+29:                                               ; preds = %.critedge
+  %30 = getelementptr inbounds i8, ptr %3, i32 40
+  %31 = getelementptr inbounds i8, ptr %3, i32 80
+  %32 = getelementptr inbounds i8, ptr %3, i32 120
+  call fastcc void @Hacl_Impl_Ed25519_Pow2_252m2_pow2_252m2(ptr noundef nonnull %30, ptr noundef %3)
+  call fastcc void @Hacl_Bignum25519_fsquare(ptr noundef nonnull %31, ptr noundef nonnull %30)
+  call void @llvm.memcpy.p0.p0.i32(ptr noundef nonnull align 4 dereferenceable(40) %32, ptr noundef nonnull align 4 dereferenceable(40) %3, i32 40, i1 false)
+  call fastcc void @Hacl_Bignum25519_fdifference(ptr noundef nonnull %32, ptr noundef nonnull %31)
+  call fastcc void @Hacl_Bignum25519_reduce_513(ptr noundef nonnull %32)
+  call fastcc void @Hacl_Bignum25519_reduce(ptr noundef nonnull %32)
+  %33 = call fastcc zeroext i1 @Hacl_Impl_Ed25519_RecoverX_is_0(ptr noundef nonnull %32)
+  br i1 %33, label %35, label %34
 
-30:                                               ; preds = %29
-  br label %40
-
-31:                                               ; preds = %29
-  %32 = getelementptr inbounds i8, ptr %3, i32 40
-  %33 = getelementptr inbounds i8, ptr %3, i32 80
-  %34 = getelementptr inbounds i8, ptr %3, i32 120
-  call fastcc void @Hacl_Impl_Ed25519_Pow2_252m2_pow2_252m2(ptr noundef nonnull %32, ptr noundef %3)
-  call fastcc void @Hacl_Bignum25519_fsquare(ptr noundef nonnull %33, ptr noundef nonnull %32)
-  call void @llvm.memcpy.p0.p0.i32(ptr noundef nonnull align 4 dereferenceable(40) %34, ptr noundef nonnull align 4 dereferenceable(40) %3, i32 40, i1 false)
-  call fastcc void @Hacl_Bignum25519_fdifference(ptr noundef nonnull %34, ptr noundef nonnull %33)
-  call fastcc void @Hacl_Bignum25519_reduce_513(ptr noundef nonnull %34)
-  call fastcc void @Hacl_Bignum25519_reduce(ptr noundef nonnull %34)
-  %35 = call fastcc zeroext i1 @Hacl_Impl_Ed25519_RecoverX_is_0(ptr noundef nonnull %34)
-  br i1 %35, label %37, label %36
-
-36:                                               ; preds = %31
+34:                                               ; preds = %29
   call void @llvm.memset.p0.i32(ptr noundef nonnull align 8 dereferenceable(40) %6, i8 0, i32 40, i1 false)
   call fastcc void @Hacl_Lib_Create64_make_h64_5(ptr noundef nonnull %6, i64 noundef 1718705420411056, i64 noundef 234908883556509, i64 noundef 2233514472574048, i64 noundef 2117202627021982, i64 noundef 765476049583133)
-  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef nonnull %32, ptr noundef nonnull %32, ptr noundef nonnull %6)
-  br label %37
+  call fastcc void @Hacl_Bignum25519_fmul(ptr noundef nonnull %30, ptr noundef nonnull %30, ptr noundef nonnull %6)
+  br label %35
 
-37:                                               ; preds = %36, %31
+35:                                               ; preds = %34, %29
+  call fastcc void @Hacl_Bignum25519_reduce(ptr noundef nonnull %30)
+  call fastcc void @Hacl_Bignum25519_fsquare(ptr noundef nonnull %31, ptr noundef nonnull %30)
+  call void @llvm.memcpy.p0.p0.i32(ptr noundef nonnull align 4 dereferenceable(40) %32, ptr noundef nonnull align 4 dereferenceable(40) %3, i32 40, i1 false)
+  call fastcc void @Hacl_Bignum25519_fdifference(ptr noundef nonnull %32, ptr noundef nonnull %31)
+  call fastcc void @Hacl_Bignum25519_reduce_513(ptr noundef nonnull %32)
   call fastcc void @Hacl_Bignum25519_reduce(ptr noundef nonnull %32)
-  call fastcc void @Hacl_Bignum25519_fsquare(ptr noundef nonnull %33, ptr noundef nonnull %32)
-  call void @llvm.memcpy.p0.p0.i32(ptr noundef nonnull align 4 dereferenceable(40) %34, ptr noundef nonnull align 4 dereferenceable(40) %3, i32 40, i1 false)
-  call fastcc void @Hacl_Bignum25519_fdifference(ptr noundef nonnull %34, ptr noundef nonnull %33)
-  call fastcc void @Hacl_Bignum25519_reduce_513(ptr noundef nonnull %34)
-  call fastcc void @Hacl_Bignum25519_reduce(ptr noundef nonnull %34)
-  %38 = call fastcc zeroext i1 @Hacl_Impl_Ed25519_RecoverX_is_0(ptr noundef nonnull %34)
-  br i1 %38, label %39, label %40
+  %36 = call fastcc zeroext i1 @Hacl_Impl_Ed25519_RecoverX_is_0(ptr noundef nonnull %32)
+  br i1 %36, label %37, label %.thread90
 
-39:                                               ; preds = %37
-  call fastcc void @Hacl_Impl_Ed25519_RecoverX_recover_x_step_5(ptr noundef %0, i64 noundef %2, ptr noundef %3)
-  br label %40
+37:                                               ; preds = %35
+  call fastcc void @Hacl_Impl_Ed25519_RecoverX_recover_x_step_5(ptr noundef %0, i64 noundef %2, ptr noundef nonnull %3)
+  br label %.thread90
 
-40:                                               ; preds = %37, %29, %18, %39, %30
-  %.0 = phi i1 [ true, %30 ], [ true, %39 ], [ false, %18 ], [ false, %29 ], [ false, %37 ]
+.thread90:                                        ; preds = %26, %35, %18, %37, %28
+  %.0 = phi i1 [ true, %28 ], [ true, %37 ], [ false, %18 ], [ false, %35 ], [ false, %26 ]
   ret i1 %.0
 }
 
@@ -7762,19 +7726,24 @@ define internal fastcc void @Hacl_Bignum_Crecip_crecip_(ptr noundef %0, ptr noun
 
 ; Function Attrs: noinline nounwind uwtable
 define internal fastcc void @Hacl_EC_Format_fexpand.67(ptr noundef %0, ptr noundef %1) unnamed_addr #0 {
-  %3 = tail call fastcc i64 @load64.38(ptr noundef %1)
+  %.val26 = load i64, ptr %1, align 1
+  %3 = tail call fastcc i64 @load64.38(i64 %.val26)
   %4 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %3)
   %5 = getelementptr inbounds i8, ptr %1, i32 6
-  %6 = tail call fastcc i64 @load64.38(ptr noundef nonnull %5)
+  %.val25 = load i64, ptr %5, align 1
+  %6 = tail call fastcc i64 @load64.38(i64 %.val25)
   %7 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %6)
   %8 = getelementptr inbounds i8, ptr %1, i32 12
-  %9 = tail call fastcc i64 @load64.38(ptr noundef nonnull %8)
+  %.val24 = load i64, ptr %8, align 1
+  %9 = tail call fastcc i64 @load64.38(i64 %.val24)
   %10 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %9)
   %11 = getelementptr inbounds i8, ptr %1, i32 19
-  %12 = tail call fastcc i64 @load64.38(ptr noundef nonnull %11)
+  %.val23 = load i64, ptr %11, align 1
+  %12 = tail call fastcc i64 @load64.38(i64 %.val23)
   %13 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %12)
   %14 = getelementptr inbounds i8, ptr %1, i32 24
-  %15 = tail call fastcc i64 @load64.38(ptr noundef nonnull %14)
+  %.val = load i64, ptr %14, align 1
+  %15 = tail call fastcc i64 @load64.38(i64 %.val)
   %16 = tail call fastcc i64 @__uint64_identity.39(i64 noundef %15)
   %17 = and i64 %4, 2251799813685247
   %18 = lshr i64 %7, 3
@@ -8402,7 +8371,8 @@ define internal fastcc void @Hacl_Hash_Lib_LoadStore_uint32s_from_be_bytes(ptr n
 5:                                                ; preds = %3
   %6 = shl nuw nsw i32 %.0, 2
   %7 = getelementptr inbounds i8, ptr %1, i32 %6
-  %8 = tail call fastcc i32 @load32.71(ptr noundef %7)
+  %.val = load i32, ptr %7, align 1
+  %8 = tail call fastcc i32 @load32.71(i32 %.val)
   %9 = tail call fastcc i32 @__bswap_32(i32 noundef %8)
   %10 = getelementptr inbounds i32, ptr %0, i32 %.0
   store i32 %9, ptr %10, align 4
@@ -8414,9 +8384,8 @@ define internal fastcc void @Hacl_Hash_Lib_LoadStore_uint32s_from_be_bytes(ptr n
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i32 @load32.71(ptr noundef %0) unnamed_addr #0 {
-  %.0.copyload = load i32, ptr %0, align 1
-  ret i32 %.0.copyload
+define internal fastcc i32 @load32.71(i32 %.0.val) unnamed_addr #0 {
+  ret i32 %.0.val
 }
 
 ; Function Attrs: noinline nounwind uwtable
@@ -8514,7 +8483,7 @@ define dso_local zeroext i8 @Hacl_Policies_cmp_bytes_(ptr noundef %0, ptr nounde
   %13 = tail call fastcc zeroext i8 @FStar_UInt8_eq_mask(i8 noundef zeroext %9, i8 noundef zeroext %11)
   %14 = and i8 %13, %12
   store i8 %14, ptr %3, align 1
-  %15 = add i32 %.0, 1
+  %15 = add nuw i32 %.0, 1
   br label %5, !llvm.loop !30
 
 16:                                               ; preds = %5
@@ -8552,12 +8521,12 @@ define dso_local ptr @Hacl_Poly1305_32_op_String_Access(ptr noundef %0, ptr noun
 
 ; Function Attrs: noinline nounwind uwtable
 define dso_local void @Hacl_Poly1305_32_mk_state(ptr dead_on_unwind noalias writable sret(%struct.Hacl_Impl_Poly1305_64_State_poly1305_state) align 4 %0, ptr noundef %1, ptr noundef %2) local_unnamed_addr #0 {
-  tail call fastcc void @Hacl_Impl_Poly1305_32_mk_state(ptr dead_on_unwind writable sret(%struct.Hacl_Impl_Poly1305_64_State_poly1305_state) align 4 %0, ptr noundef %1, ptr noundef %2)
+  tail call fastcc void @Hacl_Impl_Poly1305_32_mk_state(ptr dead_on_unwind noalias writable align 4 %0, ptr noundef %1, ptr noundef %2)
   ret void
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @Hacl_Impl_Poly1305_32_mk_state(ptr dead_on_unwind noalias writable sret(%struct.Hacl_Impl_Poly1305_64_State_poly1305_state) align 4 %0, ptr noundef %1, ptr noundef %2) unnamed_addr #0 {
+define internal fastcc void @Hacl_Impl_Poly1305_32_mk_state(ptr dead_on_unwind noalias writable align 4 %0, ptr noundef %1, ptr noundef %2) unnamed_addr #0 {
   store ptr %1, ptr %0, align 4
   %4 = getelementptr inbounds i8, ptr %0, i32 4
   store ptr %2, ptr %4, align 4
@@ -8576,7 +8545,7 @@ define dso_local void @Hacl_Poly1305_32_init(ptr %0, ptr %1, ptr noundef %2) loc
   %11 = alloca %struct.FStar_UInt128_uint128, align 8
   %12 = alloca %struct.FStar_UInt128_uint128, align 8
   %13 = alloca %struct.FStar_UInt128_uint128, align 8
-  call fastcc void @load128_le.74(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %4, ptr noundef %2)
+  call fastcc void @load128_le.74(ptr dead_on_unwind noalias nonnull writable align 4 %4, ptr noundef %2)
   call void @FStar_UInt128_uint64_to_uint128(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %8, i64 noundef 1152921487695413244)
   %14 = load i64, ptr %8, align 8
   %15 = getelementptr inbounds i8, ptr %8, i32 8
@@ -8644,18 +8613,20 @@ define dso_local void @Hacl_Poly1305_32_init(ptr %0, ptr %1, ptr noundef %2) loc
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @load128_le.74(ptr dead_on_unwind noalias writable sret(%struct.FStar_UInt128_uint128) align 4 %0, ptr noundef %1) unnamed_addr #0 {
+define internal fastcc void @load128_le.74(ptr dead_on_unwind noalias writable align 4 %0, ptr noundef %1) unnamed_addr #0 {
   tail call fastcc void @load128_le_.75(ptr noundef %1, ptr noundef %0)
   ret void
 }
 
 ; Function Attrs: noinline nounwind uwtable
 define internal fastcc void @load128_le_.75(ptr noundef %0, ptr noundef %1) unnamed_addr #0 {
-  %3 = tail call fastcc i64 @load64.76(ptr noundef %0)
+  %.val = load i64, ptr %0, align 1
+  %3 = tail call fastcc i64 @load64.76(i64 %.val)
   %4 = tail call fastcc i64 @__uint64_identity.77(i64 noundef %3)
   store i64 %4, ptr %1, align 4
   %5 = getelementptr inbounds i8, ptr %0, i32 8
-  %6 = tail call fastcc i64 @load64.76(ptr noundef nonnull %5)
+  %.val4 = load i64, ptr %5, align 1
+  %6 = tail call fastcc i64 @load64.76(i64 %.val4)
   %7 = tail call fastcc i64 @__uint64_identity.77(i64 noundef %6)
   %8 = getelementptr inbounds i8, ptr %1, i32 8
   store i64 %7, ptr %8, align 4
@@ -8663,9 +8634,8 @@ define internal fastcc void @load128_le_.75(ptr noundef %0, ptr noundef %1) unna
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i64 @load64.76(ptr noundef %0) unnamed_addr #0 {
-  %.0.copyload = load i64, ptr %0, align 1
-  ret i64 %.0.copyload
+define internal fastcc i64 @load64.76(i64 %.0.val) unnamed_addr #0 {
+  ret i64 %.0.val
 }
 
 ; Function Attrs: noinline nounwind uwtable
@@ -8682,20 +8652,24 @@ define dso_local void @Hacl_Poly1305_32_update_block(ptr %0, ptr %1, ptr noundef
 ; Function Attrs: noinline nounwind uwtable
 define internal fastcc void @Hacl_Impl_Poly1305_32_poly1305_update(ptr %0, ptr %1, ptr noundef %2) unnamed_addr #0 {
   %4 = alloca [5 x i32], align 4
-  call void @llvm.memset.p0.i32(ptr noundef nonnull align 4 dereferenceable(20) %4, i8 0, i32 20, i1 false)
   %5 = getelementptr inbounds i8, ptr %2, i32 3
   %6 = getelementptr inbounds i8, ptr %2, i32 6
   %7 = getelementptr inbounds i8, ptr %2, i32 9
   %8 = getelementptr inbounds i8, ptr %2, i32 12
-  %9 = tail call fastcc i32 @load32.78(ptr noundef %2)
+  %.val = load i32, ptr %2, align 1
+  %9 = tail call fastcc i32 @load32.78(i32 %.val)
   %10 = tail call fastcc i32 @__uint32_identity.79(i32 noundef %9)
-  %11 = tail call fastcc i32 @load32.78(ptr noundef nonnull %5)
+  %.val27 = load i32, ptr %5, align 1
+  %11 = tail call fastcc i32 @load32.78(i32 %.val27)
   %12 = tail call fastcc i32 @__uint32_identity.79(i32 noundef %11)
-  %13 = tail call fastcc i32 @load32.78(ptr noundef nonnull %6)
+  %.val28 = load i32, ptr %6, align 1
+  %13 = tail call fastcc i32 @load32.78(i32 %.val28)
   %14 = tail call fastcc i32 @__uint32_identity.79(i32 noundef %13)
-  %15 = tail call fastcc i32 @load32.78(ptr noundef nonnull %7)
+  %.val29 = load i32, ptr %7, align 1
+  %15 = tail call fastcc i32 @load32.78(i32 %.val29)
   %16 = tail call fastcc i32 @__uint32_identity.79(i32 noundef %15)
-  %17 = tail call fastcc i32 @load32.78(ptr noundef nonnull %8)
+  %.val30 = load i32, ptr %8, align 1
+  %17 = tail call fastcc i32 @load32.78(i32 %.val30)
   %18 = tail call fastcc i32 @__uint32_identity.79(i32 noundef %17)
   %19 = and i32 %10, 67108863
   %20 = lshr i32 %12, 2
@@ -8719,9 +8693,8 @@ define internal fastcc void @Hacl_Impl_Poly1305_32_poly1305_update(ptr %0, ptr %
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i32 @load32.78(ptr noundef %0) unnamed_addr #0 {
-  %.0.copyload = load i32, ptr %0, align 1
-  ret i32 %.0.copyload
+define internal fastcc i32 @load32.78(i32 %.0.val) unnamed_addr #0 {
+  ret i32 %.0.val
 }
 
 ; Function Attrs: noinline nounwind uwtable
@@ -8976,14 +8949,14 @@ define dso_local void @Hacl_Poly1305_32_update(ptr %0, ptr %1, ptr noundef %2, i
   br label %tailrecurse
 
 tailrecurse:                                      ; preds = %6, %4
-  %.tr9 = phi ptr [ %2, %4 ], [ %7, %6 ]
-  %.tr10 = phi i32 [ %3, %4 ], [ %8, %6 ]
+  %.tr9 = phi ptr [ %2, %4 ], [ %8, %6 ]
+  %.tr10 = phi i32 [ %3, %4 ], [ %7, %6 ]
   %5 = icmp eq i32 %.tr10, 0
   br i1 %5, label %9, label %6
 
 6:                                                ; preds = %tailrecurse
-  %7 = getelementptr inbounds i8, ptr %.tr9, i32 16
-  %8 = add i32 %.tr10, -1
+  %7 = add i32 %.tr10, -1
+  %8 = getelementptr inbounds i8, ptr %.tr9, i32 16
   tail call void @Hacl_Poly1305_32_update_block(ptr %0, ptr %1, ptr noundef %.tr9)
   br label %tailrecurse
 
@@ -9217,20 +9190,24 @@ define internal fastcc range(i32 -1, 1) i32 @FStar_UInt32_eq_mask(i32 noundef %0
 ; Function Attrs: noinline nounwind uwtable
 define internal fastcc void @Hacl_Impl_Poly1305_32_poly1305_process_last_block_(ptr noundef %0, ptr %1, ptr %2) unnamed_addr #0 {
   %4 = alloca [5 x i32], align 4
-  call void @llvm.memset.p0.i32(ptr noundef nonnull align 4 dereferenceable(20) %4, i8 0, i32 20, i1 false)
   %5 = getelementptr inbounds i8, ptr %0, i32 3
   %6 = getelementptr inbounds i8, ptr %0, i32 6
   %7 = getelementptr inbounds i8, ptr %0, i32 9
   %8 = getelementptr inbounds i8, ptr %0, i32 12
-  %9 = tail call fastcc i32 @load32.78(ptr noundef %0)
+  %.val26 = load i32, ptr %0, align 1
+  %9 = tail call fastcc i32 @load32.78(i32 %.val26)
   %10 = tail call fastcc i32 @__uint32_identity.79(i32 noundef %9)
-  %11 = tail call fastcc i32 @load32.78(ptr noundef nonnull %5)
+  %.val25 = load i32, ptr %5, align 1
+  %11 = tail call fastcc i32 @load32.78(i32 %.val25)
   %12 = tail call fastcc i32 @__uint32_identity.79(i32 noundef %11)
-  %13 = tail call fastcc i32 @load32.78(ptr noundef nonnull %6)
+  %.val24 = load i32, ptr %6, align 1
+  %13 = tail call fastcc i32 @load32.78(i32 %.val24)
   %14 = tail call fastcc i32 @__uint32_identity.79(i32 noundef %13)
-  %15 = tail call fastcc i32 @load32.78(ptr noundef nonnull %7)
+  %.val23 = load i32, ptr %7, align 1
+  %15 = tail call fastcc i32 @load32.78(i32 %.val23)
   %16 = tail call fastcc i32 @__uint32_identity.79(i32 noundef %15)
-  %17 = tail call fastcc i32 @load32.78(ptr noundef nonnull %8)
+  %.val = load i32, ptr %8, align 1
+  %17 = tail call fastcc i32 @load32.78(i32 %.val)
   %18 = tail call fastcc i32 @__uint32_identity.79(i32 noundef %17)
   %19 = and i32 %10, 67108863
   %20 = lshr i32 %12, 2
@@ -9269,7 +9246,7 @@ define dso_local void @Hacl_Poly1305_32_finish(ptr %0, ptr %1, ptr noundef %2, p
   %17 = alloca %struct.FStar_UInt128_uint128, align 8
   %18 = alloca %struct.FStar_UInt128_uint128, align 8
   %19 = alloca %struct.FStar_UInt128_uint128, align 8
-  call fastcc void @load128_le.74(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %5, ptr noundef %3)
+  call fastcc void @load128_le.74(ptr dead_on_unwind noalias nonnull writable align 4 %5, ptr noundef %3)
   %20 = load i32, ptr %1, align 4
   %21 = getelementptr inbounds i8, ptr %1, i32 4
   %22 = load i32, ptr %21, align 4
@@ -9409,14 +9386,14 @@ define internal fastcc void @Hacl_Standalone_Poly1305_32_crypto_onetimeauth_(ptr
   %21 = alloca %struct.FStar_UInt128_uint128, align 8
   call void @llvm.memset.p0.i32(ptr noundef nonnull align 4 dereferenceable(40) %5, i8 0, i32 40, i1 false)
   %22 = getelementptr inbounds i8, ptr %5, i32 20
-  call fastcc void @Hacl_Impl_Poly1305_32_mk_state(ptr dead_on_unwind nonnull writable sret(%struct.Hacl_Impl_Poly1305_64_State_poly1305_state) align 4 %6, ptr noundef nonnull %5, ptr noundef nonnull %22)
+  call fastcc void @Hacl_Impl_Poly1305_32_mk_state(ptr dead_on_unwind noalias nonnull writable align 4 %6, ptr noundef nonnull %5, ptr noundef nonnull %22)
   %23 = getelementptr inbounds i8, ptr %3, i32 16
   %24 = load ptr, ptr %6, align 4
   %25 = getelementptr inbounds i8, ptr %6, i32 4
   %26 = load ptr, ptr %25, align 4
   call fastcc void @Hacl_Standalone_Poly1305_32_poly1305_complete(ptr %24, ptr %26, ptr noundef %1, i64 noundef %2, ptr noundef %3)
   %.sroa.1.0.copyload = load ptr, ptr %25, align 4
-  call fastcc void @load128_le.74(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %7, ptr noundef nonnull %23)
+  call fastcc void @load128_le.74(ptr dead_on_unwind noalias nonnull writable align 4 %7, ptr noundef nonnull %23)
   %27 = load i32, ptr %.sroa.1.0.copyload, align 4
   %28 = getelementptr inbounds i8, ptr %.sroa.1.0.copyload, i32 4
   %29 = load i32, ptr %28, align 4
@@ -9526,7 +9503,7 @@ define internal fastcc void @Hacl_Standalone_Poly1305_32_poly1305_partial(ptr %0
   %13 = alloca %struct.FStar_UInt128_uint128, align 8
   %14 = alloca %struct.FStar_UInt128_uint128, align 8
   %15 = alloca %struct.FStar_UInt128_uint128, align 8
-  call fastcc void @load128_le.74(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %6, ptr noundef %4)
+  call fastcc void @load128_le.74(ptr dead_on_unwind noalias nonnull writable align 4 %6, ptr noundef %4)
   call void @FStar_UInt128_uint64_to_uint128(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %10, i64 noundef 1152921487695413244)
   %16 = load i64, ptr %10, align 8
   %17 = getelementptr inbounds i8, ptr %10, i32 8
@@ -9599,15 +9576,15 @@ define internal fastcc void @Hacl_Standalone_Poly1305_32_poly1305_blocks(ptr %0,
   br label %tailrecurse
 
 tailrecurse:                                      ; preds = %6, %4
-  %.tr9 = phi ptr [ %2, %4 ], [ %7, %6 ]
-  %.tr10 = phi i64 [ %3, %4 ], [ %8, %6 ]
+  %.tr9 = phi ptr [ %2, %4 ], [ %8, %6 ]
+  %.tr10 = phi i64 [ %3, %4 ], [ %7, %6 ]
   %5 = icmp eq i64 %.tr10, 0
   br i1 %5, label %9, label %6
 
 6:                                                ; preds = %tailrecurse
-  %7 = getelementptr inbounds i8, ptr %.tr9, i32 16
+  %7 = add nsw i64 %.tr10, -1
+  %8 = getelementptr inbounds i8, ptr %.tr9, i32 16
   tail call fastcc void @Hacl_Impl_Poly1305_32_poly1305_update(ptr %0, ptr %1, ptr noundef %.tr9)
-  %8 = add nsw i64 %.tr10, -1
   br label %tailrecurse
 
 9:                                                ; preds = %tailrecurse
@@ -9616,12 +9593,12 @@ tailrecurse:                                      ; preds = %6, %4
 
 ; Function Attrs: noinline nounwind uwtable
 define dso_local void @Hacl_Poly1305_64_mk_state(ptr dead_on_unwind noalias writable sret(%struct.Hacl_Impl_Poly1305_64_State_poly1305_state) align 4 %0, ptr noundef %1, ptr noundef %2) local_unnamed_addr #0 {
-  tail call fastcc void @Hacl_Impl_Poly1305_64_mk_state.94(ptr dead_on_unwind writable sret(%struct.Hacl_Impl_Poly1305_64_State_poly1305_state) align 4 %0, ptr noundef %1, ptr noundef %2)
+  tail call fastcc void @Hacl_Impl_Poly1305_64_mk_state.94(ptr dead_on_unwind noalias writable align 4 %0, ptr noundef %1, ptr noundef %2)
   ret void
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @Hacl_Impl_Poly1305_64_mk_state.94(ptr dead_on_unwind noalias writable sret(%struct.Hacl_Impl_Poly1305_64_State_poly1305_state) align 4 %0, ptr noundef %1, ptr noundef %2) unnamed_addr #0 {
+define internal fastcc void @Hacl_Impl_Poly1305_64_mk_state.94(ptr dead_on_unwind noalias writable align 4 %0, ptr noundef %1, ptr noundef %2) unnamed_addr #0 {
   store ptr %1, ptr %0, align 4
   %4 = getelementptr inbounds i8, ptr %0, i32 4
   store ptr %2, ptr %4, align 4
@@ -9638,7 +9615,7 @@ define dso_local void @Hacl_Poly1305_64_init(ptr %0, ptr %1, ptr noundef %2) loc
   %9 = alloca %struct.FStar_UInt128_uint128, align 8
   %10 = alloca %struct.FStar_UInt128_uint128, align 8
   %11 = alloca %struct.FStar_UInt128_uint128, align 8
-  call fastcc void @load128_le.95(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %4, ptr noundef %2)
+  call fastcc void @load128_le.95(ptr dead_on_unwind noalias nonnull writable align 4 %4, ptr noundef %2)
   call void @FStar_UInt128_uint64_to_uint128(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %8, i64 noundef 1152921487695413244)
   %12 = load i64, ptr %8, align 8
   %13 = getelementptr inbounds i8, ptr %8, i32 8
@@ -9684,18 +9661,20 @@ define dso_local void @Hacl_Poly1305_64_init(ptr %0, ptr %1, ptr noundef %2) loc
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @load128_le.95(ptr dead_on_unwind noalias writable sret(%struct.FStar_UInt128_uint128) align 4 %0, ptr noundef %1) unnamed_addr #0 {
+define internal fastcc void @load128_le.95(ptr dead_on_unwind noalias writable align 4 %0, ptr noundef %1) unnamed_addr #0 {
   tail call fastcc void @load128_le_.96(ptr noundef %1, ptr noundef %0)
   ret void
 }
 
 ; Function Attrs: noinline nounwind uwtable
 define internal fastcc void @load128_le_.96(ptr noundef %0, ptr noundef %1) unnamed_addr #0 {
-  %3 = tail call fastcc i64 @load64.97(ptr noundef %0)
+  %.val = load i64, ptr %0, align 1
+  %3 = tail call fastcc i64 @load64.97(i64 %.val)
   %4 = tail call fastcc i64 @__uint64_identity.98(i64 noundef %3)
   store i64 %4, ptr %1, align 4
   %5 = getelementptr inbounds i8, ptr %0, i32 8
-  %6 = tail call fastcc i64 @load64.97(ptr noundef nonnull %5)
+  %.val4 = load i64, ptr %5, align 1
+  %6 = tail call fastcc i64 @load64.97(i64 %.val4)
   %7 = tail call fastcc i64 @__uint64_identity.98(i64 noundef %6)
   %8 = getelementptr inbounds i8, ptr %1, i32 8
   store i64 %7, ptr %8, align 4
@@ -9703,9 +9682,8 @@ define internal fastcc void @load128_le_.96(ptr noundef %0, ptr noundef %1) unna
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i64 @load64.97(ptr noundef %0) unnamed_addr #0 {
-  %.0.copyload = load i64, ptr %0, align 1
-  ret i64 %.0.copyload
+define internal fastcc i64 @load64.97(i64 %.0.val) unnamed_addr #0 {
+  ret i64 %.0.val
 }
 
 ; Function Attrs: noinline nounwind uwtable
@@ -9725,8 +9703,7 @@ define internal fastcc void @Hacl_Impl_Poly1305_64_poly1305_update.99(ptr %0, pt
   %5 = alloca %struct.FStar_UInt128_uint128, align 8
   %6 = alloca %struct.FStar_UInt128_uint128, align 8
   %7 = alloca %struct.FStar_UInt128_uint128, align 8
-  call void @llvm.memset.p0.i32(ptr noundef nonnull align 8 dereferenceable(24) %4, i8 0, i32 24, i1 false)
-  call fastcc void @load128_le.95(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %5, ptr noundef %2)
+  call fastcc void @load128_le.95(ptr dead_on_unwind noalias nonnull writable align 4 %5, ptr noundef %2)
   %8 = load i64, ptr %5, align 8
   %9 = getelementptr inbounds i8, ptr %5, i32 8
   %10 = call i64 @FStar_UInt128_uint128_to_uint64(i64 %8, i64 poison)
@@ -9982,14 +9959,14 @@ define dso_local void @Hacl_Poly1305_64_update(ptr %0, ptr %1, ptr noundef %2, i
   br label %tailrecurse
 
 tailrecurse:                                      ; preds = %6, %4
-  %.tr9 = phi ptr [ %2, %4 ], [ %7, %6 ]
-  %.tr10 = phi i32 [ %3, %4 ], [ %8, %6 ]
+  %.tr9 = phi ptr [ %2, %4 ], [ %8, %6 ]
+  %.tr10 = phi i32 [ %3, %4 ], [ %7, %6 ]
   %5 = icmp eq i32 %.tr10, 0
   br i1 %5, label %9, label %6
 
 6:                                                ; preds = %tailrecurse
-  %7 = getelementptr inbounds i8, ptr %.tr9, i32 16
-  %8 = add i32 %.tr10, -1
+  %7 = add i32 %.tr10, -1
+  %8 = getelementptr inbounds i8, ptr %.tr9, i32 16
   tail call void @Hacl_Poly1305_64_update_block(ptr %0, ptr %1, ptr noundef %.tr9)
   br label %tailrecurse
 
@@ -10170,8 +10147,7 @@ define internal fastcc void @Hacl_Impl_Poly1305_64_poly1305_process_last_block_(
   %5 = alloca %struct.FStar_UInt128_uint128, align 8
   %6 = alloca %struct.FStar_UInt128_uint128, align 8
   %7 = alloca %struct.FStar_UInt128_uint128, align 8
-  call void @llvm.memset.p0.i32(ptr noundef nonnull align 8 dereferenceable(24) %4, i8 0, i32 24, i1 false)
-  call fastcc void @load128_le.95(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %5, ptr noundef %0)
+  call fastcc void @load128_le.95(ptr dead_on_unwind noalias nonnull writable align 4 %5, ptr noundef %0)
   %8 = load i64, ptr %5, align 8
   %9 = getelementptr inbounds i8, ptr %5, i32 8
   %10 = call i64 @FStar_UInt128_uint128_to_uint64(i64 %8, i64 poison)
@@ -10204,7 +10180,7 @@ define dso_local void @Hacl_Poly1305_64_finish(ptr %0, ptr %1, ptr noundef %2, p
   %8 = alloca %struct.FStar_UInt128_uint128, align 8
   %9 = alloca %struct.FStar_UInt128_uint128, align 8
   %10 = alloca %struct.FStar_UInt128_uint128, align 8
-  call fastcc void @load128_le.95(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %5, ptr noundef %3)
+  call fastcc void @load128_le.95(ptr dead_on_unwind noalias nonnull writable align 4 %5, ptr noundef %3)
   %11 = load i64, ptr %1, align 4
   %12 = getelementptr inbounds i8, ptr %1, i32 8
   %13 = load i64, ptr %12, align 4
@@ -10295,14 +10271,14 @@ define internal fastcc void @Hacl_Standalone_Poly1305_64_crypto_onetimeauth_(ptr
   %12 = alloca %struct.FStar_UInt128_uint128, align 8
   call void @llvm.memset.p0.i32(ptr noundef nonnull align 8 dereferenceable(48) %5, i8 0, i32 48, i1 false)
   %13 = getelementptr inbounds i8, ptr %5, i32 24
-  call fastcc void @Hacl_Impl_Poly1305_64_mk_state.94(ptr dead_on_unwind nonnull writable sret(%struct.Hacl_Impl_Poly1305_64_State_poly1305_state) align 4 %6, ptr noundef nonnull %5, ptr noundef nonnull %13)
+  call fastcc void @Hacl_Impl_Poly1305_64_mk_state.94(ptr dead_on_unwind noalias nonnull writable align 4 %6, ptr noundef nonnull %5, ptr noundef nonnull %13)
   %14 = getelementptr inbounds i8, ptr %3, i32 16
   %15 = load ptr, ptr %6, align 4
   %16 = getelementptr inbounds i8, ptr %6, i32 4
   %17 = load ptr, ptr %16, align 4
   call fastcc void @Hacl_Standalone_Poly1305_64_poly1305_complete(ptr %15, ptr %17, ptr noundef %1, i64 noundef %2, ptr noundef %3)
   %.sroa.1.0.copyload = load ptr, ptr %16, align 4
-  call fastcc void @load128_le.95(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %7, ptr noundef nonnull %14)
+  call fastcc void @load128_le.95(ptr dead_on_unwind noalias nonnull writable align 4 %7, ptr noundef nonnull %14)
   %18 = load i64, ptr %.sroa.1.0.copyload, align 4
   %19 = getelementptr inbounds i8, ptr %.sroa.1.0.copyload, i32 8
   %20 = load i64, ptr %19, align 4
@@ -10370,7 +10346,7 @@ define internal fastcc void @Hacl_Standalone_Poly1305_64_poly1305_partial.117(pt
   %11 = alloca %struct.FStar_UInt128_uint128, align 8
   %12 = alloca %struct.FStar_UInt128_uint128, align 8
   %13 = alloca %struct.FStar_UInt128_uint128, align 8
-  call fastcc void @load128_le.95(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %6, ptr noundef %4)
+  call fastcc void @load128_le.95(ptr dead_on_unwind noalias nonnull writable align 4 %6, ptr noundef %4)
   call void @FStar_UInt128_uint64_to_uint128(ptr dead_on_unwind nonnull writable sret(%struct.FStar_UInt128_uint128) align 4 %10, i64 noundef 1152921487695413244)
   %14 = load i64, ptr %10, align 8
   %15 = getelementptr inbounds i8, ptr %10, i32 8
@@ -10421,15 +10397,15 @@ define internal fastcc void @Hacl_Standalone_Poly1305_64_poly1305_blocks.118(ptr
   br label %tailrecurse
 
 tailrecurse:                                      ; preds = %6, %4
-  %.tr9 = phi ptr [ %2, %4 ], [ %7, %6 ]
-  %.tr10 = phi i64 [ %3, %4 ], [ %8, %6 ]
+  %.tr9 = phi ptr [ %2, %4 ], [ %8, %6 ]
+  %.tr10 = phi i64 [ %3, %4 ], [ %7, %6 ]
   %5 = icmp eq i64 %.tr10, 0
   br i1 %5, label %9, label %6
 
 6:                                                ; preds = %tailrecurse
-  %7 = getelementptr inbounds i8, ptr %.tr9, i32 16
+  %7 = add nsw i64 %.tr10, -1
+  %8 = getelementptr inbounds i8, ptr %.tr9, i32 16
   tail call fastcc void @Hacl_Impl_Poly1305_64_poly1305_update.99(ptr %0, ptr %1, ptr noundef %.tr9)
-  %8 = add nsw i64 %.tr10, -1
   br label %tailrecurse
 
 9:                                                ; preds = %tailrecurse
@@ -10817,7 +10793,8 @@ define internal fastcc void @Hacl_Hash_Lib_LoadStore_uint32s_from_be_bytes.121(p
 5:                                                ; preds = %3
   %6 = shl nuw nsw i32 %.0, 2
   %7 = getelementptr inbounds i8, ptr %1, i32 %6
-  %8 = tail call fastcc i32 @load32.122(ptr noundef %7)
+  %.val = load i32, ptr %7, align 1
+  %8 = tail call fastcc i32 @load32.122(i32 %.val)
   %9 = tail call fastcc i32 @__bswap_32.123(i32 noundef %8)
   %10 = getelementptr inbounds i32, ptr %0, i32 %.0
   store i32 %9, ptr %10, align 4
@@ -10829,9 +10806,8 @@ define internal fastcc void @Hacl_Hash_Lib_LoadStore_uint32s_from_be_bytes.121(p
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i32 @load32.122(ptr noundef %0) unnamed_addr #0 {
-  %.0.copyload = load i32, ptr %0, align 1
-  ret i32 %.0.copyload
+define internal fastcc i32 @load32.122(i32 %.0.val) unnamed_addr #0 {
+  ret i32 %.0.val
 }
 
 ; Function Attrs: noinline nounwind uwtable
@@ -10859,7 +10835,7 @@ define internal fastcc void @Hacl_Impl_SHA2_256_update_multi.124(ptr noundef %0,
   %7 = shl i32 %.0, 6
   %8 = getelementptr inbounds i8, ptr %1, i32 %7
   tail call fastcc void @Hacl_Impl_SHA2_256_update.120(ptr noundef %0, ptr noundef %8)
-  %9 = add i32 %.0, 1
+  %9 = add nuw i32 %.0, 1
   br label %4, !llvm.loop !34
 
 10:                                               ; preds = %4
@@ -11439,7 +11415,8 @@ define internal fastcc void @Hacl_Hash_Lib_LoadStore_uint64s_from_be_bytes.132(p
 5:                                                ; preds = %3
   %6 = shl nuw nsw i32 %.0, 3
   %7 = getelementptr inbounds i8, ptr %1, i32 %6
-  %8 = tail call fastcc i64 @load64.133(ptr noundef %7)
+  %.val = load i64, ptr %7, align 1
+  %8 = tail call fastcc i64 @load64.133(i64 %.val)
   %9 = tail call fastcc i64 @__bswap_64.134(i64 noundef %8)
   %10 = getelementptr inbounds i64, ptr %0, i32 %.0
   store i64 %9, ptr %10, align 4
@@ -11451,9 +11428,8 @@ define internal fastcc void @Hacl_Hash_Lib_LoadStore_uint64s_from_be_bytes.132(p
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i64 @load64.133(ptr noundef %0) unnamed_addr #0 {
-  %.0.copyload = load i64, ptr %0, align 1
-  ret i64 %.0.copyload
+define internal fastcc i64 @load64.133(i64 %.0.val) unnamed_addr #0 {
+  ret i64 %.0.val
 }
 
 ; Function Attrs: noinline nounwind uwtable
@@ -11481,7 +11457,7 @@ define internal fastcc void @Hacl_Impl_SHA2_384_update_multi(ptr noundef %0, ptr
   %7 = shl i32 %.0, 7
   %8 = getelementptr inbounds i8, ptr %1, i32 %7
   tail call fastcc void @Hacl_Impl_SHA2_384_update(ptr noundef %0, ptr noundef %8)
-  %9 = add i32 %.0, 1
+  %9 = add nuw i32 %.0, 1
   br label %4, !llvm.loop !38
 
 10:                                               ; preds = %4
@@ -12090,7 +12066,8 @@ define internal fastcc void @Hacl_Hash_Lib_LoadStore_uint64s_from_be_bytes.141(p
 5:                                                ; preds = %3
   %6 = shl nuw nsw i32 %.0, 3
   %7 = getelementptr inbounds i8, ptr %1, i32 %6
-  %8 = tail call fastcc i64 @load64.142(ptr noundef %7)
+  %.val = load i64, ptr %7, align 1
+  %8 = tail call fastcc i64 @load64.142(i64 %.val)
   %9 = tail call fastcc i64 @__bswap_64.143(i64 noundef %8)
   %10 = getelementptr inbounds i64, ptr %0, i32 %.0
   store i64 %9, ptr %10, align 4
@@ -12102,9 +12079,8 @@ define internal fastcc void @Hacl_Hash_Lib_LoadStore_uint64s_from_be_bytes.141(p
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i64 @load64.142(ptr noundef %0) unnamed_addr #0 {
-  %.0.copyload = load i64, ptr %0, align 1
-  ret i64 %.0.copyload
+define internal fastcc i64 @load64.142(i64 %.0.val) unnamed_addr #0 {
+  ret i64 %.0.val
 }
 
 ; Function Attrs: noinline nounwind uwtable
@@ -12132,7 +12108,7 @@ define internal fastcc void @Hacl_Impl_SHA2_512_update_multi.144(ptr noundef %0,
   %7 = shl i32 %.0, 7
   %8 = getelementptr inbounds i8, ptr %1, i32 %7
   tail call fastcc void @Hacl_Impl_SHA2_512_update.140(ptr noundef %0, ptr noundef %8)
-  %9 = add i32 %.0, 1
+  %9 = add nuw i32 %.0, 1
   br label %4, !llvm.loop !43
 
 10:                                               ; preds = %4
@@ -12338,12 +12314,12 @@ define internal fastcc void @Hacl_Impl_Salsa20_salsa20_counter_mode(ptr noundef 
   br i1 %.not, label %14, label %8
 
 8:                                                ; preds = %5
-  %9 = and i32 %2, -64
-  %10 = getelementptr inbounds i8, ptr %1, i32 %9
-  %11 = getelementptr inbounds i8, ptr %0, i32 %9
-  %12 = zext nneg i32 %6 to i64
-  %13 = add i64 %12, %4
-  tail call fastcc void @Hacl_Impl_Salsa20_update_last(ptr noundef %11, ptr noundef %10, i32 noundef %7, ptr noundef %3, i64 noundef %13)
+  %9 = zext nneg i32 %6 to i64
+  %10 = add i64 %9, %4
+  %11 = and i32 %2, -64
+  %12 = getelementptr inbounds i8, ptr %0, i32 %11
+  %13 = getelementptr inbounds i8, ptr %1, i32 %11
+  tail call fastcc void @Hacl_Impl_Salsa20_update_last(ptr noundef %12, ptr noundef %13, i32 noundef %7, ptr noundef %3, i64 noundef %10)
   br label %14
 
 14:                                               ; preds = %8, %5
@@ -12751,7 +12727,8 @@ define internal fastcc void @Hacl_Lib_LoadStore32_uint32s_from_le_bytes.157(ptr 
 6:                                                ; preds = %4
   %7 = shl nuw nsw i32 %.0, 2
   %8 = getelementptr inbounds i8, ptr %1, i32 %7
-  %9 = tail call fastcc i32 @load32.158(ptr noundef %8)
+  %.val = load i32, ptr %8, align 1
+  %9 = tail call fastcc i32 @load32.158(i32 %.val)
   %10 = tail call fastcc i32 @__uint32_identity.155(i32 noundef %9)
   %11 = getelementptr inbounds i32, ptr %0, i32 %.0
   store i32 %10, ptr %11, align 4
@@ -12763,9 +12740,8 @@ define internal fastcc void @Hacl_Lib_LoadStore32_uint32s_from_le_bytes.157(ptr 
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i32 @load32.158(ptr noundef %0) unnamed_addr #0 {
-  %.0.copyload = load i32, ptr %0, align 1
-  ret i32 %.0.copyload
+define internal fastcc i32 @load32.158(i32 %.0.val) unnamed_addr #0 {
+  ret i32 %.0.val
 }
 
 ; Function Attrs: noinline nounwind uwtable
@@ -13034,10 +13010,10 @@ define internal fastcc range(i32 -1, 1) i32 @Hacl_SecretBox_ZeroPad_crypto_secre
   br i1 %7, label %8, label %12
 
 8:                                                ; preds = %6
-  %9 = trunc i64 %2 to i32
-  %10 = add i32 %9, 32
-  %11 = getelementptr inbounds i8, ptr %3, i32 16
-  tail call void @Hacl_Salsa20_salsa20(ptr noundef %0, ptr noundef %1, i32 noundef %10, ptr noundef %4, ptr noundef nonnull %11, i64 noundef 0)
+  %9 = getelementptr inbounds i8, ptr %3, i32 16
+  %10 = trunc i64 %2 to i32
+  %11 = add i32 %10, 32
+  tail call void @Hacl_Salsa20_salsa20(ptr noundef %0, ptr noundef %1, i32 noundef %11, ptr noundef %4, ptr noundef nonnull %9, i64 noundef 0)
   tail call fastcc void @Hacl_SecretBox_ZeroPad_set_zero_bytes(ptr noundef %4)
   tail call fastcc void @Hacl_SecretBox_ZeroPad_set_zero_bytes(ptr noundef %0)
   br label %12
@@ -13682,7 +13658,7 @@ define dso_local void @print_bytes(ptr noundef %0, i32 noundef %1) local_unnamed
   %7 = load i8, ptr %6, align 1
   %8 = zext i8 %7 to i32
   %9 = tail call i32 (ptr, ...) @printf(ptr noundef nonnull dereferenceable(1) @.str.1.164, i32 noundef %8)
-  %10 = add i32 %.0, 1
+  %10 = add nuw i32 %.0, 1
   br label %3, !llvm.loop !51
 
 11:                                               ; preds = %3

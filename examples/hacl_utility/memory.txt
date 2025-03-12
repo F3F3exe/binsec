@@ -1,3 +1,0 @@
-# Setting esp
-ebp<32>:=0xffffcbf8;
-esp<32>:=0xffffca50;

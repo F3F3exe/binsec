@@ -23,7 +23,7 @@ for TARGET in "${targets[@]}"; do
   for CLANG in "${clang_version[@]}"; do
     #echo "Clang version: $CLANG" >> ${LOG_FILE}
     for OPT_LEVEL in "${OPT_LEVELS[@]}"; do
-        #echo "Optimization level: $OPT_LEVEL" >> ${LOG_FILE}
+        #echo "Optimization level: $OPT_LEVEL" 
       
           echo "Running run_opt_passes.sh with OPT_LEVEL=$OPT_LEVEL and TARGET=$TARGET and CLANG=$CLANG"
           #echo "    Analysing Clang Optimizations:"
@@ -47,14 +47,14 @@ for TARGET in "${targets[@]}"; do
               #echo "    Analysing LLVM optimization passes:" 
 
               if [[ "$CLANG" == "clang-19" ]]; then
-                if [[ "$OPT_LEVEL" != "O0" ]]; then
-                  RESULTS_FILE4=$(./test_opt19_passes.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/llvm_opt_passes/results_.*\.txt')
+                if [[ "$OPT_LEVEL" != "O0" ]]; then 
+		   RESULTS_FILE4=$(./test_opt19_passes.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/llvm_opt_passes/results_.*\.txt')
                 fi
               else
                 RESULTS_FILE3=$(./test_opt_passes.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/llvm_opt_passes/results_.*\.txt')
-              fi
+	      fi
 
-              RESULTS_FILE4=$(./test_opt19_passes.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/llvm_opt_passes/results_.*\.txt')
+              #RESULTS_FILE4=$(./test_opt19_passes.sh "$OPT_LEVEL" "$TARGET" "$CLANG" | grep -oP 'Results/llvm_opt_passes/results_.*\.txt')
 
           
 
