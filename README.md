@@ -4,7 +4,7 @@ This repository is a fork from Binsec (https://github.com/binsec/binsec). There 
 
 
 
-# BINSEC 
+## BINSEC 
 
 BINSEC is an open-source toolset to help improve software security at
 the binary level. It relies on cutting-edge research in binary code analysis,
@@ -13,7 +13,7 @@ engineering. It is powered up by state-of-the-art techniques such as
 binary-level formal methods, symbolic execution, abstract interpretation,
 SMT solving and fuzzing.
 
-# Getting started with Binsec
+## Getting started with Binsec
 
 See [install instructions](./INSTALL.md).  
 Then, have a look at [user documentation](doc) for command examples.
