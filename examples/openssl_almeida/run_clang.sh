@@ -26,7 +26,7 @@ case "$CLANG" in
 esac
 
 targets=(
-tls1_cbc_remove_padding_patch tls1_cbc_remove_padding_lucky13 ssl3_cbc_copy_mac ssl3_cbc_digest_record ssl3_cbc_remove_padding_patch
+tls1_cbc_remove_padding_patch   ssl3_cbc_remove_padding_patch
 )
 
 if [[ $# -eq 3 ]]; then
@@ -41,9 +41,9 @@ fi
 echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): ${targets[@]}"
 
 depth=100000000
-timeout=10
+timeout=50
 # Configuration
-SOURCE_FILE=${specific_target}_wrapper.c
+SOURCE_FILE="$specific_target.c"  
 BASE_NAME=$specific_target
 SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct -sse-timeout $timeout"
@@ -58,7 +58,7 @@ if [[ ! -f "$SOURCE_FILE" ]]; then
 fi
 
 # Create a results file to track the status
-# Ensure the Results directory exists
+
 mkdir -p Results
 mkdir -p Results/clang_optimizations
 RESULTS_FILE="Results/clang_optimizations/results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG_v}_$(date +%Y%m%d_%H%M%S)" #.txt"
@@ -72,28 +72,16 @@ export LIBS
 export CLANG
 
     
-echo     $CLANG $CFLAGS -$OPT_LEVEL $SOURCE_FILE -o $BASE_NAME.out 
-$CLANG $CFLAGS -$OPT_LEVEL $SOURCE_FILE -o $BASE_NAME.out $LIBS 
+echo     $CLANG $CFLAGS -$OPT_LEVEL lib.c $SOURCE_FILE -o $BASE_NAME.out &&
+$CLANG $CFLAGS -$OPT_LEVEL lib.c $SOURCE_FILE -o $BASE_NAME.out $LIBS &&
 
-
-config_file="checkct_${BASE_NAME}.cfg"
-binsec_output=""
-
-if grep -q "^starting from core" "$config_file"; then
-    core_dump="core_${BASE_NAME}.snapshot"
-    make_coredump.sh core_${BASE_NAME}.snapshot ${BASE_NAME}.out
-
-    binsec_output=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct core_${BASE_NAME}.snapshot -sse-timeout $timeout 2>&1)
-else
-    binsec_output=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct ${BASE_NAME}.out -sse-timeout $timeout 2>&1)
-fi
-
+binsec_output="$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct $BASE_NAME.out -sse-timeout $timeout)"
 
 status=$(echo "$binsec_output" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')
 
 if [[ -z "$status" ]]; then
     status="unknown"
-    #echo "Warning: Status not found for $BASE_NAME" >> debug_log.txt
+    
 fi
 
 echo "$OPT_LEVEL, $status" | tee -a "${RESULTS_FILE}.txt"

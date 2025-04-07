@@ -234,9 +234,9 @@ for PASS in "${OPT_PASSES[@]}"; do
 
     if [[ -z "$status" ]]; then
         status="unknown"
-        #echo "Warning: Status not found for $BASE_NAME" >> debug_log.txt
+        
     elif [[ "$status" == "insecure" ]]; then
-        echo "Status is insecure!"
+        #echo "Status is insecure!"
         echo "$PASS, $status" >> "$LOG_FILE"
         echo "-----------------------------------------------------" >> "$LOG_FILE"
         #break

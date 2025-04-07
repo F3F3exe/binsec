@@ -103,7 +103,7 @@ echo "-------------------------------------------------------"
 
 
 # Create a results file to track the status
-# Ensure the Results directory exists
+
 mkdir -p Results
 mkdir -p Results/clang_frontend_optimizations
 RESULTS_FILE="Results/clang_frontend_optimizations/results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG_v}_$(date +%Y%m%d_%H%M%S)" #.txt"
@@ -145,16 +145,16 @@ if grep -q "^starting from core" "$config_file"; then
         UNIQUE_BASE=${BASE_NAME}_{#} 
         
 
-        echo $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
+        #echo $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
         eval $CLANG $CFLAGS -$OPT_LEVEL {} $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
 
         
         
         core_dump="core_\$UNIQUE_BASE.snapshot"
         make_coredump.sh core_\$UNIQUE_BASE.snapshot \$UNIQUE_BASE.out
-        echo binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 100000000 -checkct core_\$UNIQUE_BASE.snapshot -sse-timeout 50
+        #echo binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 100000000 -checkct core_\$UNIQUE_BASE.snapshot -sse-timeout 50
         binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 100000000 -checkct core_\$UNIQUE_BASE.snapshot -sse-timeout 50)\"
-        echo "binsec output" $binsec_output
+        #echo "binsec output" $binsec_output
         status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
 
         if [[ -z \"\$status\" ]]; then
@@ -171,11 +171,11 @@ else
     generate_combinations "${VALID_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
-        echo $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
+        #echo $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
         eval $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
         
         binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 100000000 -checkct \$UNIQUE_BASE.out -sse-timeout 50)\"
-        echo $binsec_output
+        #echo $binsec_output
         status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
 
         if [[ -z \"\$status\" ]]; then

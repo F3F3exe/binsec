@@ -102,7 +102,7 @@ echo "-------------------------------------------------------"
 
 
 # Create a results file to track the status
-# Ensure the Results directory exists
+
 mkdir -p Results
 mkdir -p Results/clang_frontend_optimizations
 RESULTS_FILE="Results/clang_frontend_optimizations/results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG_v}_$(date +%Y%m%d_%H%M%S)" #.txt"

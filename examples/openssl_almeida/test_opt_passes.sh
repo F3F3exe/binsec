@@ -3,7 +3,7 @@
 #no lib, wrapper, from core
 
 targets=(
-tls1_cbc_remove_padding_patch tls1_cbc_remove_padding_lucky13 ssl3_cbc_copy_mac ssl3_cbc_digest_record ssl3_cbc_remove_padding_patch
+tls1_cbc_remove_padding_patch ssl3_cbc_remove_padding_patch
 )
 
 OPT_LEVEL=$1
@@ -136,9 +136,9 @@ for PASS in "${OPT_PASSES[@]}"; do
 
     if [[ -z "$status" ]]; then
         status="unknown"
-        #echo "Warning: Status not found for $BASE_NAME" >> debug_log.txt
+        
     elif [[ "$status" == "insecure" ]]; then
-        echo "Status is insecure!"
+        #echo "Status is insecure!"
         echo "$PASS, $status" >> "$LOG_FILE"
         echo "-----------------------------------------------------" >> "$LOG_FILE"
         #break

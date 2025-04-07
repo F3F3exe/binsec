@@ -69,7 +69,7 @@ echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): $
 depth=100000000
 timeout=100
 #configuration
-SOURCE_FILE="$specific_target.c"  # Change this if needed
+SOURCE_FILE="$specific_target.c"  
 BASE_NAME=$specific_target
 LLVM_IR="$specific_target.ll"
 OPTIMIZED_LL="$specific_target.ll"
@@ -116,22 +116,16 @@ ADDED_PASSES=()
 for PASS in "${OPT_PASSES[@]}"; do
     ADDED_PASSES+=("$PASS") 
     echo "Adding pass: $PASS"
-    echo $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
-    echo $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$LIB.c" -o "$LIB.ll"
-
+    
     $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
     $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$LIB.c" -o "$LIB.ll"
 
-    echo $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LLVM_IR" -o "$OPTIMIZED_LL"
-    echo $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LIB.ll" -o "$LIB.ll"
     $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LLVM_IR" -o "$OPTIMIZED_LL"
     $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LIB.ll" -o "$LIB.ll"
 
-    echo $CLANG -$OPT_LEVEL_CLANG $CFLAGS $LIB.ll $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
     $CLANG -$OPT_LEVEL_CLANG $CFLAGS $LIB.ll $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
 
     # Run binsec and log the result
-    echo binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct ${BASE_NAME}.out -sse-timeout $timeout
     BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct ${BASE_NAME}.out -sse-timeout $timeout 2>&1)
 
 
@@ -140,9 +134,9 @@ for PASS in "${OPT_PASSES[@]}"; do
 
     if [[ -z "$status" ]]; then
         status="unknown"
-        #echo "Warning: Status not found for $BASE_NAME" >> debug_log.txt
+        
     elif [[ "$status" == "insecure" ]]; then
-        echo "Status is insecure!"
+        #echo "Status is insecure!"
         echo "$PASS, $status" >> "$LOG_FILE"
         echo "-----------------------------------------------------" >> "$LOG_FILE"
         break

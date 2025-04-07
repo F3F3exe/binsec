@@ -1,3 +1,6 @@
+# Semester Project: Identifying Compiler Optimizations that Break Constant Time Programming Techniques
+
+
 # BINSEC [![License: LGPL](https://img.shields.io/badge/license-LGPL--2.1-blue.svg)](https://opensource.org/licenses/LGPL-2.1)
 
 BINSEC is an open-source toolset to help improve software security at

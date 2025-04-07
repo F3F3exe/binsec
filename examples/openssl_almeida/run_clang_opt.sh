@@ -1,7 +1,7 @@
 #!/bin/bash
 
 targets=(
-tls1_cbc_remove_padding_patch tls1_cbc_remove_padding_lucky13 ssl3_cbc_copy_mac ssl3_cbc_digest_record ssl3_cbc_remove_padding_patch
+tls1_cbc_remove_padding_patch ssl3_cbc_remove_padding_patch
 )
 
 LIBS=""
@@ -84,9 +84,7 @@ VALID_OPTIMIZATIONS=()
 
 for OPTIMIZATION in "${OPTIMIZATIONS[@]}"; do
   echo "Checking optimization: $OPTIMIZATION"
-  echo $CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $SOURCE_FILE -o $BASE_NAME.out $LIBSYM
   ERROR_OUTPUT=$($CLANG -w $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $SOURCE_FILE -o $BASE_NAME.out $LIBSYM 2>&1)
-  echo $ERROR_OUTPUT
  
 
   if [[ -z "$ERROR_OUTPUT" ]]; then
@@ -103,7 +101,7 @@ echo "-------------------------------------------------------"
 
 
 # Create a results file to track the status
-# Ensure the Results directory exists
+
 mkdir -p Results
 mkdir -p Results/clang_frontend_optimizations
 RESULTS_FILE="Results/clang_frontend_optimizations/results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG_v}_$(date +%Y%m%d_%H%M%S)" #.txt"
@@ -145,7 +143,6 @@ if grep -q "^starting from core" "$config_file"; then
         UNIQUE_BASE=${BASE_NAME}_{#} 
         
 
-        echo $CLANG $CFLAGS -$OPT_LEVEL {}  $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
         eval $CLANG $CFLAGS -$OPT_LEVEL {} $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
 
         

@@ -84,8 +84,6 @@ echo "$OPT_OUTPUT" > opt_output.txt
 
 ALL_OPT_PASSES=($(echo "$OPT_OUTPUT" | grep "Pass Arguments:" | sed -E 's/Pass Arguments:  //g' | tr -s ' ' | tr ' ' '\n'))
 
-echo "Extrahierte OPT_PASSES:"
-echo "("${ALL_OPT_PASSES[@]}" )"
 
 # Blacklist passes
 BLACKLIST=("-targetpassconfig" "-write-bitcode" "-print-module")
@@ -134,9 +132,9 @@ for PASS in "${OPT_PASSES[@]}"; do
 
     if [[ -z "$status" ]]; then
         status="unknown"
-        #echo "Warning: Status not found for $BASE_NAME" >> debug_log.txt
+        
     elif [[ "$status" == "insecure" ]]; then
-        echo "Status is insecure!"
+        #echo "Status is insecure!"
         echo "$PASS, $status" >> "$LOG_FILE"
         echo "-----------------------------------------------------" >> "$LOG_FILE"
         #break

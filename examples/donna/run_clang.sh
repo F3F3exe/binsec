@@ -58,7 +58,7 @@ if [[ ! -f "$SOURCE_FILE" ]]; then
 fi
 
 # Create a results file to track the status
-# Ensure the Results directory exists
+
 mkdir -p Results
 mkdir -p Results/clang_optimizations
 RESULTS_FILE="Results/clang_optimizations/results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG_v}_$(date +%Y%m%d_%H%M%S)" #.txt"
@@ -93,7 +93,7 @@ status=$(echo "$binsec_output" | grep -oP '(?<=\[checkct:result\] Program status
 
 if [[ -z "$status" ]]; then
     status="unknown"
-    #echo "Warning: Status not found for $BASE_NAME" >> debug_log.txt
+    
 fi
 
 echo "$OPT_LEVEL, $status" | tee -a "${RESULTS_FILE}.txt"

@@ -67,7 +67,7 @@ echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): $
 depth=100000000
 timeout=20
 #configuration
-SOURCE_FILE="$specific_target.c"  # Change this if needed
+SOURCE_FILE="$specific_target.c"  
 BASE_NAME=$specific_target
 LLVM_IR="$specific_target.ll"
 OPTIMIZED_LL="$specific_target.ll"
@@ -128,9 +128,9 @@ for PASS in "${OPT_PASSES[@]}"; do
 
     if [[ -z "$status" ]]; then
         status="unknown"
-        #echo "Warning: Status not found for $BASE_NAME" >> debug_log.txt
+        
     elif [[ "$status" == "insecure" ]]; then
-        echo "Status is insecure!"
+        #echo "Status is insecure!"
         echo "$PASS, $status" >> "$LOG_FILE"
         echo "-----------------------------------------------------" >> "$LOG_FILE"
         #break

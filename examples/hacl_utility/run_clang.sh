@@ -43,7 +43,7 @@ echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): $
 depth=100000000
 timeout=100
 # Configuration
-SOURCE_FILE="$specific_target.c"  # Change this if needed
+SOURCE_FILE="$specific_target.c"  
 BASE_NAME=$specific_target
 SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct -sse-timeout $timeout"
@@ -58,7 +58,7 @@ if [[ ! -f "$SOURCE_FILE" ]]; then
 fi
 
 # Create a results file to track the status
-# Ensure the Results directory exists
+
 mkdir -p Results
 mkdir -p Results/clang_optimizations
 RESULTS_FILE="Results/clang_optimizations/results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG_v}_$(date +%Y%m%d_%H%M%S)" #.txt"
@@ -72,16 +72,14 @@ export LIBSYM
 export CLANG
 
     
-echo     $CLANG $CFLAGS -$OPT_LEVEL $LIBS $SOURCE_FILE -o $BASE_NAME.out $LIBSYM &&
 $CLANG $CFLAGS -$OPT_LEVEL $LIBS $SOURCE_FILE -o $BASE_NAME.out $LIBSYM &&
-echo binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth 1000000 -checkct $BASE_NAME.out -sse-timeout 10
 binsec_output="$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct $BASE_NAME.out -sse-timeout $timeout)"
 
 status=$(echo "$binsec_output" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')
 
 if [[ -z "$status" ]]; then
     status="unknown"
-    #echo "Warning: Status not found for $BASE_NAME" >> debug_log.txt
+    
 fi
 
 echo "$OPT_LEVEL, $status" | tee -a "${RESULTS_FILE}.txt"

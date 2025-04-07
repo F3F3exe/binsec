@@ -1,9 +1,9 @@
 #!/bin/bash
 
-#no lib, no wrapper
+#no lib, wrapper, from core
 
 targets=(
-  01 02 03 04 05 07 08 09 10 
+  02 04 08 09
 )
 
 OPT_LEVEL=$1
@@ -25,8 +25,8 @@ fi
 case "$OPT_LEVEL" in
     O0) OPT_LEVEL_CLANG="O0"  ;; 
     O1)  OPT_LEVEL_CLANG="O0" ;;
-    O2)  OPT_LEVEL_CLANG="O1" ;;
-    O3)  OPT_LEVEL_CLANG="O2" ;;
+    O2)  OPT_LEVEL_CLANG="O0" ;;
+    O3)  OPT_LEVEL_CLANG="O0" ;;
 esac
 
 echo $OPT_LEVEL $OPT_LEVEL_CLANG
@@ -65,16 +65,16 @@ fi
 echo "Compiling with $CLANG using optimization level $OPT_LEVEL for target(s): ${targets[@]}"
 
 depth=100000000
-timeout=20
+timeout=50
 #configuration
-SOURCE_FILE="$specific_target.c"  # Change this if needed
+SOURCE_FILE=${specific_target}_wrapper.c
 BASE_NAME=$specific_target
 LLVM_IR="$specific_target.ll"
 OPTIMIZED_LL="$specific_target.ll"
 SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct -sse-timeout $timeout"
 CFLAGS=" -m32 -march=i386 -DKRML_NOUINT128 -static -Wall "
-LIBSYM="-L../../__libsym__/ -lsym"
+LIBSYM="-L../../__libsym__/ -lsym -I./inc -L./. -lbearssl"
 
 $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
 
@@ -185,8 +185,6 @@ for pass in "${ALL_OPT_PASSES[@]}"; do
     # Check if the pass is in the BLACKLIST or ends with "Pass"
     if [[ ! "${BLACKLIST[@]} " =~ "$pass" && ! $pass =~ Pass$ ]]; then
         OPT_PASSES+=("$pass")
-    else
-        echo "remove pass " $pass "."
     fi
 done
 
@@ -205,29 +203,37 @@ $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOU
 # Apply passes one-by-one
 ADDED_PASSES=() 
 for PASS in "${OPT_PASSES[@]}"; do
-    ADDED_PASSES+=("$PASS")  
+    ADDED_PASSES+=("$PASS") 
     echo "Adding pass: $PASS"
     $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
 
     PASSES_STRING=$(IFS=,; echo "${ADDED_PASSES[*]}")
-    
-    echo $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LLVM_IR" -o "$OPTIMIZED_LL"
+   
     $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LLVM_IR" -o "$OPTIMIZED_LL"
 
-    $CLANG -$OPT_LEVEL_CLANG $CFLAGS $OPTIMIZED_LL -o ${BASE_NAME}.out -L../../__libsym__/ -lsym
-
-    # Run binsec and log the result
-    BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct ${BASE_NAME}.out -sse-timeout $timeout 2>&1)
+    $CLANG -$OPT_LEVEL_CLANG $CFLAGS $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
 
 
+    config_file="checkct_${BASE_NAME}.cfg"
+    BINSEC_OUTPUT=""
+
+    if grep -q "^starting from core" "$config_file"; then
+        core_dump="core_${BASE_NAME}.snapshot"
+        make_coredump.sh core_${BASE_NAME}.snapshot ${BASE_NAME}.out
+
+        BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct core_${BASE_NAME}.snapshot -sse-timeout $timeout 2>&1)
+    else
+        BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct ${BASE_NAME}.out -sse-timeout $timeout 2>&1)
+
+    fi
 
     status=$(echo "$BINSEC_OUTPUT" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')
 
     if [[ -z "$status" ]]; then
         status="unknown"
-        #echo "Warning: Status not found for $BASE_NAME" >> debug_log.txt
+        
     elif [[ "$status" == "insecure" ]]; then
-        echo "Status is insecure!"
+        #echo "Status is insecure!"
         echo "$PASS, $status" >> "$LOG_FILE"
         echo "-----------------------------------------------------" >> "$LOG_FILE"
         #break

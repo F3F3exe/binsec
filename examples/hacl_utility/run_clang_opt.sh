@@ -84,9 +84,7 @@ VALID_OPTIMIZATIONS=()
 
 for OPTIMIZATION in "${OPTIMIZATIONS[@]}"; do
   echo "Checking optimization: $OPTIMIZATION"
-  echo $CLANG $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $LIBS $SOURCE_FILE -o $BASE_NAME.out $LIBSYM 
   ERROR_OUTPUT=$($CLANG -w $CFLAGS -$OPT_LEVEL -$OPTIMIZATION $LIBS $SOURCE_FILE -o $BASE_NAME.out $LIBSYM 2>&1)
-  echo $ERROR_OUTPUT
  
 
   if [[ -z "$ERROR_OUTPUT" ]]; then
@@ -103,7 +101,7 @@ echo "-------------------------------------------------------"
 
 
 # Create a results file to track the status
-# Ensure the Results directory exists
+
 mkdir -p Results
 mkdir -p Results/clang_frontend_optimizations
 RESULTS_FILE="Results/clang_frontend_optimizations/results_$(basename $FILE .c)_${OPT_LEVEL}_${CLANG_v}_$(date +%Y%m%d_%H%M%S)" #.txt"
@@ -145,7 +143,6 @@ if grep -q "^starting from core" "$config_file"; then
         UNIQUE_BASE=${BASE_NAME}_{#} 
         
 
-        echo $CLANG $CFLAGS -$OPT_LEVEL {} $LIBS $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
         eval $CLANG $CFLAGS -$OPT_LEVEL {} $LIBS $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
 
         
@@ -171,11 +168,9 @@ else
     generate_combinations "${VALID_OPTIMIZATIONS[@]}" | parallel -j 28 "
         UNIQUE_BASE=${BASE_NAME}_{#} 
 
-        echo $CLANG $CFLAGS -$OPT_LEVEL {} $LIBS $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
         eval $CLANG $CFLAGS -$OPT_LEVEL {} $LIBS $SOURCE_FILE -o \$UNIQUE_BASE.out $LIBSYM &&
         
         binsec_output=\"\$(binsec -sse -sse-script checkct_\$BASE_NAME.cfg -sse-depth 1000000 -checkct \$UNIQUE_BASE.out -sse-timeout 10)\"
-        echo $binsec_output
         status=\$(echo \"\$binsec_output\" | grep -oP '(?<=\[checkct:result\] Program status is : )\\w+')
 
         if [[ -z \"\$status\" ]]; then

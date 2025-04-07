@@ -1,2 +1,0 @@
-Optimization,Result
-O3, secure
