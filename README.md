@@ -1,6 +1,6 @@
 # Semester Project: Identifying Compiler Optimizations that Break Constant Time Programming Techniques
 
-This repository is a fork from Binsec (https://github.com/binsec/binsec). There have been no changes made to the verification tool. We added the examples/ folder containing the code examples for our analysis. In each of them is a Results/ folder containing the results of our analysis.
+This repository is a fork from Binsec (https://github.com/binsec/binsec). There have been no changes made to the verification tool. We added the examples/ folder containing the code examples for our analysis. In each of them is a Results/ folder containing the results of our analysis. The code_examples.pdf provides an overview of our curated examples.
 
 
 
