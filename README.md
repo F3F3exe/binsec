@@ -26,4 +26,5 @@ The following 4 scripts take as input the Clang optimization level (-O0 to -O3),
   - run_clang_opt.sh: analyzes Clang front-end optimizations for CT violations
   - run_test_opt_passes.sh: analyzes LLVM optimization passes for CT violations (for clang-7.1, clang-12)
   - run_test_opt19_passes.sh: analyzes LLVM optimization passes for CT violations (for clang-19)
+
 The script run_analysis.sh performs the full analysis for optimizations O0 to O3 for clang-7.1, clang-12 and clang-19 with the above scripts.
