@@ -1,10 +1,10 @@
 #include "lib.h"
 #include "../../__libsym__/sym.h"
 
-unsigned int x, y;  // private
 
 int main() {
   
+unsigned int x, y;  // private
 
   high_input_4(&x);
   high_input_4(&y);

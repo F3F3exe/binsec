@@ -1,0 +1,74 @@
+[smt:info] Found Bitwuzla in the path.
+[sse:info] Load section .got.plt (0x080f1000, 0x44)
+[sse:info] Load section .plt (0x08049028, 0x70)
+[sse:info] Load section .data (0x080f1060, 0xea8)
+[sse:info] Load section .rodata (0x080b9000, 0x1c040)
+[sse:info] Load section .text (0x080490a0, 0x6eeb7)
+[checkct:result] Instruction 0x08049735 has control flow leak (0.076s)
+[sse:info] Empty path worklist: halting ...
+[sse:info] SMT queries
+             Preprocessing simplifications
+               total          38
+               true           0
+               false          32
+               constant enum  6
+             
+             Satisfiability queries
+               total          1
+               sat            1
+               time           0.21
+             
+           Exploration
+             total paths                      2
+             completed/cut paths              2
+             visited instructions (static)    40
+             
+           
+[checkct:result] Program status is : insecure (0.285)
+[checkct:info] 2 visited paths covering 40 instructions
+[checkct:info] 6 / 7 control flow checks pass
+[checkct:info] 44 / 44 memory access checks pass
+
+
+
+
+
+
+
+clang-19 -m32 -static -Wall -O3 ct_eq_8.c -o ct_eq_8.out -L../../__libsym__/ -lsym
+binsec -sse -sse-script checkct_ct_eq_8.cfg -sse-depth 100000000 -checkct ct_eq_8.out -sse-timeout 50
+
+
+clang-19 -m32 -O1 -Xclang -disable-llvm-passes -march=i386 -DKRML_NOUINT128 -static -Wall -S -emit-llvm ct_eq_8.c -o ct_eq_8.ll 
+opt-19 -S -O3 ct_eq_8.ll -o ct_eq_8.ll
+clang-19 -m32 -O1  -march=i386 -DKRML_NOUINT128 -static -Wall ct_eq_8.ll -o ct_eq_8.out -L../../__libsym__/ -lsym
+binsec -sse -sse-script checkct_ct_eq_8.cfg -sse-depth 100000000 -checkct ct_eq_8.out -sse-timeout 50
+
+clang-19 -m32 -O1 -Xclang -disable-llvm-passes -march=i386 -DKRML_NOUINT128 -static ct_eq_8.c -o ct_eq_8.out -L../../__libsym__/ -lsym
+binsec -sse -sse-script checkct_ct_eq_8.cfg -sse-depth 100000000 -checkct ct_eq_8.out -sse-timeout 50
+
+
+
+
+
+
+
+
+Running pass: VerifierPass on [module]
+Running pass: Annotation2MetadataPass on [module]
+Running pass: ForceFunctionAttrsPass on [module]
+Running pass: InferFunctionAttrsPass on [module]
+Running pass: LowerExpectIntrinsicPass on issue
+Running pass: SimplifyCFGPass on issue
+Running pass: SROAPass on issue
+Running pass: EarlyCSEPass on issue
+Running pass: CoroEarlyPass on issue
+Running pass: LowerExpectIntrinsicPass on main
+Running pass: SimplifyCFGPass on main
+Running pass: SROAPass on main
+Running pass: EarlyCSEPass on main
+Running pass: CoroEarlyPass on main
+Running pass: OpenMPOptPass on [module]
+Running pass: IPSCCPPass on [module]
+Running pass: CalledValuePropagationPass on [module]
+Running pass: GlobalOptPass on [module]

@@ -72,7 +72,7 @@ export LIBS
 export CLANG
 
     
-echo     $CLANG $CFLAGS -$OPT_LEVEL $SOURCE_FILE -o $BASE_NAME.out 
+echo     $CLANG $CFLAGS -$OPT_LEVEL $SOURCE_FILE -o $BASE_NAME.out $LIBS 
 $CLANG $CFLAGS -$OPT_LEVEL $SOURCE_FILE -o $BASE_NAME.out $LIBS 
 
 
@@ -85,6 +85,7 @@ if grep -q "^starting from core" "$config_file"; then
 
     binsec_output=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct core_${BASE_NAME}.snapshot -sse-timeout $timeout 2>&1)
 else
+    echo binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct ${BASE_NAME}.out -sse-timeout $timeout
     binsec_output=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct ${BASE_NAME}.out -sse-timeout $timeout 2>&1)
 fi
 

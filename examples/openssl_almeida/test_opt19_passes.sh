@@ -77,7 +77,7 @@ CFLAGS=" -m32 -march=i386 -DKRML_NOUINT128 -static -Wall "
 LIBSYM="-L../../__libsym__/ -lsym"
 
 
-$CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
+$CLANG -$OPT_LEVEL_CLANG -Xclang -disable-llvm-passes $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
 
 declare -A PASS_MAP=(
     ["Annotation2MetadataPass"]="annotation2metadata"
@@ -199,20 +199,20 @@ echo "Binsec Results Log" > "$LOG_FILE"
 
 
 # Compile the source to LLVM IR
-$CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
+$CLANG -$OPT_LEVEL_CLANG -Xclang -disable-llvm-passes $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
 
 # Apply passes one-by-one
 ADDED_PASSES=() 
 for PASS in "${OPT_PASSES[@]}"; do
     ADDED_PASSES+=("$PASS")  
     echo "Adding pass: $PASS"
-    $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
+    $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-llvm-passes $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
 
     PASSES_STRING=$(IFS=,; echo "${ADDED_PASSES[*]}")
    
     $OPT $NEW_PM -S -passes="$PASSES_STRING" "$LLVM_IR" -o "$OPTIMIZED_LL"
 
-    $CLANG -$OPT_LEVEL_CLANG $CFLAGS $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
+    $CLANG -O0 $CFLAGS $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
 
 
     config_file="checkct_${BASE_NAME}.cfg"

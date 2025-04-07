@@ -72,9 +72,10 @@ export LIBS
 export CLANG
 
     
-echo     $CLANG $CFLAGS -$OPT_LEVEL lib.c $SOURCE_FILE -o $BASE_NAME.out &&
+echo     $CLANG $CFLAGS -$OPT_LEVEL lib.c $SOURCE_FILE -o $BASE_NAME.out $LIBS &&
 $CLANG $CFLAGS -$OPT_LEVEL lib.c $SOURCE_FILE -o $BASE_NAME.out $LIBS &&
 
+echo binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct $BASE_NAME.out -sse-timeout $timeout
 binsec_output="$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct $BASE_NAME.out -sse-timeout $timeout)"
 
 status=$(echo "$binsec_output" | grep -oP '(?<=\[checkct:result\] Program status is : )\w+')

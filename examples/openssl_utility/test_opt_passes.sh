@@ -28,7 +28,12 @@ case "$OPT_LEVEL" in
     O2)  OPT_LEVEL_CLANG="O0" ;;
     O3)  OPT_LEVEL_CLANG="O0" ;;
 esac
-
+case "$OPT_LEVEL" in
+    O0) OPT_LEVEL_CLANG="O0"  ;; 
+    O1)  OPT_LEVEL_CLANG="O0" ;;
+    O2)  OPT_LEVEL_CLANG="O1" ;;
+    O3)  OPT_LEVEL_CLANG="O2" ;;
+esac
 echo $OPT_LEVEL $OPT_LEVEL_CLANG
 
 if [[ ! "$CLANG" =~ ^(clang-7.1|clang-14|clang-12|clang-19)$ ]]; then
@@ -112,9 +117,13 @@ ADDED_PASSES=()
 for PASS in "${OPT_PASSES[@]}"; do
     ADDED_PASSES+=("$PASS") 
     echo "Adding pass: $PASS"
-   
+    echo $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
+    $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
+
+    echo $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LLVM_IR" -o "$OPTIMIZED_LL"
     $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LLVM_IR" -o "$OPTIMIZED_LL"
 
+    echo $CLANG -$OPT_LEVEL_CLANG $CFLAGS $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
     $CLANG -$OPT_LEVEL_CLANG $CFLAGS $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
 
 
@@ -127,6 +136,7 @@ for PASS in "${OPT_PASSES[@]}"; do
 
         BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct core_${BASE_NAME}.snapshot -sse-timeout $timeout 2>&1)
     else
+        echo binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct ${BASE_NAME}.out -sse-timeout $timeout
         BINSEC_OUTPUT=$(binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct ${BASE_NAME}.out -sse-timeout $timeout 2>&1)
 
 
@@ -141,7 +151,7 @@ for PASS in "${OPT_PASSES[@]}"; do
         echo "Status is insecure!"
         echo "$PASS, $status" >> "$LOG_FILE"
         echo "-----------------------------------------------------" >> "$LOG_FILE"
-        #break
+        break
     fi
     
 

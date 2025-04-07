@@ -75,11 +75,11 @@ LLVM_IR="$specific_target.ll"
 OPTIMIZED_LL="$specific_target.ll"
 SNAPSHOT_SCRIPT="make_coredump.sh"
 BINSEC_SCRIPT="binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth -checkct -sse-timeout $timeout"
-CFLAGS=" -m32 -march=i386 -DKRML_NOUINT128 -static -Wall "
+CFLAGS=" -m32 -static -Wall "
 LIBSYM="-L../../__libsym__/ -lsym"
 LIB="Hacl_Policies"
 
-$CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
+$CLANG -$OPT_LEVEL_CLANG -Xclang -disable-llvm-passes $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
 
 # get llvm opt passes
 OPT_OUTPUT=$($OPT -S -$OPT_LEVEL -debug-pass=Arguments $NEW_PM "$LLVM_IR" -o "$OPTIMIZED_LL" 2>&1)
@@ -107,8 +107,8 @@ echo "Binsec Results Log" > "$LOG_FILE"
 
 
 # Compile the source to LLVM IR
-$CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
-$CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$LIB.c" -o "$LIB.ll"
+$CLANG -$OPT_LEVEL_CLANG -Xclang -disable-llvm-passes $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
+$CLANG -$OPT_LEVEL_CLANG -Xclang -disable-llvm-passes $CFLAGS -S -emit-llvm "$LIB.c" -o "$LIB.ll"
 
 
 # Apply passes one-by-one
@@ -116,19 +116,19 @@ ADDED_PASSES=()
 for PASS in "${OPT_PASSES[@]}"; do
     ADDED_PASSES+=("$PASS") 
     echo "Adding pass: $PASS"
-    echo $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
-    echo $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$LIB.c" -o "$LIB.ll"
+    echo $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-llvm-passes $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
+    echo $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-llvm-passes $CFLAGS -S -emit-llvm "$LIB.c" -o "$LIB.ll"
 
-    $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
-    $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-O0-optnone $CFLAGS -S -emit-llvm "$LIB.c" -o "$LIB.ll"
+    $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-llvm-passes $CFLAGS -S -emit-llvm "$SOURCE_FILE" -o "$LLVM_IR"
+    $CLANG -$OPT_LEVEL_CLANG -Xclang -disable-llvm-passes $CFLAGS -S -emit-llvm "$LIB.c" -o "$LIB.ll"
 
     echo $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LLVM_IR" -o "$OPTIMIZED_LL"
     echo $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LIB.ll" -o "$LIB.ll"
     $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LLVM_IR" -o "$OPTIMIZED_LL"
     $OPT $NEW_PM -S "${ADDED_PASSES[@]}" "$LIB.ll" -o "$LIB.ll"
 
-    echo $CLANG -$OPT_LEVEL_CLANG $CFLAGS $LIB.ll $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
-    $CLANG -$OPT_LEVEL_CLANG $CFLAGS $LIB.ll $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
+    echo $CLANG -O0 $CFLAGS $LIB.ll $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
+    $CLANG -O0 $CFLAGS $LIB.ll $OPTIMIZED_LL -o ${BASE_NAME}.out $LIBSYM
 
     # Run binsec and log the result
     echo binsec -sse -sse-script checkct_$BASE_NAME.cfg -sse-depth $depth  -checkct ${BASE_NAME}.out -sse-timeout $timeout
